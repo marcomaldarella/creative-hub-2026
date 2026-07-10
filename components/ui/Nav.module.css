@@ -4,9 +4,9 @@
   z-index: 50;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  background: color-mix(in srgb, var(--ghiaccio) 82%, transparent);
-  border-bottom: 1px solid var(--linea);
-  color: var(--petrolio);
+  background: color-mix(in srgb, var(--bg) 82%, transparent);
+  border-bottom: 1px solid var(--line);
+  color: var(--fg);
 }
 
 .inner {
@@ -33,19 +33,19 @@
 
 .links a {
   font-size: var(--fs-small);
-  color: var(--grigio);
+  color: var(--fg-2);
   transition: color 0.2s;
 }
 
 .links a:hover {
-  color: var(--petrolio);
+  color: var(--fg);
 }
 
 .lang {
   font-family: var(--font-mono), monospace;
   font-size: var(--fs-mono);
   letter-spacing: 0.02em;
-  color: var(--grigio);
+  color: var(--fg-2);
   white-space: nowrap;
 }
 
@@ -54,11 +54,11 @@
 }
 
 .lang a:hover {
-  color: var(--petrolio);
+  color: var(--fg);
 }
 
 .langOn {
-  color: var(--petrolio);
+  color: var(--fg);
   font-weight: 500;
 }
 
@@ -257,7 +257,8 @@
     display: none;
   }
 
-  .inner .lang {
+  .inner .lang,
+  .inner .theme {
     display: none;
   }
 

@@ -1,0 +1,43 @@
+import type { CSSProperties } from 'react';
+import styles from './PartnerMark.module.css';
+
+/**
+ * Loghi locali (public/img/partners). ratio = viewBox w/h dell'SVG,
+ * h = altezza in px calibrata a occhio perché i marchi pesino uguale.
+ */
+const LOGOS: Record<string, { file: string; ratio: number; h: number }> = {
+  'sony music': { file: 'sony-music', ratio: 1.07, h: 38 },
+  'universal music group': { file: 'universal', ratio: 2.7, h: 34 },
+  'warner music group': { file: 'warner', ratio: 4.06, h: 30 },
+  rai: { file: 'rai', ratio: 1, h: 36 },
+  dolby: { file: 'dolby', ratio: 3.95, h: 28 },
+  'solid state logic': { file: 'ssl', ratio: 4.81, h: 24 },
+  adobe: { file: 'adobe', ratio: 3.96, h: 26 },
+  ableton: { file: 'ableton', ratio: 5.71, h: 22 },
+  steinberg: { file: 'steinberg', ratio: 4.46, h: 26 },
+  avid: { file: 'avid', ratio: 2.34, h: 30 },
+  apple: { file: 'apple', ratio: 0.81, h: 32 },
+  'berklee college of music': { file: 'berklee', ratio: 3.99, h: 28 },
+};
+
+export type PartnerMarkProps = {
+  name: string;
+};
+
+/**
+ * Marchio partner per il Marquee: se esiste l'SVG locale lo renderizza
+ * come mask riempita di currentColor (così eredita colore e hover
+ * dell'item e si inverte col tema); altrimenti degrada al nome testuale.
+ */
+export function PartnerMark({ name }: PartnerMarkProps) {
+  const logo = LOGOS[name.trim().toLowerCase()];
+  if (!logo) return <>{name}</>;
+
+  const style = {
+    '--logo': `url(/img/partners/${logo.file}.svg)`,
+    height: `${logo.h}px`,
+    aspectRatio: logo.ratio,
+  } as CSSProperties;
+
+  return <span className={styles.mark} role="img" aria-label={name} style={style} />;
+}

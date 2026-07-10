@@ -22,7 +22,7 @@
 
 .lede {
   max-width: 52ch;
-  color: var(--grigio);
+  color: var(--fg-2);
 }
 
 .dark .lede {

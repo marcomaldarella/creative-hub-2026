@@ -35,8 +35,8 @@
 
 .ghost {
   background: transparent;
-  color: var(--petrolio);
-  border: 1px solid var(--linea);
+  color: var(--fg);
+  border: 1px solid var(--line);
 }
 
 .ghost:hover {

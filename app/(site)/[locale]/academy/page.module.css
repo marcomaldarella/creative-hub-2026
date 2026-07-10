@@ -20,7 +20,7 @@
 
 .lede {
   max-width: 52ch;
-  color: var(--grigio);
+  color: var(--fg-2);
   font-size: var(--fs-lede);
 }
 
@@ -35,16 +35,16 @@
 
 .pill {
   display: inline-block;
-  border: 1px solid var(--linea);
+  border: 1px solid var(--line);
   border-radius: var(--radius-pill);
   padding: 7px 18px;
   font-size: var(--fs-small);
-  color: var(--grigio);
+  color: var(--fg-2);
   transition: color 0.2s, border-color 0.2s, background 0.2s;
 }
 
 .pill:hover {
-  color: var(--petrolio);
+  color: var(--fg);
   border-color: var(--azzurro);
 }
 
@@ -75,10 +75,10 @@
 a.course {
   display: flex;
   flex-direction: column;
-  border: 1px solid var(--linea);
+  border: 1px solid var(--line);
   border-radius: var(--radius);
   overflow: hidden;
-  background: var(--bianco);
+  background: var(--surface);
   transition:
     box-shadow var(--dur) ease,
     opacity var(--dur-slow) ease var(--rvd, 0s),
@@ -112,7 +112,7 @@ a.course:hover {
 
 .courseSummary {
   font-size: var(--fs-small);
-  color: var(--grigio);
+  color: var(--fg-2);
   margin-bottom: 18px;
 }
 

@@ -27,7 +27,7 @@
 
 .lede {
   max-width: 52ch;
-  color: var(--grigio);
+  color: var(--fg-2);
   font-size: var(--fs-lede);
 }
 
@@ -62,11 +62,11 @@
 }
 
 .facts {
-  border: 1px solid var(--linea);
+  border: 1px solid var(--line);
   border-radius: var(--radius);
   padding: 24px;
   margin-bottom: 20px;
-  background: var(--bianco);
+  background: var(--surface);
 }
 
 .fact {
@@ -74,7 +74,7 @@
   justify-content: space-between;
   gap: 16px;
   padding: 9px 0;
-  border-bottom: 1px solid var(--linea);
+  border-bottom: 1px solid var(--line);
 }
 
 .fact:first-child {
@@ -87,11 +87,11 @@
 }
 
 .fact dt {
-  color: var(--grigio);
+  color: var(--fg-2);
 }
 
 .fact dd {
-  color: var(--petrolio);
+  color: var(--fg);
   text-align: right;
 }
 

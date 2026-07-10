@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Fragment } from 'react'
 import { notFound } from 'next/navigation'
-import { Button, Marquee, Reveal, Rule, SectionHeader } from '@/components/ui'
+import { Button, Marquee, PartnerMark, Reveal, Rule, SectionHeader } from '@/components/ui'
 import { PortableBlocks } from '@/components/sections/PortableBlocks'
 import { SiteChrome, shopHref } from '@/components/sections/SiteChrome'
 import { TeacherGrid } from '@/components/sections/TeacherGrid'
@@ -46,9 +46,10 @@ export default async function ChiSiamoPage({
   ])
 
   const sections = page?.sections ?? []
-  const partnerNames = partners
+  const partnerMarks = partners
     .map((p) => p.name)
     .filter((name): name is string => Boolean(name))
+    .map((name) => <PartnerMark key={name} name={name} />)
   const contactLines = [
     settings?.address ?? t.footer.address,
     settings?.phone,
@@ -104,11 +105,11 @@ export default async function ChiSiamoPage({
         </section>
 
         {/* ————— partner ————— */}
-        {partnerNames.length > 0 && (
+        {partnerMarks.length > 0 && (
           <>
             <Rule left={t.about.partnersRuleLeft} right={t.about.partnersRuleRight} />
             <section className={styles.marqueeSez}>
-              <Marquee items={partnerNames} />
+              <Marquee items={partnerMarks} />
             </section>
           </>
         )}

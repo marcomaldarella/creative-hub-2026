@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useCallback, useEffect, useId, useState } from 'react';
+import { ThemeToggle } from './ThemeToggle';
 import { Wordmark } from './Wordmark';
 import styles from './Nav.module.css';
 
@@ -123,6 +124,7 @@ export function Nav({
         </nav>
 
         {lang}
+        <ThemeToggle className={styles.theme} />
         {cta}
 
         <button
@@ -159,6 +161,7 @@ export function Nav({
         </nav>
         <div className={styles.overlayFoot}>
           {lang}
+          <ThemeToggle />
           {cta}
         </div>
       </div>

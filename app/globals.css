@@ -19,6 +19,15 @@
   --osso-16: rgba(237, 230, 218, 0.16);
   --azzurro-06: rgba(79, 168, 223, 0.06);
 
+  /* ————— layer semantico (inverte col tema) —————
+     Regola: un elemento che deve invertirsi col tema usa questi token;
+     i momenti brand fissi (petrolio, azzurro, gradient…) restano sui token brand. */
+  --bg: #F2F1EE;        /* sfondo pagina / nav / footer */
+  --surface: #FFFFFF;   /* superfici card */
+  --fg: #1F3D4A;        /* testo */
+  --fg-2: #77848C;      /* testo secondario */
+  --line: #DCE0DE;      /* bordi, divisori */
+
   /* layout */
   --max: 1680px;
   --pad: clamp(20px, 3vw, 48px);
@@ -44,13 +53,22 @@
   --fs-mono: 12px;
 }
 
+[data-theme='dark'] {
+  --bg: #0B1B21;
+  --surface: #0F2229;
+  --fg: #EDE6DA;
+  --fg-2: #8FA0A8;
+  --line: rgba(237, 230, 218, 0.14);
+  color-scheme: dark;
+}
+
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 html { scroll-behavior: smooth; }
 
 body {
-  background: var(--ghiaccio);
-  color: var(--petrolio);
+  background: var(--bg);
+  color: var(--fg);
   font-family: var(--font-body), system-ui, sans-serif;
   font-size: var(--fs-body);
   line-height: 1.55;
@@ -81,7 +99,7 @@ img { max-width: 100%; height: auto; display: block; }
   font-family: var(--font-mono), monospace;
   font-size: var(--fs-mono);
   letter-spacing: 0.02em;
-  color: var(--grigio);
+  color: var(--fg-2);
 }
 
 /* display: FreeFat — solo titoli giganti (voce del brand) */

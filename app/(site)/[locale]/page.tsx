@@ -6,6 +6,7 @@ import {
   Counter,
   CounterRow,
   Marquee,
+  PartnerMark,
   NodeGrid,
   Reveal,
   RevealGroup,
@@ -79,9 +80,10 @@ export default async function HomePage({
     t.home.stats.startups,
   ]
 
-  const partnerNames = partners
+  const partnerMarks = partners
     .map((p) => p.name)
     .filter((name): name is string => Boolean(name))
+    .map((name) => <PartnerMark key={name} name={name} />)
 
   const openDate = openDayLabel(settings?.openDay?.date, locale)
   const openTitle = l(settings?.openDay?.title, locale)
@@ -202,7 +204,7 @@ export default async function HomePage({
         </section>
 
         {/* ————— marquee partner ————— */}
-        {partnerNames.length > 0 && <Marquee items={partnerNames} />}
+        {partnerMarks.length > 0 && <Marquee items={partnerMarks} />}
 
         {/* ————— magazine ————— */}
         <section className={styles.sez}>

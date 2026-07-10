@@ -22,6 +22,12 @@ export type { ArrowLinkProps } from './ArrowLink';
 export { Marquee } from './Marquee';
 export type { MarqueeProps } from './Marquee';
 
+export { PartnerMark } from './PartnerMark';
+export type { PartnerMarkProps } from './PartnerMark';
+
+export { ThemeToggle } from './ThemeToggle';
+export type { ThemeToggleProps } from './ThemeToggle';
+
 export { Counter, CounterRow } from './Counter';
 export type { CounterProps, CounterRowProps } from './Counter';
 

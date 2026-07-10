@@ -1,16 +1,16 @@
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  border-top: 1px solid var(--linea);
-  border-left: 1px solid var(--linea);
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
 }
 
 /* a.nodo: specificità superiore al globale .rv, così la transition
    qui sotto (con --rvd per lo stagger SOLO su opacity/transform)
    vince senza dipendere dall'ordine dei fogli di stile */
 a.nodo {
-  border-right: 1px solid var(--linea);
-  border-bottom: 1px solid var(--linea);
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
   padding: 34px 28px 42px;
   position: relative;
   transition:
@@ -20,7 +20,7 @@ a.nodo {
 }
 
 a.nodo:hover {
-  background: var(--bianco);
+  background: var(--surface);
 }
 
 .label {
@@ -37,7 +37,7 @@ a.nodo:hover {
 
 .text {
   font-size: var(--fs-small);
-  color: var(--grigio);
+  color: var(--fg-2);
   max-width: 34ch;
 }
 

@@ -4,8 +4,8 @@
 .card {
   display: flex;
   flex-direction: column;
-  background: var(--bianco);
-  border: 1px solid var(--linea);
+  background: var(--surface);
+  border: 1px solid var(--line);
   border-radius: var(--radius);
   overflow: hidden;
   transition:
@@ -14,7 +14,7 @@
 }
 
 .card:hover {
-  border-color: color-mix(in srgb, var(--petrolio) 40%, var(--linea));
+  border-color: color-mix(in srgb, var(--petrolio) 40%, var(--line));
   box-shadow: 0 8px 24px -18px color-mix(in srgb, var(--petrolio) 35%, transparent);
 }
 
@@ -22,7 +22,7 @@
 
 .media {
   aspect-ratio: 16 / 9;
-  border-bottom: 1px solid var(--linea);
+  border-bottom: 1px solid var(--line);
   overflow: hidden;
 }
 
@@ -58,8 +58,8 @@
   font-family: var(--font-mono), monospace;
   font-size: 11px;
   letter-spacing: 0.02em;
-  color: var(--petrolio);
-  border: 1px solid var(--linea);
+  color: var(--fg);
+  border: 1px solid var(--line);
   border-radius: var(--radius-pill);
   padding: 3px 10px;
   white-space: nowrap;
@@ -89,7 +89,7 @@
 
 .excerpt {
   font-size: var(--fs-small);
-  color: var(--grigio);
+  color: var(--fg-2);
   line-height: 1.5;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -107,7 +107,7 @@
 }
 
 .author {
-  color: var(--grigio);
+  color: var(--fg-2);
 }
 
 .arrow {
@@ -136,7 +136,7 @@
   min-height: 360px;
   height: 100%;
   border-bottom: none;
-  border-right: 1px solid var(--linea);
+  border-right: 1px solid var(--line);
 }
 
 .featured .body {
@@ -169,6 +169,6 @@
     min-height: 0;
     aspect-ratio: 16 / 9;
     border-right: none;
-    border-bottom: 1px solid var(--linea);
+    border-bottom: 1px solid var(--line);
   }
 }

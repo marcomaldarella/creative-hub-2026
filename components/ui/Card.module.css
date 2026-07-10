@@ -5,8 +5,8 @@
 }
 
 .light {
-  background: var(--bianco);
-  border: 1px solid var(--linea);
+  background: var(--surface);
+  border: 1px solid var(--line);
   transition: transform var(--dur) var(--ease-out), box-shadow var(--dur);
 }
 
@@ -50,7 +50,7 @@
 
 .body {
   font-size: var(--fs-small);
-  color: var(--grigio);
+  color: var(--fg-2);
 }
 
 .dark .body {

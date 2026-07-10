@@ -1,0 +1,7 @@
+.mark {
+  display: inline-block;
+  vertical-align: middle;
+  background: currentColor;
+  -webkit-mask: var(--logo) no-repeat center / contain;
+  mask: var(--logo) no-repeat center / contain;
+}

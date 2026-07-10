@@ -1,7 +1,7 @@
 .thumb {
   width: 100%;
   overflow: hidden;
-  background: var(--linea);
+  background: var(--line);
 }
 
 .thumb img {
@@ -28,7 +28,7 @@
   background: linear-gradient(
     200deg,
     var(--osso),
-    var(--grigio) 70%,
+    var(--fg-2) 70%,
     var(--petrolio)
   );
 }

@@ -1,6 +1,6 @@
 .footer {
-  background: var(--ghiaccio);
-  border-top: 1px solid var(--linea);
+  background: var(--bg);
+  border-top: 1px solid var(--line);
   padding: 64px 0 40px;
 }
 
@@ -27,7 +27,7 @@
   flex-direction: column;
   line-height: 2;
   font-size: var(--fs-small);
-  color: var(--grigio);
+  color: var(--fg-2);
 }
 
 .col a {
@@ -35,11 +35,11 @@
 }
 
 .col a:hover {
-  color: var(--petrolio);
+  color: var(--fg);
 }
 
 .colTitle {
-  color: var(--petrolio);
+  color: var(--fg);
 }
 
 .bottom {
@@ -52,7 +52,7 @@
 
 .legal {
   font-size: var(--fs-small);
-  color: var(--grigio);
+  color: var(--fg-2);
 }
 
 .legal a {
@@ -60,5 +60,5 @@
 }
 
 .legal a:hover {
-  color: var(--petrolio);
+  color: var(--fg);
 }

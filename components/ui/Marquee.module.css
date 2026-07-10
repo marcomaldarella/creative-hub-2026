@@ -1,6 +1,6 @@
 .marquee {
-  border-top: 1px solid var(--linea);
-  border-bottom: 1px solid var(--linea);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
   padding: 26px 0;
   overflow: hidden;
 }
@@ -19,6 +19,7 @@
 /* padding-right = gap: rende il loop -50% perfettamente seamless */
 .group {
   display: flex;
+  align-items: center;
   gap: 64px;
   padding-right: 64px;
 }
@@ -28,13 +29,13 @@
   font-weight: 500;
   font-stretch: 105%;
   font-size: 20px;
-  color: var(--grigio);
+  color: var(--fg-2);
   white-space: nowrap;
   transition: color 0.2s;
 }
 
 .item:hover {
-  color: var(--petrolio);
+  color: var(--fg);
 }
 
 @keyframes mq {

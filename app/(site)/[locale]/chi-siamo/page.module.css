@@ -25,7 +25,7 @@
 
 .lede {
   max-width: 52ch;
-  color: var(--grigio);
+  color: var(--fg-2);
   font-size: var(--fs-lede);
 }
 

@@ -20,7 +20,7 @@
 
 .meter {
   height: 3px;
-  background: var(--linea);
+  background: var(--line);
   border-radius: 2px;
   margin: 16px 0 12px;
   overflow: hidden;
@@ -36,5 +36,5 @@
 
 .label {
   font-size: 14px;
-  color: var(--grigio);
+  color: var(--fg-2);
 }

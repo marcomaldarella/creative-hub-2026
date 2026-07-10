@@ -1,0 +1,29 @@
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-pill);
+  color: inherit;
+  opacity: 0.72;
+  transition: opacity 0.2s, transform var(--dur) var(--ease-out);
+}
+
+.toggle:hover {
+  opacity: 1;
+  transform: rotate(12deg);
+}
+
+/* quale icona mostrare lo decide il tema globale */
+.moon {
+  display: none;
+}
+
+:global([data-theme='dark']) .sun {
+  display: none;
+}
+
+:global([data-theme='dark']) .moon {
+  display: block;
+}

@@ -10,7 +10,7 @@
 .line {
   flex: 1;
   height: 1px;
-  background: var(--linea);
+  background: var(--line);
   transform-origin: left;
   transform: scaleX(0);
   transition: transform 1.2s var(--ease-out);

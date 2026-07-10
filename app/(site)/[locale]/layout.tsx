@@ -58,10 +58,19 @@ export default async function SiteLayout({
   if (!isLocale(locale)) notFound()
 
   return (
-    <html lang={locale}>
+    // suppressHydrationWarning: lo script qui sotto scrive data-theme
+    // su <html> prima dell'hydration, il mismatch è voluto
+    <html lang={locale} suppressHydrationWarning>
       <body
         className={`${display.variable} ${body.variable} ${mono.variable} ${fat.variable}`}
       >
+        {/* tema prima del paint: localStorage, poi preferenza di sistema */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "(function(){try{var t=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');if(t==='dark')document.documentElement.dataset.theme='dark'}catch(e){}})()",
+          }}
+        />
         {children}
       </body>
     </html>
