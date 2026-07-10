@@ -145,7 +145,9 @@ export function HeroOrb({ className }: { className?: string }) {
 
       // uniforms condivise tra chrome e wireframe
       const uTime = { value: 0.8 }
-      const uAmp = { value: 0.24 }
+      const AMP_BASE = 0.13 // estrusione a riposo, calma
+      const AMP_MAX = 0.34 // col mouse in movimento
+      const uAmp = { value: AMP_BASE }
 
       const patchShader = (shader: { uniforms: Record<string, unknown>; vertexShader: string }) => {
         shader.uniforms.uTime = uTime
@@ -219,13 +221,24 @@ export function HeroOrb({ className }: { className?: string }) {
         '(prefers-reduced-motion: reduce)'
       ).matches
 
-      // interattività: il solido si inclina verso il puntatore (mouse/touch)
+      // interattività: tilt verso il puntatore + energia dal movimento
       const pointer = { x: 0, y: 0 }
       const tilt = { x: 0, y: 0 }
+      let energy = 0 // 0..1, sale muovendo il mouse, decade da ferma
+      let lastX = 0
+      let lastY = 0
+      let hasLast = false
       const onPointerMove = (e: PointerEvent) => {
         const r = host.getBoundingClientRect()
         pointer.x = ((e.clientX - (r.left + r.width / 2)) / r.width) * 2
         pointer.y = ((e.clientY - (r.top + r.height / 2)) / r.height) * 2
+        if (hasLast) {
+          const speed = Math.hypot(e.clientX - lastX, e.clientY - lastY)
+          energy = Math.min(1, energy + speed * 0.012)
+        }
+        lastX = e.clientX
+        lastY = e.clientY
+        hasLast = true
       }
       window.addEventListener('pointermove', onPointerMove, { passive: true })
 
@@ -233,6 +246,10 @@ export function HeroOrb({ className }: { className?: string }) {
       const t0 = performance.now()
       const frame = () => {
         uTime.value = 0.8 + (performance.now() - t0) / 1000
+        // l'energia del mouse gonfia l'estrusione, poi decade dolcemente
+        energy *= 0.97
+        const targetAmp = AMP_BASE + (AMP_MAX - AMP_BASE) * energy
+        uAmp.value += (targetAmp - uAmp.value) * 0.06
         tilt.x += (pointer.y * 0.38 - tilt.x) * 0.045
         tilt.y += (pointer.x * 0.55 - tilt.y) * 0.045
         blob.rotation.x = tilt.x
