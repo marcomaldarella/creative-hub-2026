@@ -90,7 +90,7 @@ export default async function HomePage({
     <SiteChrome locale={locale} path="/" dark>
       <main>
         {/* ————— hero ————— */}
-        <header className={styles.hero}>
+        <header className={`${styles.hero} liquid`}>
           <div className={styles.heroAnnot}>
             <span className="mono">{t.hero.since}</span>
             <span className="mono">{t.hero.coords}</span>
@@ -157,7 +157,8 @@ export default async function HomePage({
         </section>
 
         {/* ————— metodo (§ 04) ————— */}
-        <section className={styles.sez}>
+        <section className={`${styles.sez} ${styles.methodSez}`}>
+          <div className={styles.methodWire} aria-hidden="true" />
           <div className="wrap">
             <Reveal as="span" className={`mono ${styles.methodKicker}`}>
               {t.home.methodKicker}
@@ -249,7 +250,13 @@ export default async function HomePage({
         </section>
 
         {/* ————— open day (azzurro) ————— */}
-        <section className={`${styles.sez} ${styles.openday}`}>
+        <section className={`${styles.sez} ${styles.openday} liquid`}>
+          <span className={`mono ${styles.frameL}`} aria-hidden="true">
+            {t.home.opendayFrameA}
+          </span>
+          <span className={`mono ${styles.frameR}`} aria-hidden="true">
+            {t.home.opendayFrameB}
+          </span>
           <div className={`wrap ${styles.opendayIn}`}>
             <div>
               <span className={`mono ${styles.opendayDate}`}>

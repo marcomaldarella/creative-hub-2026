@@ -1,0 +1,25 @@
+.wave {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  height: 16px;
+}
+
+.wave i {
+  width: 3px;
+  border-radius: 2px;
+  background: currentColor;
+  height: calc(var(--h, 1) * 100%);
+  transform-origin: center;
+  animation: eq 1.8s ease-in-out infinite alternate;
+  animation-delay: var(--wd, 0s);
+}
+
+@keyframes eq {
+  from {
+    transform: scaleY(0.5);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}

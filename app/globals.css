@@ -123,6 +123,28 @@ img { max-width: 100%; height: auto; display: block; }
   letter-spacing: 0.01em;
 }
 
+/* texture liquid del brand (manuale studenti): velo sulle sezioni
+   scure; in dark resta scuro, solo più sottile */
+.liquid {
+  position: relative;
+  isolation: isolate;
+}
+
+.liquid::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: url('/img/sections/texture-liquid.jpg') center / cover no-repeat;
+  mix-blend-mode: overlay;
+  opacity: 0.16;
+  pointer-events: none;
+}
+
+[data-theme='dark'] .liquid::after {
+  opacity: 0.09;
+}
+
 /* reveal on scroll (attivato dal provider client) */
 .rv {
   opacity: 0;

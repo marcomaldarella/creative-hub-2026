@@ -287,6 +287,8 @@
 }
 
 .opendayIn {
+  position: relative;
+  z-index: 2;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -303,6 +305,65 @@
 .opendayTitle {
   font-size: clamp(34px, 5vw, 64px);
   line-height: 0.95;
+}
+
+/* cornice di testo ruotato (manuale, pag. viaggio) */
+
+.openday {
+  position: relative;
+}
+
+.frameL,
+.frameR {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  writing-mode: vertical-rl;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: color-mix(in srgb, var(--petrolio) 55%, transparent);
+  white-space: nowrap;
+}
+
+.frameL {
+  left: 14px;
+  transform: translateY(-50%) rotate(180deg);
+}
+
+.frameR {
+  right: 14px;
+  transform: translateY(-50%);
+}
+
+@media (max-width: 760px) {
+  .frameL,
+  .frameR {
+    display: none;
+  }
+}
+
+/* mesh wireframe dietro al metodo (manuale, pag. background) */
+
+.methodSez {
+  position: relative;
+  overflow: hidden;
+}
+
+.methodWire {
+  position: absolute;
+  top: -140px;
+  right: -160px;
+  width: min(560px, 60vw);
+  aspect-ratio: 1;
+  background: var(--azzurro);
+  -webkit-mask: url('/img/sections/wire-blob.svg') center / contain no-repeat;
+  mask: url('/img/sections/wire-blob.svg') center / contain no-repeat;
+  opacity: 0.28;
+  pointer-events: none;
+}
+
+:global([data-theme='dark']) .methodWire {
+  opacity: 0.2;
 }
 
 /* ————— mobile ————— */

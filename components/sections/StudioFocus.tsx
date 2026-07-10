@@ -35,7 +35,7 @@ export function StudioFocus({
   captionRight,
 }: StudioFocusProps) {
   return (
-    <section className={styles.sez}>
+    <section className={`${styles.sez} liquid`}>
       <RevealGroup className={styles.grid}>
         <div className={styles.content}>
           <Reveal as="span" className={`mono ${styles.eyebrow}`}>

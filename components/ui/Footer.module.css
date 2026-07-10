@@ -1,7 +1,8 @@
 .footer {
   background: var(--bg);
   border-top: 1px solid var(--line);
-  padding: 64px 0 40px;
+  padding: 64px 0 0;
+  overflow: hidden;
 }
 
 .cols {
@@ -61,4 +62,28 @@
 
 .legal a:hover {
   color: var(--fg);
+}
+
+.brandRow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.wave {
+  color: var(--azzurro);
+  margin-bottom: 16px;
+}
+
+/* il wordmark gigante esce dal bordo inferiore (crop da manuale) */
+.giant {
+  white-space: nowrap;
+  text-align: center;
+  font-size: clamp(88px, 15vw, 250px);
+  line-height: 0.74;
+  margin-top: 56px;
+  margin-bottom: -0.16em;
+  color: color-mix(in srgb, var(--fg) 8%, transparent);
+  user-select: none;
+  pointer-events: none;
 }
