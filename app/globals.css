@@ -53,12 +53,14 @@
   --fs-mono: 12px;
 }
 
+/* dark mono, riferimento Vercel: quasi-nero neutro, grigi puri —
+   i momenti brand (petrolio, azzurro, osso) restano invariati */
 [data-theme='dark'] {
-  --bg: #0B1B21;
-  --surface: #0F2229;
-  --fg: #EDE6DA;
-  --fg-2: #8FA0A8;
-  --line: rgba(237, 230, 218, 0.14);
+  --bg: #0A0A0A;
+  --surface: #141414;
+  --fg: #EDEDED;
+  --fg-2: #8F8F8F;
+  --line: #262626;
   color-scheme: dark;
 }
 
