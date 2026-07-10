@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { Archivo, Geist, Geist_Mono } from 'next/font/google'
+import { Archivo, Geist } from 'next/font/google'
 import localFont from 'next/font/local'
 import { locales, isLocale } from '@/lib/i18n/config'
 import '@/app/globals.css'
@@ -17,13 +17,6 @@ const body = Geist({
   subsets: ['latin'],
   weight: 'variable',
   variable: '--font-body',
-  display: 'swap',
-})
-
-const mono = Geist_Mono({
-  subsets: ['latin'],
-  weight: 'variable',
-  variable: '--font-mono',
   display: 'swap',
 })
 
@@ -62,7 +55,7 @@ export default async function SiteLayout({
     // su <html> prima dell'hydration, il mismatch è voluto
     <html lang={locale} suppressHydrationWarning>
       <body
-        className={`${display.variable} ${body.variable} ${mono.variable} ${fat.variable}`}
+        className={`${display.variable} ${body.variable} ${fat.variable}`}
       >
         {/* tema prima del paint: localStorage, poi preferenza di sistema */}
         <script

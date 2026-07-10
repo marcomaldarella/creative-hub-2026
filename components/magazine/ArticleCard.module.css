@@ -55,7 +55,7 @@
 }
 
 .pill {
-  font-family: var(--font-mono), monospace;
+  font-family: var(--font-body), sans-serif;
   font-size: 11px;
   letter-spacing: 0.02em;
   color: var(--fg);
