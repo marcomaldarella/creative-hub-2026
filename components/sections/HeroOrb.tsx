@@ -136,8 +136,10 @@ export function HeroOrb({ className }: { className?: string }) {
       host.appendChild(renderer.domElement)
 
       const scene = new THREE.Scene()
+      // z tale che il raggio massimo estruso (~1.35) stia nel frustum
+      // senza tagli ai bordi del canvas
       const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 20)
-      camera.position.set(0, 0, 3.4)
+      camera.position.set(0, 0, 4.1)
 
       const pmrem = new THREE.PMREMGenerator(renderer)
       const env = pmrem.fromScene(new RoomEnvironment(), 0.04)

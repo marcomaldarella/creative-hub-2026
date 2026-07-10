@@ -33,6 +33,11 @@
   z-index: 3;
 }
 
+.heroAnnot span {
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
 /* palco centrale: ring + orb + titolo impilati */
 .orbStage {
   flex: 1;
@@ -46,8 +51,9 @@
   grid-area: 1 / 1;
 }
 
+/* canvas più largo dell'orb visibile: margine per l'estrusione col mouse */
 .orb {
-  width: min(62vh, 78vw, 620px);
+  width: min(74vh, 92vw, 740px);
   aspect-ratio: 1;
 }
 
