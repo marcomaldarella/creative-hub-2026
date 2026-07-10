@@ -13,6 +13,7 @@ import {
   SectionHeader,
 } from '@/components/ui'
 import { SiteChrome, shopHref } from '@/components/sections/SiteChrome'
+import { HeroOrb } from '@/components/sections/HeroOrb'
 import { ArticleCard } from '@/components/magazine/ArticleCard'
 import { isLocale, localeHref, type Locale } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
@@ -111,13 +112,7 @@ export default async function HomePage({
                 </textPath>
               </text>
             </svg>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/img/hero-orb.jpg"
-              alt=""
-              className={styles.orb}
-              fetchPriority="high"
-            />
+            <HeroOrb className={styles.orb} />
             <h1 className={`display-black ${styles.heroTitle}`}>
               CREATIVE
               <br />

@@ -80,6 +80,11 @@
   font-weight: 600;
   letter-spacing: -0.01em;
   line-height: 1.35;
+  /* misura stretta: a capo naturali, mai parole spezzate */
+  max-width: 26ch;
+  text-wrap: balance;
+  overflow-wrap: normal;
+  hyphens: none;
 }
 
 .excerpt {
@@ -147,6 +152,7 @@
   font-size: clamp(24px, 2.6vw, 40px);
   line-height: 1.12;
   letter-spacing: -0.015em;
+  max-width: 18ch;
 }
 
 .featured .excerpt {
