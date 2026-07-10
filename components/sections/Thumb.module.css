@@ -1,0 +1,43 @@
+.thumb {
+  width: 100%;
+  overflow: hidden;
+  background: var(--linea);
+}
+
+.thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.round {
+  border-radius: 50%;
+}
+
+/* fallback: gradient sui token brand, come i .thumb del reference */
+.g0 {
+  background: linear-gradient(
+    150deg,
+    color-mix(in srgb, var(--azzurro) 30%, var(--bianco)),
+    var(--azzurro) 60%,
+    var(--petrolio)
+  );
+}
+
+.g1 {
+  background: linear-gradient(
+    200deg,
+    var(--osso),
+    var(--grigio) 70%,
+    var(--petrolio)
+  );
+}
+
+.g2 {
+  background: linear-gradient(
+    120deg,
+    var(--petrolio),
+    color-mix(in srgb, var(--azzurro) 55%, var(--petrolio)) 55%,
+    color-mix(in srgb, var(--azzurro) 65%, var(--bianco))
+  );
+}

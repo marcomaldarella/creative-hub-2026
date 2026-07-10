@@ -1,0 +1,74 @@
+.main {
+  padding-top: var(--nav-h);
+}
+
+.sez {
+  padding: var(--sez) 0;
+}
+
+/* ————— hero ————— */
+
+.head {
+  padding-top: clamp(56px, 8vw, 96px);
+  padding-bottom: clamp(48px, 6vw, 80px);
+}
+
+.kicker {
+  display: block;
+  margin-bottom: 20px;
+}
+
+.title {
+  font-size: var(--fs-h2);
+  margin-bottom: 18px;
+}
+
+.lede {
+  max-width: 52ch;
+  color: var(--grigio);
+  font-size: var(--fs-lede);
+}
+
+/* ————— layout editoriale ————— */
+
+.editorial {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: clamp(32px, 5vw, 80px);
+  align-items: start;
+}
+
+.sectionHead {
+  margin-bottom: 0;
+}
+
+/* ————— partner ————— */
+
+.marqueeSez {
+  padding: clamp(40px, 6vw, 80px) 0;
+}
+
+/* ————— contatti ————— */
+
+.contacts {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+.contactsHead {
+  margin-bottom: 24px;
+}
+
+.contactLines {
+  font-style: normal;
+  line-height: 2;
+}
+
+@media (max-width: 860px) {
+  .editorial {
+    grid-template-columns: 1fr;
+  }
+}

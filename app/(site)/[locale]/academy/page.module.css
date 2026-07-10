@@ -1,0 +1,129 @@
+.main {
+  padding-top: var(--nav-h);
+}
+
+/* ————— header ————— */
+
+.head {
+  padding-top: clamp(56px, 8vw, 96px);
+}
+
+.kicker {
+  display: block;
+  margin-bottom: 20px;
+}
+
+.title {
+  font-size: var(--fs-h2);
+  margin-bottom: 18px;
+}
+
+.lede {
+  max-width: 52ch;
+  color: var(--grigio);
+  font-size: var(--fs-lede);
+}
+
+/* ————— filtri pill ————— */
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: clamp(32px, 4vw, 48px);
+}
+
+.pill {
+  display: inline-block;
+  border: 1px solid var(--linea);
+  border-radius: var(--radius-pill);
+  padding: 7px 18px;
+  font-size: var(--fs-small);
+  color: var(--grigio);
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+
+.pill:hover {
+  color: var(--petrolio);
+  border-color: var(--azzurro);
+}
+
+.pillOn {
+  background: var(--petrolio);
+  border-color: var(--petrolio);
+  color: var(--osso);
+}
+
+.pillOn:hover {
+  color: var(--osso);
+  border-color: var(--petrolio);
+}
+
+/* ————— griglia corsi ————— */
+
+.gridSez {
+  padding-top: clamp(40px, 5vw, 64px);
+  padding-bottom: var(--sez);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+a.course {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--linea);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--bianco);
+  transition:
+    box-shadow var(--dur) ease,
+    opacity var(--dur-slow) ease var(--rvd, 0s),
+    transform var(--dur-slow) var(--ease-out) var(--rvd, 0s);
+}
+
+a.course:hover {
+  box-shadow: 0 16px 40px -20px color-mix(in srgb, var(--petrolio) 35%, transparent);
+}
+
+.courseBody {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 22px 22px 26px;
+}
+
+.courseKicker {
+  display: block;
+  margin-bottom: 12px;
+  color: var(--azzurro);
+}
+
+.courseTitle {
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+  margin-bottom: 8px;
+}
+
+.courseSummary {
+  font-size: var(--fs-small);
+  color: var(--grigio);
+  margin-bottom: 18px;
+}
+
+.courseMeta {
+  display: block;
+  margin-top: auto;
+}
+
+/* ————— docenti ————— */
+
+.teachersSez {
+  padding-top: var(--sez);
+  padding-bottom: var(--sez);
+}

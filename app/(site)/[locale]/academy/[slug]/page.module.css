@@ -1,0 +1,112 @@
+.main {
+  padding-top: var(--nav-h);
+}
+
+/* ————— hero testuale ————— */
+
+.head {
+  padding-top: clamp(56px, 8vw, 96px);
+  padding-bottom: clamp(48px, 6vw, 80px);
+}
+
+.back {
+  margin-bottom: clamp(28px, 4vw, 44px);
+}
+
+.kicker {
+  display: block;
+  margin-bottom: 20px;
+  color: var(--azzurro);
+}
+
+.title {
+  font-size: var(--fs-h2);
+  margin-bottom: 18px;
+  max-width: 18ch;
+}
+
+.lede {
+  max-width: 52ch;
+  color: var(--grigio);
+  font-size: var(--fs-lede);
+}
+
+/* ————— layout corpo + sidebar ————— */
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(240px, 320px);
+  gap: clamp(40px, 6vw, 96px);
+  padding-top: clamp(48px, 6vw, 80px);
+  padding-bottom: var(--sez);
+}
+
+.body {
+  min-width: 0;
+}
+
+.teachers {
+  margin-top: clamp(48px, 6vw, 72px);
+}
+
+.teachersKicker {
+  display: block;
+  margin-bottom: 24px;
+}
+
+/* ————— sidebar sticky mono ————— */
+
+.sticky {
+  position: sticky;
+  top: calc(var(--nav-h) + 28px);
+}
+
+.facts {
+  border: 1px solid var(--linea);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin-bottom: 20px;
+  background: var(--bianco);
+}
+
+.fact {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--linea);
+}
+
+.fact:first-child {
+  padding-top: 0;
+}
+
+.fact:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.fact dt {
+  color: var(--grigio);
+}
+
+.fact dd {
+  color: var(--petrolio);
+  text-align: right;
+}
+
+/* ————— mobile ————— */
+
+@media (max-width: 860px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .aside {
+    order: -1;
+  }
+
+  .sticky {
+    position: static;
+  }
+}

@@ -1,0 +1,28 @@
+/* Le tre varianti di gradient del reference (.thumb), solo token brand. */
+
+.g0 {
+  background: linear-gradient(
+    150deg,
+    color-mix(in srgb, var(--azzurro) 25%, var(--bianco)),
+    var(--azzurro) 60%,
+    var(--petrolio)
+  );
+}
+
+.g1 {
+  background: linear-gradient(
+    200deg,
+    var(--osso),
+    var(--grigio) 70%,
+    var(--petrolio)
+  );
+}
+
+.g2 {
+  background: linear-gradient(
+    120deg,
+    var(--petrolio),
+    color-mix(in srgb, var(--azzurro) 55%, var(--petrolio)) 55%,
+    var(--azzurro-hover)
+  );
+}

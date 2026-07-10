@@ -6,7 +6,9 @@
     "innovation": "innovation",
     "magazine": "magazine",
     "about": "about us",
-    "book": "book"
+    "book": "book",
+    "menu": "menu",
+    "lang": "language"
   },
   "hero": {
     "since": "since 1999 — international college of music, sound, multimedia & visual",
@@ -28,11 +30,129 @@
     "start": "start",
     "level": "level",
     "language": "language",
-    "mode": "mode"
+    "mode": "mode",
+    "category": "category"
+  },
+  "home": {
+    "manifestoRuleLeft": "creative hub",
+    "manifestoRuleRight": "manifesto",
+    "manifestoPre": "We are not a school. We are not a studio. We are not a coworking space. We are ",
+    "manifestoBold": "the infrastructure",
+    "manifestoPost": " that lets people who work with sound, image and code turn their vision into a profession.",
+    "studioKicker": "the studio",
+    "studioTitle": "Where sound takes shape",
+    "studioDesc": "SSL console, Dolby Atmos certification, a team of sound engineers working across records and film. The lights go down, the signal flows.",
+    "studioCta": "step into the studios",
+    "ecosystemKicker": "the ecosystem",
+    "ecosystemTitle": "Six nodes, one network",
+    "nodes": {
+      "academy": { "title": "Courses and training", "text": "Degree paths and tailored training, since 1999." },
+      "studio": { "title": "Recording and production", "text": "SSL, Dolby Atmos, audio for film." },
+      "coworking": { "title": "Workspaces", "text": "Desks, meeting rooms, day passes and events." },
+      "innovation": { "title": "Incubation and B2B", "text": "Creative startups and services for companies." },
+      "magazine": { "title": "Editorial", "text": "Voices and stories from the creative industry." },
+      "about": { "title": "Team and governance", "text": "The people and partners behind the hub." }
+    },
+    "resultsRuleLeft": "results",
+    "resultsRuleRight": "2026",
+    "stats": {
+      "students": { "value": 8400, "suffix": "+", "label": "students trained" },
+      "partners": { "value": 300, "suffix": "+", "label": "partner companies" },
+      "placement": { "value": 92, "suffix": "%", "label": "placement within 12 months" },
+      "startups": { "value": 14, "suffix": "", "label": "startups incubated per year" }
+    },
+    "magazineKicker": "magazine",
+    "magazineTitle": "From the industry",
+    "magazineAll": "all articles",
+    "opendayTitleLine1": "AN AFTERNOON",
+    "opendayTitleLine2": "INSIDE THE HUB",
+    "opendayCta": "book your spot"
+  },
+  "academy": {
+    "kicker": "academy",
+    "title": "Courses and training",
+    "lede": "Programmes born inside real control rooms and studios: you learn by doing, next to people who work in the industry every day.",
+    "categoryLabel": "filter by category",
+    "empty": "no courses in this category.",
+    "teachersKicker": "the teachers",
+    "teachersTitle": "Who teaches here",
+    "backToCourses": "all courses",
+    "courseTeachers": "course teachers",
+    "courseInfo": "course details"
+  },
+  "studios": {
+    "kicker": "the studio",
+    "title": "Where sound takes shape",
+    "lede": "SSL console, Dolby Atmos certification, a team of sound engineers working across records and film. The lights go down, the signal flows.",
+    "spacesKicker": "the spaces",
+    "spacesTitle": "Control rooms, live room, immersive suite",
+    "servicesKicker": "the services",
+    "servicesTitle": "From tracking to the international soundtrack",
+    "services": {
+      "recording": { "n": "ch.01", "title": "Recording", "text": "Live room, SSL console, reference monitoring." },
+      "mix": { "n": "ch.02", "title": "Mix & mastering", "text": "Analog and in the box, for records and broadcast." },
+      "atmos": { "n": "ch.03", "title": "Dolby Atmos", "text": "Certified immersive mixing, music and film." },
+      "cinema": { "n": "ch.04", "title": "Film audio", "text": "Post-production, foley, international soundtracks." }
+    },
+    "ctaKicker": "bookings",
+    "ctaTitle": "Bring your project here",
+    "ctaText": "Tell us what you want to record or mix: we reply within one working day.",
+    "ctaBook": "book a session",
+    "ctaContact": "write to us"
+  },
+  "coworking": {
+    "kicker": "coworking",
+    "title": "Workspaces",
+    "lede": "Desks, meeting rooms and day passes among studios and classrooms: a space designed for people working in the creative industries.",
+    "spacesKicker": "the spaces",
+    "spacesTitle": "From desk to meeting room",
+    "ctaKicker": "come try it",
+    "ctaTitle": "A day inside the hub",
+    "ctaText": "The day pass is the simplest way to get to know the space: book online, pay only when you need it.",
+    "ctaDayPass": "book a day pass"
+  },
+  "innovation": {
+    "fallbackTitle": "Innovation",
+    "fallbackLede": "Applied research on immersive audio, artificial intelligence and interactive media, with companies and universities.",
+    "statsRuleLeft": "numbers",
+    "statsRuleRight": "innovation",
+    "stats": {
+      "startups": { "value": 14, "suffix": "", "label": "startups incubated per year" },
+      "partners": { "value": 300, "suffix": "+", "label": "partner companies" }
+    }
+  },
+  "about": {
+    "fallbackTitle": "About us",
+    "fallbackLede": "Training music, sound and visual professionals since 1999, in Bologna's productive heart.",
+    "teamKicker": "the people",
+    "teamTitle": "Teachers and team",
+    "partnersRuleLeft": "the partners",
+    "partnersRuleRight": "since 1999",
+    "contactsKicker": "contacts",
+    "contactsTitle": "Come visit us",
+    "contactsText": "We are in the fair district, ten minutes from the centre. The open day is the way in."
   },
   "footer": {
     "address": "via del tappezziere, 4 — bologna",
     "copyright": "© 2026 creative hub — since 1999",
-    "legal": "privacy · cookies · transparency"
+    "legal": "privacy · cookies · transparency",
+    "privacy": "privacy",
+    "cookie": "cookies",
+    "transparency": "transparency"
+  },
+  "magazine": {
+    "kicker": "magazine",
+    "title": "From the industry",
+    "lede": "Voices, stories and tools from the creative industry: sound, image, code.",
+    "metaTitle": "magazine",
+    "metaDescription": "Voices and stories from the creative industry — the creative hub bologna magazine.",
+    "featuredLabel": "featured",
+    "latestLabel": "all articles",
+    "categoriesLabel": "categories",
+    "categoryKicker": "category",
+    "backToMagazine": "back to the magazine",
+    "relatedTitle": "more articles",
+    "empty": "no articles yet.",
+    "by": "by"
   }
 }

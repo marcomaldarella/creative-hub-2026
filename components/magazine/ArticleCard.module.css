@@ -1,0 +1,95 @@
+.card {
+  display: block;
+  border: 1px solid var(--linea);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--bianco);
+  transition:
+    transform var(--dur) var(--ease-out),
+    box-shadow var(--dur);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px -20px color-mix(in srgb, var(--petrolio) 25%, transparent);
+}
+
+.thumb {
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.body {
+  padding: 22px 22px 26px;
+}
+
+.kicker {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.title {
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+}
+
+.excerpt {
+  margin-top: 12px;
+  font-size: var(--fs-small);
+  color: var(--grigio);
+  max-width: 52ch;
+}
+
+/* ————— variante featured: orizzontale, titolo grande ————— */
+
+.featured {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+}
+
+.featured .thumb {
+  aspect-ratio: auto;
+  min-height: 320px;
+  height: 100%;
+}
+
+.featured .body {
+  padding: clamp(24px, 3vw, 44px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.featured .kicker {
+  margin-bottom: 18px;
+}
+
+.featured .title {
+  font-family: var(--font-display), sans-serif;
+  font-weight: 650;
+  font-stretch: 95%;
+  font-size: clamp(24px, 2.8vw, 38px);
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+}
+
+@media (max-width: 760px) {
+  .featured {
+    grid-template-columns: 1fr;
+  }
+
+  .featured .thumb {
+    aspect-ratio: 3 / 2;
+    min-height: 0;
+  }
+}

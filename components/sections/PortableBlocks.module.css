@@ -1,0 +1,74 @@
+.blocks {
+  max-width: 62ch;
+}
+
+.blocks p {
+  margin-bottom: 1.2em;
+}
+
+.blocks p:last-child {
+  margin-bottom: 0;
+}
+
+.blocks h2,
+.blocks h3,
+.blocks h4 {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+  margin: 1.8em 0 0.6em;
+}
+
+.blocks h2 { font-size: 26px; }
+.blocks h3 { font-size: 21px; }
+.blocks h4 { font-size: 17px; }
+
+.blocks h2:first-child,
+.blocks h3:first-child,
+.blocks h4:first-child {
+  margin-top: 0;
+}
+
+.blocks blockquote {
+  border-left: 2px solid var(--azzurro);
+  padding-left: 20px;
+  margin: 1.4em 0;
+  font-size: 1.1em;
+  line-height: 1.45;
+}
+
+.blocks ul,
+.blocks ol {
+  margin: 0 0 1.2em;
+  padding-left: 1.2em;
+}
+
+.blocks li {
+  margin-bottom: 0.4em;
+}
+
+.blocks a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--azzurro);
+  transition: color 0.2s;
+}
+
+.blocks a:hover {
+  color: var(--azzurro);
+}
+
+.blocks code {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.9em;
+}
+
+.blocks strong {
+  font-weight: 600;
+}
+
+.image {
+  width: 100%;
+  border-radius: var(--radius);
+  margin: 1.6em 0;
+}

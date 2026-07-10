@@ -1,0 +1,88 @@
+.main {
+  padding-top: var(--nav-h);
+}
+
+.sez {
+  padding: var(--sez) 0;
+}
+
+/* ————— hero ————— */
+
+.head {
+  padding-top: clamp(56px, 8vw, 96px);
+  padding-bottom: clamp(48px, 6vw, 80px);
+}
+
+.kicker {
+  display: block;
+  margin-bottom: 20px;
+}
+
+.title {
+  font-size: var(--fs-h2);
+  margin-bottom: 18px;
+}
+
+.lede {
+  max-width: 52ch;
+  color: var(--grigio);
+  font-size: var(--fs-lede);
+}
+
+/* ————— spazi ————— */
+
+.spaces {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.spaceCard {
+  height: 100%;
+}
+
+.spaceSummary {
+  margin-bottom: 18px;
+}
+
+.features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.features li::before {
+  content: '— ';
+  color: var(--azzurro);
+}
+
+/* ————— cta (azzurro) ————— */
+
+.cta {
+  background: var(--azzurro);
+  color: var(--petrolio);
+}
+
+.ctaIn {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+}
+
+.ctaKicker {
+  display: block;
+  margin-bottom: 14px;
+  color: color-mix(in srgb, var(--petrolio) 70%, transparent);
+}
+
+.ctaTitle {
+  font-size: clamp(34px, 5vw, 64px);
+  margin-bottom: 12px;
+}
+
+.ctaText {
+  max-width: 44ch;
+}

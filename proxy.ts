@@ -6,6 +6,16 @@ import type { NextRequest } from 'next/server'
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl
 
+  // Sanity Studio e API restano fuori dall'i18n (confronto esatto sul segmento:
+  // /studios è una pagina del sito e DEVE passare dal rewrite)
+  if (
+    pathname === '/studio' ||
+    pathname.startsWith('/studio/') ||
+    pathname.startsWith('/api/')
+  ) {
+    return NextResponse.next()
+  }
+
   if (pathname === '/it' || pathname.startsWith('/it/')) {
     const url = request.nextUrl.clone()
     url.pathname = pathname.replace(/^\/it/, '') || '/'
@@ -22,6 +32,6 @@ export function proxy(request: NextRequest) {
 }
 
 export const config = {
-  // esclude studio Sanity, API route, asset statici e file
-  matcher: ['/((?!api|studio|_next|.*\\..*).*)'],
+  // esclude asset statici e file; studio/api gestiti nella funzione
+  matcher: ['/((?!_next|.*\\..*).*)'],
 }
