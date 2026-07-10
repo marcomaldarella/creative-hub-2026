@@ -107,12 +107,15 @@ export default async function HomePage({
                   fill="none"
                 />
               </defs>
-              {/* linea continua che chiude l'anello, appena fuori dal testo */}
-              <circle className={styles.ringLine} cx="50" cy="50" r="48.6" />
               <text>
                 <textPath href="#hero-ring">
                   creative · creative-hub · inspire · innovate · excel ·
-                  bologna · dal 1999 ·
+                  bologna · dal 1999{' '}
+                  {/* linea continua alla stessa altezza del type: em-dash
+                      senza tracking; l'eccedenza oltre il cerchio è clippata */}
+                  <tspan className={styles.ringDash} aria-hidden="true">
+                    {'—'.repeat(90)}
+                  </tspan>
                 </textPath>
               </text>
             </svg>
