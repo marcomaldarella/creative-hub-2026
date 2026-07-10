@@ -146,7 +146,7 @@ export function HeroOrb({ className }: { className?: string }) {
       // uniforms condivise tra chrome e wireframe
       const uTime = { value: 0.8 }
       const AMP_BASE = 0.085 // estrusione a riposo, calma
-      const AMP_MAX = 0.2 // col mouse in movimento
+      const AMP_MAX = 0.32 // col mouse in movimento: reazione ben visibile
       const uAmp = { value: AMP_BASE }
 
       const patchShader = (shader: { uniforms: Record<string, unknown>; vertexShader: string }) => {
@@ -234,7 +234,7 @@ export function HeroOrb({ className }: { className?: string }) {
         pointer.y = ((e.clientY - (r.top + r.height / 2)) / r.height) * 2
         if (hasLast) {
           const speed = Math.hypot(e.clientX - lastX, e.clientY - lastY)
-          energy = Math.min(1, energy + speed * 0.007)
+          energy = Math.min(1, energy + speed * 0.015)
         }
         lastX = e.clientX
         lastY = e.clientY
@@ -249,7 +249,10 @@ export function HeroOrb({ className }: { className?: string }) {
         // l'energia del mouse gonfia l'estrusione, poi decade dolcemente
         energy *= 0.975
         const targetAmp = AMP_BASE + (AMP_MAX - AMP_BASE) * energy
-        uAmp.value += (targetAmp - uAmp.value) * 0.04
+        // attacco pronto, rilascio morbido: il gonfiore si sente subito
+        // muovendo il mouse ma si spegne con calma
+        const k = targetAmp > uAmp.value ? 0.12 : 0.03
+        uAmp.value += (targetAmp - uAmp.value) * k
         tilt.x += (pointer.y * 0.38 - tilt.x) * 0.045
         tilt.y += (pointer.x * 0.55 - tilt.y) * 0.045
         blob.rotation.x = tilt.x

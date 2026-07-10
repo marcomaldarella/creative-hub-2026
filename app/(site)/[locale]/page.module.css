@@ -63,6 +63,7 @@
   font-family: var(--font-body), sans-serif;
   font-size: 3.2px;
   letter-spacing: 0.42em;
+  text-transform: uppercase;
   fill: color-mix(in srgb, var(--ghiaccio) 62%, transparent);
 }
 
