@@ -74,11 +74,11 @@ float field(vec3 n){
     snoise(q + vec3(5.2, 1.3, 2.8)),
     snoise(q + vec3(1.7, 9.2, 3.1))
   );
-  vec3 p = n * 1.55 + 0.62 * w + vec3(t * 0.085, t * 0.06, -t * 0.075);
+  vec3 p = n * 1.45 + 0.45 * w + vec3(t * 0.07, t * 0.05, -t * 0.06);
   float v = 0.0;
-  v += 0.58 * snoise(p);
-  v += 0.30 * snoise(p * 2.15 + vec3(t * 0.12));
-  v += 0.12 * snoise(p * 4.4);
+  v += 0.66 * snoise(p);
+  v += 0.28 * snoise(p * 1.9 + vec3(t * 0.09));
+  v += 0.06 * snoise(p * 3.6);
   return v;
 }
 
@@ -93,7 +93,7 @@ const VERTEX_PATCH = /* glsl */ `
 vec3 nDir = normalize(position);
 vec3 tangA = normalize(cross(nDir, abs(nDir.y) < 0.99 ? vec3(0.0,1.0,0.0) : vec3(1.0,0.0,0.0)));
 vec3 tangB = cross(nDir, tangA);
-float eps = 0.012;
+float eps = 0.007;
 vec3 dP0 = orbDisplace(nDir);
 vec3 dPA = orbDisplace(normalize(nDir + eps * tangA));
 vec3 dPB = orbDisplace(normalize(nDir + eps * tangB));
@@ -145,8 +145,8 @@ export function HeroOrb({ className }: { className?: string }) {
 
       // uniforms condivise tra chrome e wireframe
       const uTime = { value: 0.8 }
-      const AMP_BASE = 0.13 // estrusione a riposo, calma
-      const AMP_MAX = 0.34 // col mouse in movimento
+      const AMP_BASE = 0.085 // estrusione a riposo, calma
+      const AMP_MAX = 0.2 // col mouse in movimento
       const uAmp = { value: AMP_BASE }
 
       const patchShader = (shader: { uniforms: Record<string, unknown>; vertexShader: string }) => {
@@ -174,12 +174,12 @@ export function HeroOrb({ className }: { className?: string }) {
       const chrome = new THREE.MeshPhysicalMaterial({
         color: 0xd2d8dc,
         metalness: 1,
-        roughness: 0.07,
-        clearcoat: 0.65,
-        clearcoatRoughness: 0.22,
-        envMapIntensity: 1.7,
+        roughness: 0.035,
+        clearcoat: 0.9,
+        clearcoatRoughness: 0.1,
+        envMapIntensity: 2.0,
         emissive: 0x06333c,
-        emissiveIntensity: 0.5,
+        emissiveIntensity: 0.28,
       })
       chrome.onBeforeCompile = patchShader
       const blob = new THREE.Mesh(geo, chrome)
@@ -234,7 +234,7 @@ export function HeroOrb({ className }: { className?: string }) {
         pointer.y = ((e.clientY - (r.top + r.height / 2)) / r.height) * 2
         if (hasLast) {
           const speed = Math.hypot(e.clientX - lastX, e.clientY - lastY)
-          energy = Math.min(1, energy + speed * 0.012)
+          energy = Math.min(1, energy + speed * 0.007)
         }
         lastX = e.clientX
         lastY = e.clientY
@@ -247,9 +247,9 @@ export function HeroOrb({ className }: { className?: string }) {
       const frame = () => {
         uTime.value = 0.8 + (performance.now() - t0) / 1000
         // l'energia del mouse gonfia l'estrusione, poi decade dolcemente
-        energy *= 0.97
+        energy *= 0.975
         const targetAmp = AMP_BASE + (AMP_MAX - AMP_BASE) * energy
-        uAmp.value += (targetAmp - uAmp.value) * 0.06
+        uAmp.value += (targetAmp - uAmp.value) * 0.04
         tilt.x += (pointer.y * 0.38 - tilt.x) * 0.045
         tilt.y += (pointer.x * 0.55 - tilt.y) * 0.045
         blob.rotation.x = tilt.x
