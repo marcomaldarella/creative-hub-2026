@@ -6,7 +6,6 @@
 
 .light {
   background: var(--surface);
-  border: 1px solid var(--line);
   transition: transform var(--dur) var(--ease-out), box-shadow var(--dur);
 }
 

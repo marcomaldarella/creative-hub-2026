@@ -2,7 +2,6 @@ import { notFound } from 'next/navigation'
 import {
   ArrowLink,
   Button,
-  Card,
   Counter,
   CounterRow,
   Marquee,
@@ -15,10 +14,11 @@ import {
 } from '@/components/ui'
 import { SiteChrome, shopHref } from '@/components/sections/SiteChrome'
 import { HeroOrb } from '@/components/sections/HeroOrb'
+import { StudioFocus } from '@/components/sections/StudioFocus'
 import { ArticleCard } from '@/components/magazine/ArticleCard'
 import { isLocale, localeHref, type Locale } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
-import { getHomeData, getSpacesByKind } from '@/lib/sanity/queries'
+import { getHomeData } from '@/lib/sanity/queries'
 import { l } from '@/lib/sanity/l'
 import styles from './page.module.css'
 
@@ -53,10 +53,7 @@ export default async function HomePage({
   if (!isLocale(locale)) notFound()
   const t = getDictionary(locale)
 
-  const [home, studioSpaces] = await Promise.all([
-    getHomeData(),
-    getSpacesByKind('studio'),
-  ])
+  const home = await getHomeData()
   const { settings, latestArticles, partners } = home
 
   const nodes = [
@@ -108,7 +105,9 @@ export default async function HomePage({
                 />
               </defs>
               <text>
-                <textPath href="#hero-ring">
+                {/* startOffset: la linea clippa a fine cerchio (0%),
+                    il testo parte più avanti → aria prima della c */}
+                <textPath href="#hero-ring" startOffset="1.6%">
                   creative · creative-hub · inspire · innovate · excel ·
                   bologna · dal 1999{' '}
                   {/* linea continua alla stessa altezza del type: em-dash
@@ -146,38 +145,6 @@ export default async function HomePage({
           </div>
         </section>
 
-        {/* ————— lo studio (petrolio) ————— */}
-        <section className={`${styles.sez} ${styles.studio}`}>
-          <div className={`wrap ${styles.studioIn}`}>
-            <SectionHeader
-              dark
-              kicker={t.home.studioKicker}
-              title={t.home.studioTitle}
-              lede={t.home.studioDesc}
-            />
-            <div className={styles.cards}>
-              {studioSpaces.map((space, i) => (
-                <Reveal key={space._id} delay={i * 60}>
-                  <Card
-                    variant="dark"
-                    kicker={`ch.0${i + 1}`}
-                    title={l(space.title, locale)}
-                    href={localeHref(locale, '/studios')}
-                    className={styles.studioCard}
-                  >
-                    {l(space.summary, locale)}
-                  </Card>
-                </Reveal>
-              ))}
-            </div>
-            <Reveal className={styles.studioCta} delay={120}>
-              <ArrowLink href={localeHref(locale, '/studios')}>
-                {t.home.studioCta}
-              </ArrowLink>
-            </Reveal>
-          </div>
-        </section>
-
         {/* ————— sei nodi ————— */}
         <section className={styles.sez}>
           <div className="wrap">
@@ -186,6 +153,24 @@ export default async function HomePage({
               title={t.home.ecosystemTitle}
             />
             <NodeGrid nodes={nodes} />
+          </div>
+        </section>
+
+        {/* ————— metodo (§ 04) ————— */}
+        <section className={styles.sez}>
+          <div className="wrap">
+            <Reveal as="span" className={`mono ${styles.methodKicker}`}>
+              {t.home.methodKicker}
+            </Reveal>
+            <RevealGroup className={styles.method}>
+              {t.home.method.map((m, i) => (
+                <Reveal key={m.n} className={styles.methodItem} delay={i * 90}>
+                  <span className={`mono ${styles.methodN}`}>I/{m.n}</span>
+                  <h3 className={styles.methodTitle}>{m.title}</h3>
+                  <p className={styles.methodText}>{m.text}</p>
+                </Reveal>
+              ))}
+            </RevealGroup>
           </div>
         </section>
 
@@ -208,8 +193,35 @@ export default async function HomePage({
           </div>
         </section>
 
-        {/* ————— marquee partner ————— */}
-        {partnerMarks.length > 0 && <Marquee items={partnerMarks} />}
+        {/* ————— focus studio SSL (§ 06) ————— */}
+        <StudioFocus
+          eyebrow={t.home.studioFocus.eyebrow}
+          titleA={t.home.studioFocus.titleA}
+          titleB={t.home.studioFocus.titleB}
+          desc={t.home.studioFocus.desc}
+          services={t.home.studioFocus.services}
+          ctaLabel={t.home.studioFocus.cta}
+          ctaHref={localeHref(locale, '/studios')}
+          captionLeft={t.home.studioFocus.captionLeft}
+          captionRight={t.home.studioFocus.captionRight}
+        />
+
+        {/* ————— network (§ 07): marquee partner ————— */}
+        {partnerMarks.length > 0 && (
+          <section className={styles.sez}>
+            <div className="wrap">
+              <SectionHeader
+                kicker={t.home.networkKicker}
+                title={t.home.networkTitle}
+              />
+            </div>
+            <Marquee items={partnerMarks} />
+            <div className={`wrap ${styles.networkFoot}`}>
+              <span className="mono">{t.home.networkRight}</span>
+              <span className="mono">{partnerMarks.length}</span>
+            </div>
+          </section>
+        )}
 
         {/* ————— magazine ————— */}
         <section className={styles.sez}>

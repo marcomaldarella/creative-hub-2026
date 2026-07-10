@@ -1,6 +1,6 @@
 /* pagina full petrolio */
 .dark {
-  background: var(--petrolio);
+  background: var(--panel);
   color: var(--osso);
   padding-top: var(--nav-h);
   min-height: 100svh;

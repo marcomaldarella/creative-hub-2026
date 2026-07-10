@@ -1,0 +1,158 @@
+.sez {
+  background: var(--panel);
+  color: var(--osso);
+  overflow: hidden;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(380px, 5fr) 7fr;
+  min-height: min(88vh, 900px);
+}
+
+/* allineato al .wrap: padding che assorbe lo spazio oltre --max */
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0;
+  padding: clamp(64px, 9vw, 120px) clamp(28px, 4vw, 72px);
+  padding-left: max(var(--pad), calc((100vw - var(--max)) / 2 + var(--pad)));
+}
+
+.eyebrow {
+  color: var(--azzurro);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.title {
+  margin-top: 22px;
+  font-size: clamp(46px, 6.4vw, 104px);
+  line-height: 0.94;
+}
+
+/* riga con mask: il contenuto sale da sotto quando arriva .in */
+.line {
+  display: block;
+  overflow: hidden;
+}
+
+/* neutralizza il reveal standard sul wrapper: anima solo l'interno */
+:global(.rv).line {
+  opacity: 1;
+  transform: none;
+}
+
+.lineIn {
+  display: inline-block;
+  transform: translateY(112%);
+  transition: transform 0.85s var(--ease-out);
+  transition-delay: inherit;
+}
+
+.line:global(.in) .lineIn {
+  transform: none;
+}
+
+.ssl {
+  font-style: normal;
+  color: var(--azzurro);
+}
+
+.dot {
+  color: color-mix(in srgb, var(--osso) 35%, transparent);
+}
+
+.desc {
+  margin-top: 28px;
+  max-width: 46ch;
+  font-size: var(--fs-lede);
+  color: var(--osso-60);
+}
+
+.services {
+  list-style: none;
+  margin-top: 38px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.service {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 8px 0;
+  font-size: 13px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--osso-60);
+}
+
+.dash {
+  width: 28px;
+  height: 1px;
+  background: color-mix(in srgb, var(--osso) 40%, transparent);
+  flex-shrink: 0;
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 40px;
+  padding: 11px 24px;
+  border: 1px solid color-mix(in srgb, var(--azzurro) 55%, transparent);
+  border-radius: var(--radius-pill);
+  color: var(--azzurro);
+  font-size: var(--fs-small);
+  font-weight: 500;
+  transition: background var(--dur), color var(--dur), border-color var(--dur);
+}
+
+.cta:hover {
+  background: var(--azzurro);
+  border-color: var(--azzurro);
+  color: var(--petrolio);
+}
+
+.media {
+  position: relative;
+  min-height: 420px;
+}
+
+.img {
+  object-fit: cover;
+}
+
+.caption {
+  position: absolute;
+  inset: auto 0 0 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 44px 24px 18px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.55), transparent);
+}
+
+.caption span {
+  color: color-mix(in srgb, var(--osso) 75%, transparent);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .content {
+    padding: clamp(56px, 12vw, 80px) var(--pad);
+  }
+
+  .media {
+    min-height: 72vw;
+  }
+}

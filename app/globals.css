@@ -27,12 +27,13 @@
   --fg: #1F3D4A;        /* testo */
   --fg-2: #77848C;      /* testo secondario */
   --line: #DCE0DE;      /* bordi, divisori */
+  --panel: #1F3D4A;     /* superfici brand grandi (sezioni scure, nav dark, overlay) */
 
   /* layout */
   --max: 1680px;
   --pad: clamp(20px, 3vw, 48px);
   --nav-h: 64px;
-  --radius: 12px;
+  --radius: 8px;
   --radius-pill: 999px;
 
   /* sezioni */
@@ -57,10 +58,11 @@
    i momenti brand (petrolio, azzurro, osso) restano invariati */
 [data-theme='dark'] {
   --bg: #0A0A0A;
-  --surface: #141414;
+  --surface: #111111;
   --fg: #EDEDED;
-  --fg-2: #8F8F8F;
-  --line: #262626;
+  --fg-2: #8A8A8A;
+  --line: #1F1F1F;
+  --panel: #0F0F0F; /* anche le superfici brand diventano neutre scure */
   color-scheme: dark;
 }
 

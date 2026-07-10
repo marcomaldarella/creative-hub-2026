@@ -165,7 +165,49 @@
     "magazineAll": "tutti gli articoli",
     "opendayTitleLine1": "UN POMERIGGIO",
     "opendayTitleLine2": "DENTRO L'HUB",
-    "opendayCta": "prenota il tuo posto"
+    "opendayCta": "prenota il tuo posto",
+    "methodKicker": "§ 04 — metodo",
+    "method": [
+      {
+        "n": "01",
+        "title": "Formazione",
+        "text": "Università, master e percorsi custom riconosciuti."
+      },
+      {
+        "n": "02",
+        "title": "Collaborazioni",
+        "text": "Studi, etichette, broadcaster, brand internazionali."
+      },
+      {
+        "n": "03",
+        "title": "Tecnologie",
+        "text": "SSL, Dolby Atmos, post-produzione, XR."
+      },
+      {
+        "n": "04",
+        "title": "Networking",
+        "text": "Community globale, mentor e industria al tuo fianco."
+      }
+    ],
+    "networkKicker": "§ 07 — network",
+    "networkTitle": "L'industria creativa passa di qui.",
+    "networkRight": "partner attivi · 2026",
+    "studioFocus": {
+      "eyebrow": "§ 06 — focus / studio",
+      "titleA": "uno studio",
+      "titleB": "SSL",
+      "desc": "Una delle poche console SSL d'Italia, sala Dolby Atmos certificata e una squadra di ingegneri del suono che lavora ogni giorno con etichette, broadcaster e produttori indipendenti.",
+      "services": [
+        "recording · live tracking",
+        "mix & mastering",
+        "dolby atmos · 7.1.4",
+        "remote recording",
+        "audio per cinema & video"
+      ],
+      "cta": "entra in studio",
+      "captionLeft": "recording / ssl room a",
+      "captionRight": "— 06 / studio"
+    }
   },
   "academy": {
     "kicker": "academy",

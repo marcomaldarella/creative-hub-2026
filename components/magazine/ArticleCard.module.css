@@ -5,16 +5,15 @@
   display: flex;
   flex-direction: column;
   background: var(--surface);
-  border: 1px solid var(--line);
   border-radius: var(--radius);
   overflow: hidden;
   transition:
-    border-color var(--dur),
+    background var(--dur),
     box-shadow var(--dur);
 }
 
 .card:hover {
-  border-color: color-mix(in srgb, var(--petrolio) 40%, var(--line));
+  background: color-mix(in srgb, var(--surface) 94%, var(--fg) 6%);
   box-shadow: 0 8px 24px -18px color-mix(in srgb, var(--petrolio) 35%, transparent);
 }
 

@@ -21,7 +21,7 @@
    qui sotto (con --rvd per lo stagger SOLO su opacity/transform)
    vince senza dipendere dall'ordine dei fogli di stile */
 a.nodo {
-  border: 1px solid var(--line);
+  background: var(--surface);
   border-radius: var(--radius);
   padding: 28px 28px 30px;
   position: relative;
@@ -29,15 +29,14 @@ a.nodo {
   display: flex;
   flex-direction: column;
   transition:
-    border-color 0.25s ease,
     background 0.25s ease,
     opacity var(--dur-slow) ease var(--rvd, 0s),
     transform var(--dur-slow) var(--ease-out) var(--rvd, 0s);
 }
 
+/* hover alla vercel: la superficie si schiarisce, niente bordi */
 a.nodo:hover {
-  border-color: var(--fg-2);
-  background: var(--surface);
+  background: color-mix(in srgb, var(--surface) 92%, var(--fg) 8%);
 }
 
 .label {
