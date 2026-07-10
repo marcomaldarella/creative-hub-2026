@@ -2,10 +2,12 @@
   position: fixed;
   inset: 0 0 auto 0;
   z-index: 50;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  background: color-mix(in srgb, var(--bg) 82%, transparent);
-  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(22px) saturate(1.6);
+  -webkit-backdrop-filter: blur(22px) saturate(1.6);
+  background: color-mix(in srgb, var(--bg) 68%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--line) 75%, transparent);
+  /* bordo-luce in alto: il "vetro" prende la luce */
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--surface) 45%, transparent);
   color: var(--fg);
 }
 
@@ -71,10 +73,13 @@
   top: var(--nav-h);
   left: 0;
   right: 0;
-  background: color-mix(in srgb, var(--bg) 94%, transparent);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  border-bottom: 1px solid var(--line);
+  background: color-mix(in srgb, var(--bg) 58%, transparent);
+  backdrop-filter: blur(32px) saturate(1.8);
+  -webkit-backdrop-filter: blur(32px) saturate(1.8);
+  border-bottom: 1px solid color-mix(in srgb, var(--line) 70%, transparent);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--surface) 40%, transparent),
+    0 32px 80px -36px color-mix(in srgb, var(--petrolio) 45%, transparent);
   opacity: 0;
   visibility: hidden;
   transform: translateY(-8px);
@@ -83,6 +88,25 @@
     opacity var(--dur) ease,
     transform var(--dur) var(--ease-out),
     visibility 0s linear var(--dur);
+}
+
+/* velatura di riflesso diagonale sul vetro */
+.panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    115deg,
+    color-mix(in srgb, var(--surface) 22%, transparent) 0%,
+    transparent 34%,
+    transparent 68%,
+    color-mix(in srgb, var(--azzurro) 7%, transparent) 100%
+  );
+}
+
+.panelIn {
+  position: relative;
 }
 
 .navItem:hover .panel,
@@ -180,7 +204,7 @@
 }
 
 .lang {
-  font-family: var(--font-mono), monospace;
+  font-family: var(--font-body), sans-serif;
   font-size: var(--fs-mono);
   letter-spacing: 0.02em;
   color: var(--fg-2);
@@ -262,7 +286,9 @@
   position: fixed;
   inset: 0;
   z-index: 1;
-  background: var(--petrolio);
+  background: color-mix(in srgb, var(--petrolio) 84%, transparent);
+  backdrop-filter: blur(28px) saturate(1.6);
+  -webkit-backdrop-filter: blur(28px) saturate(1.6);
   color: var(--osso);
   padding: calc(var(--nav-h) + 28px) var(--pad) 40px;
   flex-direction: column;
@@ -337,8 +363,9 @@
 /* ————— stato menu aperto: la barra si fonde con l'overlay ————— */
 
 .menuOpen {
-  background: var(--petrolio);
+  background: color-mix(in srgb, var(--petrolio) 84%, transparent);
   border-bottom-color: var(--osso-16);
+  box-shadow: inset 0 1px 0 var(--osso-16);
   color: var(--osso);
 }
 
@@ -354,8 +381,9 @@
 /* ————— variante dark (hero petrolio) ————— */
 
 .dark {
-  background: color-mix(in srgb, var(--petrolio) 82%, transparent);
+  background: color-mix(in srgb, var(--petrolio) 68%, transparent);
   border-bottom-color: var(--osso-16);
+  box-shadow: inset 0 1px 0 var(--osso-16);
   color: var(--osso);
 }
 
@@ -370,8 +398,21 @@
 }
 
 .dark .panel {
-  background: color-mix(in srgb, var(--petrolio) 94%, transparent);
+  background: color-mix(in srgb, var(--petrolio) 62%, transparent);
   border-bottom-color: var(--osso-16);
+  box-shadow:
+    inset 0 1px 0 var(--osso-16),
+    0 32px 80px -32px rgba(0, 0, 0, 0.55);
+}
+
+.dark .panel::before {
+  background: linear-gradient(
+    115deg,
+    color-mix(in srgb, var(--osso) 9%, transparent) 0%,
+    transparent 34%,
+    transparent 68%,
+    color-mix(in srgb, var(--azzurro) 10%, transparent) 100%
+  );
 }
 
 .dark .panelTitle,
