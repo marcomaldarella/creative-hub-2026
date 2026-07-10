@@ -20,8 +20,8 @@
   --azzurro-06: rgba(79, 168, 223, 0.06);
 
   /* layout */
-  --max: 1280px;
-  --pad: clamp(20px, 4vw, 56px);
+  --max: 1680px;
+  --pad: clamp(20px, 3vw, 48px);
   --nav-h: 64px;
   --radius: 12px;
   --radius-pill: 999px;
