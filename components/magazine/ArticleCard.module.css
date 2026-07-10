@@ -1,21 +1,28 @@
+/* card stile Vercel (templates): larga, bordata, immagine 16:9 sopra,
+   contenuto sotto, hover sobrio sul bordo — niente salti */
+
 .card {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  background: var(--bianco);
   border: 1px solid var(--linea);
   border-radius: var(--radius);
   overflow: hidden;
-  background: var(--bianco);
   transition:
-    transform var(--dur) var(--ease-out),
+    border-color var(--dur),
     box-shadow var(--dur);
 }
 
 .card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 16px 40px -20px color-mix(in srgb, var(--petrolio) 25%, transparent);
+  border-color: color-mix(in srgb, var(--petrolio) 40%, var(--linea));
+  box-shadow: 0 8px 24px -18px color-mix(in srgb, var(--petrolio) 35%, transparent);
 }
 
-.thumb {
-  aspect-ratio: 3 / 2;
+/* ————— media (immagine o gradient placeholder) ————— */
+
+.media {
+  aspect-ratio: 16 / 9;
+  border-bottom: 1px solid var(--linea);
   overflow: hidden;
 }
 
@@ -23,64 +30,128 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.6s var(--ease-out);
 }
+
+.card:hover .img {
+  transform: scale(1.03);
+}
+
+/* ————— contenuto ————— */
 
 .body {
-  padding: 22px 22px 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 24px;
+  flex: 1;
 }
 
-.kicker {
+.top {
   display: flex;
+  align-items: center;
   justify-content: space-between;
   gap: 12px;
-  margin-bottom: 12px;
+}
+
+.pill {
+  font-family: var(--font-mono), monospace;
+  font-size: 11px;
+  letter-spacing: 0.02em;
+  color: var(--petrolio);
+  border: 1px solid var(--linea);
+  border-radius: var(--radius-pill);
+  padding: 3px 10px;
+  white-space: nowrap;
+  transition: border-color var(--dur), color var(--dur);
+}
+
+.card:hover .pill {
+  border-color: var(--azzurro);
+  color: color-mix(in srgb, var(--azzurro) 70%, var(--petrolio));
+}
+
+.date {
+  white-space: nowrap;
 }
 
 .title {
-  font-size: 19px;
+  font-size: 18px;
   font-weight: 600;
   letter-spacing: -0.01em;
-  line-height: 1.3;
+  line-height: 1.35;
 }
 
 .excerpt {
-  margin-top: 12px;
   font-size: var(--fs-small);
   color: var(--grigio);
-  max-width: 52ch;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
-/* ————— variante featured: orizzontale, titolo grande ————— */
+.foot {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 4px;
+}
+
+.author {
+  color: var(--grigio);
+}
+
+.arrow {
+  font-family: var(--font-display), sans-serif;
+  font-weight: 700;
+  color: var(--azzurro);
+  opacity: 0;
+  transform: rotate(180deg);
+  transition: opacity var(--dur), transform var(--dur) var(--ease-out);
+}
+
+.card:hover .arrow {
+  opacity: 1;
+  transform: rotate(90deg);
+}
+
+/* ————— variante featured: immagine a sinistra, contenuto a destra ————— */
 
 .featured {
   display: grid;
-  grid-template-columns: 1.25fr 1fr;
+  grid-template-columns: 1.15fr 1fr;
 }
 
-.featured .thumb {
+.featured .media {
   aspect-ratio: auto;
-  min-height: 320px;
+  min-height: 360px;
   height: 100%;
+  border-bottom: none;
+  border-right: 1px solid var(--linea);
 }
 
 .featured .body {
-  padding: clamp(24px, 3vw, 44px);
-  display: flex;
-  flex-direction: column;
+  padding: clamp(28px, 3vw, 48px);
   justify-content: center;
-}
-
-.featured .kicker {
-  margin-bottom: 18px;
+  gap: 18px;
 }
 
 .featured .title {
   font-family: var(--font-display), sans-serif;
   font-weight: 650;
-  font-stretch: 95%;
-  font-size: clamp(24px, 2.8vw, 38px);
+  font-stretch: 92%;
+  font-size: clamp(24px, 2.6vw, 40px);
   line-height: 1.12;
   letter-spacing: -0.015em;
+}
+
+.featured .excerpt {
+  -webkit-line-clamp: 3;
+  max-width: 52ch;
 }
 
 @media (max-width: 760px) {
@@ -88,8 +159,10 @@
     grid-template-columns: 1fr;
   }
 
-  .featured .thumb {
-    aspect-ratio: 3 / 2;
+  .featured .media {
     min-height: 0;
+    aspect-ratio: 16 / 9;
+    border-right: none;
+    border-bottom: 1px solid var(--linea);
   }
 }

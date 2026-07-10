@@ -20,8 +20,10 @@ export type ArticleCardProps = {
 const gradientClasses = [gradients.g0, gradients.g1, gradients.g2]
 
 /**
- * Card articolo del magazine, come il reference (.art):
- * thumb con gradient fallback, kicker mono categoria+data, titolo.
+ * Card articolo — stile Vercel (templates): scatola bordata larga con
+ * immagine 16:9 sopra (gradient placeholder se assente), pill categoria +
+ * data, titolo, excerpt, autore, freccia ↙ del brand on-hover.
+ * La variante featured è orizzontale: immagine a sinistra, contenuto a destra.
  */
 export function ArticleCard({
   article,
@@ -34,11 +36,12 @@ export function ArticleCard({
   const excerpt = l(article.excerpt, locale)
   const category = l(article.categories?.[0]?.title, locale)
   const date = formatDate(article.publishedAt, locale)
+  const author = article.author?.name
 
   const imageUrl = article.coverImage?.asset
     ? urlFor(article.coverImage)
-        .width(featured ? 1400 : 900)
-        .height(featured ? 900 : 600)
+        .width(featured ? 1400 : 960)
+        .height(featured ? 900 : 540)
         .fit('crop')
         .url()
     : undefined
@@ -55,7 +58,7 @@ export function ArticleCard({
   return (
     <Link href={articleHref(article, locale)} className={cls}>
       <div
-        className={`${styles.thumb} ${
+        className={`${styles.media} ${
           imageUrl ? '' : gradientClasses[gradientIndex(article._id)]
         }`}
       >
@@ -69,16 +72,22 @@ export function ArticleCard({
         )}
       </div>
       <div className={styles.body}>
-        <div className={`mono ${styles.kicker}`}>
-          <span>{category?.toLowerCase()}</span>
-          <span>{date}</span>
+        <div className={styles.top}>
+          {category && <span className={styles.pill}>{category.toLowerCase()}</span>}
+          <span className={`mono ${styles.date}`}>{date}</span>
         </div>
         {featured ? (
           <h2 className={styles.title}>{title}</h2>
         ) : (
           <h3 className={styles.title}>{title}</h3>
         )}
-        {featured && excerpt && <p className={styles.excerpt}>{excerpt}</p>}
+        {excerpt && <p className={styles.excerpt}>{excerpt}</p>}
+        <div className={styles.foot}>
+          {author && <span className={`mono ${styles.author}`}>{author}</span>}
+          <span className={styles.arrow} aria-hidden>
+            ↙
+          </span>
+        </div>
       </div>
     </Link>
   )

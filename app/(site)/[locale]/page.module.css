@@ -112,43 +112,8 @@
 
 .mag {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(460px, 100%), 1fr));
   gap: 20px;
-}
-
-/* stagger del reveal senza toccare la transition dell'hover */
-a.art {
-  display: block;
-  border: 1px solid var(--linea);
-  border-radius: var(--radius);
-  overflow: hidden;
-  background: var(--bianco);
-  transition:
-    box-shadow var(--dur) ease,
-    opacity var(--dur-slow) ease var(--rvd, 0s),
-    transform var(--dur-slow) var(--ease-out) var(--rvd, 0s);
-}
-
-a.art:hover {
-  box-shadow: 0 16px 40px -20px color-mix(in srgb, var(--petrolio) 35%, transparent);
-}
-
-.artBody {
-  padding: 22px 22px 26px;
-}
-
-.artMeta {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 12px;
-}
-
-.artTitle {
-  font-size: 19px;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  line-height: 1.3;
 }
 
 .magAll {

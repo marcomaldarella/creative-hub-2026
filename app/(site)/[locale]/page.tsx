@@ -1,6 +1,4 @@
-import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import type { CSSProperties } from 'react'
 import {
   ArrowLink,
   Button,
@@ -16,7 +14,7 @@ import {
   SectionHeader,
 } from '@/components/ui'
 import { SiteChrome, shopHref } from '@/components/sections/SiteChrome'
-import { Thumb } from '@/components/sections/Thumb'
+import { ArticleCard } from '@/components/magazine/ArticleCard'
 import { isLocale, localeHref, type Locale } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
 import { getHomeData, getSpacesByKind } from '@/lib/sanity/queries'
@@ -88,11 +86,6 @@ export default async function HomePage({
   const openDate = openDayLabel(settings?.openDay?.date, locale)
   const openTitle = l(settings?.openDay?.title, locale)
   const openHref = settings?.openDay?.ctaUrl ?? shopHref(settings)
-
-  const artDate = new Intl.DateTimeFormat(fmtLocale(locale), {
-    month: 'short',
-    year: 'numeric',
-  })
 
   return (
     <SiteChrome locale={locale} path="/">
@@ -201,33 +194,13 @@ export default async function HomePage({
               title={t.home.magazineTitle}
             />
             <RevealGroup className={styles.mag}>
-              {latestArticles.map((article, i) => (
-                <Link
+              {latestArticles.map((article) => (
+                <ArticleCard
                   key={article._id}
-                  href={localeHref(
-                    locale,
-                    `/magazine/${article.slug?.current ?? ''}`
-                  )}
-                  className={`rv ${styles.art}`}
-                  style={{ '--rvd': `${i * 60}ms` } as CSSProperties}
-                >
-                  <Thumb image={article.coverImage} index={i} />
-                  <div className={styles.artBody}>
-                    <div className={`mono ${styles.artMeta}`}>
-                      <span>
-                        {l(article.categories?.[0]?.title, locale)?.toLowerCase()}
-                      </span>
-                      <span>
-                        {article.publishedAt
-                          ? artDate.format(new Date(article.publishedAt))
-                          : ''}
-                      </span>
-                    </div>
-                    <h3 className={styles.artTitle}>
-                      {l(article.title, locale)}
-                    </h3>
-                  </div>
-                </Link>
+                  article={article}
+                  locale={locale}
+                  reveal
+                />
               ))}
             </RevealGroup>
             <Reveal className={styles.magAll} delay={180}>
