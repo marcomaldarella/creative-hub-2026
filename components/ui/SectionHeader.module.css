@@ -1,0 +1,30 @@
+.header {
+  margin-bottom: clamp(40px, 6vw, 56px);
+}
+
+.kicker {
+  display: block;
+  margin-bottom: 20px;
+}
+
+.dark .kicker {
+  color: var(--azzurro);
+}
+
+.title {
+  font-size: var(--fs-h2);
+  margin-bottom: 18px;
+}
+
+.dark .title {
+  color: var(--osso);
+}
+
+.lede {
+  max-width: 52ch;
+  color: var(--grigio);
+}
+
+.dark .lede {
+  color: color-mix(in srgb, var(--osso) 75%, transparent);
+}

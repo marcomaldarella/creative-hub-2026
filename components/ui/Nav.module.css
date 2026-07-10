@@ -1,0 +1,277 @@
+.nav {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 50;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background: color-mix(in srgb, var(--ghiaccio) 82%, transparent);
+  border-bottom: 1px solid var(--linea);
+  color: var(--petrolio);
+}
+
+.inner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  height: var(--nav-h);
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 var(--pad);
+}
+
+.brand {
+  flex-shrink: 0;
+}
+
+.links {
+  display: flex;
+  gap: 26px;
+  margin-left: auto;
+}
+
+.links a {
+  font-size: var(--fs-small);
+  color: var(--grigio);
+  transition: color 0.2s;
+}
+
+.links a:hover {
+  color: var(--petrolio);
+}
+
+.lang {
+  font-family: var(--font-mono), monospace;
+  font-size: var(--fs-mono);
+  letter-spacing: 0.02em;
+  color: var(--grigio);
+  white-space: nowrap;
+}
+
+.lang a {
+  transition: color 0.2s;
+}
+
+.lang a:hover {
+  color: var(--petrolio);
+}
+
+.langOn {
+  color: var(--petrolio);
+  font-weight: 500;
+}
+
+.cta {
+  display: inline-block;
+  background: var(--petrolio);
+  color: var(--osso);
+  border-radius: var(--radius-pill);
+  padding: 10px 22px;
+  font-size: var(--fs-small);
+  font-weight: 500;
+  white-space: nowrap;
+  transition: background var(--dur), transform var(--dur);
+}
+
+.cta:hover {
+  background: var(--petrolio-hover);
+  transform: translateY(-1px);
+}
+
+/* ————— hamburger ————— */
+
+.burger {
+  display: none;
+  position: relative;
+  z-index: 2;
+  width: 40px;
+  height: 40px;
+  margin-right: -8px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  color: inherit;
+}
+
+.burger span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  border-radius: 1px;
+  background: currentColor;
+  transition: transform var(--dur) var(--ease-out), opacity 0.2s ease;
+}
+
+.menuOpen .burger span:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+
+.menuOpen .burger span:nth-child(2) {
+  opacity: 0;
+}
+
+.menuOpen .burger span:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+/* ————— overlay mobile (petrolio) ————— */
+
+/* display:none quando chiuso: regola iOS del progetto per gli overlay fixed */
+.overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  background: var(--petrolio);
+  color: var(--osso);
+  padding: calc(var(--nav-h) + 28px) var(--pad) 40px;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 32px;
+  overflow-y: auto;
+}
+
+.open {
+  display: flex;
+  animation: overlayIn 0.35s ease both;
+}
+
+@keyframes overlayIn {
+  from {
+    opacity: 0;
+  }
+}
+
+.overlayNav {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.overlayLink {
+  font-size: clamp(34px, 9vw, 64px);
+  color: var(--osso);
+  animation: linkIn 0.5s var(--ease-out) both;
+  transition: color 0.2s;
+}
+
+.overlayLink:hover {
+  color: var(--azzurro);
+}
+
+@keyframes linkIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+
+.overlayFoot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.overlay .lang {
+  color: var(--osso-60);
+}
+
+.overlay .lang a:hover {
+  color: var(--osso);
+}
+
+.overlay .langOn {
+  color: var(--osso);
+}
+
+.overlay .cta {
+  background: var(--azzurro);
+  color: var(--petrolio);
+}
+
+.overlay .cta:hover {
+  background: var(--azzurro-hover);
+}
+
+/* ————— stato menu aperto: la barra si fonde con l'overlay ————— */
+
+.menuOpen {
+  background: var(--petrolio);
+  border-bottom-color: var(--osso-16);
+  color: var(--osso);
+}
+
+.menuOpen .cta {
+  background: var(--azzurro);
+  color: var(--petrolio);
+}
+
+.menuOpen .cta:hover {
+  background: var(--azzurro-hover);
+}
+
+/* ————— variante dark (hero petrolio) ————— */
+
+.dark {
+  background: color-mix(in srgb, var(--petrolio) 82%, transparent);
+  border-bottom-color: var(--osso-16);
+  color: var(--osso);
+}
+
+.dark .links a {
+  color: var(--osso-60);
+}
+
+.dark .links a:hover {
+  color: var(--osso);
+}
+
+.dark .lang {
+  color: var(--osso-60);
+}
+
+.dark .lang a:hover {
+  color: var(--osso);
+}
+
+.dark .langOn {
+  color: var(--osso);
+}
+
+.dark .cta {
+  background: var(--azzurro);
+  color: var(--petrolio);
+}
+
+.dark .cta:hover {
+  background: var(--azzurro-hover);
+}
+
+/* ————— responsive ————— */
+
+@media (max-width: 760px) {
+  .links {
+    display: none;
+  }
+
+  .inner .lang {
+    display: none;
+  }
+
+  .cta {
+    margin-left: auto;
+  }
+
+  .burger {
+    display: flex;
+  }
+}
+
+@media (min-width: 761px) {
+  .overlay {
+    display: none !important;
+  }
+}

@@ -1,0 +1,35 @@
+.rule {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 var(--pad);
+}
+
+.line {
+  flex: 1;
+  height: 1px;
+  background: var(--linea);
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 1.2s var(--ease-out);
+}
+
+.rule:global(.in) .line {
+  transform: scaleX(1);
+}
+
+.dark .line {
+  background: var(--osso-16);
+}
+
+.dark .label {
+  color: var(--azzurro);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .line {
+    transform: scaleX(1);
+  }
+}

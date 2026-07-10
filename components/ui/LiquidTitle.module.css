@@ -1,0 +1,39 @@
+/* gradient e keyframes ESATTI dal reference approvato (design/reference.html).
+   I fermi-colore intermedi (#7cc3ec, #16303c, #2e6e93, #39759b) sono sfumature
+   della texture liquida definite nel mockup e non esistono come token. */
+.title {
+  font-size: var(--fs-hero);
+  text-align: center;
+  white-space: nowrap;
+  margin: 0.06em -0.03em; /* sanguina leggermente oltre i margini */
+  color: transparent;
+  background-image:
+    radial-gradient(60% 90% at 18% 25%, var(--azzurro) 0%, transparent 55%),
+    radial-gradient(55% 80% at 82% 20%, #7cc3ec 0%, transparent 52%),
+    radial-gradient(70% 95% at 50% 90%, #16303c 0%, transparent 60%),
+    radial-gradient(45% 70% at 70% 65%, #2e6e93 0%, transparent 55%),
+    linear-gradient(
+      160deg,
+      var(--petrolio) 0%,
+      #39759b 45%,
+      var(--azzurro) 78%,
+      var(--petrolio) 100%
+    );
+  background-size: 220% 220%, 200% 200%, 240% 240%, 210% 210%, 300% 300%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: liquid 22s ease-in-out infinite alternate;
+  user-select: none;
+}
+
+@keyframes liquid {
+  0% {
+    background-position: 0% 0%, 100% 0%, 50% 100%, 80% 60%, 0% 0%;
+  }
+  50% {
+    background-position: 80% 60%, 20% 90%, 10% 20%, 30% 10%, 100% 50%;
+  }
+  100% {
+    background-position: 100% 100%, 0% 40%, 90% 0%, 60% 90%, 0% 100%;
+  }
+}

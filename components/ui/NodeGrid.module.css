@@ -1,0 +1,60 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  border-top: 1px solid var(--linea);
+  border-left: 1px solid var(--linea);
+}
+
+/* a.nodo: specificità superiore al globale .rv, così la transition
+   qui sotto (con --rvd per lo stagger SOLO su opacity/transform)
+   vince senza dipendere dall'ordine dei fogli di stile */
+a.nodo {
+  border-right: 1px solid var(--linea);
+  border-bottom: 1px solid var(--linea);
+  padding: 34px 28px 42px;
+  position: relative;
+  transition:
+    background 0.25s ease,
+    opacity var(--dur-slow) ease var(--rvd, 0s),
+    transform var(--dur-slow) var(--ease-out) var(--rvd, 0s);
+}
+
+a.nodo:hover {
+  background: var(--bianco);
+}
+
+.label {
+  display: block;
+  margin-bottom: 26px;
+}
+
+.title {
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin-bottom: 10px;
+}
+
+.text {
+  font-size: var(--fs-small);
+  color: var(--grigio);
+  max-width: 34ch;
+}
+
+.arrow {
+  position: absolute;
+  top: 30px;
+  right: 26px;
+  color: var(--azzurro);
+  font-size: 20px;
+  font-family: var(--font-display), sans-serif;
+  font-weight: 700;
+  opacity: 0;
+  transform: rotate(180deg);
+  transition: opacity 0.25s, transform var(--dur) var(--ease-out);
+}
+
+a.nodo:hover .arrow {
+  opacity: 1;
+  transform: rotate(90deg);
+}

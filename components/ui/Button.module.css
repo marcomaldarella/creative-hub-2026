@@ -1,0 +1,44 @@
+.btn {
+  display: inline-block;
+  border-radius: var(--radius-pill);
+  padding: 10px 22px;
+  font-size: var(--fs-small);
+  font-weight: 500;
+  line-height: 1.55;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background var(--dur), color var(--dur),
+    border-color var(--dur), transform var(--dur);
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.primary {
+  background: var(--petrolio);
+  color: var(--osso);
+}
+
+.primary:hover {
+  background: var(--petrolio-hover);
+}
+
+.azzurro {
+  background: var(--azzurro);
+  color: var(--petrolio);
+}
+
+.azzurro:hover {
+  background: var(--azzurro-hover);
+}
+
+.ghost {
+  background: transparent;
+  color: var(--petrolio);
+  border: 1px solid var(--linea);
+}
+
+.ghost:hover {
+  border-color: var(--azzurro);
+}

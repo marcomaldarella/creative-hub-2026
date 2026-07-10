@@ -1,0 +1,57 @@
+.footer {
+  background: var(--ghiaccio);
+  border-top: 1px solid var(--linea);
+  padding: 64px 0 40px;
+}
+
+.cols {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 48px;
+  justify-content: space-between;
+}
+
+.brand {
+  display: inline-block;
+  margin-bottom: 18px;
+}
+
+.contact {
+  font-style: normal;
+  display: block;
+  line-height: 2;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  line-height: 2;
+}
+
+.col a {
+  transition: color 0.2s;
+}
+
+.col a:hover {
+  color: var(--petrolio);
+}
+
+.colTitle {
+  color: var(--petrolio);
+}
+
+.bottom {
+  margin-top: 56px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.legal a {
+  transition: color 0.2s;
+}
+
+.legal a:hover {
+  color: var(--petrolio);
+}

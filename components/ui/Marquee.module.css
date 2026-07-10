@@ -1,0 +1,71 @@
+.marquee {
+  border-top: 1px solid var(--linea);
+  border-bottom: 1px solid var(--linea);
+  padding: 26px 0;
+  overflow: hidden;
+}
+
+.track {
+  display: flex;
+  width: max-content;
+  animation: mq linear infinite;
+  will-change: transform;
+}
+
+.marquee:hover .track {
+  animation-play-state: paused;
+}
+
+/* padding-right = gap: rende il loop -50% perfettamente seamless */
+.group {
+  display: flex;
+  gap: 64px;
+  padding-right: 64px;
+}
+
+.item {
+  font-family: var(--font-display), sans-serif;
+  font-weight: 500;
+  font-stretch: 105%;
+  font-size: 20px;
+  color: var(--grigio);
+  white-space: nowrap;
+  transition: color 0.2s;
+}
+
+.item:hover {
+  color: var(--petrolio);
+}
+
+@keyframes mq {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.dark {
+  border-color: var(--osso-16);
+}
+
+.dark .item {
+  color: var(--osso-60);
+}
+
+.dark .item:hover {
+  color: var(--osso);
+}
+
+/* degrado: lista statica scrollabile */
+@media (prefers-reduced-motion: reduce) {
+  .marquee {
+    overflow-x: auto;
+  }
+
+  .track {
+    animation: none;
+  }
+
+  .copy {
+    display: none;
+  }
+}
