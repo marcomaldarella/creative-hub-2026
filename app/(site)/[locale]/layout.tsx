@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { Archivo, DM_Sans, Geist_Mono } from 'next/font/google'
+import { Archivo, Geist, Geist_Mono } from 'next/font/google'
+import localFont from 'next/font/local'
 import { locales, isLocale } from '@/lib/i18n/config'
 import '@/app/globals.css'
 
@@ -12,7 +13,7 @@ const display = Archivo({
   display: 'swap',
 })
 
-const body = DM_Sans({
+const body = Geist({
   subsets: ['latin'],
   weight: 'variable',
   variable: '--font-body',
@@ -23,6 +24,13 @@ const mono = Geist_Mono({
   subsets: ['latin'],
   weight: 'variable',
   variable: '--font-mono',
+  display: 'swap',
+})
+
+// FreeFat — il display ultra-fat dei titoli giganti (dal design di riferimento)
+const fat = localFont({
+  src: '../../fonts/FreeFat-Regular.woff',
+  variable: '--font-fat',
   display: 'swap',
 })
 
@@ -51,7 +59,9 @@ export default async function SiteLayout({
 
   return (
     <html lang={locale}>
-      <body className={`${display.variable} ${body.variable} ${mono.variable}`}>
+      <body
+        className={`${display.variable} ${body.variable} ${mono.variable} ${fat.variable}`}
+      >
         {children}
       </body>
     </html>

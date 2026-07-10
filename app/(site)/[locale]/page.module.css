@@ -4,16 +4,20 @@
   padding: var(--sez) 0;
 }
 
-/* ————— hero ————— */
+/* ————— hero: orb metallico su petrolio profondo (reference brand) ————— */
 
 .hero {
   padding-top: var(--nav-h);
   min-height: 100svh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   overflow: hidden;
   position: relative;
+  color: var(--ghiaccio);
+  /* gradiente che raccorda i bordi dell'immagine orb (teal profondo) */
+  background:
+    radial-gradient(90% 70% at 50% 42%, #12333c 0%, transparent 60%),
+    linear-gradient(150deg, #0f272e 0%, #0a1c22 48%, #061318 100%);
 }
 
 .heroAnnot {
@@ -24,12 +28,63 @@
   width: 100%;
   margin: 0 auto;
   padding: 28px var(--pad) 0;
+  color: color-mix(in srgb, var(--ghiaccio) 55%, transparent);
+  position: relative;
+  z-index: 3;
+}
+
+/* palco centrale: ring + orb + titolo impilati */
+.orbStage {
+  flex: 1;
+  display: grid;
+  place-items: center;
+  position: relative;
+  min-height: 0;
+}
+
+.orbStage > * {
+  grid-area: 1 / 1;
+}
+
+.orb {
+  width: min(62vh, 78vw, 620px);
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 50%;
+  /* fonde l'immagine col gradiente di sfondo */
+  -webkit-mask-image: radial-gradient(closest-side, #000 62%, transparent 98%);
+  mask-image: radial-gradient(closest-side, #000 62%, transparent 98%);
+  user-select: none;
+  pointer-events: none;
+}
+
+/* anello di testo mono che ruota lentissimo attorno all'orb */
+.ring {
+  width: min(80vh, 96vw, 800px);
+  aspect-ratio: 1;
+  animation: ringSpin 90s linear infinite;
+  pointer-events: none;
+}
+
+.ring text {
+  font-family: var(--font-mono), monospace;
+  font-size: 3.1px;
+  letter-spacing: 0.42em;
+  fill: color-mix(in srgb, var(--ghiaccio) 62%, transparent);
+}
+
+@keyframes ringSpin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .heroTitle {
   text-align: center;
-  white-space: nowrap;
-  margin: 0.06em -0.03em;
+  font-size: clamp(56px, 9.5vw, 168px);
+  z-index: 2;
+  transform: translateY(14%);
+  text-shadow: 0 12px 60px rgba(4, 16, 20, 0.65);
 }
 
 .heroSub {
@@ -40,12 +95,36 @@
   max-width: var(--max);
   width: 100%;
   margin: 0 auto;
-  padding: 26px var(--pad) 0;
+  padding: 26px var(--pad) clamp(28px, 4vh, 48px);
+  position: relative;
+  z-index: 3;
+}
+
+.heroSub .mono {
+  color: color-mix(in srgb, var(--ghiaccio) 55%, transparent);
 }
 
 .lede {
   font-size: var(--fs-lede);
   max-width: 34ch;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ring {
+    animation: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .heroSub {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .heroTitle {
+    transform: translateY(4%);
+  }
 }
 
 /* ————— manifesto ————— */

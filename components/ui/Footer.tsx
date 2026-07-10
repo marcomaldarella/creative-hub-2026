@@ -68,7 +68,7 @@ export function Footer({
           </div>
 
           {groups?.map((group, i) => (
-            <div key={i} className={`mono ${styles.col}`}>
+            <div key={i} className={styles.col}>
               {group.title && (
                 <span className={styles.colTitle}>{group.title}</span>
               )}
@@ -79,7 +79,7 @@ export function Footer({
           ))}
 
           {social && social.length > 0 && (
-            <div className={`mono ${styles.col}`}>
+            <div className={styles.col}>
               {social.map((link) => (
                 <FootLink key={`${link.href}-${link.label}`} link={link} />
               ))}
@@ -90,7 +90,7 @@ export function Footer({
         <div className={styles.bottom}>
           <span className="mono">{copyright}</span>
           {legal && legal.length > 0 && (
-            <span className={`mono ${styles.legal}`}>
+            <span className={styles.legal}>
               {legal.map((link, i) => (
                 <Fragment key={`${link.href}-${link.label}`}>
                   {i > 0 && <span aria-hidden="true"> · </span>}

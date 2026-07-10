@@ -5,7 +5,6 @@ import {
   Card,
   Counter,
   CounterRow,
-  LiquidTitle,
   Marquee,
   NodeGrid,
   Reveal,
@@ -88,7 +87,7 @@ export default async function HomePage({
   const openHref = settings?.openDay?.ctaUrl ?? shopHref(settings)
 
   return (
-    <SiteChrome locale={locale} path="/">
+    <SiteChrome locale={locale} path="/" dark>
       <main>
         {/* ————— hero ————— */}
         <header className={styles.hero}>
@@ -96,11 +95,35 @@ export default async function HomePage({
             <span className="mono">{t.hero.since}</span>
             <span className="mono">{t.hero.coords}</span>
           </div>
-          <LiquidTitle className={styles.heroTitle}>
-            CREATIVE
-            <br />
-            HUB
-          </LiquidTitle>
+          <div className={styles.orbStage}>
+            <svg className={styles.ring} viewBox="0 0 100 100" aria-hidden="true">
+              <defs>
+                <path
+                  id="hero-ring"
+                  d="M 50,50 m -46,0 a 46,46 0 1,1 92,0 a 46,46 0 1,1 -92,0"
+                  fill="none"
+                />
+              </defs>
+              <text>
+                <textPath href="#hero-ring">
+                  creative · creative-hub · inspire · innovate · excel ·
+                  bologna · dal 1999 ·
+                </textPath>
+              </text>
+            </svg>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/img/hero-orb.jpg"
+              alt=""
+              className={styles.orb}
+              fetchPriority="high"
+            />
+            <h1 className={`display-black ${styles.heroTitle}`}>
+              CREATIVE
+              <br />
+              HUB
+            </h1>
+          </div>
           <div className={styles.heroSub}>
             <p className={styles.lede}>{t.hero.lede}</p>
             <span className="mono">{t.hero.tagline}</span>
