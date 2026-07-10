@@ -22,6 +22,9 @@ export type { ArrowLinkProps } from './ArrowLink';
 export { Marquee } from './Marquee';
 export type { MarqueeProps } from './Marquee';
 
+export { SearchBox } from './SearchBox';
+export type { SearchBoxProps } from './SearchBox';
+
 export { PartnerMark } from './PartnerMark';
 export type { PartnerMarkProps } from './PartnerMark';
 

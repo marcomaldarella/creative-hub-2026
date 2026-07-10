@@ -6,6 +6,21 @@
   padding-top: clamp(48px, 7vw, 96px);
 }
 
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: clamp(24px, 3vw, 40px);
+  padding-bottom: clamp(40px, 5vw, 64px);
+}
+
+.toolbar .categories {
+  margin-top: 0;
+  padding-bottom: 0;
+}
+
 .categories {
   margin-top: clamp(24px, 3vw, 40px);
   padding-bottom: clamp(40px, 5vw, 64px);

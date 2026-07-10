@@ -1,0 +1,35 @@
+/* pill coerente coi filtri categoria */
+.box {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  padding: 7px 16px;
+  color: var(--fg-2);
+  transition: border-color var(--dur), color var(--dur);
+}
+
+.box:focus-within {
+  border-color: var(--azzurro);
+  color: var(--fg);
+}
+
+.input {
+  border: none;
+  background: none;
+  outline: none;
+  font: inherit;
+  font-size: var(--fs-small);
+  color: var(--fg);
+  width: clamp(140px, 22vw, 240px);
+}
+
+.input::placeholder {
+  color: var(--fg-2);
+}
+
+/* via la x nativa di WebKit: la pill resta pulita */
+.input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+}

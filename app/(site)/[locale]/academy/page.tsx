@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import type { CSSProperties } from 'react'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { Reveal, RevealGroup, Rule, SectionHeader } from '@/components/ui'
+import { Reveal, RevealGroup, Rule, SearchBox, SectionHeader } from '@/components/ui'
 import { SiteChrome } from '@/components/sections/SiteChrome'
 import { TeacherGrid } from '@/components/sections/TeacherGrid'
 import { Thumb } from '@/components/sections/Thumb'
@@ -10,6 +10,7 @@ import { isLocale, localeHref } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
 import { getAllCourses, getAllTeachers } from '@/lib/sanity/queries'
 import { l } from '@/lib/sanity/l'
+import { matchesQuery } from '@/lib/search'
 import styles from './page.module.css'
 
 export const dynamic = 'force-dynamic'
@@ -35,8 +36,9 @@ export default async function AcademyPage({
   const { locale } = await params
   if (!isLocale(locale)) notFound()
   const t = getDictionary(locale)
-  const { categoria } = await searchParams
+  const { categoria, q } = await searchParams
   const active = typeof categoria === 'string' ? categoria : undefined
+  const query = typeof q === 'string' ? q : undefined
 
   const [courses, teachers] = await Promise.all([
     getAllCourses(),
@@ -53,9 +55,19 @@ export default async function AcademyPage({
     }
   }
 
-  const filtered = active
+  const byCategory = active
     ? courses.filter((c) => c.category?.slug?.current === active)
     : courses
+  const filtered = byCategory.filter((c) =>
+    matchesQuery(
+      query,
+      l(c.title, locale),
+      l(c.summary, locale),
+      l(c.category?.title, locale),
+      l(c.duration, locale),
+      l(c.mode, locale)
+    )
+  )
 
   const basePath = localeHref(locale, '/academy')
 
@@ -96,6 +108,7 @@ export default async function AcademyPage({
               {cat.label}
             </Link>
           ))}
+          <SearchBox placeholder={t.common.search} className={styles.search} />
         </nav>
 
         {/* ————— griglia corsi ————— */}

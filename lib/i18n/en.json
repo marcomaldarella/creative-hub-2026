@@ -95,7 +95,8 @@
     "level": "level",
     "language": "language",
     "mode": "mode",
-    "category": "category"
+    "category": "category",
+    "search": "search this section…"
   },
   "home": {
     "manifestoRuleLeft": "creative hub",

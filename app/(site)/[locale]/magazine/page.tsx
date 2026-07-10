@@ -1,12 +1,14 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { Rule, SectionHeader, RevealGroup } from '@/components/ui'
+import { Rule, SearchBox, SectionHeader, RevealGroup } from '@/components/ui'
 import { ArticleCard } from '@/components/magazine/ArticleCard'
 import { CategoryBar } from '@/components/magazine/CategoryBar'
 import { SiteChrome } from '@/components/sections/SiteChrome'
 import { isLocale } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
 import { getAllArticles, getAllCategories } from '@/lib/sanity/queries'
+import { l } from '@/lib/sanity/l'
+import { matchesQuery } from '@/lib/search'
 import styles from './Magazine.module.css'
 
 export const dynamic = 'force-dynamic'
@@ -27,17 +29,35 @@ export async function generateMetadata({
   }
 }
 
-export default async function MagazinePage({ params }: { params: Params }) {
+export default async function MagazinePage({
+  params,
+  searchParams,
+}: {
+  params: Params
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}) {
   const { locale } = await params
   if (!isLocale(locale)) notFound()
   const t = getDictionary(locale)
+  const { q } = await searchParams
+  const query = typeof q === 'string' ? q : undefined
 
   const [articles, categories] = await Promise.all([
     getAllArticles(),
     getAllCategories(),
   ])
 
-  const [featured, ...rest] = articles
+  const results = articles.filter((a) =>
+    matchesQuery(
+      query,
+      l(a.title, locale),
+      l(a.excerpt, locale),
+      a.author?.name,
+      ...(a.categories?.map((c) => l(c.title, locale)) ?? [])
+    )
+  )
+
+  const [featured, ...rest] = results
 
   return (
     <SiteChrome locale={locale} path="/magazine">
@@ -48,16 +68,19 @@ export default async function MagazinePage({ params }: { params: Params }) {
             title={t.magazine.title}
             lede={t.magazine.lede}
           />
-          <CategoryBar
-            categories={categories}
-            locale={locale}
-            allLabel={t.common.all}
-            ariaLabel={t.magazine.categoriesLabel}
-            className={styles.categories}
-          />
+          <div className={styles.toolbar}>
+            <CategoryBar
+              categories={categories}
+              locale={locale}
+              allLabel={t.common.all}
+              ariaLabel={t.magazine.categoriesLabel}
+              className={styles.categories}
+            />
+            <SearchBox placeholder={t.common.search} className={styles.search} />
+          </div>
         </div>
 
-        {articles.length === 0 ? (
+        {results.length === 0 ? (
           <div className="wrap">
             <span className={`mono ${styles.empty}`}>{t.magazine.empty}</span>
           </div>
@@ -75,7 +98,7 @@ export default async function MagazinePage({ params }: { params: Params }) {
               <>
                 <Rule
                   left={t.magazine.latestLabel}
-                  right={`${articles.length} ${t.common.articles}`}
+                  right={`${results.length} ${t.common.articles}`}
                 />
                 <RevealGroup className={`wrap ${styles.zone} ${styles.grid}`}>
                   {rest.map((article) => (
