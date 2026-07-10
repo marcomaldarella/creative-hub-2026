@@ -8,7 +8,71 @@
     "about": "about us",
     "book": "book",
     "menu": "menu",
-    "lang": "language"
+    "lang": "language",
+    "explore": "explore the section",
+    "sub": {
+      "academy": {
+        "desc": "Education · school of music, sound, multimedia, visual.",
+        "items": [
+          "University courses",
+          "Funded training",
+          "Internships & placement",
+          "Custom courses",
+          "Open day",
+          "Student services"
+        ]
+      },
+      "studio": {
+        "desc": "SSL recording studio. Mix, master and production.",
+        "items": [
+          "Recording",
+          "Remote recording",
+          "Audio for video & film",
+          "Dolby Atmos",
+          "Mix & mastering",
+          "Studio rental"
+        ]
+      },
+      "coworking": {
+        "desc": "Coworking · rooms · events in the heart of Bologna.",
+        "items": [
+          "Coworking",
+          "Recording studio",
+          "Book a space",
+          "Rooms & events",
+          "Metaverse"
+        ]
+      },
+      "innovation": {
+        "desc": "Incubation · B2B · creative startups.",
+        "items": [
+          "Services for companies",
+          "Acceleration",
+          "Grants & opportunities",
+          "Incubation",
+          "CTE COBO"
+        ]
+      },
+      "magazine": {
+        "desc": "Editorial engine · SEO · stories from the creative industry.",
+        "items": [
+          "Music production",
+          "Creative industries",
+          "Education & careers",
+          "Events & news"
+        ]
+      },
+      "about": {
+        "desc": "Ecosystem · team · contacts.",
+        "items": [
+          "The ecosystem",
+          "Governance",
+          "Contacts",
+          "Team",
+          "Partners"
+        ]
+      }
+    }
   },
   "hero": {
     "since": "since 1999 — international college of music, sound, multimedia & visual",
@@ -46,20 +110,54 @@
     "ecosystemKicker": "the ecosystem",
     "ecosystemTitle": "Six nodes, one network",
     "nodes": {
-      "academy": { "title": "Courses and training", "text": "Degree paths and tailored training, since 1999." },
-      "studio": { "title": "Recording and production", "text": "SSL, Dolby Atmos, audio for film." },
-      "coworking": { "title": "Workspaces", "text": "Desks, meeting rooms, day passes and events." },
-      "innovation": { "title": "Incubation and B2B", "text": "Creative startups and services for companies." },
-      "magazine": { "title": "Editorial", "text": "Voices and stories from the creative industry." },
-      "about": { "title": "Team and governance", "text": "The people and partners behind the hub." }
+      "academy": {
+        "title": "Courses and training",
+        "text": "Degree paths and tailored training, since 1999."
+      },
+      "studio": {
+        "title": "Recording and production",
+        "text": "SSL, Dolby Atmos, audio for film."
+      },
+      "coworking": {
+        "title": "Workspaces",
+        "text": "Desks, meeting rooms, day passes and events."
+      },
+      "innovation": {
+        "title": "Incubation and B2B",
+        "text": "Creative startups and services for companies."
+      },
+      "magazine": {
+        "title": "Editorial",
+        "text": "Voices and stories from the creative industry."
+      },
+      "about": {
+        "title": "Team and governance",
+        "text": "The people and partners behind the hub."
+      }
     },
     "resultsRuleLeft": "results",
     "resultsRuleRight": "2026",
     "stats": {
-      "students": { "value": 8400, "suffix": "+", "label": "students trained" },
-      "partners": { "value": 300, "suffix": "+", "label": "partner companies" },
-      "placement": { "value": 92, "suffix": "%", "label": "placement within 12 months" },
-      "startups": { "value": 14, "suffix": "", "label": "startups incubated per year" }
+      "students": {
+        "value": 8400,
+        "suffix": "+",
+        "label": "students trained"
+      },
+      "partners": {
+        "value": 300,
+        "suffix": "+",
+        "label": "partner companies"
+      },
+      "placement": {
+        "value": 92,
+        "suffix": "%",
+        "label": "placement within 12 months"
+      },
+      "startups": {
+        "value": 14,
+        "suffix": "",
+        "label": "startups incubated per year"
+      }
     },
     "magazineKicker": "magazine",
     "magazineTitle": "From the industry",
@@ -89,10 +187,26 @@
     "servicesKicker": "the services",
     "servicesTitle": "From tracking to the international soundtrack",
     "services": {
-      "recording": { "n": "ch.01", "title": "Recording", "text": "Live room, SSL console, reference monitoring." },
-      "mix": { "n": "ch.02", "title": "Mix & mastering", "text": "Analog and in the box, for records and broadcast." },
-      "atmos": { "n": "ch.03", "title": "Dolby Atmos", "text": "Certified immersive mixing, music and film." },
-      "cinema": { "n": "ch.04", "title": "Film audio", "text": "Post-production, foley, international soundtracks." }
+      "recording": {
+        "n": "ch.01",
+        "title": "Recording",
+        "text": "Live room, SSL console, reference monitoring."
+      },
+      "mix": {
+        "n": "ch.02",
+        "title": "Mix & mastering",
+        "text": "Analog and in the box, for records and broadcast."
+      },
+      "atmos": {
+        "n": "ch.03",
+        "title": "Dolby Atmos",
+        "text": "Certified immersive mixing, music and film."
+      },
+      "cinema": {
+        "n": "ch.04",
+        "title": "Film audio",
+        "text": "Post-production, foley, international soundtracks."
+      }
     },
     "ctaKicker": "bookings",
     "ctaTitle": "Bring your project here",
@@ -117,8 +231,16 @@
     "statsRuleLeft": "numbers",
     "statsRuleRight": "innovation",
     "stats": {
-      "startups": { "value": 14, "suffix": "", "label": "startups incubated per year" },
-      "partners": { "value": 300, "suffix": "+", "label": "partner companies" }
+      "startups": {
+        "value": 14,
+        "suffix": "",
+        "label": "startups incubated per year"
+      },
+      "partners": {
+        "value": 300,
+        "suffix": "+",
+        "label": "partner companies"
+      }
     }
   },
   "about": {

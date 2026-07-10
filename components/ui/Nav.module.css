@@ -31,14 +31,152 @@
   margin-left: auto;
 }
 
-.links a {
+.navItem {
+  display: flex;
+  align-items: center;
+  height: var(--nav-h);
+}
+
+.navLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 100%;
   font-size: var(--fs-small);
   color: var(--fg-2);
   transition: color 0.2s;
 }
 
-.links a:hover {
+.navItem:hover .navLink,
+.navItem:focus-within .navLink,
+.navLink:hover {
   color: var(--fg);
+}
+
+.caret {
+  transition: transform var(--dur) var(--ease-out);
+}
+
+.navItem:hover .caret,
+.navItem:focus-within .caret {
+  transform: rotate(180deg);
+}
+
+/* ————— mega-menu (desktop) ————— */
+
+/* position:fixed ma il containing block è .nav (backdrop-filter):
+   il pannello è quindi full-bleed sotto la barra */
+.panel {
+  position: fixed;
+  top: var(--nav-h);
+  left: 0;
+  right: 0;
+  background: color-mix(in srgb, var(--bg) 94%, transparent);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--line);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  pointer-events: none;
+  transition:
+    opacity var(--dur) ease,
+    transform var(--dur) var(--ease-out),
+    visibility 0s linear var(--dur);
+}
+
+.navItem:hover .panel,
+.navItem:focus-within .panel {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  pointer-events: auto;
+  transition-delay: 0s;
+}
+
+.panelIn {
+  display: grid;
+  grid-template-columns: minmax(260px, 5fr) 7fr;
+  gap: clamp(32px, 4vw, 72px);
+  padding-top: 44px;
+  padding-bottom: 48px;
+}
+
+.panelIntro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.panelEyebrow {
+  color: var(--azzurro);
+}
+
+.panelTitle {
+  font-size: clamp(38px, 3.4vw, 56px);
+  color: var(--fg);
+}
+
+.panelDesc {
+  font-size: var(--fs-small);
+  color: var(--fg-2);
+  max-width: 36ch;
+}
+
+.panelExplore {
+  font-size: var(--fs-small);
+  color: var(--azzurro);
+  transition: color 0.2s;
+}
+
+.panelExplore:hover {
+  color: var(--fg);
+}
+
+.panelList {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(3, auto);
+  column-gap: clamp(24px, 3vw, 48px);
+  align-content: start;
+}
+
+.panelRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  border-top: 1px solid var(--line);
+}
+
+.panelEntry {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 19px 0;
+  color: var(--fg);
+  transition: color 0.2s;
+}
+
+.panelEntry:hover {
+  color: var(--azzurro);
+}
+
+.panelChev {
+  color: var(--azzurro);
+}
+
+.panelCross {
+  color: var(--fg-2);
+  white-space: nowrap;
+  transition: color 0.2s;
+}
+
+.panelCross:hover {
+  color: var(--azzurro);
 }
 
 .lang {
@@ -221,12 +359,41 @@
   color: var(--osso);
 }
 
-.dark .links a {
+.dark .navLink {
   color: var(--osso-60);
 }
 
-.dark .links a:hover {
+.dark .navItem:hover .navLink,
+.dark .navItem:focus-within .navLink,
+.dark .navLink:hover {
   color: var(--osso);
+}
+
+.dark .panel {
+  background: color-mix(in srgb, var(--petrolio) 94%, transparent);
+  border-bottom-color: var(--osso-16);
+}
+
+.dark .panelTitle,
+.dark .panelEntry {
+  color: var(--osso);
+}
+
+.dark .panelEntry:hover {
+  color: var(--azzurro);
+}
+
+.dark .panelDesc,
+.dark .panelCross {
+  color: var(--osso-60);
+}
+
+.dark .panelExplore:hover {
+  color: var(--osso);
+}
+
+.dark .panelRow {
+  border-top-color: var(--osso-16);
 }
 
 .dark .lang {

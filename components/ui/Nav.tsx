@@ -6,9 +6,27 @@ import { ThemeToggle } from './ThemeToggle';
 import { Wordmark } from './Wordmark';
 import styles from './Nav.module.css';
 
+export type NavSubEntry = {
+  label: string;
+  href: string;
+  /** rimando a un'altra sezione (es. "/studio"), stile mono */
+  cross?: { label: string; href: string };
+};
+
+export type NavSub = {
+  /** eyebrow mono del pannello (es. "/academy") */
+  eyebrow: string;
+  desc: string;
+  /** label del link "esplora la sezione" */
+  explore: string;
+  entries: NavSubEntry[];
+};
+
 export type NavItem = {
   label: string;
   href: string;
+  /** mega-menu della sezione (solo desktop, hover/focus) */
+  sub?: NavSub;
 };
 
 export type NavProps = {
@@ -117,9 +135,70 @@ export function Nav({
 
         <nav className={styles.links}>
           {items.map((item) => (
-            <Link key={item.href} href={item.href}>
-              {item.label}
-            </Link>
+            <div key={item.href} className={styles.navItem}>
+              <Link href={item.href} className={styles.navLink}>
+                {item.label}
+                {item.sub && (
+                  <svg
+                    className={styles.caret}
+                    viewBox="0 0 10 6"
+                    width="10"
+                    height="6"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.4"
+                    strokeLinecap="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M1 1l4 4 4-4" />
+                  </svg>
+                )}
+              </Link>
+
+              {item.sub && (
+                <div className={styles.panel}>
+                  <div className={`wrap ${styles.panelIn}`}>
+                    <div className={styles.panelIntro}>
+                      <span className={`mono ${styles.panelEyebrow}`}>
+                        {item.sub.eyebrow}
+                      </span>
+                      <span className={`display-black ${styles.panelTitle}`}>
+                        {item.label}
+                      </span>
+                      <p className={styles.panelDesc}>{item.sub.desc}</p>
+                      <Link href={item.href} className={styles.panelExplore}>
+                        {item.sub.explore} <span aria-hidden="true">→</span>
+                      </Link>
+                    </div>
+                    <ul
+                      className={styles.panelList}
+                      style={{
+                        gridTemplateRows: `repeat(${Math.ceil(item.sub.entries.length / 2)}, auto)`,
+                      }}
+                    >
+                      {item.sub.entries.map((entry) => (
+                        <li key={entry.label} className={styles.panelRow}>
+                          <Link href={entry.href} className={styles.panelEntry}>
+                            <span className={styles.panelChev} aria-hidden="true">
+                              ›
+                            </span>
+                            {entry.label}
+                          </Link>
+                          {entry.cross && (
+                            <Link
+                              href={entry.cross.href}
+                              className={`mono ${styles.panelCross}`}
+                            >
+                              <span aria-hidden="true">↗</span> {entry.cross.label}
+                            </Link>
+                          )}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              )}
+            </div>
           ))}
         </nav>
 

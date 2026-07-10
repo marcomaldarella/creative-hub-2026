@@ -32,14 +32,101 @@ export async function SiteChrome({
   const t = getDictionary(locale)
   const settings = await getSiteSettings()
 
-  const items = [
-    { label: t.nav.academy, href: localeHref(locale, '/academy') },
-    { label: t.nav.studio, href: localeHref(locale, '/studios') },
-    { label: t.nav.coworking, href: localeHref(locale, '/coworking') },
-    { label: t.nav.innovation, href: localeHref(locale, '/innovazione') },
-    { label: t.nav.magazine, href: localeHref(locale, '/magazine') },
-    { label: t.nav.about, href: localeHref(locale, '/chi-siamo') },
+  // mega-menu: ancore stabili (non localizzate) per voce, nell'ordine
+  // di t.nav.sub[key].items; null = link alla sezione senza hash
+  type SectionKey = keyof typeof t.nav.sub
+  type Section = {
+    key: SectionKey
+    label: string
+    base: string
+    anchors: (string | null)[]
+    cross?: Record<number, SectionKey>
+  }
+  const sections: Section[] = [
+    {
+      key: 'academy',
+      label: t.nav.academy,
+      base: '/academy',
+      anchors: [
+        'corsi-universitari',
+        'formazione-finanziata',
+        'stage-placement',
+        'corsi-custom',
+        'open-day',
+        'servizi-studenti',
+      ],
+    },
+    {
+      key: 'studio',
+      label: t.nav.studio,
+      base: '/studios',
+      anchors: [
+        'registrazione',
+        'remote-recording',
+        'audio-video-cinema',
+        'dolby-atmos',
+        'mix-mastering',
+        'affitto-studio',
+      ],
+    },
+    {
+      key: 'coworking',
+      label: t.nav.coworking,
+      base: '/coworking',
+      anchors: ['coworking', null, 'prenota', 'sale-eventi', 'metaverso'],
+      cross: { 1: 'studio' },
+    },
+    {
+      key: 'innovation',
+      label: t.nav.innovation,
+      base: '/innovazione',
+      anchors: ['aziende', 'accelerazione', 'bandi', 'incubazione', 'cte-cobo'],
+    },
+    {
+      key: 'magazine',
+      label: t.nav.magazine,
+      base: '/magazine',
+      anchors: [null, null, null, null],
+      cross: { 0: 'studio', 1: 'innovation', 2: 'academy', 3: 'coworking' },
+    },
+    {
+      key: 'about',
+      label: t.nav.about,
+      base: '/chi-siamo',
+      anchors: ['ecosistema', 'governance', 'contatti', 'team', 'partner'],
+    },
   ]
+
+  const baseOf = Object.fromEntries(sections.map((s) => [s.key, s.base]))
+  const labelOf = Object.fromEntries(sections.map((s) => [s.key, s.label]))
+
+  const items = sections.map((s) => {
+    const sub = t.nav.sub[s.key]
+    const cross: Partial<Record<number, SectionKey>> = s.cross ?? {}
+    return {
+      label: s.label,
+      href: localeHref(locale, s.base),
+      sub: {
+        eyebrow: `/${s.label}`,
+        desc: sub.desc,
+        explore: t.nav.explore,
+        entries: sub.items.map((label, i) => {
+          const anchor = s.anchors[i]
+          const crossKey = cross[i]
+          return {
+            label,
+            href: localeHref(locale, anchor ? `${s.base}#${anchor}` : s.base),
+            cross: crossKey
+              ? {
+                  label: `/${labelOf[crossKey]}`,
+                  href: localeHref(locale, baseOf[crossKey]),
+                }
+              : undefined,
+          }
+        }),
+      },
+    }
+  })
 
   const clean = path.startsWith('/') ? path : `/${path}`
   const langHrefs = {
