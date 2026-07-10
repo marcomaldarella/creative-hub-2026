@@ -1,0 +1,38 @@
+{
+  "nav": {
+    "academy": "academy",
+    "studio": "studio",
+    "coworking": "coworking",
+    "innovation": "innovazione",
+    "magazine": "magazine",
+    "about": "chi siamo",
+    "book": "prenota"
+  },
+  "hero": {
+    "since": "dal 1999 — international college of music, sound, multimedia & visual",
+    "coords": "bologna 44.4929°n, 11.3429°e",
+    "lede": "L'infrastruttura che trasforma suono, immagine e codice in professione.",
+    "tagline": "inspire, innovate, excel.",
+    "discover": "scopri l'hub"
+  },
+  "common": {
+    "readMore": "leggi",
+    "viewAll": "vedi tutti",
+    "all": "tutti",
+    "bookOn": "prenota sullo shop",
+    "backTo": "torna a",
+    "teachers": "docenti",
+    "courses": "corsi",
+    "articles": "articoli",
+    "duration": "durata",
+    "start": "inizio",
+    "level": "livello",
+    "language": "lingua",
+    "mode": "modalità"
+  },
+  "footer": {
+    "address": "via del tappezziere, 4 — bologna",
+    "copyright": "© 2026 creative hub — since 1999",
+    "legal": "privacy · cookie · trasparenza"
+  }
+}

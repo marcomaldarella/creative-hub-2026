@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>creative hub — design preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900&family=DM+Sans:opsz,wght@9..40,300..700&family=Geist+Mono:wght@300..500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ghiaccio:#F2F1EE;
+    --petrolio:#1F3D4A;
+    --azzurro:#4FA8DF;
+    --osso:#EDE6DA;
+    --grigio:#77848C;
+    --linea:#DCE0DE;
+    --max:1280px;
+    --pad:clamp(20px,4vw,56px);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--ghiaccio);
+    color:var(--petrolio);
+    font-family:"DM Sans",system-ui,sans-serif;
+    font-size:16px;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none}
+  .mono{font-family:"Geist Mono",monospace;font-size:12px;letter-spacing:.02em;color:var(--grigio)}
+  .wrap{max-width:var(--max);margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
+
+  /* ————— nav ————— */
+  nav{
+    position:fixed;inset:0 0 auto 0;z-index:50;
+    backdrop-filter:blur(12px);
+    background:color-mix(in srgb,var(--ghiaccio) 82%,transparent);
+    border-bottom:1px solid var(--linea);
+  }
+  .nav-in{display:flex;align-items:center;gap:32px;height:64px;max-width:var(--max);margin:0 auto;padding:0 var(--pad)}
+  .wordmark{font-weight:600;font-size:17px;letter-spacing:-.01em;white-space:nowrap}
+  .wordmark em{font-style:normal;display:inline-block;width:26px;height:1px;background:currentColor;vertical-align:middle;margin:0 6px}
+  .nav-links{display:flex;gap:26px;margin-left:auto}
+  .nav-links a{font-size:14.5px;color:var(--grigio);transition:color .2s}
+  .nav-links a:hover{color:var(--petrolio)}
+  .lang{font-family:"Geist Mono",monospace;font-size:12px;color:var(--grigio)}
+  .lang b{color:var(--petrolio);font-weight:500}
+  .btn{
+    display:inline-block;background:var(--petrolio);color:var(--osso);
+    border-radius:999px;padding:10px 22px;font-size:14.5px;font-weight:500;
+    transition:background .2s,transform .2s;
+  }
+  .btn:hover{background:#2a4f5f;transform:translateY(-1px)}
+  .btn-azzurro{background:var(--azzurro);color:var(--petrolio)}
+  .btn-azzurro:hover{background:#66b5e5}
+
+  /* ————— hero ————— */
+  .hero{padding-top:64px;min-height:100svh;display:flex;flex-direction:column;justify-content:center;overflow:hidden;position:relative}
+  .hero-annot{display:flex;justify-content:space-between;max-width:var(--max);width:100%;margin:0 auto;padding:28px var(--pad) 0}
+  .hero-title{
+    font-family:"Archivo",sans-serif;
+    font-weight:900;
+    font-stretch:72%;
+    font-size:clamp(88px,19.5vw,300px);
+    line-height:.82;
+    letter-spacing:-.015em;
+    text-align:center;
+    white-space:nowrap;
+    margin:.06em -0.03em;
+    color:transparent;
+    background-image:
+      radial-gradient(60% 90% at 18% 25%,#4FA8DF 0%,transparent 55%),
+      radial-gradient(55% 80% at 82% 20%,#7cc3ec 0%,transparent 52%),
+      radial-gradient(70% 95% at 50% 90%,#16303c 0%,transparent 60%),
+      radial-gradient(45% 70% at 70% 65%,#2e6e93 0%,transparent 55%),
+      linear-gradient(160deg,#1F3D4A 0%,#39759b 45%,#4FA8DF 78%,#1F3D4A 100%);
+    background-size:220% 220%,200% 200%,240% 240%,210% 210%,300% 300%;
+    -webkit-background-clip:text;background-clip:text;
+    animation:liquid 22s ease-in-out infinite alternate;
+    user-select:none;
+  }
+  @keyframes liquid{
+    0%  {background-position:0% 0%,100% 0%,50% 100%,80% 60%,0% 0%}
+    50% {background-position:80% 60%,20% 90%,10% 20%,30% 10%,100% 50%}
+    100%{background-position:100% 100%,0% 40%,90% 0%,60% 90%,0% 100%}
+  }
+  .hero-sub{display:flex;justify-content:space-between;align-items:center;max-width:var(--max);width:100%;margin:0 auto;padding:26px var(--pad) 0}
+  .hero-sub .lede{font-size:clamp(16px,1.6vw,20px);max-width:34ch;color:var(--petrolio)}
+  .arrow-link{display:inline-flex;align-items:center;gap:10px;font-size:15px;font-weight:500}
+  .arrow{display:inline-block;font-family:"Archivo";font-weight:700;transition:transform .3s cubic-bezier(.2,.7,.2,1)}
+  .arrow-link:hover .arrow{transform:rotate(90deg)}
+
+  /* ————— regola con doppia etichetta ————— */
+  .rule{display:flex;align-items:center;gap:16px;max-width:var(--max);margin:0 auto;padding:0 var(--pad)}
+  .rule .line{flex:1;height:1px;background:var(--linea);transform-origin:left;transform:scaleX(0);transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
+  .rule.in .line{transform:scaleX(1)}
+
+  section{padding:clamp(72px,10vw,140px) 0}
+
+  /* ————— manifesto ————— */
+  .manifesto p{
+    font-size:clamp(26px,3.6vw,46px);
+    line-height:1.22;letter-spacing:-.015em;font-weight:400;
+    max-width:24ch;
+  }
+  .manifesto p b{font-weight:600;color:var(--azzurro)}
+
+  /* reveal */
+  .rv{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+  .rv.in{opacity:1;transform:none}
+
+  /* ————— studio (petrolio) ————— */
+  .studio{background:var(--petrolio);color:var(--osso);position:relative;overflow:hidden}
+  .studio::before{
+    content:"";position:absolute;inset:-20%;
+    background:
+      radial-gradient(50% 60% at 20% 30%,rgba(79,168,223,.14),transparent 60%),
+      radial-gradient(60% 70% at 85% 75%,rgba(79,168,223,.10),transparent 65%),
+      radial-gradient(40% 50% at 60% 10%,rgba(237,230,218,.05),transparent 60%);
+    animation:drift 30s ease-in-out infinite alternate;
+    pointer-events:none;
+  }
+  @keyframes drift{from{transform:translate(0,0) rotate(0deg)}to{transform:translate(4%,6%) rotate(3deg)}}
+  .studio .wrap{position:relative}
+  .kicker{font-family:"Geist Mono",monospace;font-size:12px;color:var(--azzurro);display:block;margin-bottom:20px}
+  .studio h2{
+    font-family:"Archivo";font-weight:100;font-stretch:125%;
+    font-size:clamp(40px,6.5vw,84px);line-height:1;letter-spacing:.01em;margin-bottom:18px;
+  }
+  .studio .desc{max-width:52ch;color:color-mix(in srgb,var(--osso) 75%,transparent);margin-bottom:56px}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+  .card{
+    border:1px solid rgba(237,230,218,.16);border-radius:12px;padding:28px 24px;
+    background:rgba(237,230,218,.03);transition:border-color .25s,background .25s;
+  }
+  .card:hover{border-color:var(--azzurro);background:rgba(79,168,223,.06)}
+  .card .mono{color:var(--azzurro);display:block;margin-bottom:14px}
+  .card h3{font-size:19px;font-weight:600;margin-bottom:8px;color:var(--osso)}
+  .card p{font-size:14.5px;color:color-mix(in srgb,var(--osso) 65%,transparent)}
+
+  /* ————— sei nodi ————— */
+  .nodi h2,.mag h2{
+    font-family:"Archivo";font-weight:100;font-stretch:125%;
+    font-size:clamp(36px,5.5vw,72px);line-height:1.05;margin-bottom:56px;
+  }
+  .grid-nodi{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));border-top:1px solid var(--linea);border-left:1px solid var(--linea)}
+  .nodo{
+    border-right:1px solid var(--linea);border-bottom:1px solid var(--linea);
+    padding:34px 28px 42px;position:relative;transition:background .25s;
+  }
+  .nodo:hover{background:#fff}
+  .nodo .mono{display:block;margin-bottom:26px}
+  .nodo h3{font-size:22px;font-weight:600;letter-spacing:-.01em;margin-bottom:10px}
+  .nodo p{font-size:14.5px;color:var(--grigio);max-width:34ch}
+  .nodo .arrow{position:absolute;top:30px;right:26px;color:var(--azzurro);font-size:20px;opacity:0;transform:rotate(180deg)}
+  .nodo:hover .arrow{opacity:1;transform:rotate(90deg)}
+
+  /* ————— counters ————— */
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:clamp(24px,4vw,64px)}
+  .stat .num{
+    font-family:"Archivo";font-weight:800;font-stretch:80%;
+    font-size:clamp(44px,5.5vw,72px);line-height:1;letter-spacing:-.02em;
+    font-variant-numeric:tabular-nums;
+  }
+  .stat .meter{height:3px;background:var(--linea);border-radius:2px;margin:16px 0 12px;overflow:hidden}
+  .stat .meter i{display:block;height:100%;width:0%;background:var(--azzurro);border-radius:2px}
+  .stat .label{font-size:14px;color:var(--grigio)}
+
+  /* ————— marquee ————— */
+  .marquee{border-top:1px solid var(--linea);border-bottom:1px solid var(--linea);padding:26px 0;overflow:hidden}
+  .track{display:flex;gap:64px;width:max-content;animation:mq 38s linear infinite;will-change:transform}
+  .marquee:hover .track{animation-play-state:paused}
+  .track span{font-family:"Archivo";font-weight:500;font-stretch:105%;font-size:20px;color:var(--grigio);white-space:nowrap;transition:color .2s}
+  .track span:hover{color:var(--petrolio)}
+  @keyframes mq{to{transform:translateX(-50%)}}
+
+  /* ————— magazine ————— */
+  .grid-mag{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+  .art{border:1px solid var(--linea);border-radius:12px;overflow:hidden;background:#fff;transition:transform .3s cubic-bezier(.2,.7,.2,1),box-shadow .3s}
+  .art:hover{transform:translateY(-4px);box-shadow:0 16px 40px -20px rgba(31,61,74,.25)}
+  .art .thumb{aspect-ratio:3/2;background:linear-gradient(150deg,#cfe6f5,#4FA8DF 60%,#1F3D4A)}
+  .art:nth-child(2) .thumb{background:linear-gradient(200deg,#EDE6DA,#77848C 70%,#1F3D4A)}
+  .art:nth-child(3) .thumb{background:linear-gradient(120deg,#1F3D4A,#2e6e93 55%,#7cc3ec)}
+  .art .body{padding:22px 22px 26px}
+  .art .mono{display:flex;justify-content:space-between;margin-bottom:12px}
+  .art h3{font-size:19px;font-weight:600;letter-spacing:-.01em;line-height:1.3}
+
+  /* ————— open day ————— */
+  .openday{background:var(--azzurro);color:var(--petrolio)}
+  .openday .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:28px}
+  .openday h2{font-family:"Archivo";font-weight:800;font-stretch:78%;font-size:clamp(34px,5vw,64px);line-height:.95;letter-spacing:-.01em}
+  .openday .mono{color:rgba(31,61,74,.7);display:block;margin-bottom:14px}
+
+  /* ————— footer ————— */
+  footer{background:var(--ghiaccio);border-top:1px solid var(--linea);padding:64px 0 40px}
+  .foot{display:flex;flex-wrap:wrap;gap:48px;justify-content:space-between}
+  .foot .mono{line-height:2}
+  .foot-bottom{margin-top:56px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+
+  @media (max-width:760px){
+    .nav-links{display:none}
+    .hero-annot{flex-direction:column;gap:6px}
+    .hero-sub{flex-direction:column;align-items:flex-start;gap:22px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *,*::before{animation:none!important;transition:none!important}
+    .rv,.rule .line{opacity:1;transform:none}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <a class="wordmark" href="#">creative<em></em>hub</a>
+    <div class="nav-links">
+      <a href="#">academy</a><a href="#">studio</a><a href="#">coworking</a>
+      <a href="#">innovazione</a><a href="#">magazine</a><a href="#">chi siamo</a>
+    </div>
+    <span class="lang"><b>it</b> / en</span>
+    <a class="btn" href="#">prenota</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-annot">
+    <span class="mono">dal 1999 — international college of music, sound, multimedia &amp; visual</span>
+    <span class="mono">bologna 44.4929°n, 11.3429°e</span>
+  </div>
+  <div class="hero-title">CREATIVE<br>HUB</div>
+  <div class="hero-sub">
+    <p class="lede">L'infrastruttura che trasforma suono, immagine e codice in professione.</p>
+    <span class="mono">inspire, innovate, excel.</span>
+    <a class="arrow-link" href="#manifesto">scopri l'hub <span class="arrow">↙</span></a>
+  </div>
+</header>
+
+<div class="rule"><span class="mono">creative hub</span><span class="line"></span><span class="mono">manifesto</span></div>
+
+<section class="manifesto" id="manifesto">
+  <div class="wrap">
+    <p class="rv">Non siamo una scuola. Non siamo uno studio. Non siamo un coworking. Siamo <b>l'infrastruttura</b> che permette a chi lavora con il suono, l'immagine e il codice di trasformare la propria visione in professione.</p>
+  </div>
+</section>
+
+<section class="studio">
+  <div class="wrap">
+    <span class="kicker rv">lo studio</span>
+    <h2 class="rv">Dove il suono prende forma</h2>
+    <p class="desc rv">Console SSL, certificazione Dolby Atmos, un team di sound engineer che lavora tra discografia e cinema. Le luci si abbassano, il segnale scorre.</p>
+    <div class="cards">
+      <div class="card rv"><span class="mono">ch.01</span><h3>Recording</h3><p>Sala di ripresa, console SSL, ascolto di riferimento.</p></div>
+      <div class="card rv"><span class="mono">ch.02</span><h3>Mix &amp; mastering</h3><p>Analogico e in the box, per discografia e broadcast.</p></div>
+      <div class="card rv"><span class="mono">ch.03</span><h3>Dolby Atmos</h3><p>Missaggio immersivo certificato, musica e cinema.</p></div>
+      <div class="card rv"><span class="mono">ch.04</span><h3>Cinema audio</h3><p>Post-produzione, foley, colonna internazionale.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="nodi">
+  <div class="wrap">
+    <span class="kicker rv" style="color:var(--grigio)">l'ecosistema</span>
+    <h2 class="rv">Sei nodi, una rete</h2>
+    <div class="grid-nodi">
+      <a class="nodo rv" href="#"><span class="mono">academy</span><h3>Corsi e formazione</h3><p>Percorsi universitari e training su misura, dal 1999.</p><span class="arrow">↙</span></a>
+      <a class="nodo rv" href="#"><span class="mono">studio</span><h3>Registrazione e produzione</h3><p>SSL, Dolby Atmos, audio per il cinema.</p><span class="arrow">↙</span></a>
+      <a class="nodo rv" href="#"><span class="mono">coworking</span><h3>Spazi di lavoro</h3><p>Desk, sale riunioni, day pass ed eventi.</p><span class="arrow">↙</span></a>
+      <a class="nodo rv" href="#"><span class="mono">innovazione</span><h3>Incubazione e B2B</h3><p>Startup creative e servizi per le imprese.</p><span class="arrow">↙</span></a>
+      <a class="nodo rv" href="#"><span class="mono">magazine</span><h3>Editoriale</h3><p>Voci e storie dall'industria creativa.</p><span class="arrow">↙</span></a>
+      <a class="nodo rv" href="#"><span class="mono">chi siamo</span><h3>Team e governance</h3><p>Le persone e i partner dietro l'hub.</p><span class="arrow">↙</span></a>
+    </div>
+  </div>
+</section>
+
+<div class="rule"><span class="mono">risultati</span><span class="line"></span><span class="mono">2026</span></div>
+
+<section>
+  <div class="wrap stats">
+    <div class="stat rv"><div class="num" data-n="8400" data-suf="+">0</div><div class="meter"><i></i></div><div class="label">studenti formati</div></div>
+    <div class="stat rv"><div class="num" data-n="300" data-suf="+">0</div><div class="meter"><i></i></div><div class="label">aziende partner</div></div>
+    <div class="stat rv"><div class="num" data-n="92" data-suf="%">0</div><div class="meter"><i></i></div><div class="label">placement entro 12 mesi</div></div>
+    <div class="stat rv"><div class="num" data-n="14" data-suf="">0</div><div class="meter"><i></i></div><div class="label">startup incubate all'anno</div></div>
+  </div>
+</section>
+
+<div class="marquee">
+  <div class="track">
+    <span>Sony Music</span><span>Universal</span><span>Warner</span><span>RAI</span><span>Mediaset</span><span>Cinecittà</span><span>Dolby</span><span>SSL</span><span>Adobe</span><span>Ableton</span><span>Steinberg</span><span>Avid</span><span>Apple</span><span>Berklee</span>
+    <span>Sony Music</span><span>Universal</span><span>Warner</span><span>RAI</span><span>Mediaset</span><span>Cinecittà</span><span>Dolby</span><span>SSL</span><span>Adobe</span><span>Ableton</span><span>Steinberg</span><span>Avid</span><span>Apple</span><span>Berklee</span>
+  </div>
+</div>
+
+<section class="mag">
+  <div class="wrap">
+    <span class="kicker rv" style="color:var(--grigio)">magazine</span>
+    <h2 class="rv">Dall'industria</h2>
+    <div class="grid-mag">
+      <a class="art rv" href="#"><div class="thumb"></div><div class="body"><div class="mono"><span>tecnologia</span><span>giu 2026</span></div><h3>Dolby Atmos: il mix immersivo spiegato da chi lo fa</h3></div></a>
+      <a class="art rv" href="#"><div class="thumb"></div><div class="body"><div class="mono"><span>carriere</span><span>mag 2026</span></div><h3>Lavorare nella musica nel 2026: cinque percorsi reali</h3></div></a>
+      <a class="art rv" href="#"><div class="thumb"></div><div class="body"><div class="mono"><span>bologna</span><span>mag 2026</span></div><h3>La scena creative-tech bolognese, mappata</h3></div></a>
+    </div>
+  </div>
+</section>
+
+<section class="openday">
+  <div class="wrap">
+    <div>
+      <span class="mono">sabato 23 maggio — ore 14:00</span>
+      <h2>UN POMERIGGIO<br>DENTRO L'HUB</h2>
+    </div>
+    <a class="btn" href="#">prenota il tuo posto</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <div class="wordmark" style="margin-bottom:18px">creative<em></em>hub</div>
+        <div class="mono">via del tappezziere, 4 — bologna<br>051 63.13.706<br>info@mpda.bo.it</div>
+      </div>
+      <div class="mono">academy<br>studio<br>coworking</div>
+      <div class="mono">innovazione<br>magazine<br>chi siamo</div>
+      <div class="mono">instagram<br>linkedin<br>vimeo<br>youtube</div>
+    </div>
+    <div class="foot-bottom">
+      <span class="mono">© 2026 creative hub — since 1999</span>
+      <span class="mono">privacy · cookie · trasparenza</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+  }), { threshold: .18 });
+  document.querySelectorAll('.rv,.rule').forEach(el => io.observe(el));
+
+  // contatori stile peak-meter: overshoot e assestamento
+  const fmt = n => n.toLocaleString('it-IT');
+  const statIO = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    statIO.unobserve(e.target);
+    const num = e.target.querySelector('.num');
+    const bar = e.target.querySelector('.meter i');
+    const target = +num.dataset.n, suf = num.dataset.suf;
+    const t0 = performance.now(), dur = 1400;
+    const ease = t => 1 - Math.pow(1 - t, 4);
+    (function tick(now) {
+      const t = Math.min((now - t0) / dur, 1);
+      num.textContent = fmt(Math.round(target * ease(t))) + (t === 1 ? suf : '');
+      // la barra fa overshoot al 100% e si assesta all'82% (peak-hold)
+      const over = t < .6 ? ease(t / .6) : 1 - .18 * ease((t - .6) / .4);
+      bar.style.width = (over * 100) + '%';
+      if (t < 1) requestAnimationFrame(tick);
+    })(t0);
+  }), { threshold: .5 });
+  document.querySelectorAll('.stat').forEach(el => statIO.observe(el));
+</script>
+</body>
+</html>

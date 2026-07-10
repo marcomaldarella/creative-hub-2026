@@ -1,0 +1,38 @@
+{
+  "nav": {
+    "academy": "academy",
+    "studio": "studio",
+    "coworking": "coworking",
+    "innovation": "innovation",
+    "magazine": "magazine",
+    "about": "about us",
+    "book": "book"
+  },
+  "hero": {
+    "since": "since 1999 — international college of music, sound, multimedia & visual",
+    "coords": "bologna 44.4929°n, 11.3429°e",
+    "lede": "The infrastructure that turns sound, image and code into a profession.",
+    "tagline": "inspire, innovate, excel.",
+    "discover": "discover the hub"
+  },
+  "common": {
+    "readMore": "read",
+    "viewAll": "view all",
+    "all": "all",
+    "bookOn": "book on the shop",
+    "backTo": "back to",
+    "teachers": "teachers",
+    "courses": "courses",
+    "articles": "articles",
+    "duration": "duration",
+    "start": "start",
+    "level": "level",
+    "language": "language",
+    "mode": "mode"
+  },
+  "footer": {
+    "address": "via del tappezziere, 4 — bologna",
+    "copyright": "© 2026 creative hub — since 1999",
+    "legal": "privacy · cookies · transparency"
+  }
+}

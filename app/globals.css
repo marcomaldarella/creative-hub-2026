@@ -1,0 +1,120 @@
+/* ————————————————————————————————————————
+   creative hub — design tokens
+   palette dal manuale studenti + tee (brand reale)
+———————————————————————————————————————— */
+:root {
+  /* colori */
+  --ghiaccio: #F2F1EE;   /* sfondo base */
+  --petrolio: #1F3D4A;   /* testo su light, sfondo sezioni dark */
+  --azzurro:  #4FA8DF;   /* accento brand */
+  --osso:     #EDE6DA;   /* testo su petrolio (mai bianco puro) */
+  --grigio:   #77848C;   /* testo secondario */
+  --linea:    #DCE0DE;   /* bordi, regole, divisori */
+  --bianco:   #FFFFFF;   /* superfici card su light */
+
+  /* derivati */
+  --petrolio-hover: #2A4F5F;
+  --azzurro-hover:  #66B5E5;
+  --osso-60: rgba(237, 230, 218, 0.6);
+  --osso-16: rgba(237, 230, 218, 0.16);
+  --azzurro-06: rgba(79, 168, 223, 0.06);
+
+  /* layout */
+  --max: 1280px;
+  --pad: clamp(20px, 4vw, 56px);
+  --nav-h: 64px;
+  --radius: 12px;
+  --radius-pill: 999px;
+
+  /* sezioni */
+  --sez: clamp(72px, 10vw, 140px);
+
+  /* motion */
+  --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --dur: 0.3s;
+  --dur-slow: 0.7s;
+
+  /* type scale */
+  --fs-hero: clamp(88px, 19.5vw, 300px);
+  --fs-h2: clamp(36px, 5.5vw, 72px);
+  --fs-h3: clamp(26px, 3.6vw, 46px);
+  --fs-lede: clamp(16px, 1.6vw, 20px);
+  --fs-body: 16px;
+  --fs-small: 14.5px;
+  --fs-mono: 12px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--ghiaccio);
+  color: var(--petrolio);
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: var(--fs-body);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+button { font: inherit; cursor: pointer; border: none; background: none; }
+img { max-width: 100%; height: auto; display: block; }
+
+::selection { background: var(--azzurro); color: var(--petrolio); }
+
+:focus-visible {
+  outline: 2px solid var(--azzurro);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* utility condivise */
+.wrap {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding-left: var(--pad);
+  padding-right: var(--pad);
+}
+
+.mono {
+  font-family: var(--font-mono), monospace;
+  font-size: var(--fs-mono);
+  letter-spacing: 0.02em;
+  color: var(--grigio);
+}
+
+/* display: Archivo Black stretto — solo momenti oversized */
+.display-black {
+  font-family: var(--font-display), sans-serif;
+  font-weight: 900;
+  font-stretch: 72%;
+  line-height: 0.82;
+  letter-spacing: -0.015em;
+}
+
+/* display: Archivo Thin Expanded — marcatori di sezione */
+.display-thin {
+  font-family: var(--font-display), sans-serif;
+  font-weight: 100;
+  font-stretch: 125%;
+  line-height: 1.05;
+  letter-spacing: 0.01em;
+}
+
+/* reveal on scroll (attivato dal provider client) */
+.rv {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity var(--dur-slow) ease, transform var(--dur-slow) var(--ease-out);
+}
+.rv.in { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  html { scroll-behavior: auto; }
+  .rv { opacity: 1; transform: none; }
+}
