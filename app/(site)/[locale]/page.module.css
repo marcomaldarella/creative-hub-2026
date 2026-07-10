@@ -67,10 +67,16 @@
 
 .ring text {
   font-family: var(--font-body), sans-serif;
-  font-size: 3.2px;
+  font-size: 2.3px;
   letter-spacing: 0.42em;
   text-transform: uppercase;
   fill: color-mix(in srgb, var(--ghiaccio) 62%, transparent);
+}
+
+.ringLine {
+  fill: none;
+  stroke: color-mix(in srgb, var(--ghiaccio) 30%, transparent);
+  stroke-width: 0.14;
 }
 
 @keyframes ringSpin {

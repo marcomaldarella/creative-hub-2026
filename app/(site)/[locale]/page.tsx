@@ -107,6 +107,8 @@ export default async function HomePage({
                   fill="none"
                 />
               </defs>
+              {/* linea continua che chiude l'anello, appena fuori dal testo */}
+              <circle className={styles.ringLine} cx="50" cy="50" r="48.6" />
               <text>
                 <textPath href="#hero-ring">
                   creative · creative-hub · inspire · innovate · excel ·
