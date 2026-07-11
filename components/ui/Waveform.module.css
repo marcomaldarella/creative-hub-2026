@@ -1,13 +1,13 @@
 .wave {
   display: inline-flex;
   align-items: center;
-  gap: 3px;
+  gap: 2.5px;
   height: 16px;
 }
 
 .wave i {
-  width: 3px;
-  border-radius: 2px;
+  width: 2px;
+  border-radius: 1px;
   background: currentColor;
   height: calc(var(--h, 1) * 100%);
   transform-origin: center;

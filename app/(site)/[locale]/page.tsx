@@ -210,7 +210,7 @@ export default async function HomePage({
         {/* ————— network (§ 07): marquee partner ————— */}
         {partnerMarks.length > 0 && (
           <section className={styles.sez}>
-            <div className="wrap">
+            <div className={`wrap ${styles.networkHead}`}>
               <SectionHeader
                 kicker={t.home.networkKicker}
                 title={t.home.networkTitle}

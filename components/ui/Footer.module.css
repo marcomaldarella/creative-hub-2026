@@ -60,9 +60,10 @@
 .bottom {
   margin-top: 56px;
   display: flex;
-  justify-content: space-between;
+  align-items: baseline;
+  justify-content: flex-start;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 10px 28px;
 }
 
 .legal {

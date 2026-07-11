@@ -257,6 +257,12 @@
 
 /* ————— network (§ 07) ————— */
 
+/* titolo centrato, a capo dal dizionario (\n → pre-line) */
+.networkHead {
+  text-align: center;
+  white-space: pre-line;
+}
+
 .networkFoot {
   display: flex;
   justify-content: space-between;
