@@ -75,10 +75,11 @@
   margin-bottom: 16px;
 }
 
-/* il wordmark gigante esce dal bordo inferiore (crop da manuale) */
+/* il wordmark gigante esce dal bordo inferiore (crop da manuale)
+   e scorre in marquee infinito */
 .giant {
   white-space: nowrap;
-  text-align: center;
+  overflow: hidden;
   font-size: clamp(88px, 15vw, 250px);
   line-height: 0.74;
   margin-top: 56px;
@@ -86,4 +87,22 @@
   color: color-mix(in srgb, var(--fg) 8%, transparent);
   user-select: none;
   pointer-events: none;
+}
+
+.giantTrack {
+  display: flex;
+  width: max-content;
+  animation: giantScroll 52s linear infinite;
+  will-change: transform;
+}
+
+/* padding-right = gap: il loop -50% resta seamless */
+.giantGroup {
+  padding-right: 0.45em;
+}
+
+@keyframes giantScroll {
+  to {
+    transform: translateX(-50%);
+  }
 }

@@ -106,9 +106,13 @@ export function Footer({
         </div>
       </div>
 
-      {/* type gigante croppato al bordo, come le cover del manuale */}
+      {/* type gigante croppato al bordo, come le cover del manuale:
+          marquee infinito (contenuto duplicato, loop -50%) */}
       <div className={`display-black ${styles.giant}`} aria-hidden="true">
-        creative hub
+        <div className={styles.giantTrack}>
+          <span className={styles.giantGroup}>creative hub</span>
+          <span className={styles.giantGroup}>creative hub</span>
+        </div>
       </div>
     </footer>
   );
