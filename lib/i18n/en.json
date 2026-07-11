@@ -4,7 +4,7 @@
     "studio": "Studio",
     "coworking": "Coworking",
     "innovation": "Innovation",
-    "magazine": "Magazine",
+    "magazine": "Editorial",
     "about": "About",
     "book": "book",
     "menu": "menu",
@@ -160,7 +160,7 @@
         "label": "startups incubated per year"
       }
     },
-    "magazineKicker": "magazine",
+    "magazineKicker": "editorial",
     "magazineTitle": "From the industry",
     "magazineAll": "all articles",
     "opendayTitleLine1": "AN AFTERNOON",
@@ -311,16 +311,16 @@
     "colSocial": "social"
   },
   "magazine": {
-    "kicker": "magazine",
-    "title": "From the industry",
+    "kicker": "editorial",
+    "title": "Editorial",
     "lede": "Voices, stories and tools from the creative industry: sound, image, code.",
-    "metaTitle": "magazine",
-    "metaDescription": "Voices and stories from the creative industry — the creative hub bologna magazine.",
+    "metaTitle": "editorial",
+    "metaDescription": "Voices and stories from the creative industry — the creative hub bologna editorial.",
     "featuredLabel": "featured",
     "latestLabel": "all articles",
     "categoriesLabel": "categories",
     "categoryKicker": "category",
-    "backToMagazine": "back to the magazine",
+    "backToMagazine": "back to editorial",
     "relatedTitle": "more articles",
     "empty": "no articles yet.",
     "by": "by"

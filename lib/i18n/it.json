@@ -4,7 +4,7 @@
     "studio": "Studio",
     "coworking": "Coworking",
     "innovation": "Innovazione",
-    "magazine": "Magazine",
+    "magazine": "Editorial",
     "about": "Chi siamo",
     "book": "prenota",
     "menu": "menu",
@@ -160,7 +160,7 @@
         "label": "startup incubate all'anno"
       }
     },
-    "magazineKicker": "magazine",
+    "magazineKicker": "editorial",
     "magazineTitle": "Dall'industria",
     "magazineAll": "tutti gli articoli",
     "opendayTitleLine1": "UN POMERIGGIO",
@@ -311,16 +311,16 @@
     "colSocial": "social"
   },
   "magazine": {
-    "kicker": "magazine",
-    "title": "Dall'industria",
+    "kicker": "editorial",
+    "title": "Editorial",
     "lede": "Voci, storie e strumenti dall'industria creativa: suono, immagine, codice.",
-    "metaTitle": "magazine",
-    "metaDescription": "Voci e storie dall'industria creativa — il magazine di creative hub bologna.",
+    "metaTitle": "editorial",
+    "metaDescription": "Voci e storie dall'industria creativa — l'editorial di creative hub bologna.",
     "featuredLabel": "in evidenza",
     "latestLabel": "tutti gli articoli",
     "categoriesLabel": "categorie",
     "categoryKicker": "categoria",
-    "backToMagazine": "torna al magazine",
+    "backToMagazine": "torna all'editorial",
     "relatedTitle": "altri articoli",
     "empty": "nessun articolo, per ora.",
     "by": "di"
