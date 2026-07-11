@@ -158,42 +158,34 @@ export function Nav({
               {item.sub && (
                 <div className={styles.panel}>
                   <div className={`wrap ${styles.panelIn}`}>
-                    <div className={styles.panelIntro}>
-                      <span className={`mono ${styles.panelEyebrow}`}>
-                        {item.sub.eyebrow}
-                      </span>
-                      <span className={`display-black ${styles.panelTitle}`}>
-                        {item.label}
-                      </span>
-                      <p className={styles.panelDesc}>{item.sub.desc}</p>
-                      <Link href={item.href} className={styles.panelExplore}>
-                        {item.sub.explore} <span aria-hidden="true">→</span>
-                      </Link>
-                    </div>
+                    <span className={styles.panelLabel}>{item.sub.eyebrow}</span>
                     <ul
                       className={styles.panelList}
                       style={{
-                        gridTemplateRows: `repeat(${Math.ceil(item.sub.entries.length / 2)}, auto)`,
+                        gridTemplateRows: `repeat(${Math.ceil((item.sub.entries.length + 1) / 2)}, auto)`,
                       }}
                     >
                       {item.sub.entries.map((entry) => (
-                        <li key={entry.label} className={styles.panelRow}>
+                        <li key={entry.label}>
                           <Link href={entry.href} className={styles.panelEntry}>
-                            <span className={styles.panelChev} aria-hidden="true">
-                              ›
-                            </span>
                             {entry.label}
+                            {entry.cross && (
+                              <span className={styles.panelCross}>
+                                <span aria-hidden="true">↗</span>{' '}
+                                {entry.cross.label}
+                              </span>
+                            )}
                           </Link>
-                          {entry.cross && (
-                            <Link
-                              href={entry.cross.href}
-                              className={`mono ${styles.panelCross}`}
-                            >
-                              <span aria-hidden="true">↗</span> {entry.cross.label}
-                            </Link>
-                          )}
                         </li>
                       ))}
+                      <li>
+                        <Link
+                          href={item.href}
+                          className={`${styles.panelEntry} ${styles.panelExplore}`}
+                        >
+                          {item.sub.explore} <span aria-hidden="true">→</span>
+                        </Link>
+                      </li>
                     </ul>
                   </div>
                 </div>

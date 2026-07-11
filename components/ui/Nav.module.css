@@ -73,7 +73,7 @@
   top: var(--nav-h);
   left: 0;
   right: 0;
-  background: color-mix(in srgb, var(--bg) 80%, transparent);
+  background: color-mix(in srgb, var(--bg) 93%, transparent);
   backdrop-filter: blur(48px) saturate(1.8);
   -webkit-backdrop-filter: blur(48px) saturate(1.8);
   border-bottom: 1px solid color-mix(in srgb, var(--line) 70%, transparent);
@@ -84,10 +84,18 @@
   visibility: hidden;
   transform: translateY(-8px);
   pointer-events: none;
+  /* chiusura rapida: niente doppio pannello in trasparenza nel cross-fade */
   transition:
-    opacity var(--dur) ease,
-    transform var(--dur) var(--ease-out),
-    visibility 0s linear var(--dur);
+    opacity 0.15s ease,
+    transform 0.15s var(--ease-out),
+    visibility 0s linear 0.15s;
+}
+
+/* il pannello attivo sta sopra quello che sta sfumando */
+.navItem:hover,
+.navItem:focus-within {
+  position: relative;
+  z-index: 3;
 }
 
 /* velatura di riflesso diagonale sul vetro */
@@ -107,100 +115,58 @@
 
 .panelIn {
   position: relative;
+  padding-top: 30px;
+  padding-bottom: 40px;
 }
 
-.navItem:hover .panel,
-.navItem:focus-within .panel {
-  opacity: 1;
-  visibility: visible;
-  transform: none;
-  pointer-events: auto;
-  transition-delay: 0s;
-}
-
-.panelIn {
-  display: grid;
-  grid-template-columns: minmax(260px, 5fr) 7fr;
-  gap: clamp(32px, 4vw, 72px);
-  padding-top: 44px;
-  padding-bottom: 48px;
-}
-
-.panelIntro {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 14px;
-}
-
-.panelEyebrow {
-  color: var(--azzurro);
-}
-
-.panelTitle {
-  font-size: clamp(38px, 3.4vw, 56px);
-  color: var(--fg);
-}
-
-.panelDesc {
-  font-size: var(--fs-small);
+/* label di gruppo alla vercel: piccola, grigia, sopra la lista */
+.panelLabel {
+  display: block;
+  margin-bottom: 14px;
+  font-size: 13px;
   color: var(--fg-2);
-  max-width: 36ch;
-}
-
-.panelExplore {
-  font-size: var(--fs-small);
-  color: var(--azzurro);
-  transition: color 0.2s;
-}
-
-.panelExplore:hover {
-  color: var(--fg);
 }
 
 .panelList {
   list-style: none;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, minmax(220px, max-content));
   grid-auto-flow: column;
-  grid-template-rows: repeat(3, auto);
-  column-gap: clamp(24px, 3vw, 48px);
+  column-gap: clamp(48px, 6vw, 96px);
   align-content: start;
-}
-
-.panelRow {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  border-top: 1px solid var(--line);
+  justify-content: start;
 }
 
 .panelEntry {
   display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  padding: 19px 0;
+  align-items: baseline;
+  gap: 10px;
+  padding: 8px 0;
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
   color: var(--fg);
-  transition: color 0.2s;
+  transition: color 0.15s;
 }
 
 .panelEntry:hover {
   color: var(--azzurro);
 }
 
-.panelChev {
-  color: var(--azzurro);
-}
-
 .panelCross {
+  font-size: 12.5px;
+  font-weight: 400;
   color: var(--fg-2);
   white-space: nowrap;
-  transition: color 0.2s;
 }
 
-.panelCross:hover {
+.panelExplore {
   color: var(--azzurro);
+  font-size: 15px;
+}
+
+.panelExplore:hover {
+  color: var(--fg);
 }
 
 .lang {
@@ -398,7 +364,7 @@
 }
 
 .dark .panel {
-  background: color-mix(in srgb, var(--panel) 80%, transparent);
+  background: color-mix(in srgb, var(--panel) 93%, transparent);
   border-bottom-color: var(--osso-16);
   box-shadow:
     inset 0 1px 0 var(--osso-16),
@@ -415,7 +381,6 @@
   );
 }
 
-.dark .panelTitle,
 .dark .panelEntry {
   color: var(--osso);
 }
@@ -424,17 +389,17 @@
   color: var(--azzurro);
 }
 
-.dark .panelDesc,
+.dark .panelLabel,
 .dark .panelCross {
   color: var(--osso-60);
 }
 
-.dark .panelExplore:hover {
-  color: var(--osso);
+.dark .panelExplore {
+  color: var(--azzurro);
 }
 
-.dark .panelRow {
-  border-top-color: var(--osso-16);
+.dark .panelExplore:hover {
+  color: var(--osso);
 }
 
 .dark .lang {
