@@ -13,7 +13,7 @@
   background: linear-gradient(
     200deg,
     var(--osso),
-    var(--fg-2) 70%,
+    var(--grigio) 70%,
     var(--petrolio)
   );
 }

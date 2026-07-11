@@ -92,9 +92,10 @@
   padding-bottom: clamp(32px, 4vw, 56px);
 }
 
+/* stessa griglia del listing: card identiche per proporzioni */
 .relatedGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(460px, 100%), 1fr));
   gap: 20px;
 }
 
