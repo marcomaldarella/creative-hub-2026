@@ -85,7 +85,7 @@
 /* tracking negativo: gli em-dash si sovrappongono e fondono in
    una linea continua senza micro-stacchi */
 .ringDash {
-  letter-spacing: -0.06em;
+  letter-spacing: -0.15em;
   fill: color-mix(in srgb, var(--ghiaccio) 38%, transparent);
 }
 
@@ -284,6 +284,7 @@
 .openday {
   background: var(--azzurro);
   color: var(--petrolio);
+  padding: clamp(56px, 7vw, 100px) 0;
 }
 
 .opendayIn {

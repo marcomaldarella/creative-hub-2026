@@ -14,7 +14,7 @@
 
 /* titoli in display, weight 600, stretch normale (mai liquid qui) */
 .h2 {
-  font-family: var(--font-display), sans-serif;
+  font-family: var(--font-swiss), 'Helvetica Neue', var(--font-display), sans-serif;
   font-weight: 600;
   font-stretch: 100%;
   font-size: clamp(24px, 2.6vw, 32px);
@@ -24,7 +24,7 @@
 }
 
 .h3 {
-  font-family: var(--font-display), sans-serif;
+  font-family: var(--font-swiss), 'Helvetica Neue', var(--font-display), sans-serif;
   font-weight: 600;
   font-stretch: 100%;
   font-size: clamp(20px, 2vw, 24px);
@@ -34,7 +34,7 @@
 }
 
 .h4 {
-  font-family: var(--font-display), sans-serif;
+  font-family: var(--font-swiss), 'Helvetica Neue', var(--font-display), sans-serif;
   font-weight: 600;
   font-stretch: 100%;
   font-size: 18px;

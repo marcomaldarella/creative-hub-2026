@@ -28,6 +28,17 @@ const fat = localFont({
   display: 'swap',
 })
 
+// Helvetica Now Text (dal Font Book dell'utente) — display svizzero.
+// NB: per il go-live su dominio pubblico serve la licenza web Monotype
+const swiss = localFont({
+  src: [
+    { path: '../../fonts/HelveticaNowText-Medium.ttf', weight: '500' },
+    { path: '../../fonts/HelveticaNowText-Bold.ttf', weight: '700' },
+  ],
+  variable: '--font-swiss',
+  display: 'swap',
+})
+
 export const metadata: Metadata = {
   title: {
     default: 'creative hub — bologna',
@@ -56,7 +67,7 @@ export default async function SiteLayout({
     // su <html> prima dell'hydration, il mismatch è voluto
     <html lang={locale} suppressHydrationWarning>
       <body
-        className={`${display.variable} ${body.variable} ${fat.variable}`}
+        className={`${display.variable} ${body.variable} ${fat.variable} ${swiss.variable}`}
       >
         {/* tema prima del paint: localStorage, poi preferenza di sistema.
             next/script beforeInteractive: iniettato nell'head, niente

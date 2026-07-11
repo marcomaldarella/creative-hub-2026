@@ -250,7 +250,7 @@ export default async function HomePage({
         </section>
 
         {/* ————— open day (azzurro) ————— */}
-        <section className={`${styles.sez} ${styles.openday} liquid`}>
+        <section className={`${styles.sez} ${styles.openday}`}>
           <span className={`mono ${styles.frameL}`} aria-hidden="true">
             {t.home.opendayFrameA}
           </span>

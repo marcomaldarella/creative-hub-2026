@@ -12,7 +12,7 @@
 
 .arrow {
   display: inline-block;
-  font-family: var(--font-display), sans-serif;
+  font-family: var(--font-swiss), 'Helvetica Neue', var(--font-display), sans-serif;
   font-weight: 700;
   transition: transform var(--dur) var(--ease-out);
 }

@@ -129,15 +129,14 @@ img { max-width: 100%; height: auto; display: block; }
   letter-spacing: 0.01em;
 }
 
-/* display svizzero: grottesco compatto in maiuscolo, tracking stretto,
+/* display svizzero: Helvetica Now Text in maiuscolo, tracking stretto,
    interlinea serrata (sostituisce il vecchio Thin Expanded) */
 .display-thin {
-  font-family: var(--font-display), sans-serif;
+  font-family: var(--font-swiss), 'Helvetica Neue', var(--font-display), sans-serif;
   font-weight: 500;
-  font-stretch: 100%;
   text-transform: uppercase;
   line-height: 0.98;
-  letter-spacing: -0.015em;
+  letter-spacing: -0.02em;
 }
 
 /* texture liquid del brand (manuale studenti): velo sulle sezioni
@@ -150,12 +149,23 @@ img { max-width: 100%; height: auto; display: block; }
 .liquid::after {
   content: '';
   position: absolute;
-  inset: 0;
+  inset: -6%;
   z-index: 1;
   background: url('/img/sections/texture-liquid.jpg') center / cover no-repeat;
   mix-blend-mode: overlay;
   opacity: 0.16;
   pointer-events: none;
+  /* deriva lenta: il liquido respira (inset -6% dà margine al movimento) */
+  animation: liquidDrift 36s ease-in-out infinite alternate;
+}
+
+@keyframes liquidDrift {
+  from {
+    transform: translate3d(-1.5%, -1%, 0) scale(1);
+  }
+  to {
+    transform: translate3d(1.5%, 1.2%, 0) scale(1.07);
+  }
 }
 
 [data-theme='dark'] .liquid::after {

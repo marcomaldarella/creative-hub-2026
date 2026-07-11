@@ -110,7 +110,7 @@
 }
 
 .arrow {
-  font-family: var(--font-display), sans-serif;
+  font-family: var(--font-swiss), 'Helvetica Neue', var(--font-display), sans-serif;
   font-weight: 700;
   color: var(--azzurro);
   opacity: 0;
@@ -145,7 +145,7 @@
 }
 
 .featured .title {
-  font-family: var(--font-display), sans-serif;
+  font-family: var(--font-swiss), 'Helvetica Neue', var(--font-display), sans-serif;
   font-weight: 650;
   font-stretch: 92%;
   font-size: clamp(24px, 2.6vw, 40px);
