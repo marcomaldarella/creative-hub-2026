@@ -98,6 +98,15 @@
   z-index: 3;
 }
 
+.navItem:hover .panel,
+.navItem:focus-within .panel {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  pointer-events: auto;
+  transition: opacity 0.22s ease, transform 0.26s var(--ease-out);
+}
+
 /* velatura di riflesso diagonale sul vetro */
 .panel::before {
   content: '';
