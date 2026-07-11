@@ -18,6 +18,16 @@ const LOGOS: Record<string, { file: string; ratio: number; h: number }> = {
   avid: { file: 'avid', ratio: 2.34, h: 45 },
   apple: { file: 'apple', ratio: 0.81, h: 48 },
   'berklee college of music': { file: 'berklee', ratio: 3.99, h: 42 },
+  google: { file: 'google', ratio: 2.96, h: 42 },
+  'ik multimedia': { file: 'ik-multimedia', ratio: 3.65, h: 40 },
+  pearson: { file: 'pearson', ratio: 4.99, h: 36 },
+  'coventry university': { file: 'coventry', ratio: 3.57, h: 44 },
+  'erasmus+': { file: 'erasmus-plus', ratio: 3.49, h: 40 },
+  'confindustria emilia': { file: 'confindustria', ratio: 1.93, h: 48 },
+  'università di bologna': { file: 'unibo', ratio: 1, h: 54 },
+  'cnr tecnopolo bologna': { file: 'cnr', ratio: 8.57, h: 34 },
+  'regione emilia-romagna': { file: 'regione-emilia-romagna', ratio: 1, h: 48 },
+  'comune di bologna': { file: 'comune-bologna', ratio: 0.66, h: 54 },
 };
 
 export type PartnerMarkProps = {
