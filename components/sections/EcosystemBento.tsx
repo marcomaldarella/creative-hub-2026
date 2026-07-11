@@ -15,6 +15,9 @@ export type EcosystemBentoProps = {
   /** [corsi di formazione, registrazione e produzione, spazi di lavoro] */
   items: BentoItem[]
   hrefs: [string, string, string]
+  /** fila secondaria: gli altri nodi (innovazione, editorial, chi siamo) */
+  minor?: BentoItem[]
+  minorHrefs?: string[]
 }
 
 const IMAGES = [academyImg, studioImg, spaziImg]
@@ -24,7 +27,7 @@ const IMAGES = [academyImg, studioImg, spaziImg]
  * media pieno e testo in basso, due card orizzontali impilate a destra
  * con testo a sinistra e media a filo sul lato destro.
  */
-export function EcosystemBento({ items, hrefs }: EcosystemBentoProps) {
+export function EcosystemBento({ items, hrefs, minor, minorHrefs }: EcosystemBentoProps) {
   const [big, ...side] = items
   return (
     <RevealGroup className={styles.bento}>
@@ -68,6 +71,22 @@ export function EcosystemBento({ items, hrefs }: EcosystemBentoProps) {
           </div>
         </Link>
       ))}
+
+      {minor && minorHrefs && (
+        <div className={styles.minorRow}>
+          {minor.map((item, i) => (
+            <Link
+              key={item.title}
+              href={minorHrefs[i]}
+              className={`rv ${styles.mini}`}
+              style={{ transitionDelay: `${240 + i * 90}ms` }}
+            >
+              <h3 className={styles.title}>{item.title}</h3>
+              <p className={styles.text}>{item.text}</p>
+            </Link>
+          ))}
+        </div>
+      )}
     </RevealGroup>
   )
 }

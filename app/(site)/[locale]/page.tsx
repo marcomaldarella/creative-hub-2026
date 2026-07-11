@@ -154,6 +154,16 @@ export default async function HomePage({
                 localeHref(locale, '/studios'),
                 localeHref(locale, '/coworking'),
               ]}
+              minor={[
+                t.home.nodes.innovation,
+                t.home.nodes.magazine,
+                t.home.nodes.about,
+              ]}
+              minorHrefs={[
+                localeHref(locale, '/innovazione'),
+                localeHref(locale, '/magazine'),
+                localeHref(locale, '/chi-siamo'),
+              ]}
             />
           </div>
         </section>
