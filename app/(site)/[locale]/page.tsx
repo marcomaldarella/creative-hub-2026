@@ -126,9 +126,14 @@ export default async function HomePage({
             </h1>
           </div>
           <div className={styles.heroSub}>
-            <p className={styles.lede}>{t.hero.lede}</p>
-            <span className="mono">{t.hero.tagline}</span>
-            <ArrowLink href="#manifesto">{t.hero.discover}</ArrowLink>
+            <div className={styles.heroSubText}>
+              {/* inciso sopra la lede, giustificato a sinistra */}
+              <span className={`mono ${styles.tagline}`}>{t.hero.tagline}</span>
+              <p className={styles.lede}>{t.hero.lede}</p>
+            </div>
+            <a href="#manifesto" className={styles.heroCta}>
+              {t.hero.discover} <span aria-hidden="true">→</span>
+            </a>
           </div>
         </header>
 
