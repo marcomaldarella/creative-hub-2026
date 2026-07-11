@@ -66,6 +66,21 @@
   color-scheme: dark;
 }
 
+/* fallback pre-JS: con sistema dark i token partono scuri già al primo
+   paint (lo script di init poi stampa l'attributo esplicito; qui serve
+   solo a coprire la finestra prima che esegua) */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --bg: #0A0A0A;
+    --surface: #111111;
+    --fg: #EDEDED;
+    --fg-2: #8A8A8A;
+    --line: #1F1F1F;
+    --panel: #0F0F0F;
+    color-scheme: dark;
+  }
+}
+
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 html { scroll-behavior: smooth; }

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
+import Script from 'next/script'
 import { Archivo, Geist } from 'next/font/google'
 import localFont from 'next/font/local'
 import { locales, isLocale } from '@/lib/i18n/config'
@@ -57,11 +58,15 @@ export default async function SiteLayout({
       <body
         className={`${display.variable} ${body.variable} ${fat.variable}`}
       >
-        {/* tema prima del paint: localStorage, poi preferenza di sistema */}
-        <script
+        {/* tema prima del paint: localStorage, poi preferenza di sistema.
+            next/script beforeInteractive: iniettato nell'head, niente
+            warning React per script dentro il body */}
+        <Script
+          id="theme-init"
+          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{
             __html:
-              "(function(){try{var t=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');if(t==='dark')document.documentElement.dataset.theme='dark'}catch(e){}})()",
+              "(function(){try{var t=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.dataset.theme=t}catch(e){}})()",
           }}
         />
         {children}

@@ -19,11 +19,9 @@ export function ThemeToggle({ label = 'tema', className }: ThemeToggleProps) {
   const toggle = () => {
     const root = document.documentElement;
     const dark = root.dataset.theme === 'dark';
-    if (dark) {
-      delete root.dataset.theme;
-    } else {
-      root.dataset.theme = 'dark';
-    }
+    // sempre esplicito ('light'/'dark'): 'light' deve vincere anche
+    // sul fallback @media prefers-color-scheme in globals.css
+    root.dataset.theme = dark ? 'light' : 'dark';
     try {
       localStorage.setItem('theme', dark ? 'light' : 'dark');
     } catch {
