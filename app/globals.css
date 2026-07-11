@@ -129,13 +129,15 @@ img { max-width: 100%; height: auto; display: block; }
   letter-spacing: 0.01em;
 }
 
-/* display: Archivo Thin Expanded — marcatori di sezione */
+/* display svizzero: grottesco compatto in maiuscolo, tracking stretto,
+   interlinea serrata (sostituisce il vecchio Thin Expanded) */
 .display-thin {
   font-family: var(--font-display), sans-serif;
-  font-weight: 100;
-  font-stretch: 125%;
-  line-height: 1.05;
-  letter-spacing: 0.01em;
+  font-weight: 500;
+  font-stretch: 100%;
+  text-transform: uppercase;
+  line-height: 0.98;
+  letter-spacing: -0.015em;
 }
 
 /* texture liquid del brand (manuale studenti): velo sulle sezioni
