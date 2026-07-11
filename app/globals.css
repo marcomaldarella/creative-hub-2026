@@ -144,6 +144,7 @@ img { max-width: 100%; height: auto; display: block; }
 .liquid {
   position: relative;
   isolation: isolate;
+  overflow: hidden; /* il velo ::after sborda (inset -6%): mai fuori dalla sezione */
 }
 
 .liquid::after {
