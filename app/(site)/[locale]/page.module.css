@@ -260,6 +260,10 @@
   color: var(--osso);
 }
 
+.minorNodes {
+  margin-top: 20px;
+}
+
 /* ————— metodo (§ 04) ————— */
 
 .methodKicker {

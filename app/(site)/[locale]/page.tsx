@@ -3,6 +3,7 @@ import {
   ArrowLink,
   Button,
   Counter,
+  NodeGrid,
   CounterRow,
   Marquee,
   PartnerMark,
@@ -154,15 +155,13 @@ export default async function HomePage({
                 localeHref(locale, '/studios'),
                 localeHref(locale, '/coworking'),
               ]}
-              minor={[
-                t.home.nodes.innovation,
-                t.home.nodes.magazine,
-                t.home.nodes.about,
-              ]}
-              minorHrefs={[
-                localeHref(locale, '/innovazione'),
-                localeHref(locale, '/magazine'),
-                localeHref(locale, '/chi-siamo'),
+            />
+            <NodeGrid
+              className={styles.minorNodes}
+              nodes={[
+                { label: t.nav.innovation, ...t.home.nodes.innovation, href: localeHref(locale, '/innovazione') },
+                { label: t.nav.magazine, ...t.home.nodes.magazine, href: localeHref(locale, '/magazine') },
+                { label: t.nav.about, ...t.home.nodes.about, href: localeHref(locale, '/chi-siamo') },
               ]}
             />
           </div>

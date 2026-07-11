@@ -7,8 +7,7 @@
 }
 
 .big,
-.side,
-.mini {
+.side {
   background: var(--surface);
   border-radius: var(--radius);
   overflow: hidden;
@@ -19,8 +18,7 @@
 }
 
 .big:hover,
-.side:hover,
-.mini:hover {
+.side:hover {
   background: color-mix(in srgb, var(--surface) 92%, var(--fg) 8%);
 }
 
@@ -65,8 +63,7 @@
 }
 
 .big:hover .img,
-.side:hover .img,
-.mini:hover .img {
+.side:hover .img {
   transform: scale(1.03);
 }
 
@@ -99,28 +96,3 @@
   }
 }
 
-/* fila secondaria: gli altri nodi, card compatte testo-only */
-.minorRow {
-  grid-column: 1 / -1;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 20px;
-}
-
-.mini {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  min-height: 190px;
-  padding: 26px 28px 30px;
-}
-
-@media (max-width: 900px) {
-  .minorRow {
-    grid-template-columns: 1fr;
-  }
-
-  .mini {
-    min-height: 140px;
-  }
-}
