@@ -72,11 +72,16 @@
           "Partner"
         ]
       }
+    },
+    "topbar": {
+      "left": "est.1999 · bologna",
+      "middle": "iscrizioni aperte · a.a. 2026/27",
+      "cta": "prenota l'open day"
     }
   },
   "hero": {
-    "since": "est.1999\ninternational college of music, sound, multimedia & visual",
-    "coords": "bologna 44.4929°n, 11.3429°e",
+    "since": "international college of music,\nsound, multimedia & visual",
+    "coords": "est.1999\nbologna 44.4929°n, 11.3429°e",
     "lede": "L'infrastruttura che trasforma suono, immagine e codice in professione.",
     "tagline": "inspire, innovate, excel.",
     "discover": "scopri l'hub"
@@ -101,7 +106,7 @@
   "home": {
     "manifestoRuleLeft": "creative hub",
     "manifestoRuleRight": "manifesto",
-    "manifestoPre": "Non siamo una scuola. Non siamo uno studio. Non siamo un coworking. Siamo ",
+    "manifestoPre": "Siamo ",
     "manifestoBold": "l'infrastruttura",
     "manifestoPost": " che permette a chi lavora con il suono, l'immagine e il codice di trasformare la propria visione in professione.",
     "studioKicker": "lo studio",
@@ -209,7 +214,8 @@
       "captionRight": "— 06 / studio"
     },
     "opendayFrameA": "inspire, innovate, excel.",
-    "opendayFrameB": "bologna · creative hub"
+    "opendayFrameB": "bologna · creative hub",
+    "manifestoNeg": "Non siamo una scuola. Non siamo uno studio. Non siamo un coworking."
   },
   "academy": {
     "kicker": "academy",
@@ -312,7 +318,7 @@
   },
   "magazine": {
     "kicker": "editorial",
-    "title": "Editorial",
+    "title": "EDITORIAL",
     "lede": "Voci, storie e strumenti dall'industria creativa: suono, immagine, codice.",
     "metaTitle": "editorial",
     "metaDescription": "Voci e storie dall'industria creativa — l'editorial di creative hub bologna.",

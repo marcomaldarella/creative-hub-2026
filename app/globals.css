@@ -33,6 +33,8 @@
   --max: 1680px;
   --pad: clamp(20px, 3vw, 48px);
   --nav-h: 64px;
+  --topbar-h: 34px;
+  --header-h: calc(var(--nav-h) + var(--topbar-h));
   --radius: 8px;
   --radius-pill: 999px;
 
@@ -52,6 +54,12 @@
   --fs-body: 16px;
   --fs-small: 14.5px;
   --fs-mono: 12px;
+}
+
+@media (max-width: 900px) {
+  :root {
+    --topbar-h: 0px; /* niente topbar su mobile */
+  }
 }
 
 /* dark mono, riferimento Vercel: quasi-nero neutro, grigi puri —

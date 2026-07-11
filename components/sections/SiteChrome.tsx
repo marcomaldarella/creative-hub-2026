@@ -159,6 +159,14 @@ export async function SiteChrome({
         dark={dark}
         menuLabel={t.nav.menu}
         langLabel={t.nav.lang}
+        topbar={{
+          left: t.nav.topbar.left,
+          middle: t.nav.topbar.middle,
+          cta: t.nav.topbar.cta,
+          ctaHref: shopHref(settings),
+          phone: settings?.phone,
+          email: settings?.email,
+        }}
       />
       {children}
       <Footer

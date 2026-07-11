@@ -13,6 +13,112 @@
   color: var(--fg);
 }
 
+/* ————— topbar utility (solo desktop) ————— */
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  height: var(--topbar-h);
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 var(--pad);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fg-2);
+  border-bottom: 1px solid color-mix(in srgb, var(--line) 60%, transparent);
+  overflow: hidden;
+}
+
+.dark .topbar {
+  color: var(--osso-60);
+  border-bottom-color: var(--osso-16);
+}
+
+/* centro: marquee infinito con sfumatura ai bordi */
+.topMid {
+  flex: 1;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+}
+
+.topTrack {
+  display: flex;
+  width: max-content;
+  animation: topScroll 26s linear infinite;
+}
+
+.topGroup {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  padding-right: 48px;
+  white-space: nowrap;
+}
+
+.topPair {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+}
+
+@keyframes topScroll {
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.topClose {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  color: inherit;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.topClose:hover {
+  opacity: 1;
+}
+
+.topCta {
+  color: var(--azzurro);
+  transition: color 0.2s;
+}
+
+.topCta:hover {
+  color: var(--fg);
+}
+
+.dark .topCta:hover {
+  color: var(--osso);
+}
+
+.topRight a {
+  transition: color 0.2s;
+}
+
+.topRight a:hover {
+  color: var(--fg);
+}
+
+.dark .topRight a:hover {
+  color: var(--osso);
+}
+
+@media (max-width: 900px) {
+  .topbar {
+    display: none;
+  }
+}
+
 .inner {
   position: relative;
   z-index: 2;
@@ -73,7 +179,7 @@
    il pannello è quindi full-bleed sotto la barra */
 .panel {
   position: fixed;
-  top: var(--nav-h);
+  top: 100%; /* fondo dell'header, topbar inclusa */
   left: 0;
   right: 0;
   background: var(--bg);

@@ -49,6 +49,15 @@ export type NavProps = {
   menuLabel?: string;
   /** aria-label dello switcher lingua (da dizionario; default 'lingua') */
   langLabel?: string;
+  /** strip utility sopra la barra (desktop): sinistra · centro+cta · contatti */
+  topbar?: {
+    left: string;
+    middle: string;
+    cta: string;
+    ctaHref: string;
+    phone?: string;
+    email?: string;
+  };
 };
 
 export function Nav({
@@ -62,10 +71,30 @@ export function Nav({
   dark = false,
   menuLabel = 'menu',
   langLabel = 'lingua',
+  topbar,
 }: NavProps) {
   const [open, setOpen] = useState(false);
+  const [topOpen, setTopOpen] = useState(true);
   const overlayId = useId();
   const close = useCallback(() => setOpen(false), []);
+
+  // topbar chiusa: resta chiusa per la sessione, e l'header si accorcia
+  useEffect(() => {
+    if (sessionStorage.getItem('topbar') === 'closed') {
+      setTopOpen(false);
+      document.documentElement.style.setProperty('--topbar-h', '0px');
+    }
+  }, []);
+
+  const closeTopbar = useCallback(() => {
+    setTopOpen(false);
+    document.documentElement.style.setProperty('--topbar-h', '0px');
+    try {
+      sessionStorage.setItem('topbar', 'closed');
+    } catch {
+      /* niente storage: vale solo per la pagina */
+    }
+  }, []);
 
   useEffect(() => {
     if (!open) return;
@@ -128,6 +157,53 @@ export function Nav({
 
   return (
     <header className={rootClass}>
+      {topbar && topOpen && (
+        <div className={styles.topbar}>
+          <span className={styles.topLeft}>{topbar.left}</span>
+          {/* marquee infinito al centro: due gruppi identici, loop -50% */}
+          <span className={styles.topMid} aria-label={topbar.middle}>
+            <span className={styles.topTrack}>
+              {[0, 1].map((copy) => (
+                <span
+                  key={copy}
+                  className={styles.topGroup}
+                  aria-hidden={copy === 1 ? 'true' : undefined}
+                >
+                  {[0, 1, 2].map((i) => (
+                    <span key={i} className={styles.topPair}>
+                      {topbar.middle}
+                      <a
+                        href={topbar.ctaHref}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={styles.topCta}
+                        tabIndex={copy === 1 || i > 0 ? -1 : undefined}
+                      >
+                        {topbar.cta} <span aria-hidden="true">→</span>
+                      </a>
+                    </span>
+                  ))}
+                </span>
+              ))}
+            </span>
+          </span>
+          <span className={styles.topRight}>
+            {topbar.phone && <a href={`tel:${topbar.phone.replace(/\s/g, '')}`}>{topbar.phone}</a>}
+            {topbar.phone && topbar.email && <span aria-hidden="true"> · </span>}
+            {topbar.email && <a href={`mailto:${topbar.email}`}>{topbar.email}</a>}
+          </span>
+          <button
+            type="button"
+            className={styles.topClose}
+            aria-label="chiudi"
+            onClick={closeTopbar}
+          >
+            <svg viewBox="0 0 10 10" width="10" height="10" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" aria-hidden="true">
+              <path d="M1 1l8 8M9 1l-8 8" />
+            </svg>
+          </button>
+        </div>
+      )}
       <div className={styles.inner}>
         <Link href={homeHref} onClick={close} className={styles.brand}>
           <Wordmark />

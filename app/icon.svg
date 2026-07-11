@@ -1,10 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <style>
-    circle { fill: #111111; }
-    @media (prefers-color-scheme: dark) {
-      circle { fill: #ffffff; }
-    }
-  </style>
-  <circle cx="16" cy="9.5" r="5" />
-  <circle cx="16" cy="22.5" r="5" />
+  <!-- due pallini in verticale — azzurro brand (--azzurro #4FA8DF) -->
+  <circle cx="16" cy="9.5" r="5" fill="#4FA8DF" />
+  <circle cx="16" cy="22.5" r="5" fill="#4FA8DF" />
 </svg>
