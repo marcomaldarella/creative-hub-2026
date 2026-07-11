@@ -8,7 +8,9 @@
    e detta l'altezza della riga */
 .grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  /* minmax(0,1fr): senza, il minimo intrinseco della foto quadrata
+     spinge la sua colonna oltre il 50% */
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 /* allineato al .wrap: padding che assorbe lo spazio oltre --max */
