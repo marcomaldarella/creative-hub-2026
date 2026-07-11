@@ -133,7 +133,7 @@ export default async function AcademyPage({
                     className={`rv ${styles.course}`}
                     style={{ '--rvd': `${(i % 3) * 60}ms` } as CSSProperties}
                   >
-                    <Thumb image={course.coverImage} index={i} />
+                    <Thumb image={course.coverImage} index={i} ratio="3 / 4" />
                     <div className={styles.courseBody}>
                       <span className={`mono ${styles.courseKicker}`}>
                         {l(course.category?.title, locale)?.toLowerCase()}
