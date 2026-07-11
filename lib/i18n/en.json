@@ -215,7 +215,21 @@
     },
     "opendayFrameA": "inspire, innovate, excel.",
     "opendayFrameB": "bologna · creative hub",
-    "manifestoNeg": "We are not a school. We are not a studio. We are not a coworking."
+    "manifestoNeg": "We are not a school.\nWe are not a studio.\nWe are not a coworking.",
+    "bento": [
+      {
+        "title": "Training courses",
+        "text": "University degrees, masters, funded and custom courses: the path that turns passion into profession."
+      },
+      {
+        "title": "Recording & production",
+        "text": "SSL XL Desk control room, live room, Dolby Atmos: the studio where the industry works."
+      },
+      {
+        "title": "Workspaces",
+        "text": "Coworking, meeting rooms and events in the heart of the Roveri district."
+      }
+    ]
   },
   "academy": {
     "kicker": "academy",

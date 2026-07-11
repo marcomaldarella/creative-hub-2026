@@ -30,8 +30,8 @@
   --panel: #1F3D4A;     /* superfici brand grandi (sezioni scure, nav dark, overlay) */
 
   /* layout */
-  --max: 1680px;
-  --pad: clamp(20px, 3vw, 48px);
+  --max: 100%;                      /* full-bleed alla studio dumbar */
+  --pad: clamp(16px, 1.4vw, 26px);  /* gutter stretti e costanti */
   --nav-h: 64px;
   --topbar-h: 34px;
   --header-h: calc(var(--nav-h) + var(--topbar-h));

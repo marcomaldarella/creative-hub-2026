@@ -6,7 +6,6 @@ import {
   CounterRow,
   Marquee,
   PartnerMark,
-  NodeGrid,
   Reveal,
   RevealGroup,
   Rule,
@@ -15,6 +14,7 @@ import {
 import { SiteChrome, shopHref } from '@/components/sections/SiteChrome'
 import { HeroOrb } from '@/components/sections/HeroOrb'
 import { StudioFocus } from '@/components/sections/StudioFocus'
+import { EcosystemBento } from '@/components/sections/EcosystemBento'
 import { ArticleCard } from '@/components/magazine/ArticleCard'
 import { isLocale, localeHref, type Locale } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
@@ -56,19 +56,6 @@ export default async function HomePage({
   const home = await getHomeData()
   const { settings, latestArticles, partners } = home
 
-  const nodes = [
-    { key: 'academy', label: t.nav.academy, href: '/academy', ...t.home.nodes.academy },
-    { key: 'studio', label: t.nav.studio, href: '/studios', ...t.home.nodes.studio },
-    { key: 'coworking', label: t.nav.coworking, href: '/coworking', ...t.home.nodes.coworking },
-    { key: 'innovation', label: t.nav.innovation, href: '/innovazione', ...t.home.nodes.innovation },
-    { key: 'magazine', label: t.nav.magazine, href: '/magazine', ...t.home.nodes.magazine },
-    { key: 'about', label: t.nav.about, href: '/chi-siamo', ...t.home.nodes.about },
-  ].map((n) => ({
-    label: n.label,
-    title: n.title,
-    text: n.text,
-    href: localeHref(locale, n.href),
-  }))
 
   const stats = [
     t.home.stats.students,
@@ -160,7 +147,14 @@ export default async function HomePage({
               kicker={t.home.ecosystemKicker}
               title={t.home.ecosystemTitle}
             />
-            <NodeGrid nodes={nodes} />
+            <EcosystemBento
+              items={t.home.bento}
+              hrefs={[
+                localeHref(locale, '/academy'),
+                localeHref(locale, '/studios'),
+                localeHref(locale, '/coworking'),
+              ]}
+            />
           </div>
         </section>
 

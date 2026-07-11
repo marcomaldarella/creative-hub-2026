@@ -184,7 +184,7 @@
   display: grid;
   grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
   gap: clamp(28px, 5vw, 80px);
-  align-items: end;
+  align-items: start; /* contenitori testo allineati in alto */
 }
 
 @media (max-width: 860px) {
@@ -199,7 +199,7 @@
   line-height: 1.12;
   letter-spacing: -0.02em;
   font-weight: 500;
-  max-width: 18ch;
+  white-space: pre-line; /* una negazione per riga */
 }
 
 .manifesto {

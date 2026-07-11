@@ -215,7 +215,21 @@
     },
     "opendayFrameA": "inspire, innovate, excel.",
     "opendayFrameB": "bologna · creative hub",
-    "manifestoNeg": "Non siamo una scuola. Non siamo uno studio. Non siamo un coworking."
+    "manifestoNeg": "Non siamo una scuola.\nNon siamo uno studio.\nNon siamo un coworking.",
+    "bento": [
+      {
+        "title": "Corsi di formazione",
+        "text": "Università, master, corsi finanziati e custom: il percorso che trasforma la passione in professione."
+      },
+      {
+        "title": "Registrazione e produzione",
+        "text": "Regia SSL XL Desk, sala live, Dolby Atmos: lo studio dove lavora l’industria."
+      },
+      {
+        "title": "Spazi di lavoro",
+        "text": "Coworking, sale riunioni ed eventi nel cuore della zona Roveri."
+      }
+    ]
   },
   "academy": {
     "kicker": "academy",

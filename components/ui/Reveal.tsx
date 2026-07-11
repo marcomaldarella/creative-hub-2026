@@ -22,6 +22,13 @@ export function useRevealOnce<T extends HTMLElement>(
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    // fail-open: se al mount siamo già in viewport (es. atterraggio su
+    // un'ancora prima dell'hydration), rivela subito senza observer
+    const r = el.getBoundingClientRect();
+    if (r.top < window.innerHeight && r.bottom > 0) {
+      el.classList.add('in');
+      return;
+    }
     const io = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
@@ -107,6 +114,11 @@ export function RevealGroup({
     if (!root) return;
     const targets = root.querySelectorAll('.rv');
     if (targets.length === 0) return;
+    // fail-open come in useRevealOnce: già visibile → rivela subito
+    targets.forEach((t) => {
+      const r = t.getBoundingClientRect();
+      if (r.top < window.innerHeight && r.bottom > 0) t.classList.add('in');
+    });
     const io = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {

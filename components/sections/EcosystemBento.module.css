@@ -1,0 +1,97 @@
+/* bento 2×2: la card grande occupa la colonna sinistra su due righe */
+.bento {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.big,
+.side {
+  background: var(--surface);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition:
+    background 0.25s ease,
+    opacity var(--dur-slow) ease var(--rvd, 0s),
+    transform var(--dur-slow) var(--ease-out) var(--rvd, 0s);
+}
+
+.big:hover,
+.side:hover {
+  background: color-mix(in srgb, var(--surface) 92%, var(--fg) 8%);
+}
+
+.big {
+  grid-row: span 2;
+  display: flex;
+  flex-direction: column;
+  min-height: 620px;
+}
+
+.bigMedia {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+}
+
+.bigFoot {
+  padding: 26px 28px 30px;
+}
+
+/* card orizzontale: testo in basso a sinistra, media a filo a destra */
+.side {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  min-height: 300px;
+}
+
+.sideBody {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 26px 24px 30px 28px;
+}
+
+.sideMedia {
+  position: relative;
+}
+
+.img {
+  object-fit: cover;
+  transition: transform 0.6s var(--ease-out);
+}
+
+.big:hover .img,
+.side:hover .img {
+  transform: scale(1.03);
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin-bottom: 8px;
+}
+
+.text {
+  font-size: var(--fs-small);
+  color: var(--fg-2);
+  max-width: 34ch;
+}
+
+@media (max-width: 900px) {
+  .bento {
+    grid-template-columns: 1fr;
+    grid-template-rows: none;
+  }
+
+  .big {
+    grid-row: auto;
+    min-height: 420px;
+  }
+
+  .side {
+    min-height: 240px;
+  }
+}
