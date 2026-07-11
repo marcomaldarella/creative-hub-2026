@@ -28,12 +28,13 @@ const fat = localFont({
   display: 'swap',
 })
 
-// Helvetica Now Text (dal Font Book dell'utente) — display svizzero.
+// Helvetica Neue (estratta dal .ttc dell'utente) — display svizzero.
 // NB: per il go-live su dominio pubblico serve la licenza web Monotype
 const swiss = localFont({
   src: [
-    { path: '../../fonts/HelveticaNowText-Medium.ttf', weight: '500' },
-    { path: '../../fonts/HelveticaNowText-Bold.ttf', weight: '700' },
+    { path: '../../fonts/HelveticaNeue-Regular.woff2', weight: '400' },
+    { path: '../../fonts/HelveticaNeue-Medium.woff2', weight: '500' },
+    { path: '../../fonts/HelveticaNeue-Bold.woff2', weight: '700' },
   ],
   variable: '--font-swiss',
   display: 'swap',
