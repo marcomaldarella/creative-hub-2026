@@ -141,7 +141,7 @@ export default async function HomePage({
 
         {/* ————— manifesto ————— */}
         <section className={styles.sez} id="manifesto">
-          <div className="wrap">
+          <div className={`wrap ${styles.manifestoGrid}`}>
             <Reveal as="h2" className={styles.manifestoNeg}>
               {t.home.manifestoNeg}
             </Reveal>
