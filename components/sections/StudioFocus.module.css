@@ -4,10 +4,11 @@
   overflow: hidden;
 }
 
+/* due colonne identiche; la cella immagine è un quadrato perfetto
+   e detta l'altezza della riga */
 .grid {
   display: grid;
-  grid-template-columns: minmax(380px, 5fr) 7fr;
-  min-height: min(88vh, 900px);
+  grid-template-columns: 1fr 1fr;
 }
 
 /* allineato al .wrap: padding che assorbe lo spazio oltre --max */
@@ -120,7 +121,7 @@
 
 .media {
   position: relative;
-  min-height: 420px;
+  aspect-ratio: 1 / 1;
 }
 
 .img {
@@ -153,6 +154,6 @@
   }
 
   .media {
-    min-height: 72vw;
+    aspect-ratio: 1 / 1;
   }
 }
