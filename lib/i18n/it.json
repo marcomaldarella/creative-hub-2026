@@ -305,7 +305,10 @@
     "legal": "privacy · cookie · trasparenza",
     "privacy": "privacy",
     "cookie": "cookie",
-    "transparency": "trasparenza"
+    "transparency": "trasparenza",
+    "colHub": "hub",
+    "colEco": "ecosistema",
+    "colSocial": "social"
   },
   "magazine": {
     "kicker": "magazine",

@@ -164,10 +164,11 @@ export async function SiteChrome({
       <Footer
         contactLines={contactLines}
         groups={[
-          { links: items.slice(0, 3) },
-          { links: items.slice(3) },
+          { title: t.footer.colHub, links: items.slice(0, 3) },
+          { title: t.footer.colEco, links: items.slice(3) },
         ]}
         social={social}
+        socialTitle={t.footer.colSocial}
         copyright={t.footer.copyright}
         legal={[
           { label: t.footer.privacy, href: '#' },

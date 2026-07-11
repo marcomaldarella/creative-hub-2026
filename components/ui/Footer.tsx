@@ -16,6 +16,8 @@ export type FooterGroup = {
 };
 
 export type FooterProps = {
+  /** intestazione della colonna social */
+  socialTitle?: string;
   /** righe indirizzo/contatti sotto il wordmark */
   contactLines?: string[];
   /** colonne di link */
@@ -44,6 +46,7 @@ export function Footer({
   contactLines,
   groups,
   social,
+  socialTitle,
   copyright,
   legal,
   homeHref = '/',
@@ -84,6 +87,9 @@ export function Footer({
 
           {social && social.length > 0 && (
             <div className={styles.col}>
+              {socialTitle && (
+                <span className={styles.colTitle}>{socialTitle}</span>
+              )}
               {social.map((link) => (
                 <FootLink key={`${link.href}-${link.label}`} link={link} />
               ))}

@@ -5,11 +5,23 @@
   overflow: hidden;
 }
 
+/* griglia alla vercel: brand largo + colonne uguali allineate a sinistra */
 .cols {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 48px;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: minmax(260px, 1.6fr) repeat(3, minmax(150px, 1fr));
+  gap: 40px clamp(32px, 4vw, 80px);
+}
+
+@media (max-width: 900px) {
+  .cols {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 540px) {
+  .cols {
+    grid-template-columns: 1fr;
+  }
 }
 
 .brand {
@@ -26,7 +38,8 @@
 .col {
   display: flex;
   flex-direction: column;
-  line-height: 2;
+  gap: 2px;
+  line-height: 2.1;
   font-size: var(--fs-small);
   color: var(--fg-2);
 }
@@ -41,6 +54,7 @@
 
 .colTitle {
   color: var(--fg);
+  margin-bottom: 10px;
 }
 
 .bottom {
@@ -92,8 +106,8 @@
 .giantTrack {
   display: flex;
   width: max-content;
-  animation: giantScroll 52s linear infinite;
-  will-change: transform;
+  animation: giantScroll 60s linear infinite;
+  backface-visibility: hidden;
 }
 
 /* padding-right = gap: il loop -50% resta seamless */
@@ -102,7 +116,10 @@
 }
 
 @keyframes giantScroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
   to {
-    transform: translateX(-50%);
+    transform: translate3d(-50%, 0, 0);
   }
 }
