@@ -23,13 +23,13 @@
         ]
       },
       "studio": {
-        "desc": "Recording studio SSL. Mix, master e produzione.",
+        "desc": "Regia SSL XL Desk da 55 m², sala live, ISO box e tre cabine B-Ear.",
         "items": [
           "Registrazione",
-          "Remote recording",
-          "Audio per video & cinema",
-          "Dolby Atmos",
           "Mix & mastering",
+          "Dolby Atmos",
+          "Sound design",
+          "Podcast & voice over",
           "Affitto studio"
         ]
       },
@@ -196,16 +196,16 @@
       "eyebrow": "§ 06 — focus / studio",
       "titleA": "uno studio",
       "titleB": "SSL",
-      "desc": "Una delle poche console SSL d'Italia, sala Dolby Atmos certificata e una squadra di ingegneri del suono che lavora ogni giorno con etichette, broadcaster e produttori indipendenti.",
+      "desc": "Regia da 55 m² con console SSL XL Desk — una delle poche in Italia — sala live, ISO box per voci e ampli e tre cabine B-Ear. Ingegneri del suono che lavorano ogni giorno con etichette, broadcaster e produttori indipendenti.",
       "services": [
         "recording · live tracking",
         "mix & mastering",
-        "dolby atmos · 7.1.4",
-        "remote recording",
-        "audio per cinema & video"
+        "dolby atmos",
+        "sound design & gaming",
+        "podcast & voice over"
       ],
       "cta": "entra in studio",
-      "captionLeft": "recording / ssl room a",
+      "captionLeft": "regia ssl xl desk · 55 m²",
       "captionRight": "— 06 / studio"
     },
     "opendayFrameA": "inspire, innovate, excel.",
@@ -300,7 +300,7 @@
     "contactsText": "Siamo in zona fiera, a dieci minuti dal centro. La porta d'ingresso è l'open day."
   },
   "footer": {
-    "address": "via del tappezziere, 4 — bologna",
+    "address": "via del Tappezziere 4, 40138 Bologna",
     "copyright": "© 2026 creative hub — since 1999",
     "legal": "privacy · cookie · trasparenza",
     "privacy": "privacy",

@@ -62,10 +62,10 @@ export async function SiteChrome({
       base: '/studios',
       anchors: [
         'registrazione',
-        'remote-recording',
-        'audio-video-cinema',
-        'dolby-atmos',
         'mix-mastering',
+        'dolby-atmos',
+        'sound-design',
+        'podcast',
         'affitto-studio',
       ],
     },
