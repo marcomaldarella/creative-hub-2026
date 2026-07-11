@@ -71,8 +71,11 @@ export function StudioFocus({
                 className={styles.service}
                 delay={280 + i * 70}
               >
-                <span className={styles.dash} aria-hidden="true" />
-                {service}
+                <span className={styles.serviceLabel}>{service}</span>
+                <span className={styles.serviceFill} aria-hidden="true" />
+                <span className={`mono ${styles.serviceN}`}>
+                  0{i + 1}
+                </span>
               </Reveal>
             ))}
           </ul>
