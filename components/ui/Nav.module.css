@@ -175,11 +175,10 @@
 
 /* ————— mega-menu (desktop) ————— */
 
-/* position:fixed ma il containing block è .nav (backdrop-filter):
-   il pannello è quindi full-bleed sotto la barra */
+/* fixed sul viewport: --header-h segue topbar aperta/chiusa e mobile */
 .panel {
   position: fixed;
-  top: 100%; /* fondo dell'header, topbar inclusa */
+  top: var(--header-h);
   left: 0;
   right: 0;
   background: var(--bg);
