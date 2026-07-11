@@ -13,7 +13,6 @@
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
-/* allineato al .wrap: padding che assorbe lo spazio oltre --max */
 .content {
   display: flex;
   flex-direction: column;
@@ -21,7 +20,7 @@
   justify-content: center;
   gap: 0;
   padding: clamp(64px, 9vw, 120px) clamp(28px, 4vw, 72px);
-  padding-left: max(var(--pad), calc((100vw - var(--max)) / 2 + var(--pad)));
+  padding-left: max(var(--pad), 3vw);
 }
 
 .eyebrow {
