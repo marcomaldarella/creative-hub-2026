@@ -14,17 +14,17 @@
   overflow: hidden;
   position: relative;
   color: var(--ghiaccio);
-  /* gradiente che raccorda i bordi dell'immagine orb (teal profondo) */
+  /* light: la palette azzurra delle CTA (mood cover "Tips and Tools") */
+  background:
+    radial-gradient(90% 70% at 50% 42%, #6FBAE8 0%, transparent 60%),
+    linear-gradient(150deg, #5FB0E2 0%, #4FA8DF 48%, #2E7FB5 100%);
+}
+
+/* dark: il petrolio profondo resta qui */
+:global([data-theme='dark']) .hero {
   background:
     radial-gradient(90% 70% at 50% 42%, #12333c 0%, transparent 60%),
     linear-gradient(150deg, #0f272e 0%, #0a1c22 48%, #061318 100%);
-}
-
-/* in dark l'hero perde la tinta petrolio: neutro quasi-nero */
-:global([data-theme='dark']) .hero {
-  background:
-    radial-gradient(90% 70% at 50% 42%, #191919 0%, transparent 60%),
-    linear-gradient(150deg, #121212 0%, #0a0a0a 48%, #040404 100%);
 }
 
 .heroAnnot {
