@@ -86,6 +86,7 @@
 html { scroll-behavior: smooth; }
 
 body {
+  overflow-x: clip; /* guard-rail: nessun elemento decorativo allarga la pagina */
   background: var(--bg);
   color: var(--fg);
   font-family: var(--font-body), system-ui, sans-serif;

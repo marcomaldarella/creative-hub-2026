@@ -79,14 +79,13 @@
   font-size: 2.3px;
   letter-spacing: 0.28em;
   text-transform: uppercase;
-  fill: color-mix(in srgb, var(--ghiaccio) 62%, transparent);
+  fill: var(--ghiaccio); /* opaco: le sovrapposizioni dei trattini non si vedono */
 }
 
 /* tracking negativo: gli em-dash si sovrappongono e fondono in
    una linea continua senza micro-stacchi */
 .ringDash {
   letter-spacing: -0.15em;
-  fill: color-mix(in srgb, var(--ghiaccio) 38%, transparent);
 }
 
 @keyframes ringSpin {

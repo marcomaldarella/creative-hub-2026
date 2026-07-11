@@ -107,7 +107,7 @@ export async function SiteChrome({
       label: s.label,
       href: localeHref(locale, s.base),
       sub: {
-        eyebrow: `/${s.label}`,
+        eyebrow: `/${s.label.toLowerCase()}`,
         desc: sub.desc,
         explore: t.nav.explore,
         entries: sub.items.map((label, i) => {

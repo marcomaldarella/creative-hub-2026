@@ -44,9 +44,8 @@
   align-items: center;
   gap: 6px;
   height: 100%;
-  font-size: 13px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  font-size: 14px;
+  letter-spacing: 0.01em;
   color: var(--fg-2);
   transition: color 0.2s;
 }
@@ -153,8 +152,7 @@
   padding: 3px 0;
   font-size: 15px;
   font-weight: 500;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
+  letter-spacing: 0;
   color: var(--fg);
   transition: color 0.15s;
 }
