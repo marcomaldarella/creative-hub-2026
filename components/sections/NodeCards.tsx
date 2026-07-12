@@ -37,7 +37,7 @@ export function NodeCards({ cards, hrefs, className }: NodeCardsProps) {
             <span className={styles.n}>n° {card.n}</span>
             <span className={styles.tags}>{card.tags}</span>
           </div>
-          <h3 className={`display-black ${styles.title}`}>{card.title}</h3>
+          <h3 className={styles.title}>{card.title}</h3>
           <p className={styles.text}>{card.text}</p>
           <span className={styles.cta}>
             {card.cta} <span aria-hidden="true">→</span>

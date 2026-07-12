@@ -1,35 +1,33 @@
+/* nodi secondari: struttura della reference (n° + tag, titolo in basso,
+   cta) ma nel linguaggio card Vercel: superficie, radius, hover a contrasto */
 .row {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  border-top: 1px solid var(--line);
+  gap: 20px;
 }
 
 .card {
   display: flex;
   flex-direction: column;
-  min-height: clamp(380px, 36vw, 520px);
-  padding: 28px 32px 34px;
-  border-left: 1px solid var(--line);
+  min-height: 300px;
+  padding: 26px 28px 30px;
+  background: var(--surface);
+  border-radius: var(--radius);
   transition:
     background 0.25s ease,
     opacity var(--dur-slow) ease var(--rvd, 0s),
     transform var(--dur-slow) var(--ease-out) var(--rvd, 0s);
 }
 
-.card:first-child {
-  border-left: none;
-  padding-left: 0;
-}
-
 .card:hover {
-  background: color-mix(in srgb, var(--surface) 60%, transparent);
+  background: color-mix(in srgb, var(--surface) 92%, var(--fg) 8%);
 }
 
 .head {
   display: flex;
   justify-content: space-between;
   gap: 16px;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 
@@ -41,23 +39,24 @@
   color: var(--fg-2);
 }
 
-/* titolo gigante ancorato in basso */
+/* titolo come le altre card, ancorato in basso */
 .title {
   margin-top: auto;
-  font-size: clamp(38px, 3.6vw, 64px);
-  text-transform: uppercase;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
   color: var(--fg);
 }
 
 .text {
-  margin-top: 18px;
+  margin-top: 8px;
   font-size: var(--fs-small);
   color: var(--fg-2);
   max-width: 40ch;
 }
 
 .cta {
-  margin-top: 22px;
+  margin-top: 18px;
   font-size: var(--fs-small);
   font-weight: 500;
   color: var(--azzurro);
@@ -74,17 +73,6 @@
   }
 
   .card {
-    border-left: none;
-    border-top: 1px solid var(--line);
-    min-height: 0;
-    padding: 26px 0 34px;
-  }
-
-  .card:first-child {
-    border-top: none;
-  }
-
-  .title {
-    margin-top: 28px;
+    min-height: 200px;
   }
 }
