@@ -41,12 +41,52 @@ const swiss = localFont({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://bologna-creativehub.it'),
   title: {
     default: 'creative hub — bologna',
     template: '%s — creative hub',
   },
   description:
     "International college of music, sound, multimedia & visual. L'infrastruttura che trasforma suono, immagine e codice in professione. Bologna, dal 1999.",
+  openGraph: {
+    type: 'website',
+    siteName: 'creative hub — bologna',
+    images: [{ url: '/og.png', width: 1200, height: 630 }],
+    locale: 'it_IT',
+    alternateLocale: 'en_GB',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    images: ['/og.png'],
+  },
+  alternates: {
+    canonical: '/',
+    languages: { it: '/', en: '/en' },
+  },
+}
+
+// JSON-LD Organization (dati reali del sito live)
+const ORG_JSONLD = {
+  '@context': 'https://schema.org',
+  '@type': 'EducationalOrganization',
+  name: 'Creative Hub Bologna',
+  url: 'https://bologna-creativehub.it',
+  email: 'hello@bologna-creativehub.it',
+  telephone: '+39 051 6313706',
+  foundingDate: '1999',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'via del Tappezziere 4',
+    postalCode: '40138',
+    addressLocality: 'Bologna',
+    addressCountry: 'IT',
+  },
+  sameAs: [
+    'https://www.instagram.com/creative.hub.bologna/',
+    'https://www.facebook.com/Bolognacreativehub',
+    'https://www.linkedin.com/company/75527577/',
+    'https://www.youtube.com/channel/UC7m00ZO8tAk5VV1GTP1alrA',
+  ],
 }
 
 export function generateStaticParams() {
@@ -80,6 +120,10 @@ export default async function SiteLayout({
             __html:
               "(function(){try{var t=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.dataset.theme=t}catch(e){}})()",
           }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(ORG_JSONLD) }}
         />
         {children}
       </body>
