@@ -3,7 +3,6 @@ import {
   ArrowLink,
   Button,
   Counter,
-  NodeGrid,
   CounterRow,
   Marquee,
   PartnerMark,
@@ -16,6 +15,7 @@ import { SiteChrome, shopHref } from '@/components/sections/SiteChrome'
 import { HeroOrb } from '@/components/sections/HeroOrb'
 import { StudioFocus } from '@/components/sections/StudioFocus'
 import { EcosystemBento } from '@/components/sections/EcosystemBento'
+import { NodeCards } from '@/components/sections/NodeCards'
 import { ArticleCard } from '@/components/magazine/ArticleCard'
 import { isLocale, localeHref, type Locale } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
@@ -156,12 +156,13 @@ export default async function HomePage({
                 localeHref(locale, '/coworking'),
               ]}
             />
-            <NodeGrid
+            <NodeCards
               className={styles.minorNodes}
-              nodes={[
-                { label: t.nav.innovation, ...t.home.nodes.innovation, href: localeHref(locale, '/innovazione') },
-                { label: t.nav.magazine, ...t.home.nodes.magazine, href: localeHref(locale, '/magazine') },
-                { label: t.nav.about, ...t.home.nodes.about, href: localeHref(locale, '/chi-siamo') },
+              cards={t.home.nodeCards}
+              hrefs={[
+                localeHref(locale, '/innovazione'),
+                localeHref(locale, '/magazine'),
+                localeHref(locale, '/chi-siamo'),
               ]}
             />
           </div>

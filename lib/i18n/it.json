@@ -229,6 +229,29 @@
         "title": "Spazi di lavoro",
         "text": "Coworking, sale riunioni ed eventi nel cuore della zona Roveri."
       }
+    ],
+    "nodeCards": [
+      {
+        "n": "04",
+        "tags": "b2b · startup",
+        "title": "Innovazione",
+        "text": "Programmi di incubazione e accelerazione per startup e servizi B2B per aziende creative.",
+        "cta": "Entra nel nodo"
+      },
+      {
+        "n": "05",
+        "tags": "editoriale · seo",
+        "title": "Editorial",
+        "text": "Storie, ricerca e SEO sull'industria creativa: motore editoriale che alimenta l'intero hub.",
+        "cta": "Entra nel nodo"
+      },
+      {
+        "n": "06",
+        "tags": "ecosistema · team",
+        "title": "Chi siamo",
+        "text": "L'ecosistema, il team, la governance e i partner che rendono Creative Hub possibile.",
+        "cta": "Entra nel nodo"
+      }
     ]
   },
   "academy": {

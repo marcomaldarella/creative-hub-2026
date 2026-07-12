@@ -229,6 +229,29 @@
         "title": "Workspaces",
         "text": "Coworking, meeting rooms and events in the heart of the Roveri district."
       }
+    ],
+    "nodeCards": [
+      {
+        "n": "04",
+        "tags": "b2b · startups",
+        "title": "Innovation",
+        "text": "Incubation and acceleration programmes for startups, plus B2B services for creative companies.",
+        "cta": "Enter the node"
+      },
+      {
+        "n": "05",
+        "tags": "editorial · seo",
+        "title": "Editorial",
+        "text": "Stories, research and SEO on the creative industry: the editorial engine that feeds the whole hub.",
+        "cta": "Enter the node"
+      },
+      {
+        "n": "06",
+        "tags": "ecosystem · team",
+        "title": "About",
+        "text": "The ecosystem, the team, the governance and the partners that make Creative Hub possible.",
+        "cta": "Enter the node"
+      }
     ]
   },
   "academy": {
