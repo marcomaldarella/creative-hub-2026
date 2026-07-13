@@ -36,7 +36,13 @@
 }
 
 .bigFoot {
-  padding: 26px 28px 30px;
+  display: flex;
+  flex-direction: column;
+  padding: 22px 28px 30px;
+}
+
+.bigFoot .title {
+  margin-top: 16px;
 }
 
 /* card orizzontale: testo in basso a sinistra, media a filo a destra */
@@ -49,8 +55,24 @@
 .sideBody {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
   padding: 26px 24px 30px 28px;
+}
+
+/* eyebrow: numero azzurro + tag caps, come i nodi 04-06 */
+.head {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.n {
+  color: var(--azzurro);
+}
+
+.tags {
+  color: var(--fg-2);
 }
 
 .sideMedia {
@@ -65,6 +87,11 @@
 .big:hover .img,
 .side:hover .img {
   transform: scale(1.03);
+}
+
+.sideBody .title {
+  margin-top: auto;
+  padding-top: 16px;
 }
 
 .title {

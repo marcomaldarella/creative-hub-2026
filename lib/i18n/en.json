@@ -219,15 +219,21 @@
     "bento": [
       {
         "title": "Training courses",
-        "text": "University degrees, masters, funded and custom courses: the path that turns passion into profession."
+        "text": "University degrees, masters, funded and custom courses: the path that turns passion into profession.",
+        "n": "01",
+        "tags": "university · masters"
       },
       {
         "title": "Recording & production",
-        "text": "SSL XL Desk control room, live room, Dolby Atmos: the studio where the industry works."
+        "text": "SSL XL Desk control room, live room, Dolby Atmos: the studio where the industry works.",
+        "n": "02",
+        "tags": "ssl · dolby atmos"
       },
       {
         "title": "Workspaces",
-        "text": "Coworking, meeting rooms and events in the heart of the Roveri district."
+        "text": "Coworking, meeting rooms and events in the heart of the Roveri district.",
+        "n": "03",
+        "tags": "coworking · events"
       }
     ],
     "nodeCards": [

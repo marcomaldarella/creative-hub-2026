@@ -219,15 +219,21 @@
     "bento": [
       {
         "title": "Corsi di formazione",
-        "text": "Università, master, corsi finanziati e custom: il percorso che trasforma la passione in professione."
+        "text": "Università, master, corsi finanziati e custom: il percorso che trasforma la passione in professione.",
+        "n": "01",
+        "tags": "università · master"
       },
       {
         "title": "Registrazione e produzione",
-        "text": "Regia SSL XL Desk, sala live, Dolby Atmos: lo studio dove lavora l’industria."
+        "text": "Regia SSL XL Desk, sala live, Dolby Atmos: lo studio dove lavora l’industria.",
+        "n": "02",
+        "tags": "ssl · dolby atmos"
       },
       {
         "title": "Spazi di lavoro",
-        "text": "Coworking, sale riunioni ed eventi nel cuore della zona Roveri."
+        "text": "Coworking, sale riunioni ed eventi nel cuore della zona Roveri.",
+        "n": "03",
+        "tags": "coworking · eventi"
       }
     ],
     "nodeCards": [

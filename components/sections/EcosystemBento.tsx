@@ -9,6 +9,8 @@ import styles from './EcosystemBento.module.css'
 export type BentoItem = {
   title: string
   text: string
+  n?: string
+  tags?: string
 }
 
 export type EcosystemBentoProps = {
@@ -40,6 +42,10 @@ export function EcosystemBento({ items, hrefs }: EcosystemBentoProps) {
           />
         </div>
         <div className={styles.bigFoot}>
+          <div className={`mono ${styles.head}`}>
+            <span className={styles.n}>n° {big.n}</span>
+            <span className={styles.tags}>{big.tags}</span>
+          </div>
           <h3 className={styles.title}>{big.title}</h3>
           <p className={styles.text}>{big.text}</p>
         </div>
@@ -53,6 +59,10 @@ export function EcosystemBento({ items, hrefs }: EcosystemBentoProps) {
           style={{ transitionDelay: `${(i + 1) * 90}ms` }}
         >
           <div className={styles.sideBody}>
+            <div className={`mono ${styles.head}`}>
+              <span className={styles.n}>n° {item.n}</span>
+              <span className={styles.tags}>{item.tags}</span>
+            </div>
             <h3 className={styles.title}>{item.title}</h3>
             <p className={styles.text}>{item.text}</p>
           </div>

@@ -179,12 +179,23 @@
 
 /* ————— manifesto ————— */
 
-/* negazioni e continuazione affiancate, allineate in basso */
+/* due colonne ravvicinate, titoletti caps e linea separatrice */
 .manifestoGrid {
   display: grid;
-  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
-  gap: clamp(28px, 5vw, 80px);
-  align-items: start; /* contenitori testo allineati in alto */
+  grid-template-columns: minmax(0, 56ch) minmax(0, 44ch);
+  justify-content: start;
+  gap: clamp(24px, 3.5vw, 56px);
+  align-items: start;
+  border-top: 1px solid var(--line);
+  padding-top: clamp(20px, 2.5vw, 32px);
+}
+
+.manifestoLabel {
+  display: block;
+  margin-bottom: 18px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--azzurro);
 }
 
 @media (max-width: 860px) {
@@ -356,6 +367,8 @@
 .opendayIn {
   position: relative;
   z-index: 2;
+  padding-left: clamp(44px, 4vw, 72px);
+  padding-right: clamp(44px, 4vw, 72px);
   display: flex;
   flex-wrap: wrap;
   align-items: center;

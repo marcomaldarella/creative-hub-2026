@@ -130,14 +130,24 @@ export default async function HomePage({
         {/* ————— manifesto ————— */}
         <section className={styles.sez} id="manifesto">
           <div className={`wrap ${styles.manifestoGrid}`}>
-            <Reveal as="h2" className={styles.manifestoNeg}>
-              {t.home.manifestoNeg}
-            </Reveal>
-            <Reveal as="p" className={styles.manifesto} delay={140}>
+            <div>
+              <Reveal as="span" className={`mono ${styles.manifestoLabel}`}>
+                {t.home.manifestoRuleLeft}
+              </Reveal>
+              <Reveal as="h2" className={styles.manifestoNeg} delay={60}>
+                {t.home.manifestoNeg}
+              </Reveal>
+            </div>
+            <div>
+              <Reveal as="span" className={`mono ${styles.manifestoLabel}`} delay={80}>
+                {t.home.manifestoRuleRight}
+              </Reveal>
+              <Reveal as="p" className={styles.manifesto} delay={140}>
               {t.home.manifestoPre}
               <b>{t.home.manifestoBold}</b>
               {t.home.manifestoPost}
-            </Reveal>
+              </Reveal>
+            </div>
           </div>
         </section>
 
