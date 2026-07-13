@@ -1,0 +1,35 @@
+.main {
+  padding-top: calc(var(--header-h) + clamp(40px, 6vw, 80px));
+  padding-bottom: var(--sez);
+  max-width: 860px;
+}
+
+.updated {
+  display: block;
+  margin-bottom: 14px;
+}
+
+.title {
+  font-size: clamp(38px, 5vw, 72px);
+  margin-bottom: clamp(28px, 4vw, 48px);
+}
+
+.sez {
+  border-top: 1px solid var(--line);
+  padding: 22px 0 8px;
+}
+
+.h {
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin-bottom: 10px;
+}
+
+.p {
+  font-size: var(--fs-small);
+  color: var(--fg-2);
+  line-height: 1.7;
+  margin-bottom: 12px;
+  max-width: 70ch;
+}

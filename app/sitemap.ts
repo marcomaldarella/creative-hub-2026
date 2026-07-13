@@ -11,6 +11,9 @@ const SECTIONS = [
   '/innovazione',
   '/magazine',
   '/chi-siamo',
+  '/privacy',
+  '/cookie',
+  '/trasparenza',
 ]
 
 /** sitemap IT (root) + EN (/en), con gli slug reali da Sanity */

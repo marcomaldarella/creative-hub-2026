@@ -179,9 +179,9 @@ export async function SiteChrome({
         socialTitle={t.footer.colSocial}
         copyright={t.footer.copyright}
         legal={[
-          { label: t.footer.privacy, href: '#' },
-          { label: t.footer.cookie, href: '#' },
-          { label: t.footer.transparency, href: '#' },
+          { label: t.footer.privacy, href: localeHref(locale, '/privacy') },
+          { label: t.footer.cookie, href: localeHref(locale, '/cookie') },
+          { label: t.footer.transparency, href: localeHref(locale, '/trasparenza') },
         ]}
         homeHref={localeHref(locale, '/')}
       />
