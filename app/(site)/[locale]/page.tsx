@@ -115,9 +115,9 @@ export default async function HomePage({
               ]}
             />
             <h1 className={`display-black ${styles.heroTitle}`}>
-              Creative
+              creative
               <br />
-              Hub
+              hub
             </h1>
           </div>
           <div className={styles.heroSub}>
