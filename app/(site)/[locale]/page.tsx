@@ -78,7 +78,7 @@ export default async function HomePage({
     <SiteChrome locale={locale} path="/" dark>
       <main>
         {/* ————— hero ————— */}
-        <header className={`${styles.hero} liquid`}>
+        <header className={styles.hero}>
           <div className={styles.heroAnnot}>
             <span className="mono">{t.hero.since}</span>
             <span className="mono">{t.hero.coords}</span>
@@ -106,11 +106,18 @@ export default async function HomePage({
                 </textPath>
               </text>
             </svg>
-            <HeroOrb className={styles.orb} />
+            <HeroOrb
+              className={styles.orb}
+              hrefs={[
+                localeHref(locale, '/academy'),
+                localeHref(locale, '/coworking'),
+                localeHref(locale, '/studios'),
+              ]}
+            />
             <h1 className={`display-black ${styles.heroTitle}`}>
-              CREATIVE
+              Creative
               <br />
-              HUB
+              Hub
             </h1>
           </div>
           <div className={styles.heroSub}>
@@ -127,25 +134,32 @@ export default async function HomePage({
 
         <Rule left={t.home.manifestoRuleLeft} right={t.home.manifestoRuleRight} />
 
-        {/* ————— manifesto ————— */}
+        {/* ————— manifesto: statement gigante + colonne al piede (ref endzeit) ————— */}
         <section className={styles.sez} id="manifesto">
-          <div className={`wrap ${styles.manifestoGrid}`}>
-            <div>
-              <Reveal as="span" className={`mono ${styles.manifestoLabel}`}>
-                {t.home.manifestoRuleLeft}
-              </Reveal>
-              <Reveal as="h2" className={styles.manifestoNeg} delay={60}>
-                {t.home.manifestoNeg}
-              </Reveal>
-            </div>
-            <div>
-              <Reveal as="span" className={`mono ${styles.manifestoLabel}`} delay={80}>
+          <div className={`wrap ${styles.manifestoWrap}`}>
+            <Reveal
+              as="h2"
+              className={`display-black ${styles.manifestoStatement}`}
+            >
+              {t.home.manifestoNeg}
+            </Reveal>
+            <div className={styles.manifestoFoot}>
+              <div>
+                <Reveal as="span" className={`mono ${styles.manifestoLabel}`}>
+                  {t.home.manifestoRuleLeft}
+                </Reveal>
+                <Reveal as="p" className={styles.manifesto} delay={80}>
+                  {t.home.manifestoPre}
+                  <b>{t.home.manifestoBold}</b>
+                  {t.home.manifestoPost}
+                </Reveal>
+              </div>
+              <Reveal
+                as="span"
+                className={`mono ${styles.manifestoLabel} ${styles.manifestoLabelR}`}
+                delay={40}
+              >
                 {t.home.manifestoRuleRight}
-              </Reveal>
-              <Reveal as="p" className={styles.manifesto} delay={140}>
-              {t.home.manifestoPre}
-              <b>{t.home.manifestoBold}</b>
-              {t.home.manifestoPost}
               </Reveal>
             </div>
           </div>
@@ -180,7 +194,6 @@ export default async function HomePage({
 
         {/* ————— metodo (§ 04) ————— */}
         <section className={`${styles.sez} ${styles.methodSez}`}>
-          <div className={styles.methodWire} aria-hidden="true" />
           <div className="wrap">
             <Reveal as="span" className={`mono ${styles.methodKicker}`}>
               {t.home.methodKicker}

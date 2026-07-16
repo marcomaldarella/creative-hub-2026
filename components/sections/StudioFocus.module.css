@@ -25,8 +25,7 @@
 
 .eyebrow {
   color: var(--azzurro);
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }
 
 .title {
@@ -93,8 +92,7 @@
   padding: 13px 0;
   border-bottom: 1px solid var(--osso-16);
   font-size: 13.5px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  letter-spacing: 0.06em;
   color: color-mix(in srgb, var(--osso) 78%, transparent);
 }
 
@@ -155,8 +153,7 @@
 
 .caption span {
   color: color-mix(in srgb, var(--osso) 75%, transparent);
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.08em;
 }
 
 @media (max-width: 900px) {

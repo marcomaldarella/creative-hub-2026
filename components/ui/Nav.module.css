@@ -2,9 +2,7 @@
   position: fixed;
   inset: 0 0 auto 0;
   z-index: 50;
-  backdrop-filter: blur(40px) saturate(2.2) brightness(1.08);
-  -webkit-backdrop-filter: blur(40px) saturate(2.2) brightness(1.08);
-  background: color-mix(in srgb, var(--bg) 42%, transparent);
+  background: var(--bg);
   border-bottom: 1px solid color-mix(in srgb, var(--line) 60%, transparent);
   /* bordo-luce in alto + velo interno: vetro spesso, ben visibile */
   box-shadow:
@@ -25,8 +23,7 @@
   margin: 0 auto;
   padding: 0 var(--pad);
   font-size: 11px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  letter-spacing: 0.06em;
   color: var(--fg-2);
   border-bottom: 1px solid color-mix(in srgb, var(--line) 60%, transparent);
   overflow: hidden;
@@ -213,33 +210,57 @@
   transition: opacity 0.22s ease, transform 0.26s var(--ease-out);
 }
 
-/* velatura di riflesso diagonale sul vetro */
-.panel::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: linear-gradient(
-    115deg,
-    color-mix(in srgb, var(--surface) 22%, transparent) 0%,
-    transparent 34%,
-    transparent 68%,
-    color-mix(in srgb, var(--azzurro) 7%, transparent) 100%
-  );
+/* pannello del nav dark: stesso neutro pieno dell'header */
+.dark .panel {
+  background: #0e0f10;
+  border-bottom-color: rgba(255, 255, 255, 0.08);
 }
 
 .panelIn {
   position: relative;
-  padding-top: 30px;
-  padding-bottom: 40px;
+  display: grid;
+  grid-template-columns: minmax(280px, 440px) 1fr;
+  gap: clamp(40px, 6vw, 110px);
+  align-items: start;
+  padding-top: 38px;
+  padding-bottom: 46px;
 }
 
-/* label di gruppo alla vercel: piccola, grigia, sopra la lista */
+/* colonna identità: numerino + eyebrow, titolo grande, pre-descrizione */
+.panelHead {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
 .panelLabel {
   display: block;
-  margin-bottom: 14px;
   font-size: 13px;
+  letter-spacing: 0.06em;
+  color: var(--azzurro);
+}
+
+.panelNum {
   color: var(--fg-2);
+  margin-right: 6px;
+}
+
+.panelTitle {
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: clamp(32px, 3.4vw, 54px);
+  font-weight: 500;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  color: var(--fg);
+}
+
+.panelDesc {
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: var(--fg-2);
+  max-width: 36ch;
+  margin: 2px 0 6px;
 }
 
 .panelList {
@@ -462,11 +483,10 @@
 /* ————— variante dark (hero petrolio) ————— */
 
 .dark {
-  background: color-mix(in srgb, var(--panel) 38%, transparent);
-  border-bottom-color: var(--osso-16);
-  box-shadow:
-    inset 0 1px 0 color-mix(in srgb, var(--osso) 28%, transparent),
-    inset 0 -12px 24px -18px color-mix(in srgb, var(--osso) 12%, transparent);
+  /* neutro pieno: niente tinta petrolio, niente trasparenza */
+  background: #0e0f10;
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+  box-shadow: none;
   color: var(--osso);
 }
 

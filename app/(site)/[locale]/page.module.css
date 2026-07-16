@@ -23,8 +23,8 @@
 /* dark: il petrolio profondo resta qui */
 :global([data-theme='dark']) .hero {
   background:
-    radial-gradient(90% 70% at 50% 42%, #12333c 0%, transparent 60%),
-    linear-gradient(150deg, #0f272e 0%, #0a1c22 48%, #061318 100%);
+    radial-gradient(90% 70% at 50% 42%, #1a1c1e 0%, transparent 60%),
+    linear-gradient(150deg, #131416 0%, #0b0c0d 48%, #060707 100%);
 }
 
 .heroAnnot {
@@ -41,7 +41,6 @@
 }
 
 .heroAnnot span {
-  text-transform: uppercase;
   letter-spacing: 0.06em;
   white-space: pre-line; /* international college of music ↵ sound ↵ multimedia ↵ & visual */
   line-height: 1.6;
@@ -83,7 +82,6 @@
   font-family: var(--font-body), sans-serif;
   font-size: 2.3px;
   letter-spacing: 0.28em;
-  text-transform: uppercase;
   fill: var(--ghiaccio); /* opaco: le sovrapposizioni dei trattini non si vedono */
 }
 
@@ -101,10 +99,10 @@
 
 .heroTitle {
   text-align: center;
-  font-size: clamp(56px, 9.5vw, 168px);
-  line-height: 0.78;
+  font-size: clamp(52px, 8.8vw, 150px);
+  line-height: 0.86;
   z-index: 2;
-  transform: translateY(14%);
+  transform: translateY(10%);
   text-shadow: 0 12px 60px rgba(4, 16, 20, 0.65);
 }
 
@@ -131,7 +129,6 @@
 .tagline {
   color: color-mix(in srgb, var(--ghiaccio) 55%, transparent);
   letter-spacing: 0.08em;
-  text-transform: uppercase;
 }
 
 /* CTA con contorno: pill outline che si accende in hover */
@@ -180,45 +177,62 @@
 /* ————— manifesto ————— */
 
 /* due colonne ravvicinate, titoletti caps e linea separatrice */
-.manifestoGrid {
-  display: grid;
-  grid-template-columns: minmax(0, 56ch) minmax(0, 44ch);
-  justify-content: start;
-  gap: clamp(24px, 3.5vw, 56px);
-  align-items: start;
+.manifestoWrap {
   border-top: 1px solid var(--line);
   padding-top: clamp(20px, 2.5vw, 32px);
+}
+
+/* statement gigante centrato a tutta larghezza (ref endzeit) */
+.manifestoStatement {
+  text-align: center;
+  font-size: clamp(42px, 7.2vw, 126px);
+  line-height: 1.02;
+  white-space: pre-line; /* una negazione per riga */
+  margin: clamp(28px, 6vh, 72px) 0;
+}
+
+/* piede: paragrafo a sinistra, label a destra */
+.manifestoFoot {
+  display: grid;
+  grid-template-columns: minmax(0, 58ch) 1fr;
+  gap: clamp(24px, 3.5vw, 56px);
+  align-items: start;
+  margin-top: clamp(36px, 7vh, 88px);
+}
+
+.manifestoLabelR {
+  text-align: right;
+}
+
+@media (max-width: 760px) {
+  .manifestoFoot {
+    grid-template-columns: 1fr;
+  }
+
+  .manifestoLabelR {
+    text-align: left;
+  }
 }
 
 .manifestoLabel {
   display: block;
   margin-bottom: 18px;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.08em;
   color: var(--azzurro);
 }
 
 @media (max-width: 860px) {
-  .manifestoGrid {
-    grid-template-columns: 1fr;
+  .manifestoStatement {
+    font-size: clamp(34px, 9vw, 52px);
   }
 }
 
-/* le negazioni: come il manifesto, solo più grandi */
-.manifestoNeg {
-  font-size: clamp(32px, 4.4vw, 60px);
-  line-height: 1.12;
-  letter-spacing: -0.02em;
-  font-weight: 500;
-  white-space: pre-line; /* una negazione per riga */
-}
-
 .manifesto {
-  font-size: var(--fs-h3);
-  line-height: 1.22;
-  letter-spacing: -0.015em;
+  font-size: clamp(18px, 1.6vw, 24px);
+  line-height: 1.4;
+  letter-spacing: -0.01em;
   font-weight: 400;
-  max-width: 24ch;
+  max-width: 52ch;
 }
 
 .manifesto b {
@@ -281,8 +295,7 @@
   display: block;
   margin-bottom: 34px;
   color: var(--azzurro);
-  text-transform: uppercase;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.08em;
 }
 
 .method {
@@ -340,8 +353,7 @@
   justify-content: space-between;
   gap: 16px;
   padding-top: 14px;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.06em;
 }
 
 /* ————— magazine ————— */
@@ -399,8 +411,7 @@
   top: 50%;
   z-index: 2;
   writing-mode: vertical-rl;
-  text-transform: uppercase;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.12em;
   color: color-mix(in srgb, var(--petrolio) 55%, transparent);
   white-space: nowrap;
 }
@@ -422,28 +433,8 @@
   }
 }
 
-/* mesh wireframe dietro al metodo (manuale, pag. background) */
-
 .methodSez {
   position: relative;
-  overflow: hidden;
-}
-
-.methodWire {
-  position: absolute;
-  top: -140px;
-  right: -160px;
-  width: min(560px, 60vw);
-  aspect-ratio: 1;
-  background: var(--azzurro);
-  -webkit-mask: url('/img/sections/wire-blob.svg') center / contain no-repeat;
-  mask: url('/img/sections/wire-blob.svg') center / contain no-repeat;
-  opacity: 0.28;
-  pointer-events: none;
-}
-
-:global([data-theme='dark']) .methodWire {
-  opacity: 0.2;
 }
 
 /* ————— mobile ————— */

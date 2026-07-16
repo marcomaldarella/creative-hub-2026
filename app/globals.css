@@ -5,15 +5,17 @@
 :root {
   /* colori */
   --ghiaccio: #F2F1EE;   /* sfondo base */
-  --petrolio: #1F3D4A;   /* testo su light, sfondo sezioni dark */
-  --azzurro:  #4FA8DF;   /* accento brand */
+  --petrolio: #17181A;   /* inchiostro neutro: testo su light, sezioni dark */
+  --azzurro:  #4FA8DF;   /* accento brand — academy */
+  --giallo-fluo: #DFFF3A; /* accento coworking */
+  --arancio:  #FF7A2E;   /* accento studio (registrazione) */
   --osso:     #EDE6DA;   /* testo su petrolio (mai bianco puro) */
   --grigio:   #77848C;   /* testo secondario */
   --linea:    #DCE0DE;   /* bordi, regole, divisori */
   --bianco:   #FFFFFF;   /* superfici card su light */
 
   /* derivati */
-  --petrolio-hover: #2A4F5F;
+  --petrolio-hover: #26282B;
   --azzurro-hover:  #66B5E5;
   --osso-60: rgba(237, 230, 218, 0.6);
   --osso-16: rgba(237, 230, 218, 0.16);
@@ -24,10 +26,10 @@
      i momenti brand fissi (petrolio, azzurro, gradient…) restano sui token brand. */
   --bg: #F2F1EE;        /* sfondo pagina / nav / footer */
   --surface: #FFFFFF;   /* superfici card */
-  --fg: #1F3D4A;        /* testo */
+  --fg: #17181A;        /* testo: inchiostro neutro */
   --fg-2: #77848C;      /* testo secondario */
   --line: #DCE0DE;      /* bordi, divisori */
-  --panel: #1F3D4A;     /* superfici brand grandi (sezioni scure, nav dark, overlay) */
+  --panel: #141516;     /* superfici scure neutre (sezioni, nav dark, overlay) */
 
   /* layout */
   --max: 100%;                      /* full-bleed alla studio dumbar */
@@ -130,22 +132,21 @@ img { max-width: 100%; height: auto; display: block; }
   color: var(--fg-2);
 }
 
-/* display: FreeFat — solo titoli giganti (voce del brand) */
+/* display: il sans del sito, medium, tracking stretto — titoli giganti
+   in sentence case (il cliente non vuole caps né il fat) */
 .display-black {
-  font-family: var(--font-fat), var(--font-display), sans-serif;
-  font-weight: 400;
-  line-height: 0.92;
-  letter-spacing: 0.01em;
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-weight: 500;
+  line-height: 0.9;
+  letter-spacing: -0.05em;
 }
 
-/* display svizzero: Helvetica Now Text in maiuscolo, tracking stretto,
-   interlinea serrata (sostituisce il vecchio Thin Expanded) */
+/* display secondario: stesso sans, peso medio, interlinea serrata */
 .display-thin {
-  font-family: var(--font-swiss), 'Helvetica Neue', var(--font-display), sans-serif;
+  font-family: var(--font-body), system-ui, sans-serif;
   font-weight: 500;
-  text-transform: uppercase;
   line-height: 0.98;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
 }
 
 /* texture liquid del brand (manuale studenti): velo sulle sezioni

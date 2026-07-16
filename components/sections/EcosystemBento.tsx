@@ -21,6 +21,13 @@ export type EcosystemBentoProps = {
 
 const IMAGES = [academyImg, studioImg, spaziImg]
 
+/* labeling di sezione: ogni nodo porta il colore della sua area */
+const SECTIONS = [
+  { label: 'Academy', accent: 'var(--azzurro)' },
+  { label: 'Studio', accent: 'var(--arancio)' },
+  { label: 'Coworking', accent: 'var(--giallo-fluo)' },
+] as const
+
 /**
  * Bento alla Vercel ("Recently shipped"): card grande a sinistra con
  * media pieno e testo in basso, due card orizzontali impilate a destra
@@ -30,7 +37,11 @@ export function EcosystemBento({ items, hrefs }: EcosystemBentoProps) {
   const [big, ...side] = items
   return (
     <RevealGroup className={styles.bento}>
-      <Link href={hrefs[0]} className={`rv ${styles.big}`}>
+      <Link
+        href={hrefs[0]}
+        className={`rv ${styles.big}`}
+        style={{ '--accent': SECTIONS[0].accent } as React.CSSProperties}
+      >
         <div className={styles.bigMedia}>
           <Image
             src={IMAGES[0]}
@@ -43,7 +54,8 @@ export function EcosystemBento({ items, hrefs }: EcosystemBentoProps) {
         </div>
         <div className={styles.bigFoot}>
           <div className={`mono ${styles.head}`}>
-            <span className={styles.n}>n° {big.n}</span>
+            <span className={styles.n}>{big.n}</span>
+            <span className={styles.badge}>{SECTIONS[0].label}</span>
             <span className={styles.tags}>{big.tags}</span>
           </div>
           <h3 className={styles.title}>{big.title}</h3>
@@ -56,11 +68,17 @@ export function EcosystemBento({ items, hrefs }: EcosystemBentoProps) {
           key={item.title}
           href={hrefs[i + 1]}
           className={`rv ${styles.side}`}
-          style={{ transitionDelay: `${(i + 1) * 90}ms` }}
+          style={
+            {
+              transitionDelay: `${(i + 1) * 90}ms`,
+              '--accent': SECTIONS[i + 1].accent,
+            } as React.CSSProperties
+          }
         >
           <div className={styles.sideBody}>
             <div className={`mono ${styles.head}`}>
-              <span className={styles.n}>n° {item.n}</span>
+              <span className={styles.n}>{item.n}</span>
+              <span className={styles.badge}>{SECTIONS[i + 1].label}</span>
               <span className={styles.tags}>{item.tags}</span>
             </div>
             <h3 className={styles.title}>{item.title}</h3>

@@ -210,7 +210,7 @@ export function Nav({
         </Link>
 
         <nav className={styles.links}>
-          {items.map((item) => (
+          {items.map((item, idx) => (
             <div key={item.href} className={styles.navItem}>
               <Link href={item.href} className={styles.navLink}>
                 {item.label}
@@ -234,11 +234,27 @@ export function Nav({
               {item.sub && (
                 <div className={styles.panel}>
                   <div className={`wrap ${styles.panelIn}`}>
-                    <span className={styles.panelLabel}>{item.sub.eyebrow}</span>
+                    {/* colonna sinistra: numerino, eyebrow, titolo, pre-descrizione */}
+                    <div className={styles.panelHead}>
+                      <span className={styles.panelLabel}>
+                        <span className={styles.panelNum}>
+                          {String(idx + 1).padStart(2, '0')}
+                        </span>{' '}
+                        {item.sub.eyebrow}
+                      </span>
+                      <span className={styles.panelTitle}>{item.label}</span>
+                      <p className={styles.panelDesc}>{item.sub.desc}</p>
+                      <Link
+                        href={item.href}
+                        className={`${styles.panelEntry} ${styles.panelExplore}`}
+                      >
+                        {item.sub.explore} <span aria-hidden="true">→</span>
+                      </Link>
+                    </div>
                     <ul
                       className={styles.panelList}
                       style={{
-                        gridTemplateRows: `repeat(${Math.ceil((item.sub.entries.length + 1) / 2)}, auto)`,
+                        gridTemplateRows: `repeat(${Math.ceil(item.sub.entries.length / 2)}, auto)`,
                       }}
                     >
                       {item.sub.entries.map((entry) => (
@@ -254,14 +270,6 @@ export function Nav({
                           </Link>
                         </li>
                       ))}
-                      <li>
-                        <Link
-                          href={item.href}
-                          className={`${styles.panelEntry} ${styles.panelExplore}`}
-                        >
-                          {item.sub.explore} <span aria-hidden="true">→</span>
-                        </Link>
-                      </li>
                     </ul>
                   </div>
                 </div>
