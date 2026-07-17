@@ -168,8 +168,8 @@
     "magazineKicker": "editorial",
     "magazineTitle": "Editorial",
     "magazineAll": "all articles",
-    "opendayTitleLine1": "AN AFTERNOON",
-    "opendayTitleLine2": "INSIDE THE HUB",
+    "opendayTitleLine1": "An afternoon",
+    "opendayTitleLine2": "inside the Hub",
     "opendayCta": "book your spot",
     "methodKicker": "§ 04 — method",
     "method": [
@@ -361,7 +361,7 @@
   },
   "magazine": {
     "kicker": "editorial",
-    "title": "EDITORIAL",
+    "title": "Editorial",
     "lede": "Voices, stories and tools from the creative industry: sound, image, code.",
     "metaTitle": "editorial",
     "metaDescription": "Voices and stories from the creative industry — the creative hub bologna editorial.",

@@ -136,6 +136,10 @@ export function HeroOrb({
           attribute float aRnd;
           varying float vGlow;
           varying float vFace;
+          varying float vBand;
+          varying float vTwk;
+          varying float vHalo;
+          varying float vTemp;
 
           vec3 displace(vec3 p){
             vec3 n = normalize(p);
@@ -150,16 +154,39 @@ export function HeroOrb({
             return p + n * d;
           }
           void main(){
-            vec3 p = displace(position);
+            vec3 n0 = normalize(position);
+            // correnti tangenziali: bande che scorrono sulla superficie
+            float drift = snoise(n0*0.9 + vec3(0.0, uTime*0.045, 0.0)) * (0.16 + uPointer*0.06);
+            float ca = cos(drift), sa = sin(drift);
+            vec3 pr = vec3(position.x*ca - position.z*sa,
+                           position.y,
+                           position.x*sa + position.z*ca);
+            vec3 n = normalize(pr);
+            // vortice sotto il cursore: il mouse mescola la nuvola
+            vec3 pdir = normalize(uPointerDir + 0.0001);
+            float facing = max(dot(n, pdir), 0.0);
+            vec3 swirl = normalize(cross(n, pdir) + 0.0001);
+            pr += swirl * pow(facing, 2.2) * uPointer * 0.07
+                * sin(uTime*0.6 + aRnd*6.2831);
+            vec3 p = displace(pr);
+            // alone: il 7% delle particelle vive su un guscio esterno che respira
+            vHalo = step(0.93, aRnd);
+            p *= 1.0 + vHalo * (0.09 + 0.05*sin(uTime*0.32 + aRnd*40.0));
             vGlow = length(p) - ${RADIUS.toFixed(2)};
+            // fronte di densità: una macro-onda di luce che attraversa la sfera
+            vBand = 0.72 + 0.28*snoise(n*1.5 + vec3(uTime*0.05, 0.0, uTime*0.032));
+            // twinkle individuale, lento e sfasato
+            vTwk = 0.86 + 0.14*sin(uTime*(0.5 + aRnd*1.3) + aRnd*6.2831);
+            vTemp = aRnd;
             // orientamento verso la camera: davanti pieno, retro in penombra
-            vec3 vn = normalize((modelViewMatrix * vec4(normalize(position), 0.0)).xyz);
+            vec3 vn = normalize((modelViewMatrix * vec4(n, 0.0)).xyz);
             vFace = clamp(vn.z, 0.0, 1.0);
             vec4 mv = modelViewMatrix * vec4(p,1.0);
             gl_Position = projectionMatrix * mv;
             gl_PointSize = uSize * (1.0 / -mv.z)
               * (0.85 + aRnd*0.3)
-              * (0.7 + 0.5*vFace);   // i punti dietro rimpiccioliscono: volume
+              * (0.7 + 0.5*vFace)     // i punti dietro rimpiccioliscono: volume
+              * (1.0 - vHalo*0.35);   // l'alone è fatto di grani più fini
           }
         `,
         fragmentShader: /* glsl */ `
@@ -167,6 +194,10 @@ export function HeroOrb({
           uniform float uTheme;
           varying float vGlow;
           varying float vFace;
+          varying float vBand;
+          varying float vTwk;
+          varying float vHalo;
+          varying float vTemp;
           void main(){
             vec2 c = gl_PointCoord - 0.5;
             float dd = dot(c,c);
@@ -178,8 +209,11 @@ export function HeroOrb({
             vec3 lightP = mix(vec3(0.60,0.68,0.76), vec3(0.95,0.97,1.0), b);  // tema dark
             vec3 col = mix(darkP, lightP, uTheme);
             col *= 0.45 + 0.75*vFace;                      // chiaroscuro: il retro affonda
-            col += core * mix(0.08, 0.20, uTheme);         // scintilla sul davanti
-            float alpha = a * (0.28 + 0.48*vFace);
+            col *= vBand * vTwk;                           // fronti di densità + twinkle
+            // micro-temperatura per grano: monocromo più ricco
+            col *= mix(vec3(1.025, 1.0, 0.965), vec3(0.965, 1.0, 1.035), vTemp);
+            col += core * mix(0.08, 0.20, uTheme) * vBand; // scintilla sul davanti
+            float alpha = a * (0.28 + 0.48*vFace) * (1.0 - vHalo*0.45);
             gl_FragColor = vec4(col, alpha);
           }
         `,

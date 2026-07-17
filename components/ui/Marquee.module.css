@@ -25,9 +25,8 @@
 }
 
 .item {
-  font-family: var(--font-swiss), 'Helvetica Neue', var(--font-display), sans-serif;
+  font-family: var(--font-body), system-ui, sans-serif;
   font-weight: 500;
-  font-stretch: 105%;
   font-size: 24px;
   color: var(--fg-2);
   white-space: nowrap;
@@ -39,8 +38,11 @@
 }
 
 @keyframes mq {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
   to {
-    transform: translateX(-50%);
+    transform: translate3d(-50%, 0, 0);
   }
 }
 

@@ -20,11 +20,15 @@ export function Marquee({ items, speed = 38, dark = false, className }: MarqueeP
     .filter(Boolean)
     .join(' ');
 
-  const row = items.map((item, i) => (
-    <span className={styles.item} key={i}>
-      {item}
-    </span>
-  ));
+  // 3 ripetizioni per metà: il gruppo supera sempre il viewport,
+  // così il loop -50% non mostra mai il bordo (niente salti)
+  const row = [0, 1, 2].flatMap((rep) =>
+    items.map((item, i) => (
+      <span className={styles.item} key={`${rep}-${i}`}>
+        {item}
+      </span>
+    ))
+  );
 
   return (
     <div className={cls}>

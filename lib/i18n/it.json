@@ -168,8 +168,8 @@
     "magazineKicker": "editorial",
     "magazineTitle": "Editorial",
     "magazineAll": "tutti gli articoli",
-    "opendayTitleLine1": "UN POMERIGGIO",
-    "opendayTitleLine2": "DENTRO L'HUB",
+    "opendayTitleLine1": "Un pomeriggio",
+    "opendayTitleLine2": "dentro l'Hub",
     "opendayCta": "prenota il tuo posto",
     "methodKicker": "§ 04 — metodo",
     "method": [
@@ -361,7 +361,7 @@
   },
   "magazine": {
     "kicker": "editorial",
-    "title": "EDITORIAL",
+    "title": "Editorial",
     "lede": "Voci, storie e strumenti dall'industria creativa: suono, immagine, codice.",
     "metaTitle": "editorial",
     "metaDescription": "Voci e storie dall'industria creativa — l'editorial di creative hub bologna.",
