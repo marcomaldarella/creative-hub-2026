@@ -177,10 +177,15 @@
 
 /* ————— manifesto ————— */
 
-/* due colonne ravvicinate, titoletti caps e linea separatrice */
 .manifestoWrap {
-  border-top: 1px solid var(--line);
-  padding-top: clamp(20px, 2.5vw, 32px);
+  text-align: center;
+}
+
+/* titolo centrale della sezione */
+.manifestoKicker {
+  display: block;
+  letter-spacing: 0.08em;
+  color: var(--azzurro);
 }
 
 /* statement gigante centrato a tutta larghezza (ref endzeit) */
@@ -192,34 +197,10 @@
   margin: clamp(28px, 6vh, 72px) 0;
 }
 
-/* piede: paragrafo a sinistra, label a destra */
+/* piede: solo il paragrafo, allineato a sinistra sotto lo statement */
 .manifestoFoot {
-  display: grid;
-  grid-template-columns: minmax(0, 58ch) 1fr;
-  gap: clamp(24px, 3.5vw, 56px);
-  align-items: start;
+  text-align: left;
   margin-top: clamp(36px, 7vh, 88px);
-}
-
-.manifestoLabelR {
-  text-align: right;
-}
-
-@media (max-width: 760px) {
-  .manifestoFoot {
-    grid-template-columns: 1fr;
-  }
-
-  .manifestoLabelR {
-    text-align: left;
-  }
-}
-
-.manifestoLabel {
-  display: block;
-  margin-bottom: 18px;
-  letter-spacing: 0.08em;
-  color: var(--azzurro);
 }
 
 @media (max-width: 860px) {

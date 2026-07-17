@@ -132,34 +132,24 @@ export default async function HomePage({
           </div>
         </header>
 
-        <Rule left={t.home.manifestoRuleLeft} right={t.home.manifestoRuleRight} />
-
-        {/* ————— manifesto: statement gigante + colonne al piede (ref endzeit) ————— */}
+        {/* ————— manifesto: titolo centrale + statement gigante (ref endzeit) ————— */}
         <section className={styles.sez} id="manifesto">
           <div className={`wrap ${styles.manifestoWrap}`}>
+            <Reveal as="span" className={`mono ${styles.manifestoKicker}`}>
+              {t.home.manifestoRuleRight}
+            </Reveal>
             <Reveal
               as="h2"
               className={`display-black ${styles.manifestoStatement}`}
+              delay={60}
             >
               {t.home.manifestoNeg}
             </Reveal>
             <div className={styles.manifestoFoot}>
-              <div>
-                <Reveal as="span" className={`mono ${styles.manifestoLabel}`}>
-                  {t.home.manifestoRuleLeft}
-                </Reveal>
-                <Reveal as="p" className={styles.manifesto} delay={80}>
-                  {t.home.manifestoPre}
-                  <b>{t.home.manifestoBold}</b>
-                  {t.home.manifestoPost}
-                </Reveal>
-              </div>
-              <Reveal
-                as="span"
-                className={`mono ${styles.manifestoLabel} ${styles.manifestoLabelR}`}
-                delay={40}
-              >
-                {t.home.manifestoRuleRight}
+              <Reveal as="p" className={styles.manifesto} delay={120}>
+                {t.home.manifestoPre}
+                <b>{t.home.manifestoBold}</b>
+                {t.home.manifestoPost}
               </Reveal>
             </div>
           </div>
