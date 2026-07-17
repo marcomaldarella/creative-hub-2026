@@ -34,7 +34,7 @@
   max-width: var(--max);
   width: 100%;
   margin: 0 auto;
-  padding: 28px var(--pad) 0;
+  padding: clamp(20px, 3vh, 34px) var(--pad) 0;
   color: color-mix(in srgb, var(--ghiaccio) 55%, transparent);
   position: relative;
   z-index: 3;
@@ -58,6 +58,7 @@
   place-items: center;
   position: relative;
   min-height: 0;
+  padding: clamp(10px, 2.5vh, 32px) 0;
 }
 
 .orbStage > * {
@@ -114,7 +115,7 @@
   max-width: var(--max);
   width: 100%;
   margin: 0 auto;
-  padding: 26px var(--pad) clamp(28px, 4vh, 48px);
+  padding: clamp(20px, 3vh, 34px) var(--pad) clamp(28px, 4.5vh, 56px);
   position: relative;
   z-index: 3;
 }

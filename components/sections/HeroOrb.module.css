@@ -23,7 +23,7 @@
   z-index: 4;
   display: flex;
   align-items: center;
-  gap: 18px;
+  gap: 14px;
   color: var(--ghiaccio, currentColor);
   /* il resto dell'orb è decorativo, ma le label navigano */
   pointer-events: auto;
@@ -102,64 +102,67 @@
 .hudArm {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
 
 /* diagonale alto-sx: academy — testo dritto, braccio che scende verso la sfera */
 .hud_l {
-  right: calc(100% - clamp(60px, 14vw, 200px));
-  top: 16%;
+  right: 80%;
+  top: 17%;
+  transform: translateY(-50%);
   --tx: -24px;
 }
 
 .hud_l .hudArm {
-  transform: rotate(38deg);
+  transform: rotate(45deg);
   transform-origin: left center;
 }
 
 .hud_l .hudLn {
   height: 1px;
-  width: clamp(70px, 11vw, 160px);
+  width: clamp(56px, 8.5vw, 118px);
   transform-origin: left center;
 }
 
 /* diagonale alto-dx: recording — speculare */
 .hud_r {
-  left: calc(100% - clamp(60px, 14vw, 200px));
-  top: 16%;
+  left: 80%;
+  top: 17%;
+  transform: translateY(-50%);
   flex-direction: row-reverse;
   --tx: 24px;
 }
 
 .hud_r .hudArm {
   flex-direction: row-reverse;
-  transform: rotate(-38deg);
+  transform: rotate(-45deg);
   transform-origin: right center;
 }
 
 .hud_r .hudLn {
   height: 1px;
-  width: clamp(70px, 11vw, 160px);
+  width: clamp(56px, 8.5vw, 118px);
   transform-origin: right center;
 }
 
 /* basso-dx: coworking — sotto recording, braccio a 45° che sale alla sfera */
 .hud_t {
-  left: calc(100% - clamp(60px, 14vw, 200px));
-  top: 64%;
+  left: 80%;
+  top: 76%;
+  transform: translateY(-50%);
   flex-direction: row-reverse;
   --tx: 24px;
 }
 
 .hud_t .hudArm {
   flex-direction: row-reverse;
-  transform: rotate(38deg); /* punta in alto a sinistra, verso la sfera */
+  transform: rotate(45deg); /* punta in alto a sinistra, verso la sfera */
   transform-origin: right center;
 }
 
 .hud_t .hudLn {
   height: 1px;
-  width: clamp(70px, 11vw, 160px);
+  width: clamp(56px, 8.5vw, 118px);
   transform-origin: right center;
 }
 
