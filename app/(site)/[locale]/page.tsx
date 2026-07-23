@@ -16,6 +16,7 @@ import { SiteChrome, shopHref } from '@/components/sections/SiteChrome'
 import { HeroOrb } from '@/components/sections/HeroOrb'
 import { HighlightsCarousel } from '@/components/sections/HighlightsCarousel'
 import { EcosystemBento } from '@/components/sections/EcosystemBento'
+import { MethodCards } from '@/components/sections/MethodCards'
 import { NodeCards } from '@/components/sections/NodeCards'
 import { ArticleCard } from '@/components/magazine/ArticleCard'
 import { isLocale, localeHref, type Locale } from '@/lib/i18n/config'
@@ -211,15 +212,9 @@ export default async function HomePage({
             <Reveal as="span" className={`mono ${styles.methodKicker}`}>
               {t.home.methodKicker}
             </Reveal>
-            <RevealGroup className={styles.method}>
-              {t.home.method.map((m, i) => (
-                <Reveal key={m.n} className={styles.methodItem} delay={i * 90}>
-                  <span className={`mono ${styles.methodN}`}>I/{m.n}</span>
-                  <h3 className={styles.methodTitle}>{m.title}</h3>
-                  <p className={styles.methodText}>{m.text}</p>
-                </Reveal>
-              ))}
-            </RevealGroup>
+            <Reveal delay={80}>
+              <MethodCards items={t.home.method} />
+            </Reveal>
           </div>
         </section>
 

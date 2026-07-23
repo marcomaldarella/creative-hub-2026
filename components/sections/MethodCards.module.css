@@ -1,0 +1,106 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  min-height: 340px;
+  padding: clamp(20px, 2vw, 28px);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  transition: border-color var(--dur);
+}
+
+.card:hover {
+  border-color: color-mix(in srgb, var(--fg) 26%, var(--line));
+}
+
+.label {
+  color: var(--azzurro);
+  letter-spacing: 0.08em;
+}
+
+/* palco del visual: colonne sottili alla vercel, sfumate ai bordi */
+.stage {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  min-height: 150px;
+  margin: 18px 0 24px;
+}
+
+.stage::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    90deg,
+    var(--line) 0 1px,
+    transparent 1px 44px
+  );
+  opacity: 0.55;
+  -webkit-mask-image: radial-gradient(ellipse 90% 80% at 50% 50%, #000 30%, transparent 100%);
+  mask-image: radial-gradient(ellipse 90% 80% at 50% 50%, #000 30%, transparent 100%);
+  pointer-events: none;
+}
+
+.vis {
+  position: relative;
+  width: min(100%, 340px);
+  height: auto;
+  margin: 0 auto;
+}
+
+.visFill {
+  fill: color-mix(in srgb, var(--fg) 12%, transparent);
+}
+
+.visDot {
+  fill: var(--fg-2);
+}
+
+.visAccent {
+  fill: var(--azzurro);
+}
+
+.visLine {
+  stroke: var(--line);
+  stroke-width: 1.5;
+  fill: none;
+}
+
+.card:hover .visAccent {
+  fill: var(--azzurro-hover);
+}
+
+.title {
+  font-size: clamp(19px, 1.5vw, 23px);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  margin-bottom: 8px;
+}
+
+.text {
+  font-size: var(--fs-small);
+  color: var(--fg-2);
+  max-width: 44ch;
+}
+
+@media (max-width: 860px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    min-height: 280px;
+  }
+
+  .stage {
+    min-height: 120px;
+  }
+}
