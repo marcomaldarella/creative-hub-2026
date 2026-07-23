@@ -120,6 +120,8 @@ export function HeroOrb({
         uPointerDir: { value: new THREE.Vector3(0, 0, 1) },
         uTheme: { value: 0 },
         uSize: { value: 4.4 * dpr },
+        // rottura/swirl: caricata dalla velocità del mouse, decade a molla
+        uBurst: { value: 0 },
       }
 
       const mat = new THREE.ShaderMaterial({
@@ -133,6 +135,7 @@ export function HeroOrb({
           uniform float uPointer;
           uniform vec3  uPointerDir;
           uniform float uSize;
+          uniform float uBurst;
           attribute float aRnd;
           varying float vGlow;
           varying float vFace;
@@ -168,6 +171,18 @@ export function HeroOrb({
             vec3 swirl = normalize(cross(n, pdir) + 0.0001);
             pr += swirl * pow(facing, 2.2) * uPointer * 0.07
                 * sin(uTime*0.6 + aRnd*6.2831);
+            // rottura: uno sweep veloce del mouse apre la nuvola sotto il
+            // cursore (spinta via dall'asse, come la reference (1-d/R)^2)
+            // e la fa turbinare; poi si richiude a molla via uBurst
+            float cone = smoothstep(0.55, 0.96, facing);
+            cone *= cone; // falloff quadratico: buco netto al centro, morbido al bordo
+            vec3 axisAway = pr - pdir * dot(pr, pdir);
+            vec3 away = normalize(axisAway + 0.0001);
+            vec3 tang = normalize(cross(pdir, away) + 0.0001);
+            float rag = 0.55 + 0.9*aRnd; // bordo frastagliato per grano
+            float kb = uBurst * cone * rag;
+            pr += (away * 0.24 + tang * 0.36) * kb;
+            pr += n * snoise(n*6.0 + vec3(uTime*0.8)) * 0.14 * kb; // sbriciolamento
             vec3 p = displace(pr);
             // alone: il 7% delle particelle vive su un guscio esterno che respira
             vHalo = step(0.93, aRnd);
@@ -292,6 +307,12 @@ export function HeroOrb({
       const current = { rx: 0, ry: 0 }
       let pointerTarget = 0
       let pointerCur = 0
+      // rottura: si carica con la velocità del mouse, decade con damping
+      let burstTarget = 0
+      let burstCur = 0
+      let lastNx = 0
+      let lastNy = 0
+      let hasLast = false
       let activeZone: Zone = null
 
       const setZoneOnce = (z: Zone) => {
@@ -315,6 +336,14 @@ export function HeroOrb({
         // normalizzazione sul semi-lato dello stage: la sfera è il riferimento
         const nx = (e.clientX - cx) / (r.width / 2)
         const ny = -((e.clientY - cy) / (r.height / 2))
+        // la velocità dello sweep carica la rottura (clamp: mai oltre 1.15)
+        if (hasLast) {
+          const speed = Math.hypot(nx - lastNx, ny - lastNy)
+          burstTarget = Math.min(1.15, burstTarget + speed * 2.6)
+        }
+        lastNx = nx
+        lastNy = ny
+        hasLast = true
         mouse.x = nx
         mouse.y = ny
         target.ry = nx * 0.75
@@ -401,6 +430,10 @@ export function HeroOrb({
         current.ry += (target.ry - current.ry) * 0.038
         pointerCur += (pointerTarget - pointerCur) * 0.035
         uniforms.uPointer.value = pointerCur
+        // molla della rottura: il target decade (damping), il valore lo insegue
+        burstTarget *= 0.94
+        burstCur += (burstTarget - burstCur) * 0.16
+        uniforms.uBurst.value = burstCur
         uniforms.uTheme.value += (themeTarget - uniforms.uTheme.value) * 0.06
 
         group.rotation.y = current.ry + t * 0.022
