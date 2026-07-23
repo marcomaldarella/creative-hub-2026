@@ -197,10 +197,10 @@
   margin: clamp(28px, 6vh, 72px) 0;
 }
 
-/* piede: lead a sinistra + colonna secondaria, ancorate al margine */
+/* piede: lead a sinistra (un pelo più stretto) + colonna secondaria più ampia */
 .manifestoCols {
   display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
   gap: clamp(28px, 4.5vw, 80px);
   margin: clamp(36px, 7vh, 88px) 0 0;
   text-align: left;
