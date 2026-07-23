@@ -210,12 +210,6 @@
   transition: opacity 0.22s ease, transform 0.26s var(--ease-out);
 }
 
-/* pannello del nav dark: stesso neutro pieno dell'header */
-.dark .panel {
-  background: #0e0f10;
-  border-bottom-color: rgba(255, 255, 255, 0.08);
-}
-
 .panelIn {
   position: relative;
   display: grid;
@@ -484,8 +478,8 @@
 
 .dark {
   /* neutro pieno: niente tinta petrolio, niente trasparenza */
-  background: #0e0f10;
-  border-bottom-color: rgba(255, 255, 255, 0.08);
+  background: var(--panel);
+  border-bottom-color: var(--osso-16);
   box-shadow: none;
   color: var(--osso);
 }

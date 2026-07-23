@@ -50,8 +50,8 @@ export default async function StudiosPage({
   ]
 
   return (
-    <SiteChrome locale={locale} path="/studios" dark>
-      <main className={styles.dark}>
+    <SiteChrome locale={locale} path="/studios">
+      <main className={styles.main}>
         {/* ————— hero ————— */}
         <header className={`wrap ${styles.head}`}>
           <Reveal as="span" className={`mono ${styles.kicker}`}>
@@ -65,13 +65,12 @@ export default async function StudiosPage({
           </Reveal>
         </header>
 
-        <Rule dark left={t.studios.kicker} right={t.studios.spacesKicker} />
+        <Rule left={t.studios.kicker} right={t.studios.spacesKicker} />
 
         {/* ————— gli spazi ————— */}
         <section className={styles.sez}>
           <div className="wrap">
             <SectionHeader
-              dark
               kicker={t.studios.spacesKicker}
               title={t.studios.spacesTitle}
             />
@@ -79,7 +78,6 @@ export default async function StudiosPage({
               {spaces.map((space, i) => (
                 <Reveal key={space._id} delay={(i % 3) * 60}>
                   <Card
-                    variant="dark"
                     kicker={`s.0${i + 1}`}
                     title={l(space.title, locale)}
                     className={styles.spaceCard}
@@ -101,13 +99,12 @@ export default async function StudiosPage({
           </div>
         </section>
 
-        <Rule dark left={t.studios.spacesKicker} right={t.studios.servicesKicker} />
+        <Rule left={t.studios.spacesKicker} right={t.studios.servicesKicker} />
 
         {/* ————— i servizi ch.01–04 ————— */}
         <section className={styles.sez}>
           <div className="wrap">
             <SectionHeader
-              dark
               kicker={t.studios.servicesKicker}
               title={t.studios.servicesTitle}
             />
@@ -115,7 +112,6 @@ export default async function StudiosPage({
               {services.map((service, i) => (
                 <Reveal key={service.n} delay={i * 60}>
                   <Card
-                    variant="dark"
                     kicker={service.n}
                     title={service.title}
                     className={styles.spaceCard}
@@ -132,7 +128,6 @@ export default async function StudiosPage({
         <section className={`${styles.sez} ${styles.cta}`}>
           <div className="wrap">
             <SectionHeader
-              dark
               kicker={t.studios.ctaKicker}
               title={t.studios.ctaTitle}
               lede={t.studios.ctaText}

@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import {
   ArrowLink,
@@ -13,7 +14,7 @@ import {
 } from '@/components/ui'
 import { SiteChrome, shopHref } from '@/components/sections/SiteChrome'
 import { HeroOrb } from '@/components/sections/HeroOrb'
-import { StudioFocus } from '@/components/sections/StudioFocus'
+import { HighlightsCarousel } from '@/components/sections/HighlightsCarousel'
 import { EcosystemBento } from '@/components/sections/EcosystemBento'
 import { NodeCards } from '@/components/sections/NodeCards'
 import { ArticleCard } from '@/components/magazine/ArticleCard'
@@ -145,18 +146,40 @@ export default async function HomePage({
             >
               {t.home.manifestoNeg}
             </Reveal>
-            <div className={styles.manifestoFoot}>
-              <Reveal as="p" className={styles.manifesto} delay={120}>
-                {t.home.manifestoPre}
-                <b>{t.home.manifestoBold}</b>
-                {t.home.manifestoPost}
+            <RevealGroup className={styles.manifestoCols}>
+              <Reveal as="p" delay={120}>
+                {t.home.manifestoCol1}
               </Reveal>
-            </div>
+              <Reveal as="div" delay={210}>
+                <p>{t.home.manifestoCol2}</p>
+                <Link
+                  href={localeHref(locale, '/chi-siamo')}
+                  className={styles.manifestoCta}
+                >
+                  <span>{t.home.manifestoCta}</span>
+                  <span className={styles.manifestoCtaBall} aria-hidden="true">
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.8"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M4 12h15" />
+                      <path d="M13 5.5 19.5 12 13 18.5" />
+                    </svg>
+                  </span>
+                </Link>
+              </Reveal>
+            </RevealGroup>
           </div>
         </section>
 
         {/* ————— sei nodi ————— */}
-        <section className={styles.sez}>
+        <section className={`${styles.sez} ${styles.nodesSez}`}>
           <div className="wrap">
             <SectionHeader
               kicker={t.home.ecosystemKicker}
@@ -200,11 +223,28 @@ export default async function HomePage({
           </div>
         </section>
 
-        <Rule left={t.home.resultsRuleLeft} right={t.home.resultsRuleRight} />
+        {/* ————— hi-lights carousel (§ 05) ————— */}
+        <HighlightsCarousel
+          eyebrow={t.home.highlights.eyebrow}
+          slides={t.home.highlights.slides}
+          hrefs={[
+            localeHref(locale, '/studios'),
+            localeHref(locale, '/coworking'),
+            `${localeHref(locale, '/academy')}?tipo=custom`,
+          ]}
+        />
 
-        {/* ————— counters ————— */}
-        <section className={styles.sez}>
-          <div className="wrap">
+        {/* ————— counters: titolo a sinistra (~25%), numeri inline nel resto ————— */}
+        <section className={styles.counters}>
+          <div className={`wrap ${styles.countersGrid}`}>
+            <div>
+              <h2 className={`display-black ${styles.countersTitle}`}>
+                {t.home.resultsRuleLeft}
+              </h2>
+              <span className={`mono ${styles.countersYear}`}>
+                {t.home.resultsRuleRight}
+              </span>
+            </div>
             <CounterRow>
               {stats.map((stat) => (
                 <Counter
@@ -219,20 +259,7 @@ export default async function HomePage({
           </div>
         </section>
 
-        {/* ————— focus studio SSL (§ 06) ————— */}
-        <StudioFocus
-          eyebrow={t.home.studioFocus.eyebrow}
-          titleA={t.home.studioFocus.titleA}
-          titleB={t.home.studioFocus.titleB}
-          desc={t.home.studioFocus.desc}
-          services={t.home.studioFocus.services}
-          ctaLabel={t.home.studioFocus.cta}
-          ctaHref={localeHref(locale, '/studios')}
-          captionLeft={t.home.studioFocus.captionLeft}
-          captionRight={t.home.studioFocus.captionRight}
-        />
-
-        {/* ————— network (§ 07): marquee partner ————— */}
+        {/* ————— network (§ 06): marquee partner ————— */}
         {partnerMarks.length > 0 && (
           <section className={styles.sez}>
             <div className={`wrap ${styles.networkHead}`}>

@@ -3,10 +3,12 @@
 .row {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 20px;
+  gap: 12px;
 }
 
 .card {
+  --accent: var(--azzurro);
+  position: relative;
   display: flex;
   flex-direction: column;
   min-height: 300px;
@@ -15,12 +17,63 @@
   border-radius: var(--radius);
   transition:
     background 0.25s ease,
+    box-shadow 0.3s ease,
     opacity var(--dur-slow) ease var(--rvd, 0s),
     transform var(--dur-slow) var(--ease-out) var(--rvd, 0s);
 }
 
+/* hover alla vercel: bloom morbido nel colore del nodo… */
 .card:hover {
-  background: color-mix(in srgb, var(--surface) 92%, var(--fg) 8%);
+  background: color-mix(in srgb, var(--surface) 94%, var(--accent) 6%);
+  box-shadow:
+    0 0 18px -2px color-mix(in srgb, var(--accent) 50%, transparent),
+    0 0 56px -10px color-mix(in srgb, var(--accent) 35%, transparent);
+}
+
+/* …e ring animato: arco di luce che percorre il perimetro pulsando */
+.card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: conic-gradient(
+    from var(--ring-angle, 0deg),
+    color-mix(in srgb, var(--accent) 30%, transparent),
+    var(--accent) 45deg,
+    color-mix(in srgb, var(--accent) 30%, transparent) 120deg,
+    color-mix(in srgb, var(--accent) 30%, transparent)
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.card:hover::after {
+  opacity: 1;
+  animation:
+    ringSpin 3s linear infinite,
+    ringPulse 3s ease-in-out infinite;
+}
+
+@keyframes ringSpin {
+  to { --ring-angle: 360deg; }
+}
+
+@keyframes ringPulse {
+  0%, 100% { filter: brightness(1); opacity: 0.7; }
+  50% { filter: brightness(1.45); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card:hover::after {
+    animation: none;
+    opacity: 1;
+  }
 }
 
 .head {
@@ -32,10 +85,6 @@
 
 .n {
   color: var(--azzurro);
-}
-
-.tags {
-  color: var(--fg-2);
 }
 
 /* titolo come le altre card, ancorato in basso */

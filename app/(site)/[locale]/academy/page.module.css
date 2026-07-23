@@ -38,6 +38,14 @@
   margin-left: auto;
 }
 
+/* divisore tra filtri categoria e filtri tipologia */
+.filterSep {
+  width: 1px;
+  height: 20px;
+  background: var(--line);
+  margin: 0 6px;
+}
+
 .pill {
   display: inline-block;
   border: 1px solid var(--line);

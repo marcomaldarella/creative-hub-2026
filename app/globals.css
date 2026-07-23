@@ -35,7 +35,7 @@
   --max: 100%;                      /* full-bleed alla studio dumbar */
   --pad: clamp(16px, 1.4vw, 26px);  /* gutter stretti e costanti */
   --nav-h: 64px;
-  --topbar-h: 34px;
+  --topbar-h: 28px;
   --header-h: calc(var(--nav-h) + var(--topbar-h));
   --radius: 8px;
   --radius-pill: 999px;
@@ -132,19 +132,19 @@ img { max-width: 100%; height: auto; display: block; }
   color: var(--fg-2);
 }
 
-/* display: il sans del sito, medium, tracking stretto — titoli giganti
+/* display: il sans del sito, semibold, tracking stretto — titoli giganti
    in sentence case (il cliente non vuole caps né il fat) */
 .display-black {
   font-family: var(--font-body), system-ui, sans-serif;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 0.9;
   letter-spacing: -0.05em;
 }
 
-/* display secondario: stesso sans, peso medio, interlinea serrata */
+/* display secondario: stesso sans, semibold, interlinea serrata */
 .display-thin {
   font-family: var(--font-body), system-ui, sans-serif;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 0.98;
   letter-spacing: -0.03em;
 }
@@ -198,4 +198,11 @@ img { max-width: 100%; height: auto; display: block; }
   }
   html { scroll-behavior: auto; }
   .rv { opacity: 1; transform: none; }
+}
+
+/* angolo animabile per il ring luminoso delle card (hover nodi) */
+@property --ring-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
 }

@@ -109,10 +109,6 @@
     "manifestoPre": "We are ",
     "manifestoBold": "the infrastructure",
     "manifestoPost": " that lets people who work with sound, image and code turn their vision into a profession.",
-    "studioKicker": "the studio",
-    "studioTitle": "Where sound takes shape",
-    "studioDesc": "SSL console, Dolby Atmos certification, a team of sound engineers working across records and film. The lights go down, the signal flows.",
-    "studioCta": "step into the studios",
     "ecosystemKicker": "the ecosystem",
     "ecosystemTitle": "Six nodes, one network",
     "nodes": {
@@ -171,7 +167,7 @@
     "opendayTitleLine1": "An afternoon",
     "opendayTitleLine2": "inside the Hub",
     "opendayCta": "book your spot",
-    "methodKicker": "§ 04 — method",
+    "methodKicker": "04 — method",
     "method": [
       {
         "n": "01",
@@ -194,46 +190,33 @@
         "text": "Global community, mentors and the industry by your side."
       }
     ],
-    "networkKicker": "§ 07 — network",
+    "networkKicker": "06 — network",
     "networkTitle": "The creative industry\ncomes through here.",
     "networkRight": "active partners · 2026",
-    "studioFocus": {
-      "eyebrow": "§ 06 — focus / studio",
-      "titleA": "an SSL",
-      "titleB": "studio",
-      "desc": "A 55 m² control room with an SSL XL Desk console — one of the few in Italy — live room, ISO box for vocals and amps, and three B-Ear cabins. Sound engineers working daily with labels, broadcasters and independent producers.",
-      "services": [
-        "recording · live tracking",
-        "mix & mastering",
-        "dolby atmos",
-        "sound design & gaming",
-        "podcast & voice over"
-      ],
-      "cta": "enter the studio",
-      "captionLeft": "ssl xl desk control room · 55 m²",
-      "captionRight": "— 06 / studio"
-    },
     "opendayFrameA": "inspire, innovate, excel.",
     "opendayFrameB": "bologna · creative hub",
-    "manifestoNeg": "We are not a school.\nWe are not a studio.\nWe are not a coworking.",
+    "manifestoNeg": "We are the infrastructure for people who work with sound, image, code and want to make it a profession.",
     "bento": [
       {
-        "title": "Training courses",
-        "text": "University degrees, masters, funded and custom courses: the path that turns passion into profession.",
+        "title": "Degree & Higher Education",
+        "text": "Not a certificate of attendance. A recognised degree in music, sound and visual arts.",
         "n": "01",
-        "tags": "university · masters"
+        "tags": "university · masters",
+        "cta": "Enter the node"
       },
       {
         "title": "Recording & production",
         "text": "SSL XL Desk control room, live room, Dolby Atmos: the studio where the industry works.",
         "n": "02",
-        "tags": "ssl · dolby atmos"
+        "tags": "ssl · dolby atmos",
+        "cta": "Enter the node"
       },
       {
         "title": "Workspaces",
         "text": "Coworking, meeting rooms and events in the heart of the Roveri district.",
         "n": "03",
-        "tags": "coworking · events"
+        "tags": "coworking · events",
+        "cta": "Enter the node"
       }
     ],
     "nodeCards": [
@@ -258,19 +241,68 @@
         "text": "The ecosystem, the team, the governance and the partners that make Creative Hub possible.",
         "cta": "Enter the node"
       }
-    ]
+    ],
+    "manifestoCol1": "A network of companies, shared workspaces, an education that doesn't end in the classroom: they are not elements alongside the course of study — they are an integral part of it. Studying and entering the industry happen in the same place.",
+    "manifestoCol2": "Students work side by side with people already in the industry — in the same network of companies, in the same spaces. Not an internship at the end of the course, but a constant condition: education stays anchored to what the market demands today, not to a syllabus fixed years ago.",
+    "manifestoCta": "Discover who we are",
+    "highlights": {
+      "eyebrow": "05 — hi-lights",
+      "slides": [
+        {
+          "kicker": "studio",
+          "title": "The recording studio",
+          "text": "A 55 m² SSL XL Desk control room, live room, ISO box and Dolby Atmos suite: the technical heart of the hub, where the industry works.",
+          "tags": [
+            "ssl xl desk",
+            "dolby atmos",
+            "live room"
+          ],
+          "cta": "step into the studios"
+        },
+        {
+          "kicker": "coworking",
+          "title": "Spaces, meeting rooms and events",
+          "text": "Open space, meeting rooms and event spaces in the heart of the Roveri district: where work meets the community.",
+          "tags": [
+            "open space",
+            "meeting rooms",
+            "events"
+          ],
+          "cta": "discover the spaces"
+        },
+        {
+          "kicker": "academy",
+          "title": "Custom courses by instrument or specialisation",
+          "text": "One-to-one paths built around an instrument, a tool or a goal: schedule, teacher and level tailored to you.",
+          "tags": [
+            "one-to-one",
+            "tailored",
+            "all levels"
+          ],
+          "cta": "discover custom courses"
+        }
+      ]
+    }
   },
   "academy": {
     "kicker": "academy",
-    "title": "Courses and training",
-    "lede": "Programmes born inside real control rooms and studios: you learn by doing, next to people who work in the industry every day.",
+    "title": "Degree & Higher Education",
+    "lede": "Degree programmes, university masters and funded courses: a recognised qualification, not just a certificate.",
     "categoryLabel": "filter by category",
     "empty": "no courses in this category.",
     "teachersKicker": "the teachers",
     "teachersTitle": "Who teaches here",
     "backToCourses": "all courses",
     "courseTeachers": "course teachers",
-    "courseInfo": "course details"
+    "courseInfo": "course details",
+    "typeLabel": "filter by type",
+    "types": {
+      "magistrale": "master's",
+      "triennio": "bachelor's",
+      "finanziato": "funded",
+      "gratuito": "free",
+      "custom": "custom"
+    }
   },
   "studios": {
     "kicker": "the studio",

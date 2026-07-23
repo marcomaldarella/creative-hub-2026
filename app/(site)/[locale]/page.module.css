@@ -192,83 +192,124 @@
 .manifestoStatement {
   text-align: center;
   font-size: clamp(42px, 7.2vw, 126px);
-  line-height: 1.02;
+  line-height: 0.94;
   white-space: pre-line; /* una negazione per riga */
   margin: clamp(28px, 6vh, 72px) 0;
 }
 
-/* piede: solo il paragrafo, allineato a sinistra sotto lo statement */
-.manifestoFoot {
+/* piede: lead a sinistra + colonna secondaria, ancorate al margine */
+.manifestoCols {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: clamp(28px, 4.5vw, 80px);
+  margin: clamp(36px, 7vh, 88px) 0 0;
   text-align: left;
-  margin-top: clamp(36px, 7vh, 88px);
+  align-items: start;
+}
+
+.manifestoCols p {
+  font-size: clamp(16px, 1.3vw, 20px);
+  line-height: 1.5;
+  letter-spacing: -0.008em;
+  color: color-mix(in srgb, var(--fg) 78%, var(--bg));
+}
+
+/* colonna sinistra = lead: più grande, colore pieno, riempie la colonna
+   (> p: solo il figlio diretto, non il p dentro la colonna destra) */
+.manifestoCols > p:first-child {
+  font-size: clamp(19px, 1.7vw, 26px);
+  line-height: 1.36;
+  letter-spacing: -0.015em;
+  font-weight: 500;
+  color: var(--fg);
+}
+
+/* cta verso l'about: pastiglia con pallino-freccia, su token di tema */
+.manifestoCta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-width: 250px;
+  margin-top: 22px;
+  padding: 11px 11px 11px 26px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  background: var(--bg);
+  color: var(--fg);
+  font-size: var(--fs-small);
+  font-weight: 500;
+  transition: border-color var(--dur), background var(--dur);
+}
+
+.manifestoCta:hover {
+  border-color: var(--fg);
+}
+
+.manifestoCtaBall {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--fg);
+  color: var(--bg);
+  transition: transform var(--dur);
+}
+
+.manifestoCta:hover .manifestoCtaBall {
+  transform: translateX(3px);
+}
+
+/* i nodi si avvicinano al manifesto: metà del respiro standard sopra */
+.nodesSez {
+  padding-top: clamp(36px, 5vw, 70px);
 }
 
 @media (max-width: 860px) {
   .manifestoStatement {
     font-size: clamp(34px, 9vw, 52px);
   }
-}
 
-.manifesto {
-  font-size: clamp(18px, 1.6vw, 24px);
-  line-height: 1.4;
-  letter-spacing: -0.01em;
-  font-weight: 400;
-  max-width: 52ch;
-}
-
-.manifesto b {
-  font-weight: 600;
-  color: var(--azzurro);
-}
-
-/* ————— lo studio (petrolio) ————— */
-
-.studio {
-  background: var(--panel);
-  color: var(--osso);
-  position: relative;
-  overflow: hidden;
-}
-
-.studio::before {
-  content: '';
-  position: absolute;
-  inset: -20%;
-  background:
-    radial-gradient(50% 60% at 20% 30%, color-mix(in srgb, var(--azzurro) 14%, transparent), transparent 60%),
-    radial-gradient(60% 70% at 85% 75%, color-mix(in srgb, var(--azzurro) 10%, transparent), transparent 65%),
-    radial-gradient(40% 50% at 60% 10%, color-mix(in srgb, var(--osso) 5%, transparent), transparent 60%);
-  animation: drift 30s ease-in-out infinite alternate;
-  pointer-events: none;
-}
-
-@keyframes drift {
-  from { transform: translate(0, 0) rotate(0deg); }
-  to { transform: translate(4%, 6%) rotate(3deg); }
-}
-
-.studioIn {
-  position: relative;
-}
-
-.cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 16px;
-}
-
-.studioCard {
-  height: 100%;
-}
-
-.studioCta {
-  margin-top: 40px;
-  color: var(--osso);
+  .manifestoCols {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
 }
 
 .minorNodes {
-  margin-top: 20px;
+  margin-top: 12px;
+}
+
+/* risultati: titolo su colonna ~25%, numeri inline nel restante spazio */
+.counters {
+  padding: clamp(48px, 7vw, 110px) 0;
+}
+
+.countersGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 3fr);
+  gap: clamp(28px, 4vw, 64px);
+  align-items: start;
+}
+
+.countersTitle {
+  font-size: clamp(28px, 2.6vw, 44px);
+  line-height: 1;
+}
+
+.countersYear {
+  display: block;
+  margin-top: 10px;
+  letter-spacing: 0.08em;
+  color: var(--fg-2);
+}
+
+@media (max-width: 860px) {
+  .countersGrid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
 }
 
 /* ————— metodo (§ 04) ————— */

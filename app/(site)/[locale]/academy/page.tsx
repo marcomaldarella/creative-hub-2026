@@ -36,8 +36,9 @@ export default async function AcademyPage({
   const { locale } = await params
   if (!isLocale(locale)) notFound()
   const t = getDictionary(locale)
-  const { categoria, q } = await searchParams
+  const { categoria, tipo, q } = await searchParams
   const active = typeof categoria === 'string' ? categoria : undefined
+  const activeType = typeof tipo === 'string' ? tipo : undefined
   const query = typeof q === 'string' ? q : undefined
 
   const [courses, teachers] = await Promise.all([
@@ -58,7 +59,10 @@ export default async function AcademyPage({
   const byCategory = active
     ? courses.filter((c) => c.category?.slug?.current === active)
     : courses
-  const filtered = byCategory.filter((c) =>
+  const byType = activeType
+    ? byCategory.filter((c) => c.types?.includes(activeType))
+    : byCategory
+  const filtered = byType.filter((c) =>
     matchesQuery(
       query,
       l(c.title, locale),
@@ -70,6 +74,17 @@ export default async function AcademyPage({
   )
 
   const basePath = localeHref(locale, '/academy')
+
+  // href che preserva l'altro filtro attivo
+  const filterHref = (cat?: string, type?: string) => {
+    const sp = new URLSearchParams()
+    if (cat) sp.set('categoria', cat)
+    if (type) sp.set('tipo', type)
+    const s = sp.toString()
+    return s ? `${basePath}?${s}` : basePath
+  }
+
+  const typeOrder = ['magistrale', 'triennio', 'finanziato', 'gratuito', 'custom'] as const
 
   return (
     <SiteChrome locale={locale} path="/academy">
@@ -90,7 +105,7 @@ export default async function AcademyPage({
         {/* ————— filtri categoria ————— */}
         <nav className={`wrap ${styles.filters}`} aria-label={t.academy.categoryLabel}>
           <Link
-            href={basePath}
+            href={filterHref(undefined, activeType)}
             className={!active ? `${styles.pill} ${styles.pillOn}` : styles.pill}
           >
             {t.common.all}
@@ -98,7 +113,7 @@ export default async function AcademyPage({
           {categories.map((cat) => (
             <Link
               key={cat.slug}
-              href={`${basePath}?categoria=${cat.slug}`}
+              href={filterHref(cat.slug, activeType)}
               className={
                 active === cat.slug
                   ? `${styles.pill} ${styles.pillOn}`
@@ -106,6 +121,20 @@ export default async function AcademyPage({
               }
             >
               {cat.label}
+            </Link>
+          ))}
+          <span className={styles.filterSep} aria-hidden="true" />
+          {typeOrder.map((slug) => (
+            <Link
+              key={slug}
+              href={filterHref(active, activeType === slug ? undefined : slug)}
+              className={
+                activeType === slug
+                  ? `${styles.pill} ${styles.pillOn}`
+                  : styles.pill
+              }
+            >
+              {t.academy.types[slug]}
             </Link>
           ))}
           <SearchBox placeholder={t.common.search} className={styles.search} />

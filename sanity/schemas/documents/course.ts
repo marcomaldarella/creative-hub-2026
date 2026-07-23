@@ -26,6 +26,23 @@ export const course = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: 'types',
+      title: 'Tipologia',
+      description: 'Filtri academy: triennio, magistrale, finanziato, gratuito, custom.',
+      type: 'array',
+      of: [{ type: 'string' }],
+      options: {
+        list: [
+          { title: 'Triennio', value: 'triennio' },
+          { title: 'Magistrale', value: 'magistrale' },
+          { title: 'Finanziato', value: 'finanziato' },
+          { title: 'Gratuito', value: 'gratuito' },
+          { title: 'Custom', value: 'custom' },
+        ],
+        layout: 'grid',
+      },
+    }),
+    defineField({
       name: 'teachers',
       title: 'Docenti',
       type: 'array',

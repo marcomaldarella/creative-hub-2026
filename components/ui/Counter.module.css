@@ -1,7 +1,7 @@
 .row {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: clamp(24px, 4vw, 64px);
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: clamp(32px, 4vw, 64px) clamp(24px, 4vw, 64px);
 }
 
 .stat {
@@ -22,7 +22,7 @@
   height: 3px;
   background: var(--line);
   border-radius: 2px;
-  margin: 16px 0 12px;
+  margin: clamp(14px, 1.6vw, 22px) 0 10px;
   overflow: hidden;
 }
 

@@ -1,0 +1,326 @@
+/* banda scura full-bleed: il carosello vive su --panel in entrambi i temi */
+.sez {
+  --sw: min(64vw, 1120px);
+  --gap: 20px;
+  background: var(--panel);
+  padding: var(--sez) 0;
+  overflow: hidden;
+}
+
+/* ————— header: eyebrow + controlli ————— */
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: clamp(28px, 4vw, 48px);
+}
+
+.eyebrow {
+  letter-spacing: 0.08em;
+  color: var(--azzurro);
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.counter {
+  margin-right: 8px;
+  color: rgba(255, 255, 255, 0.9);
+  letter-spacing: 0.08em;
+}
+
+.counter em {
+  font-style: normal;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.arrow {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.92);
+  cursor: pointer;
+  transition:
+    background var(--dur),
+    border-color var(--dur),
+    color var(--dur),
+    transform var(--dur);
+}
+
+.arrow svg {
+  display: block;
+}
+
+.arrow:hover {
+  background: #fff;
+  border-color: #fff;
+  color: #0a0a0a;
+}
+
+.arrow:active {
+  transform: scale(0.94);
+}
+
+/* ————— viewport + track ————— */
+
+.viewport {
+  cursor: grab;
+  touch-action: pan-y;
+}
+
+.grabbing {
+  cursor: grabbing;
+}
+
+.track {
+  display: flex;
+  gap: var(--gap);
+  width: max-content;
+  padding-left: calc(50vw - var(--sw) / 2);
+  transform: translateX(
+    calc(var(--pos) * (var(--sw) + var(--gap)) * -1 + var(--drag, 0px))
+  );
+  will-change: transform;
+}
+
+.animate {
+  transition: transform 0.7s var(--ease-out);
+}
+
+/* ————— slide ————— */
+
+.slide {
+  position: relative;
+  flex: 0 0 var(--sw);
+  height: clamp(420px, 58vh, 640px);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transform: scale(0.94);
+  opacity: 0.45;
+  transition:
+    transform 0.7s var(--ease-out),
+    opacity 0.5s ease,
+    box-shadow 0.5s ease;
+}
+
+.slideOn {
+  transform: none;
+  opacity: 1;
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--accent) 40%, transparent),
+    0 24px 80px -32px color-mix(in srgb, var(--accent) 45%, transparent);
+}
+
+.img {
+  object-fit: cover;
+  transform: translateX(var(--par, 0%)) scale(1.12);
+  transition: transform 0.7s var(--ease-out);
+}
+
+/* velo per la leggibilità del testo */
+.shade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.18) 0%, transparent 30%),
+    linear-gradient(180deg, transparent 34%, rgba(0, 0, 0, 0.78) 100%);
+}
+
+.body {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: clamp(22px, 3vw, 40px);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  color: #fff;
+}
+
+.kicker {
+  letter-spacing: 0.08em;
+  color: color-mix(in srgb, var(--accent) 85%, #fff);
+}
+
+.title {
+  font-size: clamp(26px, 3.2vw, 48px);
+  line-height: 1.04;
+  max-width: 18ch;
+}
+
+.text {
+  max-width: 56ch;
+  font-size: var(--fs-small);
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.tag {
+  padding: 4px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.26);
+  border-radius: var(--radius-pill);
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.cta {
+  margin-left: auto;
+  padding: 9px 20px;
+  border-radius: var(--radius-pill);
+  background: var(--accent);
+  color: #0a0a0a;
+  font-size: var(--fs-small);
+  font-weight: 500;
+  transition: transform var(--dur), filter var(--dur);
+}
+
+.slideOn:hover .cta {
+  transform: translateX(2px);
+  filter: brightness(1.08);
+}
+
+/* ————— progress stile storia ————— */
+
+.bars {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: clamp(24px, 3.5vw, 40px);
+}
+
+.bar {
+  position: relative;
+  flex: 0 0 clamp(36px, 4vw, 56px);
+  height: 2px;
+  padding: 0;
+  border: none;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.16);
+  cursor: pointer;
+  transition: background var(--dur);
+}
+
+.bar:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* area tocco generosa senza ingrossare la barra */
+.bar::after {
+  content: '';
+  position: absolute;
+  inset: -14px 0;
+}
+
+.barLive,
+.barDone {
+  position: absolute;
+  inset: 0;
+  border-radius: 2px;
+  pointer-events: none;
+}
+
+/* solo la barra attiva prende l'accento; le completate restano bianche */
+.barLive {
+  background: var(--accent);
+}
+
+.barDone {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+/* la barra attiva si riempie in AUTOPLAY_MS (duration inline dal componente)
+   e a fine animazione fa avanzare la slide */
+.barLive {
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  animation-name: storyFill;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+.paused .barLive {
+  animation-play-state: paused;
+}
+
+@keyframes storyFill {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* ————— mobile ————— */
+
+@media (max-width: 860px) {
+  .sez {
+    --sw: 88vw;
+    --gap: 10px;
+  }
+
+  .slide {
+    height: clamp(340px, 52vh, 470px);
+  }
+
+  /* swipe + barre bastano: via le frecce */
+  .arrow {
+    display: none;
+  }
+
+  .body {
+    padding: 18px;
+    gap: 8px;
+  }
+
+  .title {
+    font-size: clamp(24px, 6.6vw, 32px);
+  }
+
+  .text {
+    font-size: 14px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+  }
+
+  .tag {
+    display: none;
+  }
+
+  .cta {
+    margin-left: 0;
+  }
+
+  .bars {
+    gap: 6px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate,
+  .slide,
+  .img {
+    transition: none;
+  }
+
+  /* niente animazione = niente animationend = autoplay spento */
+  .barLive {
+    animation: none;
+    transform: none;
+  }
+}

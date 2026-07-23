@@ -91,6 +91,7 @@ export interface Course {
   language?: LocaleString
   shopUrl?: string
   featured?: boolean
+  types?: string[]
 }
 
 export interface Author {

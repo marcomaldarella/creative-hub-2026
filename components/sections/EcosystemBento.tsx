@@ -11,6 +11,7 @@ export type BentoItem = {
   text: string
   n?: string
   tags?: string
+  cta?: string
 }
 
 export type EcosystemBentoProps = {
@@ -56,10 +57,14 @@ export function EcosystemBento({ items, hrefs }: EcosystemBentoProps) {
           <div className={`mono ${styles.head}`}>
             <span className={styles.n}>{big.n}</span>
             <span className={styles.badge}>{SECTIONS[0].label}</span>
-            <span className={styles.tags}>{big.tags}</span>
           </div>
           <h3 className={styles.title}>{big.title}</h3>
           <p className={styles.text}>{big.text}</p>
+          {big.cta && (
+            <span className={styles.cta}>
+              {big.cta} <span aria-hidden="true">→</span>
+            </span>
+          )}
         </div>
       </Link>
 
@@ -79,10 +84,14 @@ export function EcosystemBento({ items, hrefs }: EcosystemBentoProps) {
             <div className={`mono ${styles.head}`}>
               <span className={styles.n}>{item.n}</span>
               <span className={styles.badge}>{SECTIONS[i + 1].label}</span>
-              <span className={styles.tags}>{item.tags}</span>
             </div>
             <h3 className={styles.title}>{item.title}</h3>
             <p className={styles.text}>{item.text}</p>
+            {item.cta && (
+              <span className={styles.cta}>
+                {item.cta} <span aria-hidden="true">→</span>
+              </span>
+            )}
           </div>
           <div className={styles.sideMedia}>
             <Image

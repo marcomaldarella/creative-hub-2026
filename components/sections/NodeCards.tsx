@@ -35,7 +35,6 @@ export function NodeCards({ cards, hrefs, className }: NodeCardsProps) {
         >
           <div className={`mono ${styles.head}`}>
             <span className={styles.n}>n° {card.n}</span>
-            <span className={styles.tags}>{card.tags}</span>
           </div>
           <h3 className={styles.title}>{card.title}</h3>
           <p className={styles.text}>{card.text}</p>

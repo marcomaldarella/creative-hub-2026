@@ -109,10 +109,6 @@
     "manifestoPre": "Siamo ",
     "manifestoBold": "l'infrastruttura",
     "manifestoPost": " che permette a chi lavora con il suono, l'immagine e il codice di trasformare la propria visione in professione.",
-    "studioKicker": "lo studio",
-    "studioTitle": "Dove il suono prende forma",
-    "studioDesc": "Console SSL, certificazione Dolby Atmos, un team di sound engineer che lavora tra discografia e cinema. Le luci si abbassano, il segnale scorre.",
-    "studioCta": "entra negli studi",
     "ecosystemKicker": "l'ecosistema",
     "ecosystemTitle": "Sei nodi, una rete",
     "nodes": {
@@ -171,7 +167,7 @@
     "opendayTitleLine1": "Un pomeriggio",
     "opendayTitleLine2": "dentro l'Hub",
     "opendayCta": "prenota il tuo posto",
-    "methodKicker": "§ 04 — metodo",
+    "methodKicker": "04 — metodo",
     "method": [
       {
         "n": "01",
@@ -194,46 +190,33 @@
         "text": "Community globale, mentor e industria al tuo fianco."
       }
     ],
-    "networkKicker": "§ 07 — network",
+    "networkKicker": "06 — network",
     "networkTitle": "L'industria creativa\npassa di qui.",
     "networkRight": "partner attivi · 2026",
-    "studioFocus": {
-      "eyebrow": "§ 06 — focus / studio",
-      "titleA": "uno studio",
-      "titleB": "SSL",
-      "desc": "Regia da 55 m² con console SSL XL Desk — una delle poche in Italia — sala live, ISO box per voci e ampli e tre cabine B-Ear. Ingegneri del suono che lavorano ogni giorno con etichette, broadcaster e produttori indipendenti.",
-      "services": [
-        "recording · live tracking",
-        "mix & mastering",
-        "dolby atmos",
-        "sound design & gaming",
-        "podcast & voice over"
-      ],
-      "cta": "entra in studio",
-      "captionLeft": "regia ssl xl desk · 55 m²",
-      "captionRight": "— 06 / studio"
-    },
     "opendayFrameA": "inspire, innovate, excel.",
     "opendayFrameB": "bologna · creative hub",
-    "manifestoNeg": "Non siamo una scuola.\nNon siamo uno studio.\nNon siamo un coworking.",
+    "manifestoNeg": "Siamo l'infrastruttura per chi lavora con suono, immagine, codice e vuole farne un mestiere.",
     "bento": [
       {
-        "title": "Corsi di formazione",
-        "text": "Università, master, corsi finanziati e custom: il percorso che trasforma la passione in professione.",
+        "title": "Laurea & Alta Formazione",
+        "text": "Non un attestato di partecipazione. Una laurea, riconosciuta, in musica, sound e arti visive.",
         "n": "01",
-        "tags": "università · master"
+        "tags": "università · master",
+        "cta": "Entra nel nodo"
       },
       {
         "title": "Registrazione e produzione",
         "text": "Regia SSL XL Desk, sala live, Dolby Atmos: lo studio dove lavora l’industria.",
         "n": "02",
-        "tags": "ssl · dolby atmos"
+        "tags": "ssl · dolby atmos",
+        "cta": "Entra nel nodo"
       },
       {
         "title": "Spazi di lavoro",
         "text": "Coworking, sale riunioni ed eventi nel cuore della zona Roveri.",
         "n": "03",
-        "tags": "coworking · eventi"
+        "tags": "coworking · eventi",
+        "cta": "Entra nel nodo"
       }
     ],
     "nodeCards": [
@@ -258,19 +241,68 @@
         "text": "L'ecosistema, il team, la governance e i partner che rendono Creative Hub possibile.",
         "cta": "Entra nel nodo"
       }
-    ]
+    ],
+    "manifestoCol1": "Una rete di aziende, spazi di lavoro condivisi, una formazione che non finisce in aula: non sono elementi accanto al percorso di studio, ne sono parte integrante. Il percorso di studio e l'ingresso nel settore avvengono nello stesso luogo.",
+    "manifestoCol2": "Chi studia lo fa a fianco di chi già lavora nel settore — nella stessa rete di aziende, negli stessi spazi. Non un tirocinio a fine corso, ma una condizione costante: la formazione resta ancorata a ciò che il mercato richiede oggi, non a un programma fissato anni prima.",
+    "manifestoCta": "Scopri chi siamo",
+    "highlights": {
+      "eyebrow": "05 — hi-lights",
+      "slides": [
+        {
+          "kicker": "studio",
+          "title": "Lo studio di registrazione",
+          "text": "Regia SSL XL Desk da 55 m², sala live, ISO box e suite Dolby Atmos: il cuore tecnico dell'hub, dove lavora l'industria.",
+          "tags": [
+            "ssl xl desk",
+            "dolby atmos",
+            "sala live"
+          ],
+          "cta": "entra negli studi"
+        },
+        {
+          "kicker": "coworking",
+          "title": "Spazi, sale meeting ed eventi",
+          "text": "Open space, sale riunioni e spazi per eventi nel cuore della zona Roveri: dove il lavoro incontra la community.",
+          "tags": [
+            "open space",
+            "sale meeting",
+            "eventi"
+          ],
+          "cta": "scopri gli spazi"
+        },
+        {
+          "kicker": "academy",
+          "title": "Corsi custom su strumento o specializzazione",
+          "text": "Percorsi one-to-one costruiti su strumento, software o obiettivo: calendario, docente e livello su misura.",
+          "tags": [
+            "one-to-one",
+            "su misura",
+            "tutti i livelli"
+          ],
+          "cta": "scopri i corsi custom"
+        }
+      ]
+    }
   },
   "academy": {
     "kicker": "academy",
-    "title": "Corsi e formazione",
-    "lede": "Percorsi che nascono dentro regie e studi veri: si impara facendo, accanto a chi nel settore ci lavora ogni giorno.",
+    "title": "Laurea & Alta Formazione",
+    "lede": "Corsi di laurea, master universitari e percorsi finanziati: un titolo riconosciuto, non solo un attestato.",
     "categoryLabel": "filtra per categoria",
     "empty": "nessun corso in questa categoria.",
     "teachersKicker": "i docenti",
     "teachersTitle": "Chi insegna qui",
     "backToCourses": "tutti i corsi",
     "courseTeachers": "docenti del corso",
-    "courseInfo": "scheda del corso"
+    "courseInfo": "scheda del corso",
+    "typeLabel": "filtra per tipologia",
+    "types": {
+      "magistrale": "magistrale",
+      "triennio": "triennio",
+      "finanziato": "finanziati",
+      "gratuito": "gratuito",
+      "custom": "custom"
+    }
   },
   "studios": {
     "kicker": "lo studio",

@@ -113,6 +113,10 @@
 
 /* padding-right = gap: il loop -50% resta seamless */
 .giantGroup {
+  display: flex;
+}
+
+.giantWord {
   padding-right: 0.45em;
 }
 

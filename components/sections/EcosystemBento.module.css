@@ -3,23 +3,79 @@
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   grid-template-rows: repeat(2, minmax(0, 1fr));
-  gap: 20px;
+  gap: 12px;
 }
 
 .big,
 .side {
+  position: relative;
   background: var(--surface);
   border-radius: var(--radius);
   overflow: hidden;
   transition:
     background 0.25s ease,
+    box-shadow 0.3s ease,
     opacity var(--dur-slow) ease var(--rvd, 0s),
     transform var(--dur-slow) var(--ease-out) var(--rvd, 0s);
 }
 
+/* hover alla vercel: bloom morbido nel colore della sezione… */
 .big:hover,
 .side:hover {
-  background: color-mix(in srgb, var(--surface) 92%, var(--fg) 8%);
+  background: color-mix(in srgb, var(--surface) 94%, var(--accent) 6%);
+  box-shadow:
+    0 0 18px -2px color-mix(in srgb, var(--accent) 50%, transparent),
+    0 0 56px -10px color-mix(in srgb, var(--accent) 35%, transparent);
+}
+
+/* …e ring animato: un arco di luce percorre il perimetro pulsando.
+   La mask lascia visibile solo la cornice di 1.5px del conic-gradient */
+.big::after,
+.side::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: conic-gradient(
+    from var(--ring-angle, 0deg),
+    color-mix(in srgb, var(--accent) 30%, transparent),
+    var(--accent) 45deg,
+    color-mix(in srgb, var(--accent) 30%, transparent) 120deg,
+    color-mix(in srgb, var(--accent) 30%, transparent)
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.big:hover::after,
+.side:hover::after {
+  opacity: 1;
+  animation:
+    ringSpin 3s linear infinite,
+    ringPulse 3s ease-in-out infinite;
+}
+
+@keyframes ringSpin {
+  to { --ring-angle: 360deg; }
+}
+
+@keyframes ringPulse {
+  0%, 100% { filter: brightness(1); opacity: 0.7; }
+  50% { filter: brightness(1.45); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .big:hover::after,
+  .side:hover::after {
+    animation: none;
+    opacity: 1;
+  }
 }
 
 .big {
@@ -86,12 +142,18 @@
   font-weight: 500;
 }
 
-.tags {
-  margin-left: auto;
+/* cta in tinta con la sezione, leggibile anche col giallo fluo */
+.cta {
+  margin-top: 16px;
+  font-size: var(--fs-small);
+  font-weight: 500;
+  color: color-mix(in srgb, var(--accent, var(--azzurro)) 70%, var(--fg));
 }
 
-.tags {
-  color: var(--fg-2);
+.big:hover .cta,
+.side:hover .cta {
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .sideMedia {
