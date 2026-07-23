@@ -104,14 +104,14 @@ export default async function ChiSiamoPage({
           </div>
         </section>
 
-        {/* ————— partner ————— */}
+        {/* ————— partner (ancora del submenu e della cta in home) ————— */}
         {partnerMarks.length > 0 && (
-          <>
+          <div id="partner">
             <Rule left={t.about.partnersRuleLeft} right={t.about.partnersRuleRight} />
             <section className={styles.marqueeSez}>
               <Marquee items={partnerMarks} />
             </section>
-          </>
+          </div>
         )}
 
         {/* ————— contatti ————— */}

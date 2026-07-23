@@ -12,7 +12,7 @@
     "explore": "esplora la sezione",
     "sub": {
       "academy": {
-        "desc": "Formazione · scuola di musica, sound, multimedia, visual.",
+        "desc": "Corsi di laurea, master e alta formazione in musica, sound, multimedia e visual. E corsi custom — per strumento, per codice, per skill — su tempi tuoi.",
         "items": [
           "Corsi universitari",
           "Formazione finanziata",
@@ -282,7 +282,9 @@
           "cta": "scopri i corsi custom"
         }
       ]
-    }
+    },
+    "networkText": "Università, aziende e istituzioni collaborano ai percorsi: portano brief e produzioni reali, ospitano stage e assumono dal network. È la stessa rete che attraversa corsi, studi e coworking.",
+    "networkCta": "Partner"
   },
   "academy": {
     "kicker": "academy",

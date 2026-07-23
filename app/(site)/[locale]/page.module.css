@@ -321,12 +321,42 @@
   letter-spacing: 0.08em;
 }
 
-/* ————— network (§ 07) ————— */
+/* ————— network (§ 06) ————— */
 
-/* titolo centrato, a capo dal dizionario (\n → pre-line) */
+/* titolo a sinistra su due righe + colonna approfondimento/cta a destra */
 .networkHead {
-  text-align: center;
-  white-space: pre-line;
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: clamp(28px, 5vw, 90px);
+  align-items: end;
+  margin-bottom: clamp(32px, 4.5vw, 56px);
+}
+
+.networkKicker {
+  display: block;
+  margin-bottom: 18px;
+  color: var(--azzurro);
+  letter-spacing: 0.08em;
+}
+
+.networkTitle {
+  font-size: var(--fs-h2);
+  white-space: pre-line; /* a capo dal dizionario */
+}
+
+.networkSide p {
+  font-size: clamp(15px, 1.2vw, 18px);
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--fg) 78%, var(--bg));
+  max-width: 46ch;
+}
+
+@media (max-width: 860px) {
+  .networkHead {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    align-items: start;
+  }
 }
 
 .networkFoot {

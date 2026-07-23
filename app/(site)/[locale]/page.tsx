@@ -254,14 +254,46 @@ export default async function HomePage({
           </div>
         </section>
 
-        {/* ————— network (§ 06): marquee partner ————— */}
+        {/* ————— network (§ 06): titolo a sinistra, approfondimento + cta partner a destra ————— */}
         {partnerMarks.length > 0 && (
           <section className={styles.sez}>
             <div className={`wrap ${styles.networkHead}`}>
-              <SectionHeader
-                kicker={t.home.networkKicker}
-                title={t.home.networkTitle}
-              />
+              <div>
+                <Reveal as="span" className={`mono ${styles.networkKicker}`}>
+                  {t.home.networkKicker}
+                </Reveal>
+                <Reveal
+                  as="h2"
+                  className={`display-thin ${styles.networkTitle}`}
+                  delay={80}
+                >
+                  {t.home.networkTitle}
+                </Reveal>
+              </div>
+              <Reveal as="div" className={styles.networkSide} delay={160}>
+                <p>{t.home.networkText}</p>
+                <Link
+                  href={localeHref(locale, '/chi-siamo#partner')}
+                  className={styles.manifestoCta}
+                >
+                  <span>{t.home.networkCta}</span>
+                  <span className={styles.manifestoCtaBall} aria-hidden="true">
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.8"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M4 12h15" />
+                      <path d="M13 5.5 19.5 12 13 18.5" />
+                    </svg>
+                  </span>
+                </Link>
+              </Reveal>
             </div>
             <Marquee items={partnerMarks} />
             <div className={`wrap ${styles.networkFoot}`}>

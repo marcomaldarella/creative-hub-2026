@@ -12,7 +12,7 @@
     "explore": "explore the section",
     "sub": {
       "academy": {
-        "desc": "Education · school of music, sound, multimedia, visual.",
+        "desc": "Degree courses, masters and higher education in music, sound, multimedia and visual. Plus custom courses — by instrument, by code, by skill — on your own schedule.",
         "items": [
           "University courses",
           "Funded training",
@@ -282,7 +282,9 @@
           "cta": "discover custom courses"
         }
       ]
-    }
+    },
+    "networkText": "Universities, companies and institutions shape the paths: they bring real briefs and productions, host internships and hire from the network. The same network that runs through courses, studios and coworking.",
+    "networkCta": "Partners"
   },
   "academy": {
     "kicker": "academy",

@@ -7,7 +7,7 @@
 .card {
   display: flex;
   flex-direction: column;
-  min-height: 340px;
+  min-height: 210px;
   padding: clamp(20px, 2vw, 28px);
   background: var(--surface);
   border: 1px solid var(--line);
@@ -24,61 +24,10 @@
   letter-spacing: 0.08em;
 }
 
-/* palco del visual: colonne sottili alla vercel, sfumate ai bordi */
-.stage {
-  position: relative;
-  flex: 1;
-  display: flex;
-  align-items: center;
-  min-height: 150px;
-  margin: 18px 0 24px;
-}
-
-.stage::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: repeating-linear-gradient(
-    90deg,
-    var(--line) 0 1px,
-    transparent 1px 44px
-  );
-  opacity: 0.55;
-  -webkit-mask-image: radial-gradient(ellipse 90% 80% at 50% 50%, #000 30%, transparent 100%);
-  mask-image: radial-gradient(ellipse 90% 80% at 50% 50%, #000 30%, transparent 100%);
-  pointer-events: none;
-}
-
-.vis {
-  position: relative;
-  width: min(100%, 340px);
-  height: auto;
-  margin: 0 auto;
-}
-
-.visFill {
-  fill: color-mix(in srgb, var(--fg) 12%, transparent);
-}
-
-.visDot {
-  fill: var(--fg-2);
-}
-
-.visAccent {
-  fill: var(--azzurro);
-}
-
-.visLine {
-  stroke: var(--line);
-  stroke-width: 1.5;
-  fill: none;
-}
-
-.card:hover .visAccent {
-  fill: var(--azzurro-hover);
-}
-
+/* titolo+testo ancorati in basso: l'aria sta sopra, alla vercel */
 .title {
+  margin-top: auto;
+  padding-top: 40px;
   font-size: clamp(19px, 1.5vw, 23px);
   font-weight: 600;
   letter-spacing: -0.015em;
@@ -97,10 +46,6 @@
   }
 
   .card {
-    min-height: 280px;
-  }
-
-  .stage {
-    min-height: 120px;
+    min-height: 150px;
   }
 }

@@ -37,7 +37,7 @@
   --nav-h: 64px;
   --topbar-h: 28px;
   --header-h: calc(var(--nav-h) + var(--topbar-h));
-  --radius: 8px;
+  --radius: 6px; /* card leggermente più acute */
   --radius-pill: 999px;
 
   /* sezioni */
