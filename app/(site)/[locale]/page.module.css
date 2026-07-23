@@ -35,7 +35,7 @@
   width: 100%;
   margin: 0 auto;
   padding: clamp(20px, 3vh, 34px) var(--pad) 0;
-  color: color-mix(in srgb, var(--ghiaccio) 55%, transparent);
+  color: var(--ghiaccio); /* pieno: sul gradiente azzurro il 55% era illeggibile */
   position: relative;
   z-index: 3;
 }
@@ -44,6 +44,7 @@
   letter-spacing: 0.06em;
   white-space: pre-line; /* international college of music ↵ sound ↵ multimedia ↵ & visual */
   line-height: 1.6;
+  color: var(--ghiaccio); /* vince sul grigio di .mono: sul blob deve essere bianco */
 }
 
 /* colonna destra: est.1999 ↵ bologna 44.4929°n — giustificata a destra */
