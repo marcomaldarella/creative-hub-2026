@@ -413,15 +413,97 @@
   gap: 10px;
 }
 
+.overlayItem {
+  animation: linkIn 0.5s var(--ease-out) both;
+}
+
+/* riga voce: link a sinistra, + a fine riga */
+.overlayRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
 .overlayLink {
   font-size: clamp(34px, 9vw, 64px);
   color: var(--osso);
-  animation: linkIn 0.5s var(--ease-out) both;
   transition: color 0.2s;
 }
 
 .overlayLink:hover {
   color: var(--azzurro);
+}
+
+/* bottone +: cerchio sottile, il tratto verticale collassa quando aperto (+ → −) */
+.overlayPlus {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border: 1px solid var(--osso-16);
+  border-radius: 50%;
+  color: var(--osso-60);
+  transition: color 0.2s, border-color 0.2s, transform 0.3s var(--ease-out);
+}
+
+.overlayPlus:hover {
+  color: var(--osso);
+  border-color: var(--osso-60);
+}
+
+.plusV {
+  transform-origin: center;
+  transition: transform 0.3s var(--ease-out), opacity 0.2s;
+}
+
+/* aperto: il tratto verticale collassa, resta il − */
+.overlayPlusOpen {
+  color: var(--osso);
+  border-color: var(--osso-60);
+}
+
+.overlayPlusOpen .plusV {
+  transform: scaleY(0);
+  opacity: 0;
+}
+
+/* sottovoci: accordion via grid-rows (animabile senza misurare altezze) */
+.overlaySub {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.4s var(--ease-out);
+}
+
+.overlaySub > div {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.overlaySubOpen {
+  grid-template-rows: 1fr;
+}
+
+.overlaySubLink {
+  font-size: clamp(17px, 4.4vw, 22px);
+  line-height: 1.4;
+  padding: 7px 0;
+  color: var(--osso-60);
+  transition: color 0.2s;
+}
+
+.overlaySub > div .overlaySubLink:first-child {
+  padding-top: 14px;
+}
+
+.overlaySub > div .overlaySubLink:last-child {
+  padding-bottom: 18px;
+}
+
+.overlaySubLink:hover {
+  color: var(--osso);
 }
 
 @keyframes linkIn {

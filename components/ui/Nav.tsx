@@ -75,8 +75,13 @@ export function Nav({
 }: NavProps) {
   const [open, setOpen] = useState(false);
   const [topOpen, setTopOpen] = useState(true);
+  // accordion overlay: indice della voce espansa (una alla volta)
+  const [expanded, setExpanded] = useState<number | null>(null);
   const overlayId = useId();
-  const close = useCallback(() => setOpen(false), []);
+  const close = useCallback(() => {
+    setOpen(false);
+    setExpanded(null);
+  }, []);
 
   // topbar chiusa: resta chiusa per la sessione, e l'header si accorcia
   useEffect(() => {
@@ -302,17 +307,75 @@ export function Nav({
         className={open ? `${styles.overlay} ${styles.open}` : styles.overlay}
       >
         <nav className={styles.overlayNav}>
-          {items.map((item, i) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              onClick={close}
-              className={`display-thin ${styles.overlayLink}`}
-              style={{ animationDelay: `${80 + i * 50}ms` }}
-            >
-              {item.label}
-            </Link>
-          ))}
+          {items.map((item, i) => {
+            const isOpen = expanded === i;
+            const hasSub = !!item.sub?.entries.length;
+            return (
+              <div
+                key={item.href}
+                className={styles.overlayItem}
+                style={{ animationDelay: `${80 + i * 50}ms` }}
+              >
+                <div className={styles.overlayRow}>
+                  <Link
+                    href={item.href}
+                    onClick={close}
+                    className={`display-thin ${styles.overlayLink}`}
+                  >
+                    {item.label}
+                  </Link>
+                  {hasSub && (
+                    <button
+                      type="button"
+                      className={
+                        isOpen
+                          ? `${styles.overlayPlus} ${styles.overlayPlusOpen}`
+                          : styles.overlayPlus
+                      }
+                      aria-expanded={isOpen}
+                      aria-label={item.label}
+                      onClick={() => setExpanded(isOpen ? null : i)}
+                    >
+                      <svg
+                        width="18"
+                        height="18"
+                        viewBox="0 0 18 18"
+                        stroke="currentColor"
+                        strokeWidth="1.6"
+                        strokeLinecap="round"
+                        aria-hidden="true"
+                      >
+                        <path d="M9 3v12" className={styles.plusV} />
+                        <path d="M3 9h12" />
+                      </svg>
+                    </button>
+                  )}
+                </div>
+                {hasSub && (
+                  <div
+                    className={
+                      isOpen
+                        ? `${styles.overlaySub} ${styles.overlaySubOpen}`
+                        : styles.overlaySub
+                    }
+                  >
+                    <div>
+                      {item.sub!.entries.map((entry) => (
+                        <Link
+                          key={entry.href + entry.label}
+                          href={entry.href}
+                          onClick={close}
+                          className={styles.overlaySubLink}
+                        >
+                          {entry.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </nav>
         <div className={styles.overlayFoot}>
           {lang}
