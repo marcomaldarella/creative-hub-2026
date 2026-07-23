@@ -45,7 +45,12 @@
     grid-template-columns: 1fr;
   }
 
+  /* niente aria gonfiata in colonna singola: card compatte */
   .card {
-    min-height: 150px;
+    min-height: 0;
+  }
+
+  .title {
+    padding-top: 22px;
   }
 }
