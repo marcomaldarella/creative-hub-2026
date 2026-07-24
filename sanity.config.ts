@@ -14,7 +14,7 @@ export default defineConfig({
   title: 'creative hub — bologna',
   projectId,
   dataset,
-  basePath: '/studio',
+  basePath: '/admin', // NON /studio: troppo vicino a /studios (pagina del sito)
   plugins: [structureTool({ structure }), visionTool()],
   schema: {
     types: schemaTypes,

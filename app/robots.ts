@@ -5,7 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: '/',
-      disallow: ['/studio'], // Sanity Studio embedded
+      disallow: ['/admin', '/studio'], // Sanity Studio embedded (+ vecchio path)
     },
     sitemap: 'https://bologna-creativehub.it/sitemap.xml',
   }
