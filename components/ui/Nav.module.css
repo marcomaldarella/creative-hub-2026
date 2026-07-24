@@ -385,9 +385,8 @@
   position: fixed;
   inset: 0;
   z-index: 1;
-  background: color-mix(in srgb, var(--panel) 62%, transparent);
-  backdrop-filter: blur(44px) saturate(2);
-  -webkit-backdrop-filter: blur(44px) saturate(2);
+  /* opaco pieno, come i pannelli del mega-menu (regola cliente) */
+  background: var(--panel);
   color: var(--osso);
   padding: calc(var(--nav-h) + 28px) var(--pad) 40px;
   flex-direction: column;
