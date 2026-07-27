@@ -75,6 +75,9 @@
 .viewport {
   cursor: grab;
   touch-action: pan-y;
+  /* niente selezione testo mentre si trascina */
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .grabbing {

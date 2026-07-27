@@ -201,6 +201,8 @@ export function HighlightsCarousel({
         onPointerUp={onUp}
         onPointerCancel={onUp}
         onClickCapture={onClickCapture}
+        /* il drag nativo di link/immagini ucciderebbe i pointer event */
+        onDragStart={(e) => e.preventDefault()}
       >
         <div
           className={anim && drag === 0 ? `${styles.track} ${styles.animate}` : styles.track}
@@ -230,6 +232,7 @@ export function HighlightsCarousel({
                 }
                 aria-hidden={clone || !active}
                 tabIndex={active ? 0 : -1}
+                draggable={false}
                 onClick={(e) => {
                   if (!active) {
                     e.preventDefault()
@@ -244,6 +247,7 @@ export function HighlightsCarousel({
                   sizes="(max-width: 860px) 88vw, 64vw"
                   className={styles.img}
                   placeholder="blur"
+                  draggable={false}
                 />
                 <div className={styles.shade} />
                 <div className={styles.body}>
