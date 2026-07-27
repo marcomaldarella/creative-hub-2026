@@ -84,7 +84,9 @@
     "coords": "est.1999\nbologna 44.4929°n, 11.3429°e",
     "lede": "L'infrastruttura che trasforma suono, immagine e codice in professione.",
     "tagline": "inspire, innovate, excel.",
-    "discover": "scopri l'hub"
+    "discover": "scopri l'hub",
+    "caption": "Scuola internazionale di musica, studio di registrazione e spazi co-working.",
+    "captionSub": "Bologna dal 1999."
   },
   "common": {
     "readMore": "leggi",
@@ -110,7 +112,7 @@
     "manifestoBold": "l'infrastruttura",
     "manifestoPost": " che permette a chi lavora con il suono, l'immagine e il codice di trasformare la propria visione in professione.",
     "ecosystemKicker": "l'ecosistema",
-    "ecosystemTitle": "Sei nodi, una rete",
+    "ecosystemTitle": "3 nodi, una rete",
     "nodes": {
       "academy": {
         "title": "Corsi e formazione",
@@ -168,6 +170,8 @@
     "opendayTitleLine2": "dentro l'Hub",
     "opendayCta": "prenota il tuo posto",
     "methodKicker": "04 — metodo",
+    "methodEyebrow": "metodo",
+    "methodTitle": "Il metodo è uno: si studia dentro l'industria, non accanto.",
     "method": [
       {
         "n": "01",

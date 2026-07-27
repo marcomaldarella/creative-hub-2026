@@ -27,12 +27,22 @@
   color: var(--ghiaccio, currentColor);
   /* il resto dell'orb è decorativo, ma le label navigano */
   pointer-events: auto;
+  transition: color 0.3s ease;
+}
+
+/* stessa logica delle HeroWords: in hover il pin prende il colore della
+   sua sezione (testo, linea e punto via currentColor) e il testo irradia */
+.hud:hover {
+  color: var(--wcol, var(--ghiaccio));
 }
 
 .hud:hover .hudTxt {
   opacity: 1;
   filter: blur(0);
   transform: translate(0, 0);
+  text-shadow:
+    0 0 18px color-mix(in srgb, var(--wcol, var(--ghiaccio)) 55%, transparent),
+    0 0 64px color-mix(in srgb, var(--wcol, var(--ghiaccio)) 32%, transparent);
 }
 
 /* su touch l'autoplay è solo presentazione: niente tap-navigazione */
@@ -53,7 +63,8 @@
   transition:
     opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
     transform 0.75s cubic-bezier(0.16, 1, 0.3, 1),
-    filter 0.55s ease;
+    filter 0.55s ease,
+    text-shadow 0.3s ease;
   transition-delay: 0s;
 }
 
@@ -164,6 +175,41 @@
   height: 1px;
   width: clamp(56px, 8.5vw, 118px);
   transform-origin: right center;
+}
+
+/* ————— variante home 2: pin sempre visibili in filigrana —————
+   Le regole stanno DOPO quelle di .on: a parità di specificità le
+   versioni "piene" (.dim .on / .dim .hud:hover) devono vincere. */
+
+.dim .hudTxt {
+  opacity: 0.3;
+  filter: blur(0);
+  transform: translate(0, 0);
+}
+
+.dim .hudLn {
+  transform: scaleX(1);
+  opacity: 0.22;
+}
+
+.dim .hudDot {
+  transform: scale(1);
+  opacity: 0.22;
+}
+
+.dim .on .hudTxt,
+.dim .hud:hover .hudTxt {
+  opacity: 1;
+}
+
+.dim .on .hudLn,
+.dim .hud:hover .hudLn {
+  opacity: 0.55;
+}
+
+.dim .on .hudDot,
+.dim .hud:hover .hudDot {
+  opacity: 0.55;
 }
 
 /* mobile: niente puntatore — le HUD entrano in autoplay, riposizionate

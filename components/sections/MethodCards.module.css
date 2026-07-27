@@ -1,56 +1,71 @@
+/* metodo nudo (ref mock): blocco indentato da sinistra, eyebrow +
+   statement, quattro colonne con hairline, numerone, titolo, testo */
+
+.wrap {
+  margin-left: clamp(0px, 16vw, 280px);
+}
+
+.eyebrow {
+  display: block;
+  letter-spacing: 0.14em;
+  color: var(--fg-2);
+}
+
+.title {
+  margin: 16px 0 clamp(28px, 4vw, 48px);
+  font-size: clamp(24px, 2.3vw, 38px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.18;
+  max-width: 26ch;
+}
+
 .grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 26px;
 }
 
-.card {
-  display: flex;
-  flex-direction: column;
-  min-height: 210px;
-  padding: clamp(20px, 2vw, 28px);
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  transition: border-color var(--dur);
+.item {
+  border-top: 1px solid var(--line);
+  padding-top: 20px;
 }
 
-.card:hover {
-  border-color: color-mix(in srgb, var(--fg) 26%, var(--line));
-}
-
-.label {
-  color: var(--azzurro);
-  letter-spacing: 0.08em;
-}
-
-/* titolo+testo ancorati in basso: l'aria sta sopra, alla vercel */
-.title {
-  margin-top: auto;
-  padding-top: 40px;
-  font-size: clamp(19px, 1.5vw, 23px);
+.num {
+  display: block;
+  font-size: clamp(40px, 3.4vw, 60px);
   font-weight: 600;
-  letter-spacing: -0.015em;
-  margin-bottom: 8px;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.itemTitle {
+  margin-top: 18px;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
 }
 
 .text {
+  margin-top: 6px;
   font-size: var(--fs-small);
   color: var(--fg-2);
-  max-width: 44ch;
+  max-width: 30ch;
 }
 
-@media (max-width: 860px) {
+@media (max-width: 900px) {
+  .wrap {
+    margin-left: 0;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 32px 22px;
+  }
+}
+
+@media (max-width: 520px) {
   .grid {
     grid-template-columns: 1fr;
-  }
-
-  /* niente aria gonfiata in colonna singola: card compatte */
-  .card {
-    min-height: 0;
-  }
-
-  .title {
-    padding-top: 22px;
   }
 }

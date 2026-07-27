@@ -17,9 +17,8 @@ export type NodeCardsProps = {
 }
 
 /**
- * I nodi secondari come da reference: eyebrow "N° 0X" + tag a destra,
- * titolo FreeFat gigante in basso, testo e "Entra nel nodo →".
- * Colonne separate da hairline, fondo trasparente.
+ * I nodi secondari, ridotti all'osso: eyebrow "n° 0X" + titolo in basso.
+ * Testo e CTA nascosti (i campi restano nei dizionari), hover bianco.
  */
 export function NodeCards({ cards, hrefs, className }: NodeCardsProps) {
   return (
@@ -37,10 +36,6 @@ export function NodeCards({ cards, hrefs, className }: NodeCardsProps) {
             <span className={styles.n}>n° {card.n}</span>
           </div>
           <h3 className={styles.title}>{card.title}</h3>
-          <p className={styles.text}>{card.text}</p>
-          <span className={styles.cta}>
-            {card.cta} <span aria-hidden="true">→</span>
-          </span>
         </Link>
       ))}
     </RevealGroup>

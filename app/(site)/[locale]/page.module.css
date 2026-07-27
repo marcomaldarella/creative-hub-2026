@@ -158,6 +158,36 @@
   max-width: 34ch;
 }
 
+/* variante home 2: TUTTO nel primo viewport — la hero è alta esattamente
+   uno schermo e la caption è sovrapposta in basso a sinistra */
+.heroFit {
+  height: 100svh;
+  min-height: 0;
+}
+
+.heroCaption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0 var(--pad) clamp(28px, 4.5vh, 56px);
+  z-index: 3;
+}
+
+.heroCaption p {
+  font-size: clamp(17px, 1.4vw, 21px);
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  max-width: 34ch;
+  color: var(--ghiaccio);
+}
+
+.heroCaptionSub {
+  display: block;
+  color: color-mix(in srgb, var(--ghiaccio) 55%, transparent);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .ring {
     animation: none;

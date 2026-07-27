@@ -84,7 +84,9 @@
     "coords": "est.1999\nbologna 44.4929°n, 11.3429°e",
     "lede": "The infrastructure that turns sound, image and code into a profession.",
     "tagline": "inspire, innovate, excel.",
-    "discover": "discover the hub"
+    "discover": "discover the hub",
+    "caption": "International school of music, recording studio and co-working spaces.",
+    "captionSub": "Bologna, since 1999."
   },
   "common": {
     "readMore": "read",
@@ -110,7 +112,7 @@
     "manifestoBold": "the infrastructure",
     "manifestoPost": " that lets people who work with sound, image and code turn their vision into a profession.",
     "ecosystemKicker": "the ecosystem",
-    "ecosystemTitle": "Six nodes, one network",
+    "ecosystemTitle": "3 nodes, one network",
     "nodes": {
       "academy": {
         "title": "Courses and training",
@@ -168,6 +170,8 @@
     "opendayTitleLine2": "inside the Hub",
     "opendayCta": "book your spot",
     "methodKicker": "04 — method",
+    "methodEyebrow": "method",
+    "methodTitle": "The method is one: you study inside the industry, not next to it.",
     "method": [
       {
         "n": "01",

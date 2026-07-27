@@ -46,19 +46,40 @@ float snoise(vec3 v){
 
 type Zone = 'l' | 'r' | 't' | null
 
-const HUD_LABELS: { zone: Exclude<Zone, null>; label: string }[] = [
-  { zone: 'l', label: 'Academy' },
-  { zone: 't', label: 'Coworking' },
-  { zone: 'r', label: 'Recording' },
+/* accento di sezione per pin: token CSS per colore/glow, rgb per la tinta shader */
+const HUD_LABELS: {
+  zone: Exclude<Zone, null>
+  label: string
+  token: string
+  rgb: [number, number, number]
+}[] = [
+  { zone: 'l', label: 'Academy', token: 'var(--azzurro)', rgb: [0.31, 0.66, 0.87] },
+  { zone: 't', label: 'Coworking', token: 'var(--giallo-fluo)', rgb: [0.87, 1.0, 0.23] },
+  { zone: 'r', label: 'Recording', token: 'var(--arancio)', rgb: [1.0, 0.43, 0.07] },
 ]
+
+/* stessa logica delle HeroWords: avvisa l'orb che deve tingersi */
+const tintEvent = (rgb: [number, number, number] | null) => {
+  window.dispatchEvent(
+    new CustomEvent('hero-tint', {
+      detail: rgb ? { on: true, rgb } : { on: false },
+    })
+  )
+}
 
 export function HeroOrb({
   className,
   hrefs,
+  dimPins,
+  pins = true,
 }: {
   className?: string
   /** destinazioni delle zone hot: [academy, coworking, recording] */
   hrefs?: [string, string, string]
+  /** variante home 2: i pin sono sempre visibili a bassa opacità */
+  dimPins?: boolean
+  /** false: sfera nuda, nessun pin (variante con le tre parole al centro) */
+  pins?: boolean
 }) {
   const hostRef = useRef<HTMLDivElement>(null)
   const [ready, setReady] = useState(false)
@@ -122,6 +143,9 @@ export function HeroOrb({
         uSize: { value: 4.4 * dpr },
         // rottura/swirl: caricata dalla velocità del mouse, decade a molla
         uBurst: { value: 0 },
+        // tinta di sezione (hover sulle tre parole): colore + intensità
+        uTint: { value: 0 },
+        uTintCol: { value: new THREE.Color(1, 1, 1) },
       }
 
       const mat = new THREE.ShaderMaterial({
@@ -207,6 +231,8 @@ export function HeroOrb({
         fragmentShader: /* glsl */ `
           precision mediump float;
           uniform float uTheme;
+          uniform float uTint;
+          uniform vec3  uTintCol;
           varying float vGlow;
           varying float vFace;
           varying float vBand;
@@ -228,6 +254,9 @@ export function HeroOrb({
             // micro-temperatura per grano: monocromo più ricco
             col *= mix(vec3(1.025, 1.0, 0.965), vec3(0.965, 1.0, 1.035), vTemp);
             col += core * mix(0.08, 0.20, uTheme) * vBand; // scintilla sul davanti
+            // tinta di sezione: mescola verso il colore mantenendo il chiaroscuro
+            float lum = dot(col, vec3(0.3333));
+            col = mix(col, uTintCol * (0.25 + 1.45*lum), uTint);
             float alpha = a * (0.28 + 0.48*vFace) * (1.0 - vHalo*0.45);
             gl_FragColor = vec4(col, alpha);
           }
@@ -372,6 +401,19 @@ export function HeroOrb({
       window.addEventListener('pointermove', onPointerMove, { passive: true })
       document.documentElement.addEventListener('pointerleave', onPointerLeave)
 
+      /* ——— tinta di sezione: le HeroWords avvisano via CustomEvent ——— */
+      let tintTarget = 0
+      const onTint = (e: Event) => {
+        const d = (e as CustomEvent).detail
+        if (d?.on && Array.isArray(d.rgb)) {
+          uniforms.uTintCol.value.setRGB(d.rgb[0], d.rgb[1], d.rgb[2])
+          tintTarget = 0.85
+        } else {
+          tintTarget = 0
+        }
+      }
+      window.addEventListener('hero-tint', onTint)
+
       /* ——— autoplay su touch: cicla le zone e gonfia la sfera verso la label ——— */
       const AUTO_DIR: Record<Exclude<Zone, null>, [number, number]> = {
         l: [-0.7, 0.6],
@@ -434,6 +476,7 @@ export function HeroOrb({
         burstTarget *= 0.94
         burstCur += (burstTarget - burstCur) * 0.16
         uniforms.uBurst.value = burstCur
+        uniforms.uTint.value += (tintTarget - uniforms.uTint.value) * 0.08
         uniforms.uTheme.value += (themeTarget - uniforms.uTheme.value) * 0.06
 
         group.rotation.y = current.ry + t * 0.022
@@ -452,6 +495,7 @@ export function HeroOrb({
       cleanup = () => {
         cancelAnimationFrame(raf)
         autoTimers.forEach(clearTimeout)
+        window.removeEventListener('hero-tint', onTint)
         window.removeEventListener('pointermove', onPointerMove)
         document.documentElement.removeEventListener(
           'pointerleave',
@@ -477,38 +521,51 @@ export function HeroOrb({
   return (
     <div
       ref={hostRef}
-      className={[styles.host, ready ? styles.ready : '', className]
+      className={[
+        styles.host,
+        ready ? styles.ready : '',
+        dimPins ? styles.dim : '',
+        className,
+      ]
         .filter(Boolean)
         .join(' ')}
     >
-      {HUD_LABELS.map(({ zone: z, label }, i) => {
-        const href = hrefs?.[i]
-        const cls = [
-          styles.hud,
-          styles[`hud_${z}`],
-          zone === z ? styles.on : '',
-        ]
-          .filter(Boolean)
-          .join(' ')
-        const inner = (
-          <>
-            <span className={styles.hudTxt}>{label}</span>
-            <span className={styles.hudArm} aria-hidden="true">
-              <span className={styles.hudLn} />
-              <span className={styles.hudDot} />
-            </span>
-          </>
-        )
-        return href ? (
-          <Link key={z} href={href} className={cls}>
-            {inner}
-          </Link>
-        ) : (
-          <div key={z} className={cls} aria-hidden="true">
-            {inner}
-          </div>
-        )
-      })}
+      {pins &&
+        HUD_LABELS.map(({ zone: z, label, token, rgb }, i) => {
+          const href = hrefs?.[i]
+          const cls = [
+            styles.hud,
+            styles[`hud_${z}`],
+            zone === z ? styles.on : '',
+          ]
+            .filter(Boolean)
+            .join(' ')
+          const accent = { '--wcol': token } as React.CSSProperties
+          const hover = {
+            onPointerEnter: () => tintEvent(rgb),
+            onPointerLeave: () => tintEvent(null),
+            onFocus: () => tintEvent(rgb),
+            onBlur: () => tintEvent(null),
+          }
+          const inner = (
+            <>
+              <span className={styles.hudTxt}>{label}</span>
+              <span className={styles.hudArm} aria-hidden="true">
+                <span className={styles.hudLn} />
+                <span className={styles.hudDot} />
+              </span>
+            </>
+          )
+          return href ? (
+            <Link key={z} href={href} className={cls} style={accent} {...hover}>
+              {inner}
+            </Link>
+          ) : (
+            <div key={z} className={cls} style={accent} aria-hidden="true" {...hover}>
+              {inner}
+            </div>
+          )
+        })}
     </div>
   )
 }

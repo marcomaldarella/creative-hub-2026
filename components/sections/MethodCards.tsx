@@ -7,20 +7,31 @@ export type MethodItem = {
 }
 
 /**
- * Metodo come griglia 2×2 di card alla Vercel: label mono in alto,
- * titolo+testo ancorati in basso. Tutto su token semantici: inverte
- * col tema da solo.
+ * Metodo senza card: eyebrow + statement, poi quattro colonne nude —
+ * hairline in testa, numerone, titolo, testo. Tutto su token semantici.
  */
-export function MethodCards({ items }: { items: MethodItem[] }) {
+export function MethodCards({
+  eyebrow,
+  title,
+  items,
+}: {
+  eyebrow: string
+  title: string
+  items: MethodItem[]
+}) {
   return (
-    <div className={styles.grid}>
-      {items.map((m) => (
-        <article key={m.n} className={styles.card}>
-          <span className={`mono ${styles.label}`}>I/{m.n}</span>
-          <h3 className={styles.title}>{m.title}</h3>
-          <p className={styles.text}>{m.text}</p>
-        </article>
-      ))}
+    <div className={styles.wrap}>
+      <span className={`mono ${styles.eyebrow}`}>{eyebrow}</span>
+      <h2 className={styles.title}>{title}</h2>
+      <div className={styles.grid}>
+        {items.map((m) => (
+          <div key={m.n} className={styles.item}>
+            <span className={styles.num}>{m.n}</span>
+            <h3 className={styles.itemTitle}>{m.title}</h3>
+            <p className={styles.text}>{m.text}</p>
+          </div>
+        ))}
+      </div>
     </div>
   )
 }

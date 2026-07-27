@@ -199,8 +199,26 @@
     min-height: 420px;
   }
 
+  /* le card 02/03 diventano come la 01: media sopra, testo sotto
+     (column-reverse: nel DOM il body precede il media) */
   .side {
-    min-height: 240px;
+    display: flex;
+    flex-direction: column-reverse;
+    min-height: 420px;
+  }
+
+  .sideMedia {
+    flex: 1;
+    min-height: 0;
+  }
+
+  .sideBody {
+    padding: 22px 28px 30px;
+  }
+
+  .sideBody .title {
+    margin-top: 16px;
+    padding-top: 0;
   }
 }
 

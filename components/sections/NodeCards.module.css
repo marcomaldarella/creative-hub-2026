@@ -7,7 +7,8 @@
 }
 
 .card {
-  --accent: var(--azzurro);
+  /* bloom e ring in bianco (inchiostro in light): il colore resta al numerino */
+  --accent: var(--fg);
   position: relative;
   display: flex;
   flex-direction: column;
@@ -94,25 +95,6 @@
   font-weight: 600;
   letter-spacing: -0.01em;
   color: var(--fg);
-}
-
-.text {
-  margin-top: 8px;
-  font-size: var(--fs-small);
-  color: var(--fg-2);
-  max-width: 40ch;
-}
-
-.cta {
-  margin-top: 18px;
-  font-size: var(--fs-small);
-  font-weight: 500;
-  color: var(--azzurro);
-}
-
-.card:hover .cta {
-  text-decoration: underline;
-  text-underline-offset: 3px;
 }
 
 @media (max-width: 900px) {
