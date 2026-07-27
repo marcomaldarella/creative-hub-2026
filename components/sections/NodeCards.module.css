@@ -84,8 +84,10 @@
   letter-spacing: 0.06em;
 }
 
+/* numero come nei nodi 01/02/03: bianco su dark, inchiostro su light */
 .n {
-  color: var(--azzurro);
+  color: var(--fg);
+  font-weight: 500;
 }
 
 /* titolo come le altre card, ancorato in basso */

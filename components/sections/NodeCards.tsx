@@ -33,7 +33,7 @@ export function NodeCards({ cards, hrefs, className }: NodeCardsProps) {
           style={{ transitionDelay: `${i * 90}ms` }}
         >
           <div className={`mono ${styles.head}`}>
-            <span className={styles.n}>n° {card.n}</span>
+            <span className={styles.n}>{card.n}</span>
           </div>
           <h3 className={styles.title}>{card.title}</h3>
         </Link>

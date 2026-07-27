@@ -24,7 +24,7 @@
   display: flex;
   align-items: center;
   gap: 14px;
-  color: var(--ghiaccio, currentColor);
+  color: var(--fg); /* segue il tema: inchiostro su bianco, ghiaccio su nero */
   /* il resto dell'orb è decorativo, ma le label navigano */
   pointer-events: auto;
   transition: color 0.3s ease;
@@ -33,7 +33,7 @@
 /* stessa logica delle HeroWords: in hover il pin prende il colore della
    sua sezione (testo, linea e punto via currentColor) e il testo irradia */
 .hud:hover {
-  color: var(--wcol, var(--ghiaccio));
+  color: var(--wcol, var(--fg));
 }
 
 .hud:hover .hudTxt {
@@ -41,8 +41,8 @@
   filter: blur(0);
   transform: translate(0, 0);
   text-shadow:
-    0 0 18px color-mix(in srgb, var(--wcol, var(--ghiaccio)) 55%, transparent),
-    0 0 64px color-mix(in srgb, var(--wcol, var(--ghiaccio)) 32%, transparent);
+    0 0 18px color-mix(in srgb, var(--wcol, var(--fg)) 55%, transparent),
+    0 0 64px color-mix(in srgb, var(--wcol, var(--fg)) 32%, transparent);
 }
 
 /* su touch l'autoplay è solo presentazione: niente tap-navigazione */

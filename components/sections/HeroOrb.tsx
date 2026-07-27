@@ -115,7 +115,10 @@ export function HeroOrb({
 
       const scene = new THREE.Scene()
       const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100)
-      camera.position.z = 4.4
+      // camera arretrata + canvas più largo (in page.module.css): la sfera
+      // resta della stessa dimensione visiva ma estrusioni/burst dell'hover
+      // hanno margine e non vengono MAI tagliati dal bordo del canvas
+      camera.position.z = 5.3
 
       /* ——— sfera: Fibonacci + guscio sottile ——— */
       const pos = new Float32Array(PARTICLES * 3)

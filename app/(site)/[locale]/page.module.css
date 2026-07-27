@@ -13,15 +13,16 @@
   flex-direction: column;
   overflow: hidden;
   position: relative;
-  color: var(--ghiaccio);
-  /* light: la palette azzurra delle CTA (mood cover "Tips and Tools") */
-  background:
-    radial-gradient(90% 70% at 50% 42%, #6FBAE8 0%, transparent 60%),
-    linear-gradient(150deg, #5FB0E2 0%, #4FA8DF 48%, #2E7FB5 100%);
+  /* mono in entrambi i temi: nero su bianco in light, bianco su nero in
+     dark. --hero-glow spegne le ombre di testo dove farebbero sporco */
+  color: var(--fg);
+  --hero-glow: none;
+  background: var(--bg);
 }
 
-/* dark: il petrolio profondo resta qui */
+/* dark: nero profondo con una vignettatura appena percepibile */
 :global([data-theme='dark']) .hero {
+  --hero-glow: 0 12px 60px rgba(4, 16, 20, 0.65);
   background:
     radial-gradient(90% 70% at 50% 42%, #1a1c1e 0%, transparent 60%),
     linear-gradient(150deg, #131416 0%, #0b0c0d 48%, #060707 100%);
@@ -35,7 +36,7 @@
   width: 100%;
   margin: 0 auto;
   padding: clamp(20px, 3vh, 34px) var(--pad) 0;
-  color: var(--ghiaccio); /* pieno: sul gradiente azzurro il 55% era illeggibile */
+  color: var(--fg); /* segue il tema: inchiostro su bianco, ghiaccio su nero */
   position: relative;
   z-index: 3;
 }
@@ -44,7 +45,7 @@
   letter-spacing: 0.06em;
   white-space: pre-line; /* international college of music ↵ sound ↵ multimedia ↵ & visual */
   line-height: 1.6;
-  color: var(--ghiaccio); /* vince sul grigio di .mono: sul blob deve essere bianco */
+  color: var(--fg); /* vince sul grigio di .mono: sul blob deve essere pieno */
 }
 
 /* colonna destra: est.1999 ↵ bologna 44.4929°n — giustificata a destra */
@@ -66,9 +67,10 @@
   grid-area: 1 / 1;
 }
 
-/* canvas più largo dell'orb visibile: margine per l'estrusione col mouse */
+/* canvas MOLTO più largo dell'orb visibile (camera a 5.3 nel component):
+   margine per estrusione/burst col mouse — la nuvola non si taglia mai */
 .orb {
-  width: min(74vh, 92vw, 740px);
+  width: min(89vh, 110vw, 890px);
   aspect-ratio: 1;
 }
 
@@ -84,7 +86,7 @@
   font-family: var(--font-body), sans-serif;
   font-size: 2.3px;
   letter-spacing: 0.28em;
-  fill: var(--ghiaccio); /* opaco: le sovrapposizioni dei trattini non si vedono */
+  fill: var(--fg); /* opaco: le sovrapposizioni dei trattini non si vedono */
 }
 
 /* tracking negativo: gli em-dash si sovrappongono e fondono in
@@ -105,7 +107,7 @@
   line-height: 0.86;
   z-index: 2;
   transform: translateY(10%);
-  text-shadow: 0 12px 60px rgba(4, 16, 20, 0.65);
+  text-shadow: var(--hero-glow);
 }
 
 .heroSub {
@@ -129,7 +131,7 @@
 }
 
 .tagline {
-  color: color-mix(in srgb, var(--ghiaccio) 55%, transparent);
+  color: color-mix(in srgb, var(--fg) 55%, transparent);
   letter-spacing: 0.08em;
 }
 
@@ -139,17 +141,17 @@
   align-items: center;
   gap: 10px;
   padding: 13px 28px;
-  border: 1px solid color-mix(in srgb, var(--ghiaccio) 38%, transparent);
+  border: 1px solid color-mix(in srgb, var(--fg) 38%, transparent);
   border-radius: var(--radius-pill);
   font-size: var(--fs-small);
   font-weight: 500;
-  color: var(--ghiaccio);
+  color: var(--fg);
   transition: border-color var(--dur), background var(--dur), transform var(--dur);
 }
 
 .heroCta:hover {
-  border-color: var(--ghiaccio);
-  background: color-mix(in srgb, var(--ghiaccio) 8%, transparent);
+  border-color: var(--fg);
+  background: color-mix(in srgb, var(--fg) 8%, transparent);
   transform: translateY(-1px);
 }
 
@@ -180,12 +182,12 @@
   line-height: 1.35;
   letter-spacing: -0.01em;
   max-width: 34ch;
-  color: var(--ghiaccio);
+  color: var(--fg);
 }
 
 .heroCaptionSub {
   display: block;
-  color: color-mix(in srgb, var(--ghiaccio) 55%, transparent);
+  color: color-mix(in srgb, var(--fg) 55%, transparent);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -203,6 +205,12 @@
 
   .heroTitle {
     transform: translateY(4%);
+  }
+
+  /* su touch non c'è burst da contenere: il canvas sta nello schermo,
+     così i pin ancorati ai suoi bordi non finiscono fuori */
+  .orb {
+    width: min(89vh, 100vw, 890px);
   }
 }
 
@@ -485,6 +493,11 @@
   .heroAnnot {
     flex-direction: column;
     gap: 6px;
+  }
+
+  /* le coordinate non si vedono da mobile */
+  .heroAnnot span:last-child {
+    display: none;
   }
 
   .heroSub {

@@ -11,7 +11,7 @@
 
 .mark {
   letter-spacing: 0.14em;
-  color: var(--ghiaccio);
+  color: var(--fg);
 }
 
 .mark span {
@@ -23,21 +23,32 @@
   flex-direction: column;
   font-size: clamp(34px, 4.6vw, 78px);
   line-height: 1.06;
-  text-shadow: 0 12px 60px rgba(4, 16, 20, 0.65);
 }
 
 .title a {
-  color: var(--ghiaccio);
+  color: var(--fg);
+  /* stessa curva della tinta della sfera: accensione morbida, spegnimento lungo */
   transition:
-    color 0.3s ease,
-    text-shadow 0.3s ease;
+    color 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    text-shadow 0.9s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* hover: la parola prende il colore della sezione e irradia */
+/* hover (desktop) e .lit (autoplay su touch): la parola prende il colore
+   della sezione e irradia */
 .title a:hover,
-.title a:focus-visible {
+.title a:focus-visible,
+.title a.lit {
   color: var(--wcol);
   text-shadow:
     0 0 18px color-mix(in srgb, var(--wcol) 55%, transparent),
     0 0 64px color-mix(in srgb, var(--wcol) 32%, transparent);
+}
+
+/* col mouse l'accensione è immediata: la curva lenta è per l'autoplay */
+@media (hover: hover) {
+  .title a {
+    transition:
+      color 0.3s ease,
+      text-shadow 0.3s ease;
+  }
 }
