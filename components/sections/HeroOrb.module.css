@@ -90,12 +90,22 @@
   transition-delay: 0s;
 }
 
-/* enter: linea prima, poi testo (stagger); uscita in reverse */
+/* enter: linea prima, poi testo (stagger); uscita in reverse.
+   Il pin acceso — via zona o hover — porta il colore della sua sezione
+   (testo, linea e punto via currentColor) e il testo irradia, in sync
+   con la tinta della sfera */
+.on {
+  color: var(--wcol, var(--fg));
+}
+
 .on .hudTxt {
   opacity: 1;
   filter: blur(0);
   transform: translate(0, 0);
   transition-delay: 0.16s;
+  text-shadow:
+    0 0 18px color-mix(in srgb, var(--wcol, var(--fg)) 55%, transparent),
+    0 0 64px color-mix(in srgb, var(--wcol, var(--fg)) 32%, transparent);
 }
 
 .on .hudLn {

@@ -61,6 +61,11 @@ const HUD_LABELS: {
   { zone: 'r', label: 'Recording', token: 'var(--arancio)', rgb: [1.0, 0.43, 0.07] },
 ]
 
+/* zona → rgb: quando un pin si accende via settore, la sfera si tinge */
+const ZONE_RGB = Object.fromEntries(
+  HUD_LABELS.map((h) => [h.zone, h.rgb])
+) as Record<Exclude<Zone, null>, [number, number, number]>
+
 /* stessa logica delle HeroWords: avvisa l'orb che deve tingersi */
 const tintEvent = (rgb: [number, number, number] | null) => {
   window.dispatchEvent(
@@ -350,6 +355,8 @@ export function HeroOrb({
       // rottura: si carica con la velocità del mouse, decade con damping
       let burstTarget = 0
       let burstCur = 0
+      // tinta di sezione: 0 = mono, 0.85 = colore pieno (lerp nel frame)
+      let tintTarget = 0
       let lastNx = 0
       let lastNy = 0
       let hasLast = false
@@ -359,6 +366,17 @@ export function HeroOrb({
         if (z !== activeZone) {
           activeZone = z
           setZone(z)
+          // il pin acceso porta il suo colore anche sulla sfera (solo se
+          // i pin esistono: sulla variante words la tinta la guidano loro)
+          if (pins) {
+            if (z) {
+              const [r, g, b] = ZONE_RGB[z]
+              uniforms.uTintCol.value.setRGB(r, g, b)
+              tintTarget = 0.85
+            } else {
+              tintTarget = 0
+            }
+          }
         }
       }
 
@@ -413,7 +431,6 @@ export function HeroOrb({
       document.documentElement.addEventListener('pointerleave', onPointerLeave)
 
       /* ——— tinta di sezione: le HeroWords avvisano via CustomEvent ——— */
-      let tintTarget = 0
       const onTint = (e: Event) => {
         const d = (e as CustomEvent).detail
         if (d?.on && Array.isArray(d.rgb)) {
