@@ -14,7 +14,10 @@ import styles from './HeroOrb.module.css'
  * Particelle ambient rade sullo sfondo, fuori dalla rotazione.
  */
 
+/* la nuvola piena è per il desktop: su telefono un terzo dei punti dà la
+   stessa resa a schermo piccolo senza cuocere la GPU */
 const PARTICLES = 380000
+const PARTICLES_SMALL = 130000
 const RADIUS = 1.42
 
 const NOISE_GLSL = /* glsl */ `
@@ -107,7 +110,11 @@ export function HeroOrb({
       } catch {
         return
       }
-      const dpr = Math.min(window.devicePixelRatio, 1.75)
+      const small =
+        window.matchMedia('(max-width: 760px)').matches ||
+        window.matchMedia('(hover: none)').matches
+      const count = small ? PARTICLES_SMALL : PARTICLES
+      const dpr = Math.min(window.devicePixelRatio, small ? 1.4 : 1.75)
       renderer.setPixelRatio(dpr)
       renderer.domElement.className = styles.canvas
       renderer.domElement.setAttribute('aria-hidden', 'true')
@@ -121,11 +128,11 @@ export function HeroOrb({
       camera.position.z = 5.3
 
       /* ——— sfera: Fibonacci + guscio sottile ——— */
-      const pos = new Float32Array(PARTICLES * 3)
-      const rnd = new Float32Array(PARTICLES)
+      const pos = new Float32Array(count * 3)
+      const rnd = new Float32Array(count)
       const gold = Math.PI * (3 - Math.sqrt(5))
-      for (let i = 0; i < PARTICLES; i++) {
-        const y = 1 - (i / (PARTICLES - 1)) * 2
+      for (let i = 0; i < count; i++) {
+        const y = 1 - (i / (count - 1)) * 2
         const rr = Math.sqrt(Math.max(0, 1 - y * y))
         const th = gold * i
         const r = RADIUS + (Math.random() - 0.5) * 0.055
@@ -143,7 +150,8 @@ export function HeroOrb({
         uPointer: { value: 0 },
         uPointerDir: { value: new THREE.Vector3(0, 0, 1) },
         uTheme: { value: 0 },
-        uSize: { value: 4.4 * dpr },
+        // meno punti = punti un filo più grossi, così la nuvola resta densa
+        uSize: { value: (small ? 6.2 : 4.4) * dpr },
         // rottura/swirl: caricata dalla velocità del mouse, decade a molla
         uBurst: { value: 0 },
         // tinta di sezione (hover sulle tre parole): colore + intensità

@@ -173,13 +173,17 @@
   margin-top: 12px;
 }
 
+/* bordo nel colore della sezione (--accent sulla slide: arancio studio,
+   giallo coworking, azzurro academy); il testo resta bianco leggibile
+   sulla foto, con un velo dello stesso accento a scaldare la pastiglia */
 .tag {
   padding: 4px 12px;
-  border: 1px solid rgba(255, 255, 255, 0.26);
+  border: 1px solid color-mix(in srgb, var(--accent) 65%, transparent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
   border-radius: var(--radius-pill);
   font-size: 11px;
   letter-spacing: 0.05em;
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(255, 255, 255, 0.9);
 }
 
 .cta {

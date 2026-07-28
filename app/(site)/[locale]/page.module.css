@@ -210,7 +210,22 @@
   /* su touch non c'è burst da contenere: il canvas sta nello schermo,
      così i pin ancorati ai suoi bordi non finiscono fuori */
   .orb {
-    width: min(89vh, 100vw, 890px);
+    width: min(62vh, 100vw, 890px);
+  }
+
+  /* anello più stretto della sfera: il type circolare non finisce
+     addosso alle parole al centro */
+  .ring {
+    width: min(58vh, 88vw, 800px);
+  }
+
+  .heroAnnot {
+    padding-top: clamp(14px, 2vh, 24px);
+  }
+
+  /* la lede sotto la sfera respira meno: tutto nel primo schermo */
+  .heroSub {
+    padding-bottom: clamp(20px, 3vh, 36px);
   }
 }
 

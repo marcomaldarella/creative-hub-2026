@@ -1,0 +1,42 @@
+/* tabella di quadrati: le hairline sono i gap del contenitore, così le
+   celle adiacenti non raddoppiano il bordo */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.cell {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  padding: clamp(18px, 3vw, 40px);
+  background: var(--bg);
+  color: var(--fg-2);
+  transition:
+    background var(--dur),
+    color var(--dur),
+    opacity var(--dur-slow) ease var(--rvd, 0s),
+    transform var(--dur-slow) var(--ease-out) var(--rvd, 0s);
+}
+
+.cell:hover {
+  background: var(--surface);
+  color: var(--fg);
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

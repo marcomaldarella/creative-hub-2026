@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
 import { Fragment } from 'react'
 import { notFound } from 'next/navigation'
-import { Button, Marquee, PartnerMark, Reveal, Rule, SectionHeader } from '@/components/ui'
+import { Button, Reveal, Rule, SectionHeader } from '@/components/ui'
+import { PartnerGrid } from '@/components/sections/PartnerGrid'
 import { PortableBlocks } from '@/components/sections/PortableBlocks'
 import { SiteChrome, shopHref } from '@/components/sections/SiteChrome'
 import { TeacherGrid } from '@/components/sections/TeacherGrid'
@@ -46,10 +47,9 @@ export default async function ChiSiamoPage({
   ])
 
   const sections = page?.sections ?? []
-  const partnerMarks = partners
+  const partnerNames = partners
     .map((p) => p.name)
     .filter((name): name is string => Boolean(name))
-    .map((name) => <PartnerMark key={name} name={name} />)
   const contactLines = [
     settings?.address ?? t.footer.address,
     settings?.phone,
@@ -105,11 +105,13 @@ export default async function ChiSiamoPage({
         </section>
 
         {/* ————— partner (ancora del submenu e della cta in home) ————— */}
-        {partnerMarks.length > 0 && (
+        {partnerNames.length > 0 && (
           <div id="partner">
             <Rule left={t.about.partnersRuleLeft} right={t.about.partnersRuleRight} />
-            <section className={styles.marqueeSez}>
-              <Marquee items={partnerMarks} />
+            <section className={styles.sez}>
+              <div className="wrap">
+                <PartnerGrid names={partnerNames} />
+              </div>
             </section>
           </div>
         )}

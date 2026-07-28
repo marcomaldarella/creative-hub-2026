@@ -1,18 +1,9 @@
-/* metodo nudo (ref mock): blocco indentato da sinistra, eyebrow +
-   statement, quattro colonne con hairline, numerone, titolo, testo */
-
-.wrap {
-  margin-left: clamp(0px, 16vw, 280px);
-}
-
-.eyebrow {
-  display: block;
-  letter-spacing: 0.14em;
-  color: var(--fg-2);
-}
+/* metodo nudo: statement + quattro colonne con hairline, numerone,
+   titolo, testo. Tutto allineato al margine sinistro della gabbia,
+   sullo stesso asse del kicker di sezione */
 
 .title {
-  margin: 16px 0 clamp(28px, 4vw, 48px);
+  margin: 22px 0 clamp(28px, 4vw, 48px);
   font-size: clamp(24px, 2.3vw, 38px);
   font-weight: 600;
   letter-spacing: -0.02em;

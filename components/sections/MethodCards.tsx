@@ -7,21 +7,19 @@ export type MethodItem = {
 }
 
 /**
- * Metodo senza card: eyebrow + statement, poi quattro colonne nude —
- * hairline in testa, numerone, titolo, testo. Tutto su token semantici.
+ * Metodo senza card: statement, poi quattro colonne nude — hairline in
+ * testa, numerone, titolo, testo. L'etichetta di sezione la mette la
+ * pagina (kicker "04 — metodo"): qui non va ripetuta.
  */
 export function MethodCards({
-  eyebrow,
   title,
   items,
 }: {
-  eyebrow: string
   title: string
   items: MethodItem[]
 }) {
   return (
     <div className={styles.wrap}>
-      <span className={`mono ${styles.eyebrow}`}>{eyebrow}</span>
       <h2 className={styles.title}>{title}</h2>
       <div className={styles.grid}>
         {items.map((m) => (

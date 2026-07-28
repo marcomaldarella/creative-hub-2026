@@ -249,11 +249,7 @@ export async function HomeScreen({
               {t.home.methodKicker}
             </Reveal>
             <Reveal delay={80}>
-              <MethodCards
-                eyebrow={t.home.methodEyebrow}
-                title={t.home.methodTitle}
-                items={t.home.method}
-              />
+              <MethodCards title={t.home.methodTitle} items={t.home.method} />
             </Reveal>
           </div>
         </section>

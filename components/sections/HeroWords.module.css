@@ -52,3 +52,19 @@
       text-shadow 0.3s ease;
   }
 }
+
+/* mobile: le tre parole devono reggere la composizione da sole */
+@media (max-width: 760px) {
+  .title {
+    font-size: clamp(30px, 9vw, 46px);
+    line-height: 1.1;
+  }
+
+  .mark {
+    font-size: 11px;
+  }
+
+  .words {
+    gap: 8px;
+  }
+}
