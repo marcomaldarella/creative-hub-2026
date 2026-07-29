@@ -19,6 +19,27 @@ export function shopHref(settings: SiteSettings | null | undefined): string {
   return settings?.shopUrl ?? process.env.NEXT_PUBLIC_SHOP_URL ?? '#'
 }
 
+/* accento di sezione: --accent per superfici/bordi, --accent-ink per il
+   testo (il giallo fluo puro non regge su fondo chiaro: si mixa con l'ink) */
+const SECTION_ACCENTS: Record<
+  string,
+  { accent: string; ink: string }
+> = {
+  '/academy': { accent: 'var(--azzurro)', ink: 'var(--azzurro)' },
+  '/studios': { accent: 'var(--arancio)', ink: 'var(--arancio)' },
+  '/coworking': {
+    accent: 'var(--giallo-fluo)',
+    ink: 'color-mix(in srgb, var(--giallo-fluo) 70%, var(--fg))',
+  },
+}
+
+function accentOf(path: string) {
+  const base = Object.keys(SECTION_ACCENTS).find(
+    (b) => path === b || path.startsWith(`${b}/`)
+  )
+  return base ? SECTION_ACCENTS[base] : undefined
+}
+
 /**
  * Chrome condiviso del sito: Nav fixed in alto, Footer in basso,
  * la pagina in mezzo. Server component: carica siteSettings e dizionario.
@@ -106,6 +127,7 @@ export async function SiteChrome({
     return {
       label: s.label,
       href: localeHref(locale, s.base),
+      accent: accentOf(s.base),
       sub: {
         eyebrow: `/${s.label.toLowerCase()}`,
         desc: sub.desc,
@@ -129,6 +151,7 @@ export async function SiteChrome({
   })
 
   const clean = path.startsWith('/') ? path : `/${path}`
+  const pageAccent = accentOf(clean)
   const langHrefs = {
     it: clean,
     en: clean === '/' ? '/en' : `/en${clean}`,
@@ -168,7 +191,23 @@ export async function SiteChrome({
           email: settings?.email,
         }}
       />
-      {children}
+      {pageAccent ? (
+        /* display: contents — nessun impatto sul layout, solo cascade
+           delle variabili di accento sulla pagina (nav/footer esclusi) */
+        <div
+          style={
+            {
+              display: 'contents',
+              '--accent': pageAccent.accent,
+              '--accent-ink': pageAccent.ink,
+            } as React.CSSProperties
+          }
+        >
+          {children}
+        </div>
+      ) : (
+        children
+      )}
       <Footer
         contactLines={contactLines}
         groups={[

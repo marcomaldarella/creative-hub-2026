@@ -25,6 +25,8 @@ export type NavSub = {
 export type NavItem = {
   label: string;
   href: string;
+  /** accento di sezione per il pannello (--accent / --accent-ink) */
+  accent?: { accent: string; ink: string };
   /** mega-menu della sezione (solo desktop, hover/focus) */
   sub?: NavSub;
 };
@@ -237,7 +239,17 @@ export function Nav({
               </Link>
 
               {item.sub && (
-                <div className={styles.panel}>
+                <div
+                  className={styles.panel}
+                  style={
+                    item.accent
+                      ? ({
+                          '--accent': item.accent.accent,
+                          '--accent-ink': item.accent.ink,
+                        } as React.CSSProperties)
+                      : undefined
+                  }
+                >
                   <div className={`wrap ${styles.panelIn}`}>
                     {/* colonna sinistra: numerino, eyebrow, titolo, pre-descrizione */}
                     <div className={styles.panelHead}>

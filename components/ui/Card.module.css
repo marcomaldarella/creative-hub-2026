@@ -22,8 +22,8 @@
 }
 
 .dark:hover {
-  border-color: var(--azzurro);
-  background: var(--azzurro-06);
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 6%, transparent);
 }
 
 .kicker {
@@ -32,7 +32,7 @@
 }
 
 .dark .kicker {
-  color: var(--azzurro);
+  color: var(--accent-ink);
 }
 
 .title {

@@ -235,7 +235,7 @@
   display: block;
   font-size: 13px;
   letter-spacing: 0.06em;
-  color: var(--azzurro);
+  color: var(--accent-ink);
 }
 
 .panelNum {
@@ -283,7 +283,7 @@
 }
 
 .panelEntry:hover {
-  color: var(--azzurro);
+  color: var(--accent-ink);
 }
 
 .panelCross {
@@ -294,7 +294,7 @@
 }
 
 .panelExplore {
-  color: var(--azzurro);
+  color: var(--accent-ink);
   font-size: 15px;
 }
 
@@ -601,16 +601,19 @@
 }
 
 .dark .panelEntry:hover {
-  color: var(--azzurro);
+  color: var(--accent-ink);
 }
 
-.dark .panelLabel,
+.dark .panelLabel {
+  color: var(--accent-ink);
+}
+
 .dark .panelCross {
   color: var(--osso-60);
 }
 
 .dark .panelExplore {
-  color: var(--azzurro);
+  color: var(--accent-ink);
 }
 
 .dark .panelExplore:hover {

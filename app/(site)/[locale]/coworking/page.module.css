@@ -54,13 +54,13 @@
 
 .features li::before {
   content: '— ';
-  color: var(--azzurro);
+  color: var(--accent-ink);
 }
 
-/* ————— cta (azzurro) ————— */
+/* ————— cta: in tinta di sezione ————— */
 
 .cta {
-  background: var(--azzurro);
+  background: var(--accent);
   color: var(--petrolio);
 }
 

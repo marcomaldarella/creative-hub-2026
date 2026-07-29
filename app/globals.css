@@ -21,6 +21,12 @@
   --osso-16: rgba(237, 230, 218, 0.16);
   --azzurro-06: rgba(79, 168, 223, 0.06);
 
+  /* accento di sezione: azzurro di default, SiteChrome lo cambia dentro
+     academy (azzurro) / studios (arancio) / coworking (giallo).
+     --accent = superfici, barre, bordi; --accent-ink = testo leggibile */
+  --accent: var(--azzurro);
+  --accent-ink: var(--azzurro);
+
   /* ————— layer semantico (inverte col tema) —————
      Regola: un elemento che deve invertirsi col tema usa questi token;
      i momenti brand fissi (petrolio, azzurro, gradient…) restano sui token brand. */

@@ -30,7 +30,7 @@
   display: block;
   height: 100%;
   width: 0%;
-  background: var(--azzurro);
+  background: var(--accent);
   border-radius: 2px;
 }
 

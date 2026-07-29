@@ -25,12 +25,13 @@
 }
 
 .azzurro {
-  background: var(--azzurro);
+  /* dentro le sezioni segue l'accento (arancio/giallo), altrove resta azzurro */
+  background: var(--accent);
   color: var(--petrolio);
 }
 
 .azzurro:hover {
-  background: var(--azzurro-hover);
+  background: color-mix(in srgb, var(--accent) 86%, var(--fg));
 }
 
 .ghost {
@@ -40,5 +41,5 @@
 }
 
 .ghost:hover {
-  border-color: var(--azzurro);
+  border-color: var(--accent);
 }
