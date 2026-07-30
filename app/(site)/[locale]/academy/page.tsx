@@ -106,6 +106,7 @@ export default async function AcademyPage({
         <nav className={`wrap ${styles.filters}`} aria-label={t.academy.categoryLabel}>
           <Link
             href={filterHref(undefined, activeType)}
+            scroll={false}
             className={!active ? `${styles.pill} ${styles.pillOn}` : styles.pill}
           >
             {t.common.all}
@@ -114,6 +115,7 @@ export default async function AcademyPage({
             <Link
               key={cat.slug}
               href={filterHref(cat.slug, activeType)}
+              scroll={false}
               className={
                 active === cat.slug
                   ? `${styles.pill} ${styles.pillOn}`
@@ -128,6 +130,7 @@ export default async function AcademyPage({
             <Link
               key={slug}
               href={filterHref(active, activeType === slug ? undefined : slug)}
+              scroll={false}
               className={
                 activeType === slug
                   ? `${styles.pill} ${styles.pillOn}`

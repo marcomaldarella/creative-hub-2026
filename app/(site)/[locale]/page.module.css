@@ -167,6 +167,20 @@
   min-height: 0;
 }
 
+/* la hero di home-2 è una maschera fissa di 100svh: anello e sfera vanno
+   dimensionati sull'altezza DISPONIBILE (100svh meno header+annotazioni+
+   caption), altrimenti il marquee circolare ruotando finisce sotto il
+   bordo e viene tagliato — in qualunque tema */
+.heroFit .ring {
+  width: min(100svh - 330px, 96vw, 800px);
+}
+
+.heroFit .orb {
+  /* stessa proporzione attuale canvas/anello (~1.11): la sfera resta
+     dentro l'anello a ogni altezza di viewport */
+  width: min((100svh - 330px) * 1.11, 110vw, 890px);
+}
+
 .heroCaption {
   position: absolute;
   left: 0;
