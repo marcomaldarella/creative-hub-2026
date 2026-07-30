@@ -62,14 +62,17 @@
 }
 
 .pillOn {
-  background: var(--petrolio);
-  border-color: var(--petrolio);
-  color: var(--osso);
+  /* la pill attiva porta il colore della sezione (azzurro qui,
+     arancio/giallo se il pattern verra riusato altrove) */
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--petrolio);
 }
 
 .pillOn:hover {
-  color: var(--osso);
-  border-color: var(--petrolio);
+  color: var(--petrolio);
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 86%, var(--fg));
 }
 
 /* ————— griglia corsi ————— */

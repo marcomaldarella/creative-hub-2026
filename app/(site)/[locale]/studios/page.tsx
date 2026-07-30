@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import {
+  Anchors,
   ArrowLink,
   Button,
   Card,
@@ -68,7 +69,7 @@ export default async function StudiosPage({
         <Rule left={t.studios.kicker} right={t.studios.spacesKicker} />
 
         {/* ————— gli spazi ————— */}
-        <section className={styles.sez}>
+        <section className={styles.sez} id="registrazione">
           <div className="wrap">
             <SectionHeader
               kicker={t.studios.spacesKicker}
@@ -101,8 +102,10 @@ export default async function StudiosPage({
 
         <Rule left={t.studios.spacesKicker} right={t.studios.servicesKicker} />
 
+        <Anchors ids={['dolby-atmos', 'sound-design', 'podcast']} />
+
         {/* ————— i servizi ch.01–04 ————— */}
-        <section className={styles.sez}>
+        <section className={styles.sez} id="mix-mastering">
           <div className="wrap">
             <SectionHeader
               kicker={t.studios.servicesKicker}
@@ -125,7 +128,7 @@ export default async function StudiosPage({
         </section>
 
         {/* ————— cta ————— */}
-        <section className={`${styles.sez} ${styles.cta}`}>
+        <section className={`${styles.sez} ${styles.cta}`} id="affitto-studio">
           <div className="wrap">
             <SectionHeader
               kicker={t.studios.ctaKicker}

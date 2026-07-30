@@ -212,3 +212,8 @@ img { max-width: 100%; height: auto; display: block; }
   inherits: false;
   initial-value: 0deg;
 }
+
+/* le ancore (#registrazione, #team…) non devono finire sotto la nav fissa */
+[id] {
+  scroll-margin-top: calc(var(--header-h) + 18px);
+}

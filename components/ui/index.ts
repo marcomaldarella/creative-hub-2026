@@ -1,3 +1,4 @@
+export { Anchors } from './Anchors';
 export { Reveal, RevealGroup, useRevealOnce } from './Reveal';
 export type { RevealProps, RevealGroupProps } from './Reveal';
 

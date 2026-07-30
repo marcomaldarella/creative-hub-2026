@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Fragment } from 'react'
 import { notFound } from 'next/navigation'
-import { Button, Reveal, Rule, SectionHeader } from '@/components/ui'
+import { Anchors, Button, Reveal, Rule, SectionHeader } from '@/components/ui'
 import { PartnerGrid } from '@/components/sections/PartnerGrid'
 import { PortableBlocks } from '@/components/sections/PortableBlocks'
 import { SiteChrome, shopHref } from '@/components/sections/SiteChrome'
@@ -72,6 +72,8 @@ export default async function ChiSiamoPage({
           </Reveal>
         </header>
 
+        <Anchors ids={['ecosistema', 'governance']} />
+
         {/* ————— sezioni editoriali ————— */}
         {sections.map((section, i) => (
           <Fragment key={section._key}>
@@ -97,7 +99,7 @@ export default async function ChiSiamoPage({
         <Rule left={t.about.teamKicker} right={t.common.teachers} />
 
         {/* ————— team completo ————— */}
-        <section className={styles.sez}>
+        <section className={styles.sez} id="team">
           <div className="wrap">
             <SectionHeader kicker={t.about.teamKicker} title={t.about.teamTitle} />
             <TeacherGrid teachers={teachers} locale={locale} variant="grid" />
@@ -117,7 +119,7 @@ export default async function ChiSiamoPage({
         )}
 
         {/* ————— contatti ————— */}
-        <section className={styles.sez}>
+        <section className={styles.sez} id="contatti">
           <div className={`wrap ${styles.contacts}`}>
             <div>
               <SectionHeader
