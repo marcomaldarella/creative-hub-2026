@@ -192,12 +192,11 @@ export async function SiteChrome({
         }}
       />
       {pageAccent ? (
-        /* display: contents — nessun impatto sul layout, solo cascade
-           delle variabili di accento sulla pagina (nav/footer esclusi) */
+        /* div NORMALE, non display:contents: senza box Next salta lo
+           scroll-to-top alla navigazione e si resta a fondo pagina */
         <div
           style={
             {
-              display: 'contents',
               '--accent': pageAccent.accent,
               '--accent-ink': pageAccent.ink,
             } as React.CSSProperties

@@ -78,7 +78,8 @@ export async function HomeScreen({
   const openHref = settings?.openDay?.ctaUrl ?? shopHref(settings)
 
   return (
-    <SiteChrome locale={locale} path={heroV2 ? '/home-2' : '/'} dark>
+    // niente flag dark: la hero segue il tema, la nav deve invertirsi con lui
+    <SiteChrome locale={locale} path={heroV2 ? '/home-2' : '/'}>
       <main>
         {/* ————— hero ————— */}
         <header
