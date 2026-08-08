@@ -7,7 +7,12 @@ import { useEffect } from 'react'
 const BOOT_RGB = [0.24, 0.49, 0.6] as const
 
 /** oltre questa attesa la sfera si apre comunque: mai una splash infinita */
-const MAX_WAIT_MS = 2200
+const MAX_WAIT_MS = 1200
+
+/* il download parte alla valutazione del modulo, in parallelo con
+   l'idratazione: dentro l'effect arrivava troppo tardi e in produzione la
+   splash sforava i 5 secondi */
+const gsapReady = import('gsap')
 
 const tint = (rgb: readonly number[] | null) =>
   window.dispatchEvent(
@@ -67,7 +72,7 @@ export function HeroBoot() {
       tint(null)
     }
 
-    import('gsap')
+    gsapReady
       .then(({ gsap }) => {
         if (!alive) return
         ctx = gsap.context(() => {
@@ -87,7 +92,7 @@ export function HeroBoot() {
             .to(
               mark,
               { autoAlpha: 0, y: -24, duration: 0.5, ease: 'power2.in' },
-              small ? '+=0.5' : '+=0.75'
+              small ? '+=0.45' : '+=0.6'
             )
 
             /* attesa della sfera: si riprende su 'hero-ready' o al timeout.
