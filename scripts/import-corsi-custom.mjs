@@ -105,6 +105,15 @@ const CORSI = [
     cover: 'Production/3.jpg',
   },
   {
+    id: 'course-custom-dj',
+    dir: 'DJ',
+    it: 'DJ',
+    en: 'DJing',
+    slug: 'corso-custom-dj',
+    category: 'courseCategory-musica',
+    cover: 'DJ/4.jpg',
+  },
+  {
     /* cartella vuota: le foto sono nel materiale del corso universitario,
        che deve ancora arrivare. Il documento si crea comunque, senza foto. */
     id: 'course-custom-pianoforte',
