@@ -3,6 +3,7 @@ import { Footer, Nav } from '@/components/ui'
 import { getDictionary } from '@/lib/i18n/dictionaries'
 import { localeHref, type Locale } from '@/lib/i18n/config'
 import { getSiteSettings } from '@/lib/sanity/queries'
+import { findTopic, type TopicBase } from '@/lib/topics'
 import type { SiteSettings } from '@/lib/sanity/types'
 
 export type SiteChromeProps = {
@@ -74,6 +75,17 @@ export async function SiteChrome({
     anchors: (string | null)[]
     cross?: Record<number, SectionKey>
   }
+  /* una voce di menu può portare a: la sua pagina (lib/topics), un'ancora
+     su una sezione reale della pagina indice, o la pagina indice stessa */
+  const hrefSub = (base: string, anchor: string | null) => {
+    if (!anchor) return base
+    /* già un percorso (es. categoria/…) oppure una voce con pagina propria */
+    if (anchor.includes('/') || findTopic(base as TopicBase, anchor)) {
+      return `${base}/${anchor}`
+    }
+    return `${base}#${anchor}`
+  }
+
   const sections: Section[] = [
     {
       key: 'academy',
@@ -118,7 +130,13 @@ export async function SiteChrome({
       key: 'magazine',
       label: t.nav.magazine,
       base: '/magazine',
-      anchors: [null, null, null, null],
+      /* le quattro linee editoriali sono pagine categoria vere */
+      anchors: [
+        'categoria/produzione-musicale',
+        'categoria/industrie-creative',
+        'categoria/formazione-carriera',
+        'categoria/eventi-news',
+      ],
       cross: { 0: 'studio', 1: 'innovation', 2: 'academy', 3: 'coworking' },
     },
     {
@@ -148,7 +166,10 @@ export async function SiteChrome({
           const crossKey = cross[i]
           return {
             label,
-            href: localeHref(locale, anchor ? `${s.base}#${anchor}` : s.base),
+            /* se la voce ha una pagina propria (lib/topics) si va lì;
+               altrimenti resta l'ancora, che punta a una sezione vera
+               della pagina indice */
+            href: localeHref(locale, hrefSub(s.base, anchor)),
             cross: crossKey
               ? {
                   label: `/${labelOf[crossKey]}`,

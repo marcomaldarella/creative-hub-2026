@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import type { CSSProperties } from 'react'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { Anchors, Reveal, RevealGroup, Rule, SearchBox, SectionHeader } from '@/components/ui'
+import { Reveal, RevealGroup, Rule, SearchBox, SectionHeader } from '@/components/ui'
 import { SiteChrome } from '@/components/sections/SiteChrome'
 import { TeacherGrid } from '@/components/sections/TeacherGrid'
 import { Thumb } from '@/components/sections/Thumb'
@@ -102,16 +102,6 @@ export default async function AcademyPage({
           </Reveal>
         </header>
 
-        <Anchors
-          ids={[
-            'corsi-universitari',
-            'formazione-finanziata',
-            'stage-placement',
-            'corsi-custom',
-            'open-day',
-            'servizi-studenti',
-          ]}
-        />
 
         {/* ————— filtri categoria ————— */}
         <nav className={`wrap ${styles.filters}`} aria-label={t.academy.categoryLabel}>

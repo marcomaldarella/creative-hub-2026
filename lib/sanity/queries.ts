@@ -120,7 +120,9 @@ export const pageByIdQuery = groq`
   }
 `
 
-export function getPageById(pageId: PageId): Promise<Page | null> {
+/* accetta anche gli slug delle voci di menu (lib/topics): se esiste un
+   documento page con quel pageId, il suo corpo compare nella pagina */
+export function getPageById(pageId: PageId | string): Promise<Page | null> {
   return client.fetch(pageByIdQuery, { pageId })
 }
 

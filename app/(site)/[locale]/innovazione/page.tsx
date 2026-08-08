@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Fragment } from 'react'
 import { notFound } from 'next/navigation'
-import { Anchors, Counter, CounterRow, Reveal, Rule, SectionHeader } from '@/components/ui'
+import { Counter, CounterRow, Reveal, Rule, SectionHeader } from '@/components/ui'
 import { PortableBlocks } from '@/components/sections/PortableBlocks'
 import { SiteChrome } from '@/components/sections/SiteChrome'
 import { isLocale } from '@/lib/i18n/config'
@@ -52,9 +52,6 @@ export default async function InnovazionePage({
           </Reveal>
         </header>
 
-        <Anchors
-          ids={['aziende', 'accelerazione', 'bandi', 'incubazione', 'cte-cobo']}
-        />
 
         {/* ————— sezioni editoriali ————— */}
         {sections.map((section, i) => (

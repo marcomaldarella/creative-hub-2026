@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Fragment } from 'react'
 import { notFound } from 'next/navigation'
-import { Anchors, Button, Reveal, Rule, SectionHeader } from '@/components/ui'
+import { Button, Reveal, Rule, SectionHeader } from '@/components/ui'
 import { PartnerGrid } from '@/components/sections/PartnerGrid'
 import { PortableBlocks } from '@/components/sections/PortableBlocks'
 import { SiteChrome, shopHref } from '@/components/sections/SiteChrome'
@@ -72,7 +72,6 @@ export default async function ChiSiamoPage({
           </Reveal>
         </header>
 
-        <Anchors ids={['ecosistema', 'governance']} />
 
         {/* ————— sezioni editoriali ————— */}
         {sections.map((section, i) => (

@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import {
-  Anchors,
   ArrowLink,
   Button,
   Card,
@@ -102,7 +101,6 @@ export default async function StudiosPage({
 
         <Rule left={t.studios.spacesKicker} right={t.studios.servicesKicker} />
 
-        <Anchors ids={['dolby-atmos', 'sound-design', 'podcast']} />
 
         {/* ————— i servizi ch.01–04 ————— */}
         <section className={styles.sez} id="mix-mastering">

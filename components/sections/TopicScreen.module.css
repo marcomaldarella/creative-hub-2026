@@ -1,0 +1,155 @@
+/* pagina di una voce di menu — stessa grammatica delle pagine sezione */
+
+.main {
+  padding-top: var(--nav-h);
+}
+
+.head {
+  padding-top: clamp(40px, 6vw, 72px);
+}
+
+.back {
+  display: block;
+  margin-bottom: clamp(24px, 3vw, 40px);
+}
+
+.kicker {
+  display: block;
+  margin-bottom: 20px;
+  color: var(--accent-ink);
+}
+
+.title {
+  font-size: var(--fs-h2);
+  margin-bottom: 18px;
+  max-width: 20ch;
+}
+
+.lede {
+  max-width: 52ch;
+  color: var(--fg-2);
+  font-size: var(--fs-lede);
+}
+
+/* ————— punti elenco del documento testi ————— */
+
+.points {
+  padding-top: clamp(36px, 4.5vw, 56px);
+}
+
+.pointsList {
+  display: grid;
+  gap: 0;
+  max-width: 68ch;
+}
+
+.point {
+  border-top: 1px solid var(--line);
+  padding: 16px 0;
+  font-size: var(--fs-lede);
+}
+
+.point:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
+/* ————— corsi della tipologia ————— */
+
+.sez {
+  padding: clamp(40px, 5vw, 64px) 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+}
+
+@media (max-width: 1100px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+a.course {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--surface);
+  transition: box-shadow var(--dur) ease;
+}
+
+a.course:hover {
+  box-shadow: 0 16px 40px -20px color-mix(in srgb, var(--petrolio) 35%, transparent);
+}
+
+.courseBody {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 22px 22px 26px;
+}
+
+.courseKicker {
+  display: block;
+  margin-bottom: 12px;
+  color: var(--accent-ink);
+}
+
+.courseTitle {
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+  margin-bottom: 8px;
+}
+
+.courseSummary {
+  font-size: var(--fs-small);
+  color: var(--fg-2);
+  margin-bottom: 18px;
+}
+
+.courseMeta {
+  display: block;
+  margin-top: auto;
+}
+
+.empty {
+  color: var(--fg-2);
+}
+
+/* ————— corpo editoriale da Sanity ————— */
+
+.editorial {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+  gap: clamp(24px, 4vw, 72px);
+  align-items: start;
+}
+
+@media (max-width: 860px) {
+  .editorial {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ————— cta ————— */
+
+.cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 24px;
+  padding-top: clamp(32px, 4vw, 48px);
+  padding-bottom: var(--sez);
+}

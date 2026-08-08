@@ -412,5 +412,119 @@
     "relatedTitle": "more articles",
     "empty": "no articles yet.",
     "by": "by"
+  },
+  "topics": {
+    "backTo": "back to",
+    "related": "in this section",
+    "empty": "content coming soon.",
+    "corsiUniversitari": {
+      "title": "Bachelor of Arts. Bachelor of Science. In music, sound and visual.",
+      "lede": "International undergraduate degrees and Master of Music. Twenty places per course, one hour of one-to-one tuition a week.",
+      "points": [
+        "Performance & songwriting · urban music production · music technology",
+        "Film production · music business · creative musicianship",
+        "Twenty places per course, one hour of one-to-one tuition a week"
+      ]
+    },
+    "formazioneFinanziata": {
+      "title": "Training funded by the Region.",
+      "lede": "Courses co-funded by the Emilia-Romagna Region: requirements, timing and how to apply.",
+      "points": []
+    },
+    "stagePlacement": {
+      "title": "Real internships. 83% work in the industry.",
+      "lede": "Placements inside the studios, labels and productions of the network — during the course, not after it.",
+      "points": []
+    },
+    "corsiCustom": {
+      "title": "Your instrument. Your schedule. The first lesson is free.",
+      "lede": "One-to-one paths built around an instrument, a tool or a goal, on your own timetable.",
+      "points": [
+        "One one-to-one lesson a week, evenings included",
+        "Packages of 4, 20 or 40 lessons",
+        "Rooms and gear included",
+        "Free trial, on site or online"
+      ]
+    },
+    "openDay": {
+      "title": "Come and see. Bring your parents too.",
+      "lede": "An afternoon inside the hub: classrooms, studios, teachers and students. Book online.",
+      "points": []
+    },
+    "serviziStudenti": {
+      "title": "Everything around your studies.",
+      "lede": "What comes beyond the lessons, from scholarships to housing.",
+      "points": [
+        "Scholarships",
+        "Erasmus+",
+        "Guidance",
+        "Housing",
+        "Live events"
+      ]
+    },
+    "dolbyAtmos": {
+      "title": "Immersive audio. Music, film, gaming.",
+      "lede": "Certified Dolby Atmos suite for immersive mixing, from records to soundtracks.",
+      "points": []
+    },
+    "soundDesign": {
+      "title": "Sound for image.",
+      "lede": "Sound design and audio post for film, series, advertising and branded content.",
+      "points": []
+    },
+    "podcast": {
+      "title": "Three booths. Voice, podcast, dubbing.",
+      "lede": "Three B-Ear booths for voice recording, podcast production and dubbing.",
+      "points": []
+    },
+    "saleEventi": {
+      "title": "Meetings, showcases, shoots.",
+      "lede": "Spaces for work meetings, presentations, live sets and photo shoots in the Roveri district.",
+      "points": []
+    },
+    "metaverso": {
+      "title": "Even where there is no address.",
+      "lede": "Virtual environments for events, training and presentations: the hub outside the building.",
+      "points": []
+    },
+    "aziende": {
+      "title": "Production, training, technology.",
+      "lede": "Services for companies: content production, tailored training and access to the hub’s technology.",
+      "points": []
+    },
+    "incubazione": {
+      "title": "From idea to company.",
+      "lede": "Incubation paths for creative projects that need to become businesses.",
+      "points": []
+    },
+    "accelerazione": {
+      "title": "Createch. The programme for creative startups.",
+      "lede": "The acceleration programme for startups combining creativity and technology.",
+      "points": []
+    },
+    "cteCobo": {
+      "title": "Emerging technology. In the field.",
+      "lede": "Bologna’s Emerging Technologies House: applied experimentation with companies and institutions.",
+      "points": []
+    },
+    "bandi": {
+      "title": "Open funding.",
+      "lede": "Grants and funding opportunities for creative companies and projects.",
+      "points": []
+    },
+    "ecosistema": {
+      "title": "Three areas. One address.",
+      "lede": "Academy, recording studio and coworking: three distinct activities in the same building, feeding each other.",
+      "points": [
+        "Academy — international qualifications in music, sound and visual",
+        "Studio — SSL control room, live room, Dolby Atmos",
+        "Coworking — desks, offices and rooms in the Roveri district"
+      ]
+    },
+    "governance": {
+      "title": "Who answers for what.",
+      "lede": "Creative Hub’s corporate structure, bodies and responsibilities.",
+      "points": []
+    }
   }
 }

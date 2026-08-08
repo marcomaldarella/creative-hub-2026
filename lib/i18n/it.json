@@ -412,5 +412,119 @@
     "relatedTitle": "altri articoli",
     "empty": "nessun articolo, per ora.",
     "by": "di"
+  },
+  "topics": {
+    "backTo": "torna a",
+    "related": "in questa sezione",
+    "empty": "contenuti in arrivo.",
+    "corsiUniversitari": {
+      "title": "Bachelor of Arts. Bachelor of Science. In musica, sound e visual.",
+      "lede": "Titoli universitari internazionali di primo ciclo e Master of Music. Venti posti per corso, un'ora di lezione individuale a settimana.",
+      "points": [
+        "Performance & songwriting · urban music production · music technology",
+        "Film production · music business · creative musicianship",
+        "Venti posti per corso, un'ora di lezione individuale a settimana"
+      ]
+    },
+    "formazioneFinanziata": {
+      "title": "Formazione finanziata dalla Regione.",
+      "lede": "Percorsi cofinanziati dalla Regione Emilia-Romagna: requisiti, tempi e modalità di accesso.",
+      "points": []
+    },
+    "stagePlacement": {
+      "title": "Stage veri. L'83% lavora nel settore.",
+      "lede": "Tirocini dentro studi, etichette e produzioni della rete, non a fine corso ma durante.",
+      "points": []
+    },
+    "corsiCustom": {
+      "title": "Il tuo strumento. I tuoi orari. La prima lezione è gratis.",
+      "lede": "Percorsi individuali su strumento, software o obiettivo, costruiti sui tuoi tempi.",
+      "points": [
+        "Una lezione individuale a settimana, anche di sera",
+        "Pacchetti da 4, 20 o 40 lezioni",
+        "Sale e strumentazione incluse",
+        "Prova gratuita, in sede o online"
+      ]
+    },
+    "openDay": {
+      "title": "Vieni a vedere. Anche con i tuoi.",
+      "lede": "Un pomeriggio dentro l'hub: aule, studi, docenti e studenti. Si prenota online.",
+      "points": []
+    },
+    "serviziStudenti": {
+      "title": "Tutto intorno allo studio.",
+      "lede": "Quello che c'è oltre le lezioni, dalla borsa di studio all'alloggio.",
+      "points": [
+        "Borse di studio",
+        "Erasmus+",
+        "Orientamento",
+        "Alloggio",
+        "Eventi live"
+      ]
+    },
+    "dolbyAtmos": {
+      "title": "Audio immersivo. Musica, cinema, gaming.",
+      "lede": "Suite certificata Dolby Atmos per missaggio immersivo, dal disco alla colonna sonora.",
+      "points": []
+    },
+    "soundDesign": {
+      "title": "Suono per immagini.",
+      "lede": "Sound design e post-produzione audio per cinema, serie, pubblicità e branded content.",
+      "points": []
+    },
+    "podcast": {
+      "title": "Tre cabine. Voce, podcast, doppiaggio.",
+      "lede": "Tre cabine B-Ear per registrazione voce, produzione podcast e doppiaggio.",
+      "points": []
+    },
+    "saleEventi": {
+      "title": "Riunioni, showcase, riprese.",
+      "lede": "Spazi per incontri di lavoro, presentazioni, live e set fotografici in zona Roveri.",
+      "points": []
+    },
+    "metaverso": {
+      "title": "Anche dove non c'è un indirizzo.",
+      "lede": "Ambienti virtuali per eventi, formazione e presentazioni: l'hub fuori dall'edificio.",
+      "points": []
+    },
+    "aziende": {
+      "title": "Produzione, formazione, tecnologie.",
+      "lede": "Servizi per le imprese: produzione di contenuti, formazione su misura e accesso alle tecnologie dell'hub.",
+      "points": []
+    },
+    "incubazione": {
+      "title": "Dall'idea all'impresa.",
+      "lede": "Percorsi di incubazione per progetti creativi che devono diventare aziende.",
+      "points": []
+    },
+    "accelerazione": {
+      "title": "Createch. Il programma per le startup creative.",
+      "lede": "Il programma di accelerazione per startup che uniscono creatività e tecnologia.",
+      "points": []
+    },
+    "cteCobo": {
+      "title": "Tecnologie emergenti. Sul campo.",
+      "lede": "La Casa delle Tecnologie Emergenti di Bologna: sperimentazione applicata con imprese e istituzioni.",
+      "points": []
+    },
+    "bandi": {
+      "title": "Fondi aperti.",
+      "lede": "Bandi e opportunità di finanziamento per imprese e progetti creativi.",
+      "points": []
+    },
+    "ecosistema": {
+      "title": "Tre aree. Un solo indirizzo.",
+      "lede": "Academy, studio di registrazione e coworking: tre attività distinte nello stesso edificio, che si alimentano a vicenda.",
+      "points": [
+        "Academy — titoli internazionali in musica, sound e visual",
+        "Studio — regia SSL, sala live, Dolby Atmos",
+        "Coworking — postazioni, uffici e sale in zona Roveri"
+      ]
+    },
+    "governance": {
+      "title": "Chi risponde di cosa.",
+      "lede": "Assetto societario, organi e responsabilità di Creative Hub.",
+      "points": []
+    }
   }
 }

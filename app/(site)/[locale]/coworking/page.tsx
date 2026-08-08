@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { Anchors, Button, Card, Reveal, Rule, SectionHeader } from '@/components/ui'
+import { Button, Card, Reveal, Rule, SectionHeader } from '@/components/ui'
 import { SiteChrome, shopHref } from '@/components/sections/SiteChrome'
 import { isLocale } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
@@ -53,7 +53,6 @@ export default async function CoworkingPage({
 
         <Rule left={t.coworking.kicker} right={t.coworking.spacesKicker} />
 
-        <Anchors ids={['sale-eventi', 'metaverso']} />
 
         {/* ————— gli spazi ————— */}
         <section className={styles.sez} id="coworking">

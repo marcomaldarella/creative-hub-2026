@@ -9,6 +9,8 @@ import { isLocale, localeHref } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
 import { getCourseBySlug, getSiteSettings } from '@/lib/sanity/queries'
 import { l } from '@/lib/sanity/l'
+import { findTopic } from '@/lib/topics'
+import { TopicScreen } from '@/components/sections/TopicScreen'
 import styles from './page.module.css'
 
 export const dynamic = 'force-dynamic'
@@ -20,6 +22,16 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale, slug } = await params
   if (!isLocale(locale)) return {}
+  /* le voci di menu vivono nello stesso spazio degli slug dei corsi */
+  const topic = findTopic('/academy', slug)
+  if (topic) {
+    const t = getDictionary(locale)
+    const copy = t.topics[topic.key as keyof typeof t.topics] as {
+      title: string
+      lede: string
+    }
+    return { title: copy.title, description: copy.lede }
+  }
   const course = await getCourseBySlug(slug)
   const title = l(course?.title, locale)
   const description = l(course?.summary, locale)
@@ -33,6 +45,12 @@ export default async function CoursePage({
 }) {
   const { locale, slug } = await params
   if (!isLocale(locale)) notFound()
+
+  /* /academy/corsi-universitari e simili non sono corsi: sono le pagine
+     delle voci di menu, hanno la precedenza sullo slug del corso */
+  const topic = findTopic('/academy', slug)
+  if (topic) return <TopicScreen locale={locale} topic={topic} />
+
   const t = getDictionary(locale)
 
   const [course, settings] = await Promise.all([

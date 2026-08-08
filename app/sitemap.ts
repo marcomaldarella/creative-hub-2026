@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next'
 import { client } from '@/lib/sanity/client'
+import { TOPIC_PATHS } from '@/lib/topics'
 
 const BASE = 'https://bologna-creativehub.it'
 
@@ -30,6 +31,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date()
   const paths: { path: string; lastModified: Date; priority: number }[] = [
     ...SECTIONS.map((s) => ({ path: s, lastModified: now, priority: s === '' ? 1 : 0.8 })),
+    /* le pagine delle voci di menu (lib/topics) */
+    ...TOPIC_PATHS.map((p) => ({ path: p, lastModified: now, priority: 0.7 })),
     ...courses.map((c) => ({ path: `/academy/${c.slug}`, lastModified: now, priority: 0.6 })),
     ...articles.map((a) => ({
       path: `/magazine/${a.slug}`,
