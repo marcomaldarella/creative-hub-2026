@@ -65,6 +65,14 @@ export const course = defineType({
       options: { hotspot: true },
     }),
     defineField({
+      name: 'gallery',
+      title: 'Galleria',
+      description: 'Altre foto del corso, oltre alla copertina.',
+      type: 'array',
+      of: [{ type: 'image', options: { hotspot: true } }],
+      options: { layout: 'grid' },
+    }),
+    defineField({
       name: 'duration',
       title: 'Durata',
       type: 'localeString',

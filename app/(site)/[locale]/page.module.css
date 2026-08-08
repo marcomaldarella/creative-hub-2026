@@ -249,6 +249,76 @@
   }
 }
 
+/* ————— preloader: il disco piccolo si apre nella hero —————
+   Lo stato è `data-boot` su <html> (scritto prima del paint dallo script
+   boot-init, tolto da HeroBoot). Qui vive solo l'aspetto: sfera e anello
+   rimpiccioliti, wordmark al centro, tutto il resto della hero spento. */
+
+.wordsSlot,
+.bootMark {
+  z-index: 2;
+}
+
+/* il wordmark del preloader esiste solo durante il boot */
+.bootMark {
+  display: none;
+  text-align: center;
+  font-size: clamp(52px, 8.8vw, 150px);
+  line-height: 0.86;
+  color: var(--fg);
+  text-shadow: var(--hero-glow);
+  pointer-events: none;
+}
+
+/* l'apertura: le stesse proprietà tornano a riposo quando data-boot cade */
+.orbStage,
+.wordsSlot,
+.heroAnnot,
+.heroSub {
+  transition:
+    transform 1.15s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.75s ease 0.25s;
+}
+
+:global(html[data-boot='1']) .orbStage {
+  transform: scale(0.46);
+}
+
+:global(html[data-boot='1']) .wordsSlot,
+:global(html[data-boot='1']) .heroAnnot,
+:global(html[data-boot='1']) .heroSub {
+  opacity: 0;
+  transition-delay: 0s;
+}
+
+:global(html[data-boot='1']) .bootMark {
+  display: block;
+  animation: bootMarkIn 0.7s var(--ease-out) both;
+}
+
+@keyframes bootMarkIn {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+}
+
+/* su mobile il disco può stringersi di più: c'è meno larghezza */
+@media (max-width: 760px) {
+  :global(html[data-boot='1']) .orbStage {
+    transform: scale(0.5) translateY(-2%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orbStage,
+  .wordsSlot,
+  .heroAnnot,
+  .heroSub {
+    transition: none;
+  }
+}
+
 /* ————— manifesto ————— */
 
 .manifestoWrap {

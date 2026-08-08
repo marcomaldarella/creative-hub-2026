@@ -112,7 +112,7 @@
     "manifestoBold": "l'infrastruttura",
     "manifestoPost": " che permette a chi lavora con il suono, l'immagine e il codice di trasformare la propria visione in professione.",
     "ecosystemKicker": "01 — le tre aree",
-    "ecosystemTitle": "Un luogo dove si impara. Dove si crea. Dove si lavora.",
+    "ecosystemTitle": "Un luogo dove si impara.\nDove si crea. Dove si lavora.",
     "nodes": {
       "academy": {
         "title": "Corsi e formazione",
@@ -308,7 +308,8 @@
       "finanziato": "finanziati",
       "gratuito": "gratuito",
       "custom": "custom"
-    }
+    },
+    "courseGallery": "galleria"
   },
   "studios": {
     "kicker": "studio · bologna",

@@ -17,7 +17,7 @@ import type {
 /* ---------- frammenti ---------- */
 
 const courseFields = groq`
-  _id, _type, title, slug, summary, body, coverImage,
+  _id, _type, title, slug, summary, body, coverImage, gallery,
   duration, startDate, level, mode, language, shopUrl, featured, types,
   category->{ _id, _type, title, slug },
   teachers[]->{ _id, _type, name, slug, role, bio, photo, links }

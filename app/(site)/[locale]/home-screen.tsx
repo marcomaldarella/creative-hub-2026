@@ -11,6 +11,7 @@ import {
   SectionHeader,
 } from '@/components/ui'
 import { SiteChrome, shopHref } from '@/components/sections/SiteChrome'
+import { HeroBoot } from '@/components/sections/HeroBoot'
 import { HeroOrb } from '@/components/sections/HeroOrb'
 import { HeroWords } from '@/components/sections/HeroWords'
 import { HighlightsCarousel } from '@/components/sections/HighlightsCarousel'
@@ -81,6 +82,7 @@ export async function HomeScreen({
     // niente flag dark: la hero segue il tema, la nav deve invertirsi con lui
     <SiteChrome locale={locale} path={heroV2 ? '/home-2' : '/'}>
       <main>
+        {!heroV2 && <HeroBoot />}
         {/* ————— hero ————— */}
         <header
           className={heroV2 ? `${styles.hero} ${styles.heroFit}` : styles.hero}
@@ -130,20 +132,35 @@ export async function HomeScreen({
               </h1>
             ) : (
               /* sfera nuda: le tre anime dell'hub, hover colorato + glow,
-                 la sfera dietro si tinge (evento 'hero-tint') */
-              <HeroWords
-                words={[
-                  {
-                    label: 'Academy',
-                    href: localeHref(locale, '/academy'),
-                  },
-                  { label: 'Rec. Studio', href: localeHref(locale, '/studios') },
-                  {
-                    label: 'Co-Working',
-                    href: localeHref(locale, '/coworking'),
-                  },
-                ]}
-              />
+                 la sfera dietro si tinge (evento 'hero-tint'). Lo slot
+                 serve al preloader per nasconderle mentre il disco è
+                 ancora chiuso */
+              <div className={styles.wordsSlot}>
+                <HeroWords
+                  words={[
+                    {
+                      label: 'Academy',
+                      href: localeHref(locale, '/academy'),
+                    },
+                    {
+                      label: 'Rec. Studio',
+                      href: localeHref(locale, '/studios'),
+                    },
+                    {
+                      label: 'Co-Working',
+                      href: localeHref(locale, '/coworking'),
+                    },
+                  ]}
+                />
+              </div>
+            )}
+            {/* wordmark del preloader: visibile solo con data-boot su <html> */}
+            {!heroV2 && (
+              <div className={`display-black ${styles.bootMark}`} aria-hidden="true">
+                creative
+                <br />
+                hub
+              </div>
             )}
           </div>
           {heroV2 ? (

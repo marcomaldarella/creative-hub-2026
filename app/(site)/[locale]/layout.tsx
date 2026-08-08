@@ -121,6 +121,18 @@ export default async function SiteLayout({
               "(function(){try{var t=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.dataset.theme=t}catch(e){}})()",
           }}
         />
+        {/* preloader della home: il flag va scritto PRIMA del paint,
+            altrimenti si vede la hero completa e poi il disco piccolo.
+            Una volta per sessione, mai con moto ridotto; il timer di
+            sicurezza lo toglie anche se React non idrata */}
+        <Script
+          id="boot-init"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{
+            __html:
+              "(function(){try{var p=location.pathname.replace(/\\/$/,'');if(p!==''&&p!=='/en')return;if(sessionStorage.getItem('ch-booted'))return;if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;var d=document.documentElement;d.dataset.boot='1';setTimeout(function(){delete d.dataset.boot},3000)}catch(e){}})()",
+          }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(ORG_JSONLD) }}

@@ -84,6 +84,7 @@ export interface Course {
   summary?: LocaleText
   body?: LocaleBlock
   coverImage?: SanityImage
+  gallery?: SanityImage[]
   duration?: LocaleString
   startDate?: LocaleString
   level?: LocaleString

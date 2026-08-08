@@ -46,7 +46,8 @@ export function Thumb({
       {hasAsset && (
         /* eslint-disable-next-line @next/next/no-img-element */
         <img
-          src={urlFor(image as SanityImage).width(width).url()}
+          /* auto('format'): la CDN di Sanity serve webp/avif dove supportati */
+          src={urlFor(image as SanityImage).width(width).auto('format').url()}
           alt={image?.alt ?? alt}
           loading="lazy"
         />

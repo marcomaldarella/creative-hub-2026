@@ -54,6 +54,24 @@
   margin-bottom: 24px;
 }
 
+/* ————— galleria del corso ————— */
+
+.gallery {
+  margin-top: clamp(48px, 6vw, 72px);
+}
+
+.galleryGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+@media (max-width: 760px) {
+  .galleryGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 /* ————— sidebar sticky mono ————— */
 
 .sticky {

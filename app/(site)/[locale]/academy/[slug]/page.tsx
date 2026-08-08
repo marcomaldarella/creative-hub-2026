@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { ArrowLink, Button, Reveal, Rule } from '@/components/ui'
 import { PortableBlocks } from '@/components/sections/PortableBlocks'
+import { Thumb } from '@/components/sections/Thumb'
 import { SiteChrome, shopHref } from '@/components/sections/SiteChrome'
 import { TeacherGrid } from '@/components/sections/TeacherGrid'
 import { isLocale, localeHref } from '@/lib/i18n/config'
@@ -82,6 +83,27 @@ export default async function CoursePage({
             <Reveal>
               <PortableBlocks value={l(course.body, locale)} />
             </Reveal>
+
+            {(course.gallery?.length ?? 0) > 0 && (
+              <div className={styles.gallery}>
+                <Reveal as="span" className={`mono ${styles.teachersKicker}`}>
+                  {t.academy.courseGallery}
+                </Reveal>
+                <div className={styles.galleryGrid}>
+                  {course.gallery!.map((shot, i) => (
+                    <Reveal key={shot.asset?._ref ?? i} delay={(i % 3) * 60}>
+                      <Thumb
+                        image={shot}
+                        index={i}
+                        ratio="4 / 3"
+                        width={900}
+                        alt={l(course.title, locale) ?? ''}
+                      />
+                    </Reveal>
+                  ))}
+                </div>
+              </div>
+            )}
 
             {teachers.length > 0 && (
               <div className={styles.teachers}>

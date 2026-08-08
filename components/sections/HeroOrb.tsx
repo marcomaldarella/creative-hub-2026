@@ -519,6 +519,8 @@ export function HeroOrb({
       }
       frame()
       setReady(true)
+      /* il preloader della home aspetta questo per aprirsi */
+      window.dispatchEvent(new Event('hero-ready'))
 
       cleanup = () => {
         cancelAnimationFrame(raf)
