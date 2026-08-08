@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import Script from 'next/script'
 import { Archivo, Geist } from 'next/font/google'
 import localFont from 'next/font/local'
 import { locales, isLocale } from '@/lib/i18n/config'
@@ -110,27 +109,27 @@ export default async function SiteLayout({
       <body
         className={`${display.variable} ${body.variable} ${fat.variable} ${swiss.variable}`}
       >
-        {/* tema prima del paint: localStorage, poi preferenza di sistema.
-            next/script beforeInteractive: iniettato nell'head, niente
-            warning React per script dentro il body */}
-        <Script
-          id="theme-init"
-          strategy="beforeInteractive"
+        {/* ⚠️ <script> RAW, non next/script: con strategy
+            beforeInteractive Next mette il codice in coda al suo runtime
+            (`self.__next_s.push(...)`), quindi in produzione girava DOPO
+            il primo paint — si vedeva la hero completa e solo dopo partiva
+            la splash. Un tag inline viene invece eseguito dal parser prima
+            che il resto del body sia dipinto. */}
+
+        {/* tema: localStorage, poi preferenza di sistema */}
+        <script
           dangerouslySetInnerHTML={{
             __html:
               "(function(){try{var t=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.dataset.theme=t}catch(e){}})()",
           }}
         />
-        {/* preloader della home: il flag va scritto PRIMA del paint,
-            altrimenti si vede la hero completa e poi il disco piccolo.
-            Una volta per sessione, mai con moto ridotto; il timer di
-            sicurezza lo toglie anche se React non idrata */}
-        <Script
-          id="boot-init"
-          strategy="beforeInteractive"
+        {/* splash della home: una volta per sessione, mai con moto
+            ridotto; il timer di sicurezza toglie il flag anche se React
+            non idrata o se GSAP non carica */}
+        <script
           dangerouslySetInnerHTML={{
             __html:
-              "(function(){try{var p=location.pathname.replace(/\\/$/,'');if(p!==''&&p!=='/en')return;if(sessionStorage.getItem('ch-booted'))return;if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;var d=document.documentElement;d.dataset.boot='1';setTimeout(function(){delete d.dataset.boot},4400)}catch(e){}})()",
+              "(function(){try{var p=location.pathname.replace(/\/$/,'');if(p!==''&&p!=='/en')return;if(sessionStorage.getItem('ch-booted'))return;if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;var d=document.documentElement;d.dataset.boot='1';setTimeout(function(){delete d.dataset.boot},6000)}catch(e){}})()",
           }}
         />
         <script
