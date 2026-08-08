@@ -56,7 +56,7 @@ const HUD_LABELS: {
   token: string
   rgb: [number, number, number]
 }[] = [
-  { zone: 'l', label: 'Academy', token: 'var(--azzurro)', rgb: [0.31, 0.66, 0.87] },
+  { zone: 'l', label: 'Academy', token: 'var(--azzurro-ink)', rgb: [0.24, 0.49, 0.6] },
   { zone: 't', label: 'Coworking', token: 'var(--giallo-fluo)', rgb: [0.87, 1.0, 0.23] },
   { zone: 'r', label: 'Recording', token: 'var(--arancio)', rgb: [1.0, 0.43, 0.07] },
 ]

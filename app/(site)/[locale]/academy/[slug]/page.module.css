@@ -16,7 +16,7 @@
 .kicker {
   display: block;
   margin-bottom: 20px;
-  color: var(--azzurro);
+  color: var(--azzurro-ink);
 }
 
 .title {

@@ -20,7 +20,7 @@
 
 .pill:hover {
   color: var(--fg);
-  border-color: var(--azzurro);
+  border-color: var(--azzurro-ink);
 }
 
 .active {

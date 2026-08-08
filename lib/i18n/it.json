@@ -82,10 +82,10 @@
   "hero": {
     "since": "international college of music,\nsound, multimedia & visual",
     "coords": "est.1999\nbologna 44.4929°n, 11.3429°e",
-    "lede": "L'infrastruttura che trasforma suono, immagine e codice in professione.",
+    "lede": "Suono, immagine, codice. Tutto in un edificio.",
     "tagline": "inspire, innovate, excel.",
     "discover": "scopri l'hub",
-    "caption": "Scuola internazionale di musica, studio di registrazione e spazi co-working.",
+    "caption": "Accademia di musica e arti creative, studio di registrazione e spazi di co-working.",
     "captionSub": "Bologna dal 1999."
   },
   "common": {
@@ -111,8 +111,8 @@
     "manifestoPre": "Siamo ",
     "manifestoBold": "l'infrastruttura",
     "manifestoPost": " che permette a chi lavora con il suono, l'immagine e il codice di trasformare la propria visione in professione.",
-    "ecosystemKicker": "l'ecosistema",
-    "ecosystemTitle": "3 nodi, una rete",
+    "ecosystemKicker": "01 — le tre aree",
+    "ecosystemTitle": "Un luogo dove si impara. Dove si crea. Dove si lavora.",
     "nodes": {
       "academy": {
         "title": "Corsi e formazione",
@@ -139,7 +139,7 @@
         "text": "Le persone e i partner dietro l'hub."
       }
     },
-    "resultsRuleLeft": "risultati",
+    "resultsRuleLeft": "I nostri numeri.",
     "resultsRuleRight": "2026",
     "stats": {
       "students": {
@@ -163,61 +163,61 @@
         "label": "startup incubate all'anno"
       }
     },
-    "magazineKicker": "editorial",
-    "magazineTitle": "Editorial",
+    "magazineKicker": "06 — editorial",
+    "magazineTitle": "Storie di mestiere.",
     "magazineAll": "tutti gli articoli",
     "opendayTitleLine1": "Un pomeriggio",
-    "opendayTitleLine2": "dentro l'Hub",
+    "opendayTitleLine2": "dentro l'hub.",
     "opendayCta": "prenota il tuo posto",
-    "methodKicker": "04 — metodo",
+    "methodKicker": "02 — metodo",
     "methodEyebrow": "metodo",
-    "methodTitle": "Il metodo è uno: si studia dentro l'industria, non accanto.",
+    "methodTitle": "Si impara dentro l'industria. Non accanto.",
     "method": [
       {
         "n": "01",
-        "title": "Formazione",
+        "title": "Titoli riconosciuti",
         "text": "Università, master e percorsi custom riconosciuti."
       },
       {
         "n": "02",
-        "title": "Collaborazioni",
+        "title": "Collaborazioni vere",
         "text": "Studi, etichette, broadcaster, brand internazionali."
       },
       {
         "n": "03",
-        "title": "Tecnologie",
+        "title": "Tecnologie di livello",
         "text": "SSL, Dolby Atmos, post-produzione, XR."
       },
       {
         "n": "04",
-        "title": "Networking",
+        "title": "Una rete che assume",
         "text": "Community globale, mentor e industria al tuo fianco."
       }
     ],
-    "networkKicker": "06 — network",
+    "networkKicker": "05 — network",
     "networkTitle": "L'industria creativa\npassa di qui.",
     "networkRight": "partner attivi · 2026",
     "opendayFrameA": "inspire, innovate, excel.",
     "opendayFrameB": "bologna · creative hub",
-    "manifestoNeg": "Siamo l'infrastruttura per chi lavora con suono, immagine, codice e vuole farne un mestiere.",
+    "manifestoNeg": "Un'infrastruttura creativa dove impari un mestiere e trovi il tuo spazio.",
     "bento": [
       {
-        "title": "Laurea & Alta Formazione",
-        "text": "Non un attestato di partecipazione. Una laurea, riconosciuta, in musica, sound e arti visive.",
+        "title": "Academy",
+        "text": "Titoli internazionali in musica, sound e visual.",
         "n": "01",
         "tags": "università · master",
         "cta": "Entra nel nodo"
       },
       {
-        "title": "Registrazione e produzione",
-        "text": "Regia SSL XL Desk, sala live, Dolby Atmos: lo studio dove lavora l’industria.",
+        "title": "Studio",
+        "text": "Regia SSL. Sala live. Dolby Atmos.",
         "n": "02",
         "tags": "ssl · dolby atmos",
         "cta": "Entra nel nodo"
       },
       {
-        "title": "Spazi di lavoro",
-        "text": "Coworking, sale riunioni ed eventi nel cuore della zona Roveri.",
+        "title": "Coworking",
+        "text": "Postazioni, uffici e sale. Zona Roveri.",
         "n": "03",
         "tags": "coworking · eventi",
         "cta": "Entra nel nodo"
@@ -250,7 +250,7 @@
     "manifestoCol2": "Chi studia lo fa a fianco di chi già lavora nel settore — nella stessa rete di aziende, negli stessi spazi. Non un tirocinio a fine corso, ma una condizione costante: la formazione resta ancorata a ciò che il mercato richiede oggi, non a un programma fissato anni prima.",
     "manifestoCta": "Scopri chi siamo",
     "highlights": {
-      "eyebrow": "05 — hi-lights",
+      "eyebrow": "03 — in evidenza",
       "slides": [
         {
           "kicker": "studio",
@@ -291,13 +291,13 @@
     "networkCta": "Partner"
   },
   "academy": {
-    "kicker": "academy",
-    "title": "Laurea & Alta Formazione",
-    "lede": "Corsi di laurea, master universitari e percorsi finanziati: un titolo riconosciuto, non solo un attestato.",
+    "kicker": "academy · iscrizioni aperte · a.a. 2026/27",
+    "title": "L'università delle industrie creative.",
+    "lede": "Bachelor of Arts, Bachelor of Science e Master of Music in musica, sound e visual. Venti posti per corso, un'ora di lezione individuale a settimana.",
     "categoryLabel": "filtra per categoria",
     "empty": "nessun corso in questa categoria.",
     "teachersKicker": "i docenti",
-    "teachersTitle": "Chi insegna qui",
+    "teachersTitle": "Chi insegna, lavora.",
     "backToCourses": "tutti i corsi",
     "courseTeachers": "docenti del corso",
     "courseInfo": "scheda del corso",
@@ -311,55 +311,55 @@
     }
   },
   "studios": {
-    "kicker": "lo studio",
-    "title": "Dove il suono prende forma",
-    "lede": "Console SSL, certificazione Dolby Atmos, un team di sound engineer che lavora tra discografia e cinema. Le luci si abbassano, il segnale scorre.",
+    "kicker": "studio · bologna",
+    "title": "Registra come l'industria.",
+    "lede": "Regia SSL XL Desk da 55 m². Sala live. ISO box. Tre cabine B-Ear.",
     "spacesKicker": "gli spazi",
-    "spacesTitle": "Regie, sala ripresa, suite immersiva",
+    "spacesTitle": "Tutta la band. Nella stessa stanza.",
     "servicesKicker": "i servizi",
     "servicesTitle": "Dal tracking alla colonna internazionale",
     "services": {
       "recording": {
         "n": "ch.01",
-        "title": "Recording",
-        "text": "Sala di ripresa, console SSL, ascolto di riferimento."
+        "title": "Registrazione",
+        "text": "Tutta la band, nella stessa stanza."
       },
       "mix": {
         "n": "ch.02",
         "title": "Mix & mastering",
-        "text": "Analogico e in the box, per discografia e broadcast."
+        "text": "Monitoraggio calibrato. Nessuna sorpresa."
       },
       "atmos": {
         "n": "ch.03",
         "title": "Dolby Atmos",
-        "text": "Missaggio immersivo certificato, musica e cinema."
+        "text": "Audio immersivo. Musica, cinema, gaming."
       },
       "cinema": {
         "n": "ch.04",
-        "title": "Cinema audio",
-        "text": "Post-produzione, foley, colonna internazionale."
+        "title": "Sound design",
+        "text": "Suono per immagini."
       }
     },
-    "ctaKicker": "prenotazioni",
-    "ctaTitle": "Porta qui il tuo progetto",
+    "ctaKicker": "preventivo",
+    "ctaTitle": "Raccontaci il progetto.",
     "ctaText": "Raccontaci cosa vuoi registrare o mixare: rispondiamo entro un giorno lavorativo.",
     "ctaBook": "prenota una sessione",
     "ctaContact": "scrivici"
   },
   "coworking": {
-    "kicker": "coworking",
-    "title": "Spazi di lavoro",
-    "lede": "Desk, sale riunioni e day pass in mezzo a studi e aule: uno spazio pensato per chi lavora nelle industrie creative.",
+    "kicker": "coworking · zona roveri, bologna",
+    "title": "Uno spazio all'altezza del tuo lavoro.",
+    "lede": "Coworking, sale ed eventi. Zona Roveri, Bologna.",
     "spacesKicker": "gli spazi",
-    "spacesTitle": "Dal desk alla sala riunioni",
-    "ctaKicker": "vieni a provarlo",
-    "ctaTitle": "Una giornata dentro l'hub",
+    "spacesTitle": "Una postazione. Una scrivania fissa. Un ufficio.",
+    "ctaKicker": "prenota",
+    "ctaTitle": "Scegli lo spazio. Blocca la data.",
     "ctaText": "Il day pass è il modo più semplice per conoscere lo spazio: si prenota online e si paga solo quando serve.",
     "ctaDayPass": "prenota un day pass"
   },
   "innovation": {
-    "fallbackTitle": "Innovazione",
-    "fallbackLede": "Ricerca applicata su audio immersivo, intelligenza artificiale e media interattivi, con aziende e università.",
+    "fallbackTitle": "Le imprese creative nascono qui.",
+    "fallbackLede": "Incubazione, accelerazione, servizi alle imprese.",
     "statsRuleLeft": "numeri",
     "statsRuleRight": "innovazione",
     "stats": {
@@ -376,15 +376,15 @@
     }
   },
   "about": {
-    "fallbackTitle": "Chi siamo",
-    "fallbackLede": "Dal 1999 formiamo professionisti della musica, del suono e dell'immagine, nel cuore produttivo di Bologna.",
+    "fallbackTitle": "Dal 1999.",
+    "fallbackLede": "Un college, uno studio di registrazione, un coworking.",
     "teamKicker": "le persone",
-    "teamTitle": "Docenti e team",
+    "teamTitle": "Le persone.",
     "partnersRuleLeft": "i partner",
     "partnersRuleRight": "dal 1999",
     "contactsKicker": "contatti",
-    "contactsTitle": "Vieni a trovarci",
-    "contactsText": "Siamo in zona fiera, a dieci minuti dal centro. La porta d'ingresso è l'open day."
+    "contactsTitle": "Un referente per ogni area.",
+    "contactsText": "Siamo in zona Roveri, a dieci minuti dal centro. La porta d'ingresso è l'open day."
   },
   "footer": {
     "address": "via del Tappezziere 4, 40138 Bologna",
@@ -399,10 +399,10 @@
   },
   "magazine": {
     "kicker": "editorial",
-    "title": "Editorial",
-    "lede": "Voci, storie e strumenti dall'industria creativa: suono, immagine, codice.",
+    "title": "Il mestiere, raccontato da chi lo fa.",
+    "lede": "Quattro linee. Un solo settore.",
     "metaTitle": "editorial",
-    "metaDescription": "Voci e storie dall'industria creativa — l'editorial di creative hub bologna.",
+    "metaDescription": "Il mestiere raccontato da chi lo fa — l'editorial di creative hub bologna.",
     "featuredLabel": "in evidenza",
     "latestLabel": "tutti gli articoli",
     "categoriesLabel": "categorie",

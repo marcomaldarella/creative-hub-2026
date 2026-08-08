@@ -11,6 +11,8 @@ export type SectionHeaderProps = {
   lede?: ReactNode;
   /** per sezioni petrolio: kicker azzurro, testi osso */
   dark?: boolean;
+  /** tag del titolo: h2 di default, h1 quando l'header apre la pagina */
+  as?: 'h1' | 'h2';
   className?: string;
 };
 
@@ -19,6 +21,7 @@ export function SectionHeader({
   title,
   lede,
   dark = false,
+  as = 'h2',
   className,
 }: SectionHeaderProps) {
   const cls = [styles.header, dark ? styles.dark : '', className]
@@ -32,7 +35,7 @@ export function SectionHeader({
           {kicker}
         </Reveal>
       )}
-      <Reveal as="h2" className={`display-thin ${styles.title}`} delay={80}>
+      <Reveal as={as} className={`display-thin ${styles.title}`} delay={80}>
         {title}
       </Reveal>
       {lede && (

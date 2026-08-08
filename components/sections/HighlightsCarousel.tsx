@@ -27,7 +27,7 @@ export type HighlightsCarouselProps = {
 const LOOK = [
   { img: studioImg, accent: 'var(--arancio)' },
   { img: spaziImg, accent: 'var(--giallo-fluo)' },
-  { img: academyImg, accent: 'var(--azzurro)' },
+  { img: academyImg, accent: 'var(--azzurro-ink)' },
 ]
 
 const AUTOPLAY_MS = 6500

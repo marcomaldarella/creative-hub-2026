@@ -11,7 +11,7 @@ export type HeroWord = {
 
 /* colori di sezione: token CSS per il glow, rgb normalizzato per lo shader */
 const ACCENTS = [
-  { token: 'var(--azzurro)', rgb: [0.31, 0.66, 0.87] }, // academy #4FA8DF
+  { token: 'var(--azzurro-ink)', rgb: [0.24, 0.49, 0.6] }, // academy — blu brand #193442
   { token: 'var(--arancio)', rgb: [1.0, 0.43, 0.07] }, // studio #FF6E12
   { token: 'var(--giallo-fluo)', rgb: [0.87, 1.0, 0.23] }, // coworking #DFFF3A
 ] as const

@@ -30,7 +30,7 @@
 }
 
 .blocks blockquote {
-  border-left: 2px solid var(--azzurro);
+  border-left: 2px solid var(--azzurro-ink);
   padding-left: 20px;
   margin: 1.4em 0;
   font-size: 1.1em;
@@ -50,12 +50,12 @@
 .blocks a {
   text-decoration: underline;
   text-underline-offset: 3px;
-  text-decoration-color: var(--azzurro);
+  text-decoration-color: var(--azzurro-ink);
   transition: color 0.2s;
 }
 
 .blocks a:hover {
-  color: var(--azzurro);
+  color: var(--azzurro-ink);
 }
 
 .blocks code {

@@ -68,15 +68,17 @@
 }
 
 /* canvas MOLTO più largo dell'orb visibile (camera a 5.3 nel component):
-   margine per estrusione/burst col mouse — la nuvola non si taglia mai */
+   margine per estrusione/burst col mouse — la nuvola non si taglia mai.
+   Su desktop il blocco è ~10% più piccolo (richiesta cliente 2026-08-07):
+   il blob non deve dominare il primo schermo */
 .orb {
-  width: min(89vh, 110vw, 890px);
+  width: min(64vh, 100vw, 720px);
   aspect-ratio: 1;
 }
 
 /* anello di testo mono che ruota lentissimo attorno all'orb */
 .ring {
-  width: min(80vh, 96vw, 800px);
+  width: min(57vh, 88vw, 640px);
   aspect-ratio: 1;
   animation: ringSpin 90s linear infinite;
   pointer-events: none;
@@ -172,13 +174,13 @@
    caption), altrimenti il marquee circolare ruotando finisce sotto il
    bordo e viene tagliato — in qualunque tema */
 .heroFit .ring {
-  width: min(100svh - 330px, 96vw, 800px);
+  width: min((100svh - 330px) * 0.8, 88vw, 640px);
 }
 
 .heroFit .orb {
   /* stessa proporzione attuale canvas/anello (~1.11): la sfera resta
      dentro l'anello a ogni altezza di viewport */
-  width: min((100svh - 330px) * 1.11, 110vw, 890px);
+  width: min((100svh - 330px) * 0.9, 100vw, 720px);
 }
 
 .heroCaption {
@@ -233,13 +235,17 @@
     width: min(58vh, 88vw, 800px);
   }
 
-  .heroAnnot {
-    padding-top: clamp(14px, 2vh, 24px);
+  /* sfera un filo più in alto: senza l'etichetta in cima il palco si
+     ricentra troppo in basso (correzione cliente 2026-08-07) */
+  .orbStage {
+    padding: 0;
+    transform: translateY(-2%);
   }
 
-  /* la lede sotto la sfera respira meno: tutto nel primo schermo */
+  /* il blocco payoff + lede + CTA sale: su iPhone la CTA finiva
+     sotto la barra di Safari */
   .heroSub {
-    padding-bottom: clamp(20px, 3vh, 36px);
+    padding-bottom: clamp(28px, 6vh, 64px);
   }
 }
 
@@ -253,7 +259,7 @@
 .manifestoKicker {
   display: block;
   letter-spacing: 0.08em;
-  color: var(--azzurro);
+  color: var(--azzurro-ink);
 }
 
 /* statement gigante centrato a tutta larghezza (ref endzeit) */
@@ -385,7 +391,7 @@
 .methodKicker {
   display: block;
   margin-bottom: 34px;
-  color: var(--azzurro);
+  color: var(--azzurro-ink);
   letter-spacing: 0.08em;
 }
 
@@ -403,7 +409,7 @@
 .networkKicker {
   display: block;
   margin-bottom: 18px;
-  color: var(--azzurro);
+  color: var(--azzurro-ink);
   letter-spacing: 0.08em;
 }
 
@@ -447,11 +453,12 @@
   margin-top: 40px;
 }
 
-/* ————— open day (azzurro) ————— */
+/* ————— open day (blu brand) ————— */
 
 .openday {
   background: var(--azzurro);
-  color: var(--petrolio);
+  /* il blu brand e' scuro: sopra ci va inchiostro chiaro, non petrolio */
+  color: var(--osso);
   padding: clamp(56px, 7vw, 100px) 0;
 }
 
@@ -470,7 +477,7 @@
 .opendayDate {
   display: block;
   margin-bottom: 14px;
-  color: color-mix(in srgb, var(--petrolio) 70%, transparent);
+  color: var(--osso-60);
 }
 
 .opendayTitle {
@@ -491,7 +498,7 @@
   z-index: 2;
   writing-mode: vertical-rl;
   letter-spacing: 0.12em;
-  color: color-mix(in srgb, var(--petrolio) 55%, transparent);
+  color: var(--osso-60);
   white-space: nowrap;
 }
 
@@ -519,13 +526,9 @@
 /* ————— mobile ————— */
 
 @media (max-width: 760px) {
+  /* etichetta e coordinate spariscono del tutto da mobile: rubavano il
+     primo schermo alla sfera (correzione cliente 2026-08-07) */
   .heroAnnot {
-    flex-direction: column;
-    gap: 6px;
-  }
-
-  /* le coordinate non si vedono da mobile */
-  .heroAnnot span:last-child {
     display: none;
   }
 

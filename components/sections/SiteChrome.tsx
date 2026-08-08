@@ -23,13 +23,24 @@ export function shopHref(settings: SiteSettings | null | undefined): string {
    testo (il giallo fluo puro non regge su fondo chiaro: si mixa con l'ink) */
 const SECTION_ACCENTS: Record<
   string,
-  { accent: string; ink: string }
+  { accent: string; ink: string; on: string }
 > = {
-  '/academy': { accent: 'var(--azzurro)', ink: 'var(--azzurro)' },
-  '/studios': { accent: 'var(--arancio)', ink: 'var(--arancio)' },
+  /* ink = accento come TESTO (il blu brand è scuro: in dark si schiarisce
+     via --azzurro-ink) · on = testo SOPRA una superficie in --accent */
+  '/academy': {
+    accent: 'var(--azzurro)',
+    ink: 'var(--azzurro-ink)',
+    on: 'var(--osso)',
+  },
+  '/studios': {
+    accent: 'var(--arancio)',
+    ink: 'var(--arancio)',
+    on: 'var(--petrolio)',
+  },
   '/coworking': {
     accent: 'var(--giallo-fluo)',
     ink: 'color-mix(in srgb, var(--giallo-fluo) 70%, var(--fg))',
+    on: 'var(--petrolio)',
   },
 }
 
@@ -199,6 +210,7 @@ export async function SiteChrome({
             {
               '--accent': pageAccent.accent,
               '--accent-ink': pageAccent.ink,
+              '--accent-on': pageAccent.on,
             } as React.CSSProperties
           }
         >

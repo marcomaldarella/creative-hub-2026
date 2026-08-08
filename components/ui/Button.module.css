@@ -25,13 +25,24 @@
 }
 
 .azzurro {
-  /* dentro le sezioni segue l'accento (arancio/giallo), altrove resta azzurro */
+  /* dentro le sezioni segue l'accento (arancio/giallo), altrove resta il
+     blu brand; --accent-on e' il testo leggibile sopra quella superficie */
   background: var(--accent);
-  color: var(--petrolio);
+  color: var(--accent-on);
 }
 
 .azzurro:hover {
   background: color-mix(in srgb, var(--accent) 86%, var(--fg));
+}
+
+/* pastiglia chiara: sopra le sezioni in blu brand (open day) */
+.osso {
+  background: var(--osso);
+  color: var(--azzurro);
+}
+
+.osso:hover {
+  background: var(--bianco);
 }
 
 .ghost {

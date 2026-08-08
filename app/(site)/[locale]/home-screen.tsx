@@ -134,7 +134,7 @@ export async function HomeScreen({
               <HeroWords
                 words={[
                   {
-                    label: 'Music Academy',
+                    label: 'Academy',
                     href: localeHref(locale, '/academy'),
                   },
                   { label: 'Rec. Studio', href: localeHref(locale, '/studios') },
@@ -384,7 +384,7 @@ export async function HomeScreen({
                 {t.home.opendayTitleLine2}
               </h2>
             </div>
-            <Button href={openHref} external>
+            <Button href={openHref} external variant="osso">
               {t.home.opendayCta}
             </Button>
           </div>

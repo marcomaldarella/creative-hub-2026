@@ -6,7 +6,7 @@
   /* colori */
   --ghiaccio: #F2F1EE;   /* sfondo base */
   --petrolio: #17181A;   /* inchiostro neutro: testo su light, sezioni dark */
-  --azzurro:  #4FA8DF;   /* accento brand — academy */
+  --azzurro:  #193442;   /* blu brand del cliente (agosto 2026) — academy */
   --giallo-fluo: #DFFF3A; /* accento coworking */
   --arancio:  #FF6E12;   /* accento studio (registrazione) */
   --osso:     #EDE6DA;   /* testo su petrolio (mai bianco puro) */
@@ -16,16 +16,23 @@
 
   /* derivati */
   --petrolio-hover: #26282B;
-  --azzurro-hover:  #66B5E5;
+  --azzurro-hover:  #22475A;
   --osso-60: rgba(237, 230, 218, 0.6);
   --osso-16: rgba(237, 230, 218, 0.16);
-  --azzurro-06: rgba(79, 168, 223, 0.06);
+  --azzurro-06: rgba(25, 52, 66, 0.06);
+
+  /* Il blu brand è scuro: come SUPERFICIE va bene ovunque, come TESTO
+     sparisce sul tema dark. --azzurro-ink è la stessa tinta schiarita
+     quanto basta per restare leggibile (in dark viene ridefinita). */
+  --azzurro-ink: #193442;
 
   /* accento di sezione: azzurro di default, SiteChrome lo cambia dentro
      academy (azzurro) / studios (arancio) / coworking (giallo).
-     --accent = superfici, barre, bordi; --accent-ink = testo leggibile */
+     --accent = superfici, barre, bordi; --accent-ink = testo leggibile;
+     --accent-on = testo SOPRA una superficie in --accent */
   --accent: var(--azzurro);
-  --accent-ink: var(--azzurro);
+  --accent-ink: var(--azzurro-ink);
+  --accent-on: var(--osso);
 
   /* ————— layer semantico (inverte col tema) —————
      Regola: un elemento che deve invertirsi col tema usa questi token;
@@ -79,6 +86,10 @@
   --fg-2: #8A8A8A;
   --line: #1F1F1F;
   --panel: #0F0F0F; /* anche le superfici brand diventano neutre scure */
+  /* il blu brand su nero è illeggibile: come inchiostro sale di luminosità
+     restando sulla stessa tinta */
+  --azzurro-ink: #7FA9BE;
+  --azzurro-hover: #9CC2D4;
   color-scheme: dark;
 }
 
@@ -93,6 +104,8 @@
     --fg-2: #8A8A8A;
     --line: #1F1F1F;
     --panel: #0F0F0F;
+    --azzurro-ink: #7FA9BE;
+    --azzurro-hover: #9CC2D4;
     color-scheme: dark;
   }
 }
@@ -115,10 +128,10 @@ a { color: inherit; text-decoration: none; }
 button { font: inherit; cursor: pointer; border: none; background: none; }
 img { max-width: 100%; height: auto; display: block; }
 
-::selection { background: var(--azzurro); color: var(--petrolio); }
+::selection { background: var(--azzurro); color: var(--osso); }
 
 :focus-visible {
-  outline: 2px solid var(--azzurro);
+  outline: 2px solid var(--azzurro-ink);
   outline-offset: 3px;
   border-radius: 2px;
 }

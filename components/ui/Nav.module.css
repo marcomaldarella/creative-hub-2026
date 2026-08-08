@@ -89,7 +89,7 @@
 }
 
 .topCta {
-  color: var(--azzurro);
+  color: var(--azzurro-ink);
   transition: color 0.2s;
 }
 
@@ -431,7 +431,7 @@
 }
 
 .overlayLink:hover {
-  color: var(--azzurro);
+  color: var(--azzurro-ink);
 }
 
 /* bottone +: cerchio sottile, il tratto verticale collassa quando aperto (+ → −) */
@@ -533,7 +533,7 @@
 
 .overlay .cta {
   background: var(--azzurro);
-  color: var(--petrolio);
+  color: var(--osso);
 }
 
 .overlay .cta:hover {
@@ -551,7 +551,7 @@
 
 .menuOpen .cta {
   background: var(--azzurro);
-  color: var(--petrolio);
+  color: var(--osso);
 }
 
 .menuOpen .cta:hover {
@@ -634,7 +634,7 @@
 
 .dark .cta {
   background: var(--azzurro);
-  color: var(--petrolio);
+  color: var(--osso);
 }
 
 .dark .cta:hover {

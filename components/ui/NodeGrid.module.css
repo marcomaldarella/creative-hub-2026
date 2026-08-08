@@ -63,7 +63,7 @@ a.nodo:hover {
   position: absolute;
   top: 30px;
   right: 26px;
-  color: var(--azzurro);
+  color: var(--azzurro-ink);
   font-size: 20px;
   font-family: var(--font-swiss), 'Helvetica Neue', var(--font-display), sans-serif;
   font-weight: 700;

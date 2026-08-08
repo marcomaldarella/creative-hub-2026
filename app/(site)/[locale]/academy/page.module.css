@@ -66,11 +66,11 @@
      arancio/giallo se il pattern verra riusato altrove) */
   background: var(--accent);
   border-color: var(--accent);
-  color: var(--petrolio);
+  color: var(--accent-on);
 }
 
 .pillOn:hover {
-  color: var(--petrolio);
+  color: var(--accent-on);
   border-color: var(--accent);
   background: color-mix(in srgb, var(--accent) 86%, var(--fg));
 }

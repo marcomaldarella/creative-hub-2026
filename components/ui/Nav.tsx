@@ -26,7 +26,7 @@ export type NavItem = {
   label: string;
   href: string;
   /** accento di sezione per il pannello (--accent / --accent-ink) */
-  accent?: { accent: string; ink: string };
+  accent?: { accent: string; ink: string; on: string };
   /** mega-menu della sezione (solo desktop, hover/focus) */
   sub?: NavSub;
 };
@@ -246,6 +246,7 @@ export function Nav({
                       ? ({
                           '--accent': item.accent.accent,
                           '--accent-ink': item.accent.ink,
+                          '--accent-on': item.accent.on,
                         } as React.CSSProperties)
                       : undefined
                   }

@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <!-- due pallini in verticale — azzurro brand (--azzurro #4FA8DF) -->
-  <circle cx="16" cy="9.5" r="5" fill="#4FA8DF" />
-  <circle cx="16" cy="22.5" r="5" fill="#4FA8DF" />
+  <!-- due pallini in verticale — azzurro brand (--azzurro #193442) -->
+  <circle cx="16" cy="9.5" r="5" fill="#193442" />
+  <circle cx="16" cy="22.5" r="5" fill="#193442" />
 </svg>

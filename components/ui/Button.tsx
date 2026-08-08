@@ -4,8 +4,9 @@ import styles from './Button.module.css';
 
 export type ButtonProps = {
   children: ReactNode;
-  /** primary: petrolio→osso · azzurro: azzurro→petrolio · ghost: bordo linea */
-  variant?: 'primary' | 'azzurro' | 'ghost';
+  /** primary: petrolio→osso · azzurro: accento→accent-on · osso: pastiglia
+   *  chiara per le sezioni in blu brand · ghost: bordo linea */
+  variant?: 'primary' | 'azzurro' | 'osso' | 'ghost';
   /** se presente rende <Link> (o <a> se external) */
   href?: string;
   /** target _blank + rel noopener */

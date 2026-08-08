@@ -64,6 +64,7 @@ export default async function MagazinePage({
       <main className={styles.main}>
         <div className={`wrap ${styles.header}`}>
           <SectionHeader
+            as="h1"
             kicker={t.magazine.kicker}
             title={t.magazine.title}
             lede={t.magazine.lede}

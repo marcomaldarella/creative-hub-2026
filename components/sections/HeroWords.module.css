@@ -9,7 +9,10 @@
   z-index: 2;
 }
 
+/* un gradino più grande del mono di sistema: il cliente lo voleva più
+   leggibile sopra al titolo (correzione 2026-08-07) */
 .mark {
+  font-size: 15px;
   letter-spacing: 0.14em;
   color: var(--fg);
 }
@@ -61,7 +64,7 @@
   }
 
   .mark {
-    font-size: 11px;
+    font-size: 12.5px;
   }
 
   .words {

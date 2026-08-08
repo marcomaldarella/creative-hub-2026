@@ -66,8 +66,8 @@
 }
 
 .card:hover .pill {
-  border-color: var(--azzurro);
-  color: color-mix(in srgb, var(--azzurro) 70%, var(--petrolio));
+  border-color: var(--azzurro-ink);
+  color: color-mix(in srgb, var(--azzurro-ink) 70%, var(--petrolio));
 }
 
 .date {
@@ -112,7 +112,7 @@
 .arrow {
   font-family: var(--font-swiss), 'Helvetica Neue', var(--font-display), sans-serif;
   font-weight: 700;
-  color: var(--azzurro);
+  color: var(--azzurro-ink);
   opacity: 0;
   transform: rotate(180deg);
   transition: opacity var(--dur), transform var(--dur) var(--ease-out);

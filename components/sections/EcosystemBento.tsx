@@ -24,7 +24,7 @@ const IMAGES = [academyImg, studioImg, spaziImg]
 
 /* labeling di sezione: ogni nodo porta il colore della sua area */
 const SECTIONS = [
-  { label: 'Academy', accent: 'var(--azzurro)' },
+  { label: 'Academy', accent: 'var(--azzurro-ink)' },
   { label: 'Studio', accent: 'var(--arancio)' },
   { label: 'Coworking', accent: 'var(--giallo-fluo)' },
 ] as const
