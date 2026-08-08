@@ -158,8 +158,11 @@
 }
 
 .lede {
-  font-size: var(--fs-lede);
-  max-width: 34ch;
+  font-size: clamp(17px, 1.4vw, 21px);
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  max-width: 40ch;
 }
 
 /* variante home 2: TUTTO nel primo viewport — la hero è alta esattamente
@@ -270,57 +273,27 @@
   pointer-events: none;
 }
 
-/* l'apertura: le stesse proprietà tornano a riposo quando data-boot cade.
-   Lo slot delle parole NON è in lista: non sfuma in blocco, sono le tre
-   parole a entrare una dopo l'altra (stagger in HeroWords.module.css) */
-.orbStage,
-.heroAnnot,
-.heroSub {
-  transition:
-    transform 1.15s cubic-bezier(0.22, 1, 0.36, 1),
-    opacity 0.75s ease 0.25s;
-}
-
 :global(html[data-boot='1']) .orbStage {
   transform: scale(0.46);
 }
 
+/* stato di partenza della splash: da qui la timeline GSAP anima con stili
+   inline, che vincono su queste regole. Se GSAP non parte, il timer di
+   sicurezza toglie data-boot e tutto torna visibile */
 :global(html[data-boot='1']) .heroAnnot,
-:global(html[data-boot='1']) .heroSub {
-  opacity: 0;
-  transition-delay: 0s;
-}
-
-/* niente transizione qui: allo scatto lo slot torna visibile di colpo e
-   l'ingresso lo fanno le parole, in stagger */
+:global(html[data-boot='1']) .heroSub,
 :global(html[data-boot='1']) .wordsSlot {
   opacity: 0;
 }
 
 :global(html[data-boot='1']) .bootMark {
   display: block;
-  animation: bootMarkIn 0.7s var(--ease-out) both;
-}
-
-@keyframes bootMarkIn {
-  from {
-    opacity: 0;
-    transform: scale(0.94);
-  }
 }
 
 /* su mobile il disco può stringersi di più: c'è meno larghezza */
 @media (max-width: 760px) {
   :global(html[data-boot='1']) .orbStage {
     transform: scale(0.5) translateY(-2%);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .orbStage,
-  .heroAnnot,
-  .heroSub {
-    transition: none;
   }
 }
 

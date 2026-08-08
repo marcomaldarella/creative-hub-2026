@@ -87,11 +87,11 @@ export async function HomeScreen({
         <header
           className={heroV2 ? `${styles.hero} ${styles.heroFit}` : styles.hero}
         >
-          <div className={styles.heroAnnot}>
+          <div className={styles.heroAnnot} data-splash="annot">
             <span className="mono">{t.hero.since}</span>
             <span className="mono">{t.hero.coords}</span>
           </div>
-          <div className={styles.orbStage}>
+          <div className={styles.orbStage} data-splash="stage">
             <svg className={styles.ring} viewBox="0 0 100 100" aria-hidden="true">
               <defs>
                 <path
@@ -135,7 +135,7 @@ export async function HomeScreen({
                  la sfera dietro si tinge (evento 'hero-tint'). Lo slot
                  serve al preloader per nasconderle mentre il disco è
                  ancora chiuso */
-              <div className={styles.wordsSlot}>
+              <div className={styles.wordsSlot} data-splash="words">
                 <HeroWords
                   words={[
                     {
@@ -156,7 +156,11 @@ export async function HomeScreen({
             )}
             {/* wordmark del preloader: visibile solo con data-boot su <html> */}
             {!heroV2 && (
-              <div className={`display-black ${styles.bootMark}`} aria-hidden="true">
+              <div
+                className={`display-black ${styles.bootMark}`}
+                data-splash="mark"
+                aria-hidden="true"
+              >
                 creative
                 <br />
                 hub
@@ -173,13 +177,20 @@ export async function HomeScreen({
               </p>
             </div>
           ) : (
-            <div className={styles.heroSub}>
+            <div className={styles.heroSub} data-splash="sub">
               <div className={styles.heroSubText}>
-                {/* inciso sopra la lede, giustificato a sinistra */}
+                {/* inciso sopra la caption, giustificato a sinistra */}
                 <span className={`mono ${styles.tagline}`}>
                   {t.hero.tagline}
                 </span>
-                <p className={styles.lede}>{t.hero.lede}</p>
+                {/* la caption riscritta dal cliente: prima stava solo su
+                    /home-2, ora è il testo della home */}
+                <p className={styles.lede}>
+                  {t.hero.caption}
+                  <span className={styles.heroCaptionSub}>
+                    {t.hero.captionSub}
+                  </span>
+                </p>
               </div>
               <a href="#manifesto" className={styles.heroCta}>
                 {t.hero.discover} <span aria-hidden="true">→</span>
