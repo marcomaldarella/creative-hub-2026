@@ -29,13 +29,13 @@ const SECTION_ACCENTS: Record<
   /* ink = accento come TESTO (il blu brand è scuro: in dark si schiarisce
      via --azzurro-ink) · on = testo SOPRA una superficie in --accent */
   '/academy': {
-    accent: 'var(--azzurro)',
+    accent: 'var(--azzurro-fill)',
     ink: 'var(--azzurro-ink)',
     on: 'var(--osso)',
   },
   '/studios': {
     accent: 'var(--arancio)',
-    ink: 'var(--arancio)',
+    ink: 'var(--arancio-ink)',
     on: 'var(--petrolio)',
   },
   '/coworking': {

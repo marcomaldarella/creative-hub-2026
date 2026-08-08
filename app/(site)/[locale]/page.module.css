@@ -20,12 +20,12 @@
   background: var(--bg);
 }
 
-/* dark: nero profondo con una vignettatura appena percepibile */
+/* dark: blu profondo della palette con una vignettatura appena percepibile */
 :global([data-theme='dark']) .hero {
   --hero-glow: 0 12px 60px rgba(4, 16, 20, 0.65);
   background:
-    radial-gradient(90% 70% at 50% 42%, #1a1c1e 0%, transparent 60%),
-    linear-gradient(150deg, #131416 0%, #0b0c0d 48%, #060707 100%);
+    radial-gradient(90% 70% at 50% 42%, #1B3846 0%, transparent 60%),
+    linear-gradient(150deg, #142934 0%, #0F1F27 48%, #0A171E 100%);
 }
 
 .heroAnnot {
@@ -531,7 +531,7 @@
 /* ————— open day (blu brand) ————— */
 
 .openday {
-  background: var(--azzurro);
+  background: var(--azzurro-fill);
   /* il blu brand e' scuro: sopra ci va inchiostro chiaro, non petrolio */
   color: var(--osso);
   padding: clamp(56px, 7vw, 100px) 0;
@@ -552,7 +552,8 @@
 .opendayDate {
   display: block;
   margin-bottom: 14px;
-  color: var(--osso-60);
+  /* osso-60 sul blu stava a 3.5:1, sotto soglia per 12px */
+  color: color-mix(in srgb, var(--osso) 80%, transparent);
 }
 
 .opendayTitle {

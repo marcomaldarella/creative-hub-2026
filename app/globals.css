@@ -4,18 +4,21 @@
 ———————————————————————————————————————— */
 :root {
   /* colori */
-  --ghiaccio: #F2F1EE;   /* sfondo base */
-  --petrolio: #17181A;   /* inchiostro neutro: testo su light, sezioni dark */
+  --ghiaccio: #F5F6F7;   /* sfondo base, bianco freddo in palette */
+  --petrolio: #13262F;   /* inchiostro: blu profondissimo, non nero neutro */
   --azzurro:  #193442;   /* blu brand del cliente (agosto 2026) — academy */
   --giallo-fluo: #DFFF3A; /* accento coworking */
   --arancio:  #FF6E12;   /* accento studio (registrazione) */
+  /* l'arancio pieno come testo su chiaro sta a 2.6:1: come inchiostro
+     serve una versione scurita (in dark torna quello pieno) */
+  --arancio-ink: #B44A05;
   --osso:     #EDE6DA;   /* testo su petrolio (mai bianco puro) */
-  --grigio:   #77848C;   /* testo secondario */
-  --linea:    #DCE0DE;   /* bordi, regole, divisori */
+  --grigio:   #56707E;   /* testo secondario, grigio-blu */
+  --linea:    #DCE2E5;   /* bordi, regole, divisori */
   --bianco:   #FFFFFF;   /* superfici card su light */
 
   /* derivati */
-  --petrolio-hover: #26282B;
+  --petrolio-hover: #1D3846;
   --azzurro-hover:  #22475A;
   --osso-60: rgba(237, 230, 218, 0.6);
   --osso-16: rgba(237, 230, 218, 0.16);
@@ -26,23 +29,28 @@
      quanto basta per restare leggibile (in dark viene ridefinita). */
   --azzurro-ink: #193442;
 
+  /* il blu brand usato come SUPERFICIE (pastiglie, sezione open day). In
+     dark il surface delle card è già #193442: il riempimento deve salire,
+     altrimenti i bottoni spariscono sulle card */
+  --azzurro-fill: #193442;
+
   /* accento di sezione: azzurro di default, SiteChrome lo cambia dentro
      academy (azzurro) / studios (arancio) / coworking (giallo).
      --accent = superfici, barre, bordi; --accent-ink = testo leggibile;
      --accent-on = testo SOPRA una superficie in --accent */
-  --accent: var(--azzurro);
+  --accent: var(--azzurro-fill);
   --accent-ink: var(--azzurro-ink);
   --accent-on: var(--osso);
 
   /* ————— layer semantico (inverte col tema) —————
      Regola: un elemento che deve invertirsi col tema usa questi token;
      i momenti brand fissi (petrolio, azzurro, gradient…) restano sui token brand. */
-  --bg: #F2F1EE;        /* sfondo pagina / nav / footer */
+  --bg: #F5F6F7;        /* sfondo pagina / nav / footer: bianco freddo */
   --surface: #FFFFFF;   /* superfici card */
-  --fg: #17181A;        /* testo: inchiostro neutro */
-  --fg-2: #77848C;      /* testo secondario */
-  --line: #DCE0DE;      /* bordi, divisori */
-  --panel: #141516;     /* superfici scure neutre (sezioni, nav dark, overlay) */
+  --fg: #13262F;        /* testo: blu profondissimo della palette */
+  --fg-2: #56707E;      /* testo secondario, grigio-blu */
+  --line: #DCE2E5;      /* bordi, divisori */
+  --panel: #13262F;     /* superfici scure (sezioni, overlay): blu, non nero */
 
   /* layout */
   --max: 100%;                      /* full-bleed alla studio dumbar */
@@ -77,19 +85,22 @@
   }
 }
 
-/* dark mono, riferimento Vercel: quasi-nero neutro, grigi puri —
-   i momenti brand (petrolio, azzurro, osso) restano invariati */
+/* dark in palette: niente nero neutro, tutto sulla tinta del blu brand */
 [data-theme='dark'] {
-  --bg: #0A0A0A;
-  --surface: #111111;
-  --fg: #EDEDED;
-  --fg-2: #8A8A8A;
-  --line: #1F1F1F;
-  --panel: #0F0F0F; /* anche le superfici brand diventano neutre scure */
-  /* il blu brand su nero è illeggibile: come inchiostro sale di luminosità
+  /* scala di blu ricavata dal brand #193442 (h200 s45): lo sfondo è la
+     stessa tinta più scura, le superfici salgono di luminosità */
+  --bg: #0F1F27;
+  --surface: #193442;   /* il blu brand è la superficie delle card */
+  --fg: #E9F0F3;
+  --fg-2: #8FA7B2;
+  --line: #244C60;
+  --panel: #132732;
+  /* il blu brand su nero era illeggibile: come inchiostro sale di luminosità
      restando sulla stessa tinta */
   --azzurro-ink: #7FA9BE;
   --azzurro-hover: #9CC2D4;
+  --azzurro-fill: #26536C;
+  --arancio-ink: #FF8A3D;
   color-scheme: dark;
 }
 
@@ -98,14 +109,16 @@
    solo a coprire la finestra prima che esegua) */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) {
-    --bg: #0A0A0A;
-    --surface: #111111;
-    --fg: #EDEDED;
-    --fg-2: #8A8A8A;
-    --line: #1F1F1F;
-    --panel: #0F0F0F;
+    --bg: #0F1F27;
+    --surface: #193442;
+    --fg: #E9F0F3;
+    --fg-2: #8FA7B2;
+    --line: #244C60;
+    --panel: #132732;
     --azzurro-ink: #7FA9BE;
     --azzurro-hover: #9CC2D4;
+    --azzurro-fill: #26536C;
+    --arancio-ink: #FF8A3D;
     color-scheme: dark;
   }
 }
@@ -164,7 +177,7 @@ a { color: inherit; text-decoration: none; }
 button { font: inherit; cursor: pointer; border: none; background: none; }
 img { max-width: 100%; height: auto; display: block; }
 
-::selection { background: var(--azzurro); color: var(--osso); }
+::selection { background: var(--azzurro-fill); color: var(--osso); }
 
 :focus-visible {
   outline: 2px solid var(--azzurro-ink);

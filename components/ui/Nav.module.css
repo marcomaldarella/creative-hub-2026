@@ -532,7 +532,7 @@
 }
 
 .overlay .cta {
-  background: var(--azzurro);
+  background: var(--azzurro-fill);
   color: var(--osso);
 }
 
@@ -550,7 +550,7 @@
 }
 
 .menuOpen .cta {
-  background: var(--azzurro);
+  background: var(--azzurro-fill);
   color: var(--osso);
 }
 
@@ -633,7 +633,7 @@
 }
 
 .dark .cta {
-  background: var(--azzurro);
+  background: var(--azzurro-fill);
   color: var(--osso);
 }
 

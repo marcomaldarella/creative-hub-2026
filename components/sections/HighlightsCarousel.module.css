@@ -3,6 +3,12 @@
   --sw: min(64vw, 1120px);
   --gap: 20px;
   background: var(--panel);
+  /* il fondo qui è scuro anche in tema chiaro: gli inchiostri della pagina
+     sparirebbero, quindi dentro la banda valgono quelli della variante
+     scura (l'eyebrow in --azzurro-ink era illeggibile in light) */
+  --azzurro-ink: #7FA9BE;
+  --fg: var(--osso);
+  --fg-2: var(--osso-60);
   padding: var(--sez) 0;
   overflow: hidden;
 }
