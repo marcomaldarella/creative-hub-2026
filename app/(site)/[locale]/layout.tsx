@@ -130,7 +130,7 @@ export default async function SiteLayout({
           strategy="beforeInteractive"
           dangerouslySetInnerHTML={{
             __html:
-              "(function(){try{var p=location.pathname.replace(/\\/$/,'');if(p!==''&&p!=='/en')return;if(sessionStorage.getItem('ch-booted'))return;if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;var d=document.documentElement;d.dataset.boot='1';setTimeout(function(){delete d.dataset.boot},3000)}catch(e){}})()",
+              "(function(){try{var p=location.pathname.replace(/\\/$/,'');if(p!==''&&p!=='/en')return;if(sessionStorage.getItem('ch-booted'))return;if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;var d=document.documentElement;d.dataset.boot='1';setTimeout(function(){delete d.dataset.boot},4400)}catch(e){}})()",
           }}
         />
         <script

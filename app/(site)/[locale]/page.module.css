@@ -270,9 +270,10 @@
   pointer-events: none;
 }
 
-/* l'apertura: le stesse proprietà tornano a riposo quando data-boot cade */
+/* l'apertura: le stesse proprietà tornano a riposo quando data-boot cade.
+   Lo slot delle parole NON è in lista: non sfuma in blocco, sono le tre
+   parole a entrare una dopo l'altra (stagger in HeroWords.module.css) */
 .orbStage,
-.wordsSlot,
 .heroAnnot,
 .heroSub {
   transition:
@@ -284,11 +285,16 @@
   transform: scale(0.46);
 }
 
-:global(html[data-boot='1']) .wordsSlot,
 :global(html[data-boot='1']) .heroAnnot,
 :global(html[data-boot='1']) .heroSub {
   opacity: 0;
   transition-delay: 0s;
+}
+
+/* niente transizione qui: allo scatto lo slot torna visibile di colpo e
+   l'ingresso lo fanno le parole, in stagger */
+:global(html[data-boot='1']) .wordsSlot {
+  opacity: 0;
 }
 
 :global(html[data-boot='1']) .bootMark {
@@ -312,7 +318,6 @@
 
 @media (prefers-reduced-motion: reduce) {
   .orbStage,
-  .wordsSlot,
   .heroAnnot,
   .heroSub {
     transition: none;

@@ -7,9 +7,9 @@ import { useEffect } from 'react'
 const BOOT_RGB = [0.24, 0.49, 0.6] as const
 
 /** quanto resta visibile il disco piccolo DOPO che la sfera è pronta */
-const HOLD_MS = 700
+const HOLD_MS = 1500
 /** oltre questa soglia si apre comunque: mai un preloader infinito */
-const MAX_MS = 2600
+const MAX_MS = 3600
 
 /**
  * Preloader della home: il disco piccolo (sfera tinta di blu + anello di
