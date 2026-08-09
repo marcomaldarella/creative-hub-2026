@@ -8,7 +8,9 @@
 
 .hero {
   padding-top: var(--header-h);
-  min-height: 100svh;
+  /* esattamente uno schermo: anello e sfera sono dimensionati sullo spazio
+     che avanza (vedi sotto), così payoff e caption stanno sempre dentro */
+  height: 100svh;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -71,14 +73,17 @@
    margine per estrusione/burst col mouse — la nuvola non si taglia mai.
    Su desktop il blocco è ~10% più piccolo (richiesta cliente 2026-08-07):
    il blob non deve dominare il primo schermo */
+/* 380px ≈ header + etichette + blocco payoff/caption: è lo spazio che il
+   palco NON ha. Senza sottrarlo la hero sforava di 20-80px a seconda
+   dell'altezza dello schermo */
 .orb {
-  width: min(64vh, 100vw, 720px);
+  width: min((100svh - 380px) * 1.125, 100vw, 720px);
   aspect-ratio: 1;
 }
 
 /* anello di testo mono che ruota lentissimo attorno all'orb */
 .ring {
-  width: min(57vh, 88vw, 640px);
+  width: min(100svh - 380px, 88vw, 640px);
   aspect-ratio: 1;
   animation: ringSpin 90s linear infinite;
   pointer-events: none;
@@ -236,6 +241,13 @@
      addosso alle parole al centro */
   .ring {
     width: min(58vh, 88vw, 800px);
+  }
+
+  /* su mobile niente altezza fissa: il contenuto è impilato e deve poter
+     crescere senza essere tagliato */
+  .hero {
+    height: auto;
+    min-height: 100svh;
   }
 
   /* sfera un filo più in alto: senza l'etichetta in cima il palco si
