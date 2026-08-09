@@ -302,10 +302,16 @@
   display: block;
 }
 
-/* su mobile il disco può stringersi di più: c'è meno larghezza */
+/* su mobile il disco deve reggere da solo uno schermo verticale: con la
+   scala del desktop restava un dettaglio in mezzo al vuoto */
 @media (max-width: 760px) {
   :global(html[data-boot='1']) .orbStage {
-    transform: scale(0.5) translateY(-2%);
+    transform: scale(0.62) translateY(-2%);
+  }
+
+  /* il wordmark scala insieme al palco: senza compensare restava a ~26px */
+  :global(html[data-boot='1']) .bootMark {
+    font-size: 76px;
   }
 }
 
