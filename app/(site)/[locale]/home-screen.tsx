@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import {
+  Arrow,
   ArrowLink,
   Button,
   Counter,
@@ -15,6 +16,7 @@ import { HeroBoot } from '@/components/sections/HeroBoot'
 import { HeroOrb } from '@/components/sections/HeroOrb'
 import { HeroWords } from '@/components/sections/HeroWords'
 import { HighlightsCarousel } from '@/components/sections/HighlightsCarousel'
+import { PhotoFull, PhotoSplit } from '@/components/sections/Photo'
 import { EcosystemBento } from '@/components/sections/EcosystemBento'
 import { MethodCards } from '@/components/sections/MethodCards'
 import { NodeCards } from '@/components/sections/NodeCards'
@@ -23,6 +25,9 @@ import { localeHref, type Locale } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
 import { getHomeData } from '@/lib/sanity/queries'
 import { l } from '@/lib/sanity/l'
+import studioSslImg from '@/public/img/foto/studio-ssl.jpg'
+import liveBandImg from '@/public/img/foto/live-band.jpg'
+import sedeImg from '@/public/img/foto/sede.jpg'
 import styles from './page.module.css'
 
 function fmtLocale(locale: Locale): string {
@@ -154,19 +159,23 @@ export async function HomeScreen({
                 />
               </div>
             )}
-            {/* wordmark del preloader: visibile solo con data-boot su <html> */}
-            {!heroV2 && (
-              <div
-                className={`display-black ${styles.bootMark}`}
-                data-splash="mark"
-                aria-hidden="true"
-              >
-                creative
-                <br />
-                hub
-              </div>
-            )}
           </div>
+          {/* Wordmark del preloader: fuori dal palco, non dentro.
+              Dentro .orbStage seguiva la scala del disco (0.62 su mobile)
+              e finiva minuscolo e sotto la sfera: qui è centrato sul
+              viewport, sopra tutto, e la sua misura non dipende da altro.
+              Visibile solo con data-boot su <html>. */}
+          {!heroV2 && (
+            <div
+              className={`display-black ${styles.bootMark}`}
+              data-splash="mark"
+              aria-hidden="true"
+            >
+              creative
+              <br />
+              hub
+            </div>
+          )}
           {heroV2 ? (
             <div className={styles.heroCaption}>
               <p>
@@ -193,7 +202,7 @@ export async function HomeScreen({
                 </p>
               </div>
               <a href="#manifesto" className={styles.heroCta}>
-                {t.hero.discover} <span aria-hidden="true">→</span>
+                {t.hero.discover} <Arrow />
               </a>
             </div>
           )}
@@ -271,6 +280,14 @@ export async function HomeScreen({
           </div>
         </section>
 
+        {/* ————— foto: la regia SSL, a tutta pagina ————— */}
+        <PhotoFull
+          src={studioSslImg}
+          alt="La regia dello studio di registrazione del Creative Hub, con console SSL, monitor da studio e sintetizzatori"
+          kicker={t.home.photoStudio.kicker}
+          caption={t.home.photoStudio.caption}
+        />
+
         {/* ————— metodo (§ 04) ————— */}
         <section className={`${styles.sez} ${styles.methodSez}`}>
           <div className="wrap">
@@ -281,6 +298,17 @@ export async function HomeScreen({
               <MethodCards title={t.home.methodTitle} items={t.home.method} />
             </Reveal>
           </div>
+        </section>
+
+        {/* ————— foto verticale: la live room in funzione ————— */}
+        <section className={styles.sez}>
+          <PhotoSplit
+            src={liveBandImg}
+            alt="Studenti del Creative Hub che suonano dal vivo nella live room: voce, chitarre, batteria e tastiere"
+            kicker={t.home.photoLive.kicker}
+            title={t.home.photoLive.title}
+            text={t.home.photoLive.text}
+          />
         </section>
 
         {/* ————— hi-lights carousel (§ 05) ————— */}
@@ -417,6 +445,15 @@ export async function HomeScreen({
             </Button>
           </div>
         </section>
+
+        {/* ————— l'ingresso della sede: ultima immagine prima del footer ————— */}
+        <PhotoFull
+          src={sedeImg}
+          alt="L'ingresso della sede del Creative Hub Bologna in via del Tappezziere 4"
+          kicker={t.home.photoSede.kicker}
+          caption={t.home.photoSede.caption}
+          height="band"
+        />
       </main>
     </SiteChrome>
   )

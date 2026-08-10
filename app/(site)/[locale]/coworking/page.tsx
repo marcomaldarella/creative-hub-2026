@@ -2,10 +2,21 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { Button, Card, Reveal, Rule, SectionHeader } from '@/components/ui'
 import { SiteChrome, shopHref } from '@/components/sections/SiteChrome'
+import { PhotoDuo } from '@/components/sections/Photo'
+import { PhotoStrip } from '@/components/sections/PhotoStrip'
 import { isLocale } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
 import { getSiteSettings, getSpacesByKind } from '@/lib/sanity/queries'
 import { l } from '@/lib/sanity/l'
+import corridoio1Img from '@/public/img/foto/corridoio-1.jpg'
+import corridoio2Img from '@/public/img/foto/corridoio-2.jpg'
+import corridoio3Img from '@/public/img/foto/corridoio-3.jpg'
+import corridoio4Img from '@/public/img/foto/corridoio-4.jpg'
+import corridoio5Img from '@/public/img/foto/corridoio-5.jpg'
+import corridoio6Img from '@/public/img/foto/corridoio-6.jpg'
+import corridoio7Img from '@/public/img/foto/corridoio-7.jpg'
+import banano1Img from '@/public/img/foto/banano-1.jpg'
+import banano2Img from '@/public/img/foto/banano-2.jpg'
 import styles from './page.module.css'
 
 export const dynamic = 'force-dynamic'
@@ -83,6 +94,50 @@ export default async function CoworkingPage({
                 </Reveal>
               ))}
             </div>
+          </div>
+        </section>
+
+        {/* ————— i corridoi: nastro di foto a filo di pagina ————— */}
+        <section className={styles.sez}>
+          <PhotoStrip
+            kicker={t.coworking.corridoiKicker}
+            title={t.coworking.corridoiTitle}
+            text={t.coworking.corridoiText}
+            labels={{
+              prev: t.coworking.corridoiPrev,
+              next: t.coworking.corridoiNext,
+              hint: t.coworking.corridoiHint,
+            }}
+            photos={[
+              { src: corridoio1Img, alt: 'Corridoio delle aule CW301 con segnaletica gialla a pavimento e pareti' },
+              { src: corridoio2Img, alt: "Ingresso dell'area CW300: pareti bianche, segnaletica gialla e parquet" },
+              { src: corridoio3Img, alt: 'Murale "future together" lungo il corridoio, con una pianta in primo piano' },
+              { src: corridoio4Img, alt: 'Scala interna con il murale "small steps big change" su parete arancio' },
+              { src: corridoio5Img, alt: "Porta dell'ufficio segreteria vista dal corridoio" },
+              { src: corridoio6Img, alt: 'Corridoio lungo verso gli uffici, con la targa della segreteria' },
+              { src: corridoio7Img, alt: 'Corridoio della library, con la scritta arancio sulla parete scura' },
+            ]}
+          />
+        </section>
+
+        {/* ————— la banano room: due quadrate affiancate ————— */}
+        <section className={styles.sez}>
+          <div className="wrap">
+            <PhotoDuo
+              kicker={t.coworking.bananoKicker}
+              title={t.coworking.bananoTitle}
+              text={t.coworking.bananoText}
+              photos={[
+                {
+                  src: banano1Img,
+                  alt: 'La banano room del coworking: tavolo rotondo, sedute in velluto e luci calde',
+                },
+                {
+                  src: banano2Img,
+                  alt: "La banano room vista d'insieme: soffitto industriale, grande banano al centro e divani",
+                },
+              ]}
+            />
           </div>
         </section>
 

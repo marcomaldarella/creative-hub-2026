@@ -1,0 +1,140 @@
+.block {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(20px, 3vw, 36px);
+}
+
+/* `wrap` porta `margin: 0 auto`: in un contenitore flex a colonna i
+   margini auto sull'asse trasversale spengono lo stretch e la riga si
+   stringe sul contenuto — la larghezza va detta a voce */
+.head,
+.controls {
+  width: 100%;
+}
+
+.head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 42%);
+  gap: clamp(20px, 4vw, 60px);
+  align-items: end;
+}
+
+.kicker {
+  display: block;
+  letter-spacing: 0.06em;
+  color: var(--azzurro-ink);
+  margin-bottom: 10px;
+}
+
+.title {
+  font-size: var(--fs-h3);
+  line-height: 1;
+}
+
+.text {
+  max-width: 52ch;
+  color: var(--fg-2);
+}
+
+/* nastro a filo di pagina: parte dal gutter e sfuma oltre il bordo */
+.strip {
+  list-style: none;
+  display: grid;
+  grid-auto-flow: column;
+  /* una lunghezza sola, non minmax(): in un contenitore che scorre il
+     minmax si risolve sempre sul minimo e le foto restavano francobolli */
+  grid-auto-columns: clamp(260px, 34vw, 520px);
+  gap: clamp(12px, 1.6vw, 24px);
+  padding: 0 var(--pad);
+  overflow-x: auto;
+  /* il gesto orizzontale muore qui: niente scroll chaining sul documento */
+  overscroll-behavior-x: contain;
+  overscroll-behavior-y: auto;
+  scroll-snap-type: x proximity;
+  scroll-padding-left: var(--pad);
+  /* la barra di sistema non si vede: al suo posto c'è .track */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.strip::-webkit-scrollbar {
+  display: none;
+}
+
+.item {
+  scroll-snap-align: start;
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.track {
+  position: relative;
+  flex: 1;
+  height: 2px;
+  background: color-mix(in srgb, var(--fg) 12%, transparent);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.thumb {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background: var(--fg);
+  border-radius: 2px;
+  transition: left 0.18s var(--ease-out), width 0.18s var(--ease-out);
+}
+
+.arrows {
+  display: flex;
+  gap: 8px;
+}
+
+.nav {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border: 1px solid color-mix(in srgb, var(--fg) 22%, transparent);
+  border-radius: var(--radius-pill);
+  color: var(--fg);
+  transition: border-color var(--dur), opacity var(--dur);
+}
+
+.nav:hover:not(:disabled) {
+  border-color: var(--fg);
+}
+
+.nav:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+@media (max-width: 900px) {
+  .head {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+}
+
+@media (max-width: 760px) {
+  .strip {
+    grid-auto-columns: 78vw;
+  }
+}
