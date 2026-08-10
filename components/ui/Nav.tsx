@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useCallback, useEffect, useId, useState } from 'react';
+import { useCallback, useRef, useEffect, useId, useState } from 'react';
 import { ThemeToggle } from './ThemeToggle';
 import { Wordmark } from './Wordmark';
 import styles from './Nav.module.css';
@@ -76,14 +76,46 @@ export function Nav({
   topbar,
 }: NavProps) {
   const [open, setOpen] = useState(false);
+  /* l'overlay resta montato mentre le voci escono: senza, `display:none`
+     lo farebbe sparire di colpo e lo stagger non si vedrebbe */
+  const [closing, setClosing] = useState(false);
   const [topOpen, setTopOpen] = useState(true);
   // accordion overlay: indice della voce espansa (una alla volta)
   const [expanded, setExpanded] = useState<number | null>(null);
   const overlayId = useId();
-  const close = useCallback(() => {
-    setOpen(false);
-    setExpanded(null);
-  }, []);
+  /* durata dell'uscita: stagger delle voci + animazione dell'ultima */
+  const CLOSE_MS = 520;
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const wasOpen = useRef(false);
+
+  const close = useCallback(() => setOpen(false), []);
+
+  /* l'uscita si aggancia alla TRANSIZIONE di `open`, non a chi la provoca:
+     il menu si chiude dal burger, dai link e dal tasto Esc, e tutti devono
+     far partire lo stagger */
+  useEffect(() => {
+    if (wasOpen.current && !open) {
+      setClosing(true);
+      if (closeTimer.current) clearTimeout(closeTimer.current);
+      closeTimer.current = setTimeout(() => {
+        setClosing(false);
+        setExpanded(null);
+      }, CLOSE_MS);
+    }
+    if (open) {
+      /* riaperto a metà uscita: il timer scaduto resetterebbe l'accordion */
+      if (closeTimer.current) clearTimeout(closeTimer.current);
+      setClosing(false);
+    }
+    wasOpen.current = open;
+  }, [open]);
+
+  useEffect(
+    () => () => {
+      if (closeTimer.current) clearTimeout(closeTimer.current);
+    },
+    []
+  );
 
   // topbar chiusa: resta chiusa per la sessione, e l'header si accorcia
   useEffect(() => {
@@ -317,7 +349,13 @@ export function Nav({
       {/* Overlay mobile: display:none quando chiuso (regola iOS del progetto) */}
       <div
         id={overlayId}
-        className={open ? `${styles.overlay} ${styles.open}` : styles.overlay}
+        className={[
+          styles.overlay,
+          open ? styles.open : '',
+          closing ? styles.closing : '',
+        ]
+          .filter(Boolean)
+          .join(' ')}
       >
         <nav className={styles.overlayNav}>
           {items.map((item, i) => {
@@ -327,7 +365,11 @@ export function Nav({
               <div
                 key={item.href}
                 className={styles.overlayItem}
-                style={{ animationDelay: `${80 + i * 50}ms` }}
+                style={{
+                  animationDelay: closing
+                    ? `${(items.length - 1 - i) * 45}ms`
+                    : `${80 + i * 50}ms`,
+                }}
               >
                 <div className={styles.overlayRow}>
                   <Link

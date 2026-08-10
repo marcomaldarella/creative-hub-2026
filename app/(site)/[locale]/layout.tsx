@@ -123,16 +123,22 @@ export default async function SiteLayout({
               "(function(){try{var t=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.dataset.theme=t}catch(e){}})()",
           }}
         />
-        {/* splash della home: una volta per sessione, mai con moto
-            ridotto; il timer di sicurezza toglie il flag anche se React
-            non idrata o se GSAP non carica */}
+        {/* Splash della home. Lo script gira solo al CARICAMENTO del
+            documento: arrivando su / (link esterno, reload, indirizzo
+            digitato) parte sempre; tornando in home navigando dentro al
+            sito non parte, perché il layout non si rimonta e questo codice
+            non viene rieseguito. Nessun flag di sessione: era proprio
+            quello a far vedere la splash una volta sola per scheda.
+            Unica esclusione: prefers-reduced-motion, con try/catch proprio.
+            Il timer di sicurezza toglie il flag anche se React non idrata
+            o se GSAP non carica. */}
         <script
           dangerouslySetInnerHTML={{
             __html:
               /* niente regex qui dentro: la barra va sfuggita nel sorgente
                  TS e nell'HTML finiva `replace(//$/,'')`, cioè un errore
                  di sintassi che spegneva del tutto la splash */
-              "(function(){try{var p=location.pathname;if(p.charAt(p.length-1)==='/')p=p.slice(0,-1);if(p!==''&&p!=='/en')return;if(sessionStorage.getItem('ch-booted'))return;if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;var d=document.documentElement;d.dataset.boot='1';setTimeout(function(){delete d.dataset.boot},9000)}catch(e){}})()",
+              "(function(){try{var p=location.pathname;if(p.charAt(p.length-1)==='/')p=p.slice(0,-1);if(p!==''&&p!=='/en')return;try{if(matchMedia('(prefers-reduced-motion: reduce)').matches)return}catch(e){}var d=document.documentElement;d.dataset.boot='1';setTimeout(function(){delete d.dataset.boot},9000)}catch(e){}})()",
           }}
         />
         <script

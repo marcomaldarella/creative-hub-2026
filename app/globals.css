@@ -89,7 +89,7 @@
 [data-theme='dark'] {
   /* scala di blu ricavata dal brand #193442 (h200 s45): lo sfondo è la
      stessa tinta più scura, le superfici salgono di luminosità */
-  --bg: #0F1F27;
+  --bg: #0B171E;
   --surface: #193442;   /* il blu brand è la superficie delle card */
   --fg: #E9F0F3;
   --fg-2: #8FA7B2;
@@ -109,7 +109,7 @@
    solo a coprire la finestra prima che esegua) */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) {
-    --bg: #0F1F27;
+    --bg: #0B171E;
     --surface: #193442;
     --fg: #E9F0F3;
     --fg-2: #8FA7B2;

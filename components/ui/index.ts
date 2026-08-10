@@ -28,8 +28,6 @@ export type { SearchBoxProps } from './SearchBox';
 export { PartnerMark } from './PartnerMark';
 export type { PartnerMarkProps } from './PartnerMark';
 
-export { Waveform } from './Waveform';
-export type { WaveformProps } from './Waveform';
 
 export { ThemeToggle } from './ThemeToggle';
 export type { ThemeToggleProps } from './ThemeToggle';

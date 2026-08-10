@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import { Fragment } from 'react';
-import { Waveform } from './Waveform';
 import { Wordmark } from './Wordmark';
 import styles from './Footer.module.css';
 
@@ -60,7 +59,6 @@ export function Footer({
               <Link href={homeHref} className={styles.brand}>
                 <Wordmark />
               </Link>
-              <Waveform className={styles.wave} />
             </div>
             {contactLines && contactLines.length > 0 && (
               <address className={`mono ${styles.contact}`}>

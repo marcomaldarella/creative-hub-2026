@@ -65,11 +65,6 @@ export function HeroBoot() {
 
     const finish = () => {
       delete root.dataset.boot
-      try {
-        sessionStorage.setItem('ch-booted', '1')
-      } catch {
-        /* navigazione privata: pazienza, si rivedrà al reload */
-      }
       tint(null)
     }
 

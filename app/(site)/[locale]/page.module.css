@@ -26,8 +26,8 @@
 :global([data-theme='dark']) .hero {
   --hero-glow: 0 12px 60px rgba(4, 16, 20, 0.65);
   background:
-    radial-gradient(90% 70% at 50% 42%, #1B3846 0%, transparent 60%),
-    linear-gradient(150deg, #142934 0%, #0F1F27 48%, #0A171E 100%);
+    radial-gradient(90% 70% at 50% 42%, #162F3B 0%, transparent 60%),
+    linear-gradient(150deg, #0F2029 0%, #0B171E 48%, #071114 100%);
 }
 
 .heroAnnot {
