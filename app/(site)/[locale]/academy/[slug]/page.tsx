@@ -4,7 +4,7 @@ import { ArrowLink, Button, Reveal, Rule } from '@/components/ui'
 import { PortableBlocks } from '@/components/sections/PortableBlocks'
 import { Thumb } from '@/components/sections/Thumb'
 import { SiteChrome, shopHref } from '@/components/sections/SiteChrome'
-import { TeacherGrid } from '@/components/sections/TeacherGrid'
+import { TeacherStrip } from '@/components/sections/TeacherStrip'
 import { isLocale, localeHref } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
 import { getCourseBySlug, getSiteSettings } from '@/lib/sanity/queries'
@@ -128,7 +128,20 @@ export default async function CoursePage({
                 <Reveal as="span" className={`mono ${styles.teachersKicker}`}>
                   {t.academy.courseTeachers}
                 </Reveal>
-                <TeacherGrid teachers={teachers} locale={locale} variant="strip" />
+                <TeacherStrip
+                  teachers={teachers}
+                  locale={locale}
+                  join={{
+                    label: t.academy.joinUs,
+                    role: t.academy.joinUsRole,
+                    href: `mailto:${settings?.email ?? 'hello@bologna-creativehub.it'}?subject=${encodeURIComponent(t.academy.joinUs)}`,
+                  }}
+                  labels={{
+                    prev: t.academy.teachersPrev,
+                    next: t.academy.teachersNext,
+                    hint: t.academy.teachersHint,
+                  }}
+                />
               </div>
             )}
           </div>

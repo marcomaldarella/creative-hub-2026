@@ -101,7 +101,7 @@ export default async function ChiSiamoPage({
         <section className={styles.sez} id="team">
           <div className="wrap">
             <SectionHeader kicker={t.about.teamKicker} title={t.about.teamTitle} />
-            <TeacherGrid teachers={teachers} locale={locale} variant="grid" />
+            <TeacherGrid teachers={teachers} locale={locale} />
           </div>
         </section>
 

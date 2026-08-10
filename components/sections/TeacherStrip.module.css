@@ -1,0 +1,144 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.strip {
+  list-style: none;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(130px, 1fr);
+  gap: clamp(24px, 3vw, 40px);
+  overflow-x: auto;
+  /* il gesto orizzontale muore qui: niente scroll chaining sul documento */
+  overscroll-behavior-x: contain;
+  overscroll-behavior-y: auto;
+  scroll-snap-type: x proximity;
+  /* la barra di sistema non si vede: al suo posto c'è .track */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding-bottom: 4px;
+}
+
+.strip::-webkit-scrollbar {
+  display: none;
+}
+
+.strip:focus-visible {
+  outline: 1px solid var(--azzurro-ink);
+  outline-offset: 6px;
+}
+
+.person {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  scroll-snap-align: start;
+}
+
+.photo {
+  width: clamp(88px, 10vw, 120px);
+  margin-bottom: 12px;
+}
+
+.name {
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: -0.01em;
+}
+
+.role {
+  display: block;
+}
+
+/* ————— la cella vuota: entra chi manca ————— */
+
+.join {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  color: inherit;
+}
+
+.joinDisc {
+  display: grid;
+  place-items: center;
+  width: clamp(88px, 10vw, 120px);
+  aspect-ratio: 1;
+  margin-bottom: 12px;
+  border: 1px dashed color-mix(in srgb, var(--fg) 34%, transparent);
+  border-radius: 50%;
+  color: var(--fg-2);
+  transition: border-color var(--dur), color var(--dur), transform var(--dur) var(--ease-out);
+}
+
+.join:hover .joinDisc {
+  border-color: var(--azzurro-ink);
+  color: var(--azzurro-ink);
+  transform: scale(1.04);
+}
+
+.join:hover .name {
+  color: var(--azzurro-ink);
+}
+
+/* ————— controlli: avanzamento + frecce ————— */
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.track {
+  position: relative;
+  flex: 1;
+  height: 2px;
+  background: color-mix(in srgb, var(--fg) 12%, transparent);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.thumb {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background: var(--fg);
+  border-radius: 2px;
+  transition: left 0.18s var(--ease-out), width 0.18s var(--ease-out);
+}
+
+.arrows {
+  display: flex;
+  gap: 8px;
+}
+
+.nav {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border: 1px solid color-mix(in srgb, var(--fg) 22%, transparent);
+  border-radius: var(--radius-pill);
+  color: var(--fg);
+  transition: border-color var(--dur), color var(--dur), opacity var(--dur);
+}
+
+.nav:hover:not(:disabled) {
+  border-color: var(--fg);
+}
+
+.nav:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+@media (max-width: 760px) {
+  .strip {
+    grid-auto-columns: minmax(120px, 42vw);
+  }
+}

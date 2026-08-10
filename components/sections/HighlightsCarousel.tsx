@@ -3,6 +3,7 @@
 import { useCallback, useRef, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { Arrow } from '@/components/ui'
 import academyImg from '@/public/img/sections/node-academy.jpg'
 import studioImg from '@/public/img/sections/node-studio.jpg'
 import spaziImg from '@/public/img/sections/node-spazi.jpg'
@@ -261,7 +262,7 @@ export function HighlightsCarousel({
                       </span>
                     ))}
                     <span className={styles.cta}>
-                      {slide.cta} <span aria-hidden="true">→</span>
+                      {slide.cta} <Arrow />
                     </span>
                   </div>
                 </div>

@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { RevealGroup } from '@/components/ui'
+import { Arrow, RevealGroup } from '@/components/ui'
 import academyImg from '@/public/img/sections/node-academy.jpg'
 import studioImg from '@/public/img/sections/node-studio.jpg'
 import spaziImg from '@/public/img/sections/node-spazi.jpg'
@@ -62,7 +62,7 @@ export function EcosystemBento({ items, hrefs }: EcosystemBentoProps) {
           <p className={styles.text}>{big.text}</p>
           {big.cta && (
             <span className={styles.cta}>
-              {big.cta} <span aria-hidden="true">→</span>
+              {big.cta} <Arrow />
             </span>
           )}
         </div>
@@ -89,7 +89,7 @@ export function EcosystemBento({ items, hrefs }: EcosystemBentoProps) {
             <p className={styles.text}>{item.text}</p>
             {item.cta && (
               <span className={styles.cta}>
-                {item.cta} <span aria-hidden="true">→</span>
+                {item.cta} <Arrow />
               </span>
             )}
           </div>

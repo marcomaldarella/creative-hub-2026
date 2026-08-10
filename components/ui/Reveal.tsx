@@ -99,6 +99,11 @@ export type RevealGroupProps = {
 /**
  * Osserva TUTTI i discendenti con classe `.rv` (per liste/griglie):
  * i figli portano la classe `rv` da soli, il gruppo li rivela.
+ *
+ * I figli possono cambiare senza che il gruppo si rimonti (filtri di
+ * academy/magazine: stesso contenitore, card diverse). Un MutationObserver
+ * rilegge la lista a ogni cambio: senza, le card nuove restavano a
+ * opacity 0 e la sezione sembrava vuota.
  */
 export function RevealGroup({
   children,
@@ -112,13 +117,6 @@ export function RevealGroup({
   useEffect(() => {
     const root = ref.current;
     if (!root) return;
-    const targets = root.querySelectorAll('.rv');
-    if (targets.length === 0) return;
-    // fail-open come in useRevealOnce: già visibile → rivela subito
-    targets.forEach((t) => {
-      const r = t.getBoundingClientRect();
-      if (r.top < window.innerHeight && r.bottom > 0) t.classList.add('in');
-    });
     const io = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
@@ -130,8 +128,23 @@ export function RevealGroup({
       },
       { threshold: 0.18 }
     );
-    targets.forEach((t) => io.observe(t));
-    return () => io.disconnect();
+    const scan = () => {
+      root.querySelectorAll('.rv:not(.in)').forEach((t) => {
+        // fail-open come in useRevealOnce: già visibile → rivela subito
+        const r = t.getBoundingClientRect();
+        if (r.top < window.innerHeight && r.bottom > 0) t.classList.add('in');
+        else io.observe(t);
+      });
+    };
+    scan();
+    /* solo childList/subtree: le classi che aggiungiamo qui sopra non
+       devono rientrare dalla finestra e far ripartire lo scan */
+    const mo = new MutationObserver(scan);
+    mo.observe(root, { childList: true, subtree: true });
+    return () => {
+      io.disconnect();
+      mo.disconnect();
+    };
   }, []);
 
   return (

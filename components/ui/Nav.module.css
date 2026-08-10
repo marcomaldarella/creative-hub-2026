@@ -199,18 +199,34 @@
 
 /* il pannello attivo sta sopra quello che sta sfumando */
 .navItem:hover,
-.navItem:focus-within {
+.navItem:focus-within,
+.navItemOn {
   position: relative;
   z-index: 3;
 }
 
+/* `.panelOn` lo mette JS (con la tregua all'uscita); il :hover resta
+   come rete di sicurezza prima dell'idratazione */
 .navItem:hover .panel,
-.navItem:focus-within .panel {
+.navItem:focus-within .panel,
+.panelOn {
   opacity: 1;
   visibility: visible;
   transform: none;
   pointer-events: auto;
   transition: opacity 0.22s ease, transform 0.26s var(--ease-out);
+}
+
+/* velo sotto il pannello: copre tutto ciò che sta sotto l'header e ne
+   assorbe il puntatore. Trasparente — è una guardia, non un fondale */
+.scrim {
+  position: fixed;
+  top: var(--header-h);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1; /* sotto .inner (z 2) e sotto il pannello aperto */
+  background: transparent;
 }
 
 .panelIn {

@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { notFound } from 'next/navigation'
 import { Archivo, Geist } from 'next/font/google'
 import localFont from 'next/font/local'
@@ -64,6 +64,16 @@ export const metadata: Metadata = {
   },
 }
 
+/* La barra del browser (Safari iOS in testa) si tinge di theme-color.
+   Qui c'è solo il valore di partenza — quello vero lo scrive lo script
+   di init insieme a data-theme, perché il tema esplicito dell'utente
+   deve vincere sulla preferenza di sistema. Senza, sull'iPhone la barra
+   restava chiara mentre il sito era scuro. */
+export const viewport: Viewport = {
+  themeColor: '#0B171E',
+  colorScheme: 'light dark',
+}
+
 // JSON-LD Organization (dati reali del sito live)
 const ORG_JSONLD = {
   '@context': 'https://schema.org',
@@ -120,7 +130,7 @@ export default async function SiteLayout({
         <script
           dangerouslySetInnerHTML={{
             __html:
-              "(function(){try{var t=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.dataset.theme=t}catch(e){}})()",
+              "(function(){try{var t=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.dataset.theme=t;var m=document.querySelector('meta[name=\"theme-color\"]');if(m)m.setAttribute('content',t==='dark'?'#0B171E':'#F5F6F7')}catch(e){}})()",
           }}
         />
         {/* Splash della home. Lo script gira solo al CARICAMENTO del

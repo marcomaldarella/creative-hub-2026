@@ -8,29 +8,17 @@ import styles from './TeacherGrid.module.css'
 export type TeacherGridProps = {
   teachers: Teacher[]
   locale: Locale
-  /** strip: fila compatta scrollabile · grid: griglia completa */
-  variant?: 'strip' | 'grid'
   className?: string
 }
 
 /**
- * Docenti/team: ritratto tondo (placeholder gradient se la foto manca),
- * nome e ruolo mono. Usato in academy (strip) e chi-siamo (grid).
+ * Docenti/team in griglia: ritratto tondo (placeholder gradient se la foto
+ * manca), nome e ruolo mono. Per la fila scorrevole c'è <TeacherStrip>.
  */
-export function TeacherGrid({
-  teachers,
-  locale,
-  variant = 'grid',
-  className,
-}: TeacherGridProps) {
+export function TeacherGrid({ teachers, locale, className }: TeacherGridProps) {
   if (teachers.length === 0) return null
 
-  const cls = [
-    variant === 'strip' ? styles.strip : styles.grid,
-    className,
-  ]
-    .filter(Boolean)
-    .join(' ')
+  const cls = [styles.grid, className].filter(Boolean).join(' ')
 
   return (
     <RevealGroup as="ul" className={cls}>

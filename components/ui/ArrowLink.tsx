@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import type { ReactNode } from 'react';
+import { Arrow } from './Arrow';
 import styles from './ArrowLink.module.css';
 
 export type ArrowLinkProps = {
@@ -30,7 +31,7 @@ export function ArrowLink({
     <>
       <span>{children}</span>
       <span className={styles.arrow} aria-hidden="true">
-        ↙
+        <Arrow dir="sw" size={15} />
       </span>
     </>
   );

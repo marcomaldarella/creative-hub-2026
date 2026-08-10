@@ -19,6 +19,9 @@ export type { RuleProps } from './Rule';
 export { ArrowLink } from './ArrowLink';
 export type { ArrowLinkProps } from './ArrowLink';
 
+export { Arrow } from './Arrow';
+export type { ArrowProps, ArrowDir } from './Arrow';
+
 export { Marquee } from './Marquee';
 export type { MarqueeProps } from './Marquee';
 

@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { Arrow } from '@/components/ui'
 import type { Locale } from '@/lib/i18n/config'
 import { l } from '@/lib/sanity/l'
 import { urlFor } from '@/lib/sanity/image'
@@ -85,7 +86,7 @@ export function ArticleCard({
         <div className={styles.foot}>
           {author && <span className={`mono ${styles.author}`}>{author}</span>}
           <span className={styles.arrow} aria-hidden>
-            ↙
+            <Arrow dir="sw" size={16} />
           </span>
         </div>
       </div>

@@ -274,12 +274,17 @@
   z-index: 2;
 }
 
-/* il wordmark del preloader esiste solo durante il boot */
+/* il wordmark del preloader esiste solo durante il boot: sta sopra la
+   hero intera, non dentro il palco che si rimpicciolisce */
 .bootMark {
   display: none;
+  position: absolute;
+  inset: 0;
+  z-index: 6; /* sopra sfera, pin (z 4) ed etichette (z 3) */
+  place-content: center;
   text-align: center;
-  font-size: clamp(52px, 8.8vw, 150px);
-  line-height: 0.86;
+  font-size: clamp(46px, 5vw, 76px);
+  line-height: 0.9;
   color: var(--fg);
   text-shadow: var(--hero-glow);
   pointer-events: none;
@@ -299,7 +304,7 @@
 }
 
 :global(html[data-boot='1']) .bootMark {
-  display: block;
+  display: grid;
 }
 
 /* su mobile il disco deve reggere da solo uno schermo verticale: con la
@@ -309,9 +314,11 @@
     transform: scale(0.62) translateY(-2%);
   }
 
-  /* il wordmark scala insieme al palco: senza compensare restava a ~26px */
+  /* su schermo stretto sale in proporzione: è il primo fotogramma del
+     sito, deve leggersi da lontano (prima, scalato col palco, restava
+     un francobollo) */
   :global(html[data-boot='1']) .bootMark {
-    font-size: 76px;
+    font-size: 15vw;
   }
 }
 

@@ -4,11 +4,11 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { Reveal, RevealGroup, Rule, SearchBox, SectionHeader } from '@/components/ui'
 import { SiteChrome } from '@/components/sections/SiteChrome'
-import { TeacherGrid } from '@/components/sections/TeacherGrid'
+import { TeacherStrip } from '@/components/sections/TeacherStrip'
 import { Thumb } from '@/components/sections/Thumb'
 import { isLocale, localeHref } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
-import { getAllCourses, getAllTeachers } from '@/lib/sanity/queries'
+import { getAllCourses, getAllTeachers, getSiteSettings } from '@/lib/sanity/queries'
 import { l } from '@/lib/sanity/l'
 import { matchesQuery } from '@/lib/search'
 import styles from './page.module.css'
@@ -41,9 +41,10 @@ export default async function AcademyPage({
   const activeType = typeof tipo === 'string' ? tipo : undefined
   const query = typeof q === 'string' ? q : undefined
 
-  const [courses, teachers] = await Promise.all([
+  const [courses, teachers, settings] = await Promise.all([
     getAllCourses(),
     getAllTeachers(),
+    getSiteSettings(),
   ])
 
   // categorie derivate dai corsi (uniche, in ordine di apparizione)
@@ -194,7 +195,20 @@ export default async function AcademyPage({
             kicker={t.academy.teachersKicker}
             title={t.academy.teachersTitle}
           />
-          <TeacherGrid teachers={teachers} locale={locale} variant="strip" />
+          <TeacherStrip
+            teachers={teachers}
+            locale={locale}
+            join={{
+              label: t.academy.joinUs,
+              role: t.academy.joinUsRole,
+              href: `mailto:${settings?.email ?? 'hello@bologna-creativehub.it'}?subject=${encodeURIComponent(t.academy.joinUs)}`,
+            }}
+            labels={{
+              prev: t.academy.teachersPrev,
+              next: t.academy.teachersNext,
+              hint: t.academy.teachersHint,
+            }}
+          />
         </section>
       </main>
     </SiteChrome>

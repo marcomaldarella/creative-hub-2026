@@ -22,6 +22,11 @@ export function ThemeToggle({ label = 'tema', className }: ThemeToggleProps) {
     // sempre esplicito ('light'/'dark'): 'light' deve vincere anche
     // sul fallback @media prefers-color-scheme in globals.css
     root.dataset.theme = dark ? 'light' : 'dark';
+    /* la barra del browser segue il tema: su iPhone è metà schermo,
+       se resta del colore vecchio il cambio sembra rotto */
+    document
+      .querySelector('meta[name="theme-color"]')
+      ?.setAttribute('content', dark ? '#F5F6F7' : '#0B171E');
     try {
       localStorage.setItem('theme', dark ? 'light' : 'dark');
     } catch {

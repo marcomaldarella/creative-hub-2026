@@ -288,7 +288,20 @@
       ]
     },
     "networkText": "Università, aziende e istituzioni collaborano ai percorsi: portano brief e produzioni reali, ospitano stage e assumono dal network. È la stessa rete che attraversa corsi, studi e coworking.",
-    "networkCta": "Partner"
+    "networkCta": "Partner",
+    "photoStudio": {
+      "kicker": "studio ssl",
+      "caption": "La regia con console SSL: si impara dove si lavora."
+    },
+    "photoLive": {
+      "kicker": "live room",
+      "title": "Il palco è un'aula.",
+      "text": "Ensemble, prove aperte e concerti degli studenti: la pratica dal vivo è parte del programma, non un extra."
+    },
+    "photoSede": {
+      "kicker": "la sede",
+      "caption": "via del Tappezziere 4 — Bologna"
+    }
   },
   "academy": {
     "kicker": "academy · iscrizioni aperte · a.a. 2026/27",
@@ -309,7 +322,12 @@
       "gratuito": "gratuito",
       "custom": "custom"
     },
-    "courseGallery": "galleria"
+    "courseGallery": "galleria",
+    "joinUs": "join us",
+    "joinUsRole": "inviaci il tuo cv",
+    "teachersPrev": "docenti precedenti",
+    "teachersNext": "altri docenti",
+    "teachersHint": "scorri per vedere tutti i docenti"
   },
   "studios": {
     "kicker": "studio · bologna",
@@ -356,7 +374,16 @@
     "ctaKicker": "prenota",
     "ctaTitle": "Scegli lo spazio. Blocca la data.",
     "ctaText": "Il day pass è il modo più semplice per conoscere lo spazio: si prenota online e si paga solo quando serve.",
-    "ctaDayPass": "prenota un day pass"
+    "ctaDayPass": "prenota un day pass",
+    "bananoKicker": "banano room",
+    "bananoTitle": "La banano room.",
+    "bananoText": "Lo spazio comune del coworking: tavoli condivisi, divani e luce calda per le pause, gli incontri informali e gli eventi piccoli.",
+    "corridoiKicker": "i corridoi",
+    "corridoiTitle": "Il palazzo, dentro.",
+    "corridoiText": "Aule, uffici, sale prova, library: i corridoi tengono insieme tutto quello che succede in hub — e ti dicono sempre dove sei.",
+    "corridoiPrev": "foto precedenti",
+    "corridoiNext": "altre foto",
+    "corridoiHint": "scorri per vedere tutte le foto"
   },
   "innovation": {
     "fallbackTitle": "Le imprese creative nascono qui.",

@@ -1,20 +1,8 @@
-.grid,
-.strip {
+.grid {
   list-style: none;
   display: grid;
   gap: clamp(24px, 3vw, 40px);
-}
-
-.grid {
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-}
-
-.strip {
-  grid-auto-flow: column;
-  grid-auto-columns: minmax(130px, 1fr);
-  overflow-x: auto;
-  padding-bottom: 8px;
-  scrollbar-width: thin;
 }
 
 .person {

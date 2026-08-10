@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { Arrow } from '@/components/ui'
 
 /** 404 brandizzata: FreeFat gigante, bilingue, link alla home */
 export default function NotFound() {
@@ -41,7 +42,7 @@ export default function NotFound() {
           fontWeight: 500,
         }}
       >
-        torna alla home →
+        torna alla home <Arrow />
       </Link>
     </main>
   )

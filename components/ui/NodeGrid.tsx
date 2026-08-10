@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import type { CSSProperties } from 'react';
+import { Arrow } from './Arrow';
 import { RevealGroup } from './Reveal';
 import styles from './NodeGrid.module.css';
 
@@ -35,7 +36,7 @@ export function NodeGrid({ nodes, className }: NodeGridProps) {
           <h3 className={styles.title}>{node.title}</h3>
           <p className={styles.text}>{node.text}</p>
           <span className={styles.arrow} aria-hidden="true">
-            ↙
+            <Arrow dir="sw" size={20} />
           </span>
         </Link>
       ))}

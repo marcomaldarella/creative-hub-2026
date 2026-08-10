@@ -288,7 +288,20 @@
       ]
     },
     "networkText": "Universities, companies and institutions shape the paths: they bring real briefs and productions, host internships and hire from the network. The same network that runs through courses, studios and coworking.",
-    "networkCta": "Partners"
+    "networkCta": "Partners",
+    "photoStudio": {
+      "kicker": "ssl studio",
+      "caption": "The SSL control room: you learn where the work happens."
+    },
+    "photoLive": {
+      "kicker": "live room",
+      "title": "The stage is a classroom.",
+      "text": "Ensembles, open rehearsals and student concerts: live practice is part of the programme, not an extra."
+    },
+    "photoSede": {
+      "kicker": "the venue",
+      "caption": "via del Tappezziere 4 — Bologna"
+    }
   },
   "academy": {
     "kicker": "academy · enrolment open · a.y. 2026/27",
@@ -309,7 +322,12 @@
       "gratuito": "free",
       "custom": "custom"
     },
-    "courseGallery": "gallery"
+    "courseGallery": "gallery",
+    "joinUs": "join us",
+    "joinUsRole": "send us your cv",
+    "teachersPrev": "previous teachers",
+    "teachersNext": "more teachers",
+    "teachersHint": "scroll to see every teacher"
   },
   "studios": {
     "kicker": "studio · bologna",
@@ -356,7 +374,16 @@
     "ctaKicker": "book",
     "ctaTitle": "Pick the space. Lock the date.",
     "ctaText": "The day pass is the simplest way to get to know the space: book online, pay only when you need it.",
-    "ctaDayPass": "book a day pass"
+    "ctaDayPass": "book a day pass",
+    "bananoKicker": "banano room",
+    "bananoTitle": "The banano room.",
+    "bananoText": "The shared heart of the coworking space: communal tables, sofas and warm light for breaks, informal meetings and small events.",
+    "corridoiKicker": "the corridors",
+    "corridoiTitle": "Inside the building.",
+    "corridoiText": "Classrooms, offices, rehearsal rooms, the library: the corridors hold together everything that happens in the hub — and always tell you where you are.",
+    "corridoiPrev": "previous photos",
+    "corridoiNext": "more photos",
+    "corridoiHint": "scroll to see every photo"
   },
   "innovation": {
     "fallbackTitle": "Creative companies start here.",

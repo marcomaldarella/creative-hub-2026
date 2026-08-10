@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useCallback, useRef, useEffect, useId, useState } from 'react';
+import { Arrow } from './Arrow';
 import { ThemeToggle } from './ThemeToggle';
 import { Wordmark } from './Wordmark';
 import styles from './Nav.module.css';
@@ -82,13 +83,48 @@ export function Nav({
   const [topOpen, setTopOpen] = useState(true);
   // accordion overlay: indice della voce espansa (una alla volta)
   const [expanded, setExpanded] = useState<number | null>(null);
+  /* mega-menu: l'apertura la governa JS, non il solo :hover. Serve per
+     due cose che il CSS non sa fare — la tregua all'uscita (si può
+     tagliare fuori dal pannello per un attimo senza perderlo) e il velo
+     che spegne la pagina sotto, che altrimenti ruba il puntatore mentre
+     si punta una voce */
+  const [panelOpen, setPanelOpen] = useState<number | null>(null);
+  const panelTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const PANEL_GRACE_MS = 160;
   const overlayId = useId();
   /* durata dell'uscita: stagger delle voci + animazione dell'ultima */
   const CLOSE_MS = 520;
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const wasOpen = useRef(false);
 
-  const close = useCallback(() => setOpen(false), []);
+  const clearPanelTimer = () => {
+    if (panelTimer.current) clearTimeout(panelTimer.current);
+    panelTimer.current = null;
+  };
+
+  const openPanel = useCallback((i: number) => {
+    clearPanelTimer();
+    setPanelOpen(i);
+  }, []);
+
+  const closePanelNow = useCallback(() => {
+    clearPanelTimer();
+    setPanelOpen(null);
+  }, []);
+
+  /* uscita con tregua: il puntatore può passare fuori dal pannello
+     (tagliando l'angolo verso una voce) senza che si chiuda */
+  const closePanelSoon = useCallback(() => {
+    clearPanelTimer();
+    panelTimer.current = setTimeout(() => setPanelOpen(null), PANEL_GRACE_MS);
+  }, []);
+
+  useEffect(() => clearPanelTimer, []);
+
+  const close = useCallback(() => {
+    setOpen(false);
+    closePanelNow();
+  }, [closePanelNow]);
 
   /* l'uscita si aggancia alla TRANSIZIONE di `open`, non a chi la provoca:
      il menu si chiude dal burger, dai link e dal tasto Esc, e tutti devono
@@ -140,14 +176,24 @@ export function Nav({
     const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setOpen(false);
+      if (e.key === 'Escape') close();
     };
     window.addEventListener('keydown', onKey);
     return () => {
       document.body.style.overflow = prevOverflow;
       window.removeEventListener('keydown', onKey);
     };
-  }, [open]);
+  }, [open, close]);
+
+  // Esc chiude anche il mega-menu (che non blocca lo scroll del body)
+  useEffect(() => {
+    if (panelOpen === null) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') closePanelNow();
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [panelOpen, closePanelNow]);
 
   const rootClass = [
     styles.nav,
@@ -218,7 +264,7 @@ export function Nav({
                         className={styles.topCta}
                         tabIndex={copy === 1 || i > 0 ? -1 : undefined}
                       >
-                        {topbar.cta} <span aria-hidden="true">→</span>
+                        {topbar.cta} <Arrow size={12} />
                       </a>
                     </span>
                   ))}
@@ -250,8 +296,27 @@ export function Nav({
 
         <nav className={styles.links}>
           {items.map((item, idx) => (
-            <div key={item.href} className={styles.navItem}>
-              <Link href={item.href} className={styles.navLink}>
+            <div
+              key={item.href}
+              className={
+                panelOpen === idx
+                  ? `${styles.navItem} ${styles.navItemOn}`
+                  : styles.navItem
+              }
+              onPointerEnter={() => item.sub && openPanel(idx)}
+              onPointerLeave={() => item.sub && closePanelSoon()}
+              onFocus={() => item.sub && openPanel(idx)}
+              onBlur={(e) => {
+                if (!e.currentTarget.contains(e.relatedTarget as Node)) {
+                  closePanelNow();
+                }
+              }}
+            >
+              <Link
+                href={item.href}
+                className={styles.navLink}
+                onClick={closePanelNow}
+              >
                 {item.label}
                 {item.sub && (
                   <svg
@@ -272,7 +337,11 @@ export function Nav({
 
               {item.sub && (
                 <div
-                  className={styles.panel}
+                  className={
+                    panelOpen === idx
+                      ? `${styles.panel} ${styles.panelOn}`
+                      : styles.panel
+                  }
                   style={
                     item.accent
                       ? ({
@@ -296,9 +365,10 @@ export function Nav({
                       <p className={styles.panelDesc}>{item.sub.desc}</p>
                       <Link
                         href={item.href}
+                        onClick={closePanelNow}
                         className={`${styles.panelEntry} ${styles.panelExplore}`}
                       >
-                        {item.sub.explore} <span aria-hidden="true">→</span>
+                        {item.sub.explore} <Arrow />
                       </Link>
                     </div>
                     <ul
@@ -309,11 +379,15 @@ export function Nav({
                     >
                       {item.sub.entries.map((entry) => (
                         <li key={entry.label}>
-                          <Link href={entry.href} className={styles.panelEntry}>
+                          <Link
+                            href={entry.href}
+                            onClick={closePanelNow}
+                            className={styles.panelEntry}
+                          >
                             {entry.label}
                             {entry.cross && (
                               <span className={styles.panelCross}>
-                                <span aria-hidden="true">↗</span>{' '}
+                                <Arrow dir="ne" size={12} />{' '}
                                 {entry.cross.label}
                               </span>
                             )}
@@ -345,6 +419,19 @@ export function Nav({
           <span />
         </button>
       </div>
+
+      {/* Velo sotto il mega-menu: mentre il pannello è aperto la pagina
+          sotto non riceve più il puntatore — niente hover che scattano,
+          niente click a vuoto mentre si punta una voce. Sfiorarlo chiude
+          il pannello, con la stessa tregua dell'uscita laterale. */}
+      {panelOpen !== null && (
+        <div
+          className={styles.scrim}
+          aria-hidden="true"
+          onPointerEnter={closePanelSoon}
+          onPointerDown={closePanelNow}
+        />
+      )}
 
       {/* Overlay mobile: display:none quando chiuso (regola iOS del progetto) */}
       <div

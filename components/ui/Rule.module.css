@@ -1,10 +1,19 @@
+/* la riga con le due etichette è un respiro tra due sezioni: si porta
+   dietro il suo spazio, così non dipende da come è impaginato chi la
+   circonda (era il motivo di certe strette e certi vuoti) */
 .rule {
   display: flex;
   align-items: center;
   gap: 16px;
   max-width: var(--max);
-  margin: 0 auto;
+  margin: clamp(24px, 3vw, 44px) auto;
   padding: 0 var(--pad);
+}
+
+/* le etichette non devono alzare la riga: altezza fissa e allineata */
+.label {
+  line-height: 1;
+  white-space: nowrap;
 }
 
 .line {

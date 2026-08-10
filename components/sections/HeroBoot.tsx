@@ -60,6 +60,19 @@ export function HeroBoot() {
 
     if (!mark || !stage) return
 
+    /* il wordmark vive fuori dal palco (non deve rimpicciolirsi con lui),
+       ma deve stare al centro del disco: gli si ritaglia addosso il
+       riquadro del palco. Il rect è già quello scalato, e la scala è
+       centrata: basta il centro. */
+    const host = mark.offsetParent as HTMLElement | null
+    if (host) {
+      const h = host.getBoundingClientRect()
+      const s = stage.getBoundingClientRect()
+      mark.style.top = `${s.top - h.top}px`
+      mark.style.height = `${s.height}px`
+      mark.style.bottom = 'auto'
+    }
+
     let ctx: { revert: () => void } | null = null
     let alive = true
 
