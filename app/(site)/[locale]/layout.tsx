@@ -132,7 +132,7 @@ export default async function SiteLayout({
               /* niente regex qui dentro: la barra va sfuggita nel sorgente
                  TS e nell'HTML finiva `replace(//$/,'')`, cioè un errore
                  di sintassi che spegneva del tutto la splash */
-              "(function(){try{var p=location.pathname;if(p.charAt(p.length-1)==='/')p=p.slice(0,-1);if(p!==''&&p!=='/en')return;if(sessionStorage.getItem('ch-booted'))return;if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;var d=document.documentElement;d.dataset.boot='1';setTimeout(function(){delete d.dataset.boot},6000)}catch(e){}})()",
+              "(function(){try{var p=location.pathname;if(p.charAt(p.length-1)==='/')p=p.slice(0,-1);if(p!==''&&p!=='/en')return;if(sessionStorage.getItem('ch-booted'))return;if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;var d=document.documentElement;d.dataset.boot='1';setTimeout(function(){delete d.dataset.boot},9000)}catch(e){}})()",
           }}
         />
         <script

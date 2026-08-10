@@ -6,8 +6,9 @@ import { useEffect } from 'react'
    HeroWords per Academy) */
 const BOOT_RGB = [0.24, 0.49, 0.6] as const
 
-/** oltre questa attesa la sfera si apre comunque: mai una splash infinita */
-const MAX_WAIT_MS = 1200
+/** oltre questa attesa la sfera si apre comunque: mai una splash infinita.
+    Con 3s di permanenza del wordmark la sfera è pronta da un pezzo */
+const MAX_WAIT_MS = 900
 
 /* il download parte alla valutazione del modulo, in parallelo con
    l'idratazione: dentro l'effect arrivava troppo tardi e in produzione la
@@ -84,7 +85,7 @@ export function HeroBoot() {
           tl.fromTo(
             mark,
             { autoAlpha: 0, y: 28, scale: 0.94 },
-            { autoAlpha: 1, y: 0, scale: 1, duration: 0.8 }
+            { autoAlpha: 1, y: 0, scale: 1, duration: 0.7 }
           )
             .add(() => tint(BOOT_RGB), 0.1)
 
@@ -92,7 +93,7 @@ export function HeroBoot() {
             .to(
               mark,
               { autoAlpha: 0, y: -24, duration: 0.5, ease: 'power2.in' },
-              small ? '+=0.45' : '+=0.6'
+              '+=3'
             )
 
             /* attesa della sfera: si riprende su 'hero-ready' o al timeout.
@@ -105,7 +106,7 @@ export function HeroBoot() {
             /* 3 — il disco si apre a tutta pagina */
             .to(stage, {
               scale: 1,
-              duration: small ? 1 : 1.25,
+              duration: small ? 1 : 1.15,
               ease: 'power3.inOut',
             })
             .add(() => tint(null), '<')
