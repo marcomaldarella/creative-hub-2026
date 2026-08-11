@@ -97,7 +97,14 @@ export async function HomeScreen({
             <span className="mono">{t.hero.coords}</span>
           </div>
           <div className={styles.orbStage} data-splash="stage">
-            <svg className={styles.ring} viewBox="0 0 100 100" aria-hidden="true">
+            {/* data-splash="disc": e' l'anello, non il palco, a dire dove sta
+                davvero il centro del disco — vedi HeroBoot */}
+            <svg
+              className={styles.ring}
+              data-splash="disc"
+              viewBox="0 0 100 100"
+              aria-hidden="true"
+            >
               <defs>
                 <path
                   id="hero-ring"

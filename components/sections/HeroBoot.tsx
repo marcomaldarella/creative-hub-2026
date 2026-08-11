@@ -49,6 +49,7 @@ export function HeroBoot() {
     const q = (s: string) => document.querySelector<HTMLElement>(`[data-splash="${s}"]`)
     const mark = q('mark')
     const stage = q('stage')
+    const disc = q('disc')
     const words = q('words')
     const annot = q('annot')
     const sub = q('sub')
@@ -60,18 +61,47 @@ export function HeroBoot() {
 
     if (!mark || !stage) return
 
-    /* il wordmark vive fuori dal palco (non deve rimpicciolirsi con lui),
-       ma deve stare al centro del disco: gli si ritaglia addosso il
-       riquadro del palco. Il rect è già quello scalato, e la scala è
-       centrata: basta il centro. */
-    const host = mark.offsetParent as HTMLElement | null
-    if (host) {
+    /* Il wordmark vive fuori dal palco — non deve rimpicciolirsi con lui — ma
+       deve stare al centro del disco, e il centro del disco è l'ANELLO, non il
+       riquadro del palco: dentro al palco sfera, anello e parole stanno nella
+       stessa cella di griglia, e se le parole sono più alte dell'anello la
+       riga cresce e deborda in basso. Anello e sfera si centrano su quella
+       riga, il palco no — misurati, ballavano di 16px in verticale, ed è lo
+       scarto che si vedeva fra logotipo e marquee.
+
+       Il rect dell'anello è già quello scalato dal boot, e la scala è
+       centrata: il centro è quello buono. */
+    const align = () => {
+      const host = mark.offsetParent as HTMLElement | null
+      if (!host) return
       const h = host.getBoundingClientRect()
-      const s = stage.getBoundingClientRect()
-      mark.style.top = `${s.top - h.top}px`
-      mark.style.height = `${s.height}px`
+      const d = (disc ?? stage).getBoundingClientRect()
+      const top = d.top - h.top
+      mark.style.top = `${top}px`
+      mark.style.height = `${d.height}px`
       mark.style.bottom = 'auto'
+
+      /* Secondo passaggio, sui glifi. Centrare il riquadro non basta: la
+         riga di testo porta con sé il piombo sopra e sotto, e "creative /
+         hub" ci finisce dentro storto. Si misura dove sta davvero
+         l'inchiostro con una Range e si corregge lo scarto — così il
+         logotipo è concentrico al marquee, non quasi. */
+      const r = document.createRange()
+      r.selectNodeContents(mark)
+      const ink = r.getBoundingClientRect()
+      if (ink.height) {
+        const dy = d.top + d.height / 2 - (ink.top + ink.height / 2)
+        mark.style.top = `${top + dy}px`
+      }
     }
+
+    align()
+    /* e di nuovo a font caricato: la prima misura cade spesso mentre è
+       ancora in piedi il fallback di sistema, che ha metriche diverse — su
+       telefono, dove il wordmark è 15vw, lo scarto era di otto pixel */
+    document.fonts?.ready.then(() => {
+      if (root.dataset.boot === '1') align()
+    })
 
     let ctx: { revert: () => void } | null = null
     let alive = true
