@@ -314,6 +314,14 @@
   display: grid;
 }
 
+/* le righe del logotipo partono spente: fra il primo paint e l'arrivo di
+   GSAP passa un attimo — in locale niente, in produzione un secondo e
+   mezzo — e lì si vedeva il logotipo fermo prima che l'animazione lo
+   riportasse a zero. Se GSAP non arriva, cade data-boot e tornano opache */
+:global(html[data-boot='1']) .bootMark span {
+  opacity: 0;
+}
+
 /* su schermo stretto il logotipo sale di corpo: è il primo fotogramma
    del sito, deve leggersi da lontano */
 @media (max-width: 760px) {
