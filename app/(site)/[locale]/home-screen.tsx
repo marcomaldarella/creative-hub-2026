@@ -167,20 +167,18 @@ export async function HomeScreen({
               </div>
             )}
           </div>
-          {/* Wordmark del preloader: fuori dal palco, non dentro.
-              Dentro .orbStage seguiva la scala del disco (0.62 su mobile)
-              e finiva minuscolo e sotto la sfera: qui è centrato sul
-              viewport, sopra tutto, e la sua misura non dipende da altro.
-              Visibile solo con data-boot su <html>. */}
+          {/* Wordmark del preloader: fuori dal palco, non dentro — la sua
+              misura non dipende da nient'altro (nella splash non c'è
+              nessuna scala in gioco). Le due righe sono due span perché
+              entrano ed escono in stagger. Visibile solo con data-boot. */}
           {!heroV2 && (
             <div
               className={`display-black ${styles.bootMark}`}
               data-splash="mark"
               aria-hidden="true"
             >
-              creative
-              <br />
-              hub
+              <span>creative</span>
+              <span>hub</span>
             </div>
           )}
           {heroV2 ? (

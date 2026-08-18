@@ -6,9 +6,14 @@ import { useEffect } from 'react'
    HeroWords per Academy) */
 const BOOT_RGB = [0.24, 0.49, 0.6] as const
 
-/** oltre questa attesa la sfera si apre comunque: mai una splash infinita.
-    Con 3s di permanenza del wordmark la sfera è pronta da un pezzo */
+/** oltre questa attesa la sequenza parte comunque: mai una splash infinita */
 const MAX_WAIT_MS = 900
+
+/** durata della materializzazione della nuvola (lerp uForm lato shader) */
+const FORM_S = 1.5
+
+/** quanto resta in campo il logotipo prima di uscire */
+const HOLD_S = 2.2
 
 /* il download parte alla valutazione del modulo, in parallelo con
    l'idratazione: dentro l'effect arrivava troppo tardi e in produzione la
@@ -23,14 +28,20 @@ const tint = (rgb: readonly number[] | null) =>
   )
 
 /**
- * Splash della home, come da storyboard del cliente:
+ * Splash della home:
  *
- *   1. il disco piccolo — sfera tinta di blu, anello di testo — e al centro
- *      "creative hub" che ENTRA
- *   2. "creative hub" ESCE
- *   3. la sfera si apre a tutta pagina
+ *   1. il blob si MATERIALIZZA — i grani arrivano da fuori e si compongono
+ *      nella sfera, tinta di blu (evento 'hero-form' verso HeroOrb)
+ *   2. "creative hub" entra al centro, una riga dopo l'altra
+ *   3. e se ne va con lo stagger al contrario (dall'ultima riga alla prima,
+ *      verso l'alto), lasciando il posto alle tre parole
  *   4. ENTRANO le tre parole della home, una dopo l'altra
  *   5. entra il resto: etichette, caption, nav, footer
+ *
+ * ⚠️ NESSUNA SCALA in tutta la sequenza: sfera, anello e testi hanno da
+ * subito la loro misura definitiva. Scalare il palco (la vecchia versione
+ * partiva da 0.46) faceva ballare centri e dimensioni, ed era la cosa che
+ * si notava di più all'atterraggio.
  *
  * Lo stato iniziale è in CSS (`data-boot` su <html>, scritto prima del
  * paint dallo script boot-init): senza, si vedrebbe la hero completa per
@@ -58,6 +69,8 @@ export function HeroBoot() {
       document.querySelector<HTMLElement>('body > footer'),
     ].filter(Boolean) as HTMLElement[]
     const wordLinks = words ? Array.from(words.querySelectorAll('a')) : []
+    /* le due righe del logotipo: entrano ed escono in stagger */
+    const markLines = mark ? Array.from(mark.querySelectorAll('span')) : []
 
     if (!mark || !stage) return
 
@@ -115,48 +128,52 @@ export function HeroBoot() {
       .then(({ gsap }) => {
         if (!alive) return
         ctx = gsap.context(() => {
-          const small = window.matchMedia('(max-width: 760px)').matches
-          let ready = false
-          const tl = gsap.timeline({ defaults: { ease: 'power3.out' } })
+          /* parte in pausa: la materializzazione ha senso solo quando il
+             canvas della sfera è vivo (evento 'hero-ready') */
+          const tl = gsap.timeline({
+            defaults: { ease: 'power3.out' },
+            paused: true,
+          })
 
-          /* 1 — "creative hub" entra nel disco piccolo */
-          tl.fromTo(
-            mark,
-            { autoAlpha: 0, y: 28, scale: 0.94 },
-            { autoAlpha: 1, y: 0, scale: 1, duration: 0.7 }
-          )
-            .add(() => tint(BOOT_RGB), 0.1)
+          /* 1 — il blob si materializza: la nuvola si compone e prende
+             la tinta blu. Nessuna scala: la sfera è già alla sua misura */
+          tl.add(() => {
+            tint(BOOT_RGB)
+            window.dispatchEvent(new Event('hero-form'))
+          })
+            .to({}, { duration: FORM_S })
 
-            /* 2 — e poi esce */
-            .to(
-              mark,
-              { autoAlpha: 0, y: -24, duration: 0.5, ease: 'power2.in' },
-              '+=3'
+            /* 2 — "creative hub" entra al centro, riga dopo riga */
+            .fromTo(
+              markLines,
+              { autoAlpha: 0, y: 26 },
+              { autoAlpha: 1, y: 0, duration: 0.75, stagger: 0.12 },
+              `-=${FORM_S * 0.35}`
             )
 
-            /* attesa della sfera: si riprende su 'hero-ready' o al timeout.
-               Il callback copre il caso in cui la sfera sia già pronta
-               prima che la timeline arrivi qui */
-            .addPause(undefined, () => {
-              if (ready) requestAnimationFrame(() => tl.resume())
-            })
+            /* 3 — e se ne va allo stesso modo ma al contrario: dall'ultima
+               riga alla prima, verso l'alto */
+            .to(
+              markLines,
+              {
+                autoAlpha: 0,
+                y: -26,
+                duration: 0.55,
+                ease: 'power2.in',
+                stagger: { each: 0.12, from: 'end' },
+              },
+              `+=${HOLD_S}`
+            )
 
-            /* 3 — il disco si apre a tutta pagina */
-            .to(stage, {
-              scale: 1,
-              duration: small ? 1 : 1.15,
-              ease: 'power3.inOut',
-            })
-            .add(() => tint(null), '<')
-
-            /* 4 — entrano le tre parole, una dopo l'altra */
-            .set(words, { autoAlpha: 1 }, '<0.35')
+            /* 4 — nel posto lasciato libero entrano le tre parole */
+            .set(words, { autoAlpha: 1 }, '<0.45')
             .fromTo(
               wordLinks,
               { autoAlpha: 0, y: 26 },
               { autoAlpha: 1, y: 0, duration: 0.7, stagger: 0.13 },
               '<'
             )
+            .add(() => tint(null), '<')
 
             /* 5 — e infine il resto della pagina */
             .to(
@@ -165,28 +182,36 @@ export function HeroBoot() {
               '-=0.45'
             )
             /* prima cade `data-boot`, POI si tolgono gli stili inline:
-               invertendo l'ordine la regola di partenza tornerebbe valida
-               per un istante e la sfera ricollasserebbe */
+               invertendo l'ordine le regole di partenza tornerebbero valide
+               per un istante e la hero sfarfallerebbe */
             .add(() => {
               finish()
               gsap.set(
-                [stage, words, annot, sub, ...wordLinks, ...chrome].filter(
-                  Boolean
-                ),
+                [
+                  stage,
+                  words,
+                  annot,
+                  sub,
+                  ...markLines,
+                  ...wordLinks,
+                  ...chrome,
+                ].filter(Boolean),
                 { clearProps: 'all' }
               )
             })
 
-          /* la pausa dura finché la sfera non è pronta, comunque non oltre
-             MAX_WAIT_MS: una splash bloccata è peggio di una sfera grezza */
+          /* si parte quando la sfera è viva, comunque non oltre MAX_WAIT_MS:
+             una splash bloccata è peggio di una sfera grezza */
           const go = () => {
             window.removeEventListener('hero-ready', go)
             clearTimeout(timer)
-            ready = true
-            if (tl.paused()) tl.resume()
+            if (tl.paused()) tl.play()
           }
           const timer = setTimeout(go, MAX_WAIT_MS)
           window.addEventListener('hero-ready', go)
+          /* sfera già pronta prima di questo punto: l'evento è passato,
+             resta il flag su <html> */
+          if (root.dataset.heroReady === '1') go()
         })
       })
       .catch(finish)

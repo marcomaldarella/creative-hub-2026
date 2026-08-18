@@ -162,6 +162,9 @@ export function HeroOrb({
         // tinta di sezione (hover sulle tre parole): colore + intensità
         uTint: { value: 0 },
         uTintCol: { value: new THREE.Color(1, 1, 1) },
+        // materializzazione della splash: 0 = nuvola dispersa, 1 = sfera
+        // formata. Fuori dal preloader parte già a 1
+        uForm: { value: 1 },
       }
 
       const mat = new THREE.ShaderMaterial({
@@ -176,6 +179,7 @@ export function HeroOrb({
           uniform vec3  uPointerDir;
           uniform float uSize;
           uniform float uBurst;
+          uniform float uForm;
           attribute float aRnd;
           varying float vGlow;
           varying float vFace;
@@ -183,6 +187,7 @@ export function HeroOrb({
           varying float vTwk;
           varying float vHalo;
           varying float vTemp;
+          varying float vForm;
 
           vec3 displace(vec3 p){
             vec3 n = normalize(p);
@@ -233,6 +238,23 @@ export function HeroOrb({
             // twinkle individuale, lento e sfasato
             vTwk = 0.86 + 0.14*sin(uTime*(0.5 + aRnd*1.3) + aRnd*6.2831);
             vTemp = aRnd;
+            // materializzazione (solo durante la splash): a uForm 0 ogni grano
+            // sta più fuori, su una sua distanza, ruotato di poco attorno alla
+            // sfera; a uForm 1 è al suo posto. La sfera non cambia MAI scala:
+            // è la nuvola che si compone, non il disco che si ingrandisce
+            float mat = 1.0 - uForm;
+            vForm = uForm;
+            if (mat > 0.001) {
+              vec3 nm = normalize(p);
+              vec3 up = abs(nm.y) > 0.9 ? vec3(1.0, 0.0, 0.0) : vec3(0.0, 1.0, 0.0);
+              vec3 tg = normalize(cross(nm, up) + 0.0001);
+              // arrivo radiale: ogni grano parte da una quota diversa
+              p += nm * mat * (0.35 + 1.25*aRnd);
+              // e con un filo di rotazione, così la nuvola si avvita dentro
+              p += tg * mat * (0.30 + 0.45*aRnd);
+              // sfilacciatura: il guscio di partenza non è una sfera pulita
+              p += nm * snoise(nm*2.4 + vec3(aRnd*11.0)) * mat * 0.45;
+            }
             // orientamento verso la camera: davanti pieno, retro in penombra
             vec3 vn = normalize((modelViewMatrix * vec4(n, 0.0)).xyz);
             vFace = clamp(vn.z, 0.0, 1.0);
@@ -241,7 +263,8 @@ export function HeroOrb({
             gl_PointSize = uSize * (1.0 / -mv.z)
               * (0.85 + aRnd*0.3)
               * (0.7 + 0.5*vFace)     // i punti dietro rimpiccioliscono: volume
-              * (1.0 - vHalo*0.35);   // l'alone è fatto di grani più fini
+              * (1.0 - vHalo*0.35)    // l'alone è fatto di grani più fini
+              * (0.6 + 0.4*uForm);    // in materializzazione i grani sono più fini
           }
         `,
         fragmentShader: /* glsl */ `
@@ -255,6 +278,7 @@ export function HeroOrb({
           varying float vTwk;
           varying float vHalo;
           varying float vTemp;
+          varying float vForm;
           void main(){
             vec2 c = gl_PointCoord - 0.5;
             float dd = dot(c,c);
@@ -273,7 +297,10 @@ export function HeroOrb({
             // tinta di sezione: mescola verso il colore mantenendo il chiaroscuro
             float lum = dot(col, vec3(0.3333));
             col = mix(col, uTintCol * (0.25 + 1.45*lum), uTint);
-            float alpha = a * (0.28 + 0.48*vFace) * (1.0 - vHalo*0.45);
+            // in materializzazione i grani sono anche più tenui: la sfera
+            // "prende corpo" mentre si compone
+            float alpha = a * (0.28 + 0.48*vFace) * (1.0 - vHalo*0.45)
+              * (0.15 + 0.85*vForm);
             gl_FragColor = vec4(col, alpha);
           }
         `,
@@ -430,6 +457,23 @@ export function HeroOrb({
       window.addEventListener('pointermove', onPointerMove, { passive: true })
       document.documentElement.addEventListener('pointerleave', onPointerLeave)
 
+      /* ——— materializzazione: solo se la pagina è nella splash ———
+         Il preloader chiama 'hero-form' quando vuole che la nuvola si
+         componga. Rete di sicurezza: se l'evento non arriva (GSAP che non
+         carica, React che non idrata) la sfera si forma comunque da sola,
+         altrimenti resterebbe una nebbia invisibile. */
+      const booting = document.documentElement.dataset.boot === '1'
+      let formTarget = booting ? 0 : 1
+      uniforms.uForm.value = formTarget
+      const onForm = () => {
+        formTarget = 1
+      }
+      let formSafety: ReturnType<typeof setTimeout> | undefined
+      if (booting) {
+        window.addEventListener('hero-form', onForm, { once: true })
+        formSafety = setTimeout(onForm, 4000)
+      }
+
       /* ——— tinta di sezione: le HeroWords avvisano via CustomEvent ——— */
       const onTint = (e: Event) => {
         const d = (e as CustomEvent).detail
@@ -505,6 +549,8 @@ export function HeroOrb({
         burstCur += (burstTarget - burstCur) * 0.16
         uniforms.uBurst.value = burstCur
         uniforms.uTint.value += (tintTarget - uniforms.uTint.value) * 0.08
+        // la nuvola si compone: lerp lento, curva naturale in uscita (~1.5s)
+        uniforms.uForm.value += (formTarget - uniforms.uForm.value) * 0.035
         uniforms.uTheme.value += (themeTarget - uniforms.uTheme.value) * 0.06
 
         group.rotation.y = current.ry + t * 0.022
@@ -519,12 +565,18 @@ export function HeroOrb({
       }
       frame()
       setReady(true)
-      /* il preloader della home aspetta questo per aprirsi */
+      /* il preloader della home aspetta questo per partire. Il flag su
+         <html> è la versione "appiccicata" dell'evento: se la sfera è
+         pronta prima che HeroBoot si metta in ascolto (GSAP arriva dopo),
+         la splash lo legge lo stesso e non aspetta il timeout */
+      document.documentElement.dataset.heroReady = '1'
       window.dispatchEvent(new Event('hero-ready'))
 
       cleanup = () => {
         cancelAnimationFrame(raf)
         autoTimers.forEach(clearTimeout)
+        clearTimeout(formSafety)
+        window.removeEventListener('hero-form', onForm)
         window.removeEventListener('hero-tint', onTint)
         window.removeEventListener('pointermove', onPointerMove)
         document.documentElement.removeEventListener(

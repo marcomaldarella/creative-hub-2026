@@ -264,10 +264,14 @@
   }
 }
 
-/* ————— preloader: il disco piccolo si apre nella hero —————
+/* ————— preloader: il blob si materializza nella hero —————
    Lo stato è `data-boot` su <html> (scritto prima del paint dallo script
-   boot-init, tolto da HeroBoot). Qui vive solo l'aspetto: sfera e anello
-   rimpiccioliti, wordmark al centro, tutto il resto della hero spento. */
+   boot-init, tolto da HeroBoot). Qui vive solo l'aspetto: wordmark al
+   centro, tutto il resto della hero spento.
+   ⚠️ NIENTE SCALE: sfera, anello e testi hanno da subito la misura
+   definitiva (la vecchia splash partiva da scale(.46) sul palco e faceva
+   ballare centri e dimensioni). L'ingresso della sfera è la
+   materializzazione dei grani, lato shader. */
 
 .wordsSlot,
 .bootMark {
@@ -275,7 +279,7 @@
 }
 
 /* il wordmark del preloader esiste solo durante il boot: sta sopra la
-   hero intera, non dentro il palco che si rimpicciolisce */
+   hero intera, centrato sul disco (HeroBoot ne misura il centro reale) */
 .bootMark {
   display: none;
   position: absolute;
@@ -283,15 +287,18 @@
   z-index: 6; /* sopra sfera, pin (z 4) ed etichette (z 3) */
   place-content: center;
   text-align: center;
-  font-size: clamp(46px, 5vw, 76px);
-  line-height: 0.9;
+  /* stessa misura del titolo delle HeroWords che prende il suo posto:
+     il logotipo esce e le tre parole entrano senza salti di corpo */
+  font-size: clamp(38px, 4.8vw, 80px);
+  line-height: 0.96;
   color: var(--fg);
   text-shadow: var(--hero-glow);
   pointer-events: none;
 }
 
-:global(html[data-boot='1']) .orbStage {
-  transform: scale(0.46);
+/* le due righe sono span: entrano ed escono in stagger */
+.bootMark span {
+  display: block;
 }
 
 /* stato di partenza della splash: da qui la timeline GSAP anima con stili
@@ -307,18 +314,11 @@
   display: grid;
 }
 
-/* su mobile il disco deve reggere da solo uno schermo verticale: con la
-   scala del desktop restava un dettaglio in mezzo al vuoto */
+/* su schermo stretto il logotipo sale di corpo: è il primo fotogramma
+   del sito, deve leggersi da lontano */
 @media (max-width: 760px) {
-  :global(html[data-boot='1']) .orbStage {
-    transform: scale(0.62) translateY(-2%);
-  }
-
-  /* su schermo stretto sale in proporzione: è il primo fotogramma del
-     sito, deve leggersi da lontano (prima, scalato col palco, restava
-     un francobollo) */
-  :global(html[data-boot='1']) .bootMark {
-    font-size: 15vw;
+  .bootMark {
+    font-size: clamp(38px, 11vw, 76px);
   }
 }
 
