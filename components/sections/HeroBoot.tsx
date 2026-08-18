@@ -2,9 +2,12 @@
 
 import { useEffect } from 'react'
 
-/* tinta blu brand della sfera durante la splash (stessa terna delle
-   HeroWords per Academy) */
-const BOOT_RGB = [0.24, 0.49, 0.6] as const
+/* L'intro resta MONOCROMA (richiesta cliente): niente blu, scritta e blob
+   bianchi. Il canale 'hero-tint' serve qui solo a ILLUMINARE la nuvola —
+   in dark verso il bianco, in light verso l'inchiostro (su fondo chiaro
+   "accendere" vuol dire farsi più densi, non più chiari) */
+const BOOT_LIGHT = [1, 1, 1] as const
+const BOOT_INK = [0.075, 0.149, 0.184] as const // --fg light #13262F
 
 /** oltre questa attesa la sequenza parte comunque: mai una splash infinita */
 const MAX_WAIT_MS = 900
@@ -31,12 +34,17 @@ const tint = (rgb: readonly number[] | null) =>
  * Splash della home:
  *
  *   1. il blob si MATERIALIZZA — i grani arrivano da fuori e si compongono
- *      nella sfera, tinta di blu (evento 'hero-form' verso HeroOrb)
- *   2. "creative hub" entra al centro, una riga dopo l'altra
- *   3. e se ne va con lo stagger al contrario (dall'ultima riga alla prima,
- *      verso l'alto), lasciando il posto alle tre parole
+ *      nella sfera, ancora monocroma (evento 'hero-form' verso HeroOrb)
+ *   2. "creative hub" entra al centro, una riga dopo l'altra, e insieme
+ *      sfera e logotipo si ILLUMINANO (tinta + data-lit sul mark: la
+ *      scritta si accende nello stesso istante in cui cambia la sfera).
+ *      L'intro è monocroma: bianco su nero, nessun colore di sezione
+ *   3. la luce si spegne mentre il logotipo se ne va, con lo stagger al
+ *      contrario (dall'ultima riga alla prima, verso l'alto), lasciando il
+ *      posto alle tre parole
  *   4. ENTRANO le tre parole della home, una dopo l'altra
  *   5. entra il resto: etichette, caption, nav, footer
+ *   6. e per ultimo il marquee circolare attorno alla sfera
  *
  * ⚠️ NESSUNA SCALA in tutta la sequenza: sfera, anello e testi hanno da
  * subito la loro misura definitiva. Scalare il palco (la vecchia versione
@@ -118,6 +126,9 @@ export function HeroBoot() {
 
     let ctx: { revert: () => void } | null = null
     let alive = true
+    /* i listener della scorciatoia vivono dentro il context di GSAP:
+       qui fuori resta il modo di staccarli allo smontaggio */
+    let unbindSkip: (() => void) | null = null
 
     const finish = () => {
       delete root.dataset.boot
@@ -135,12 +146,9 @@ export function HeroBoot() {
             paused: true,
           })
 
-          /* 1 — il blob si materializza: la nuvola si compone e prende
-             la tinta blu. Nessuna scala: la sfera è già alla sua misura */
-          tl.add(() => {
-            tint(BOOT_RGB)
-            window.dispatchEvent(new Event('hero-form'))
-          })
+          /* 1 — il blob si materializza: la nuvola si compone, ancora
+             monocroma. Nessuna scala: la sfera è già alla sua misura */
+          tl.add(() => window.dispatchEvent(new Event('hero-form')))
             .to({}, { duration: FORM_S })
 
             /* 2 — "creative hub" entra al centro, riga dopo riga */
@@ -150,6 +158,19 @@ export function HeroBoot() {
               { autoAlpha: 1, y: 0, duration: 0.75, stagger: 0.12 },
               `-=${FORM_S * 0.35}`
             )
+
+            /* ...e nello stesso istante sfera e logotipo si ILLUMINANO:
+               la scritta si accende in corrispondenza del cambio della
+               sfera, non prima e non dopo. Tutto bianco: nessun colore
+               nell'intro */
+            .add(() => {
+              tint(
+                document.documentElement.getAttribute('data-theme') === 'dark'
+                  ? BOOT_LIGHT
+                  : BOOT_INK
+              )
+              mark.dataset.lit = '1'
+            }, '<0.15')
 
             /* 3 — e se ne va allo stesso modo ma al contrario: dall'ultima
                riga alla prima, verso l'alto */
@@ -165,6 +186,13 @@ export function HeroBoot() {
               `+=${HOLD_S}`
             )
 
+            /* il colore si spegne mentre il logotipo esce: sfera e scritta
+               tornano mono insieme */
+            .add(() => {
+              tint(null)
+              delete mark.dataset.lit
+            }, '<')
+
             /* 4 — nel posto lasciato libero entrano le tre parole */
             .set(words, { autoAlpha: 1 }, '<0.45')
             .fromTo(
@@ -173,7 +201,6 @@ export function HeroBoot() {
               { autoAlpha: 1, y: 0, duration: 0.7, stagger: 0.13 },
               '<'
             )
-            .add(() => tint(null), '<')
 
             /* 5 — e infine il resto della pagina */
             .to(
@@ -181,24 +208,76 @@ export function HeroBoot() {
               { autoAlpha: 1, duration: 0.6, stagger: 0.07 },
               '-=0.45'
             )
+
+            /* 6 — ULTIMO di tutti, il marquee circolare (data-splash="disc"):
+               arriva sfocato e si mette a fuoco, e per l'occasione gira più
+               veloce del solito prima di rientrare al passo lento (il boost
+               lo raccoglie HeroRing) */
+            .fromTo(
+              [disc].filter(Boolean),
+              { autoAlpha: 0, filter: 'blur(16px)' },
+              {
+                autoAlpha: 1,
+                filter: 'blur(0px)',
+                duration: 1.3,
+                ease: 'power2.out',
+                onStart: () =>
+                  window.dispatchEvent(
+                    new CustomEvent('hero-ring-boost', { detail: { rate: 2.6 } })
+                  ),
+              },
+              '-=0.15'
+            )
             /* prima cade `data-boot`, POI si tolgono gli stili inline:
                invertendo l'ordine le regole di partenza tornerebbero valide
                per un istante e la hero sfarfallerebbe */
             .add(() => {
               finish()
               gsap.set(
-                [
-                  stage,
-                  words,
-                  annot,
-                  sub,
-                  ...markLines,
-                  ...wordLinks,
-                  ...chrome,
-                ].filter(Boolean),
+                [stage, disc, words, annot, sub, ...markLines, ...chrome].filter(
+                  Boolean
+                ),
                 { clearProps: 'all' }
               )
+              /* ⚠️ sulle tre parole SOLO le proprietà animate: ognuna porta
+                 inline la sua `--wcol` (il colore di sezione per hover e
+                 autoplay) e `clearProps: 'all'` cancellava l'intero
+                 attributo style — l'hover restava senza colore e le parole
+                 rimanevano bianche per sempre */
+              gsap.set(wordLinks, {
+                clearProps: 'opacity,visibility,transform',
+              })
             })
+
+          /* ——— scorciatoia: chi prova a scrollare vuole il sito, non la
+             splash. Durante l'intro lo scroll è bloccato (overflow hidden
+             su html/body) e insistere dava la sensazione che la pagina si
+             fosse incartata: al primo gesto si salta alla fine ——— */
+          const skipEvents = ['wheel', 'touchmove', 'keydown'] as const
+          const skip = () => {
+            unbind()
+            tl.kill()
+            tint(null)
+            delete mark.dataset.lit
+            /* la sfera si compone comunque: senza, resterebbe una nebbia */
+            window.dispatchEvent(new Event('hero-form'))
+            finish()
+            gsap.set(
+              [stage, disc, words, annot, sub, mark, ...markLines, ...chrome].filter(
+                Boolean
+              ),
+              { clearProps: 'all' }
+            )
+            gsap.set(wordLinks, { clearProps: 'opacity,visibility,transform' })
+          }
+          function unbind() {
+            skipEvents.forEach((ev) => window.removeEventListener(ev, skip))
+          }
+          unbindSkip = unbind
+          skipEvents.forEach((ev) =>
+            window.addEventListener(ev, skip, { passive: true })
+          )
+          tl.eventCallback('onComplete', unbind)
 
           /* si parte quando la sfera è viva, comunque non oltre MAX_WAIT_MS:
              una splash bloccata è peggio di una sfera grezza */
@@ -218,6 +297,7 @@ export function HeroBoot() {
 
     return () => {
       alive = false
+      unbindSkip?.()
       ctx?.revert()
     }
   }, [])

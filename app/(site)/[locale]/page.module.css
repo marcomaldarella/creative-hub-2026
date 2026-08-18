@@ -294,6 +294,29 @@
   color: var(--fg);
   text-shadow: var(--hero-glow);
   pointer-events: none;
+  /* l'intro è MONOCROMA: scritta e blob bianchi, nessun colore di sezione.
+     Parte un filo velata e si accende a pieno insieme alla sfera */
+  color: color-mix(in srgb, var(--fg) 76%, transparent);
+  --mark-glow: none;
+  /* stessa curva della tinta della sfera (lerp 0.08/frame nello shader) e
+     delle HeroWords: accensione morbida, spegnimento lungo */
+  transition:
+    color 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    text-shadow 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* l'alone bianco ha senso solo sul fondo scuro: su bianco sporcherebbe */
+:global([data-theme='dark']) .bootMark {
+  --mark-glow:
+    0 0 22px color-mix(in srgb, var(--osso) 42%, transparent),
+    0 0 72px color-mix(in srgb, var(--osso) 22%, transparent);
+}
+
+/* il logotipo si accende insieme alla sfera (HeroBoot alza data-lit nello
+   stesso istante in cui manda 'hero-tint'): inchiostro pieno + alone */
+.bootMark[data-lit='1'] {
+  color: var(--fg);
+  text-shadow: var(--mark-glow);
 }
 
 /* le due righe sono span: entrano ed escono in stagger */
@@ -306,7 +329,11 @@
    sicurezza toglie data-boot e tutto torna visibile */
 :global(html[data-boot='1']) .heroAnnot,
 :global(html[data-boot='1']) .heroSub,
-:global(html[data-boot='1']) .wordsSlot {
+:global(html[data-boot='1']) .wordsSlot,
+/* il marquee circolare è l'ULTIMA cosa che appare: la splash è il blob
+   che si materializza, l'anello arriva a sequenza finita. Opacità e non
+   display: HeroBoot misura il suo rect per centrarci il logotipo */
+:global(html[data-boot='1']) .ring {
   opacity: 0;
 }
 

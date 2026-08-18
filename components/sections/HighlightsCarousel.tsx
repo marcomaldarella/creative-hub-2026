@@ -77,6 +77,9 @@ export function HighlightsCarousel({
   const dragging = useRef(false)
   const moved = useRef(false)
   const startX = useRef(0)
+  const startY = useRef(0)
+  /* asse del gesto: null = ancora da decidere (touch), 'x' = drag preso */
+  const axis = useRef<'x' | null>(null)
   const viewportRef = useRef<HTMLDivElement>(null)
 
   const real = ((pos - 1) % n + n) % n // indice logico 0..n-1
@@ -120,12 +123,36 @@ export function HighlightsCarousel({
     dragging.current = true
     moved.current = false
     startX.current = e.clientX
+    startY.current = e.clientY
+    /* col dito l'asse non si sa ancora: si decide al primo movimento vero */
+    axis.current = e.pointerType === 'mouse' ? 'x' : null
     setPaused(true)
-    viewportRef.current?.setPointerCapture(e.pointerId)
+    /* la cattura si prende solo quando il gesto è orizzontale: prenderla
+       subito su touch faceva litigare drag e scroll della pagina */
+    if (e.pointerType === 'mouse') {
+      viewportRef.current?.setPointerCapture(e.pointerId)
+    }
   }
   const onMove = (e: React.PointerEvent) => {
     if (!dragging.current) return
     const dx = e.clientX - startX.current
+    const dy = e.clientY - startY.current
+
+    /* ⚠️ axis lock: se il dito sta scrollando la pagina (verticale) il
+       carosello si tira indietro del tutto, altrimenti la slide traballa
+       sotto il pollice e lo scroll sembra incagliarsi */
+    if (axis.current === null) {
+      if (Math.abs(dx) < 6 && Math.abs(dy) < 6) return
+      if (Math.abs(dy) > Math.abs(dx)) {
+        dragging.current = false
+        setDrag(0)
+        setPaused(false)
+        return
+      }
+      axis.current = 'x'
+      viewportRef.current?.setPointerCapture(e.pointerId)
+    }
+
     if (Math.abs(dx) > 8) moved.current = true
     setDrag(dx)
   }

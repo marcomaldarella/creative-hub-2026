@@ -30,6 +30,8 @@ export function PhotoFull({
   return (
     <figure
       className={`${styles.full} ${height === 'band' ? styles.band : ''}`}
+      /* ParallaxMedia muove l'immagine di queste figure durante lo scroll */
+      data-parallax=""
     >
       <Image
         src={src}

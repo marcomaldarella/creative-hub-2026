@@ -339,21 +339,68 @@
   font-weight: 500;
 }
 
+/* Pastiglia "prenota": pieno con un po' di volume — gradiente verticale
+   appena percepibile, bordo-luce in alto, stacco scuro in basso e ombra
+   proiettata corta. Il colore passa da UNA sola variabile (--cta-bg), così
+   le varianti (menu aperto, overlay, barra scura) cambiano solo quella e
+   gradiente/ombre si ricalcolano da sole. */
 .cta {
+  --cta-bg: var(--petrolio);
+  --cta-hi: color-mix(in srgb, var(--cta-bg) 86%, var(--osso));
+  --cta-lo: color-mix(in srgb, var(--cta-bg) 86%, #000);
   display: inline-block;
-  background: var(--petrolio);
+  position: relative;
+  background: linear-gradient(
+    180deg,
+    var(--cta-hi) 0%,
+    var(--cta-bg) 52%,
+    var(--cta-lo) 100%
+  );
   color: var(--osso);
   border-radius: var(--radius-pill);
   padding: 10px 22px;
   font-size: var(--fs-small);
   font-weight: 500;
   white-space: nowrap;
-  transition: background var(--dur), transform var(--dur);
+  box-shadow:
+    /* filo di luce sul bordo alto: il pieno smette di essere piatto */
+    inset 0 1px 0 color-mix(in srgb, var(--osso) 26%, transparent),
+    /* e ombra interna sul bordo basso: spessore */
+    inset 0 -1px 0 color-mix(in srgb, #000 30%, transparent),
+    0 1px 2px color-mix(in srgb, #000 22%, transparent),
+    0 8px 20px -10px color-mix(in srgb, var(--cta-bg) 70%, transparent);
+  transition:
+    background var(--dur),
+    box-shadow var(--dur),
+    transform var(--dur);
 }
 
 .cta:hover {
-  background: var(--petrolio-hover);
+  --cta-bg: var(--petrolio-hover);
   transform: translateY(-1px);
+  /* sollevata: la proiezione si allunga e si ammorbidisce */
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--osso) 34%, transparent),
+    inset 0 -1px 0 color-mix(in srgb, #000 30%, transparent),
+    0 2px 4px color-mix(in srgb, #000 20%, transparent),
+    0 14px 28px -12px color-mix(in srgb, var(--cta-bg) 80%, transparent);
+}
+
+/* premuta: torna giù e l'ombra rientra dentro la pastiglia */
+.cta:active {
+  transform: translateY(0);
+  box-shadow:
+    inset 0 2px 6px color-mix(in srgb, #000 38%, transparent),
+    inset 0 -1px 0 color-mix(in srgb, var(--osso) 12%, transparent);
+}
+
+.cta:focus-visible {
+  outline: none;
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--osso) 26%, transparent),
+    inset 0 -1px 0 color-mix(in srgb, #000 30%, transparent),
+    0 0 0 2px var(--bg),
+    0 0 0 4px var(--cta-bg);
 }
 
 /* ————— hamburger ————— */
@@ -572,13 +619,15 @@
   color: var(--osso);
 }
 
+/* dentro il menu è tutto bianco, pastiglia compresa: il blu pieno
+   spariva sul fondo scuro dell'overlay */
 .overlay .cta {
-  background: var(--azzurro-fill);
-  color: var(--osso);
+  --cta-bg: var(--osso);
+  color: var(--panel);
 }
 
 .overlay .cta:hover {
-  background: var(--azzurro-hover);
+  --cta-bg: #fff;
 }
 
 /* ————— stato menu aperto: la barra si fonde con l'overlay ————— */
@@ -590,13 +639,14 @@
   color: var(--osso);
 }
 
+/* barra col menu aperto: stessa pastiglia bianca dell'overlay */
 .menuOpen .cta {
-  background: var(--azzurro-fill);
-  color: var(--osso);
+  --cta-bg: var(--osso);
+  color: var(--panel);
 }
 
 .menuOpen .cta:hover {
-  background: var(--azzurro-hover);
+  --cta-bg: #fff;
 }
 
 /* ————— variante dark (hero petrolio) ————— */
@@ -674,12 +724,12 @@
 }
 
 .dark .cta {
-  background: var(--azzurro-fill);
+  --cta-bg: var(--azzurro-fill);
   color: var(--osso);
 }
 
 .dark .cta:hover {
-  background: var(--azzurro-hover);
+  --cta-bg: var(--azzurro-hover);
 }
 
 /* ————— responsive ————— */

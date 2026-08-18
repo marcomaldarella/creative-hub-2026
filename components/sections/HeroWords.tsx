@@ -57,8 +57,30 @@ export function HeroWords({ words }: { words: [HeroWord, HeroWord, HeroWord] }) 
       i = (i + 1) % words.length
       timer = setTimeout(on, OFF_MS)
     }
-    timer = setTimeout(on, 1400)
+
+    /* ⚠️ durante la splash le parole non sono ancora in campo: il ciclo
+       partirebbe a vuoto e la sua tinta litigherebbe con quella del
+       preloader (che accende il logotipo di blu e poi lo spegne). Si
+       aspetta la caduta di data-boot, cioè la fine della sequenza */
+    const root = document.documentElement
+    let mo: MutationObserver | undefined
+    const start = () => {
+      timer = setTimeout(on, 1400)
+    }
+    if (root.dataset.boot === '1') {
+      mo = new MutationObserver(() => {
+        if (root.dataset.boot !== '1') {
+          mo?.disconnect()
+          start()
+        }
+      })
+      mo.observe(root, { attributes: true, attributeFilter: ['data-boot'] })
+    } else {
+      start()
+    }
+
     return () => {
+      mo?.disconnect()
       clearTimeout(timer)
       tintEvent(null)
     }

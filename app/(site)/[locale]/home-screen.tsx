@@ -14,6 +14,8 @@ import {
 import { SiteChrome, shopHref } from '@/components/sections/SiteChrome'
 import { HeroBoot } from '@/components/sections/HeroBoot'
 import { HeroOrb } from '@/components/sections/HeroOrb'
+import { HeroRing } from '@/components/sections/HeroRing'
+import { ParallaxMedia } from '@/components/sections/ParallaxMedia'
 import { HeroWords } from '@/components/sections/HeroWords'
 import { HighlightsCarousel } from '@/components/sections/HighlightsCarousel'
 import { PhotoFull, PhotoSplit } from '@/components/sections/Photo'
@@ -88,6 +90,10 @@ export async function HomeScreen({
     <SiteChrome locale={locale} path={heroV2 ? '/home-2' : '/'}>
       <main>
         {!heroV2 && <HeroBoot />}
+        {/* moto dell'anello (boost in apparizione e sullo scroll) e
+            parallasse leggero sulle foto grandi */}
+        <HeroRing />
+        <ParallaxMedia />
         {/* ————— hero ————— */}
         <header
           className={heroV2 ? `${styles.hero} ${styles.heroFit}` : styles.hero}
