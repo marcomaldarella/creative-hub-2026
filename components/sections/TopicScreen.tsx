@@ -9,6 +9,7 @@ import {
   SectionHeader,
 } from '@/components/ui'
 import { PortableBlocks } from '@/components/sections/PortableBlocks'
+import { PointsAccordion, type PointsAccordionItem } from '@/components/sections/PointsAccordion'
 import { Thumb } from '@/components/sections/Thumb'
 import { SiteChrome, shopHref } from '@/components/sections/SiteChrome'
 import { localeHref, type Locale } from '@/lib/i18n/config'
@@ -48,8 +49,14 @@ export async function TopicScreen({
   const copy = t.topics[topic.key as keyof typeof t.topics] as {
     title: string
     lede: string
-    points: string[]
+    points: (string | PointsAccordionItem)[]
   }
+  /* alcuni topic (es. servizi-studenti) hanno punti "ricchi" con testo
+     esteso + foto: diventano un accordion invece della riga secca */
+  const richPoints =
+    copy.points.length > 0 && typeof copy.points[0] !== 'string'
+      ? (copy.points as PointsAccordionItem[])
+      : null
 
   const [courses, page, settings] = await Promise.all([
     topic.courseTypes ? getAllCourses() : Promise.resolve([]),
@@ -88,13 +95,17 @@ export async function TopicScreen({
 
         {copy.points.length > 0 && (
           <section className={`wrap ${styles.points}`}>
-            <RevealGroup className={styles.pointsList}>
-              {copy.points.map((p, i) => (
-                <Reveal as="p" key={p} delay={i * 60} className={styles.point}>
-                  {p}
-                </Reveal>
-              ))}
-            </RevealGroup>
+            {richPoints ? (
+              <PointsAccordion items={richPoints} />
+            ) : (
+              <RevealGroup className={styles.pointsList}>
+                {(copy.points as string[]).map((p, i) => (
+                  <Reveal as="p" key={p} delay={i * 60} className={styles.point}>
+                    {p}
+                  </Reveal>
+                ))}
+              </RevealGroup>
+            )}
           </section>
         )}
 

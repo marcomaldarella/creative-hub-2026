@@ -305,8 +305,8 @@
   },
   "academy": {
     "kicker": "academy · enrolment open · a.y. 2026/27",
-    "title": "The university of the creative industries.",
-    "lede": "Bachelor of Arts, Bachelor of Science and Master of Music in music, sound and visual. Twenty places per course, one hour of one-to-one tuition a week.",
+    "titleLines": ["Music, production", "and sound engineering academy in Bologna."],
+    "lede": "University courses — Bachelor of Arts, Bachelor of Science and Master of Music — in music, film production and video making. Six undergraduate courses, three Master's, twenty places per course.",
     "categoryLabel": "filter by category",
     "empty": "no courses in this category.",
     "teachersKicker": "the teachers",
@@ -327,7 +327,74 @@
     "joinUsRole": "send us your cv",
     "teachersPrev": "previous teachers",
     "teachersNext": "more teachers",
-    "teachersHint": "scroll to see every teacher"
+    "teachersHint": "scroll to see every teacher",
+    "pathsKicker": "choose your path",
+    "pathsExplore": "explore",
+    "pathsCourses": "courses",
+    "pathsItems": [
+      {
+        "title": "University courses",
+        "text": "International university qualifications. Three years, twenty places per course."
+      },
+      {
+        "title": "Custom courses",
+        "text": "Your instrument, your hours. Packages of 4, 20 or 40 lessons. First lesson free."
+      },
+      {
+        "title": "Funded training",
+        "text": "Free courses funded by the Emilia-Romagna Region."
+      }
+    ],
+    "aroundKicker": "everything around your studies",
+    "aroundItems": [
+      {
+        "title": "Career opportunities",
+        "text": "Placements with industry companies, productions with established professionals, distribution with Orchard Italia."
+      },
+      {
+        "title": "Student services",
+        "text": "Scholarships, Erasmus+, guidance, housing, live events. Everything you need around your studies."
+      },
+      {
+        "title": "Open day",
+        "text": "An afternoon inside the hub. Come and see how it works, even with your parents."
+      }
+    ],
+    "storiaKicker": "academy · since 1999",
+    "storiaTitle": "Since 1999, first in Italy.",
+    "storiaItems": [
+      {
+        "title": "Foundation",
+        "text": "In 1999 Massimiliano Magagni and Susanna Goldoni founded Italy's first school to bring the US teaching approach to popular music to Bologna, in partnership with the Los Angeles Music Academy — now the Los Angeles College of Music. The Bachelor's degree is awarded in partnership with Coventry University: an international qualification, not a local certificate."
+      },
+      {
+        "title": "Offering",
+        "text": "Over twenty-five years the course offering has grown from instrumental performance to composition for film and video games, through to film production and sound engineering."
+      },
+      {
+        "title": "The new name",
+        "text": "In 2021 Music Academy became Creative Hub Academy: Creative Hub Bologna was also born, the incubator that is today the Innovation area."
+      },
+      {
+        "title": "Awards",
+        "text": "The \"L'Europa è QUI\" award in 2020, ISO 9001:EA37 certification."
+      },
+      {
+        "title": "Research",
+        "text": "With the University of Bologna's DAMS, Tecnopolo CNR and Clust-ER Create, the Academy experiments with technologies applied to music and audiovisual production and distribution."
+      },
+      {
+        "title": "The campus",
+        "text": "Three recording, mastering and post-production studios, isobox, a live room, four production boxes, a main hall with virtual theatre, a VR/AR room, a radio studio. Around two million euros of investment, co-funded by the Emilia-Romagna Region."
+      }
+    ],
+    "teachersIntro": [
+      "Creative Hub Academy's teachers are working professionals in the music industry, not teachers describing a job they no longer do. What you bring into the classroom, they're doing right now, outside these walls: on tour, in the studio, on stage.",
+      "Among them Angela Madonia, a vocal coach familiar to Amici audiences, and Stefania Martin, who has worked alongside Renato Zero and Mina."
+    ],
+    "teachersNames": ["Angela Madonia", "Stefania Martin"],
+    "inMemoriaTitle": "In memoriam",
+    "inMemoriaText": "Bologna also counted Celso Valli among its teachers, the arranger and producer behind the sound of Vasco Rossi, Laura Pausini, Mina and Eros Ramazzotti. He passed away in 2025. What he taught here still shapes the way the Academy works today."
   },
   "studios": {
     "kicker": "studio · bologna",
@@ -482,11 +549,26 @@
       "title": "Everything around your studies.",
       "lede": "What comes beyond the lessons, from scholarships to housing.",
       "points": [
-        "Scholarships",
-        "Erasmus+",
-        "Guidance",
-        "Housing",
-        "Live events"
+        {
+          "title": "Scholarships",
+          "text": "Scholarships covering part or all of the tuition fee, awarded on merit and household income (ISEE). Applications are submitted at enrolment, together with the rest of the paperwork: the student office follows each case individually."
+        },
+        {
+          "title": "Erasmus+",
+          "text": "International mobility with partners across Europe through the Erasmus+ programme: a semester of study or a placement abroad, with credits recognised on return. The network of partner schools and studios grows every year."
+        },
+        {
+          "title": "Guidance",
+          "text": "One-to-one meetings before and during the course, to choose the right path and, later, the first step into the profession: from placement to first contract, guidance is there for those arriving and those about to leave."
+        },
+        {
+          "title": "Housing",
+          "text": "Support finding accommodation in Bologna, with a network of solutions close to campus — especially useful for those arriving from outside the region or from abroad for their first year."
+        },
+        {
+          "title": "Live events",
+          "text": "Concerts, showcases and public evenings inside and outside the hub, often with students and teachers sharing the same stage: a way of bringing what happens in the classroom in front of a real audience."
+        }
       ]
     },
     "dolbyAtmos": {

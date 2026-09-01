@@ -305,8 +305,8 @@
   },
   "academy": {
     "kicker": "academy · iscrizioni aperte · a.a. 2026/27",
-    "title": "L'università delle industrie creative.",
-    "lede": "Bachelor of Arts, Bachelor of Science e Master of Music in musica, sound e visual. Venti posti per corso, un'ora di lezione individuale a settimana.",
+    "titleLines": ["Accademia di musica, produzione", "e tecnico del suono a Bologna."],
+    "lede": "Corsi universitari — Bachelor of Arts, Bachelor of Science e Master of Music — in musica, produzione cinematografica e videomaking. Sei corsi di primo ciclo, tre Master, venti posti per corso.",
     "categoryLabel": "filtra per categoria",
     "empty": "nessun corso in questa categoria.",
     "teachersKicker": "i docenti",
@@ -327,7 +327,74 @@
     "joinUsRole": "inviaci il tuo cv",
     "teachersPrev": "docenti precedenti",
     "teachersNext": "altri docenti",
-    "teachersHint": "scorri per vedere tutti i docenti"
+    "teachersHint": "scorri per vedere tutti i docenti",
+    "pathsKicker": "scegli il tuo percorso",
+    "pathsExplore": "esplora",
+    "pathsCourses": "corsi",
+    "pathsItems": [
+      {
+        "title": "Corsi universitari",
+        "text": "Titoli universitari internazionali. Tre anni, venti posti per corso."
+      },
+      {
+        "title": "Corsi su misura",
+        "text": "Il tuo strumento, i tuoi orari. Pacchetti da 4, 20 o 40 lezioni. Prima lezione gratis."
+      },
+      {
+        "title": "Formazione finanziata",
+        "text": "Corsi gratuiti finanziati dalla Regione Emilia-Romagna."
+      }
+    ],
+    "aroundKicker": "tutto intorno allo studio",
+    "aroundItems": [
+      {
+        "title": "Opportunità lavorative",
+        "text": "Stage nelle aziende del settore, produzioni con professionisti affermati, distribuzione con Orchard Italia."
+      },
+      {
+        "title": "Servizi studenti",
+        "text": "Borse di studio, Erasmus+, orientamento, alloggio, eventi live. Tutto quello che serve intorno allo studio."
+      },
+      {
+        "title": "Open day",
+        "text": "Un pomeriggio dentro l'hub. Vieni a vedere come funziona, anche con i tuoi genitori."
+      }
+    ],
+    "storiaKicker": "academy · dal 1999",
+    "storiaTitle": "Dal 1999, prima in Italia.",
+    "storiaItems": [
+      {
+        "title": "Fondazione",
+        "text": "Nel 1999 Massimiliano Magagni e Susanna Goldoni fondano a Bologna la prima scuola in Italia a portare l'approccio didattico statunitense sulla popular music, in collaborazione con la Los Angeles Music Academy — oggi Los Angeles College of Music. Il Bachelor è conferito in partnership con Coventry University: un titolo internazionale, non un attestato locale."
+      },
+      {
+        "title": "Offerta",
+        "text": "In venticinque anni l'offerta è cresciuta dalla performance strumentale alla composizione per cinema e videogiochi, fino alla produzione cinematografica e all'ingegneria del suono."
+      },
+      {
+        "title": "Il nuovo nome",
+        "text": "Nel 2021 Music Academy diventa Creative Hub Academy: nasce anche Creative Hub Bologna, l'incubatore che oggi è l'area Innovazione."
+      },
+      {
+        "title": "Riconoscimenti",
+        "text": "Premio \"L'Europa è QUI\" nel 2020, certificazione ISO 9001:EA37."
+      },
+      {
+        "title": "Ricerca",
+        "text": "Con il DAMS dell'Università di Bologna, Tecnopolo CNR e Clust-ER Create, l'Academy sperimenta tecnologie applicate a produzione e distribuzione musicale e audiovisiva."
+      },
+      {
+        "title": "La sede",
+        "text": "Tre studi di registrazione, mastering e post-produzione, isobox, sala ripresa, quattro production box, aula magna con virtual theatre, sala VR/AR, regia radiofonica. Circa due milioni di euro d'investimento, cofinanziato dalla Regione Emilia-Romagna."
+      }
+    ],
+    "teachersIntro": [
+      "I docenti di Creative Hub Academy sono professionisti attivi nell'industria musicale, non insegnanti che raccontano un mestiere che non fanno più. Quello che porti in aula lo stanno facendo anche fuori da qui: in tour, in studio, sul palco.",
+      "Tra loro Angela Madonia, vocal coach nota al pubblico di Amici, e Stefania Martin, che ha lavorato al fianco di Renato Zero e Mina."
+    ],
+    "teachersNames": ["Angela Madonia", "Stefania Martin"],
+    "inMemoriaTitle": "In memoria",
+    "inMemoriaText": "Bologna ha avuto tra i suoi maestri anche Celso Valli, arrangiatore e produttore che ha firmato il suono di Vasco Rossi, Laura Pausini, Mina, Eros Ramazzotti. Ci ha lasciati nel 2025. Quello che ha insegnato qui resta nel modo in cui l'Academy lavora ancora oggi."
   },
   "studios": {
     "kicker": "studio · bologna",
@@ -482,11 +549,26 @@
       "title": "Tutto intorno allo studio.",
       "lede": "Quello che c'è oltre le lezioni, dalla borsa di studio all'alloggio.",
       "points": [
-        "Borse di studio",
-        "Erasmus+",
-        "Orientamento",
-        "Alloggio",
-        "Eventi live"
+        {
+          "title": "Borse di studio",
+          "text": "Borse di studio a copertura parziale o totale della retta, assegnate su merito e su base ISEE. La domanda si presenta in fase di iscrizione, insieme al resto della documentazione: l'ufficio segreteria segue ogni pratica caso per caso."
+        },
+        {
+          "title": "Erasmus+",
+          "text": "Mobilità internazionale con partner in Europa attraverso il programma Erasmus+: un semestre di studio o un tirocinio fuori sede, con crediti riconosciuti al rientro. La rete di scuole e studi partner cresce ogni anno."
+        },
+        {
+          "title": "Orientamento",
+          "text": "Colloqui individuali prima e durante il percorso, per scegliere il corso giusto e, più avanti, il primo passo nel mestiere: dallo stage al primo contratto, l'orientamento accompagna sia chi arriva sia chi sta per uscire."
+        },
+        {
+          "title": "Alloggio",
+          "text": "Un servizio di supporto nella ricerca dell'alloggio a Bologna, con una rete di soluzioni vicine alla sede — utile soprattutto per chi arriva da fuori regione o dall'estero per il primo anno."
+        },
+        {
+          "title": "Eventi live",
+          "text": "Concerti, showcase e serate aperte al pubblico dentro e fuori l'hub, spesso con studenti e docenti sullo stesso palco: un modo per portare il lavoro fatto in aula davanti a un pubblico vero."
+        }
       ]
     },
     "dolbyAtmos": {

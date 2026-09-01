@@ -1,0 +1,132 @@
+/* accordion pieno: righe con +/- (grammatica del menu mobile), il
+   pannello aperto occupa un'altezza generosa — testo a sinistra,
+   foto a metà a destra */
+
+.list {
+  display: grid;
+}
+
+.row {
+  border-top: 1px solid var(--line);
+}
+
+.row:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
+.head {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: clamp(22px, 3vw, 32px) 0;
+  background: none;
+  border: none;
+  font: inherit;
+  color: var(--fg);
+  text-align: left;
+  cursor: pointer;
+}
+
+.title {
+  font-size: clamp(24px, 3.4vw, 42px);
+  transition: color var(--dur) ease;
+}
+
+.head:hover .title {
+  color: var(--accent-ink);
+}
+
+/* bottone +: cerchio sottile, il tratto verticale collassa quando aperto
+   (+ → −) — MAI rotazione del cerchio */
+.plus {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--fg-2);
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.head:hover .plus {
+  color: var(--fg);
+  border-color: var(--accent-ink);
+}
+
+.plusOpen {
+  color: var(--fg);
+  border-color: var(--accent-ink);
+}
+
+.plusV {
+  transform-origin: center;
+  transition: transform 0.3s var(--ease-out), opacity 0.2s;
+}
+
+.plusOpen .plusV {
+  transform: scaleY(0);
+  opacity: 0;
+}
+
+/* pannello: grid-rows 0fr -> 1fr, animabile senza misurare altezze */
+.panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.5s var(--ease-out);
+}
+
+.panelOpen {
+  grid-template-rows: 1fr;
+}
+
+.panelInner {
+  overflow: hidden;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: stretch;
+  gap: clamp(24px, 4vw, 56px);
+  padding-bottom: clamp(28px, 4vw, 48px);
+}
+
+/* l'altezza generosa (il lato "full screen" del pannello) si applica
+   solo da aperto: se fosse sempre presente, il grid-rows 0fr del .panel
+   non riuscirebbe mai a collassare a zero e l'accordion resterebbe
+   visivamente aperto anche a riposo */
+.panelOpen .panelInner {
+  height: min(64vh, 620px);
+}
+
+.text {
+  align-self: center;
+  font-size: var(--fs-lede);
+  color: var(--fg-2);
+  line-height: 1.65;
+  max-width: 46ch;
+}
+
+a.photo,
+.photo {
+  border-radius: var(--radius);
+}
+
+@media (max-width: 900px) {
+  .panelInner {
+    grid-template-columns: 1fr;
+    height: auto;
+    gap: 20px;
+  }
+
+  .photo {
+    height: auto;
+    aspect-ratio: 16 / 10;
+  }
+
+  .text {
+    align-self: start;
+  }
+}

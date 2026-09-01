@@ -28,13 +28,24 @@ export function ParallaxMedia() {
     )
     if (!nodes.length) return
 
+    /* l'<img> di ogni figura si cerca una volta sola: farlo dentro il
+       loop (querySelector ad ogni frame, per ogni foto in viewport)
+       è lavoro di scripting che si somma a quello di scroll+compositing
+       del browser — con foto 100svh e' proprio li' che lo scroll si
+       sente scattare */
+    const imgs = new Map<HTMLElement, HTMLImageElement>()
+    for (const n of nodes) {
+      const img = n.querySelector('img')
+      if (img) imgs.set(n, img)
+    }
+
     const visible = new Set<HTMLElement>()
     let raf = 0
 
     const frame = () => {
       const vh = window.innerHeight
       visible.forEach((el) => {
-        const img = el.querySelector('img')
+        const img = imgs.get(el)
         if (!img) return
         const r = el.getBoundingClientRect()
         /* -1 quando la foto sta entrando dal basso, +1 quando esce in alto */
@@ -49,11 +60,20 @@ export function ParallaxMedia() {
       (entries) => {
         entries.forEach((e) => {
           const el = e.target as HTMLElement
-          if (e.isIntersecting) visible.add(el)
-          else {
+          const img = imgs.get(el)
+          if (e.isIntersecting) {
+            visible.add(el)
+            /* promuove la foto a layer proprio SOLO mentre e' animata:
+               un will-change permanente su una foto 100svh pesa in
+               memoria (vedi il marquee del footer), qui si accende e
+               si spegne con la visibilita' */
+            if (img) img.style.willChange = 'transform'
+          } else {
             visible.delete(el)
-            const img = el.querySelector('img')
-            if (img) img.style.transform = ''
+            if (img) {
+              img.style.transform = ''
+              img.style.willChange = ''
+            }
           }
         })
         if (visible.size && !raf) raf = requestAnimationFrame(frame)
@@ -65,9 +85,9 @@ export function ParallaxMedia() {
     return () => {
       io.disconnect()
       if (raf) cancelAnimationFrame(raf)
-      nodes.forEach((n) => {
-        const img = n.querySelector('img')
-        if (img) img.style.transform = ''
+      imgs.forEach((img) => {
+        img.style.transform = ''
+        img.style.willChange = ''
       })
     }
   }, [])

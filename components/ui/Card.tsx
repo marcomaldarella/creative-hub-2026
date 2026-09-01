@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import type { ReactNode } from 'react';
+import type { CSSProperties, ReactNode } from 'react';
 import styles from './Card.module.css';
 
 export type CardProps = {
@@ -16,6 +16,8 @@ export type CardProps = {
   /** target _blank + rel noopener */
   external?: boolean;
   className?: string;
+  /** es. --rvd per lo stagger di un RevealGroup */
+  style?: CSSProperties;
 };
 
 export function Card({
@@ -27,6 +29,7 @@ export function Card({
   href,
   external = false,
   className,
+  style,
 }: CardProps) {
   const cls = [
     styles.card,
@@ -53,17 +56,22 @@ export function Card({
           target="_blank"
           rel="noopener noreferrer"
           className={cls}
+          style={style}
         >
           {body}
         </a>
       );
     }
     return (
-      <Link href={href} className={cls}>
+      <Link href={href} className={cls} style={style}>
         {body}
       </Link>
     );
   }
 
-  return <article className={cls}>{body}</article>;
+  return (
+    <article className={cls} style={style}>
+      {body}
+    </article>
+  );
 }

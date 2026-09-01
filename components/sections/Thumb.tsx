@@ -11,6 +11,9 @@ export type ThumbProps = {
   ratio?: string
   /** cerchio (per i ritratti docenti) */
   round?: boolean
+  /** riempie l'altezza del genitore invece di fissare l'aspect-ratio
+   *  (es. dentro un pannello accordion con altezza propria) */
+  fill?: boolean
   width?: number
   className?: string
 }
@@ -28,6 +31,7 @@ export function Thumb({
   index = 0,
   ratio = '3 / 2',
   round = false,
+  fill = false,
   width = 1200,
   className,
 }: ThumbProps) {
@@ -35,6 +39,7 @@ export function Thumb({
   const cls = [
     styles.thumb,
     round ? styles.round : '',
+    fill ? styles.fill : '',
     hasAsset ? '' : gradients[Math.abs(index) % gradients.length],
     className,
   ]
@@ -42,7 +47,10 @@ export function Thumb({
     .join(' ')
 
   return (
-    <div className={cls} style={{ aspectRatio: round ? '1 / 1' : ratio }}>
+    <div
+      className={cls}
+      style={fill ? undefined : { aspectRatio: round ? '1 / 1' : ratio }}
+    >
       {hasAsset && (
         /* eslint-disable-next-line @next/next/no-img-element */
         <img
