@@ -48,6 +48,9 @@ export type NavProps = {
   homeHref?: string;
   /** variante per pagine con hero petrolio */
   dark?: boolean;
+  /** pagine "a colore pieno" (academy/studio/coworking): il tema è
+   *  fisso, il toggle sparisce invece di non fare nulla di visibile */
+  hideThemeToggle?: boolean;
   /** aria-label del bottone hamburger (da dizionario; default 'menu') */
   menuLabel?: string;
   /** aria-label dello switcher lingua (da dizionario; default 'lingua') */
@@ -72,6 +75,7 @@ export function Nav({
   bookExternal = false,
   homeHref = '/',
   dark = false,
+  hideThemeToggle = false,
   menuLabel = 'menu',
   langLabel = 'lingua',
   topbar,
@@ -403,7 +407,7 @@ export function Nav({
         </nav>
 
         {lang}
-        <ThemeToggle className={styles.theme} />
+        {!hideThemeToggle && <ThemeToggle className={styles.theme} />}
         {cta}
 
         <button
@@ -521,7 +525,7 @@ export function Nav({
         </nav>
         <div className={styles.overlayFoot}>
           {lang}
-          <ThemeToggle />
+          {!hideThemeToggle && <ThemeToggle />}
           {cta}
         </div>
       </div>

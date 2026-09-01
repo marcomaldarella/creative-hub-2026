@@ -15,19 +15,22 @@
   flex-direction: column;
   overflow: hidden;
   position: relative;
-  /* mono in entrambi i temi: nero su bianco in light, bianco su nero in
-     dark. --hero-glow spegne le ombre di testo dove farebbero sporco */
+  /* 2026-09: momento brand fisso — la sfera vive SEMPRE su nero, in
+     entrambi i temi. Prima era var(--bg)/var(--fg) e si sbiancava in
+     light: qui non basta cambiare background/color su .hero, i figli
+     (HeroWords, HeroOrb, HUD…) leggono var(--fg)/var(--bg) per conto
+     loro — quindi si ridefiniscono QUI i token semantici, non solo lo
+     sfondo, così tutto ciò che sta dentro l'hero eredita il nero fisso
+     invece del tema della pagina. --hero-glow spegne le ombre di testo
+     dove farebbero sporco. */
+  --bg: #000000;
+  --fg: var(--osso);
+  --fg-2: var(--osso-60);
   color: var(--fg);
-  --hero-glow: none;
-  background: var(--bg);
-}
-
-/* dark: blu profondo della palette con una vignettatura appena percepibile */
-:global([data-theme='dark']) .hero {
   --hero-glow: 0 12px 60px rgba(4, 16, 20, 0.65);
-  background:
-    radial-gradient(90% 70% at 50% 42%, #162F3B 0%, transparent 60%),
-    linear-gradient(150deg, #0F2029 0%, #0B171E 48%, #071114 100%);
+  /* nero pieno, non un gradiente: il blu/verde della vignettatura
+     precedente leggeva come un colore a sé, non come "nero" */
+  background: #000000;
 }
 
 .heroAnnot {

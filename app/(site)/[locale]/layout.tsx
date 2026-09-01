@@ -70,7 +70,7 @@ export const metadata: Metadata = {
    deve vincere sulla preferenza di sistema. Senza, sull'iPhone la barra
    restava chiara mentre il sito era scuro. */
 export const viewport: Viewport = {
-  themeColor: '#0B171E',
+  themeColor: '#000000',
   colorScheme: 'light dark',
 }
 
@@ -130,7 +130,7 @@ export default async function SiteLayout({
         <script
           dangerouslySetInnerHTML={{
             __html:
-              "(function(){try{var t=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.dataset.theme=t;var m=document.querySelector('meta[name=\"theme-color\"]');if(m)m.setAttribute('content',t==='dark'?'#0B171E':'#F5F6F7')}catch(e){}})()",
+              "(function(){try{var t=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.dataset.theme=t;var m=document.querySelector('meta[name=\"theme-color\"]');if(m)m.setAttribute('content',t==='dark'?'#000000':'#FFFFFF')}catch(e){}})()",
           }}
         />
         {/* Splash della home. Lo script gira solo al CARICAMENTO del

@@ -345,7 +345,9 @@
    le varianti (menu aperto, overlay, barra scura) cambiano solo quella e
    gradiente/ombre si ricalcolano da sole. */
 .cta {
-  --cta-bg: var(--petrolio);
+  /* segue l'accento della pagina (colore pieno nelle 3 sezioni, antracite
+     altrove) invece di essere sempre petrolio fisso */
+  --cta-bg: var(--accent, var(--petrolio));
   /* il gradiente è QUASI invisibile: due punti a 6% di distanza. Serve a
      togliere la piattezza, non a farsi notare */
   --cta-hi: color-mix(in srgb, var(--cta-bg) 94%, var(--osso));
@@ -354,7 +356,7 @@
   align-items: center;
   position: relative;
   background: linear-gradient(180deg, var(--cta-hi), var(--cta-lo));
-  color: var(--osso);
+  color: var(--accent-on, var(--osso));
   border-radius: var(--radius-pill);
   /* più bassa e più stretta: nella barra gli altri elementi pesano 14px,
      una pastiglia da 40px si piantava lì in mezzo come un blocco */
@@ -378,7 +380,10 @@
 }
 
 .cta:hover {
-  --cta-bg: var(--petrolio-hover);
+  /* scurisce QUALSIASI --cta-bg attuale invece di saltare a un
+     --petrolio-hover fisso: sul colore di sezione era un blu-verde
+     che non c'entrava nulla col giallo/arancio/azzurro della pagina */
+  --cta-bg: color-mix(in srgb, var(--accent, var(--petrolio)) 85%, black);
   transform: translateY(-1px);
   box-shadow:
     inset 0 1px 0 color-mix(in srgb, var(--osso) 26%, transparent),

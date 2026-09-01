@@ -26,7 +26,7 @@ export function ThemeToggle({ label = 'tema', className }: ThemeToggleProps) {
        se resta del colore vecchio il cambio sembra rotto */
     document
       .querySelector('meta[name="theme-color"]')
-      ?.setAttribute('content', dark ? '#F5F6F7' : '#0B171E');
+      ?.setAttribute('content', dark ? '#FFFFFF' : '#000000');
     try {
       localStorage.setItem('theme', dark ? 'light' : 'dark');
     } catch {

@@ -52,6 +52,27 @@ function accentOf(path: string) {
   return base ? SECTION_ACCENTS[base] : undefined
 }
 
+/* 2026-09: le 3 sezioni non usano più un accento leggero su fondo
+   neutro — TUTTO lo sfondo (nav, contenuto, footer) diventa il colore
+   di sezione, testo sempre nero, niente più toggle light/dark (il
+   colore è fisso, cambiare tema non farebbe nulla di visibile e
+   confonderebbe). Studio e coworking riusano l'arancio/giallo fluo già
+   in palette; l'academy prende un azzurro nuovo, più vivo del petrolio
+   usato come inchiostro altrove (il petrolio scuro sotto testo nero
+   sarebbe illeggibile). */
+const FLOOD_SECTIONS: Record<string, string> = {
+  '/academy': '#4C8DF0',
+  '/studios': 'var(--arancio)',
+  '/coworking': 'var(--giallo-fluo)',
+}
+
+function floodOf(path: string): string | undefined {
+  const base = Object.keys(FLOOD_SECTIONS).find(
+    (b) => path === b || path.startsWith(`${b}/`)
+  )
+  return base ? FLOOD_SECTIONS[base] : undefined
+}
+
 /**
  * Chrome condiviso del sito: Nav fixed in alto, Footer in basso,
  * la pagina in mezzo. Server component: carica siteSettings e dizionario.
@@ -150,13 +171,23 @@ export async function SiteChrome({
   const baseOf = Object.fromEntries(sections.map((s) => [s.key, s.base]))
   const labelOf = Object.fromEntries(sections.map((s) => [s.key, s.label]))
 
+  const clean = path.startsWith('/') ? path : `/${path}`
+  const flood = floodOf(clean)
+  /* da una pagina a colore pieno, il pannello del mega-menu di QUALSIASI
+     voce deve restare nero (mai il vecchio --azzurro-ink/--arancio-ink
+     dell'accento normale): l'inline style di NavItem è più vicino nel
+     DOM del wrapper flood e vincerebbe altrimenti */
+  const navAccent = flood
+    ? { accent: flood, ink: '#000000', on: '#000000' }
+    : undefined
+
   const items = sections.map((s) => {
     const sub = t.nav.sub[s.key]
     const cross: Partial<Record<number, SectionKey>> = s.cross ?? {}
     return {
       label: s.label,
       href: localeHref(locale, s.base),
-      accent: accentOf(s.base),
+      accent: navAccent ?? accentOf(s.base),
       sub: {
         eyebrow: `/${s.label.toLowerCase()}`,
         desc: sub.desc,
@@ -182,7 +213,6 @@ export async function SiteChrome({
     }
   })
 
-  const clean = path.startsWith('/') ? path : `/${path}`
   const pageAccent = accentOf(clean)
   const langHrefs = {
     it: clean,
@@ -201,28 +231,110 @@ export async function SiteChrome({
       .map((s) => ({ label: s.label as string, href: s.url as string, external: true })) ??
     []
 
+  const nav = (
+    <Nav
+      items={items}
+      locale={locale}
+      langHrefs={langHrefs}
+      bookHref={shopHref(settings)}
+      bookLabel={t.nav.book}
+      bookExternal
+      homeHref={localeHref(locale, '/')}
+      dark={dark}
+      hideThemeToggle={Boolean(flood)}
+      menuLabel={t.nav.menu}
+      langLabel={t.nav.lang}
+      topbar={{
+        left: t.nav.topbar.left,
+        middle: t.nav.topbar.middle,
+        cta: t.nav.topbar.cta,
+        ctaHref: shopHref(settings),
+        phone: settings?.phone,
+        email: settings?.email,
+      }}
+    />
+  )
+
+  const footer = (
+    <Footer
+      contactLines={contactLines}
+      groups={[
+        { title: t.footer.colHub, links: items.slice(0, 3) },
+        { title: t.footer.colEco, links: items.slice(3) },
+      ]}
+      social={social}
+      socialTitle={t.footer.colSocial}
+      copyright={t.footer.copyright}
+      legal={[
+        { label: t.footer.privacy, href: localeHref(locale, '/privacy') },
+        { label: t.footer.cookie, href: localeHref(locale, '/cookie') },
+        { label: t.footer.transparency, href: localeHref(locale, '/trasparenza') },
+      ]}
+      homeHref={localeHref(locale, '/')}
+    />
+  )
+
+  if (flood) {
+    /* pagina "a colore pieno": nav, contenuto e footer condividono lo
+       stesso wrapper, così --bg/--fg/--surface/--line ridipingono TUTTO
+       (Nav e Footer leggono già questi token, non serve toccarli).
+       Niente qui dentro crea un containing block per il Nav fixed
+       (solo custom properties): la barra resta ancorata al viewport. */
+    return (
+      <div
+        style={
+          {
+            /* ⚠️ non bastano le custom property: <body>, sopra questo
+               div nell'albero, dipinge il SUO sfondo con --bg del tema
+               root (bianco/nero) — le custom property non risalgono.
+               Senza un background VERO qui, ogni spazio vuoto di questa
+               pagina (i gap tra le sezioni, sotto l'ultima) mostrava il
+               nero di sfondo del body invece del colore di sezione. */
+            background: flood,
+            /* stesso motivo dello sfondo: il `color` va dichiarato QUI,
+               non solo come custom property — altrimenti i titoli senza
+               un `color: var(--fg)` esplicito (SectionHeader, Card…)
+               ereditano il colore già calcolato su <body> (bianco, se il
+               tema è dark) invece di rileggere il mio override */
+            color: '#000000',
+            minHeight: '100dvh',
+            '--bg': flood,
+            /* schede e superfici: stesso colore ma più scuro, non piatto
+               identico allo sfondo — così si vedono */
+            '--surface': `color-mix(in srgb, #000000 24%, ${flood})`,
+            '--panel': `color-mix(in srgb, #000000 24%, ${flood})`,
+            '--fg': '#000000',
+            /* testo secondario: nero SOLIDO (non trasparente) — un nero
+               al 60% di opacità sopra --surface (già scurito) si fondeva
+               nello sfondo invece di leggersi come testo */
+            '--fg-2': '#141414',
+            /* bordi/linee: nero a opacità ridotta — stesso "nero" del
+               testo, non bianco (era la prima versione, sbagliata) e
+               non nero pieno (troppo duro sulle superfici già scure) */
+            '--line': 'rgba(0, 0, 0, 0.28)',
+            /* --accent resta il colore di sezione PIENO (è il fill di
+               CTA/pillOn esistenti, es. coworking "prenota un day pass":
+               usarlo come nero rompeva quei componenti, che aspettano
+               una superficie colorata con testo scuro sopra) */
+            '--accent': flood,
+            '--accent-ink': '#000000',
+            '--accent-on': '#000000',
+            /* didascalie delle foto piena pagina (Photo.tsx): normalmente
+               chiare fisse su overlay scuro, qui devono restare nere */
+            '--photo-caption': '#000000',
+          } as React.CSSProperties
+        }
+      >
+        {nav}
+        {children}
+        {footer}
+      </div>
+    )
+  }
+
   return (
     <>
-      <Nav
-        items={items}
-        locale={locale}
-        langHrefs={langHrefs}
-        bookHref={shopHref(settings)}
-        bookLabel={t.nav.book}
-        bookExternal
-        homeHref={localeHref(locale, '/')}
-        dark={dark}
-        menuLabel={t.nav.menu}
-        langLabel={t.nav.lang}
-        topbar={{
-          left: t.nav.topbar.left,
-          middle: t.nav.topbar.middle,
-          cta: t.nav.topbar.cta,
-          ctaHref: shopHref(settings),
-          phone: settings?.phone,
-          email: settings?.email,
-        }}
-      />
+      {nav}
       {pageAccent ? (
         /* div NORMALE, non display:contents: senza box Next salta lo
            scroll-to-top alla navigazione e si resta a fondo pagina */
@@ -240,22 +352,7 @@ export async function SiteChrome({
       ) : (
         children
       )}
-      <Footer
-        contactLines={contactLines}
-        groups={[
-          { title: t.footer.colHub, links: items.slice(0, 3) },
-          { title: t.footer.colEco, links: items.slice(3) },
-        ]}
-        social={social}
-        socialTitle={t.footer.colSocial}
-        copyright={t.footer.copyright}
-        legal={[
-          { label: t.footer.privacy, href: localeHref(locale, '/privacy') },
-          { label: t.footer.cookie, href: localeHref(locale, '/cookie') },
-          { label: t.footer.transparency, href: localeHref(locale, '/trasparenza') },
-        ]}
-        homeHref={localeHref(locale, '/')}
-      />
+      {footer}
     </>
   )
 }

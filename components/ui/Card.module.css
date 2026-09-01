@@ -6,7 +6,9 @@
 
 .light {
   background: var(--surface);
-  transition: transform var(--dur) var(--ease-out), box-shadow var(--dur);
+  border: 1px solid var(--line);
+  transition: transform var(--dur) var(--ease-out), box-shadow var(--dur),
+    border-color var(--dur);
 }
 
 .light:hover {

@@ -5,7 +5,10 @@
 :root {
   /* colori */
   --ghiaccio: #F5F6F7;   /* sfondo base, bianco freddo in palette */
-  --petrolio: #13262F;   /* inchiostro: blu profondissimo, non nero neutro */
+  /* 2026-09: era un blu-petrolio (#13262F) — tema neutro puro, ora è
+     antracite: nessuna sezione "scura" del sito neutro deve leggere
+     come "un altro blu", deve leggere come nero/grigio */
+  --petrolio: #1A1A1A;   /* inchiostro / superfici scure: antracite neutro */
   --azzurro:  #193442;   /* blu brand del cliente (agosto 2026) — academy */
   --giallo-fluo: #DFFF3A; /* accento coworking */
   --arancio:  #FF6E12;   /* accento studio (registrazione) */
@@ -18,7 +21,7 @@
   --bianco:   #FFFFFF;   /* superfici card su light */
 
   /* derivati */
-  --petrolio-hover: #1D3846;
+  --petrolio-hover: #262626;
   --azzurro-hover:  #22475A;
   --osso-60: rgba(237, 230, 218, 0.6);
   --osso-16: rgba(237, 230, 218, 0.16);
@@ -34,23 +37,35 @@
      altrimenti i bottoni spariscono sulle card */
   --azzurro-fill: #193442;
 
-  /* accento di sezione: azzurro di default, SiteChrome lo cambia dentro
-     academy (azzurro) / studios (arancio) / coworking (giallo).
+  /* accento DI DEFAULT (pagine senza una sezione, es. magazine): era
+     l'azzurro brand — restava "un altro blu" proprio nelle parti più
+     neutre del sito. SiteChrome lo cambia dentro academy (azzurro) /
+     studios (arancio) / coworking (giallo); il mega-menu lo riceve
+     comunque per sezione via SECTION_ACCENTS, non da qui.
      --accent = superfici, barre, bordi; --accent-ink = testo leggibile;
      --accent-on = testo SOPRA una superficie in --accent */
-  --accent: var(--azzurro-fill);
-  --accent-ink: var(--azzurro-ink);
+  --accent: var(--petrolio);
+  --accent-ink: var(--petrolio);
   --accent-on: var(--osso);
 
   /* ————— layer semantico (inverte col tema) —————
-     Regola: un elemento che deve invertirsi col tema usa questi token;
-     i momenti brand fissi (petrolio, azzurro, gradient…) restano sui token brand. */
-  --bg: #F5F6F7;        /* sfondo pagina / nav / footer: bianco freddo */
-  --surface: #FFFFFF;   /* superfici card */
-  --fg: #13262F;        /* testo: blu profondissimo della palette */
-  --fg-2: #56707E;      /* testo secondario, grigio-blu */
-  --line: #DCE2E5;      /* bordi, divisori */
-  --panel: #13262F;     /* superfici scure (sezioni, overlay): blu, non nero */
+     2026-09: temi default NEUTRI PURI (richiesta cliente) — niente più
+     tinta blu nel bianco/nero di base. Regola: un elemento che deve
+     invertirsi col tema usa questi token; i momenti brand fissi
+     (petrolio, azzurro, gradient…) restano sui token brand, invariati.
+     Le pagine Academy/Studio/Coworking NON usano più questo layer:
+     SiteChrome le ridipinge per intero nel colore di sezione
+     (vedi FLOOD_SECTIONS). */
+  --bg: #FFFFFF;         /* sfondo pagina / nav / footer: bianco puro */
+  --surface: #F5F5F5;    /* superfici card: grigio neutro, zero tinta */
+  --fg: #0A0A0A;         /* testo: nero quasi puro (mai #13262F blu) */
+  --fg-2: #6B6B6B;       /* testo secondario: grigio neutro */
+  --line: #E3E3E3;       /* bordi, divisori: grigio neutro */
+  /* superfici scure (overlay, mega-menu, band editoriali): stesso
+     antracite di --petrolio, fisso, non inverte col tema — se qui e
+     nella band un altro elemento usasse #000 puro si vedrebbe lo
+     stacco fra due "neri" diversi */
+  --panel: var(--petrolio);
 
   /* layout */
   --max: 100%;                      /* full-bleed alla studio dumbar */
@@ -85,18 +100,17 @@
   }
 }
 
-/* dark in palette: niente nero neutro, tutto sulla tinta del blu brand */
+/* dark neutro puro: nero vero, non la scala di blu di prima */
 [data-theme='dark'] {
-  /* scala di blu ricavata dal brand #193442 (h200 s45): lo sfondo è la
-     stessa tinta più scura, le superfici salgono di luminosità */
-  --bg: #0B171E;
-  --surface: #193442;   /* il blu brand è la superficie delle card */
-  --fg: #E9F0F3;
-  --fg-2: #8FA7B2;
-  --line: #244C60;
-  --panel: #132732;
+  --bg: #000000;
+  --surface: #111111;   /* grigio quasi nero, zero tinta: superficie card */
+  --fg: #FAFAFA;
+  --fg-2: #9A9A9A;
+  --line: #262626;
+  --panel: var(--petrolio);
   /* il blu brand su nero era illeggibile: come inchiostro sale di luminosità
-     restando sulla stessa tinta */
+     restando sulla stessa tinta (resta un token brand fisso, non tocca
+     il neutro base qui sopra) */
   --azzurro-ink: #7FA9BE;
   --azzurro-hover: #9CC2D4;
   --azzurro-fill: #26536C;
@@ -109,12 +123,12 @@
    solo a coprire la finestra prima che esegua) */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) {
-    --bg: #0B171E;
-    --surface: #193442;
-    --fg: #E9F0F3;
-    --fg-2: #8FA7B2;
-    --line: #244C60;
-    --panel: #132732;
+    --bg: #000000;
+    --surface: #111111;
+    --fg: #FAFAFA;
+    --fg-2: #9A9A9A;
+    --line: #262626;
+    --panel: var(--petrolio);
     --azzurro-ink: #7FA9BE;
     --azzurro-hover: #9CC2D4;
     --azzurro-fill: #26536C;

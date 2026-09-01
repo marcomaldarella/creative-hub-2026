@@ -41,7 +41,9 @@
   justify-content: flex-end;
   gap: 8px;
   padding: var(--pad) var(--pad) clamp(20px, 4vh, 44px);
-  color: #f2f7f8;
+  /* fisso chiaro (la foto ha sempre un velo scuro sotto), TRANNE nelle
+     pagine a colore pieno: SiteChrome ridefinisce --photo-caption a nero */
+  color: var(--photo-caption, #f2f7f8);
 }
 
 .fullCap .kicker,
@@ -56,7 +58,7 @@
 }
 
 .fullCap .kicker {
-  color: rgba(242, 247, 248, 0.72);
+  color: color-mix(in srgb, var(--photo-caption, #f2f7f8) 72%, transparent);
 }
 
 .caption {
