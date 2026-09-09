@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { Button, Card, Reveal, Rule, SectionHeader } from '@/components/ui'
 import { SiteChrome, shopHref } from '@/components/sections/SiteChrome'
@@ -49,17 +50,30 @@ export default async function CoworkingPage({
   return (
     <SiteChrome locale={locale} path="/coworking">
       <main className={styles.main}>
-        {/* ————— hero ————— */}
-        <header className={`wrap ${styles.head}`}>
-          <Reveal as="span" className={`mono ${styles.kicker}`}>
-            {t.coworking.kicker}
+        {/* ————— hero: stessa grammatica di /studios — foto viva a filo
+            in alto a sx, testi a dx ————— */}
+        <header className={styles.head}>
+          <Reveal className={styles.headMedia}>
+            <Image
+              src="/img/sections/coworking-lounge.jpg"
+              alt="La lounge del coworking: sedute e grafiche geometriche alle pareti"
+              width={1800}
+              height={1350}
+              priority
+              className={styles.headImg}
+            />
           </Reveal>
-          <Reveal as="h1" className={`display-thin ${styles.title}`} delay={80}>
-            {t.coworking.title}
-          </Reveal>
-          <Reveal as="p" className={styles.lede} delay={160}>
-            {t.coworking.lede}
-          </Reveal>
+          <div className={styles.headText}>
+            <Reveal as="span" className={`mono ${styles.kicker}`}>
+              {t.coworking.kicker}
+            </Reveal>
+            <Reveal as="h1" className={`display-thin ${styles.title}`} delay={80}>
+              {t.coworking.title}
+            </Reveal>
+            <Reveal as="p" className={styles.lede} delay={160}>
+              {t.coworking.lede}
+            </Reveal>
+          </div>
         </header>
 
         <Rule left={t.coworking.kicker} right={t.coworking.spacesKicker} />
@@ -95,6 +109,24 @@ export default async function CoworkingPage({
               ))}
             </div>
           </div>
+        </section>
+
+        {/* ————— gli spazi, dal vivo: banda a due colonne come /studios ————— */}
+        <section className={styles.photoDuo} aria-label="Gli spazi del coworking">
+          <Image
+            src="/img/sections/future-together.jpg"
+            alt='Il corridoio con il murale "future together" e le sedute blu'
+            width={1800}
+            height={1350}
+            className={styles.duoImg}
+          />
+          <Image
+            src="/img/sections/designing-the.jpg"
+            alt='La parete gialla "designing the future" lungo il corridoio'
+            width={1800}
+            height={1350}
+            className={styles.duoImg}
+          />
         </section>
 
         {/* ————— i corridoi: nastro di foto a filo di pagina ————— */}

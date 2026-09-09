@@ -141,6 +141,14 @@
   border-radius: 0;
 }
 
+/* la seconda foto è più piccola ma resta agganciata al margine basso
+   e sinistro della sua colonna: la riga è alta quanto la prima */
+.duo .duoItem:nth-child(2) {
+  width: 66%;
+  align-self: end;
+  justify-self: start;
+}
+
 .duoImg {
   display: block;
   width: 100%;

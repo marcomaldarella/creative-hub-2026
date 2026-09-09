@@ -44,4 +44,20 @@
   width: 1.2em;
   height: 2px;
   background: currentColor;
+  /* il trattino cresce in scaleX da sinistra (senso di lettura) */
+  transform-origin: left center;
+}
+
+.word {
+  display: inline-flex;
+}
+
+.mask {
+  display: inline-block;
+  overflow: hidden;
+}
+
+.letter {
+  display: inline-block;
+  will-change: transform;
 }

@@ -209,6 +209,7 @@ export function Nav({
     styles.nav,
     dark ? styles.dark : '',
     open ? styles.menuOpen : '',
+    open && floodMode ? styles.menuOpenFlood : '',
     barToBlack ? styles.navToBlack : '',
   ]
     .filter(Boolean)
@@ -460,6 +461,7 @@ export function Nav({
         id={overlayId}
         className={[
           styles.overlay,
+          floodMode ? styles.overlayFlood : '',
           open ? styles.open : '',
           closing ? styles.closing : '',
         ]

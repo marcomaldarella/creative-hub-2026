@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { ArrowLink, Button, Reveal, Rule } from '@/components/ui'
+import { ArrowLink, Button, Marquee, Reveal, Rule } from '@/components/ui'
 import { PortableBlocks } from '@/components/sections/PortableBlocks'
 import { Thumb } from '@/components/sections/Thumb'
 import { SiteChrome, shopHref } from '@/components/sections/SiteChrome'
@@ -73,25 +74,78 @@ export default async function CoursePage({
   return (
     <SiteChrome locale={locale} path={`/academy/${slug}`}>
       <main className={styles.main}>
-        {/* ————— hero testuale ————— */}
-        <header className={`wrap ${styles.head}`}>
-          <Reveal className={styles.back}>
-            <ArrowLink href={localeHref(locale, '/academy/corsi')} reverse>
-              {t.academy.backToCourses}
-            </ArrowLink>
-          </Reveal>
-          <Reveal as="span" className={`mono ${styles.kicker}`} delay={60}>
-            {l(course.category?.title, locale)?.toLowerCase() ?? t.academy.kicker}
-          </Reveal>
-          <Reveal as="h1" className={`display-thin ${styles.title}`} delay={120}>
-            {l(course.title, locale)}
-          </Reveal>
-          {l(course.summary, locale) && (
-            <Reveal as="p" className={styles.lede} delay={180}>
-              {l(course.summary, locale)}
+        {/* ————— hero alla Catalyst: testi e dati chiave a sinistra,
+            cover viva a filo a destra ————— */}
+        <header className={styles.head}>
+          <div className={styles.headText}>
+            <Reveal className={styles.back}>
+              <ArrowLink href={localeHref(locale, '/academy/corsi')} reverse>
+                {t.academy.backToCourses}
+              </ArrowLink>
             </Reveal>
-          )}
+            <Reveal as="span" className={`mono ${styles.kicker}`} delay={60}>
+              {l(course.category?.title, locale)?.toLowerCase() ?? t.academy.kicker}
+            </Reveal>
+            <Reveal as="h1" className={`display-thin ${styles.title}`} delay={120}>
+              {l(course.title, locale)}
+            </Reveal>
+            {l(course.summary, locale) && (
+              <Reveal as="p" className={styles.lede} delay={180}>
+                {l(course.summary, locale)}
+              </Reveal>
+            )}
+
+            {/* summary delle feature: i dati chiave del corso */}
+            {facts.length > 0 && (
+              <Reveal delay={220}>
+                <dl className={styles.heroFacts}>
+                  {facts.map((fact) => (
+                    <div key={fact.label} className={styles.heroFact}>
+                      <dt className="mono">{fact.label}</dt>
+                      <dd>{fact.value}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </Reveal>
+            )}
+
+            <Reveal delay={260}>
+              <Button variant="azzurro" href={bookHref} external>
+                {t.common.bookOn}
+              </Button>
+            </Reveal>
+          </div>
+
+          <Reveal className={styles.headMedia} delay={120}>
+            <Thumb
+              image={course.coverImage}
+              ratio="4 / 3"
+              width={1600}
+              index={0}
+              alt={l(course.title, locale) ?? ''}
+            />
+          </Reveal>
         </header>
+
+        {/* ————— fascia nera: marquee continuo delle iscrizioni ————— */}
+        <section className={`scheme-dark ${styles.enrollBand}`}>
+          <Marquee
+            speed={26}
+            className={styles.enrollMarquee}
+            items={[
+              <span className={styles.enrollText} key="txt">
+                {t.nav.topbar.middle}
+              </span>,
+              <Link
+                className={styles.enrollPill}
+                href={localeHref(locale, '/academy/open-day')}
+                key="cta"
+              >
+                {t.nav.topbar.cta}
+              </Link>,
+            ]}
+          />
+        </section>
 
         <Rule left={t.nav.academy} right={t.academy.courseInfo} />
 
@@ -145,22 +199,6 @@ export default async function CoursePage({
               </div>
             )}
           </div>
-
-          <aside className={styles.aside}>
-            <div className={styles.sticky}>
-              <dl className={`mono ${styles.facts}`}>
-                {facts.map((fact) => (
-                  <div key={fact.label} className={styles.fact}>
-                    <dt>{fact.label}</dt>
-                    <dd>{fact.value.toLowerCase()}</dd>
-                  </div>
-                ))}
-              </dl>
-              <Button variant="azzurro" href={bookHref} external>
-                {t.common.bookOn}
-              </Button>
-            </div>
-          </aside>
         </section>
       </main>
     </SiteChrome>

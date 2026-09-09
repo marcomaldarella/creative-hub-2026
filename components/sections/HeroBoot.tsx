@@ -70,10 +70,16 @@ export function HeroBoot() {
     const words = q('words')
     const annot = q('annot')
     const sub = q('sub')
-    const chrome = [
-      document.querySelector<HTMLElement>('body > header'),
-      document.querySelector<HTMLElement>('body > footer'),
-    ].filter(Boolean) as HTMLElement[]
+    /* la nav sulle pagine neutre vive dentro il wrapper .scheme-dark:
+       senza il secondo selettore qui non la trovavamo e restava nascosta
+       fino a fine sequenza */
+    const header = document.querySelector<HTMLElement>(
+      'body > header, body > .scheme-dark > header'
+    )
+    const footer = document.querySelector<HTMLElement>(
+      'body > footer, body > .scheme-dark > footer'
+    )
+    const chrome = [header, footer].filter(Boolean) as HTMLElement[]
     const wordLinks = words ? Array.from(words.querySelectorAll('a')) : []
     /* le due righe del logotipo: entrano ed escono in stagger */
     const markLines = mark ? Array.from(mark.querySelectorAll('span')) : []
@@ -145,9 +151,14 @@ export function HeroBoot() {
           })
 
           /* 1 — il blob si materializza: la nuvola si compone, ancora
-             monocroma. Nessuna scala: la sfera è già alla sua misura */
+             monocroma. Nessuna scala: la sfera è già alla sua misura.
+             Il MENU entra subito, in parallelo: l'utente deve poter
+             navigare senza aspettare la fine della sequenza */
           tl.add(() => window.dispatchEvent(new Event('hero-form')))
-            .to({}, { duration: FORM_S })
+          if (header) {
+            tl.to(header, { autoAlpha: 1, duration: 0.5 }, 0.25)
+          }
+          tl.to({}, { duration: FORM_S }, 0)
 
             /* 2 — "creative hub" entra al centro, riga dopo riga */
             .fromTo(

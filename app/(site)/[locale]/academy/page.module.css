@@ -98,14 +98,14 @@
 }
 
 a.pathCard {
-  /* stessa grammatica delle card corso: foto 4:5 sopra, corpo nero coi
-     testi nel colore di sezione (qui --accent è il flood dell'academy) */
+  /* stessa grammatica delle card corso: foto 4:5 sopra, corpo nero.
+     Testi BIANCHI: il colore di sezione resta solo sul numerino */
   display: flex;
   flex-direction: column;
   overflow: hidden;
   background: #0A0A0A;
-  --fg: var(--accent, var(--osso));
-  --fg-2: color-mix(in srgb, var(--accent, var(--osso)) 72%, #FAFAFA);
+  --fg: #FAFAFA;
+  --fg-2: #B3B3B3;
   --accent-ink: var(--accent, var(--osso));
   --line: rgba(255, 255, 255, 0.14);
   color: var(--fg);
@@ -125,25 +125,26 @@ a.pathCard {
   display: flex;
   flex-direction: column;
   flex: 1;
-  padding: 20px 22px 24px;
+  padding: 26px 22px 30px;
 }
 
 .pathKicker {
   display: block;
-  margin-bottom: 12px;
+  margin-bottom: 18px;
+  color: var(--accent, var(--osso));
 }
 
 h3.pathTitle {
   font-size: 20px;
   font-weight: 600;
   letter-spacing: -0.01em;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 
 .pathText {
   font-size: var(--fs-small);
   color: var(--fg-2);
-  margin-bottom: 20px;
+  margin-bottom: 28px;
 }
 
 .pathMeta {
@@ -158,7 +159,7 @@ h3.pathTitle {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  color: var(--accent-ink);
+  color: var(--fg);
   opacity: 0;
   transform: translateX(-4px);
   transition: opacity var(--dur) ease, transform var(--dur) var(--ease-out);
