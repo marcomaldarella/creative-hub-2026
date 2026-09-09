@@ -1,0 +1,110 @@
+.main {
+  padding-top: var(--nav-h);
+}
+
+/* ————— header ————— */
+
+.head {
+  padding-top: clamp(40px, 6vw, 72px);
+  padding-bottom: clamp(32px, 4vw, 48px);
+}
+
+.back {
+  display: block;
+  margin-bottom: 28px;
+}
+
+.kicker {
+  display: block;
+  margin-bottom: 20px;
+}
+
+.title {
+  font-size: var(--fs-h2);
+}
+
+/* ————— filtri pill ————— */
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.search {
+  margin-left: auto;
+}
+
+/* divisore tra filtri categoria e filtri tipologia */
+.filterSep {
+  width: 1px;
+  height: 20px;
+  background: var(--line);
+  margin: 0 6px;
+}
+
+/* fascia filtrabile nera: i filtri stanno su nero con testo chiaro, le
+   card (CourseCard) ri-asseriscono da sole i token scuri del testo */
+.filterBand {
+  background: #000000;
+  --fg: #FAFAFA;
+  --fg-2: #C9C9C9;
+  --line: rgba(255, 255, 255, 0.28);
+  color: var(--fg);
+  padding-top: clamp(28px, 4vw, 44px);
+}
+
+.pill {
+  display: inline-block;
+  border: 1px solid var(--line);
+  border-radius: 0;
+  padding: 7px 18px;
+  font-size: var(--fs-small);
+  color: var(--fg-2);
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+
+.pill:hover {
+  color: var(--fg);
+  border-color: var(--accent);
+}
+
+.pillOn {
+  /* la pill attiva porta il colore della sezione */
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-on);
+}
+
+.pillOn:hover {
+  color: var(--accent-on);
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 86%, var(--fg));
+}
+
+/* ————— griglia corsi ————— */
+
+.gridSez {
+  padding-top: clamp(40px, 5vw, 64px);
+  padding-bottom: var(--sez);
+}
+
+/* 4 colonne, card verticali con cover 3:4 */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+}
+
+@media (max-width: 1100px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

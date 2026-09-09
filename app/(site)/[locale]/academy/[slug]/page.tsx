@@ -76,7 +76,7 @@ export default async function CoursePage({
         {/* ————— hero testuale ————— */}
         <header className={`wrap ${styles.head}`}>
           <Reveal className={styles.back}>
-            <ArrowLink href={localeHref(locale, '/academy')} reverse>
+            <ArrowLink href={localeHref(locale, '/academy/corsi')} reverse>
               {t.academy.backToCourses}
             </ArrowLink>
           </Reveal>

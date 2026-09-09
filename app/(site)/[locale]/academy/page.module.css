@@ -24,149 +24,61 @@
   font-size: var(--fs-lede);
 }
 
-/* ————— filtri pill ————— */
+/* ————— corsi in evidenza ————— */
 
-.filters {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 10px;
-  margin-top: clamp(32px, 4vw, 48px);
-}
-
-.search {
-  margin-left: auto;
-}
-
-/* divisore tra filtri categoria e filtri tipologia */
-.filterSep {
-  width: 1px;
-  height: 20px;
-  background: var(--line);
-  margin: 0 6px;
-}
-
-/* fascia filtrabile nera: i filtri stanno su nero con testo chiaro, le
-   CARD dentro restano nel colore di sezione (ri-asseriscono i token
-   scuri del testo qui sotto) */
-.filterBand {
+/* fascia nera come la vecchia fascia filtrabile: le card (CourseCard)
+   ri-asseriscono da sole i token scuri del testo */
+.highlightBand {
   background: #000000;
   --fg: #FAFAFA;
   --fg-2: #C9C9C9;
   --line: rgba(255, 255, 255, 0.28);
   color: var(--fg);
-  padding-top: clamp(20px, 3vw, 36px);
 }
 
-.filterBand a.course {
-  --fg: #000000;
-  --fg-2: #141414;
-  --line: rgba(0, 0, 0, 0.28);
-  color: var(--fg);
-}
-
-.pill {
-  display: inline-block;
-  border: 1px solid var(--line);
-  border-radius: 0;
-  padding: 7px 18px;
-  font-size: var(--fs-small);
-  color: var(--fg-2);
-  transition: color 0.2s, border-color 0.2s, background 0.2s;
-}
-
-.pill:hover {
-  color: var(--fg);
-  border-color: var(--accent);
-}
-
-.pillOn {
-  /* la pill attiva porta il colore della sezione (azzurro qui,
-     arancio/giallo se il pattern verra riusato altrove) */
-  background: var(--accent);
-  border-color: var(--accent);
-  color: var(--accent-on);
-}
-
-.pillOn:hover {
-  color: var(--accent-on);
-  border-color: var(--accent);
-  background: color-mix(in srgb, var(--accent) 86%, var(--fg));
-}
-
-/* ————— griglia corsi ————— */
-
-.gridSez {
-  padding-top: clamp(40px, 5vw, 64px);
+.highlightSez {
+  padding-top: clamp(32px, 4vw, 52px);
   padding-bottom: var(--sez);
 }
 
-/* 4 colonne (8 corsi → 4+4), card verticali con cover 3:4 */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+.highlightHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: clamp(20px, 3vw, 32px);
+}
+
+.highlightHead .sectionLabel {
+  margin-bottom: 0;
+}
+
+.highlightCta {
+  flex-shrink: 0;
+}
+
+/* strip orizzontale: 2 card e mezzo visibili, la mezza invita a scorrere */
+.highlightStrip {
+  display: flex;
   gap: 20px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
 }
 
-@media (max-width: 1100px) {
-  .grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+.highlightStrip::-webkit-scrollbar {
+  display: none;
+}
+
+.highlightCard {
+  flex: 0 0 calc((100% - 2 * 20px) / 2.5);
+  scroll-snap-align: start;
+}
+
+@media (max-width: 800px) {
+  .highlightCard {
+    flex-basis: calc((100% - 20px) / 1.2);
   }
-}
-
-@media (max-width: 560px) {
-  .grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-a.course {
-  display: flex;
-  flex-direction: column;
-  border: 1px solid var(--line);
-  border-radius: 0;
-  overflow: hidden;
-  background: var(--surface);
-  transition:
-    box-shadow var(--dur) ease,
-    opacity var(--dur-slow) ease var(--rvd, 0s),
-    transform var(--dur-slow) var(--ease-out) var(--rvd, 0s);
-}
-
-a.course:hover {
-  border-color: var(--fg);
-}
-
-.courseBody {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  padding: 22px 22px 26px;
-}
-
-.courseKicker {
-  display: block;
-  margin-bottom: 12px;
-  color: var(--accent-ink);
-}
-
-.courseTitle {
-  font-size: 19px;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  line-height: 1.3;
-  margin-bottom: 8px;
-}
-
-.courseSummary {
-  font-size: var(--fs-small);
-  color: var(--fg-2);
-  margin-bottom: 18px;
-}
-
-.courseMeta {
-  display: block;
-  margin-top: auto;
 }
 
 /* ————— docenti ————— */

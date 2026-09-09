@@ -312,6 +312,8 @@
     "teachersKicker": "the teachers",
     "teachersTitle": "Those who teach, work.",
     "backToCourses": "all courses",
+    "highlightKicker": "featured",
+    "highlightCta": "view all courses",
     "courseTeachers": "course teachers",
     "courseInfo": "course details",
     "typeLabel": "filter by type",
