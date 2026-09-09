@@ -147,8 +147,8 @@ export default async function SiteLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(ORG_JSONLD) }}
         />
-        {/* transizione di pagina: gli scarabocchi SVG del reference
-            CodeGrid nei colori brand (nero + azzurro) */}
+        {/* transizione di pagina: tendine dei tre colori brand + nera
+            col logotipo (vedi PageTransition) */}
         <PageTransition>{children}</PageTransition>
       </body>
     </html>
