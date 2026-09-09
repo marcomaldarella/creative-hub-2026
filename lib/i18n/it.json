@@ -314,6 +314,9 @@
     "backToCourses": "tutti i corsi",
     "highlightKicker": "in evidenza",
     "highlightCta": "visualizza tutti i corsi",
+    "sliderPrev": "corsi precedenti",
+    "sliderNext": "altri corsi",
+    "sliderHint": "scorri per vedere i corsi in evidenza",
     "courseTeachers": "docenti del corso",
     "courseInfo": "scheda del corso",
     "typeLabel": "filtra per tipologia",
@@ -545,7 +548,7 @@
       ]
     },
     "openDay": {
-      "title": "Vieni a vedere. Anche con i tuoi.",
+      "title": "Vieni a vedere.\nAnche con i tuoi.",
       "lede": "Un pomeriggio dentro l'hub: aule, studi, docenti e studenti. Si prenota online.",
       "points": []
     },

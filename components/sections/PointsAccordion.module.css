@@ -90,7 +90,11 @@
   grid-template-columns: 1fr 1fr;
   align-items: stretch;
   gap: clamp(24px, 4vw, 56px);
-  padding-bottom: clamp(28px, 4vw, 48px);
+  /* niente padding da chiuso: il padding fa da pavimento alla scatola
+     (la riga 0fr non può scendere sotto) e il pannello "chiuso" mostrava
+     una fetta di testo e foto. Entra col pannello, animato in sincrono. */
+  padding-bottom: 0;
+  transition: padding-bottom 0.5s var(--ease-out);
 }
 
 /* l'altezza generosa (il lato "full screen" del pannello) si applica
@@ -99,6 +103,7 @@
    visivamente aperto anche a riposo */
 .panelOpen .panelInner {
   height: min(64vh, 620px);
+  padding-bottom: clamp(28px, 4vw, 48px);
 }
 
 .text {

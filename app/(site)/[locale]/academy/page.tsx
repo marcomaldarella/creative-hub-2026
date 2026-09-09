@@ -13,6 +13,7 @@ import {
 } from '@/components/ui'
 import { SiteChrome } from '@/components/sections/SiteChrome'
 import { CourseCard } from '@/components/sections/CourseCard'
+import { CourseSlider } from '@/components/sections/CourseSlider'
 import { TeacherStrip } from '@/components/sections/TeacherStrip'
 import { isLocale, localeHref } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
@@ -178,7 +179,13 @@ export default async function AcademyPage({
                 {t.academy.highlightCta}
               </ArrowLink>
             </div>
-            <RevealGroup className={styles.highlightStrip}>
+            <CourseSlider
+              labels={{
+                prev: t.academy.sliderPrev,
+                next: t.academy.sliderNext,
+                hint: t.academy.sliderHint,
+              }}
+            >
               {highlights.map((course, i) => (
                 <CourseCard
                   key={course._id}
@@ -186,11 +193,10 @@ export default async function AcademyPage({
                   locale={locale}
                   index={i}
                   href={`${basePath}/${course.slug?.current ?? ''}`}
-                  className={`rv ${styles.highlightCard}`}
-                  style={{ '--rvd': `${i * 60}ms` } as CSSProperties}
+                  className={styles.highlightCard}
                 />
               ))}
-            </RevealGroup>
+            </CourseSlider>
           </section>
         </div>
 

@@ -314,6 +314,9 @@
     "backToCourses": "all courses",
     "highlightKicker": "featured",
     "highlightCta": "view all courses",
+    "sliderPrev": "previous courses",
+    "sliderNext": "more courses",
+    "sliderHint": "scroll to see the featured courses",
     "courseTeachers": "course teachers",
     "courseInfo": "course details",
     "typeLabel": "filter by type",
@@ -545,7 +548,7 @@
       ]
     },
     "openDay": {
-      "title": "Come and see. Bring your parents too.",
+      "title": "Come and see.\nBring your parents too.",
       "lede": "An afternoon inside the hub: classrooms, studios, teachers and students. Book online.",
       "points": []
     },

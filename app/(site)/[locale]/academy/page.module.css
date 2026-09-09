@@ -57,22 +57,10 @@
   flex-shrink: 0;
 }
 
-/* strip orizzontale: 2 card e mezzo visibili, la mezza invita a scorrere */
-.highlightStrip {
-  display: flex;
-  gap: 20px;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: none;
-}
-
-.highlightStrip::-webkit-scrollbar {
-  display: none;
-}
-
+/* 2 card e mezzo visibili nel nastro (CourseSlider): la mezza card e i
+   controlli invitano a scorrere */
 .highlightCard {
   flex: 0 0 calc((100% - 2 * 20px) / 2.5);
-  scroll-snap-align: start;
 }
 
 @media (max-width: 800px) {

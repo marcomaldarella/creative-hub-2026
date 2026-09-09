@@ -84,7 +84,12 @@ export async function TopicScreen({
             {sezione.toLowerCase()}
           </Reveal>
           <Reveal as="h1" className={`display-thin ${styles.title}`} delay={120}>
-            {copy.title}
+            {/* un \n nel dizionario spezza il titolo su più righe */}
+            {copy.title.split('\n').map((line, i) => (
+              <span key={i} className={styles.titleLine}>
+                {line}
+              </span>
+            ))}
           </Reveal>
           {copy.lede && (
             <Reveal as="p" className={styles.lede} delay={180}>

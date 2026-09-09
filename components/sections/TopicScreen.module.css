@@ -25,6 +25,11 @@
   max-width: 20ch;
 }
 
+/* riga del titolo: un \n nel dizionario = a capo voluto */
+.titleLine {
+  display: block;
+}
+
 .lede {
   max-width: 52ch;
   color: var(--fg-2);
