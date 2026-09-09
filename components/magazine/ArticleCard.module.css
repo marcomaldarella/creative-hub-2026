@@ -5,7 +5,7 @@
   display: flex;
   flex-direction: column;
   background: var(--surface);
-  border-radius: var(--radius);
+  border-radius: 0;
   overflow: hidden;
   transition:
     background var(--dur),
@@ -14,7 +14,6 @@
 
 .card:hover {
   background: color-mix(in srgb, var(--surface) 94%, var(--fg) 6%);
-  box-shadow: 0 8px 24px -18px color-mix(in srgb, var(--petrolio) 35%, transparent);
 }
 
 /* ————— media (immagine o gradient placeholder) ————— */
@@ -59,7 +58,7 @@
   letter-spacing: 0.02em;
   color: var(--fg);
   border: 1px solid var(--line);
-  border-radius: var(--radius-pill);
+  border-radius: 0;
   padding: 3px 10px;
   white-space: nowrap;
   transition: border-color var(--dur), color var(--dur);

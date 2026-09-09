@@ -205,7 +205,8 @@ export default async function AcademyPage({
 
         <Rule left={t.academy.aroundKicker} right={t.common.courses} />
 
-        {/* ————— filtri categoria ————— */}
+        {/* ————— fascia filtrabile: nera, le card restano nel colore ————— */}
+        <div className={styles.filterBand}>
         <nav className={`wrap ${styles.filters}`} aria-label={t.academy.categoryLabel}>
           <Link
             href={filterHref(undefined, activeType)}
@@ -287,6 +288,7 @@ export default async function AcademyPage({
             </RevealGroup>
           )}
         </section>
+        </div>
 
         <Rule left={t.common.courses} right={t.academy.storiaKicker} />
 

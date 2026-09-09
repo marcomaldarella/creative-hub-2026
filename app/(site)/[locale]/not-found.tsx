@@ -36,7 +36,6 @@ export default function NotFound() {
           marginTop: 10,
           padding: '12px 26px',
           border: '1px solid var(--azzurro)',
-          borderRadius: 'var(--radius-pill)',
           color: 'var(--azzurro)',
           fontSize: 'var(--fs-small)',
           fontWeight: 500,

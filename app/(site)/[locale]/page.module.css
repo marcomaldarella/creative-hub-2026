@@ -84,6 +84,33 @@
   aspect-ratio: 1;
 }
 
+/* Sulla hero pubblica il contenitore della sfera copre TUTTO il palco:
+   la nebula di fondo non si taglia più sul bordo del riquadro quadrato
+   (su fondo nero pieno si vedeva lo spigolo del canvas). La sfera resta
+   della stessa misura: la camera arretra in proporzione (HeroOrb). La
+   maschera radiale è la rete di sicurezza: qualunque residuo di nebula
+   sfuma comunque prima del bordo. pointer-events: none — l'interazione
+   passa da window, i link delle HeroWords restano cliccabili. */
+.hero:not(.heroFit) .orb {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
+  z-index: 0;
+  pointer-events: none;
+  -webkit-mask-image: radial-gradient(
+    ellipse 50% 50% at 50% 50%,
+    #000 60%,
+    transparent 94%
+  );
+  mask-image: radial-gradient(
+    ellipse 50% 50% at 50% 50%,
+    #000 60%,
+    transparent 94%
+  );
+}
+
 /* anello di testo mono che ruota lentissimo attorno all'orb */
 .ring {
   width: min(100svh - 380px, 88vw, 640px);
@@ -152,7 +179,7 @@
   gap: 10px;
   padding: 13px 28px;
   border: 1px solid color-mix(in srgb, var(--fg) 38%, transparent);
-  border-radius: var(--radius-pill);
+  border-radius: 0;
   font-size: var(--fs-small);
   font-weight: 500;
   color: var(--fg);
@@ -308,8 +335,8 @@
     text-shadow 0.9s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* l'alone bianco ha senso solo sul fondo scuro: su bianco sporcherebbe */
-:global([data-theme='dark']) .bootMark {
+/* l'alone bianco ha senso solo sul fondo scuro: la hero è sempre nera */
+:global(.scheme-dark) .bootMark {
   --mark-glow:
     0 0 22px color-mix(in srgb, var(--osso) 42%, transparent),
     0 0 72px color-mix(in srgb, var(--osso) 22%, transparent);
@@ -419,7 +446,7 @@
   margin-top: 22px;
   padding: 11px 11px 11px 26px;
   border: 1px solid var(--line);
-  border-radius: var(--radius-pill);
+  border-radius: 0;
   background: var(--bg);
   color: var(--fg);
   font-size: var(--fs-small);
@@ -436,6 +463,7 @@
   place-items: center;
   width: 34px;
   height: 34px;
+  /* eccezione voluta: il disco con la freccia resta tondo */
   border-radius: 50%;
   background: var(--fg);
   color: var(--bg);
@@ -567,8 +595,8 @@
 /* ————— open day (blu brand) ————— */
 
 .openday {
-  background: var(--azzurro-fill);
-  /* il blu brand e' scuro: sopra ci va inchiostro chiaro, non petrolio */
+  /* fascia nera come nav e hero (era il blu brand) */
+  background: #000000;
   color: var(--osso);
   padding: clamp(56px, 7vw, 100px) 0;
 }

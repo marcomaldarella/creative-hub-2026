@@ -96,7 +96,7 @@ export async function HomeScreen({
         <ParallaxMedia />
         {/* ————— hero ————— */}
         <header
-          className={heroV2 ? `${styles.hero} ${styles.heroFit}` : styles.hero}
+          className={`${styles.hero} ${heroV2 ? styles.heroFit : ''} scheme-dark`}
         >
           <div className={styles.heroAnnot} data-splash="annot">
             <span className="mono">{t.hero.since}</span>
@@ -265,6 +265,9 @@ export async function HomeScreen({
         </section>
 
         {/* ————— tre nodi ————— */}
+        {/* fascia nera unica: dalle tre aree fino a "Storie di mestiere"
+            (esclusa) — sfondo nero, testi e cose bianche */}
+        <div className="scheme-dark">
         <section className={`${styles.sez} ${styles.nodesSez}`}>
           <div className="wrap">
             <SectionHeader
@@ -406,6 +409,7 @@ export async function HomeScreen({
             </div>
           </section>
         )}
+        </div>
 
         {/* ————— magazine ————— */}
         <section className={styles.sez}>

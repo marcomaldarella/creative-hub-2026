@@ -21,7 +21,7 @@
 .meter {
   height: 3px;
   background: var(--line);
-  border-radius: 2px;
+  border-radius: 0;
   margin: clamp(14px, 1.6vw, 22px) 0 10px;
   overflow: hidden;
 }
@@ -31,7 +31,7 @@
   height: 100%;
   width: 0%;
   background: var(--accent-ink);
-  border-radius: 2px;
+  border-radius: 0;
 }
 
 .label {

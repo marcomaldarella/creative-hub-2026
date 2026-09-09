@@ -8,7 +8,11 @@
   list-style: none;
   display: grid;
   grid-auto-flow: column;
-  grid-auto-columns: minmax(130px, 1fr);
+  /* card grandi: se ne vedono meno per volta, va bene così */
+  grid-auto-columns: minmax(220px, 26vw);
+  /* il nastro sborda oltre il gutter destro della gabbia: la card
+     tagliata arriva a filo del bordo viewport, senza margine */
+  margin-right: calc(var(--pad) * -1);
   gap: clamp(24px, 3vw, 40px);
   overflow-x: auto;
   /* il gesto orizzontale muore qui: niente scroll chaining sul documento */
@@ -39,14 +43,20 @@
 }
 
 .photo {
-  width: clamp(88px, 10vw, 120px);
+  width: 100%;
   margin-bottom: 12px;
 }
 
 .name {
   font-weight: 600;
-  font-size: 15px;
+  font-size: clamp(17px, 1.5vw, 21px);
+  line-height: 1.02;
   letter-spacing: -0.01em;
+}
+
+/* nome e, a capo, cognome */
+.nameLine {
+  display: block;
 }
 
 .role {
@@ -70,6 +80,7 @@
   aspect-ratio: 1;
   margin-bottom: 12px;
   border: 1px dashed color-mix(in srgb, var(--fg) 34%, transparent);
+  /* eccezione voluta: il disco con la freccia resta tondo */
   border-radius: 50%;
   color: var(--fg-2);
   transition: border-color var(--dur), color var(--dur), transform var(--dur) var(--ease-out);
@@ -98,7 +109,7 @@
   flex: 1;
   height: 2px;
   background: color-mix(in srgb, var(--fg) 12%, transparent);
-  border-radius: 2px;
+  border-radius: 0;
   overflow: hidden;
 }
 
@@ -107,7 +118,7 @@
   top: 0;
   bottom: 0;
   background: var(--fg);
-  border-radius: 2px;
+  border-radius: 0;
   transition: left 0.18s var(--ease-out), width 0.18s var(--ease-out);
 }
 
@@ -123,7 +134,8 @@
   width: 38px;
   height: 38px;
   border: 1px solid color-mix(in srgb, var(--fg) 22%, transparent);
-  border-radius: var(--radius-pill);
+  /* eccezione voluta: il disco con la freccia resta tondo */
+  border-radius: 50%;
   color: var(--fg);
   transition: border-color var(--dur), color var(--dur), opacity var(--dur);
 }
@@ -139,6 +151,6 @@
 
 @media (max-width: 760px) {
   .strip {
-    grid-auto-columns: minmax(120px, 42vw);
+    grid-auto-columns: minmax(170px, 62vw);
   }
 }

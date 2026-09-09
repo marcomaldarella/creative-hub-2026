@@ -79,7 +79,7 @@
 .hudDot {
   width: 5px;
   height: 5px;
-  border-radius: 50%;
+  border-radius: 0;
   background: currentColor;
   flex: none;
   transform: scale(0);

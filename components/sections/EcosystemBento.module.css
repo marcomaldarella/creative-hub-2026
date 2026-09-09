@@ -10,7 +10,7 @@
 .side {
   position: relative;
   background: var(--surface);
-  border-radius: var(--radius);
+  border-radius: 0;
   overflow: hidden;
   transition:
     background 0.25s ease,
@@ -35,7 +35,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  border-radius: inherit;
+  border-radius: 0;
   padding: 1.5px;
   background: conic-gradient(
     from var(--ring-angle, 0deg),
@@ -127,7 +127,8 @@
    fondo ma leggibile anche su card chiara */
 .badge {
   padding: 3px 11px;
-  border-radius: var(--radius-pill);
+  /* eccezione voluta: SOLO queste label di nodo restano arrotondate */
+  border-radius: 999px;
   background: color-mix(in srgb, var(--accent, var(--azzurro)) 16%, transparent);
   border: 1px solid color-mix(in srgb, var(--accent, var(--azzurro)) 55%, transparent);
   color: color-mix(in srgb, var(--accent, var(--azzurro)) 70%, var(--fg));
@@ -176,7 +177,9 @@
 }
 
 .title {
-  font-size: 20px;
+  /* il titolo del nodo porta il colore del nodo, come il badge */
+  color: var(--accent);
+  font-size: clamp(20px, 1.7vw, 25px);
   font-weight: 600;
   letter-spacing: -0.01em;
   margin-bottom: 8px;

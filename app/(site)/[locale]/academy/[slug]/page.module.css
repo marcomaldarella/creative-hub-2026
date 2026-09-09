@@ -81,7 +81,7 @@
 
 .facts {
   border: 1px solid var(--line);
-  border-radius: var(--radius);
+  border-radius: 0;
   padding: 24px;
   margin-bottom: 20px;
   background: var(--surface);

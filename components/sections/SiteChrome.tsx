@@ -173,21 +173,35 @@ export async function SiteChrome({
 
   const clean = path.startsWith('/') ? path : `/${path}`
   const flood = floodOf(clean)
-  /* da una pagina a colore pieno, il pannello del mega-menu di QUALSIASI
-     voce deve restare nero (mai il vecchio --azzurro-ink/--arancio-ink
-     dell'accento normale): l'inline style di NavItem è più vicino nel
-     DOM del wrapper flood e vincerebbe altrimenti */
-  const navAccent = flood
-    ? { accent: flood, ink: '#000000', on: '#000000' }
-    : undefined
 
   const items = sections.map((s) => {
     const sub = t.nav.sub[s.key]
     const cross: Partial<Record<number, SectionKey>> = s.cross ?? {}
+    /* da una pagina a colore pieno, solo il pannello della SEZIONE
+       CORRENTE resta nel colore; gli altri vanno in fascia scura
+       (nero, testi chiari) via darkPanel. L'inline style di NavItem è
+       più vicino nel DOM del wrapper flood e vince, quindi l'accento
+       va passato esplicito in entrambi i casi */
+    const isCurrent = clean === s.base || clean.startsWith(`${s.base}/`)
     return {
       label: s.label,
       href: localeHref(locale, s.base),
-      accent: navAccent ?? accentOf(s.base),
+      /* pannelli: quello della sezione corrente su pagina flood è a
+         colore pieno con inchiostro nero; TUTTI gli altri sono neri con
+         eyebrow e titolo nel colore pieno della LORO sezione (le voci
+         senza colore — innovazione, editorial, chi siamo — in osso) */
+      accent:
+        flood && isCurrent
+          ? { accent: flood, ink: '#000000', on: '#000000' }
+          : {
+              accent: FLOOD_SECTIONS[s.base] ?? 'var(--osso)',
+              ink: FLOOD_SECTIONS[s.base] ?? 'var(--osso)',
+              on: '#000000',
+            },
+      /* solo la voce della sezione corrente dipinge il suo pannello nel
+         colore pieno; le altre restano nere (e fanno scivolare a nero
+         anche la barra, vedi barToBlack in Nav) */
+      floodPanel: flood && isCurrent ? flood : undefined,
       sub: {
         eyebrow: `/${s.label.toLowerCase()}`,
         desc: sub.desc,
@@ -241,7 +255,6 @@ export async function SiteChrome({
       bookExternal
       homeHref={localeHref(locale, '/')}
       dark={dark}
-      hideThemeToggle={Boolean(flood)}
       menuLabel={t.nav.menu}
       langLabel={t.nav.lang}
       topbar={{
@@ -299,9 +312,9 @@ export async function SiteChrome({
             color: '#000000',
             minHeight: '100dvh',
             '--bg': flood,
-            /* schede e superfici: stesso colore ma più scuro, non piatto
-               identico allo sfondo — così si vedono */
-            '--surface': `color-mix(in srgb, #000000 24%, ${flood})`,
+            /* schede: STESSO colore dello sfondo (richiesta 2026-09-08) —
+               a definirle basta il bordo in --line */
+            '--surface': flood,
             '--panel': `color-mix(in srgb, #000000 24%, ${flood})`,
             '--fg': '#000000',
             /* testo secondario: nero SOLIDO (non trasparente) — un nero
@@ -334,7 +347,10 @@ export async function SiteChrome({
 
   return (
     <>
-      {nav}
+      {/* schema fisso (niente più toggle): il menu è SEMPRE in fascia
+          scura sulle pagine neutre — il wrapper non crea containing
+          block per il Nav fixed (solo classe, niente transform) */}
+      <div className="scheme-dark">{nav}</div>
       {pageAccent ? (
         /* div NORMALE, non display:contents: senza box Next salta lo
            scroll-to-top alla navigazione e si resta a fondo pagina */
@@ -352,7 +368,8 @@ export async function SiteChrome({
       ) : (
         children
       )}
-      {footer}
+      {/* footer sempre nero, come il menu */}
+      <div className="scheme-dark">{footer}</div>
     </>
   )
 }

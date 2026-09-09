@@ -9,6 +9,8 @@
   letter-spacing: -0.02em;
   line-height: 1.18;
   max-width: 26ch;
+  /* il \n del dizionario va rispettato ("Non accanto." a capo) */
+  white-space: pre-line;
 }
 
 .grid {

@@ -2,6 +2,38 @@
    creative hub — design tokens
    palette dal manuale studenti + tee (brand reale)
 ———————————————————————————————————————— */
+
+/* I token di fascia sono REGISTRATI come colori: solo così si possono
+   animare (una custom property non registrata scatta senza transizione,
+   e nel cambio barra→nero si vedevano i pezzi colorarsi uno a uno).
+   Con la registrazione, la transizione dichiarata sulla barra fa sfumare
+   in sincrono anche tutti i discendenti che leggono var(). */
+@property --bg {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #ffffff;
+}
+@property --fg {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #0a0a0a;
+}
+@property --fg-2 {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #6b6b6b;
+}
+@property --line {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #e3e3e3;
+}
+@property --surface {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #f5f5f5;
+}
+
 :root {
   /* colori */
   --ghiaccio: #F5F6F7;   /* sfondo base, bianco freddo in palette */
@@ -73,8 +105,8 @@
   --nav-h: 64px;
   --topbar-h: 28px;
   --header-h: calc(var(--nav-h) + var(--topbar-h));
-  --radius: 6px; /* card leggermente più acute */
-  --radius-pill: 999px;
+  --radius: 0; /* angoli netti ovunque — taglio svizzero */
+  --radius-pill: 0;
 
   /* sezioni */
   --sez: clamp(72px, 10vw, 140px);
@@ -100,13 +132,24 @@
   }
 }
 
-/* dark neutro puro: nero vero, non la scala di blu di prima */
-[data-theme='dark'] {
+/* Fascia scura: non più un tema che inverte, ma una CLASSE di zona.
+   Lo switch light/dark è stato rimosso (2026-09-08): lo schema è fisso —
+   nav, hero e footer neri, il resto bianco, le sezioni si alternano
+   mettendo .scheme-dark sul wrapper. La classe dipinge anche lo sfondo:
+   una zona scura è scura di suo, non dipende dal body. */
+.scheme-dark {
+  background: var(--bg);
+  color: var(--fg);
   --bg: #000000;
   --surface: #111111;   /* grigio quasi nero, zero tinta: superficie card */
   --fg: #FAFAFA;
-  --fg-2: #9A9A9A;
+  --fg-2: #B3B3B3;      /* secondario più presente: su nero il grigio medio spariva */
   --line: #262626;
+  /* accento di default nella fascia scura: le sezioni SENZA colore proprio
+     (innovazione, editorial, chi siamo) altrimenti ereditano il petrolio
+     antracite — invisibile su nero (eyebrow/“esplora la sezione” spariti) */
+  --accent-ink: var(--osso);
+  --accent-on: #000000;
   --panel: var(--petrolio);
   /* il blu brand su nero era illeggibile: come inchiostro sale di luminosità
      restando sulla stessa tinta (resta un token brand fisso, non tocca
@@ -116,25 +159,6 @@
   --azzurro-fill: #26536C;
   --arancio-ink: #FF8A3D;
   color-scheme: dark;
-}
-
-/* fallback pre-JS: con sistema dark i token partono scuri già al primo
-   paint (lo script di init poi stampa l'attributo esplicito; qui serve
-   solo a coprire la finestra prima che esegua) */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme='light']) {
-    --bg: #000000;
-    --surface: #111111;
-    --fg: #FAFAFA;
-    --fg-2: #9A9A9A;
-    --line: #262626;
-    --panel: var(--petrolio);
-    --azzurro-ink: #7FA9BE;
-    --azzurro-hover: #9CC2D4;
-    --azzurro-fill: #26536C;
-    --arancio-ink: #FF8A3D;
-    color-scheme: dark;
-  }
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -147,7 +171,7 @@ body {
   color: var(--fg);
   font-family: var(--font-body), system-ui, sans-serif;
   font-size: var(--fs-body);
-  line-height: 1.55;
+  line-height: 1.45;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -177,7 +201,9 @@ html[data-boot='1'] body {
 /* il disco sta da solo: nav e footer entrano dopo l'apertura.
    body > header e' la Nav (quello della hero e' dentro <main>) */
 html[data-boot='1'] body > header,
-html[data-boot='1'] body > footer {
+html[data-boot='1'] body > .scheme-dark > header,
+html[data-boot='1'] body > footer,
+html[data-boot='1'] body > .scheme-dark > footer {
   opacity: 0;
   pointer-events: none;
 }
@@ -193,7 +219,7 @@ img { max-width: 100%; height: auto; display: block; }
 :focus-visible {
   outline: 2px solid var(--azzurro-ink);
   outline-offset: 3px;
-  border-radius: 2px;
+  border-radius: 0;
 }
 
 /* utility condivise */
@@ -216,7 +242,7 @@ img { max-width: 100%; height: auto; display: block; }
 .display-black {
   font-family: var(--font-body), system-ui, sans-serif;
   font-weight: 600;
-  line-height: 0.9;
+  line-height: 0.88;
   letter-spacing: -0.05em;
 }
 
@@ -224,7 +250,7 @@ img { max-width: 100%; height: auto; display: block; }
 .display-thin {
   font-family: var(--font-body), system-ui, sans-serif;
   font-weight: 600;
-  line-height: 0.98;
+  line-height: 0.94;
   letter-spacing: -0.03em;
 }
 
@@ -258,7 +284,7 @@ img { max-width: 100%; height: auto; display: block; }
   }
 }
 
-[data-theme='dark'] .liquid::after {
+.scheme-dark .liquid::after {
   opacity: 0.09;
 }
 

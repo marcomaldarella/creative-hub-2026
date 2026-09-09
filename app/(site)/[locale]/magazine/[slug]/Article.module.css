@@ -41,7 +41,7 @@
 .authorPhoto {
   width: 44px;
   height: 44px;
-  border-radius: 50%;
+  border-radius: 0;
   overflow: hidden;
   flex-shrink: 0;
 }
@@ -63,7 +63,7 @@
 }
 
 .cover {
-  border-radius: var(--radius);
+  border-radius: 0;
   overflow: hidden;
   aspect-ratio: 16 / 9;
   margin-bottom: clamp(40px, 5vw, 72px);

@@ -3,7 +3,6 @@
 import Link from 'next/link';
 import { useCallback, useRef, useEffect, useId, useState } from 'react';
 import { Arrow } from './Arrow';
-import { ThemeToggle } from './ThemeToggle';
 import { Wordmark } from './Wordmark';
 import styles from './Nav.module.css';
 
@@ -28,6 +27,10 @@ export type NavItem = {
   href: string;
   /** accento di sezione per il pannello (--accent / --accent-ink) */
   accent?: { accent: string; ink: string; on: string };
+  /** nelle pagine flood, SOLO la voce della sezione corrente porta qui
+   *  il colore di sezione: il suo pannello si dipinge di quel colore
+   *  (testo nero), tutti gli altri restano neri come la barra */
+  floodPanel?: string;
   /** mega-menu della sezione (solo desktop, hover/focus) */
   sub?: NavSub;
 };
@@ -48,9 +51,6 @@ export type NavProps = {
   homeHref?: string;
   /** variante per pagine con hero petrolio */
   dark?: boolean;
-  /** pagine "a colore pieno" (academy/studio/coworking): il tema è
-   *  fisso, il toggle sparisce invece di non fare nulla di visibile */
-  hideThemeToggle?: boolean;
   /** aria-label del bottone hamburger (da dizionario; default 'menu') */
   menuLabel?: string;
   /** aria-label dello switcher lingua (da dizionario; default 'lingua') */
@@ -75,7 +75,6 @@ export function Nav({
   bookExternal = false,
   homeHref = '/',
   dark = false,
-  hideThemeToggle = false,
   menuLabel = 'menu',
   langLabel = 'lingua',
   topbar,
@@ -199,10 +198,18 @@ export function Nav({
     return () => window.removeEventListener('keydown', onKey);
   }, [panelOpen, closePanelNow]);
 
+  /* pagina flood: la barra è nel colore di sezione, ma quando si apre il
+     pannello di un'ALTRA sezione (nero) anche la barra scivola a nero,
+     così barra e pannello leggono come un unico blocco */
+  const floodMode = items.some((i) => i.floodPanel);
+  const barToBlack =
+    floodMode && panelOpen !== null && !items[panelOpen]?.floodPanel;
+
   const rootClass = [
     styles.nav,
     dark ? styles.dark : '',
     open ? styles.menuOpen : '',
+    barToBlack ? styles.navToBlack : '',
   ]
     .filter(Boolean)
     .join(' ');
@@ -347,11 +354,23 @@ export function Nav({
                       : styles.panel
                   }
                   style={
-                    item.accent
+                    item.accent || item.floodPanel
                       ? ({
-                          '--accent': item.accent.accent,
-                          '--accent-ink': item.accent.ink,
-                          '--accent-on': item.accent.on,
+                          ...(item.accent && {
+                            '--accent': item.accent.accent,
+                            '--accent-ink': item.accent.ink,
+                            '--accent-on': item.accent.on,
+                          }),
+                          /* pannello a colore pieno della sezione corrente:
+                             ridefinisce i token della fascia sul pannello
+                             stesso (la barra sopra resta nera) */
+                          ...(item.floodPanel && {
+                            '--bg': item.floodPanel,
+                            '--fg': '#000000',
+                            '--fg-2': '#141414',
+                            '--line': 'rgba(0, 0, 0, 0.28)',
+                            color: '#000000',
+                          }),
                         } as React.CSSProperties)
                       : undefined
                   }
@@ -407,7 +426,6 @@ export function Nav({
         </nav>
 
         {lang}
-        {!hideThemeToggle && <ThemeToggle className={styles.theme} />}
         {cta}
 
         <button
@@ -525,7 +543,6 @@ export function Nav({
         </nav>
         <div className={styles.overlayFoot}>
           {lang}
-          {!hideThemeToggle && <ThemeToggle />}
           {cta}
         </div>
       </div>

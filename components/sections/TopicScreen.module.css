@@ -82,14 +82,14 @@ a.course {
   flex-direction: column;
   height: 100%;
   border: 1px solid var(--line);
-  border-radius: var(--radius);
+  border-radius: 0;
   overflow: hidden;
   background: var(--surface);
-  transition: box-shadow var(--dur) ease;
+  transition: border-color var(--dur) ease;
 }
 
 a.course:hover {
-  box-shadow: 0 16px 40px -20px color-mix(in srgb, var(--petrolio) 35%, transparent);
+  border-color: var(--fg);
 }
 
 .courseBody {

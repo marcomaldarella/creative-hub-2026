@@ -46,10 +46,29 @@
   margin: 0 6px;
 }
 
+/* fascia filtrabile nera: i filtri stanno su nero con testo chiaro, le
+   CARD dentro restano nel colore di sezione (ri-asseriscono i token
+   scuri del testo qui sotto) */
+.filterBand {
+  background: #000000;
+  --fg: #FAFAFA;
+  --fg-2: #C9C9C9;
+  --line: rgba(255, 255, 255, 0.28);
+  color: var(--fg);
+  padding-top: clamp(20px, 3vw, 36px);
+}
+
+.filterBand a.course {
+  --fg: #000000;
+  --fg-2: #141414;
+  --line: rgba(0, 0, 0, 0.28);
+  color: var(--fg);
+}
+
 .pill {
   display: inline-block;
   border: 1px solid var(--line);
-  border-radius: var(--radius-pill);
+  border-radius: 0;
   padding: 7px 18px;
   font-size: var(--fs-small);
   color: var(--fg-2);
@@ -105,7 +124,7 @@ a.course {
   display: flex;
   flex-direction: column;
   border: 1px solid var(--line);
-  border-radius: var(--radius);
+  border-radius: 0;
   overflow: hidden;
   background: var(--surface);
   transition:
@@ -115,7 +134,7 @@ a.course {
 }
 
 a.course:hover {
-  box-shadow: 0 16px 40px -20px color-mix(in srgb, var(--petrolio) 35%, transparent);
+  border-color: var(--fg);
 }
 
 .courseBody {
@@ -304,10 +323,11 @@ a.aroundRow:hover .aroundArrow {
 }
 
 h3.storiaTitle {
-  font-size: 16px;
+  font-size: clamp(22px, 2vw, 28px);
   font-weight: 600;
-  letter-spacing: -0.01em;
-  margin-bottom: 8px;
+  letter-spacing: -0.015em;
+  line-height: 1.05;
+  margin-bottom: 10px;
 }
 
 .storiaText {

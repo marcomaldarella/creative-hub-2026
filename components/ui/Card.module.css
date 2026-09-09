@@ -1,6 +1,6 @@
 .card {
   display: block;
-  border-radius: var(--radius);
+  border-radius: 0;
   padding: 28px 24px;
 }
 
@@ -12,8 +12,7 @@
 }
 
 .light:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 16px 40px -20px color-mix(in srgb, var(--petrolio) 25%, transparent);
+  border-color: var(--fg);
 }
 
 .dark {
@@ -52,6 +51,9 @@
 .body {
   font-size: var(--fs-small);
   color: var(--fg-2);
+  /* misura da lettura: senza, nelle card larghe il testo correva per
+     tutta la riga e andava a capo male */
+  max-width: 44ch;
 }
 
 .dark .body {

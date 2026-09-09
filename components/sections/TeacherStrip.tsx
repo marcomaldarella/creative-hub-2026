@@ -8,6 +8,14 @@ import type { Teacher } from '@/lib/sanity/types'
 import { Thumb } from './Thumb'
 import styles from './TeacherStrip.module.css'
 
+/* nome e, a capo, cognome: si spezza al primo spazio (i cognomi
+   composti restano insieme sulla seconda riga) */
+function nameLines(name?: string | null): [string] | [string, string] {
+  const n = name ?? ''
+  const i = n.indexOf(' ')
+  return i === -1 ? [n] : [n.slice(0, i), n.slice(i + 1)]
+}
+
 export type TeacherStripProps = {
   teachers: Teacher[]
   locale: Locale
@@ -84,11 +92,17 @@ export function TeacherStrip({
               image={teacher.photo}
               alt={teacher.name ?? ''}
               index={i}
-              round
+              ratio="4 / 5"
               width={320}
               className={styles.photo}
             />
-            <span className={styles.name}>{teacher.name}</span>
+            <span className={styles.name}>
+              {nameLines(teacher.name).map((line, j) => (
+                <span key={j} className={styles.nameLine}>
+                  {line}
+                </span>
+              ))}
+            </span>
             {l(teacher.role, locale) && (
               <span className={`mono ${styles.role}`}>
                 {l(teacher.role, locale)}

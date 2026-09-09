@@ -4,10 +4,8 @@ import { useEffect } from 'react'
 
 /* L'intro resta MONOCROMA (richiesta cliente): niente blu, scritta e blob
    bianchi. Il canale 'hero-tint' serve qui solo a ILLUMINARE la nuvola —
-   in dark verso il bianco, in light verso l'inchiostro (su fondo chiaro
-   "accendere" vuol dire farsi più densi, non più chiari) */
+   verso il bianco (la hero è sempre in fascia nera) */
 const BOOT_LIGHT = [1, 1, 1] as const
-const BOOT_INK = [0.075, 0.149, 0.184] as const // --fg light #13262F
 
 /** oltre questa attesa la sequenza parte comunque: mai una splash infinita */
 const MAX_WAIT_MS = 900
@@ -164,11 +162,8 @@ export function HeroBoot() {
                sfera, non prima e non dopo. Tutto bianco: nessun colore
                nell'intro */
             .add(() => {
-              tint(
-                document.documentElement.getAttribute('data-theme') === 'dark'
-                  ? BOOT_LIGHT
-                  : BOOT_INK
-              )
+              /* hero sempre in fascia nera: accensione chiara fissa */
+              tint(BOOT_LIGHT)
               mark.dataset.lit = '1'
             }, '<0.15')
 

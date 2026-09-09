@@ -84,7 +84,7 @@
   display: block;
   width: 100%;
   height: auto;
-  border-radius: var(--radius);
+  border-radius: 0;
 }
 
 .splitBody {
@@ -138,7 +138,7 @@
 
 .duoItem {
   overflow: hidden;
-  border-radius: var(--radius);
+  border-radius: 0;
 }
 
 .duoImg {

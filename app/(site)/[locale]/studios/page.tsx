@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import {
   ArrowLink,
@@ -9,9 +10,15 @@ import {
   SectionHeader,
 } from '@/components/ui'
 import { SiteChrome, shopHref } from '@/components/sections/SiteChrome'
-import { isLocale } from '@/lib/i18n/config'
+import { ArticleCard } from '@/components/magazine/ArticleCard'
+import { isLocale, localeHref } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
-import { getSiteSettings, getSpacesByKind } from '@/lib/sanity/queries'
+import {
+  getAllArticles,
+  getArticlesByCategory,
+  getSiteSettings,
+  getSpacesByKind,
+} from '@/lib/sanity/queries'
 import { l } from '@/lib/sanity/l'
 import styles from './page.module.css'
 
@@ -37,10 +44,20 @@ export default async function StudiosPage({
   if (!isLocale(locale)) notFound()
   const t = getDictionary(locale)
 
-  const [spaces, settings] = await Promise.all([
+  const [spaces, settings, studioArticles, allArticles] = await Promise.all([
     getSpacesByKind('studio'),
     getSiteSettings(),
+    getArticlesByCategory('produzione-musicale'),
+    getAllArticles(),
   ])
+  /* due articoli a tema studio: prima la linea produzione musicale,
+     poi si completa con gli ultimi del magazine se non bastano */
+  const editorial = [
+    ...studioArticles,
+    ...allArticles.filter(
+      (a) => !studioArticles.some((s) => s._id === a._id)
+    ),
+  ].slice(0, 2)
 
   const services = [
     t.studios.services.recording,
@@ -53,16 +70,28 @@ export default async function StudiosPage({
     <SiteChrome locale={locale} path="/studios">
       <main className={styles.main}>
         {/* ————— hero ————— */}
-        <header className={`wrap ${styles.head}`}>
-          <Reveal as="span" className={`mono ${styles.kicker}`}>
-            {t.studios.kicker}
+        <header className={styles.head}>
+          <Reveal className={styles.headMedia}>
+            <Image
+              src="/img/sections/studio-regia.jpg"
+              alt="La regia principale dello studio: console, monitoring e synth"
+              width={1800}
+              height={1350}
+              priority
+              className={styles.headImg}
+            />
           </Reveal>
-          <Reveal as="h1" className={`display-thin ${styles.title}`} delay={80}>
-            {t.studios.title}
-          </Reveal>
-          <Reveal as="p" className={styles.lede} delay={160}>
-            {t.studios.lede}
-          </Reveal>
+          <div className={styles.headText}>
+            <Reveal as="span" className={`mono ${styles.kicker}`}>
+              {t.studios.kicker}
+            </Reveal>
+            <Reveal as="h1" className={`display-thin ${styles.title}`} delay={80}>
+              {t.studios.title}
+            </Reveal>
+            <Reveal as="p" className={styles.lede} delay={160}>
+              {t.studios.lede}
+            </Reveal>
+          </div>
         </header>
 
         <Rule left={t.studios.kicker} right={t.studios.spacesKicker} />
@@ -101,6 +130,23 @@ export default async function StudiosPage({
 
         <Rule left={t.studios.spacesKicker} right={t.studios.servicesKicker} />
 
+        {/* ————— le regie, dal vivo: banda fotografica a due colonne ————— */}
+        <section className={styles.photoDuo} aria-label="Le regie dello studio">
+          <Image
+            src="/img/sections/studio-desk.jpg"
+            alt="La regia vista dal centro della sala: console, rack e tastiere"
+            width={1800}
+            height={1800}
+            className={styles.duoImg}
+          />
+          <Image
+            src="/img/sections/studio-regia-b.jpg"
+            alt="La postazione di lavoro con console SSL e modulari"
+            width={1200}
+            height={1600}
+            className={styles.duoImg}
+          />
+        </section>
 
         {/* ————— i servizi ch.01–04 ————— */}
         <section className={styles.sez} id="mix-mastering">
@@ -149,6 +195,32 @@ export default async function StudiosPage({
             </Reveal>
           </div>
         </section>
+
+        {/* ————— dal magazine: due articoli a tema studio, fascia nera ————— */}
+        {editorial.length > 0 && (
+          <section className={`${styles.sez} scheme-dark`}>
+            <div className="wrap">
+              <SectionHeader
+                kicker={t.studios.editorialKicker}
+                title={t.studios.editorialTitle}
+              />
+              <div className={styles.editorialGrid}>
+                {editorial.map((article) => (
+                  <ArticleCard
+                    key={article._id}
+                    article={article}
+                    locale={locale}
+                  />
+                ))}
+              </div>
+              <div className={styles.editorialAll}>
+                <ArrowLink href={localeHref(locale, '/magazine')}>
+                  {t.home.magazineAll}
+                </ArrowLink>
+              </div>
+            </div>
+          </section>
+        )}
       </main>
     </SiteChrome>
   )

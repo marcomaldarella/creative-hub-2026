@@ -15,7 +15,7 @@
   min-height: 190px;
   padding: 26px 28px 30px;
   background: var(--surface);
-  border-radius: var(--radius);
+  border-radius: 0;
   transition:
     background 0.25s ease,
     box-shadow 0.3s ease,
@@ -36,7 +36,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  border-radius: inherit;
+  border-radius: 0;
   padding: 1.5px;
   background: conic-gradient(
     from var(--ring-angle, 0deg),
@@ -93,10 +93,12 @@
 /* titolo come le altre card, ancorato in basso */
 .title {
   margin-top: auto;
-  font-size: 20px;
+  font-size: clamp(20px, 1.7vw, 25px);
   font-weight: 600;
   letter-spacing: -0.01em;
-  color: var(--fg);
+  /* stessa regola del bento: il titolo segue l'accento della card
+     (sui nodi minori l'accento è il bianco di default) */
+  color: var(--accent);
 }
 
 @media (max-width: 900px) {

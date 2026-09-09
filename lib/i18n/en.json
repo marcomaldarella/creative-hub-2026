@@ -171,7 +171,7 @@
     "opendayCta": "book your spot",
     "methodKicker": "02 — method",
     "methodEyebrow": "method",
-    "methodTitle": "You learn inside the industry. Not next to it.",
+    "methodTitle": "You learn inside the industry.\nNot next to it.",
     "method": [
       {
         "n": "01",
@@ -401,27 +401,27 @@
     "title": "Record like the industry.",
     "lede": "55 m² SSL XL Desk control room. Live room. ISO box. Three B-Ear cabins.",
     "spacesKicker": "the spaces",
-    "spacesTitle": "The whole band. In the same room.",
+    "spacesTitle": "The whole band.\nIn the same room.",
     "servicesKicker": "the services",
     "servicesTitle": "From tracking to the international soundtrack",
     "services": {
       "recording": {
-        "n": "ch.01",
+        "n": "01",
         "title": "Recording",
         "text": "The whole band, in the same room."
       },
       "mix": {
-        "n": "ch.02",
+        "n": "02",
         "title": "Mix & mastering",
         "text": "Calibrated monitoring. No surprises."
       },
       "atmos": {
-        "n": "ch.03",
+        "n": "03",
         "title": "Dolby Atmos",
         "text": "Immersive audio. Music, film, gaming."
       },
       "cinema": {
-        "n": "ch.04",
+        "n": "04",
         "title": "Sound design",
         "text": "Sound for image."
       }
@@ -430,7 +430,9 @@
     "ctaTitle": "Tell us about your project.",
     "ctaText": "Tell us what you want to record or mix: we reply within one working day.",
     "ctaBook": "book a session",
-    "ctaContact": "write to us"
+    "ctaContact": "write to us",
+    "editorialKicker": "from the magazine",
+    "editorialTitle": "Stories from the studio."
   },
   "coworking": {
     "kicker": "coworking · roveri district, bologna",

@@ -22,7 +22,7 @@
    vince senza dipendere dall'ordine dei fogli di stile */
 a.nodo {
   background: var(--surface);
-  border-radius: var(--radius);
+  border-radius: 0;
   padding: 28px 28px 30px;
   position: relative;
   aspect-ratio: 16 / 9;

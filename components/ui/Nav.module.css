@@ -4,10 +4,32 @@
   z-index: 50;
   background: var(--bg);
   border-bottom: 1px solid color-mix(in srgb, var(--line) 60%, transparent);
-  /* bordo-luce in alto + velo interno: vetro spesso, ben visibile */
-  box-shadow:
-    inset 0 1px 0 color-mix(in srgb, var(--surface) 65%, transparent),
-    inset 0 -12px 24px -18px color-mix(in srgb, var(--surface) 35%, transparent);
+  color: var(--fg);
+  /* pagina flood: la barra scivola a nero quando si apre il pannello di
+     un'altra sezione (vedi .navToBlack). I token sono registrati con
+     @property in globals: animandoli QUI, sfumano insieme anche tutti i
+     figli che li leggono — niente pezzi che si colorano uno a uno */
+  --nav-fade: 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  transition:
+    background var(--nav-fade),
+    color var(--nav-fade),
+    border-color var(--nav-fade),
+    --bg var(--nav-fade),
+    --fg var(--nav-fade),
+    --fg-2 var(--nav-fade),
+    --line var(--nav-fade),
+    --surface var(--nav-fade);
+}
+
+/* barra in nero (pannello di un'altra sezione aperto su pagina flood):
+   ridefinisce i token della fascia scura direttamente sulla barra */
+.navToBlack {
+  background: #000000;
+  --bg: #000000;
+  --surface: #111111;
+  --fg: #FAFAFA;
+  --fg-2: #9A9A9A;
+  --line: #262626;
   color: var(--fg);
 }
 
@@ -78,7 +100,7 @@
   width: 22px;
   height: 22px;
   flex-shrink: 0;
-  border-radius: 50%;
+  border-radius: 0;
   color: inherit;
   opacity: 0.7;
   transition: opacity 0.2s;
@@ -153,6 +175,7 @@
   gap: 6px;
   height: 100%;
   font-size: 14px;
+  font-weight: 600;
   letter-spacing: 0.01em;
   color: var(--fg-2);
   transition: color 0.2s;
@@ -183,9 +206,6 @@
   right: 0;
   background: var(--bg);
   border-bottom: 1px solid color-mix(in srgb, var(--line) 70%, transparent);
-  box-shadow:
-    inset 0 1px 0 color-mix(in srgb, var(--surface) 40%, transparent),
-    0 32px 80px -36px color-mix(in srgb, var(--petrolio) 45%, transparent);
   opacity: 0;
   visibility: hidden;
   transform: translateY(-8px);
@@ -262,10 +282,12 @@
 .panelTitle {
   font-family: var(--font-body), system-ui, sans-serif;
   font-size: clamp(32px, 3.4vw, 54px);
-  font-weight: 500;
+  font-weight: 600;
   line-height: 0.95;
   letter-spacing: -0.04em;
-  color: var(--fg);
+  /* il titolo di sezione resta nel colore della SUA sezione anche sul
+     pannello nero (le sezioni senza colore cadono sull'osso di fascia) */
+  color: var(--accent-ink);
 }
 
 .panelDesc {
@@ -339,72 +361,56 @@
   font-weight: 500;
 }
 
-/* Pastiglia "prenota": pieno con un po' di volume — gradiente verticale
-   appena percepibile, bordo-luce in alto, stacco scuro in basso e ombra
-   proiettata corta. Il colore passa da UNA sola variabile (--cta-bg), così
-   le varianti (menu aperto, overlay, barra scura) cambiano solo quella e
-   gradiente/ombre si ricalcolano da sole. */
+/* Bottone "prenota": rettangolo pieno e piatto, niente volume.
+   Il colore passa da UNA sola variabile (--cta-bg), così le varianti
+   (menu aperto, overlay, barra scura) cambiano solo quella. */
 .cta {
   /* segue l'accento della pagina (colore pieno nelle 3 sezioni, antracite
      altrove) invece di essere sempre petrolio fisso */
   --cta-bg: var(--accent, var(--petrolio));
-  /* il gradiente è QUASI invisibile: due punti a 6% di distanza. Serve a
-     togliere la piattezza, non a farsi notare */
-  --cta-hi: color-mix(in srgb, var(--cta-bg) 94%, var(--osso));
-  --cta-lo: color-mix(in srgb, var(--cta-bg) 94%, #000);
   display: inline-flex;
   align-items: center;
   position: relative;
-  background: linear-gradient(180deg, var(--cta-hi), var(--cta-lo));
+  background: var(--cta-bg);
   color: var(--accent-on, var(--osso));
-  border-radius: var(--radius-pill);
-  /* più bassa e più stretta: nella barra gli altri elementi pesano 14px,
-     una pastiglia da 40px si piantava lì in mezzo come un blocco */
+  border-radius: 0;
   height: 34px;
   padding: 0 18px;
   font-size: 13.5px;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.005em;
   white-space: nowrap;
-  box-shadow:
-    /* filo di luce sul bordo alto: il pieno smette di essere piatto */
-    inset 0 1px 0 color-mix(in srgb, var(--osso) 18%, transparent),
-    /* profilo: su fondo chiaro la pastiglia ha un contorno suo */
-    0 0 0 1px color-mix(in srgb, var(--cta-bg) 92%, #000),
-    /* contatto corto, niente alone: l'ombra lunga la faceva galleggiare */
-    0 1px 2px color-mix(in srgb, #000 16%, transparent);
-  transition:
-    background var(--dur),
-    box-shadow var(--dur),
-    transform var(--dur);
+  transition: background var(--dur);
 }
 
 .cta:hover {
   /* scurisce QUALSIASI --cta-bg attuale invece di saltare a un
-     --petrolio-hover fisso: sul colore di sezione era un blu-verde
-     che non c'entrava nulla col giallo/arancio/azzurro della pagina */
+     --petrolio-hover fisso */
   --cta-bg: color-mix(in srgb, var(--accent, var(--petrolio)) 85%, black);
-  transform: translateY(-1px);
-  box-shadow:
-    inset 0 1px 0 color-mix(in srgb, var(--osso) 26%, transparent),
-    0 0 0 1px color-mix(in srgb, var(--cta-bg) 92%, #000),
-    0 3px 8px -2px color-mix(in srgb, #000 22%, transparent);
 }
 
-/* premuta: torna giù e l'ombra rientra dentro la pastiglia */
 .cta:active {
-  transform: translateY(0);
-  box-shadow:
-    inset 0 2px 5px color-mix(in srgb, #000 32%, transparent),
-    0 0 0 1px color-mix(in srgb, var(--cta-bg) 92%, #000);
+  --cta-bg: color-mix(in srgb, var(--accent, var(--petrolio)) 75%, black);
 }
 
 .cta:focus-visible {
   outline: none;
   box-shadow:
-    inset 0 1px 0 color-mix(in srgb, var(--osso) 18%, transparent),
     0 0 0 2px var(--bg),
     0 0 0 4px var(--cta-bg);
+}
+
+/* barra nera (fascia scura o scivolata a nero): l'accento di default è
+   antracite e la pastiglia spariva — qui diventa chiara, testo scuro */
+:global(.scheme-dark) .cta,
+.navToBlack .cta {
+  --cta-bg: var(--osso);
+  color: var(--petrolio);
+}
+
+:global(.scheme-dark) .cta:hover,
+.navToBlack .cta:hover {
+  --cta-bg: #ffffff;
 }
 
 /* ————— hamburger ————— */
@@ -427,7 +433,7 @@
   display: block;
   width: 20px;
   height: 2px;
-  border-radius: 1px;
+  border-radius: 0;
   background: currentColor;
   transition: transform var(--dur) var(--ease-out), opacity 0.2s ease;
 }
@@ -505,6 +511,7 @@
 
 .overlayLink {
   font-size: clamp(34px, 9vw, 64px);
+  font-weight: 600;
   color: var(--osso);
   transition: color 0.2s;
 }
@@ -521,7 +528,7 @@
   height: 40px;
   flex-shrink: 0;
   border: 1px solid var(--osso-16);
-  border-radius: 50%;
+  border-radius: 0;
   color: var(--osso-60);
   transition: color 0.2s, border-color 0.2s, transform 0.3s var(--ease-out);
 }
@@ -743,8 +750,7 @@
     display: none;
   }
 
-  .inner .lang,
-  .inner .theme {
+  .inner .lang {
     display: none;
   }
 

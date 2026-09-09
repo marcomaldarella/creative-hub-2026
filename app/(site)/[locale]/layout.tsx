@@ -65,13 +65,11 @@ export const metadata: Metadata = {
 }
 
 /* La barra del browser (Safari iOS in testa) si tinge di theme-color.
-   Qui c'è solo il valore di partenza — quello vero lo scrive lo script
-   di init insieme a data-theme, perché il tema esplicito dell'utente
-   deve vincere sulla preferenza di sistema. Senza, sull'iPhone la barra
-   restava chiara mentre il sito era scuro. */
+   Lo schema è fisso (niente più switch): in cima alla pagina ci sono
+   sempre nav e hero neri, quindi la barra è nera. */
 export const viewport: Viewport = {
   themeColor: '#000000',
-  colorScheme: 'light dark',
+  colorScheme: 'light',
 }
 
 // JSON-LD Organization (dati reali del sito live)
@@ -113,7 +111,7 @@ export default async function SiteLayout({
   if (!isLocale(locale)) notFound()
 
   return (
-    // suppressHydrationWarning: lo script qui sotto scrive data-theme
+    // suppressHydrationWarning: lo script della splash scrive data-boot
     // su <html> prima dell'hydration, il mismatch è voluto
     <html lang={locale} suppressHydrationWarning>
       <body
@@ -126,13 +124,6 @@ export default async function SiteLayout({
             la splash. Un tag inline viene invece eseguito dal parser prima
             che il resto del body sia dipinto. */}
 
-        {/* tema: localStorage, poi preferenza di sistema */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html:
-              "(function(){try{var t=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.dataset.theme=t;var m=document.querySelector('meta[name=\"theme-color\"]');if(m)m.setAttribute('content',t==='dark'?'#000000':'#FFFFFF')}catch(e){}})()",
-          }}
-        />
         {/* Splash della home. Lo script gira solo al CARICAMENTO del
             documento: arrivando su / (link esterno, reload, indirizzo
             digitato) parte sempre; tornando in home navigando dentro al

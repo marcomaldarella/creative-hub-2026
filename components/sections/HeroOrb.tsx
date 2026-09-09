@@ -359,18 +359,9 @@ export function HeroOrb({
       const bgPoints = new THREE.Points(bgGeo, bgMat)
       scene.add(bgPoints)
 
-      /* ——— tema: segue [data-theme] del sito ——— */
-      const themeOf = () =>
-        document.documentElement.getAttribute('data-theme') === 'dark' ? 1 : 0
-      let themeTarget = themeOf()
-      uniforms.uTheme.value = themeTarget
-      const mo = new MutationObserver(() => {
-        themeTarget = themeOf()
-      })
-      mo.observe(document.documentElement, {
-        attributes: true,
-        attributeFilter: ['data-theme'],
-      })
+      /* ——— tema: la hero è sempre in fascia nera (schema fisso,
+         niente più switch) — l'orb resta sulla variante dark ——— */
+      uniforms.uTheme.value = 1
 
       /* ——— interazione: tilt + zone hot direzionali ——— */
       const touch = window.matchMedia('(hover: none)').matches
@@ -521,6 +512,22 @@ export function HeroOrb({
         if (!w || !h) return
         renderer.setSize(w, h)
         camera.aspect = w / h
+        /* canvas quadrato (home-2, mobile stretto): misura storica.
+           Canvas rettangolare = contenitore a tutto palco (hero pubblica):
+           la sfera in px scala con l'altezza del canvas, quindi la camera
+           arretra del rapporto tra l'altezza nuova e il lato che il
+           vecchio riquadro quadrato avrebbe avuto — la sfera resta
+           della stessa misura di prima */
+        if (Math.abs(w - h) < 2) {
+          camera.position.z = 5.3
+        } else {
+          const ref = Math.min(
+            (window.innerHeight - 380) * 1.125,
+            window.innerWidth,
+            720
+          )
+          camera.position.z = 5.3 * (h / Math.max(ref, 240))
+        }
         camera.updateProjectionMatrix()
       }
       resize()
@@ -551,7 +558,6 @@ export function HeroOrb({
         uniforms.uTint.value += (tintTarget - uniforms.uTint.value) * 0.08
         // la nuvola si compone: lerp lento, curva naturale in uscita (~1.5s)
         uniforms.uForm.value += (formTarget - uniforms.uForm.value) * 0.035
-        uniforms.uTheme.value += (themeTarget - uniforms.uTheme.value) * 0.06
 
         group.rotation.y = current.ry + t * 0.022
         group.rotation.x = current.rx + Math.sin(t * 0.22) * 0.05
@@ -583,7 +589,6 @@ export function HeroOrb({
           'pointerleave',
           onPointerLeave
         )
-        mo.disconnect()
         ro.disconnect()
         geo.dispose()
         bgGeo.dispose()

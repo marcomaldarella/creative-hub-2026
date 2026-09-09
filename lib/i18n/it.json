@@ -171,7 +171,7 @@
     "opendayCta": "prenota il tuo posto",
     "methodKicker": "02 — metodo",
     "methodEyebrow": "metodo",
-    "methodTitle": "Si impara dentro l'industria. Non accanto.",
+    "methodTitle": "Si impara dentro l'industria.\nNon accanto.",
     "method": [
       {
         "n": "01",
@@ -401,27 +401,27 @@
     "title": "Registra come l'industria.",
     "lede": "Regia SSL XL Desk da 55 m². Sala live. ISO box. Tre cabine B-Ear.",
     "spacesKicker": "gli spazi",
-    "spacesTitle": "Tutta la band. Nella stessa stanza.",
+    "spacesTitle": "Tutta la band.\nNella stessa stanza.",
     "servicesKicker": "i servizi",
     "servicesTitle": "Dal tracking alla colonna internazionale",
     "services": {
       "recording": {
-        "n": "ch.01",
+        "n": "01",
         "title": "Registrazione",
         "text": "Tutta la band, nella stessa stanza."
       },
       "mix": {
-        "n": "ch.02",
+        "n": "02",
         "title": "Mix & mastering",
         "text": "Monitoraggio calibrato. Nessuna sorpresa."
       },
       "atmos": {
-        "n": "ch.03",
+        "n": "03",
         "title": "Dolby Atmos",
         "text": "Audio immersivo. Musica, cinema, gaming."
       },
       "cinema": {
-        "n": "ch.04",
+        "n": "04",
         "title": "Sound design",
         "text": "Suono per immagini."
       }
@@ -430,7 +430,9 @@
     "ctaTitle": "Raccontaci il progetto.",
     "ctaText": "Raccontaci cosa vuoi registrare o mixare: rispondiamo entro un giorno lavorativo.",
     "ctaBook": "prenota una sessione",
-    "ctaContact": "scrivici"
+    "ctaContact": "scrivici",
+    "editorialKicker": "dal magazine",
+    "editorialTitle": "Storie dallo studio."
   },
   "coworking": {
     "kicker": "coworking · zona roveri, bologna",
