@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Urban Music Production — v3 · creative hub</title>
+<style>
+  :root{
+    --blue:#57A6FF;
+    --giallo:#DEFF3B;
+    --ink:#0A0A0A;
+    --ink-2:#161616;
+    --white:#FFFFFF;
+    --pad:clamp(16px,3vw,60px);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--ink);color:var(--blue);
+    font-family:-apple-system,'Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;}
+  img{display:block;width:100%;height:100%;object-fit:cover;}
+  button{font-family:inherit;cursor:pointer;}
+  [contenteditable="true"]{outline:none;}
+  [contenteditable="true"]:hover{background:rgba(87,166,255,.10);}
+  [contenteditable="true"]:focus{background:rgba(87,166,255,.16);}
+  .arr{display:inline-flex;vertical-align:middle;}
+  .arr svg{display:block;}
+  .arr.w{transform:rotate(180deg);}
+
+  .edit-banner{background:var(--blue);color:var(--ink);font-size:12.5px;font-weight:600;
+    text-align:center;padding:9px 16px;}
+  .edit-banner a{color:var(--ink);}
+
+  header.site{display:flex;align-items:center;justify-content:space-between;
+    padding:22px var(--pad);border-bottom:1px solid rgba(87,166,255,.3);}
+  header.site .logo{font-weight:700;font-size:20px;letter-spacing:-.01em;}
+  nav.mainnav{display:flex;gap:32px;align-items:center;}
+  nav.mainnav a{color:var(--blue);text-decoration:none;font-size:15px;font-weight:600;}
+  .pill{appearance:none;border:none;border-radius:0;padding:12px 24px;
+    font-weight:600;font-size:14.5px;white-space:nowrap;}
+  .pill-dark{background:var(--blue);color:var(--ink);}
+  .pill-dark:hover{background:#7FBAFF;}
+  .pill-outline{background:transparent;border:1px solid var(--ink);color:var(--ink);}
+  .pill-outline-ink{background:transparent;border:1px solid var(--blue);color:var(--blue);}
+  .pill-outline-ink:hover{background:var(--blue);color:var(--ink);}
+
+  .hero{display:grid;grid-template-columns:520px 1fr;min-height:620px;}
+  .hero-left{padding:48px var(--pad) 60px;display:flex;flex-direction:column;}
+  .eyebrow{font-size:13px;font-weight:600;margin-bottom:18px;font-family:ui-monospace,Menlo,monospace;}
+  h1.hero-h1{font-size:clamp(34px,4vw,54px);line-height:1.04;font-weight:700;margin:0 0 22px;letter-spacing:-.02em;}
+  .hero-sub{font-size:19px;font-weight:500;line-height:1.4;margin:0 0 40px;max-width:420px;}
+  .meta-stack{display:flex;flex-direction:column;margin-bottom:34px;}
+  .meta-stack>div{padding:16px 0;border-top:1px solid rgba(87,166,255,.3);}
+  .meta-stack .m-label{font-size:21px;font-weight:700;margin-bottom:2px;}
+  .meta-stack .m-value{font-size:14.5px;color:#7FB4EF;}
+  .hero-right{position:relative;overflow:hidden;min-height:420px;}
+  .hero-right img{position:absolute;inset:0;height:100%;}
+
+  .marquee-wrap{background:var(--giallo);overflow:hidden;padding:20px 0;white-space:nowrap;}
+  .marquee-track{display:flex;align-items:center;gap:44px;animation:scroll 22s linear infinite;width:max-content;}
+  .marquee-track span{color:var(--ink);font-size:32px;font-weight:700;letter-spacing:-.01em;}
+  .marquee-track .pill{background:var(--ink);color:var(--giallo);padding:11px 22px;font-size:15px;}
+  @keyframes scroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+  section.block{padding:clamp(56px,8vw,96px) var(--pad);}
+  section.block.tight{padding-top:32px;}
+  h2.sec{font-size:clamp(30px,3.4vw,46px);font-weight:700;letter-spacing:-.02em;margin:0 0 26px;}
+  .sec-flex-head{display:flex;justify-content:space-between;align-items:flex-start;
+    flex-wrap:wrap;gap:20px;margin-bottom:40px;}
+  .lede{font-size:18px;line-height:1.6;max-width:760px;margin:0 0 18px;font-weight:400;}
+  .lede b{font-weight:700;}
+
+  .video-card{background:var(--ink);max-width:860px;overflow:hidden;
+    display:flex;align-items:center;justify-content:center;aspect-ratio:16/9;position:relative;margin-top:30px;}
+  .video-card img{position:absolute;inset:0;opacity:.45;}
+  .video-card .play{width:64px;height:64px;border-radius:50%;background:var(--blue);
+    display:flex;align-items:center;justify-content:center;position:relative;}
+  .video-card .play::after{content:"";border-left:16px solid var(--ink);border-top:10px solid transparent;
+    border-bottom:10px solid transparent;margin-left:4px;}
+  .video-cap{position:absolute;top:16px;left:16px;color:#fff;font-size:14px;font-weight:600;z-index:1;}
+  .video-cap small{display:block;font-weight:400;font-size:11px;opacity:.7;margin-top:2px;color:#fff;}
+
+  .subnav{position:sticky;top:0;z-index:40;background:var(--blue);border-bottom:1px solid var(--ink);
+    display:flex;justify-content:space-between;align-items:center;padding:16px var(--pad);gap:16px;}
+  .subnav .course{color:var(--ink);font-weight:700;font-size:15px;}
+  .subnav .jump{display:flex;gap:24px;flex-wrap:wrap;}
+  .subnav .jump a{color:var(--ink);font-size:13px;font-weight:600;text-decoration:none;opacity:.85;}
+  .subnav .jump a:hover{opacity:1;}
+
+  ul.skills{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:0 40px;max-width:1100px;}
+  ul.skills li{font-size:17px;font-weight:500;padding:14px 0 14px 24px;position:relative;line-height:1.5;
+    border-top:1px solid rgba(87,166,255,.3);}
+  ul.skills li::before{content:"";position:absolute;left:0;top:22px;width:8px;height:8px;background:var(--blue);}
+
+  .carousel{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:6px;
+    scrollbar-width:none;}
+  .carousel::-webkit-scrollbar{display:none;}
+  .fac-card{flex:0 0 380px;scroll-snap-align:start;background:var(--blue);color:var(--ink);}
+  .fac-card .img{aspect-ratio:4/3;overflow:hidden;}
+  .fac-card .txt{padding:18px 20px 24px;}
+  .fac-card h3{font-size:18px;font-weight:700;margin:0 0 8px;}
+  .fac-card p{font-size:14px;line-height:1.55;margin:0;color:#10233B;}
+  .carousel-nav{display:flex;gap:8px;justify-content:flex-end;margin-top:24px;}
+  .cnav-btn{width:42px;height:42px;border-radius:50%;border:1px solid var(--blue);background:transparent;
+    color:var(--blue);display:flex;align-items:center;justify-content:center;}
+  .cnav-btn:hover{background:var(--blue);color:var(--ink);}
+
+  .accordion{max-width:1000px;}
+  .acc-item{border-top:1px solid rgba(87,166,255,.3);}
+  .accordion .acc-item:last-child{border-bottom:1px solid rgba(87,166,255,.3);}
+  .acc-head{display:flex;justify-content:space-between;align-items:center;padding:22px 0;cursor:pointer;}
+  .acc-head h3{font-size:22px;font-weight:700;margin:0;}
+  .acc-plus{flex-shrink:0;margin-left:20px;width:38px;height:38px;border:1px solid rgba(87,166,255,.4);
+    display:grid;place-items:center;}
+  .acc-plus svg{transition:transform .25s ease;}
+  .acc-item.open .acc-plus svg{transform:rotate(45deg);}
+  .acc-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s ease;}
+  .acc-body>div{overflow:hidden;min-height:0;}
+  .acc-item.open .acc-body{grid-template-rows:1fr;}
+  .acc-body p{font-size:15.5px;line-height:1.65;margin:0;padding:0 0 26px;font-weight:400;max-width:700px;}
+
+  .promo-two{display:grid;grid-template-columns:1fr 1fr;min-height:420px;}
+  .promo-photo{position:relative;overflow:hidden;display:flex;align-items:flex-end;padding:36px;}
+  .promo-photo img{position:absolute;inset:0;}
+  .promo-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.55),transparent 60%);}
+  .promo-photo h3{position:relative;z-index:1;color:var(--white);font-size:clamp(34px,3.6vw,52px);font-weight:700;
+    line-height:1.02;margin:0;letter-spacing:-.02em;}
+  .promo-panel{background:var(--blue);color:var(--ink);padding:clamp(32px,4vw,56px);display:flex;flex-direction:column;
+    justify-content:center;align-items:flex-start;}
+  .promo-panel h2{font-size:clamp(26px,2.6vw,34px);font-weight:700;margin:0 0 18px;letter-spacing:-.01em;}
+  .promo-panel p{font-size:15.5px;line-height:1.65;margin:0 0 26px;color:#10233B;max-width:460px;}
+
+  .split{display:grid;grid-template-columns:480px 1fr;gap:60px;align-items:center;padding:0 var(--pad);}
+  .split .imgbox{aspect-ratio:3/4;overflow:hidden;}
+  .split h2{font-size:clamp(28px,3vw,42px);font-weight:700;line-height:1.08;margin:0 0 24px;letter-spacing:-.02em;}
+  .split p{font-size:16px;line-height:1.65;margin:0 0 16px;}
+  .split p b{font-weight:700;}
+  .split-rev{display:grid;grid-template-columns:1fr 460px;gap:60px;align-items:center;padding:0 var(--pad);}
+  .split-rev .imgbox{aspect-ratio:4/3;overflow:hidden;}
+
+  .teacher{display:grid;grid-template-columns:300px 1fr;gap:48px;align-items:center;max-width:1000px;}
+  .teacher .ph{aspect-ratio:4/5;overflow:hidden;background:var(--ink-2);}
+  .teacher h3{font-size:24px;font-weight:700;margin:0 0 4px;}
+  .teacher .role{font-size:13px;font-family:ui-monospace,Menlo,monospace;margin-bottom:16px;}
+  .teacher p{font-size:15.5px;line-height:1.65;max-width:52ch;}
+
+  .cta-dark{margin:0 var(--pad);position:relative;overflow:hidden;background:var(--blue);min-height:440px;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px 40px;}
+  .cta-dark h2{position:relative;color:var(--ink);font-size:clamp(30px,3.4vw,46px);font-weight:700;
+    line-height:1.1;margin:0 0 20px;max-width:720px;letter-spacing:-.02em;}
+  .cta-dark p{position:relative;color:#10233B;font-size:17px;margin:0 0 30px;max-width:520px;}
+  .cta-dark .pill{position:relative;background:var(--ink);color:var(--blue);}
+
+  blockquote.pull2{font-size:21px;font-weight:600;line-height:1.5;
+    max-width:900px;margin:50px auto 0;text-align:center;padding:0 var(--pad);}
+  blockquote.pull2 cite{display:block;margin-top:14px;font-size:13px;font-style:normal;font-weight:500;opacity:.7;}
+
+  .connect-card{flex:0 0 400px;scroll-snap-align:start;}
+  .connect-card .img{aspect-ratio:4/5;overflow:hidden;position:relative;background:var(--ink-2);
+    display:flex;align-items:flex-start;padding:26px;margin-bottom:14px;}
+  .connect-card .img h3{position:relative;color:#fff;font-size:32px;font-weight:700;
+    line-height:1.02;margin:0;letter-spacing:-.02em;z-index:1;}
+  .connect-card .img img{position:absolute;inset:0;opacity:.55;}
+  .connect-card .cap2{font-size:15.5px;font-weight:600;display:flex;align-items:center;gap:8px;}
+
+  footer.site{background:var(--ink);color:var(--blue);padding:64px var(--pad) 28px;border-top:1px solid rgba(87,166,255,.3);}
+  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:32px;margin-bottom:44px;}
+  .foot-col h4{font-size:12px;color:#7FB4EF;margin:0 0 14px;font-weight:600;}
+  .foot-col a{display:block;font-size:14.5px;color:var(--blue);text-decoration:none;margin-bottom:10px;}
+  .foot-addr{font-size:14.5px;line-height:1.7;}
+  .foot-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:24px;
+    border-top:1px solid rgba(87,166,255,.25);font-size:12.5px;color:#7FB4EF;flex-wrap:wrap;gap:12px;}
+  .foot-bottom a{color:#7FB4EF;text-decoration:none;margin-left:14px;}
+
+  @media(max-width:1000px){
+    .hero{grid-template-columns:1fr;}
+    .split,.split-rev{grid-template-columns:1fr;gap:30px;}
+    .promo-two{grid-template-columns:1fr;}
+    .teacher{grid-template-columns:1fr;gap:24px;}
+    .teacher .ph{max-width:300px;}
+    nav.mainnav{display:none;}
+    ul.skills{grid-template-columns:1fr;}
+    .subnav .jump{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<div class="edit-banner">template corso · versione 3 di 3 — notturna, card blu su nero · testi modificabili al click ·
+  <a href="/mockup-corso/v1">v1</a> · <a href="/mockup-corso/v2">v2</a></div>
+
+<header class="site">
+  <div class="logo">creative — hub</div>
+  <nav class="mainnav">
+    <a contenteditable="true">Academy</a>
+    <a contenteditable="true">Studio</a>
+    <a contenteditable="true">Coworking</a>
+    <a contenteditable="true">Innovazione</a>
+    <a contenteditable="true">Editorial</a>
+  </nav>
+  <button class="pill pill-dark" contenteditable="true">candidati</button>
+</header>
+
+<div class="hero">
+  <div class="hero-left">
+    <div class="eyebrow" contenteditable="true">academy · bachelor of arts</div>
+    <h1 class="hero-h1" contenteditable="true">Corso universitario di produzione musicale a Bologna.</h1>
+    <p class="hero-sub" contenteditable="true">Diventa produttore musicale con il Bachelor of Arts in Urban Music Production.</p>
+
+    <div class="meta-stack">
+      <div>
+        <div class="m-label" contenteditable="true">Ottobre 2026</div>
+        <div class="m-value" contenteditable="true">inizio corso</div>
+      </div>
+      <div>
+        <div class="m-label" contenteditable="true">30 giugno 2026</div>
+        <div class="m-value" contenteditable="true">scadenza candidature (posti limitati)</div>
+      </div>
+      <div>
+        <div class="m-label" contenteditable="true">3 anni full-time, fino a 6 part-time</div>
+        <div class="m-value" contenteditable="true">durata</div>
+      </div>
+    </div>
+
+    <button class="pill pill-dark" style="align-self:flex-start;" contenteditable="true">scarica il piano di studi</button>
+  </div>
+  <div class="hero-right"><img src="/mockup-corso/img/akai.jpg" alt="Pad controller Akai in studio"></div>
+</div>
+
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span contenteditable="true">candidati entro il 30 giugno per iniziare a ottobre</span>
+    <button class="pill" contenteditable="true">candidati ora</button>
+    <span contenteditable="true">candidati entro il 30 giugno per iniziare a ottobre</span>
+    <button class="pill" contenteditable="true">candidati ora</button>
+    <span contenteditable="true">candidati entro il 30 giugno per iniziare a ottobre</span>
+    <button class="pill" contenteditable="true">candidati ora</button>
+    <span contenteditable="true">candidati entro il 30 giugno per iniziare a ottobre</span>
+    <button class="pill" contenteditable="true">candidati ora</button>
+  </div>
+</div>
+
+<section class="block tight" id="panoramica" style="padding-top:56px;">
+  <h2 class="sec" contenteditable="true">Panoramica</h2>
+  <p class="lede" contenteditable="true">Non è una scuola di produzione musicale come le altre: da Creative Hub Academy esci con un <b>titolo universitario</b>, non con un attestato di partecipazione.</p>
+  <p class="lede" contenteditable="true">Ableton, Pro Tools, FL Studio, sintetizzatori e plugin professionali dal primo giorno. Le stesse macchine che trovi negli studi dove andrai a lavorare. La teoria c'è, ma è tarata su hip-hop, rap, R&amp;B ed elettronica — non sul solfeggio. Se non sai leggere uno spartito non è un problema: si parte da come funziona un beat.</p>
+  <p class="lede" contenteditable="true">Durante il percorso lavori su progetti reali con artisti e aziende del network. Il portfolio te lo costruisci prima del titolo, non dopo.</p>
+
+  <div class="video-card">
+    <img src="/mockup-corso/img/class-2.jpg" alt="">
+    <div class="video-cap" contenteditable="true">Urban Music Production al Creative Hub<small>Creative Hub Academy — Bologna</small></div>
+    <div class="play"></div>
+  </div>
+</section>
+
+<div class="subnav">
+  <div class="course" contenteditable="true">Urban Music Production — Bachelor of Arts</div>
+  <div class="jump">
+    <a href="#panoramica">/ panoramica</a>
+    <a href="#struttura">/ struttura</a>
+    <a href="#ammissioni">/ ammissioni</a>
+    <a href="#connetti">/ connettiti</a>
+  </div>
+</div>
+
+<section class="block">
+  <h2 class="sec" contenteditable="true">Competenze che svilupperai</h2>
+  <p class="lede" contenteditable="true">Durante il corso costruisci le competenze creative e tecniche per portare un'idea dal loop iniziale al brano pubblicato, dallo studio al palco.</p>
+  <ul class="skills">
+    <li contenteditable="true">Beatmaking e produzione: dal loop al brano finito, arrangiamento e programmazione ritmica</li>
+    <li contenteditable="true">Sound design: costruire suoni invece di scaricarli, sintesi e campionamento</li>
+    <li contenteditable="true">Mix e mastering allo standard dello streaming</li>
+    <li contenteditable="true">DJing e performance live: set, mixaggio dal vivo, presenza sul palco</li>
+    <li contenteditable="true">Teoria musicale applicata direttamente su Ableton</li>
+    <li contenteditable="true">Music business: diritto d'autore, distribuzione digitale, contratti</li>
+  </ul>
+</section>
+
+<section class="block tight">
+  <div class="sec-flex-head">
+    <div>
+      <h2 class="sec" style="margin-bottom:10px;" contenteditable="true">Il tuo studio di lavoro</h2>
+      <p class="lede" style="margin-bottom:0;" contenteditable="true">Progettato per come si impara, si produce e si suona — ogni dettaglio pensato per chi studia qui.</p>
+    </div>
+    <button class="pill pill-outline-ink" contenteditable="true">esplora lo studio</button>
+  </div>
+
+  <div class="carousel" id="facCarousel">
+    <div class="fac-card">
+      <div class="img"><img src="/img/sections/studio-regia.jpg" alt="Regia SSL"></div>
+      <div class="txt">
+        <h3 contenteditable="true">Regia SSL XL Desk</h3>
+        <p contenteditable="true">55 m² di regia con console SSL XL Desk, per registrazione, mix e mastering a livello professionale.</p>
+      </div>
+    </div>
+    <div class="fac-card">
+      <div class="img"><img src="/img/sections/studio-regia-b.jpg" alt="Regia B"></div>
+      <div class="txt">
+        <h3 contenteditable="true">Sala live</h3>
+        <p contenteditable="true">Presa diretta con la band intera nella stessa stanza, ISO box incluso.</p>
+      </div>
+    </div>
+    <div class="fac-card">
+      <div class="img"><img src="/img/sections/studio-desk.jpg" alt="Postazione studio"></div>
+      <div class="txt">
+        <h3 contenteditable="true">Tre cabine B-Ear</h3>
+        <p contenteditable="true">Voce, podcast e doppiaggio: tre cabine dedicate per ogni tipo di registrazione vocale.</p>
+      </div>
+    </div>
+    <div class="fac-card">
+      <div class="img"><img src="/mockup-corso/img/class-1.jpg" alt="Aula"></div>
+      <div class="txt">
+        <h3 contenteditable="true">Aule di produzione</h3>
+        <p contenteditable="true">Postazioni individuali con DAW, monitor e controller — le stesse macchine dei corsi.</p>
+      </div>
+    </div>
+  </div>
+  <div class="carousel-nav">
+    <button class="cnav-btn" aria-label="indietro" onclick="document.getElementById('facCarousel').scrollBy({left:-400,behavior:'smooth'})"><span class="arr w"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></button>
+    <button class="cnav-btn" aria-label="avanti" onclick="document.getElementById('facCarousel').scrollBy({left:400,behavior:'smooth'})"><span class="arr"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></button>
+  </div>
+</section>
+
+<section class="block tight" id="struttura">
+  <div class="sec-flex-head">
+    <h2 class="sec" style="margin-bottom:0;" contenteditable="true">Struttura del corso</h2>
+    <button class="pill pill-outline-ink" contenteditable="true">scarica il piano di studi</button>
+  </div>
+
+  <div class="accordion" id="yearAccordion">
+    <div class="acc-item">
+      <div class="acc-head"><h3 contenteditable="true">Primo anno</h3><span class="acc-plus"><svg viewBox="0 0 18 18" width="16" height="16" stroke="currentColor" stroke-width="1.4"><path d="M9 3v12M3 9h12"/></svg></span></div>
+      <div class="acc-body"><div><p contenteditable="true">Fondamenti di beatmaking, teoria applicata alla musica elettronica, primi strumenti DAW. Un'ora di lezione individuale a settimana.</p></div></div>
+    </div>
+    <div class="acc-item">
+      <div class="acc-head"><h3 contenteditable="true">Secondo anno</h3><span class="acc-plus"><svg viewBox="0 0 18 18" width="16" height="16" stroke="currentColor" stroke-width="1.4"><path d="M9 3v12M3 9h12"/></svg></span></div>
+      <div class="acc-body"><div><p contenteditable="true">Sound design avanzato, mix e mastering, primi progetti con artisti del network. Music business e diritto d'autore.</p></div></div>
+    </div>
+    <div class="acc-item">
+      <div class="acc-head"><h3 contenteditable="true">Terzo anno</h3><span class="acc-plus"><svg viewBox="0 0 18 18" width="16" height="16" stroke="currentColor" stroke-width="1.4"><path d="M9 3v12M3 9h12"/></svg></span></div>
+      <div class="acc-body"><div><p contenteditable="true">Progetto finale, DJing e performance live, costruzione del portfolio professionale prima del titolo.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="promo-two">
+  <div class="promo-photo">
+    <img src="/mockup-corso/img/class-3.jpg" alt="">
+    <h3 contenteditable="true">Prossimo workshop</h3>
+  </div>
+  <div class="promo-panel">
+    <h2 contenteditable="true">Partecipa a un workshop di prova</h2>
+    <p contenteditable="true">Incontra i nostri tutor di Urban Music Production e scopri come il corso può accompagnare il tuo percorso da producer, beatmaker o sound designer.</p>
+    <button class="pill pill-outline" contenteditable="true">vedi i prossimi workshop</button>
+  </div>
+</div>
+
+<section class="block">
+  <div class="split">
+    <div class="imgbox"><img src="/mockup-corso/img/class-4.jpg" alt=""></div>
+    <div>
+      <h2 contenteditable="true">Nessun genere. Un metodo.</h2>
+      <p contenteditable="true">La musica urban cambia continuamente, e lo trattiamo come condizione di studio. Non ti chiediamo di aderire a uno stile o a una scena. <b>Ci concentriamo sul tuo sviluppo artistico e sulla capacità critica</b>: come pensi, come lavori, dove vuoi portare la tua musica.</p>
+      <p contenteditable="true">Che la tua base sia trap, hip-hop, R&amp;B o elettronica, diamo priorità alla profondità e alla direzione, non all'etichetta di genere. Ci aspettiamo che tu <b>rischi, testi idee e ampli il tuo raggio creativo</b>, sviluppando la capacità di argomentare le tue scelte.</p>
+      <p contenteditable="true">Le nostre sessioni uniscono la pratica alla riflessione. Esaminiamo le ragioni dietro un lavoro tanto quanto le tecniche usate per produrlo.</p>
+    </div>
+  </div>
+</section>
+
+<section class="block tight">
+  <div class="split-rev">
+    <div>
+      <h2 contenteditable="true">La vita in Academy</h2>
+      <p contenteditable="true">Al Creative Hub non produci musica da solo. Lavori in studi professionali, ti confronti con altri studenti e artisti del network, partecipi a sessioni con producer e A&amp;R in visita.</p>
+      <p contenteditable="true">Presenta i tuoi progetti in ascolti collettivi, collabora con chi studia Film Production o Music Business per progetti trasversali, ricevi feedback costruttivi da chi il mercato lo vive ancora.</p>
+      <button class="pill pill-outline-ink" contenteditable="true">scopri la vita in Academy</button>
+    </div>
+    <div class="imgbox"><img src="/mockup-corso/img/wide.jpg" alt=""></div>
+  </div>
+</section>
+
+<section class="block">
+  <h2 class="sec" contenteditable="true">Chi ti accompagna</h2>
+  <div class="teacher">
+    <div class="ph"><img src="/mockup-corso/img/zilocchi.jpg" alt="Nicolò Zilocchi"></div>
+    <div>
+      <h3 contenteditable="true">Nicolò Zilocchi</h3>
+      <div class="role" contenteditable="true">course leader · urban music production</div>
+      <p contenteditable="true">Producer e beatmaker, guida il percorso di Urban Music Production. Segue ogni studente con un'ora di lezione individuale a settimana, dal primo loop al progetto finale.</p>
+    </div>
+  </div>
+</section>
+
+<section class="block tight">
+  <div class="cta-dark">
+    <h2 contenteditable="true">Non sai quale corso scegliere?</h2>
+    <p contenteditable="true">Nessun problema. Ti aiutiamo a trovare il percorso in musica, sound o visual che parla di più a te.</p>
+    <button class="pill" contenteditable="true">scopri di più</button>
+  </div>
+  <blockquote class="pull2">
+    <span contenteditable="true">"Qui non impari solo a usare un software. Impari a finire un pezzo, a farlo suonare come quelli che ascolti, e a portarlo fuori dalla tua stanza."</span>
+    <cite contenteditable="true">— studente, Urban Music Production, terzo anno</cite>
+  </blockquote>
+</section>
+
+<section class="block" id="connetti">
+  <div class="sec-flex-head">
+    <div>
+      <h2 class="sec" style="margin-bottom:10px;" contenteditable="true">Come conoscerci</h2>
+      <p class="lede" style="margin-bottom:0;" contenteditable="true">In presenza o online, non vediamo l'ora di incontrarti.</p>
+    </div>
+    <button class="pill pill-outline-ink" contenteditable="true">vedi tutti gli eventi</button>
+  </div>
+
+  <div class="carousel" id="connCarousel">
+    <div class="connect-card">
+      <div class="img"><img src="/mockup-corso/img/class-1.jpg" alt=""><h3 contenteditable="true">Open day</h3></div>
+      <div class="cap2"><span contenteditable="true">Partecipa a un open day, in sede o online</span><span class="arr"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></div>
+    </div>
+    <div class="connect-card">
+      <div class="img"><img src="/img/sections/studio-regia.jpg" alt=""><h3 contenteditable="true">Tour dello studio</h3></div>
+      <div class="cap2"><span contenteditable="true">Prenota una visita alla regia e alla sala live</span><span class="arr"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></div>
+    </div>
+    <div class="connect-card">
+      <div class="img"><img src="/mockup-corso/img/zilocchi.jpg" alt=""><h3 contenteditable="true">Parla con un tutor</h3></div>
+      <div class="cap2"><span contenteditable="true">Una chiamata individuale per tutte le tue domande</span><span class="arr"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></div>
+    </div>
+  </div>
+</section>
+
+<section class="block tight" id="ammissioni" style="padding-bottom:96px;">
+  <div class="sec-flex-head">
+    <h2 class="sec" style="margin-bottom:0;" contenteditable="true">Ammissioni</h2>
+    <button class="pill pill-outline-ink" contenteditable="true">come candidarsi</button>
+  </div>
+
+  <div class="accordion" id="admAccordion">
+    <div class="acc-item">
+      <div class="acc-head"><h3 contenteditable="true">Requisiti di ammissione</h3><span class="acc-plus"><svg viewBox="0 0 18 18" width="16" height="16" stroke="currentColor" stroke-width="1.4"><path d="M9 3v12M3 9h12"/></svg></span></div>
+      <div class="acc-body"><div><p contenteditable="true">Diploma di scuola superiore, o titolo estero equivalente. Un colloquio motivazionale, non un'audizione: non serve saper già suonare o leggere la musica.</p></div></div>
+    </div>
+    <div class="acc-item">
+      <div class="acc-head"><h3 contenteditable="true">Date del corso e scadenze</h3><span class="acc-plus"><svg viewBox="0 0 18 18" width="16" height="16" stroke="currentColor" stroke-width="1.4"><path d="M9 3v12M3 9h12"/></svg></span></div>
+      <div class="acc-body"><div><p contenteditable="true">Inizio corso: ottobre 2026. Candidati entro il 30 giugno per 300€ di sconto e uno slot garantito con il tuo tutor. Venti posti all'anno.</p></div></div>
+    </div>
+    <div class="acc-item">
+      <div class="acc-head"><h3 contenteditable="true">Rette — da 294€ al mese</h3><span class="acc-plus"><svg viewBox="0 0 18 18" width="16" height="16" stroke="currentColor" stroke-width="1.4"><path d="M9 3v12M3 9h12"/></svg></span></div>
+      <div class="acc-body"><div><p contenteditable="true">Full-time: anticipo 488€ + 11 rate da 392€, tasso zero. Part-time: anticipo 366€ + 11 rate da 294€. Tassa di certificazione separata. Sconto 5% per pagamento anticipato.</p></div></div>
+    </div>
+    <div class="acc-item">
+      <div class="acc-head"><h3 contenteditable="true">Opportunità di finanziamento</h3><span class="acc-plus"><svg viewBox="0 0 18 18" width="16" height="16" stroke="currentColor" stroke-width="1.4"><path d="M9 3v12M3 9h12"/></svg></span></div>
+      <div class="acc-body"><div><p contenteditable="true">Rate a tasso zero senza interessi. Borse di studio disponibili: scrivici per sapere quali.</p></div></div>
+    </div>
+    <div class="acc-item">
+      <div class="acc-head"><h3 contenteditable="true">Open day, colloqui e workshop di prova</h3><span class="acc-plus"><svg viewBox="0 0 18 18" width="16" height="16" stroke="currentColor" stroke-width="1.4"><path d="M9 3v12M3 9h12"/></svg></span></div>
+      <div class="acc-body"><div><p contenteditable="true">Vieni a vedere prima di candidarti. Puoi partecipare anche con i tuoi genitori.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="foot-grid">
+    <div class="foot-col">
+      <h4 contenteditable="true">creative hub</h4>
+      <p class="foot-addr" contenteditable="true">via del Tappezziere 4, 40138 Bologna<br>+39 051 6313706<br>hello@bologna-creativehub.it</p>
+    </div>
+    <div class="foot-col">
+      <h4 contenteditable="true">hub</h4>
+      <a href="#" contenteditable="true">Academy</a>
+      <a href="#" contenteditable="true">Studio</a>
+      <a href="#" contenteditable="true">Coworking</a>
+    </div>
+    <div class="foot-col">
+      <h4 contenteditable="true">ecosistema</h4>
+      <a href="#" contenteditable="true">Innovazione</a>
+      <a href="#" contenteditable="true">Editorial</a>
+      <a href="#" contenteditable="true">Chi siamo</a>
+    </div>
+    <div class="foot-col">
+      <h4 contenteditable="true">social</h4>
+      <a href="#" contenteditable="true">Instagram</a>
+      <a href="#" contenteditable="true">Facebook</a>
+      <a href="#" contenteditable="true">LinkedIn</a>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span contenteditable="true">© 2026 creative hub — since 1999</span>
+    <span>
+      <a href="#" contenteditable="true">privacy</a>
+      <a href="#" contenteditable="true">cookie</a>
+    </span>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.acc-item').forEach(item=>{
+    item.querySelector('.acc-head').addEventListener('click', ()=>{
+      const wasOpen = item.classList.contains('open');
+      item.parentElement.querySelectorAll('.acc-item').forEach(i=>i.classList.remove('open'));
+      if(!wasOpen) item.classList.add('open');
+    });
+  });
+  document.querySelectorAll('a[href^="#"]').forEach(a=>{
+    a.addEventListener('click', e=>{
+      e.preventDefault();
+      const t = document.getElementById(a.getAttribute('href').slice(1));
+      if(t) t.scrollIntoView({behavior:'smooth', block:'start'});
+    });
+  });
+</script>
+</body>
+</html>

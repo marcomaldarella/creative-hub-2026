@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 import { Archivo, Geist } from 'next/font/google'
 import localFont from 'next/font/local'
 import { locales, isLocale } from '@/lib/i18n/config'
+import { PageTransition } from '@/components/sections/PageTransition'
 import '@/app/globals.css'
 
 const display = Archivo({
@@ -146,7 +147,9 @@ export default async function SiteLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(ORG_JSONLD) }}
         />
-        {children}
+        {/* transizione di pagina: gli scarabocchi SVG del reference
+            CodeGrid nei colori brand (nero + azzurro) */}
+        <PageTransition>{children}</PageTransition>
       </body>
     </html>
   )

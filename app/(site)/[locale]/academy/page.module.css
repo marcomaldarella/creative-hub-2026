@@ -98,20 +98,60 @@
 }
 
 a.pathCard {
-  min-height: 190px;
-  /* stessa grammatica delle card corso: corpo nero, testi nel colore
-     di sezione (qui --accent è il flood dell'academy) */
+  /* stessa grammatica delle card corso: foto 4:5 sopra, corpo nero coi
+     testi nel colore di sezione (qui --accent è il flood dell'academy) */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
   background: #0A0A0A;
-  border-color: #0A0A0A;
   --fg: var(--accent, var(--osso));
   --fg-2: color-mix(in srgb, var(--accent, var(--osso)) 72%, #FAFAFA);
   --accent-ink: var(--accent, var(--osso));
   --line: rgba(255, 255, 255, 0.14);
   color: var(--fg);
+  transition:
+    opacity var(--dur-slow) ease var(--rvd, 0s),
+    transform var(--dur-slow) var(--ease-out) var(--rvd, 0s);
 }
 
-a.pathCard:hover {
-  border-color: var(--fg);
+.pathPhoto {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  display: block;
+}
+
+.pathBody {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 20px 22px 24px;
+}
+
+.pathKicker {
+  display: block;
+  margin-bottom: 12px;
+}
+
+h3.pathTitle {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin-bottom: 8px;
+}
+
+.pathText {
+  font-size: var(--fs-small);
+  color: var(--fg-2);
+  margin-bottom: 20px;
+}
+
+.pathMeta {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
 }
 
 .pathGo {

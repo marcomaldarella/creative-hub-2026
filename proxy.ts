@@ -6,11 +6,12 @@ import type { NextRequest } from 'next/server'
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl
 
-  // Sanity Studio (ora /admin) e API restano fuori dall'i18n
+  // Sanity Studio (ora /admin), API e mockup statici restano fuori dall'i18n
   if (
     pathname === '/admin' ||
     pathname.startsWith('/admin/') ||
-    pathname.startsWith('/api/')
+    pathname.startsWith('/api/') ||
+    pathname.startsWith('/mockup-corso')
   ) {
     return NextResponse.next()
   }

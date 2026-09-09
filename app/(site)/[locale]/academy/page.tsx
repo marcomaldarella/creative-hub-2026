@@ -5,7 +5,6 @@ import { notFound } from 'next/navigation'
 import {
   Arrow,
   ArrowLink,
-  Card,
   Reveal,
   RevealGroup,
   Rule,
@@ -26,9 +25,21 @@ export const dynamic = 'force-dynamic'
    ma come vetrina editoriale — slug della pagina topic + tipologie
    corso da contare (lib/topics.ts) */
 const PATHS = [
-  { slug: 'corsi-universitari', types: ['triennio', 'magistrale'] },
-  { slug: 'corsi-custom', types: ['custom'] },
-  { slug: 'formazione-finanziata', types: ['finanziato', 'gratuito'] },
+  {
+    slug: 'corsi-universitari',
+    types: ['triennio', 'magistrale'],
+    photo: '/img/sections/academy-universitari.jpg',
+  },
+  {
+    slug: 'corsi-custom',
+    types: ['custom'],
+    photo: '/img/sections/academy-custom.jpg',
+  },
+  {
+    slug: 'formazione-finanziata',
+    types: ['finanziato', 'gratuito'],
+    photo: '/img/sections/academy-finanziata.jpg',
+  },
 ] as const
 
 /* la lista "tutto intorno allo studio": altre 3 pagine topic */
@@ -111,16 +122,24 @@ export default async function AcademyPage({
                 c.types?.some((ty) => (path.types as readonly string[]).includes(ty))
               ).length
               return (
-                <Card
+                <Link
                   key={path.slug}
-                  variant="light"
-                  kicker={`0${i + 1}`}
-                  title={item.title}
                   href={localeHref(locale, `/academy/${path.slug}`)}
                   className={`rv ${styles.pathCard}`}
                   style={{ '--rvd': `${i * 60}ms` } as CSSProperties}
-                  meta={
-                    <>
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={path.photo}
+                    alt=""
+                    className={styles.pathPhoto}
+                    loading="lazy"
+                  />
+                  <div className={styles.pathBody}>
+                    <span className={`mono ${styles.pathKicker}`}>{`0${i + 1}`}</span>
+                    <h3 className={styles.pathTitle}>{item.title}</h3>
+                    <p className={styles.pathText}>{item.text}</p>
+                    <span className={`mono ${styles.pathMeta}`}>
                       <span>
                         {count} {t.academy.pathsCourses}
                       </span>
@@ -128,11 +147,9 @@ export default async function AcademyPage({
                         {t.academy.pathsExplore}
                         <Arrow dir="e" size={12} />
                       </span>
-                    </>
-                  }
-                >
-                  {item.text}
-                </Card>
+                    </span>
+                  </div>
+                </Link>
               )
             })}
           </RevealGroup>
@@ -192,6 +209,8 @@ export default async function AcademyPage({
                   course={course}
                   locale={locale}
                   index={i}
+                  ratio="16 / 9"
+                  flat
                   href={`${basePath}/${course.slug?.current ?? ''}`}
                   className={styles.highlightCard}
                 />

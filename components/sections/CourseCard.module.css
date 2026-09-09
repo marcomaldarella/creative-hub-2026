@@ -26,6 +26,28 @@ a.course:hover {
   border-color: var(--card-ink);
 }
 
+/* variante libera ("in evidenza"): niente riquadro né inversione — la
+   foto respira sul colore di sezione, la caption sotto eredita i token
+   della pagina (testo nero sul flood) */
+a.courseFlat {
+  --card-ink: currentColor;
+  --fg: inherit;
+  --fg-2: inherit;
+  --accent-ink: currentColor;
+  background: transparent;
+  border: none;
+  color: inherit;
+  overflow: visible;
+}
+
+a.courseFlat .courseBody {
+  padding: 16px 0 0;
+}
+
+a.courseFlat .courseSummary {
+  color: var(--fg-2);
+}
+
 .courseBody {
   display: flex;
   flex-direction: column;

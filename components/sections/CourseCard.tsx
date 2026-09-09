@@ -12,6 +12,11 @@ export type CourseCardProps = {
   href: string
   /** indice nella lista: pilota il colore del placeholder e il ritardo reveal */
   index: number
+  /** aspect-ratio della cover (default 3:4 verticale) */
+  ratio?: string
+  /** senza riquadro: foto libera e caption sotto, niente corpo nero
+   *  (usata dalla sezione "in evidenza") */
+  flat?: boolean
   className?: string
   style?: CSSProperties
 }
@@ -26,6 +31,8 @@ export function CourseCard({
   locale,
   href,
   index,
+  ratio = '3 / 4',
+  flat = false,
   className,
   style,
 }: CourseCardProps) {
@@ -41,10 +48,12 @@ export function CourseCard({
   return (
     <Link
       href={href}
-      className={[styles.course, className].filter(Boolean).join(' ')}
+      className={[styles.course, flat ? styles.courseFlat : '', className]
+        .filter(Boolean)
+        .join(' ')}
       style={style}
     >
-      <Thumb image={course.coverImage} index={index} ratio="3 / 4" />
+      <Thumb image={course.coverImage} index={index} ratio={ratio} />
       <div className={styles.courseBody}>
         <span className={`mono ${styles.courseKicker}`}>
           {l(course.category?.title, locale)?.toLowerCase()}
