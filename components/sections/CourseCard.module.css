@@ -1,23 +1,29 @@
+/* card del PDF colori (set 2026): corpo NERO sopra lo sfondo di sezione,
+   tutti i testi nel colore di sezione. Vive solo dentro le pagine flood
+   (academy/corsi): lì --accent è il colore pieno di sezione. */
 a.course {
-  /* token scuri ri-asseriti: la card è chiara anche dentro le fasce nere */
-  --fg: #000000;
-  --fg-2: #141414;
-  --line: rgba(0, 0, 0, 0.28);
-  color: var(--fg);
+  --card-ink: var(--accent, var(--osso));
+  --fg: var(--card-ink);
+  /* secondario: la stessa tinta spinta verso il chiaro, resta leggibile
+     sul nero senza introdurre un grigio estraneo */
+  --fg-2: color-mix(in srgb, var(--card-ink) 72%, #FAFAFA);
+  --accent-ink: var(--card-ink);
+  --line: rgba(255, 255, 255, 0.14);
+  color: var(--card-ink);
   display: flex;
   flex-direction: column;
-  border: 1px solid var(--line);
+  border: 1px solid #0A0A0A;
   border-radius: 0;
   overflow: hidden;
-  background: var(--surface);
+  background: #0A0A0A;
   transition:
-    box-shadow var(--dur) ease,
+    border-color var(--dur) ease,
     opacity var(--dur-slow) ease var(--rvd, 0s),
     transform var(--dur-slow) var(--ease-out) var(--rvd, 0s);
 }
 
 a.course:hover {
-  border-color: var(--fg);
+  border-color: var(--card-ink);
 }
 
 .courseBody {
@@ -30,7 +36,7 @@ a.course:hover {
 .courseKicker {
   display: block;
   margin-bottom: 12px;
-  color: var(--accent-ink);
+  color: var(--card-ink);
 }
 
 .courseTitle {

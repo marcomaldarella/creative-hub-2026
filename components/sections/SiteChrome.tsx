@@ -56,12 +56,10 @@ function accentOf(path: string) {
    neutro — TUTTO lo sfondo (nav, contenuto, footer) diventa il colore
    di sezione, testo sempre nero, niente più toggle light/dark (il
    colore è fisso, cambiare tema non farebbe nulla di visibile e
-   confonderebbe). Studio e coworking riusano l'arancio/giallo fluo già
-   in palette; l'academy prende un azzurro nuovo, più vivo del petrolio
-   usato come inchiostro altrove (il petrolio scuro sotto testo nero
-   sarebbe illeggibile). */
+   confonderebbe). I tre colori sono i token brand del PDF colori del
+   cliente (set 2026): azzurro/arancio/giallo fluo. */
 const FLOOD_SECTIONS: Record<string, string> = {
-  '/academy': '#4C8DF0',
+  '/academy': 'var(--azzurro)',
   '/studios': 'var(--arancio)',
   '/coworking': 'var(--giallo-fluo)',
 }

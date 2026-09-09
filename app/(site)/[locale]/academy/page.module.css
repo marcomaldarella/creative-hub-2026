@@ -26,14 +26,10 @@
 
 /* ————— corsi in evidenza ————— */
 
-/* fascia nera come la vecchia fascia filtrabile: le card (CourseCard)
-   ri-asseriscono da sole i token scuri del testo */
+/* niente più fascia nera: lo sfondo resta il colore di sezione, sono le
+   CARD a diventare nere coi testi in colore (PDF colori set 2026) */
 .highlightBand {
-  background: #000000;
-  --fg: #FAFAFA;
-  --fg-2: #C9C9C9;
-  --line: rgba(255, 255, 255, 0.28);
-  color: var(--fg);
+  background: transparent;
 }
 
 .highlightSez {
@@ -103,6 +99,19 @@
 
 a.pathCard {
   min-height: 190px;
+  /* stessa grammatica delle card corso: corpo nero, testi nel colore
+     di sezione (qui --accent è il flood dell'academy) */
+  background: #0A0A0A;
+  border-color: #0A0A0A;
+  --fg: var(--accent, var(--osso));
+  --fg-2: color-mix(in srgb, var(--accent, var(--osso)) 72%, #FAFAFA);
+  --accent-ink: var(--accent, var(--osso));
+  --line: rgba(255, 255, 255, 0.14);
+  color: var(--fg);
+}
+
+a.pathCard:hover {
+  border-color: var(--fg);
 }
 
 .pathGo {

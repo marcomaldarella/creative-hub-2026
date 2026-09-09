@@ -44,14 +44,9 @@
   margin: 0 6px;
 }
 
-/* fascia filtrabile nera: i filtri stanno su nero con testo chiaro, le
-   card (CourseCard) ri-asseriscono da sole i token scuri del testo */
+/* niente più fascia nera: la pagina resta nel colore di sezione, sono
+   le card a diventare nere (PDF colori set 2026) */
 .filterBand {
-  background: #000000;
-  --fg: #FAFAFA;
-  --fg-2: #C9C9C9;
-  --line: rgba(255, 255, 255, 0.28);
-  color: var(--fg);
   padding-top: clamp(28px, 4vw, 44px);
 }
 
@@ -67,20 +62,20 @@
 
 .pill:hover {
   color: var(--fg);
-  border-color: var(--accent);
+  border-color: var(--fg);
 }
 
 .pillOn {
-  /* la pill attiva porta il colore della sezione */
-  background: var(--accent);
-  border-color: var(--accent);
-  color: var(--accent-on);
+  /* la pill attiva parla la lingua delle card: nera, testo in colore */
+  background: #0A0A0A;
+  border-color: #0A0A0A;
+  color: var(--accent, var(--osso));
 }
 
 .pillOn:hover {
-  color: var(--accent-on);
-  border-color: var(--accent);
-  background: color-mix(in srgb, var(--accent) 86%, var(--fg));
+  color: var(--accent, var(--osso));
+  border-color: #0A0A0A;
+  background: #161616;
 }
 
 /* ————— griglia corsi ————— */

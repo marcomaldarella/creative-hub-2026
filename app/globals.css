@@ -41,9 +41,12 @@
      antracite: nessuna sezione "scura" del sito neutro deve leggere
      come "un altro blu", deve leggere come nero/grigio */
   --petrolio: #1A1A1A;   /* inchiostro / superfici scure: antracite neutro */
-  --azzurro:  #193442;   /* blu brand del cliente (agosto 2026) — academy */
-  --giallo-fluo: #DFFF3A; /* accento coworking */
-  --arancio:  #FF6E12;   /* accento studio (registrazione) */
+  /* 2026-09-09: palette dal PDF colori del cliente — l'azzurro non è più
+     il petrolio scuro ma il blu acceso delle fasce (nero di fondo, testo
+     nero sopra i colori pieni) */
+  --azzurro:  #57A6FF;   /* blu brand — academy */
+  --giallo-fluo: #DEFF3B; /* accento coworking */
+  --arancio:  #FC732D;   /* accento studio (registrazione) */
   /* l'arancio pieno come testo su chiaro sta a 2.6:1: come inchiostro
      serve una versione scurita (in dark torna quello pieno) */
   --arancio-ink: #B44A05;
@@ -54,20 +57,18 @@
 
   /* derivati */
   --petrolio-hover: #262626;
-  --azzurro-hover:  #22475A;
+  --azzurro-hover:  #3E92F2;
   --osso-60: rgba(237, 230, 218, 0.6);
   --osso-16: rgba(237, 230, 218, 0.16);
-  --azzurro-06: rgba(25, 52, 66, 0.06);
+  --azzurro-06: rgba(87, 166, 255, 0.06);
 
-  /* Il blu brand è scuro: come SUPERFICIE va bene ovunque, come TESTO
-     sparisce sul tema dark. --azzurro-ink è la stessa tinta schiarita
-     quanto basta per restare leggibile (in dark viene ridefinita). */
-  --azzurro-ink: #193442;
+  /* Il blu brand ora è CHIARO: come SUPERFICIE va bene ovunque, come
+     TESTO su bianco sta a ~2.5:1 — l'inchiostro è la stessa tinta
+     scurita quanto basta (in dark torna quello pieno). */
+  --azzurro-ink: #1867C6;
 
-  /* il blu brand usato come SUPERFICIE (pastiglie, sezione open day). In
-     dark il surface delle card è già #193442: il riempimento deve salire,
-     altrimenti i bottoni spariscono sulle card */
-  --azzurro-fill: #193442;
+  /* il blu brand usato come SUPERFICIE (pastiglie, sezione open day) */
+  --azzurro-fill: #57A6FF;
 
   /* accento DI DEFAULT (pagine senza una sezione, es. magazine): era
      l'azzurro brand — restava "un altro blu" proprio nelle parti più
@@ -151,13 +152,12 @@
   --accent-ink: var(--osso);
   --accent-on: #000000;
   --panel: var(--petrolio);
-  /* il blu brand su nero era illeggibile: come inchiostro sale di luminosità
-     restando sulla stessa tinta (resta un token brand fisso, non tocca
-     il neutro base qui sopra) */
-  --azzurro-ink: #7FA9BE;
-  --azzurro-hover: #9CC2D4;
-  --azzurro-fill: #26536C;
-  --arancio-ink: #FF8A3D;
+  /* su nero il blu brand pieno è già leggibile: l'inchiostro torna al
+     valore pieno, l'hover schiarisce */
+  --azzurro-ink: var(--azzurro);
+  --azzurro-hover: #7FBAFF;
+  --azzurro-fill: var(--azzurro);
+  --arancio-ink: var(--arancio);
   color-scheme: dark;
 }
 
