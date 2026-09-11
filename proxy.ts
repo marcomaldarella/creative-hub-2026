@@ -6,14 +6,27 @@ import type { NextRequest } from 'next/server'
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl
 
-  // Sanity Studio (ora /admin), API e mockup statici restano fuori dall'i18n
+  // Sanity Studio (ora /admin) e API restano fuori dall'i18n
   if (
     pathname === '/admin' ||
     pathname.startsWith('/admin/') ||
-    pathname.startsWith('/api/') ||
-    pathname.startsWith('/mockup-corso')
+    pathname.startsWith('/api/')
   ) {
     return NextResponse.next()
+  }
+
+  // vecchi mockup statici del template corso: ora sono pagine vere sotto
+  // /academy, montate nel vero SiteChrome (nav/footer reali, non più
+  // ricostruiti a mano) — redirect così i link già condivisi restano validi
+  const MOCKUP_REDIRECTS: Record<string, string> = {
+    '/mockup-corso/v1': '/academy/corso-v1',
+    '/mockup-corso/v2': '/academy/corso-v2',
+    '/mockup-corso/v3': '/academy/corso-v3',
+  }
+  if (pathname in MOCKUP_REDIRECTS) {
+    const url = request.nextUrl.clone()
+    url.pathname = MOCKUP_REDIRECTS[pathname]
+    return NextResponse.redirect(url, 307)
   }
 
   // vecchio percorso dello Studio: redirect al nuovo

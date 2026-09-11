@@ -1,14 +1,7 @@
-<!DOCTYPE html>
-<html lang="it">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet">
-<title>Urban Music Production — v2 · creative hub</title>
-<style>
-  :root{
+// Estratto da public/mockup-corso/v2.html: stessi contenuti, ma montati dentro il vero SiteChrome
+// (nav e footer reali) invece del menu ricostruito a mano.
+export const css = `
+  :host{
     --blue:#57A6FF;
     --blue-ink:#1867C6;
     --ink:#0A0A0A;
@@ -17,11 +10,12 @@
     --white:#FFFFFF;
     --pad:clamp(16px,3vw,60px);
   }
-  *{box-sizing:border-box;margin:0;padding:0;}
-  html{scroll-behavior:smooth;}
-  body{background:var(--white);color:var(--ink);
-    font-family:'Geist',system-ui,sans-serif;
+  :host,:host *{box-sizing:border-box;margin:0;padding:0;}
+  :host{scroll-behavior:smooth;}
+  :host{display:block;background:var(--white);color:var(--ink);
+    font-family:var(--font-body),system-ui,sans-serif;padding-top:var(--header-h);
     font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;}
+  [id]{scroll-margin-top:calc(var(--header-h) + 18px);}
   img{display:block;width:100%;height:100%;object-fit:cover;}
   button{font-family:inherit;cursor:pointer;}
   [contenteditable="true"]{outline:none;}
@@ -30,7 +24,7 @@
   .arr{display:inline-flex;vertical-align:middle;}
   .arr svg{display:block;}
   .arr.w{transform:rotate(180deg);}
-  .mono{font-family:'Geist',system-ui,sans-serif;font-size:12px;letter-spacing:.01em;}
+  .mono{font-family:var(--font-body),system-ui,sans-serif;font-size:12px;letter-spacing:.01em;}
 
   .edit-banner{background:var(--ink);color:#FAFAFA;font-size:12.5px;font-weight:600;
     text-align:center;padding:9px 16px;}
@@ -92,7 +86,7 @@
   .video-cap{position:absolute;top:16px;left:16px;color:#fff;font-size:14px;font-weight:600;z-index:1;}
   .video-cap small{display:block;font-weight:400;font-size:11px;opacity:.7;margin-top:2px;}
 
-  .subnav{position:sticky;top:0;z-index:40;background:var(--white);border-bottom:1px solid var(--line);
+  .subnav{position:sticky;top:var(--header-h);z-index:40;background:var(--white);border-bottom:1px solid var(--line);
     display:flex;justify-content:space-between;align-items:center;padding:14px var(--pad);gap:16px;}
   .subnav .course{font-weight:700;font-size:15px;}
   .subnav .jump{display:flex;gap:24px;flex-wrap:wrap;}
@@ -104,7 +98,7 @@
     font-size:clamp(17px,1.6vw,21px);font-weight:600;padding:20px 0;border-top:1px solid var(--line);
     letter-spacing:-.01em;}
   ol.skills li::before{content:counter(sk,decimal-leading-zero);
-    font-family:'Geist',system-ui,sans-serif;font-size:13px;color:var(--blue-ink);padding-top:5px;}
+    font-family:var(--font-body),system-ui,sans-serif;font-size:13px;color:var(--blue-ink);padding-top:5px;}
   ol.skills li:last-child{border-bottom:1px solid var(--line);}
 
   .carousel{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;
@@ -124,7 +118,7 @@
   .accordion .acc-item:last-child{border-bottom:1px solid var(--line);}
   .acc-head{display:grid;grid-template-columns:60px 1fr auto;gap:20px;align-items:center;
     padding:26px 0;cursor:pointer;}
-  .acc-head .num{font-family:'Geist',system-ui,sans-serif;font-size:13px;color:var(--blue-ink);}
+  .acc-head .num{font-family:var(--font-body),system-ui,sans-serif;font-size:13px;color:var(--blue-ink);}
   .acc-head h3{font-size:clamp(20px,2vw,28px);font-weight:700;margin:0;letter-spacing:-.01em;}
   .acc-plus{width:38px;height:38px;border:1px solid var(--line);display:grid;place-items:center;}
   .acc-plus svg{transition:transform .25s ease;}
@@ -252,156 +246,13 @@
 
   .langsw{font-size:12px;letter-spacing:.02em;color:inherit;opacity:.7;white-space:nowrap;}
   .langsw b{font-weight:600;opacity:1;}
-</style>
-</head>
-<body>
 
+  .siteHead{position:sticky;top:0;z-index:100;background:var(--white);}
+`;
+
+export const html = `
 <div class="edit-banner">template corso · versione 2 di 3 — bianco editoriale, blu come accento · testi modificabili al click ·
-  <a href="/mockup-corso/v1">v1</a> · <a href="/mockup-corso/v3">v3</a></div>
-
-<div class="topbar">
-  <span class="topLeft" contenteditable="true">est. 1999 · bologna</span>
-  <div class="topMid">
-    <div class="topTrack">
-      <span class="topGroup"><span contenteditable="true">iscrizioni aperte · a.a. 2026/27</span><span contenteditable="true">prenota l'open day</span></span>
-      <span class="topGroup"><span contenteditable="true">iscrizioni aperte · a.a. 2026/27</span><span contenteditable="true">prenota l'open day</span></span>
-    </div>
-  </div>
-  <div class="topRight">
-    <span contenteditable="true">+39 051 6313706 · hello@bologna-creativehub.it</span>
-    <button class="topClose" aria-label="chiudi" onclick="this.closest('.topbar').style.display='none'">
-      <svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 2l12 12M14 2L2 14"/></svg>
-    </button>
-  </div>
-</div>
-<header class="site">
-  <div class="logo"><span class="wordmark">creative<em aria-hidden="true"></em>hub</span></div>
-  <nav class="mainnav mega">
-      <div class="navItem">
-        <a class="navLink" contenteditable="true">Academy<span class="arr"><svg class="caret" viewBox="0 0 10 6" width="10" height="6" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M1 1l4 4 4-4"/></svg></span></a>
-        <div class="panel">
-          <div class="panelIn">
-            <div class="panelHead">
-              <span class="panelLabel">/academy</span>
-              <h3 class="panelTitle">Academy</h3>
-              <p class="panelDesc">Corsi di laurea, master e alta formazione in musica, sound, multimedia e visual. E corsi custom — per strumento, per codice, per skill — su tempi tuoi.</p>
-              <span class="panelExplore">esplora la sezione <span class="arr"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></span>
-            </div>
-            <ul class="panelList">
-          <li class="panelEntry">Corsi universitari</li>
-          <li class="panelEntry">Formazione finanziata</li>
-          <li class="panelEntry">Stage &amp; placement</li>
-          <li class="panelEntry">Corsi custom</li>
-          <li class="panelEntry">Open day</li>
-          <li class="panelEntry">Servizi studenti</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="navItem">
-        <a class="navLink" contenteditable="true">Studio<span class="arr"><svg class="caret" viewBox="0 0 10 6" width="10" height="6" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M1 1l4 4 4-4"/></svg></span></a>
-        <div class="panel">
-          <div class="panelIn">
-            <div class="panelHead">
-              <span class="panelLabel">/studios</span>
-              <h3 class="panelTitle">Studio</h3>
-              <p class="panelDesc">Regia SSL XL Desk da 55&nbsp;m², sala live, ISO box e tre cabine B-Ear.</p>
-              <span class="panelExplore">esplora la sezione <span class="arr"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></span>
-            </div>
-            <ul class="panelList">
-          <li class="panelEntry">Registrazione</li>
-          <li class="panelEntry">Mix &amp; mastering</li>
-          <li class="panelEntry">Dolby Atmos</li>
-          <li class="panelEntry">Sound design</li>
-          <li class="panelEntry">Podcast &amp; voice over</li>
-          <li class="panelEntry">Affitto studio</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="navItem">
-        <a class="navLink" contenteditable="true">Coworking<span class="arr"><svg class="caret" viewBox="0 0 10 6" width="10" height="6" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M1 1l4 4 4-4"/></svg></span></a>
-        <div class="panel">
-          <div class="panelIn">
-            <div class="panelHead">
-              <span class="panelLabel">/coworking</span>
-              <h3 class="panelTitle">Coworking</h3>
-              <p class="panelDesc">Coworking · sale · eventi nel cuore di Bologna.</p>
-              <span class="panelExplore">esplora la sezione <span class="arr"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></span>
-            </div>
-            <ul class="panelList">
-          <li class="panelEntry">Coworking</li>
-          <li class="panelEntry">Studio di registrazione</li>
-          <li class="panelEntry">Prenota uno spazio</li>
-          <li class="panelEntry">Sale &amp; eventi</li>
-          <li class="panelEntry">Metaverso</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="navItem">
-        <a class="navLink" contenteditable="true">Innovazione<span class="arr"><svg class="caret" viewBox="0 0 10 6" width="10" height="6" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M1 1l4 4 4-4"/></svg></span></a>
-        <div class="panel">
-          <div class="panelIn">
-            <div class="panelHead">
-              <span class="panelLabel">/innovazione</span>
-              <h3 class="panelTitle">Innovazione</h3>
-              <p class="panelDesc">Incubazione · B2B · startup creative.</p>
-              <span class="panelExplore">esplora la sezione <span class="arr"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></span>
-            </div>
-            <ul class="panelList">
-          <li class="panelEntry">Servizi per aziende</li>
-          <li class="panelEntry">Accelerazione</li>
-          <li class="panelEntry">Bandi &amp; opportunità</li>
-          <li class="panelEntry">Incubazione</li>
-          <li class="panelEntry">CTE COBO</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="navItem">
-        <a class="navLink" contenteditable="true">Editorial<span class="arr"><svg class="caret" viewBox="0 0 10 6" width="10" height="6" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M1 1l4 4 4-4"/></svg></span></a>
-        <div class="panel">
-          <div class="panelIn">
-            <div class="panelHead">
-              <span class="panelLabel">/magazine</span>
-              <h3 class="panelTitle">Editorial</h3>
-              <p class="panelDesc">Motore editoriale · SEO · storie dell'industria creativa.</p>
-              <span class="panelExplore">esplora la sezione <span class="arr"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></span>
-            </div>
-            <ul class="panelList">
-          <li class="panelEntry">Produzione musicale</li>
-          <li class="panelEntry">Industrie creative</li>
-          <li class="panelEntry">Formazione &amp; carriera</li>
-          <li class="panelEntry">Eventi &amp; news</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="navItem" data-mega="chi-siamo">
-        <a class="navLink" contenteditable="true">Chi siamo<span class="arr"><svg class="caret" viewBox="0 0 10 6" width="10" height="6" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M1 1l4 4 4-4"/></svg></span></a>
-        <div class="panel">
-          <div class="panelIn">
-            <div class="panelHead">
-              <span class="panelLabel">/chi-siamo</span>
-              <h3 class="panelTitle">Chi siamo</h3>
-              <p class="panelDesc">Ecosistema · team · contatti.</p>
-              <span class="panelExplore">esplora la sezione <span class="arr"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></span>
-            </div>
-            <ul class="panelList">
-          <li class="panelEntry">L&#39;ecosistema</li>
-          <li class="panelEntry">Governance</li>
-          <li class="panelEntry">Contatti</li>
-          <li class="panelEntry">Team</li>
-          <li class="panelEntry">Partner</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-  </nav>
-  <span class="langsw"><b>it</b> / en</span>
-  <button class="pill pill-dark" contenteditable="true">prenota</button>
-</header>
+  <a href="/academy/corso-v1">v1</a> · <a href="/academy/corso-v3">v3</a></div>
 
 <div class="hero">
   <span class="mono eyebrow" contenteditable="true">academy · bachelor of arts · iscrizioni aperte a.a. 2026/27</span>
@@ -519,8 +370,8 @@
     </div>
   </div>
   <div class="carousel-nav">
-    <button class="cnav-btn" aria-label="indietro" onclick="document.getElementById('facCarousel').scrollBy({left:-440,behavior:'smooth'})"><span class="arr w"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></button>
-    <button class="cnav-btn" aria-label="avanti" onclick="document.getElementById('facCarousel').scrollBy({left:440,behavior:'smooth'})"><span class="arr"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></button>
+    <button class="cnav-btn" aria-label="indietro" data-scroll-id="facCarousel" data-scroll-by="-440"><span class="arr w"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></button>
+    <button class="cnav-btn" aria-label="avanti" data-scroll-id="facCarousel" data-scroll-by="440"><span class="arr"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></button>
   </div>
 </section>
 
@@ -655,56 +506,4 @@
     </div>
   </div>
 </section>
-
-<footer class="site">
-  <div class="foot-grid">
-    <div class="foot-col">
-      <h4 contenteditable="true">creative hub</h4>
-      <p class="foot-addr" contenteditable="true">via del Tappezziere 4, 40138 Bologna<br>+39 051 6313706<br>hello@bologna-creativehub.it</p>
-    </div>
-    <div class="foot-col">
-      <h4 contenteditable="true">hub</h4>
-      <a href="#" contenteditable="true">Academy</a>
-      <a href="#" contenteditable="true">Studio</a>
-      <a href="#" contenteditable="true">Coworking</a>
-    </div>
-    <div class="foot-col">
-      <h4 contenteditable="true">ecosistema</h4>
-      <a href="#" contenteditable="true">Innovazione</a>
-      <a href="#" contenteditable="true">Editorial</a>
-      <a href="#" contenteditable="true">Chi siamo</a>
-    </div>
-    <div class="foot-col">
-      <h4 contenteditable="true">social</h4>
-      <a href="#" contenteditable="true">Instagram</a>
-      <a href="#" contenteditable="true">Facebook</a>
-      <a href="#" contenteditable="true">LinkedIn</a>
-    </div>
-  </div>
-  <div class="foot-bottom">
-    <span contenteditable="true">© 2026 creative hub — since 1999</span>
-    <span>
-      <a href="#" contenteditable="true">privacy</a>
-      <a href="#" contenteditable="true">cookie</a>
-    </span>
-  </div>
-</footer>
-
-<script>
-  document.querySelectorAll('.acc-item').forEach(item=>{
-    item.querySelector('.acc-head').addEventListener('click', ()=>{
-      const wasOpen = item.classList.contains('open');
-      item.parentElement.querySelectorAll('.acc-item').forEach(i=>i.classList.remove('open'));
-      if(!wasOpen) item.classList.add('open');
-    });
-  });
-  document.querySelectorAll('a[href^="#"]').forEach(a=>{
-    a.addEventListener('click', e=>{
-      e.preventDefault();
-      const t = document.getElementById(a.getAttribute('href').slice(1));
-      if(t) t.scrollIntoView({behavior:'smooth', block:'start'});
-    });
-  });
-</script>
-</body>
-</html>
+`;

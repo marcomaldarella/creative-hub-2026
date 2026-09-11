@@ -1,69 +1,64 @@
-<!DOCTYPE html>
-<html lang="it">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet">
-<title>Urban Music Production — v1 · creative hub</title>
-<style>
-  :root{
+// Estratto da public/mockup-corso/v3.html: stessi contenuti, ma montati dentro il vero SiteChrome
+// (nav e footer reali) invece del menu ricostruito a mano.
+export const css = `
+  :host{
     --blue:#57A6FF;
+    --giallo:#DEFF3B;
     --ink:#0A0A0A;
     --ink-2:#161616;
     --white:#FFFFFF;
     --pad:clamp(16px,3vw,60px);
   }
-  *{box-sizing:border-box;margin:0;padding:0;}
-  html{scroll-behavior:smooth;}
-  body{background:var(--blue);color:var(--ink);
-    font-family:'Geist',system-ui,sans-serif;
+  :host,:host *{box-sizing:border-box;margin:0;padding:0;}
+  :host{scroll-behavior:smooth;}
+  :host{display:block;background:var(--ink);color:var(--white);
+    font-family:var(--font-body),system-ui,sans-serif;padding-top:var(--header-h);
     font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;}
+  [id]{scroll-margin-top:calc(var(--header-h) + 18px);}
   img{display:block;width:100%;height:100%;object-fit:cover;}
   button{font-family:inherit;cursor:pointer;}
   [contenteditable="true"]{outline:none;}
-  [contenteditable="true"]:hover{background:rgba(10,14,20,.06);}
-  [contenteditable="true"]:focus{background:rgba(10,14,20,.10);}
+  [contenteditable="true"]:hover{background:rgba(87,166,255,.10);}
+  [contenteditable="true"]:focus{background:rgba(87,166,255,.16);}
   .arr{display:inline-flex;vertical-align:middle;}
   .arr svg{display:block;}
   .arr.w{transform:rotate(180deg);}
 
-  .edit-banner{background:var(--ink);color:var(--blue);font-size:12.5px;font-weight:600;
+  .edit-banner{background:var(--blue);color:var(--ink);font-size:12.5px;font-weight:600;
     text-align:center;padding:9px 16px;}
-  .edit-banner a{color:var(--blue);}
+  .edit-banner a{color:var(--ink);}
 
   header.site{display:flex;align-items:center;justify-content:space-between;
-    padding:22px var(--pad);border-bottom:1px solid rgba(0,0,0,.28);}
+    padding:22px var(--pad);border-bottom:1px solid rgba(87,166,255,.3);}
   header.site .logo{font-weight:700;font-size:20px;letter-spacing:-.01em;}
   nav.mainnav{display:flex;gap:32px;align-items:center;}
-  nav.mainnav a{color:var(--ink);text-decoration:none;font-size:15px;font-weight:600;}
+  nav.mainnav a{color:var(--blue);text-decoration:none;font-size:15px;font-weight:600;}
   .pill{appearance:none;border:none;border-radius:0;padding:12px 24px;
     font-weight:600;font-size:14.5px;white-space:nowrap;}
-  .pill-dark{background:var(--ink);color:var(--blue);}
-  .pill-dark:hover{background:var(--ink-2);}
-  .pill-outline{background:transparent;border:1px solid var(--blue);color:var(--blue);}
-  .pill-outline-ink{background:transparent;border:1px solid var(--ink);color:var(--ink);}
-  .pill-outline-ink:hover{background:var(--ink);color:var(--blue);}
+  .pill-dark{background:var(--blue);color:var(--ink);}
+  .pill-dark:hover{background:#7FBAFF;}
+  .pill-outline{background:transparent;border:1px solid var(--ink);color:var(--ink);}
+  .pill-outline-ink{background:transparent;border:1px solid var(--blue);color:var(--blue);}
+  .pill-outline-ink:hover{background:var(--blue);color:var(--ink);}
 
   .hero{display:grid;grid-template-columns:minmax(520px,45%) 1fr;min-height:calc(100dvh - 150px);}
   .hero-left{padding:44px var(--pad) 48px;display:flex;flex-direction:column;}
-  .eyebrow{font-size:13px;font-weight:600;margin-bottom:18px;font-family:'Geist',system-ui,sans-serif;}
+  .eyebrow{font-size:13px;font-weight:600;margin-bottom:18px;font-family:var(--font-body),system-ui,sans-serif;color:var(--blue);}
   h1.hero-h1{font-size:clamp(34px,4vw,54px);line-height:1.04;font-weight:700;margin:0 0 22px;letter-spacing:-.02em;}
   .hero-sub{font-size:19px;font-weight:500;line-height:1.4;margin:0 0 40px;max-width:420px;}
   .meta-stack{display:flex;flex-direction:column;margin-top:auto;padding-top:56px;margin-bottom:30px;}
-  .meta-stack>div{padding:16px 0;border-top:1px solid rgba(0,0,0,.28);}
-  .meta-stack>div:last-child{border-bottom:1px solid rgba(0,0,0,.28);}
+  .meta-stack>div{padding:16px 0;border-top:1px solid rgba(87,166,255,.3);}
+  .meta-stack>div:last-child{border-bottom:1px solid rgba(87,166,255,.3);}
   .meta-stack>div{display:flex;align-items:baseline;justify-content:space-between;gap:16px;}
   .meta-stack .m-label{font-size:20px;font-weight:700;}
-  .meta-stack .m-value{font-size:14.5px;color:#141414;}
+  .meta-stack .m-value{font-size:14.5px;color:#7FB4EF;}
   .hero-right{position:relative;overflow:hidden;min-height:420px;}
   .hero-right img{position:absolute;inset:0;height:100%;}
 
-  .marquee-wrap{background:var(--ink);overflow:hidden;padding:20px 0;white-space:nowrap;}
+  .marquee-wrap{background:var(--blue);overflow:hidden;padding:20px 0;white-space:nowrap;}
   .marquee-track{display:flex;align-items:center;gap:44px;animation:scroll 22s linear infinite;width:max-content;}
-  .marquee-track span{color:var(--blue);font-size:32px;font-weight:700;letter-spacing:-.01em;}
-  .marquee-track .pill{background:var(--blue);color:var(--ink);padding:11px 22px;font-size:15px;}
+  .marquee-track span{color:var(--ink);font-size:32px;font-weight:700;letter-spacing:-.01em;}
+  .marquee-track .pill{background:var(--ink);color:var(--giallo);padding:11px 22px;font-size:15px;}
   @keyframes scroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
 
   section.block{padding:clamp(56px,8vw,96px) var(--pad);}
@@ -82,40 +77,40 @@
     display:flex;align-items:center;justify-content:center;position:relative;}
   .video-card .play::after{content:"";border-left:16px solid var(--ink);border-top:10px solid transparent;
     border-bottom:10px solid transparent;margin-left:4px;}
-  .video-cap{position:absolute;top:16px;left:16px;color:var(--blue);font-size:14px;font-weight:600;z-index:1;}
+  .video-cap{position:absolute;top:16px;left:16px;color:#fff;font-size:14px;font-weight:600;z-index:1;}
   .video-cap small{display:block;font-weight:400;font-size:11px;opacity:.7;margin-top:2px;color:#fff;}
 
-  .subnav{position:sticky;top:0;z-index:40;background:var(--ink);
+  .subnav{position:sticky;top:var(--header-h);z-index:40;background:var(--blue);border-bottom:1px solid var(--ink);
     display:flex;justify-content:space-between;align-items:center;padding:16px var(--pad);gap:16px;}
-  .subnav .course{color:var(--blue);font-weight:700;font-size:15px;}
+  .subnav .course{color:var(--ink);font-weight:700;font-size:15px;}
   .subnav .jump{display:flex;gap:24px;flex-wrap:wrap;}
-  .subnav .jump a{color:var(--blue);font-size:13px;font-weight:600;text-decoration:none;opacity:.85;}
+  .subnav .jump a{color:var(--ink);font-size:13px;font-weight:600;text-decoration:none;opacity:.85;}
   .subnav .jump a:hover{opacity:1;}
 
   ul.skills{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:0 40px;max-width:1100px;}
   ul.skills li{font-size:17px;font-weight:500;padding:14px 0 14px 24px;position:relative;line-height:1.5;
-    border-top:1px solid rgba(0,0,0,.28);}
-  ul.skills li::before{content:"";position:absolute;left:0;top:22px;width:8px;height:8px;background:var(--ink);}
+    border-top:1px solid rgba(87,166,255,.3);}
+  ul.skills li::before{content:"";position:absolute;left:0;top:22px;width:8px;height:8px;background:var(--blue);}
 
   .carousel{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;
     scrollbar-width:none;margin-right:calc(-1 * var(--pad));}
   .carousel::-webkit-scrollbar{display:none;}
-  .fac-card{flex:0 0 calc((100% - 2 * 20px)/2.5);scroll-snap-align:start;background:var(--ink);color:var(--blue);}
+  .fac-card{flex:0 0 calc((100% - 2 * 20px)/2.5);scroll-snap-align:start;background:var(--blue);color:var(--ink);}
   .fac-card .img{aspect-ratio:4/3;overflow:hidden;}
   .fac-card .txt{padding:18px 20px 24px;}
   .fac-card h3{font-size:18px;font-weight:700;margin:0 0 8px;}
-  .fac-card p{font-size:14px;line-height:1.55;margin:0;color:#BEDCFF;}
+  .fac-card p{font-size:14px;line-height:1.55;margin:0;color:#10233B;}
   .carousel-nav{display:flex;gap:8px;justify-content:flex-end;margin-top:24px;}
-  .cnav-btn{width:42px;height:42px;border-radius:50%;border:1px solid var(--ink);background:transparent;
-    color:var(--ink);display:flex;align-items:center;justify-content:center;}
-  .cnav-btn:hover{background:var(--ink);color:var(--blue);}
+  .cnav-btn{width:42px;height:42px;border-radius:50%;border:1px solid var(--blue);background:transparent;
+    color:var(--blue);display:flex;align-items:center;justify-content:center;}
+  .cnav-btn:hover{background:var(--blue);color:var(--ink);}
 
   .accordion{max-width:1000px;}
-  .acc-item{border-top:1px solid rgba(0,0,0,.28);}
-  .accordion .acc-item:last-child{border-bottom:1px solid rgba(0,0,0,.28);}
+  .acc-item{border-top:1px solid rgba(87,166,255,.3);}
+  .accordion .acc-item:last-child{border-bottom:1px solid rgba(87,166,255,.3);}
   .acc-head{display:flex;justify-content:space-between;align-items:center;padding:22px 0;cursor:pointer;}
   .acc-head h3{font-size:22px;font-weight:700;margin:0;}
-  .acc-plus{flex-shrink:0;margin-left:20px;width:38px;height:38px;border:1px solid rgba(0,0,0,.4);
+  .acc-plus{flex-shrink:0;margin-left:20px;width:38px;height:38px;border:1px solid rgba(87,166,255,.4);
     display:grid;place-items:center;}
   .acc-plus svg{transition:transform .25s ease;}
   .acc-item.open .acc-plus svg{transform:rotate(45deg);}
@@ -130,10 +125,10 @@
   .promo-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.55),transparent 60%);}
   .promo-photo h3{position:relative;z-index:1;color:var(--white);font-size:clamp(34px,3.6vw,52px);font-weight:700;
     line-height:1.02;margin:0;letter-spacing:-.02em;}
-  .promo-panel{background:var(--ink);color:var(--blue);padding:clamp(32px,4vw,56px);display:flex;flex-direction:column;
+  .promo-panel{background:var(--blue);color:var(--ink);padding:clamp(32px,4vw,56px);display:flex;flex-direction:column;
     justify-content:center;align-items:flex-start;}
   .promo-panel h2{font-size:clamp(26px,2.6vw,34px);font-weight:700;margin:0 0 18px;letter-spacing:-.01em;}
-  .promo-panel p{font-size:15.5px;line-height:1.65;margin:0 0 26px;color:#BEDCFF;max-width:460px;}
+  .promo-panel p{font-size:15.5px;line-height:1.65;margin:0 0 26px;color:#10233B;max-width:460px;}
 
   .split{display:grid;grid-template-columns:480px 1fr;gap:60px;align-items:center;padding:0 var(--pad);}
   .split .imgbox{aspect-ratio:3/4;overflow:hidden;}
@@ -144,31 +139,31 @@
   .split-rev .imgbox{aspect-ratio:4/3;overflow:hidden;}
 
   .teacher{display:grid;grid-template-columns:300px 1fr;gap:48px;align-items:center;max-width:1000px;}
-  .teacher .ph{aspect-ratio:4/5;overflow:hidden;background:var(--ink);}
+  .teacher .ph{aspect-ratio:4/5;overflow:hidden;background:var(--ink-2);}
   .teacher h3{font-size:24px;font-weight:700;margin:0 0 4px;}
-  .teacher .role{font-size:13px;font-family:'Geist',system-ui,sans-serif;margin-bottom:16px;}
+  .teacher .role{font-size:13px;font-family:var(--font-body),system-ui,sans-serif;margin-bottom:16px;color:var(--blue);}
   .teacher p{font-size:15.5px;line-height:1.65;max-width:52ch;}
 
-  .cta-dark{margin:0 calc(-1 * var(--pad));position:relative;overflow:hidden;background:var(--ink);min-height:440px;
+  .cta-dark{margin:0 calc(-1 * var(--pad));position:relative;overflow:hidden;background:var(--blue);min-height:440px;
     display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px 40px;}
-  .cta-dark h2{position:relative;color:var(--blue);font-size:clamp(30px,3.4vw,46px);font-weight:700;
+  .cta-dark h2{position:relative;color:var(--ink);font-size:clamp(30px,3.4vw,46px);font-weight:700;
     line-height:1.1;margin:0 0 20px;max-width:720px;letter-spacing:-.02em;}
-  .cta-dark p{position:relative;color:#BEDCFF;font-size:17px;margin:0 0 30px;max-width:520px;}
-  .cta-dark .pill{position:relative;background:var(--blue);color:var(--ink);}
+  .cta-dark p{position:relative;color:#10233B;font-size:17px;margin:0 0 30px;max-width:520px;}
+  .cta-dark .pill{position:relative;background:var(--ink);color:var(--blue);}
 
   blockquote.pull2{font-size:21px;font-weight:600;line-height:1.5;
     max-width:900px;margin:50px auto 0;text-align:center;padding:0 var(--pad);}
   blockquote.pull2 cite{display:block;margin-top:14px;font-size:13px;font-style:normal;font-weight:500;opacity:.7;}
 
   .connect-card{flex:0 0 calc((100% - 2 * 20px)/2.5);scroll-snap-align:start;}
-  .connect-card .img{aspect-ratio:4/5;overflow:hidden;position:relative;background:var(--ink);
+  .connect-card .img{aspect-ratio:4/5;overflow:hidden;position:relative;background:var(--ink-2);
     display:flex;align-items:flex-start;padding:26px;margin-bottom:14px;}
-  .connect-card .img h3{position:relative;color:var(--blue);font-size:32px;font-weight:700;
+  .connect-card .img h3{position:relative;color:#fff;font-size:32px;font-weight:700;
     line-height:1.02;margin:0;letter-spacing:-.02em;z-index:1;}
-  .connect-card .img img{position:absolute;inset:0;opacity:.4;}
+  .connect-card .img img{position:absolute;inset:0;opacity:.55;}
   .connect-card .cap2{font-size:15.5px;font-weight:600;display:flex;align-items:center;gap:8px;}
 
-  footer.site{background:var(--ink);color:var(--blue);padding:64px var(--pad) 28px;}
+  footer.site{background:var(--ink);color:var(--white);padding:64px var(--pad) 28px;border-top:1px solid rgba(87,166,255,.3);}
   .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:32px;margin-bottom:44px;}
   .foot-col h4{font-size:12px;color:#7FB4EF;margin:0 0 14px;font-weight:600;}
   .foot-col a{display:block;font-size:14.5px;color:var(--blue);text-decoration:none;margin-bottom:10px;}
@@ -193,11 +188,11 @@
   header.site{position:relative;z-index:100;}
   .mainnav.mega{gap:30px;}
   .navItem{position:relative;display:flex;align-items:center;height:100%;}
-  .navLink{display:inline-flex;align-items:center;gap:6px;color:var(--ink);text-decoration:none;font-size:15px;font-weight:600;transition:color .2s;}
-  .navItem:hover .navLink{color:var(--ink);}
+  .navLink{display:inline-flex;align-items:center;gap:6px;color:var(--blue);text-decoration:none;font-size:15px;font-weight:600;transition:color .2s;}
+  .navItem:hover .navLink{color:var(--white);}
   .navLink .caret{transition:transform .2s ease;}
   .navItem:hover .navLink .caret{transform:rotate(180deg);}
-  .panel{position:absolute;top:100%;left:calc(-1 * var(--pad));right:calc(-1 * var(--pad));background:var(--ink);border-top:1px solid rgba(255,255,255,.12);border-bottom:1px solid rgba(255,255,255,.12);opacity:0;visibility:hidden;transform:translateY(-6px);pointer-events:none;transition:opacity .18s ease,transform .22s ease,visibility 0s linear .18s;}
+  .panel{position:absolute;top:100%;left:calc(-1 * var(--pad));right:calc(-1 * var(--pad));background:var(--ink-2);border-top:1px solid rgba(87,166,255,.25);border-bottom:1px solid rgba(87,166,255,.25);opacity:0;visibility:hidden;transform:translateY(-6px);pointer-events:none;transition:opacity .18s ease,transform .22s ease,visibility 0s linear .18s;}
   .navItem:hover .panel,.navItem:focus-within .panel{opacity:1;visibility:visible;transform:none;pointer-events:auto;transition:opacity .2s ease,transform .24s ease;}
   .panelIn{display:grid;grid-template-columns:minmax(260px,400px) 1fr;gap:clamp(36px,5vw,90px);padding:34px var(--pad) 42px;align-items:start;}
   .panelHead{display:flex;flex-direction:column;align-items:flex-start;gap:10px;}
@@ -236,156 +231,13 @@
 
   .langsw{font-size:12px;letter-spacing:.02em;color:inherit;opacity:.7;white-space:nowrap;}
   .langsw b{font-weight:600;opacity:1;}
-</style>
-</head>
-<body>
 
-<div class="edit-banner">template corso · versione 1 di 3 — flood di sezione, card nere · testi modificabili al click ·
-  <a href="/mockup-corso/v2">v2</a> · <a href="/mockup-corso/v3">v3</a></div>
+  .siteHead{position:sticky;top:0;z-index:100;background:var(--ink);}
+`;
 
-<div class="topbar">
-  <span class="topLeft" contenteditable="true">est. 1999 · bologna</span>
-  <div class="topMid">
-    <div class="topTrack">
-      <span class="topGroup"><span contenteditable="true">iscrizioni aperte · a.a. 2026/27</span><span contenteditable="true">prenota l'open day</span></span>
-      <span class="topGroup"><span contenteditable="true">iscrizioni aperte · a.a. 2026/27</span><span contenteditable="true">prenota l'open day</span></span>
-    </div>
-  </div>
-  <div class="topRight">
-    <span contenteditable="true">+39 051 6313706 · hello@bologna-creativehub.it</span>
-    <button class="topClose" aria-label="chiudi" onclick="this.closest('.topbar').style.display='none'">
-      <svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 2l12 12M14 2L2 14"/></svg>
-    </button>
-  </div>
-</div>
-<header class="site">
-  <div class="logo"><span class="wordmark">creative<em aria-hidden="true"></em>hub</span></div>
-  <nav class="mainnav mega">
-      <div class="navItem">
-        <a class="navLink" contenteditable="true">Academy<span class="arr"><svg class="caret" viewBox="0 0 10 6" width="10" height="6" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M1 1l4 4 4-4"/></svg></span></a>
-        <div class="panel">
-          <div class="panelIn">
-            <div class="panelHead">
-              <span class="panelLabel">/academy</span>
-              <h3 class="panelTitle">Academy</h3>
-              <p class="panelDesc">Corsi di laurea, master e alta formazione in musica, sound, multimedia e visual. E corsi custom — per strumento, per codice, per skill — su tempi tuoi.</p>
-              <span class="panelExplore">esplora la sezione <span class="arr"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></span>
-            </div>
-            <ul class="panelList">
-          <li class="panelEntry">Corsi universitari</li>
-          <li class="panelEntry">Formazione finanziata</li>
-          <li class="panelEntry">Stage &amp; placement</li>
-          <li class="panelEntry">Corsi custom</li>
-          <li class="panelEntry">Open day</li>
-          <li class="panelEntry">Servizi studenti</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="navItem">
-        <a class="navLink" contenteditable="true">Studio<span class="arr"><svg class="caret" viewBox="0 0 10 6" width="10" height="6" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M1 1l4 4 4-4"/></svg></span></a>
-        <div class="panel">
-          <div class="panelIn">
-            <div class="panelHead">
-              <span class="panelLabel">/studios</span>
-              <h3 class="panelTitle">Studio</h3>
-              <p class="panelDesc">Regia SSL XL Desk da 55&nbsp;m², sala live, ISO box e tre cabine B-Ear.</p>
-              <span class="panelExplore">esplora la sezione <span class="arr"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></span>
-            </div>
-            <ul class="panelList">
-          <li class="panelEntry">Registrazione</li>
-          <li class="panelEntry">Mix &amp; mastering</li>
-          <li class="panelEntry">Dolby Atmos</li>
-          <li class="panelEntry">Sound design</li>
-          <li class="panelEntry">Podcast &amp; voice over</li>
-          <li class="panelEntry">Affitto studio</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="navItem">
-        <a class="navLink" contenteditable="true">Coworking<span class="arr"><svg class="caret" viewBox="0 0 10 6" width="10" height="6" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M1 1l4 4 4-4"/></svg></span></a>
-        <div class="panel">
-          <div class="panelIn">
-            <div class="panelHead">
-              <span class="panelLabel">/coworking</span>
-              <h3 class="panelTitle">Coworking</h3>
-              <p class="panelDesc">Coworking · sale · eventi nel cuore di Bologna.</p>
-              <span class="panelExplore">esplora la sezione <span class="arr"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></span>
-            </div>
-            <ul class="panelList">
-          <li class="panelEntry">Coworking</li>
-          <li class="panelEntry">Studio di registrazione</li>
-          <li class="panelEntry">Prenota uno spazio</li>
-          <li class="panelEntry">Sale &amp; eventi</li>
-          <li class="panelEntry">Metaverso</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="navItem">
-        <a class="navLink" contenteditable="true">Innovazione<span class="arr"><svg class="caret" viewBox="0 0 10 6" width="10" height="6" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M1 1l4 4 4-4"/></svg></span></a>
-        <div class="panel">
-          <div class="panelIn">
-            <div class="panelHead">
-              <span class="panelLabel">/innovazione</span>
-              <h3 class="panelTitle">Innovazione</h3>
-              <p class="panelDesc">Incubazione · B2B · startup creative.</p>
-              <span class="panelExplore">esplora la sezione <span class="arr"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></span>
-            </div>
-            <ul class="panelList">
-          <li class="panelEntry">Servizi per aziende</li>
-          <li class="panelEntry">Accelerazione</li>
-          <li class="panelEntry">Bandi &amp; opportunità</li>
-          <li class="panelEntry">Incubazione</li>
-          <li class="panelEntry">CTE COBO</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="navItem">
-        <a class="navLink" contenteditable="true">Editorial<span class="arr"><svg class="caret" viewBox="0 0 10 6" width="10" height="6" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M1 1l4 4 4-4"/></svg></span></a>
-        <div class="panel">
-          <div class="panelIn">
-            <div class="panelHead">
-              <span class="panelLabel">/magazine</span>
-              <h3 class="panelTitle">Editorial</h3>
-              <p class="panelDesc">Motore editoriale · SEO · storie dell'industria creativa.</p>
-              <span class="panelExplore">esplora la sezione <span class="arr"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></span>
-            </div>
-            <ul class="panelList">
-          <li class="panelEntry">Produzione musicale</li>
-          <li class="panelEntry">Industrie creative</li>
-          <li class="panelEntry">Formazione &amp; carriera</li>
-          <li class="panelEntry">Eventi &amp; news</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="navItem" data-mega="chi-siamo">
-        <a class="navLink" contenteditable="true">Chi siamo<span class="arr"><svg class="caret" viewBox="0 0 10 6" width="10" height="6" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M1 1l4 4 4-4"/></svg></span></a>
-        <div class="panel">
-          <div class="panelIn">
-            <div class="panelHead">
-              <span class="panelLabel">/chi-siamo</span>
-              <h3 class="panelTitle">Chi siamo</h3>
-              <p class="panelDesc">Ecosistema · team · contatti.</p>
-              <span class="panelExplore">esplora la sezione <span class="arr"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></span>
-            </div>
-            <ul class="panelList">
-          <li class="panelEntry">L&#39;ecosistema</li>
-          <li class="panelEntry">Governance</li>
-          <li class="panelEntry">Contatti</li>
-          <li class="panelEntry">Team</li>
-          <li class="panelEntry">Partner</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-  </nav>
-  <span class="langsw"><b>it</b> / en</span>
-  <button class="pill pill-dark" contenteditable="true">prenota</button>
-</header>
+export const html = `
+<div class="edit-banner">template corso · versione 3 di 3 — notturna, card blu su nero · testi modificabili al click ·
+  <a href="/academy/corso-v1">v1</a> · <a href="/academy/corso-v2">v2</a></div>
 
 <div class="hero">
   <div class="hero-left">
@@ -505,8 +357,8 @@
     </div>
   </div>
   <div class="carousel-nav">
-    <button class="cnav-btn" aria-label="indietro" onclick="document.getElementById('facCarousel').scrollBy({left:-400,behavior:'smooth'})"><span class="arr w"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></button>
-    <button class="cnav-btn" aria-label="avanti" onclick="document.getElementById('facCarousel').scrollBy({left:400,behavior:'smooth'})"><span class="arr"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></button>
+    <button class="cnav-btn" aria-label="indietro" data-scroll-id="facCarousel" data-scroll-by="-400"><span class="arr w"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></button>
+    <button class="cnav-btn" aria-label="avanti" data-scroll-id="facCarousel" data-scroll-by="400"><span class="arr"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></button>
   </div>
 </section>
 
@@ -646,56 +498,4 @@
     </div>
   </div>
 </section>
-
-<footer class="site">
-  <div class="foot-grid">
-    <div class="foot-col">
-      <h4 contenteditable="true">creative hub</h4>
-      <p class="foot-addr" contenteditable="true">via del Tappezziere 4, 40138 Bologna<br>+39 051 6313706<br>hello@bologna-creativehub.it</p>
-    </div>
-    <div class="foot-col">
-      <h4 contenteditable="true">hub</h4>
-      <a href="#" contenteditable="true">Academy</a>
-      <a href="#" contenteditable="true">Studio</a>
-      <a href="#" contenteditable="true">Coworking</a>
-    </div>
-    <div class="foot-col">
-      <h4 contenteditable="true">ecosistema</h4>
-      <a href="#" contenteditable="true">Innovazione</a>
-      <a href="#" contenteditable="true">Editorial</a>
-      <a href="#" contenteditable="true">Chi siamo</a>
-    </div>
-    <div class="foot-col">
-      <h4 contenteditable="true">social</h4>
-      <a href="#" contenteditable="true">Instagram</a>
-      <a href="#" contenteditable="true">Facebook</a>
-      <a href="#" contenteditable="true">LinkedIn</a>
-    </div>
-  </div>
-  <div class="foot-bottom">
-    <span contenteditable="true">© 2026 creative hub — since 1999</span>
-    <span>
-      <a href="#" contenteditable="true">privacy</a>
-      <a href="#" contenteditable="true">cookie</a>
-    </span>
-  </div>
-</footer>
-
-<script>
-  document.querySelectorAll('.acc-item').forEach(item=>{
-    item.querySelector('.acc-head').addEventListener('click', ()=>{
-      const wasOpen = item.classList.contains('open');
-      item.parentElement.querySelectorAll('.acc-item').forEach(i=>i.classList.remove('open'));
-      if(!wasOpen) item.classList.add('open');
-    });
-  });
-  document.querySelectorAll('a[href^="#"]').forEach(a=>{
-    a.addEventListener('click', e=>{
-      e.preventDefault();
-      const t = document.getElementById(a.getAttribute('href').slice(1));
-      if(t) t.scrollIntoView({behavior:'smooth', block:'start'});
-    });
-  });
-</script>
-</body>
-</html>
+`;
