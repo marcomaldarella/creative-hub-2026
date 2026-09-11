@@ -23,9 +23,6 @@ export const css = `
   .arr svg{display:block;}
   .arr.w{transform:rotate(180deg);}
 
-  .edit-banner{background:var(--ink);color:var(--blue);font-size:12.5px;font-weight:600;
-    text-align:center;padding:9px 16px;}
-  .edit-banner a{color:var(--blue);}
 
   header.site{display:flex;align-items:center;justify-content:space-between;
     padding:22px var(--pad);border-bottom:1px solid rgba(0,0,0,.28);}
@@ -235,9 +232,6 @@ export const css = `
 `;
 
 export const html = `
-<div class="edit-banner">template corso · versione 1 di 3 — flood di sezione, card nere · testi modificabili al click ·
-  <a href="/academy/corso-v2">v2</a> · <a href="/academy/corso-v3">v3</a></div>
-
 <div class="hero">
   <div class="hero-left">
     <div class="eyebrow" contenteditable="true">academy · bachelor of arts</div>

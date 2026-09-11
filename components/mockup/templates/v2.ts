@@ -26,9 +26,6 @@ export const css = `
   .arr.w{transform:rotate(180deg);}
   .mono{font-family:var(--font-body),system-ui,sans-serif;font-size:12px;letter-spacing:.01em;}
 
-  .edit-banner{background:var(--ink);color:#FAFAFA;font-size:12.5px;font-weight:600;
-    text-align:center;padding:9px 16px;}
-  .edit-banner a{color:var(--blue);}
 
   header.site{display:flex;align-items:center;justify-content:space-between;
     padding:22px var(--pad);border-bottom:1px solid var(--line);}
@@ -251,9 +248,6 @@ export const css = `
 `;
 
 export const html = `
-<div class="edit-banner">template corso · versione 2 di 3 — bianco editoriale, blu come accento · testi modificabili al click ·
-  <a href="/academy/corso-v1">v1</a> · <a href="/academy/corso-v3">v3</a></div>
-
 <div class="hero">
   <span class="mono eyebrow" contenteditable="true">academy · bachelor of arts · iscrizioni aperte a.a. 2026/27</span>
   <h1 class="hero-h1" contenteditable="true">Corso universitario di produzione musicale a Bologna.</h1>
