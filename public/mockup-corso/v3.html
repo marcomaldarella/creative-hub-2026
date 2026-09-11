@@ -44,14 +44,16 @@
   .pill-outline-ink{background:transparent;border:1px solid var(--blue);color:var(--blue);}
   .pill-outline-ink:hover{background:var(--blue);color:var(--ink);}
 
-  .hero{display:grid;grid-template-columns:520px 1fr;min-height:620px;}
-  .hero-left{padding:48px var(--pad) 60px;display:flex;flex-direction:column;}
+  .hero{display:grid;grid-template-columns:minmax(520px,45%) 1fr;min-height:calc(100dvh - 150px);}
+  .hero-left{padding:44px var(--pad) 48px;display:flex;flex-direction:column;}
   .eyebrow{font-size:13px;font-weight:600;margin-bottom:18px;font-family:ui-monospace,Menlo,monospace;}
   h1.hero-h1{font-size:clamp(34px,4vw,54px);line-height:1.04;font-weight:700;margin:0 0 22px;letter-spacing:-.02em;}
   .hero-sub{font-size:19px;font-weight:500;line-height:1.4;margin:0 0 40px;max-width:420px;}
-  .meta-stack{display:flex;flex-direction:column;margin-bottom:34px;}
+  .meta-stack{display:flex;flex-direction:column;margin-top:auto;padding-top:56px;margin-bottom:30px;}
   .meta-stack>div{padding:16px 0;border-top:1px solid rgba(87,166,255,.3);}
-  .meta-stack .m-label{font-size:21px;font-weight:700;margin-bottom:2px;}
+  .meta-stack>div:last-child{border-bottom:1px solid rgba(87,166,255,.3);}
+  .meta-stack>div{display:flex;align-items:baseline;justify-content:space-between;gap:16px;}
+  .meta-stack .m-label{font-size:20px;font-weight:700;}
   .meta-stack .m-value{font-size:14.5px;color:#7FB4EF;}
   .hero-right{position:relative;overflow:hidden;min-height:420px;}
   .hero-right img{position:absolute;inset:0;height:100%;}
@@ -70,8 +72,9 @@
   .lede{font-size:18px;line-height:1.6;max-width:760px;margin:0 0 18px;font-weight:400;}
   .lede b{font-weight:700;}
 
-  .video-card{background:var(--ink);max-width:860px;overflow:hidden;
-    display:flex;align-items:center;justify-content:center;aspect-ratio:16/9;position:relative;margin-top:30px;}
+  .pan-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,60px);align-items:start;}
+  .video-card{background:var(--ink);overflow:hidden;
+    display:flex;align-items:center;justify-content:center;aspect-ratio:16/9;position:relative;}
   .video-card img{position:absolute;inset:0;opacity:.45;}
   .video-card .play{width:64px;height:64px;border-radius:50%;background:var(--blue);
     display:flex;align-items:center;justify-content:center;position:relative;}
@@ -92,10 +95,10 @@
     border-top:1px solid rgba(87,166,255,.3);}
   ul.skills li::before{content:"";position:absolute;left:0;top:22px;width:8px;height:8px;background:var(--blue);}
 
-  .carousel{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:6px;
-    scrollbar-width:none;}
+  .carousel{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;
+    scrollbar-width:none;margin-right:calc(-1 * var(--pad));}
   .carousel::-webkit-scrollbar{display:none;}
-  .fac-card{flex:0 0 380px;scroll-snap-align:start;background:var(--blue);color:var(--ink);}
+  .fac-card{flex:0 0 calc((100% - 2 * 20px)/2.5);scroll-snap-align:start;background:var(--blue);color:var(--ink);}
   .fac-card .img{aspect-ratio:4/3;overflow:hidden;}
   .fac-card .txt{padding:18px 20px 24px;}
   .fac-card h3{font-size:18px;font-weight:700;margin:0 0 8px;}
@@ -144,7 +147,7 @@
   .teacher .role{font-size:13px;font-family:ui-monospace,Menlo,monospace;margin-bottom:16px;}
   .teacher p{font-size:15.5px;line-height:1.65;max-width:52ch;}
 
-  .cta-dark{margin:0 var(--pad);position:relative;overflow:hidden;background:var(--blue);min-height:440px;
+  .cta-dark{margin:0 calc(-1 * var(--pad));position:relative;overflow:hidden;background:var(--blue);min-height:440px;
     display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px 40px;}
   .cta-dark h2{position:relative;color:var(--ink);font-size:clamp(30px,3.4vw,46px);font-weight:700;
     line-height:1.1;margin:0 0 20px;max-width:720px;letter-spacing:-.02em;}
@@ -155,7 +158,7 @@
     max-width:900px;margin:50px auto 0;text-align:center;padding:0 var(--pad);}
   blockquote.pull2 cite{display:block;margin-top:14px;font-size:13px;font-style:normal;font-weight:500;opacity:.7;}
 
-  .connect-card{flex:0 0 400px;scroll-snap-align:start;}
+  .connect-card{flex:0 0 calc((100% - 2 * 20px)/2.5);scroll-snap-align:start;}
   .connect-card .img{aspect-ratio:4/5;overflow:hidden;position:relative;background:var(--ink-2);
     display:flex;align-items:flex-start;padding:26px;margin-bottom:14px;}
   .connect-card .img h3{position:relative;color:#fff;font-size:32px;font-weight:700;
@@ -179,6 +182,8 @@
     .teacher{grid-template-columns:1fr;gap:24px;}
     .teacher .ph{max-width:300px;}
     nav.mainnav{display:none;}
+    .fac-card,.connect-card{flex-basis:calc((100% - 20px)/1.15);}
+    .pan-grid{grid-template-columns:1fr;}
     ul.skills{grid-template-columns:1fr;}
     .subnav .jump{display:none;}
   }
@@ -242,14 +247,17 @@
 
 <section class="block tight" id="panoramica" style="padding-top:56px;">
   <h2 class="sec" contenteditable="true">Panoramica</h2>
+  <div class="pan-grid">
+  <div>
   <p class="lede" contenteditable="true">Non è una scuola di produzione musicale come le altre: da Creative Hub Academy esci con un <b>titolo universitario</b>, non con un attestato di partecipazione.</p>
   <p class="lede" contenteditable="true">Ableton, Pro Tools, FL Studio, sintetizzatori e plugin professionali dal primo giorno. Le stesse macchine che trovi negli studi dove andrai a lavorare. La teoria c'è, ma è tarata su hip-hop, rap, R&amp;B ed elettronica — non sul solfeggio. Se non sai leggere uno spartito non è un problema: si parte da come funziona un beat.</p>
   <p class="lede" contenteditable="true">Durante il percorso lavori su progetti reali con artisti e aziende del network. Il portfolio te lo costruisci prima del titolo, non dopo.</p>
-
+  </div>
   <div class="video-card">
     <img src="/mockup-corso/img/class-2.jpg" alt="">
     <div class="video-cap" contenteditable="true">Urban Music Production al Creative Hub<small>Creative Hub Academy — Bologna</small></div>
     <div class="play"></div>
+  </div>
   </div>
 </section>
 
@@ -403,32 +411,7 @@
   </blockquote>
 </section>
 
-<section class="block" id="connetti">
-  <div class="sec-flex-head">
-    <div>
-      <h2 class="sec" style="margin-bottom:10px;" contenteditable="true">Come conoscerci</h2>
-      <p class="lede" style="margin-bottom:0;" contenteditable="true">In presenza o online, non vediamo l'ora di incontrarti.</p>
-    </div>
-    <button class="pill pill-outline-ink" contenteditable="true">vedi tutti gli eventi</button>
-  </div>
-
-  <div class="carousel" id="connCarousel">
-    <div class="connect-card">
-      <div class="img"><img src="/mockup-corso/img/class-1.jpg" alt=""><h3 contenteditable="true">Open day</h3></div>
-      <div class="cap2"><span contenteditable="true">Partecipa a un open day, in sede o online</span><span class="arr"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></div>
-    </div>
-    <div class="connect-card">
-      <div class="img"><img src="/img/sections/studio-regia.jpg" alt=""><h3 contenteditable="true">Tour dello studio</h3></div>
-      <div class="cap2"><span contenteditable="true">Prenota una visita alla regia e alla sala live</span><span class="arr"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></div>
-    </div>
-    <div class="connect-card">
-      <div class="img"><img src="/mockup-corso/img/zilocchi.jpg" alt=""><h3 contenteditable="true">Parla con un tutor</h3></div>
-      <div class="cap2"><span contenteditable="true">Una chiamata individuale per tutte le tue domande</span><span class="arr"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></div>
-    </div>
-  </div>
-</section>
-
-<section class="block tight" id="ammissioni" style="padding-bottom:96px;">
+<section class="block" id="ammissioni">
   <div class="sec-flex-head">
     <h2 class="sec" style="margin-bottom:0;" contenteditable="true">Ammissioni</h2>
     <button class="pill pill-outline-ink" contenteditable="true">come candidarsi</button>
@@ -454,6 +437,31 @@
     <div class="acc-item">
       <div class="acc-head"><h3 contenteditable="true">Open day, colloqui e workshop di prova</h3><span class="acc-plus"><svg viewBox="0 0 18 18" width="16" height="16" stroke="currentColor" stroke-width="1.4"><path d="M9 3v12M3 9h12"/></svg></span></div>
       <div class="acc-body"><div><p contenteditable="true">Vieni a vedere prima di candidarti. Puoi partecipare anche con i tuoi genitori.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="block tight" id="connetti" style="padding-bottom:96px;">
+  <div class="sec-flex-head">
+    <div>
+      <h2 class="sec" style="margin-bottom:10px;" contenteditable="true">Come conoscerci</h2>
+      <p class="lede" style="margin-bottom:0;" contenteditable="true">In presenza o online, non vediamo l'ora di incontrarti.</p>
+    </div>
+    <button class="pill pill-outline-ink" contenteditable="true">vedi tutti gli eventi</button>
+  </div>
+
+  <div class="carousel" id="connCarousel">
+    <div class="connect-card">
+      <div class="img"><img src="/mockup-corso/img/class-1.jpg" alt=""><h3 contenteditable="true">Open day</h3></div>
+      <div class="cap2"><span contenteditable="true">Partecipa a un open day, in sede o online</span><span class="arr"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></div>
+    </div>
+    <div class="connect-card">
+      <div class="img"><img src="/img/sections/studio-regia.jpg" alt=""><h3 contenteditable="true">Tour dello studio</h3></div>
+      <div class="cap2"><span contenteditable="true">Prenota una visita alla regia e alla sala live</span><span class="arr"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></div>
+    </div>
+    <div class="connect-card">
+      <div class="img"><img src="/mockup-corso/img/zilocchi.jpg" alt=""><h3 contenteditable="true">Parla con un tutor</h3></div>
+      <div class="cap2"><span contenteditable="true">Una chiamata individuale per tutte le tue domande</span><span class="arr"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></div>
     </div>
   </div>
 </section>
