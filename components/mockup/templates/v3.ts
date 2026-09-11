@@ -52,10 +52,11 @@ export const css = `
   .hero-right{position:relative;overflow:hidden;min-height:420px;}
   .hero-right img{position:absolute;inset:0;height:100%;}
 
-  .marquee-wrap{background:var(--blue);overflow:hidden;padding:20px 0;white-space:nowrap;}
+  .marquee-wrap{background:var(--ink);overflow:hidden;padding:20px 0;white-space:nowrap;
+    border-top:1px solid var(--white);border-bottom:1px solid var(--white);}
   .marquee-track{display:flex;align-items:center;gap:44px;animation:scroll 22s linear infinite;width:max-content;}
-  .marquee-track span{color:var(--ink);font-size:32px;font-weight:700;letter-spacing:-.01em;}
-  .marquee-track .pill{background:var(--ink);color:var(--giallo);padding:11px 22px;font-size:15px;}
+  .marquee-track span{color:var(--white);font-size:32px;font-weight:700;letter-spacing:-.01em;}
+  .marquee-track .pill{background:var(--white);color:var(--ink);border:1px solid var(--white);padding:11px 22px;font-size:15px;}
   @keyframes scroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
 
   section.block{padding:clamp(56px,8vw,96px) var(--pad);}
