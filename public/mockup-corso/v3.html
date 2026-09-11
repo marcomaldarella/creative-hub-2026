@@ -212,6 +212,31 @@
   @media(max-width:1000px){
     .mainnav.mega{display:none;}
   }
+
+  .topbar{display:flex;align-items:center;justify-content:space-between;gap:24px;
+    padding:0 var(--pad);height:34px;font-size:11px;letter-spacing:.06em;
+    border-bottom:1px solid var(--topbar-line, rgba(0,0,0,.2));overflow:hidden;}
+  .topbar .topLeft,.topbar .topRight{white-space:nowrap;opacity:.85;}
+  .topbar .topRight{display:flex;align-items:center;gap:16px;}
+  .topbar .topRight a{color:inherit;text-decoration:none;}
+  .topMid{flex:0 1 auto;width:min(560px,42vw);margin:0 auto;overflow:hidden;
+    -webkit-mask-image:linear-gradient(to right,transparent,#000 12%,#000 88%,transparent);
+    mask-image:linear-gradient(to right,transparent,#000 12%,#000 88%,transparent);}
+  .topTrack{display:flex;width:max-content;animation:topScroll 24s linear infinite;}
+  .topGroup{display:flex;align-items:center;gap:14px;padding-right:44px;white-space:nowrap;}
+  @keyframes topScroll{to{transform:translate3d(-50%,0,0);}}
+  .topClose{flex-shrink:0;width:18px;height:18px;display:inline-flex;align-items:center;
+    justify-content:center;color:inherit;opacity:.6;background:none;border:none;padding:0;}
+  .topClose:hover{opacity:1;}
+  @media(max-width:900px){.topbar{display:none;}}
+
+  .wordmark{font-weight:600;font-size:17px;letter-spacing:-.01em;white-space:nowrap;
+    display:inline-flex;align-items:center;}
+  .wordmark em{font-style:normal;display:inline-block;width:26px;height:1px;
+    background:currentColor;margin:0 6px;}
+
+  .langsw{font-size:12px;letter-spacing:.02em;color:inherit;opacity:.7;white-space:nowrap;}
+  .langsw b{font-weight:600;opacity:1;}
 </style>
 </head>
 <body>
@@ -219,8 +244,23 @@
 <div class="edit-banner">template corso · versione 3 di 3 — notturna, card blu su nero · testi modificabili al click ·
   <a href="/mockup-corso/v1">v1</a> · <a href="/mockup-corso/v2">v2</a></div>
 
+<div class="topbar">
+  <span class="topLeft" contenteditable="true">est. 1999 · bologna</span>
+  <div class="topMid">
+    <div class="topTrack">
+      <span class="topGroup"><span contenteditable="true">iscrizioni aperte · a.a. 2026/27</span><span contenteditable="true">prenota l'open day</span></span>
+      <span class="topGroup"><span contenteditable="true">iscrizioni aperte · a.a. 2026/27</span><span contenteditable="true">prenota l'open day</span></span>
+    </div>
+  </div>
+  <div class="topRight">
+    <span contenteditable="true">+39 051 6313706 · hello@bologna-creativehub.it</span>
+    <button class="topClose" aria-label="chiudi" onclick="this.closest('.topbar').style.display='none'">
+      <svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 2l12 12M14 2L2 14"/></svg>
+    </button>
+  </div>
+</div>
 <header class="site">
-  <div class="logo">creative — hub</div>
+  <div class="logo"><span class="wordmark">creative<em aria-hidden="true"></em>hub</span></div>
   <nav class="mainnav mega">
       <div class="navItem">
         <a class="navLink" contenteditable="true">Academy<span class="arr"><svg class="caret" viewBox="0 0 10 6" width="10" height="6" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M1 1l4 4 4-4"/></svg></span></a>
@@ -323,8 +363,29 @@
           </div>
         </div>
       </div>
+      <div class="navItem" data-mega="chi-siamo">
+        <a class="navLink" contenteditable="true">Chi siamo<span class="arr"><svg class="caret" viewBox="0 0 10 6" width="10" height="6" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M1 1l4 4 4-4"/></svg></span></a>
+        <div class="panel">
+          <div class="panelIn">
+            <div class="panelHead">
+              <span class="panelLabel">/chi-siamo</span>
+              <h3 class="panelTitle">Chi siamo</h3>
+              <p class="panelDesc">Ecosistema · team · contatti.</p>
+              <span class="panelExplore">esplora la sezione <span class="arr"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></span>
+            </div>
+            <ul class="panelList">
+          <li class="panelEntry">L&#39;ecosistema</li>
+          <li class="panelEntry">Governance</li>
+          <li class="panelEntry">Contatti</li>
+          <li class="panelEntry">Team</li>
+          <li class="panelEntry">Partner</li>
+            </ul>
+          </div>
+        </div>
+      </div>
   </nav>
-  <button class="pill pill-dark" contenteditable="true">candidati</button>
+  <span class="langsw"><b>it</b> / en</span>
+  <button class="pill pill-dark" contenteditable="true">prenota</button>
 </header>
 
 <div class="hero">
