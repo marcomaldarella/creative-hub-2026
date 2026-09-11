@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet">
 <title>Urban Music Production — v1 · creative hub</title>
 <style>
   :root{
@@ -15,7 +18,7 @@
   *{box-sizing:border-box;margin:0;padding:0;}
   html{scroll-behavior:smooth;}
   body{background:var(--blue);color:var(--ink);
-    font-family:-apple-system,'Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-family:'Geist',system-ui,sans-serif;
     font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;}
   img{display:block;width:100%;height:100%;object-fit:cover;}
   button{font-family:inherit;cursor:pointer;}
@@ -45,7 +48,7 @@
 
   .hero{display:grid;grid-template-columns:minmax(520px,45%) 1fr;min-height:calc(100dvh - 150px);}
   .hero-left{padding:44px var(--pad) 48px;display:flex;flex-direction:column;}
-  .eyebrow{font-size:13px;font-weight:600;margin-bottom:18px;font-family:ui-monospace,Menlo,monospace;}
+  .eyebrow{font-size:13px;font-weight:600;margin-bottom:18px;font-family:'Geist',system-ui,sans-serif;}
   h1.hero-h1{font-size:clamp(34px,4vw,54px);line-height:1.04;font-weight:700;margin:0 0 22px;letter-spacing:-.02em;}
   .hero-sub{font-size:19px;font-weight:500;line-height:1.4;margin:0 0 40px;max-width:420px;}
   .meta-stack{display:flex;flex-direction:column;margin-top:auto;padding-top:56px;margin-bottom:30px;}
@@ -143,7 +146,7 @@
   .teacher{display:grid;grid-template-columns:300px 1fr;gap:48px;align-items:center;max-width:1000px;}
   .teacher .ph{aspect-ratio:4/5;overflow:hidden;background:var(--ink);}
   .teacher h3{font-size:24px;font-weight:700;margin:0 0 4px;}
-  .teacher .role{font-size:13px;font-family:ui-monospace,Menlo,monospace;margin-bottom:16px;}
+  .teacher .role{font-size:13px;font-family:'Geist',system-ui,sans-serif;margin-bottom:16px;}
   .teacher p{font-size:15.5px;line-height:1.65;max-width:52ch;}
 
   .cta-dark{margin:0 calc(-1 * var(--pad));position:relative;overflow:hidden;background:var(--ink);min-height:440px;
@@ -186,6 +189,28 @@
     ul.skills{grid-template-columns:1fr;}
     .subnav .jump{display:none;}
   }
+
+  header.site{position:relative;z-index:100;}
+  .mainnav.mega{gap:30px;}
+  .navItem{position:relative;display:flex;align-items:center;height:100%;}
+  .navLink{display:inline-flex;align-items:center;gap:6px;color:var(--ink);text-decoration:none;font-size:15px;font-weight:600;transition:color .2s;}
+  .navItem:hover .navLink{color:var(--ink);}
+  .navLink .caret{transition:transform .2s ease;}
+  .navItem:hover .navLink .caret{transform:rotate(180deg);}
+  .panel{position:absolute;top:100%;left:calc(-1 * var(--pad));right:calc(-1 * var(--pad));background:var(--ink);border-top:1px solid rgba(255,255,255,.12);border-bottom:1px solid rgba(255,255,255,.12);opacity:0;visibility:hidden;transform:translateY(-6px);pointer-events:none;transition:opacity .18s ease,transform .22s ease,visibility 0s linear .18s;}
+  .navItem:hover .panel,.navItem:focus-within .panel{opacity:1;visibility:visible;transform:none;pointer-events:auto;transition:opacity .2s ease,transform .24s ease;}
+  .panelIn{display:grid;grid-template-columns:minmax(260px,400px) 1fr;gap:clamp(36px,5vw,90px);padding:34px var(--pad) 42px;align-items:start;}
+  .panelHead{display:flex;flex-direction:column;align-items:flex-start;gap:10px;}
+  .panelLabel{font-size:12.5px;letter-spacing:.04em;color:var(--blue);}
+  .panelTitle{font-size:clamp(26px,2.6vw,40px);font-weight:700;letter-spacing:-.02em;line-height:.98;color:var(--blue);margin:0;}
+  .panelDesc{font-size:14px;line-height:1.5;color:rgba(255,255,255,.55);max-width:36ch;margin:0;}
+  .panelExplore{display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:600;color:var(--blue);}
+  .panelList{list-style:none;display:grid;grid-template-columns:repeat(2,minmax(180px,max-content));grid-auto-flow:column;column-gap:clamp(36px,5vw,72px);row-gap:2px;align-content:start;}
+  .panelEntry{font-size:15px;font-weight:500;padding:4px 0;color:var(--white);transition:color .15s;}
+  .panelEntry:hover{color:var(--blue);}
+  @media(max-width:1000px){
+    .mainnav.mega{display:none;}
+  }
 </style>
 </head>
 <body>
@@ -195,12 +220,108 @@
 
 <header class="site">
   <div class="logo">creative — hub</div>
-  <nav class="mainnav">
-    <a contenteditable="true">Academy</a>
-    <a contenteditable="true">Studio</a>
-    <a contenteditable="true">Coworking</a>
-    <a contenteditable="true">Innovazione</a>
-    <a contenteditable="true">Editorial</a>
+  <nav class="mainnav mega">
+      <div class="navItem">
+        <a class="navLink" contenteditable="true">Academy<span class="arr"><svg class="caret" viewBox="0 0 10 6" width="10" height="6" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M1 1l4 4 4-4"/></svg></span></a>
+        <div class="panel">
+          <div class="panelIn">
+            <div class="panelHead">
+              <span class="panelLabel">/academy</span>
+              <h3 class="panelTitle">Academy</h3>
+              <p class="panelDesc">Corsi di laurea, master e alta formazione in musica, sound, multimedia e visual. E corsi custom — per strumento, per codice, per skill — su tempi tuoi.</p>
+              <span class="panelExplore">esplora la sezione <span class="arr"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></span>
+            </div>
+            <ul class="panelList">
+          <li class="panelEntry">Corsi universitari</li>
+          <li class="panelEntry">Formazione finanziata</li>
+          <li class="panelEntry">Stage &amp; placement</li>
+          <li class="panelEntry">Corsi custom</li>
+          <li class="panelEntry">Open day</li>
+          <li class="panelEntry">Servizi studenti</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="navItem">
+        <a class="navLink" contenteditable="true">Studio<span class="arr"><svg class="caret" viewBox="0 0 10 6" width="10" height="6" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M1 1l4 4 4-4"/></svg></span></a>
+        <div class="panel">
+          <div class="panelIn">
+            <div class="panelHead">
+              <span class="panelLabel">/studios</span>
+              <h3 class="panelTitle">Studio</h3>
+              <p class="panelDesc">Regia SSL XL Desk da 55&nbsp;m², sala live, ISO box e tre cabine B-Ear.</p>
+              <span class="panelExplore">esplora la sezione <span class="arr"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></span>
+            </div>
+            <ul class="panelList">
+          <li class="panelEntry">Registrazione</li>
+          <li class="panelEntry">Mix &amp; mastering</li>
+          <li class="panelEntry">Dolby Atmos</li>
+          <li class="panelEntry">Sound design</li>
+          <li class="panelEntry">Podcast &amp; voice over</li>
+          <li class="panelEntry">Affitto studio</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="navItem">
+        <a class="navLink" contenteditable="true">Coworking<span class="arr"><svg class="caret" viewBox="0 0 10 6" width="10" height="6" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M1 1l4 4 4-4"/></svg></span></a>
+        <div class="panel">
+          <div class="panelIn">
+            <div class="panelHead">
+              <span class="panelLabel">/coworking</span>
+              <h3 class="panelTitle">Coworking</h3>
+              <p class="panelDesc">Coworking · sale · eventi nel cuore di Bologna.</p>
+              <span class="panelExplore">esplora la sezione <span class="arr"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></span>
+            </div>
+            <ul class="panelList">
+          <li class="panelEntry">Coworking</li>
+          <li class="panelEntry">Studio di registrazione</li>
+          <li class="panelEntry">Prenota uno spazio</li>
+          <li class="panelEntry">Sale &amp; eventi</li>
+          <li class="panelEntry">Metaverso</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="navItem">
+        <a class="navLink" contenteditable="true">Innovazione<span class="arr"><svg class="caret" viewBox="0 0 10 6" width="10" height="6" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M1 1l4 4 4-4"/></svg></span></a>
+        <div class="panel">
+          <div class="panelIn">
+            <div class="panelHead">
+              <span class="panelLabel">/innovazione</span>
+              <h3 class="panelTitle">Innovazione</h3>
+              <p class="panelDesc">Incubazione · B2B · startup creative.</p>
+              <span class="panelExplore">esplora la sezione <span class="arr"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></span>
+            </div>
+            <ul class="panelList">
+          <li class="panelEntry">Servizi per aziende</li>
+          <li class="panelEntry">Accelerazione</li>
+          <li class="panelEntry">Bandi &amp; opportunità</li>
+          <li class="panelEntry">Incubazione</li>
+          <li class="panelEntry">CTE COBO</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="navItem">
+        <a class="navLink" contenteditable="true">Editorial<span class="arr"><svg class="caret" viewBox="0 0 10 6" width="10" height="6" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M1 1l4 4 4-4"/></svg></span></a>
+        <div class="panel">
+          <div class="panelIn">
+            <div class="panelHead">
+              <span class="panelLabel">/magazine</span>
+              <h3 class="panelTitle">Editorial</h3>
+              <p class="panelDesc">Motore editoriale · SEO · storie dell'industria creativa.</p>
+              <span class="panelExplore">esplora la sezione <span class="arr"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></span>
+            </div>
+            <ul class="panelList">
+          <li class="panelEntry">Produzione musicale</li>
+          <li class="panelEntry">Industrie creative</li>
+          <li class="panelEntry">Formazione &amp; carriera</li>
+          <li class="panelEntry">Eventi &amp; news</li>
+            </ul>
+          </div>
+        </div>
+      </div>
   </nav>
   <button class="pill pill-dark" contenteditable="true">candidati</button>
 </header>
