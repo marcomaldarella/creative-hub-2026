@@ -33,9 +33,17 @@ const LOOK: {
   accent: string
   video?: string
 }[] = [
-  { img: studioImg, accent: 'var(--arancio)' },
-  { img: spaziImg, accent: 'var(--giallo-fluo)' },
-  { img: academyImg, accent: 'var(--azzurro-ink)' },
+  { img: studioImg, accent: 'var(--arancio)', video: '/video/node-studio.mp4' },
+  {
+    img: spaziImg,
+    accent: 'var(--giallo-fluo)',
+    video: '/video/node-coworking.mp4',
+  },
+  {
+    img: academyImg,
+    accent: 'var(--azzurro-ink)',
+    video: '/video/node-academy.mp4',
+  },
 ]
 
 const AUTOPLAY_MS = 6500
