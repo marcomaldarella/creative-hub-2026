@@ -339,7 +339,15 @@ export async function SiteChrome({
       >
         {nav}
         {children}
-        {footer}
+        {/* il footer NON segue il colore pieno: torna nero con i testi
+            chiari e il wordmark gigante nel colore della sezione — cosi'
+            la pagina si chiude invece di sfumare nel colore */}
+        <div
+          className="scheme-dark"
+          style={{ '--giant': flood } as React.CSSProperties}
+        >
+          {footer}
+        </div>
       </div>
     )
   }
