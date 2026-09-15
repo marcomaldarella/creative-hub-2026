@@ -127,7 +127,7 @@ export const css = `
      delle voci di menu) le faceva toccare. */
   .subnav .jump.aligned{position:absolute;top:0;height:100%;overflow:visible;}
   .subnav .tail{display:flex;align-items:center;gap:26px;margin-left:auto;flex-shrink:0;}
-  .subnav .jump a,.subnav .tail .year{position:relative;display:inline-flex;align-items:center;gap:6px;
+  .subnav .jump a,.subnav .tail .year{position:relative;display:inline-flex;align-items:center;gap:0;
     color:color-mix(in srgb,var(--ink) 62%,transparent);
     font-size:14px;font-weight:600;letter-spacing:-.025em;text-decoration:none;
     white-space:nowrap;transition:color .22s ease;}
@@ -518,10 +518,10 @@ export const html = `
 <div class="subnav">
   <div class="course" contenteditable="true">Urban Music Production — Bachelor of Arts</div>
   <nav class="jump" aria-label="sezioni del corso">
-    <a href="#panoramica"><span class="idx">01</span><span>Panoramica</span></a>
-    <a href="#struttura"><span class="idx">02</span><span>Struttura</span></a>
-    <a href="#ammissioni"><span class="idx">03</span><span>Ammissioni</span></a>
-    <a href="#connetti"><span class="idx">04</span><span>Connettiti</span></a>
+    <a href="#panoramica"><span class="idx">01.</span><span>Panoramica</span></a>
+    <a href="#struttura"><span class="idx">02.</span><span>Struttura</span></a>
+    <a href="#ammissioni"><span class="idx">03.</span><span>Ammissioni</span></a>
+    <a href="#connetti"><span class="idx">04.</span><span>Connettiti</span></a>
   </nav>
   <span class="tail">
     <span class="year">A.A. 2026/2027</span>
@@ -703,7 +703,7 @@ export const html = `
 </section>
 
 <section class="fullshot">
-  <video src="/video/creative-hub-8s-1920x1080.mp4" poster="/mockup-corso/img/wide.jpg" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
+  <video src="/video/creative-hub-8s-1920x1080.mp4" data-src-portrait="/video/creative-hub-8s-1080x1920.mp4" poster="/mockup-corso/img/wide.jpg" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
   <div class="in">
     <h2 contenteditable="true">La vita in Academy</h2>
     <p contenteditable="true">Al Creative Hub non produci musica da solo. Lavori in studi professionali, ti confronti con altri studenti e artisti del network, partecipi a sessioni con producer e A&amp;R in visita.</p>
