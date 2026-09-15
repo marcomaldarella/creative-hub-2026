@@ -27,21 +27,22 @@ const SECTION_ACCENTS: Record<
   { accent: string; ink: string; on: string }
 > = {
   /* ink = accento come TESTO (il blu brand è scuro: in dark si schiarisce
-     via --azzurro-ink) · on = testo SOPRA una superficie in --accent */
+     via --azzurro-ink) · on = testo SOPRA una superficie in --accent.
+     REGOLA CLIENTE: sopra un colore pieno il testo è SEMPRE nero */
   '/academy': {
     accent: 'var(--azzurro-fill)',
     ink: 'var(--azzurro-ink)',
-    on: 'var(--osso)',
+    on: '#000000',
   },
   '/studios': {
     accent: 'var(--arancio)',
     ink: 'var(--arancio-ink)',
-    on: 'var(--petrolio)',
+    on: '#000000',
   },
   '/coworking': {
     accent: 'var(--giallo-fluo)',
     ink: 'color-mix(in srgb, var(--giallo-fluo) 70%, var(--fg))',
-    on: 'var(--petrolio)',
+    on: '#000000',
   },
 }
 

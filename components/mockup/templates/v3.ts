@@ -21,7 +21,7 @@ export const css = `
   :host{scroll-behavior:smooth;}
   :host{display:block;background:var(--ink);color:var(--white);
     font-family:var(--font-body),system-ui,sans-serif;padding-top:var(--header-h);
-    font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;}
+    font-size:16px;line-height:1.35;-webkit-font-smoothing:antialiased;}
   [id]{scroll-margin-top:calc(var(--header-h) + 18px);}
   img{display:block;width:100%;height:100%;object-fit:cover;}
   button{font-family:inherit;cursor:pointer;}
@@ -55,14 +55,16 @@ export const css = `
   .hero{display:grid;grid-template-columns:minmax(520px,45%) 1fr;min-height:calc(100dvh - 150px);}
   .hero-left{padding:44px var(--pad) 48px;display:flex;flex-direction:column;}
   .eyebrow{font-size:13px;font-weight:600;margin-bottom:18px;font-family:var(--font-body),system-ui,sans-serif;color:var(--blue);}
-  h1.hero-h1{font-size:clamp(34px,4vw,54px);line-height:1.04;font-weight:700;margin:0 0 22px;letter-spacing:-.02em;}
-  .hero-sub{font-size:19px;font-weight:500;line-height:1.4;margin:0 0 40px;max-width:420px;}
-  .meta-stack{display:flex;flex-direction:column;margin-top:auto;padding-top:56px;margin-bottom:30px;}
-  .meta-stack>div{padding:16px 0;border-top:var(--hair) solid color-mix(in srgb,var(--blue) 30%,transparent);}
+  h1.hero-h1{font-size:clamp(34px,4vw,54px);line-height:.96;font-weight:700;margin:0 0 22px;letter-spacing:-.02em;}
+  .hero-sub{font-size:19px;font-weight:500;line-height:1.26;margin:0 0 40px;max-width:420px;}
+  .meta-stack{display:flex;flex-direction:column;margin-top:auto;padding-top:40px;margin-bottom:34px;}
+  .meta-stack>div{padding:18px 0;border-top:var(--hair) solid color-mix(in srgb,var(--blue) 30%,transparent);}
   .meta-stack>div:last-child{border-bottom:var(--hair) solid color-mix(in srgb,var(--blue) 30%,transparent);}
   .meta-stack>div{display:flex;align-items:baseline;justify-content:space-between;gap:16px;}
   .meta-stack .m-label{font-size:20px;font-weight:700;}
   .meta-stack .m-value{font-size:14.5px;color:var(--blue-soft);}
+  .hero-cta{display:flex;flex-wrap:wrap;gap:12px;align-self:flex-start;}
+  .hero-cta .pill{text-decoration:none;}
   .hero-right{position:relative;overflow:hidden;min-height:420px;}
   .hero-right img{position:absolute;inset:0;height:100%;}
 
@@ -82,11 +84,19 @@ export const css = `
 
   section.block{padding:clamp(56px,8vw,96px) var(--pad);}
   section.block.tight{padding-top:32px;}
-  h2.sec{font-size:clamp(30px,3.4vw,46px);font-weight:700;letter-spacing:-.02em;margin:0 0 26px;}
-  .sec-flex-head{display:flex;justify-content:space-between;align-items:flex-start;
+  h2.sec{font-size:clamp(30px,3.4vw,46px);font-weight:700;letter-spacing:-.02em;line-height:1.02;margin:0 0 26px;}
+  /* il tasto si allinea al BASSO del blocco titolo+sottotitolo */
+  .sec-flex-head{display:flex;justify-content:space-between;align-items:flex-end;
     flex-wrap:wrap;gap:20px;margin-bottom:40px;}
-  .lede{font-size:18px;line-height:1.6;max-width:760px;margin:0 0 18px;font-weight:400;}
+  .lede{font-size:18px;line-height:1.4;max-width:760px;margin:0 0 18px;font-weight:400;}
   .lede b{font-weight:700;}
+  /* attacco svizzero: il primo capoverso sale di un gradino ed e' tutto
+     in semibold, poi il testo torna alla misura di lettura.
+     :first-child sul FIGLIO DIRETTO, altrimenti prende anche i
+     paragrafi dentro altri blocchi della griglia */
+  .pan-grid > div > .lede:first-child{font-size:21px;font-weight:600;
+    line-height:1.3;letter-spacing:-.01em;margin-bottom:22px;}
+  .pan-grid > div > .lede:first-child b{font-weight:inherit;}
 
   .pan-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,60px);align-items:start;}
   .video-card{background:var(--ink);overflow:hidden;
@@ -107,22 +117,37 @@ export const css = `
     padding:0 var(--pad);height:58px;}
   .subnav .course{display:flex;align-items:center;color:var(--ink);font-weight:700;font-size:14px;
     letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-  .subnav .jump{display:flex;align-items:stretch;overflow-x:auto;scrollbar-width:none;
-    margin-right:calc(-1 * var(--pad));padding-right:var(--pad);}
+  /* le 4 voci si incolonnano sotto le voci del menu vero: la posizione
+     arriva da JS (misura le voci nel light DOM), qui c'e' solo il
+     ripiego quando il menu non c'e' — mobile o misura non riuscita */
+  .subnav .jump{display:flex;align-items:stretch;gap:26px;overflow-x:auto;scrollbar-width:none;}
   .subnav .jump::-webkit-scrollbar{display:none;}
-  .subnav .jump a{position:relative;display:inline-flex;align-items:center;gap:9px;
-    padding:0 18px;color:color-mix(in srgb,var(--ink) 62%,transparent);
-    font-size:13.5px;font-weight:600;text-decoration:none;
+  /* allineata: il blocco parte alla stessa x della PRIMA voce del menu
+     (Academy); dentro, le voci mantengono il loro ritmo */
+  .subnav .jump.aligned{position:absolute;top:0;height:100%;overflow:visible;}
+  .subnav .tail{display:flex;align-items:center;gap:26px;margin-left:auto;flex-shrink:0;}
+  .subnav .jump a,.subnav .tail .year{position:relative;display:inline-flex;align-items:center;gap:9px;
+    color:color-mix(in srgb,var(--ink) 62%,transparent);
+    font-size:14px;font-weight:600;letter-spacing:-.015em;text-decoration:none;
     white-space:nowrap;transition:color .22s ease;}
-  .subnav .jump a:last-child{padding-right:0;}
-  .subnav .jump .idx{font-size:11px;font-weight:600;letter-spacing:.04em;
+  /* voce non cliccabile: dato, non link — ma nero pieno */
+  .subnav .tail .year{color:var(--ink);cursor:default;}
+  /* frecce di salto fra le sezioni numerate, in coda alla fila */
+  .subnav .steps{display:flex;align-items:center;gap:6px;margin-left:2px;}
+  .subnav .step{width:28px;height:28px;border-radius:50%;flex-shrink:0;
+    border:1px solid color-mix(in srgb,var(--ink) 35%,transparent);background:transparent;
+    color:var(--ink);display:inline-flex;align-items:center;justify-content:center;
+    transition:background .2s ease,border-color .2s ease,opacity .2s ease;}
+  .subnav .step:hover{background:var(--ink);color:var(--blue);border-color:var(--ink);}
+  .subnav .step[disabled]{opacity:.3;pointer-events:none;}
+  .subnav .jump .idx{font-size:11px;font-weight:600;letter-spacing:.02em;
     color:color-mix(in srgb,var(--ink) 38%,transparent);transition:color .22s ease;}
   .subnav .jump a:hover{color:var(--ink);}
   .subnav .jump a.is-active{color:var(--ink);}
   .subnav .jump a.is-active .idx{color:var(--ink);}
-  /* indicatore della voce attiva sul bordo SUPERIORE: in basso ci passa
-     gia' la riga di avanzamento, un underline si sarebbe sovrapposto */
-  .subnav .jump a::before{content:"";position:absolute;left:0;right:0;top:0;height:2px;
+  /* sottolineatura della voce attiva: sotto la parola, non sul bordo
+     della barra — li' passa la riga di avanzamento */
+  .subnav .jump a::before{content:"";position:absolute;left:0;right:0;bottom:15px;height:2px;
     background:var(--ink);transform:scaleX(0);transform-origin:left;
     transition:transform .32s cubic-bezier(.22,1,.36,1);}
   .subnav .jump a.is-active::before{transform:none;}
@@ -138,12 +163,15 @@ export const css = `
      (niente border sulle celle, cosi' le righe non raddoppiano mai) */
   .skillgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--hair);
     background:color-mix(in srgb,var(--blue) 28%,transparent);border:var(--hair) solid color-mix(in srgb,var(--blue) 28%,transparent);}
-  .skill{background:var(--ink);padding:clamp(26px,2.2vw,34px) clamp(22px,2vw,30px) clamp(30px,2.6vw,38px);
-    display:flex;flex-direction:column;gap:12px;min-height:220px;transition:background .25s ease;}
+  /* misure FISSE, non legate alla larghezza della colonna: le sei celle
+     devono leggersi come sei voci della stessa lista */
+  .skill{background:var(--ink);padding:26px 26px 30px;
+    display:flex;flex-direction:column;min-height:210px;transition:background .25s ease;}
   .skill:hover{background:var(--ink-2);}
-  .skill .n{font-size:12.5px;font-weight:600;letter-spacing:.04em;color:var(--blue);}
-  .skill h3{font-size:clamp(19px,1.5vw,22px);font-weight:700;line-height:1.15;letter-spacing:-.02em;margin:0;}
-  .skill p{font-size:15px;line-height:1.55;color:var(--txt-2);margin:auto 0 0;max-width:30ch;}
+  .skill .n{font-size:12.5px;font-weight:600;letter-spacing:.04em;color:var(--blue);
+    margin-bottom:16px;}
+  .skill h3{font-size:21px;font-weight:700;line-height:1.12;letter-spacing:-.02em;margin:0 0 10px;}
+  .skill p{font-size:15px;line-height:1.4;color:var(--txt-2);margin:auto 0 0;max-width:30ch;}
   @media(max-width:1080px){.skillgrid{grid-template-columns:repeat(2,1fr);}}
   @media(max-width:620px){.skillgrid{grid-template-columns:1fr;}.skill{min-height:0;}}
 
@@ -154,8 +182,15 @@ export const css = `
   .fac-card .img{aspect-ratio:4/3;overflow:hidden;}
   .fac-card .txt{padding:16px 0 0;}
   .fac-card h3{font-size:18px;font-weight:700;margin:0 0 8px;}
-  .fac-card p{font-size:14px;line-height:1.55;margin:0;color:var(--txt-2);max-width:38ch;}
-  .carousel-nav{display:flex;gap:8px;justify-content:flex-end;margin-top:24px;}
+  .fac-card p{font-size:14px;line-height:1.4;margin:0;color:var(--txt-2);max-width:38ch;}
+  /* comandi del carosello: pallini di posizione a sinistra delle frecce,
+     sulla stessa riga */
+  .carousel-nav{display:flex;align-items:center;gap:8px;justify-content:flex-end;margin-top:24px;}
+  .dots{display:flex;align-items:center;gap:7px;margin-right:12px;}
+  .dot{width:7px;height:7px;border-radius:50%;padding:0;border:none;flex-shrink:0;
+    background:color-mix(in srgb,var(--blue) 30%,transparent);
+    transition:background .25s ease,transform .25s ease;}
+  .dot.on{background:var(--blue);transform:scale(1.25);}
   .cnav-btn{width:42px;height:42px;border-radius:50%;border:1px solid var(--blue);background:transparent;
     color:var(--blue);display:flex;align-items:center;justify-content:center;}
   .cnav-btn:hover{background:var(--blue);color:var(--ink);}
@@ -164,7 +199,7 @@ export const css = `
      sotto al tasto "Scarica il piano di studi" (stesso bordo destro) */
   .struct-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.08fr);
     gap:clamp(30px,4.5vw,84px);align-items:start;}
-  .struct-text p{font-size:16px;line-height:1.52;color:var(--txt-2);margin:0 0 16px;max-width:54ch;}
+  .struct-text p{font-size:16px;line-height:1.42;color:var(--txt-2);margin:0 0 16px;max-width:54ch;}
   .struct-text p:last-child{margin-bottom:0;}
   .struct-text b{color:var(--white);font-weight:600;}
   .struct-grid .accordion{max-width:none;margin-top:-22px;}
@@ -173,35 +208,71 @@ export const css = `
     .struct-grid .accordion{margin-top:0;}
   }
 
+  /* ————— mobile ————— */
+  @media(max-width:760px){
+    /* indice: via il nome del corso troncato e l'anno, restano le voci
+       numerate (scorrono) e le frecce di salto */
+    .subnav{gap:12px;height:54px;}
+    .subnav .course,.subnav .tail .year{display:none;}
+    .subnav .jump{gap:20px;flex:1;margin-right:0;padding-right:4px;}
+    .subnav .jump a{font-size:13px;}
+    .subnav .jump a::before{bottom:13px;}
+    .subnav .tail{gap:0;}
+
+    /* dati della hero: valore e etichetta uno sotto l'altro, altrimenti
+       "3 anni full-time, fino a 6 part-time" va a capo contro "Durata" */
+    .meta-stack>div{flex-direction:column;align-items:flex-start;gap:3px;padding:14px 0;}
+    .meta-stack .m-label{font-size:18px;}
+    .meta-stack{padding-top:28px;margin-bottom:26px;}
+    .hero-left{padding-top:32px;padding-bottom:36px;}
+    h1.hero-h1{font-size:clamp(30px,8.5vw,38px);}
+    .hero-sub{font-size:17px;}
+
+    /* titolo e tasto impilati: affiancati restavano schiacciati */
+    .sec-flex-head{flex-direction:column;align-items:flex-start;gap:16px;margin-bottom:28px;}
+    .sec-flex-head .pill{align-self:flex-start;}
+
+    .skill{padding:22px 22px 26px;}
+    .skill .n{margin-bottom:12px;}
+    .pan-grid > div > .lede:first-child{font-size:19px;}
+    .head-center{margin-bottom:34px;}
+    section.block{padding:52px var(--pad);}
+    section.block.tight{padding-top:28px;}
+    .carousel-nav{justify-content:space-between;}
+  }
+
+
   /* ammissioni: accordion a sinistra, riepilogo per parole chiave a
      destra sotto al tasto — si legge tutto a colpo d'occhio senza
      aprire una per una le voci */
-  .adm-grid{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,1fr);
-    gap:clamp(30px,4.5vw,84px);align-items:start;}
+  /* rientro: colonna stretta a sinistra per le informazioni di servizio,
+     contenuto vero incolonnato piu' a destra (stesso impianto della
+     sezione competenze della v2) */
+  .adm-grid{display:grid;grid-template-columns:280px minmax(0,1fr);
+    gap:clamp(30px,4.5vw,72px);align-items:start;}
   .adm-grid .accordion{max-width:none;}
-  /* il riepilogo si appoggia all'angolo in basso a destra della fascia:
-     colonna stirata + contenuto spinto in fondo e a filo del margine */
-  .adm-keys{align-self:stretch;display:flex;flex-direction:column;
-    justify-content:flex-end;align-items:flex-end;}
-  .adm-keys .keysIn{width:max-content;max-width:100%;}
-  /* etichetta allineata a destra: si legge come didascalia del blocco,
-     non come titolo di sezione */
-  .adm-keys .kicker{font-size:12px;font-weight:600;letter-spacing:.04em;color:var(--blue);
-    margin:0 0 12px;text-align:right;}
+  /* il riepilogo si appoggia in fondo alla colonna, all'altezza
+     dell'ultima voce dell'accordion */
+  .adm-keys{align-self:stretch;display:flex;flex-direction:column;justify-content:flex-end;}
+  .adm-keys .keysIn{max-width:100%;}
+  /* blocco piatto: nessun accento, nessun grassetto — e' informazione
+     di margine, non deve competere con l'accordion */
+  .adm-keys .kicker{font-size:12px;font-weight:400;letter-spacing:.04em;color:var(--txt-2);
+    margin:0 0 12px;}
   .adm-keys ul{list-style:none;display:grid;gap:5px;}
   .adm-keys li{position:relative;padding-left:20px;font-size:14.5px;line-height:1.32;color:var(--txt-2);}
-  .adm-keys li::before{content:"";position:absolute;left:0;top:.62em;width:9px;height:1px;background:var(--blue);}
-  .adm-keys li b{color:var(--white);font-weight:600;}
+  .adm-keys li::before{content:"";position:absolute;left:0;top:.62em;width:9px;height:1px;background:var(--txt-2);}
+  .adm-keys li b{color:inherit;font-weight:inherit;}
   @media(max-width:1000px){
-    .adm-grid{grid-template-columns:1fr;gap:34px;}
-    .adm-keys{order:-1;align-items:flex-start;}
+    .adm-grid{grid-template-columns:1fr;gap:28px;}
+    .adm-keys{order:1;}
   }
 
   .accordion{max-width:1000px;}
   .acc-item{border-top:var(--hair) solid color-mix(in srgb,var(--blue) 30%,transparent);}
   .accordion .acc-item:last-child{border-bottom:var(--hair) solid color-mix(in srgb,var(--blue) 30%,transparent);}
   .acc-head{display:flex;justify-content:space-between;align-items:center;padding:22px 0;cursor:pointer;}
-  .acc-head h3{font-size:22px;font-weight:700;margin:0;}
+  .acc-head h3{font-size:22px;font-weight:700;line-height:1.1;margin:0;}
   .acc-plus{flex-shrink:0;margin-left:20px;width:38px;height:38px;border-radius:999px;border:1px solid color-mix(in srgb,var(--blue) 40%,transparent);
     display:grid;place-items:center;}
   .acc-plus svg{transition:transform .25s ease;}
@@ -209,18 +280,17 @@ export const css = `
   .acc-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s ease;}
   .acc-body>div{overflow:hidden;min-height:0;}
   .acc-item.open .acc-body{grid-template-rows:1fr;}
-  .acc-body p{font-size:15.5px;line-height:1.65;margin:0;padding:0 0 26px;font-weight:400;max-width:700px;}
+  .acc-body p{font-size:15.5px;line-height:1.45;margin:0;padding:0 0 26px;font-weight:400;max-width:700px;}
 
   .promo-two{display:grid;grid-template-columns:1fr 1fr;min-height:420px;}
-  .promo-photo{position:relative;overflow:hidden;display:flex;align-items:flex-end;padding:36px;}
+  /* foto libera: niente titolo sopra, quindi via anche la sfumatura
+     che serviva solo a renderlo leggibile */
+  .promo-photo{position:relative;overflow:hidden;}
   .promo-photo img{position:absolute;inset:0;}
-  .promo-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.55),transparent 60%);}
-  .promo-photo h3{position:relative;z-index:1;color:var(--white);font-size:clamp(34px,3.6vw,52px);font-weight:700;
-    line-height:1.02;margin:0;letter-spacing:-.02em;}
   .promo-panel{background:var(--blue);color:var(--ink);padding:clamp(32px,4vw,56px);display:flex;flex-direction:column;
     justify-content:center;align-items:flex-start;}
   .promo-panel h2{font-size:clamp(26px,2.6vw,34px);font-weight:700;margin:0 0 18px;letter-spacing:-.01em;}
-  .promo-panel p{font-size:15.5px;line-height:1.65;margin:0 0 26px;color:var(--blue-ink);max-width:460px;}
+  .promo-panel p{font-size:15.5px;line-height:1.45;margin:0 0 26px;color:var(--blue-ink);max-width:460px;}
 
   /* due colonne uguali e larghe: la foto prende meta' schermo, quindi
      il taglio passa da verticale a quadrato */
@@ -228,7 +298,7 @@ export const css = `
     align-items:center;padding:0 var(--pad);}
   .split .imgbox{aspect-ratio:1/1;overflow:hidden;}
   .split h2{font-size:clamp(28px,3vw,42px);font-weight:700;line-height:1.08;margin:0 0 24px;letter-spacing:-.02em;}
-  .split p{font-size:16px;line-height:1.65;margin:0 0 16px;}
+  .split p{font-size:16px;line-height:1.45;margin:0 0 16px;}
   .split p b{font-weight:700;}
   /* fascia a schermo pieno: foto a tutto campo, testo sopra in basso a
      sinistra. Il tetto a 940px evita che su monitor alti la foto venga
@@ -255,17 +325,32 @@ export const css = `
   .teacher .ph{aspect-ratio:4/5;overflow:hidden;background:var(--ink-2);}
   .teacher h3{font-size:clamp(24px,2.2vw,32px);font-weight:700;letter-spacing:-.02em;margin:0 0 4px;}
   .teacher .role{font-size:13px;font-family:var(--font-body),system-ui,sans-serif;margin-bottom:16px;color:var(--blue);}
-  .teacher p{font-size:15.5px;line-height:1.42;max-width:52ch;}
+  .teacher p{font-size:15.5px;line-height:1.4;max-width:52ch;}
 
   .cta-dark{margin:0 calc(-1 * var(--pad));position:relative;overflow:hidden;background:var(--blue);min-height:440px;
     display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px 40px;}
   .cta-dark h2{position:relative;color:var(--ink);font-size:clamp(30px,3.4vw,46px);font-weight:700;
     line-height:1.1;margin:0 0 20px;max-width:720px;letter-spacing:-.02em;}
-  .cta-dark p{position:relative;color:var(--blue-ink);font-size:17px;margin:0 0 30px;max-width:520px;}
+  .cta-dark p{position:relative;color:var(--blue-ink);font-size:17px;line-height:1.35;margin:0 0 30px;max-width:520px;}
   .cta-dark .pill{position:relative;background:var(--ink);color:var(--blue);}
 
+  /* testimonial a rotazione: le citazioni stanno tutte nella stessa
+     cella di griglia e si scambiano in dissolvenza — cosi' l'altezza e'
+     quella della piu' lunga e la sezione non salta a ogni cambio */
+  /* frecce spinte ai due margini: lo spazio libero si distribuisce in
+     parti uguali, quindi la citazione resta comunque centrata */
+  .quotes{display:flex;align-items:center;justify-content:space-between;gap:clamp(14px,3vw,44px);}
+  .qtrack{display:grid;flex:0 1 900px;min-width:0;}
+  .qtrack blockquote{grid-area:1/1;opacity:0;visibility:hidden;transform:translateY(10px);
+    transition:opacity .45s ease,transform .6s cubic-bezier(.22,1,.36,1),visibility 0s linear .45s;}
+  .qtrack blockquote.is-on{opacity:1;visibility:visible;transform:none;
+    transition:opacity .45s ease,transform .6s cubic-bezier(.22,1,.36,1);}
   blockquote.pull2{font-size:clamp(22px,2.2vw,30px);font-weight:600;line-height:1.35;letter-spacing:-.02em;
     max-width:900px;margin:0 auto;text-align:center;}
+  @media(max-width:700px){
+    .quotes{gap:10px;}
+    .cnav-btn{width:36px;height:36px;}
+  }
   blockquote.pull2 cite{display:block;margin-top:14px;font-size:13px;font-style:normal;font-weight:500;opacity:.7;}
 
   .connect-card{flex:0 0 calc((100% - 2 * 20px)/2.5);scroll-snap-align:start;}
@@ -294,8 +379,6 @@ export const css = `
     nav.mainnav{display:none;}
     .fac-card,.connect-card{flex-basis:calc((100% - 20px)/1.15);}
     .pan-grid{grid-template-columns:1fr;}
-    ul.skills{grid-template-columns:1fr;}
-    .subnav .jump{display:none;}
   }
 
   header.site{position:relative;z-index:100;}
@@ -351,26 +434,29 @@ export const css = `
 export const html = `
 <div class="hero">
   <div class="hero-left">
-    <div class="eyebrow" contenteditable="true">academy · bachelor of arts</div>
+    <div class="eyebrow" contenteditable="true">Academy · Bachelor of Arts</div>
     <h1 class="hero-h1" contenteditable="true">Corso universitario di produzione musicale a Bologna.</h1>
     <p class="hero-sub" contenteditable="true">Diventa produttore musicale con il Bachelor of Arts in Urban Music Production.</p>
 
     <div class="meta-stack">
       <div>
         <div class="m-label" contenteditable="true">Ottobre 2026</div>
-        <div class="m-value" contenteditable="true">inizio corso</div>
+        <div class="m-value" contenteditable="true">Inizio corso</div>
       </div>
       <div>
         <div class="m-label" contenteditable="true">30 giugno 2026</div>
-        <div class="m-value" contenteditable="true">scadenza candidature (posti limitati)</div>
+        <div class="m-value" contenteditable="true">Scadenza candidature (posti limitati)</div>
       </div>
       <div>
         <div class="m-label" contenteditable="true">3 anni full-time, fino a 6 part-time</div>
-        <div class="m-value" contenteditable="true">durata</div>
+        <div class="m-value" contenteditable="true">Durata</div>
       </div>
     </div>
 
-    <button class="pill pill-dark" style="align-self:flex-start;"><span contenteditable="true">Scarica il piano di studi</span><svg class="dl" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M12 4v13M6 11l6 6 6-6"/></svg></button>
+    <div class="hero-cta">
+      <button class="pill pill-dark"><span contenteditable="true">Scarica il piano di studi</span><svg class="dl" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M12 4v13M6 11l6 6 6-6"/></svg></button>
+      <a class="pill pill-outline-ink" href="#panoramica"><span contenteditable="true">Maggiori informazioni</span></a>
+    </div>
   </div>
   <div class="hero-right"><img src="/mockup-corso/img/akai.jpg" alt="Pad controller Akai in studio"></div>
 </div>
@@ -411,11 +497,18 @@ export const html = `
 <div class="subnav">
   <div class="course" contenteditable="true">Urban Music Production — Bachelor of Arts</div>
   <nav class="jump" aria-label="sezioni del corso">
-    <a href="#panoramica"><span class="idx">01</span><span>panoramica</span></a>
-    <a href="#struttura"><span class="idx">02</span><span>struttura</span></a>
-    <a href="#ammissioni"><span class="idx">03</span><span>ammissioni</span></a>
-    <a href="#connetti"><span class="idx">04</span><span>connettiti</span></a>
+    <a href="#panoramica"><span class="idx">01</span><span>Panoramica</span></a>
+    <a href="#struttura"><span class="idx">02</span><span>Struttura</span></a>
+    <a href="#ammissioni"><span class="idx">03</span><span>Ammissioni</span></a>
+    <a href="#connetti"><span class="idx">04</span><span>Connettiti</span></a>
   </nav>
+  <span class="tail">
+    <span class="year">A.A. 2026/2027</span>
+    <span class="steps">
+      <button class="step" data-step="-1" aria-label="sezione precedente"><span class="arr w"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></button>
+      <button class="step" data-step="1" aria-label="sezione successiva"><span class="arr"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></button>
+    </span>
+  </span>
   <span class="prog" aria-hidden="true"></span>
 </div>
 
@@ -461,10 +554,10 @@ export const html = `
 <section class="block tight">
   <div class="sec-flex-head">
     <div>
-      <h2 class="sec" style="margin-bottom:10px;" contenteditable="true">Il tuo studio di lavoro</h2>
+      <h2 class="sec" style="margin-bottom:4px;" contenteditable="true">Il tuo studio di lavoro</h2>
       <p class="lede" style="margin-bottom:0;" contenteditable="true">Progettato per come si impara, si produce e si suona — ogni dettaglio pensato per chi studia qui.</p>
     </div>
-    <button class="pill pill-outline-ink" contenteditable="true">esplora lo studio</button>
+    <button class="pill pill-outline-ink" contenteditable="true">Esplora lo studio</button>
   </div>
 
   <div class="carousel" id="facCarousel">
@@ -536,22 +629,33 @@ export const html = `
 <div class="promo-two">
   <div class="promo-photo">
     <img src="/mockup-corso/img/class-3.jpg" alt="">
-    <h3 contenteditable="true">Prossimo workshop</h3>
   </div>
   <div class="promo-panel">
     <h2 contenteditable="true">Partecipa a un workshop di prova</h2>
     <p contenteditable="true">Incontra i nostri tutor di Urban Music Production e scopri come il corso può accompagnare il tuo percorso da producer, beatmaker o sound designer.</p>
-    <button class="pill pill-outline" contenteditable="true">vedi i prossimi workshop</button>
+    <button class="pill pill-outline" contenteditable="true">Vedi i prossimi workshop</button>
   </div>
 </div>
 
-<section class="block" id="ammissioni">
+<section class="block sep-top" id="ammissioni">
+  <div class="adm-grid">
+  <aside class="adm-keys">
+    <div class="keysIn">
+    <p class="kicker" contenteditable="true">In breve</p>
+    <ul>
+      <li contenteditable="true">Serve il <b>diploma</b> di scuola superiore</li>
+      <li contenteditable="true">Colloquio motivazionale, <b>non un'audizione</b></li>
+      <li contenteditable="true">Rette da <b>294€ al mese</b>, a tasso zero</li>
+    </ul>
+    </div>
+  </aside>
+
+  <div class="adm-main">
   <div class="sec-flex-head">
     <h2 class="sec" style="margin-bottom:0;" contenteditable="true">Ammissioni</h2>
     <button class="pill pill-outline-ink" contenteditable="true">Come candidarsi</button>
   </div>
 
-  <div class="adm-grid">
   <div class="accordion" id="admAccordion">
     <div class="acc-item">
       <div class="acc-head"><h3 contenteditable="true">Requisiti di ammissione</h3><span class="acc-plus"><svg viewBox="0 0 18 18" width="16" height="16" stroke="currentColor" stroke-width="1.4"><path d="M9 3v12M3 9h12"/></svg></span></div>
@@ -574,17 +678,7 @@ export const html = `
       <div class="acc-body"><div><p contenteditable="true">Vieni a vedere prima di candidarti. Puoi partecipare anche con i tuoi genitori.</p></div></div>
     </div>
   </div>
-
-  <aside class="adm-keys">
-    <div class="keysIn">
-    <p class="kicker" contenteditable="true">In breve</p>
-    <ul>
-      <li contenteditable="true">Serve il <b>diploma</b> di scuola superiore</li>
-      <li contenteditable="true">Colloquio motivazionale, <b>non un'audizione</b></li>
-      <li contenteditable="true">Rette da <b>294€ al mese</b>, a tasso zero</li>
-    </ul>
-    </div>
-  </aside>
+  </div>
   </div>
 </section>
 
@@ -594,17 +688,17 @@ export const html = `
     <h2 contenteditable="true">La vita in Academy</h2>
     <p contenteditable="true">Al Creative Hub non produci musica da solo. Lavori in studi professionali, ti confronti con altri studenti e artisti del network, partecipi a sessioni con producer e A&amp;R in visita.</p>
     <p contenteditable="true">Presenta i tuoi progetti in ascolti collettivi, collabora con chi studia Film Production o Music Business per progetti trasversali, ricevi feedback costruttivi da chi il mercato lo vive ancora.</p>
-    <button class="pill pill-white" contenteditable="true">scopri la vita in Academy</button>
+    <button class="pill pill-white" contenteditable="true">Scopri la vita in Academy</button>
   </div>
 </section>
 
-<section class="block tight" id="connetti">
+<section class="block tight sep-top" id="connetti">
   <div class="sec-flex-head">
     <div>
-      <h2 class="sec" style="margin-bottom:10px;" contenteditable="true">Come conoscerci</h2>
+      <h2 class="sec" style="margin-bottom:4px;" contenteditable="true">Come conoscerci</h2>
       <p class="lede" style="margin-bottom:0;" contenteditable="true">In presenza o online, non vediamo l'ora di incontrarti.</p>
     </div>
-    <button class="pill pill-outline-ink" contenteditable="true">vedi tutti gli eventi</button>
+    <button class="pill pill-outline-ink" contenteditable="true">Vedi tutti gli eventi</button>
   </div>
 
   <div class="carousel" id="connCarousel">
@@ -620,6 +714,10 @@ export const html = `
       <div class="img"><img src="/mockup-corso/img/zilocchi.jpg" alt=""><h3 contenteditable="true">Parla con un tutor</h3></div>
       <div class="cap2"><span contenteditable="true">Una chiamata individuale per tutte le tue domande</span><span class="arr"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></div>
     </div>
+  </div>
+  <div class="carousel-nav">
+    <button class="cnav-btn" aria-label="indietro" data-scroll-id="connCarousel" data-scroll-by="-400"><span class="arr w"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></button>
+    <button class="cnav-btn" aria-label="avanti" data-scroll-id="connCarousel" data-scroll-by="400"><span class="arr"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></button>
   </div>
 </section>
 
@@ -641,7 +739,7 @@ export const html = `
     <div class="ph"><img src="/mockup-corso/img/zilocchi.jpg" alt="Nicolò Zilocchi"></div>
     <div>
       <h3 contenteditable="true">Nicolò Zilocchi</h3>
-      <div class="role" contenteditable="true">course leader · urban music production</div>
+      <div class="role" contenteditable="true">Course leader · Urban Music Production</div>
       <p contenteditable="true">Producer e beatmaker, guida il percorso di Urban Music Production. Segue ogni studente con un'ora di lezione individuale a settimana, dal primo loop al progetto finale.</p>
     </div>
   </div>
@@ -651,14 +749,28 @@ export const html = `
   <div class="cta-dark">
     <h2 contenteditable="true">Non sai quale corso scegliere?</h2>
     <p contenteditable="true">Nessun problema. Ti aiutiamo a trovare il percorso in musica, sound o visual che parla di più a te.</p>
-    <button class="pill" contenteditable="true">scopri di più</button>
+    <button class="pill" contenteditable="true">Scopri di più</button>
   </div>
 </section>
 
 <section class="block tight" style="padding-bottom:clamp(72px,8vw,110px);">
-  <blockquote class="pull2">
-    <span contenteditable="true">"Qui non impari solo a usare un software. Impari a finire un pezzo, a farlo suonare come quelli che ascolti, e a portarlo fuori dalla tua stanza."</span>
-    <cite contenteditable="true">— studente, Urban Music Production, terzo anno</cite>
-  </blockquote>
+  <div class="quotes" id="quotes">
+    <button class="cnav-btn qnav" data-q="-1" aria-label="citazione precedente"><span class="arr w"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></button>
+    <div class="qtrack">
+      <blockquote class="pull2 is-on">
+        <span contenteditable="true">"Qui non impari solo a usare un software. Impari a finire un pezzo, a farlo suonare come quelli che ascolti, e a portarlo fuori dalla tua stanza."</span>
+        <cite contenteditable="true">— studente, Urban Music Production, terzo anno</cite>
+      </blockquote>
+      <blockquote class="pull2">
+        <span contenteditable="true">"Sono entrato che sapevo aprire Ableton e basta. Sono uscito con sei brani pubblicati e due clienti che mi richiamano."</span>
+        <cite contenteditable="true">— studente, Urban Music Production, diplomato 2025</cite>
+      </blockquote>
+      <blockquote class="pull2">
+        <span contenteditable="true">"L'ora individuale a settimana è la differenza. Qualcuno che ascolta il tuo pezzo davvero, ogni settimana, e ti dice dove non funziona."</span>
+        <cite contenteditable="true">— studentessa, Urban Music Production, secondo anno</cite>
+      </blockquote>
+    </div>
+    <button class="cnav-btn qnav" data-q="1" aria-label="citazione successiva"><span class="arr"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></button>
+  </div>
 </section>
 `;

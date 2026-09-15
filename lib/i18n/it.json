@@ -253,37 +253,37 @@
       "eyebrow": "03 — in evidenza",
       "slides": [
         {
-          "kicker": "studio",
+          "kicker": "Studio",
           "title": "Lo studio di registrazione",
           "text": "Regia SSL XL Desk da 55 m², sala live, ISO box e suite Dolby Atmos: il cuore tecnico dell'hub, dove lavora l'industria.",
           "tags": [
-            "ssl xl desk",
-            "dolby atmos",
-            "sala live"
+            "SSL XL Desk",
+            "Dolby Atmos",
+            "Sala live"
           ],
-          "cta": "entra negli studi"
+          "cta": "Entra negli studi"
         },
         {
-          "kicker": "coworking",
+          "kicker": "Coworking",
           "title": "Spazi, sale meeting ed eventi",
           "text": "Open space, sale riunioni e spazi per eventi nel cuore della zona Roveri: dove il lavoro incontra la community.",
           "tags": [
-            "open space",
-            "sale meeting",
-            "eventi"
+            "Open space",
+            "Sale meeting",
+            "Eventi"
           ],
-          "cta": "scopri gli spazi"
+          "cta": "Scopri gli spazi"
         },
         {
-          "kicker": "academy",
+          "kicker": "Academy",
           "title": "Corsi custom su strumento o specializzazione",
           "text": "Percorsi one-to-one costruiti su strumento, software o obiettivo: calendario, docente e livello su misura.",
           "tags": [
-            "one-to-one",
-            "su misura",
-            "tutti i livelli"
+            "One-to-one",
+            "Su misura",
+            "Tutti i livelli"
           ],
-          "cta": "scopri i corsi custom"
+          "cta": "Scopri i corsi custom"
         }
       ]
     },
@@ -305,7 +305,10 @@
   },
   "academy": {
     "kicker": "academy · iscrizioni aperte · a.a. 2026/27",
-    "titleLines": ["Accademia di musica, produzione", "e tecnico del suono a Bologna."],
+    "titleLines": [
+      "Accademia di musica, produzione",
+      "e tecnico del suono a Bologna."
+    ],
     "lede": "Corsi universitari — Bachelor of Arts, Bachelor of Science e Master of Music — in musica, produzione cinematografica e videomaking. Sei corsi di primo ciclo, tre Master, venti posti per corso.",
     "categoryLabel": "filtra per categoria",
     "empty": "nessun corso in questa categoria.",
@@ -397,7 +400,10 @@
       "I docenti di Creative Hub Academy sono professionisti attivi nell'industria musicale, non insegnanti che raccontano un mestiere che non fanno più. Quello che porti in aula lo stanno facendo anche fuori da qui: in tour, in studio, sul palco.",
       "Tra loro Angela Madonia, vocal coach nota al pubblico di Amici, e Stefania Martin, che ha lavorato al fianco di Renato Zero e Mina."
     ],
-    "teachersNames": ["Angela Madonia", "Stefania Martin"],
+    "teachersNames": [
+      "Angela Madonia",
+      "Stefania Martin"
+    ],
     "inMemoriaTitle": "In memoria",
     "inMemoriaText": "Bologna ha avuto tra i suoi maestri anche Celso Valli, arrangiatore e produttore che ha firmato il suono di Vasco Rossi, Laura Pausini, Mina, Eros Ramazzotti. Ci ha lasciati nel 2025. Quello che ha insegnato qui resta nel modo in cui l'Academy lavora ancora oggi."
   },

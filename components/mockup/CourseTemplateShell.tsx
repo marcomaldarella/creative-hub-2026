@@ -67,6 +67,44 @@ export function CourseTemplateShell({ css, html }: CourseTemplateShellProps) {
       });
     });
 
+    // testimonial a rotazione: dissolvenza fra le citazioni, frecce ai
+    // lati e avanzamento automatico (fermo sotto al puntatore e con
+    // prefers-reduced-motion)
+    const quotes = Array.from(
+      root.querySelectorAll<HTMLElement>('.qtrack blockquote')
+    );
+    let qTimer: ReturnType<typeof setInterval> | undefined;
+    if (quotes.length > 1) {
+      let i = 0;
+      const show = (n: number) => {
+        i = (n + quotes.length) % quotes.length;
+        quotes.forEach((q, k) => q.classList.toggle('is-on', k === i));
+      };
+      const calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const start = () => {
+        if (!calm && !qTimer) qTimer = setInterval(() => show(i + 1), 7000);
+      };
+      const stop = () => {
+        if (qTimer) clearInterval(qTimer);
+        qTimer = undefined;
+      };
+      root.querySelectorAll<HTMLElement>('.qnav').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          show(i + Number(btn.dataset.q ?? 1));
+          // ripartire da zero dopo un click: altrimenti il cambio
+          // automatico può arrivare mezzo secondo dopo il tuo
+          stop();
+          start();
+        });
+      });
+      const box = root.querySelector<HTMLElement>('.quotes');
+      box?.addEventListener('pointerenter', (e) => {
+        if ((e as PointerEvent).pointerType === 'mouse') stop();
+      });
+      box?.addEventListener('pointerleave', start);
+      start();
+    }
+
     // indice di sezione: voce attiva + riga di avanzamento della lettura.
     // Gli id vivono dentro lo shadow root, quindi niente
     // IntersectionObserver su document: misuriamo a mano le sezioni
@@ -78,6 +116,27 @@ export function CourseTemplateShell({ css, html }: CourseTemplateShellProps) {
     const subnav = root.querySelector<HTMLElement>('.subnav');
     let raf = 0;
 
+    // le frecce in coda all'indice muovono di una sezione: l'indice
+    // corrente lo tiene già lo scroll spy qui sotto
+    let active = -1;
+    const steps = Array.from(
+      root.querySelectorAll<HTMLButtonElement>('.subnav .step')
+    );
+    steps.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const dir = Number(btn.dataset.step ?? 1);
+        const next = Math.min(
+          links.length - 1,
+          Math.max(0, (active < 0 ? (dir > 0 ? -1 : 0) : active) + dir)
+        );
+        const id = links[next]?.getAttribute('href')?.slice(1);
+        (id ? root.getElementById(id) : null)?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+        });
+      });
+    });
+
     const sync = () => {
       raf = 0;
       const targets = links.map((a) =>
@@ -86,11 +145,16 @@ export function CourseTemplateShell({ css, html }: CourseTemplateShellProps) {
       // la soglia è il bordo inferiore della barra: una sezione è
       // "attiva" appena passa sotto l'indice, non a metà schermo
       const line = (subnav?.getBoundingClientRect().bottom ?? 0) + 4;
-      let active = -1;
+      active = -1;
       targets.forEach((t, i) => {
         if (t && t.getBoundingClientRect().top <= line) active = i;
       });
       links.forEach((a, i) => a.classList.toggle('is-active', i === active));
+      steps.forEach((btn) => {
+        const dir = Number(btn.dataset.step ?? 1);
+        btn.disabled =
+          dir < 0 ? active <= 0 : active >= links.length - 1;
+      });
 
       if (prog) {
         const first = targets.find(Boolean);
@@ -108,16 +172,43 @@ export function CourseTemplateShell({ css, html }: CourseTemplateShellProps) {
       if (!raf) raf = requestAnimationFrame(sync);
     };
 
+    // l'indice parte alla stessa x della PRIMA voce del menu vero. Le
+    // classi del CSS module sono hashate, l'aggancio è data-navlink.
+    // Senza menu (mobile) si resta sul layout a flusso.
+    const jump = root.querySelector<HTMLElement>('.subnav .jump');
+    const alignToNav = () => {
+      if (!jump) return;
+      const bar = jump.parentElement?.getBoundingClientRect();
+      const first = Array.from(
+        document.querySelectorAll<HTMLElement>('[data-navlink]')
+      ).find((el) => el.offsetParent !== null);
+      if (!bar || !first) {
+        jump.classList.remove('aligned');
+        jump.style.left = '';
+        return;
+      }
+      jump.classList.add('aligned');
+      jump.style.left = `${first.getBoundingClientRect().left - bar.left}px`;
+    };
+
+    const onResize = () => {
+      alignToNav();
+      onScroll();
+    };
+
     if (links.length) {
+      // il menu vero monta dopo: un giro di rAF prima di misurarlo
+      requestAnimationFrame(onResize);
       sync();
       window.addEventListener('scroll', onScroll, { passive: true });
-      window.addEventListener('resize', onScroll);
+      window.addEventListener('resize', onResize);
     }
 
     return () => {
+      if (qTimer) clearInterval(qTimer);
       if (raf) cancelAnimationFrame(raf);
       window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', onScroll);
+      window.removeEventListener('resize', onResize);
       wrap.remove();
       style.remove();
     };

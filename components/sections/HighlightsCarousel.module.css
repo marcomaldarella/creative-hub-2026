@@ -182,7 +182,6 @@
    giallo coworking, azzurro academy); il testo resta bianco leggibile
    sulla foto, con un velo dello stesso accento a scaldare la pastiglia */
 .tag {
-  /* inline-block: senza, ::first-letter (iniziale maiuscola) non scatta */
   display: inline-block;
   padding: 4px 12px;
   border: 1px solid color-mix(in srgb, var(--accent) 65%, transparent);
@@ -190,16 +189,6 @@
   /* eccezione voluta: le piccole label restano arrotondate, come i
      badge dei nodi */
   border-radius: 999px;
-}
-
-/* iniziale maiuscola su tag e tasto: i dizionari restano in minuscolo,
-   vale per entrambe le lingue */
-.tag::first-letter,
-.cta::first-letter {
-  text-transform: uppercase;
-  font-size: 11px;
-  letter-spacing: 0.05em;
-  color: rgba(255, 255, 255, 0.9);
 }
 
 .cta {

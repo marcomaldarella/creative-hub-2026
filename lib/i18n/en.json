@@ -253,37 +253,37 @@
       "eyebrow": "03 — featured",
       "slides": [
         {
-          "kicker": "studio",
+          "kicker": "Studio",
           "title": "The recording studio",
           "text": "A 55 m² SSL XL Desk control room, live room, ISO box and Dolby Atmos suite: the technical heart of the hub, where the industry works.",
           "tags": [
-            "ssl xl desk",
-            "dolby atmos",
-            "live room"
+            "SSL XL Desk",
+            "Dolby Atmos",
+            "Live room"
           ],
-          "cta": "step into the studios"
+          "cta": "Step into the studios"
         },
         {
-          "kicker": "coworking",
+          "kicker": "Coworking",
           "title": "Spaces, meeting rooms and events",
           "text": "Open space, meeting rooms and event spaces in the heart of the Roveri district: where work meets the community.",
           "tags": [
-            "open space",
-            "meeting rooms",
-            "events"
+            "Open space",
+            "Meeting rooms",
+            "Events"
           ],
-          "cta": "discover the spaces"
+          "cta": "Discover the spaces"
         },
         {
-          "kicker": "academy",
+          "kicker": "Academy",
           "title": "Custom courses by instrument or specialisation",
           "text": "One-to-one paths built around an instrument, a tool or a goal: schedule, teacher and level tailored to you.",
           "tags": [
-            "one-to-one",
-            "tailored",
-            "all levels"
+            "One-to-one",
+            "Tailored",
+            "All levels"
           ],
-          "cta": "discover custom courses"
+          "cta": "Discover custom courses"
         }
       ]
     },
@@ -305,7 +305,10 @@
   },
   "academy": {
     "kicker": "academy · enrolment open · a.y. 2026/27",
-    "titleLines": ["Music, production", "and sound engineering academy in Bologna."],
+    "titleLines": [
+      "Music, production",
+      "and sound engineering academy in Bologna."
+    ],
     "lede": "University courses — Bachelor of Arts, Bachelor of Science and Master of Music — in music, film production and video making. Six undergraduate courses, three Master's, twenty places per course.",
     "categoryLabel": "filter by category",
     "empty": "no courses in this category.",
@@ -397,7 +400,10 @@
       "Creative Hub Academy's teachers are working professionals in the music industry, not teachers describing a job they no longer do. What you bring into the classroom, they're doing right now, outside these walls: on tour, in the studio, on stage.",
       "Among them Angela Madonia, a vocal coach familiar to Amici audiences, and Stefania Martin, who has worked alongside Renato Zero and Mina."
     ],
-    "teachersNames": ["Angela Madonia", "Stefania Martin"],
+    "teachersNames": [
+      "Angela Madonia",
+      "Stefania Martin"
+    ],
     "inMemoriaTitle": "In memoriam",
     "inMemoriaText": "Bologna also counted Celso Valli among its teachers, the arranger and producer behind the sound of Vasco Rossi, Laura Pausini, Mina and Eros Ramazzotti. He passed away in 2025. What he taught here still shapes the way the Academy works today."
   },

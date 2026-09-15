@@ -327,6 +327,10 @@ export function Nav({
               <Link
                 href={item.href}
                 className={styles.navLink}
+                /* aggancio stabile per chi deve incolonnarsi sotto le
+                   voci del menu (indice di sezione della scheda corso):
+                   le classi dei CSS module sono hashate */
+                data-navlink=""
                 onClick={closePanelNow}
               >
                 {item.label}
