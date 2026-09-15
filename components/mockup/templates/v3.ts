@@ -342,9 +342,12 @@ export const css = `
   /* separatore di sezione: numerino a filo del margine sinistro e riga
      che corre fino al margine destro — dentro il gutter, non a tutta
      pagina come il vecchio bordo */
-  .sezRule{display:flex;align-items:center;gap:16px;padding:0 var(--pad);}
+  .sezRule{display:flex;align-items:center;gap:16px;padding:0 var(--pad);
+    margin-top:clamp(52px,6vw,96px);}
+  /* il numerino sta SOPRA la riga, non in mezzo: cosi' legge come
+     etichetta della sezione che comincia, non come parte del tratto */
   .sezRule span{flex-shrink:0;font-size:12px;font-weight:600;letter-spacing:.02em;
-    color:var(--txt-2);}
+    color:var(--txt-2);align-self:flex-end;margin-bottom:-9px;}
   .sezRule i{flex:1;height:var(--hair);background:color-mix(in srgb,var(--white) 20%,transparent);}
   .teacher{display:grid;grid-template-columns:minmax(0,.4fr) minmax(0,1fr);
     gap:clamp(28px,4vw,64px);align-items:center;max-width:none;}
