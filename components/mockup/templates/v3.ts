@@ -76,8 +76,11 @@ export const css = `
      e la giunta e' invisibile. Con il gap sulla track mancava un distacco
      proprio nel punto di ricongiunzione. */
   .marquee-track{display:flex;width:max-content;animation:scroll 28s linear infinite;}
-  .marquee-group{display:flex;align-items:center;gap:56px;padding-right:56px;}
-  .mq-unit{display:flex;align-items:center;gap:22px;}
+  /* stesso identico passo fra tutti gli elementi: frase - tasto - frase.
+     Il distacco di coda del gruppo vale quanto il gap, altrimenti il
+     ritmo salta nel punto di ricongiunzione del loop */
+  .marquee-group{display:flex;align-items:center;gap:46px;padding-right:46px;}
+  .mq-unit{display:flex;align-items:center;gap:46px;}
   .marquee-track span{color:var(--white);font-size:clamp(22px,2.4vw,30px);font-weight:700;letter-spacing:-.02em;}
   .marquee-track .pill{background:var(--ink);color:var(--white);border:1px solid var(--white);
     border-radius:999px;padding:12px 28px;font-size:16px;line-height:1.1;}
