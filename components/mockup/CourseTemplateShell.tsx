@@ -105,14 +105,12 @@ export function CourseTemplateShell({ css, html }: CourseTemplateShellProps) {
       start();
     }
 
-    // indice di sezione: voce attiva + riga di avanzamento della lettura.
-    // Gli id vivono dentro lo shadow root, quindi niente
-    // IntersectionObserver su document: misuriamo a mano le sezioni
-    // bersaglio a ogni frame utile.
+    // indice di sezione: mirino sulla voce attiva. Gli id vivono dentro
+    // lo shadow root, quindi niente IntersectionObserver su document:
+    // misuriamo a mano le sezioni bersaglio a ogni frame utile.
     const links = Array.from(
       root.querySelectorAll<HTMLAnchorElement>('.subnav .jump a')
     );
-    const prog = root.querySelector<HTMLElement>('.subnav .prog');
     const subnav = root.querySelector<HTMLElement>('.subnav');
     let raf = 0;
 
@@ -156,16 +154,6 @@ export function CourseTemplateShell({ css, html }: CourseTemplateShellProps) {
           dir < 0 ? active <= 0 : active >= links.length - 1;
       });
 
-      if (prog) {
-        const first = targets.find(Boolean);
-        const last = [...targets].reverse().find(Boolean);
-        if (first && last) {
-          const start = first.getBoundingClientRect().top - line;
-          const end = last.getBoundingClientRect().bottom - line;
-          const ratio = end > start ? -start / (end - start) : 0;
-          prog.style.width = `${Math.min(100, Math.max(0, ratio * 100))}%`;
-        }
-      }
     };
 
     const onScroll = () => {

@@ -161,12 +161,6 @@ export const css = `
     opacity:0;transform:scale(1.06);
     transition:opacity .22s ease,transform .3s cubic-bezier(.22,1,.36,1);}
   .subnav .jump a.is-active::before{opacity:1;transform:none;}
-  /* avanzamento della lettura: staccato dai margini, con una guida
-     leggera sempre visibile sotto la parte gia' percorsa */
-  .subnav .progTrack{position:absolute;left:var(--pad);right:var(--pad);bottom:8px;height:2px;
-    background:color-mix(in srgb,var(--ink) 15%,transparent);pointer-events:none;}
-  .subnav .prog{position:absolute;left:0;top:0;height:100%;width:0;background:var(--ink);
-    transition:width .12s linear;}
 
   /* intestazione centrata (titolo + lede) */
   .head-center{text-align:center;max-width:820px;margin:0 auto clamp(44px,5vw,64px);}
@@ -523,7 +517,6 @@ export const html = `
       <button class="step" data-step="1" aria-label="sezione successiva"><span class="arr"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></button>
     </span>
   </span>
-  <span class="progTrack" aria-hidden="true"><span class="prog"></span></span>
 </div>
 
 <section class="block">
