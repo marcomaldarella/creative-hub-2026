@@ -320,7 +320,10 @@ export const css = `
      tagliata a striscia e il testo resti sperduto in mezzo al nero. */
   .fullshot{position:relative;height:90svh;min-height:520px;max-height:940px;
     display:flex;align-items:flex-end;overflow:hidden;}
-  .fullshot>img{position:absolute;inset:0;}
+  /* il video di sfondo si comporta come la foto: copre tutto il palco.
+     object-fit va dichiarato qui, la regola globale vale solo per img */
+  .fullshot>img,.fullshot>video{position:absolute;inset:0;
+    width:100%;height:100%;object-fit:cover;display:block;}
   .fullshot::after{content:"";position:absolute;inset:0;pointer-events:none;
     background:linear-gradient(to top,rgba(10,10,10,.94) 0%,rgba(10,10,10,.6) 38%,
       rgba(10,10,10,.12) 68%,rgba(10,10,10,.42) 100%);}
@@ -700,7 +703,7 @@ export const html = `
 </section>
 
 <section class="fullshot">
-  <img src="/mockup-corso/img/wide.jpg" alt="Studenti al lavoro in studio">
+  <video src="/video/creative-hub-8s-1920x1080.mp4" poster="/mockup-corso/img/wide.jpg" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
   <div class="in">
     <h2 contenteditable="true">La vita in Academy</h2>
     <p contenteditable="true">Al Creative Hub non produci musica da solo. Lavori in studi professionali, ti confronti con altri studenti e artisti del network, partecipi a sessioni con producer e A&amp;R in visita.</p>
