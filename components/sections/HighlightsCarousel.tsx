@@ -42,7 +42,7 @@ const LOOK: {
   {
     img: academyImg,
     accent: 'var(--azzurro-ink)',
-    video: '/video/node-academy.mp4',
+    video: '/video/hi-corsi.mp4',
   },
 ]
 
