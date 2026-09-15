@@ -74,18 +74,37 @@ export function CourseTemplateShell({ css, html }: CourseTemplateShellProps) {
     const wantsPortrait = window.matchMedia(
       '(max-width: 760px) and (orientation: portrait)'
     ).matches;
-    if (wantsPortrait) {
-      root
-        .querySelectorAll<HTMLVideoElement>('video[data-src-portrait]')
-        .forEach((v) => {
-          const portrait = v.dataset.srcPortrait;
-          if (!portrait) return;
-          v.src = portrait;
-          v.load();
-          // su iOS il play dopo uno swap va richiesto a mano; se il
-          // browser lo rifiuta resta il poster, nessun errore in console
+    const calmVideo = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches;
+    // i video di sfondo non scaricano niente finché non entrano in
+    // campo: la sorgente si assegna al primo ingresso e la riproduzione
+    // si ferma quando escono. Finché il file non c'è resta il poster
+    const videoIO = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          const v = e.target as HTMLVideoElement;
+          if (!e.isIntersecting) {
+            if (!v.paused) v.pause();
+            return;
+          }
+          if (!v.getAttribute('src')) {
+            const wanted =
+              (wantsPortrait && v.dataset.srcPortrait) || v.dataset.srcWide;
+            if (wanted) {
+              v.setAttribute('src', wanted);
+              v.load();
+            }
+          }
           void v.play().catch(() => {});
         });
+      },
+      { rootMargin: '200px' }
+    );
+    if (!calmVideo) {
+      root
+        .querySelectorAll<HTMLVideoElement>('video[data-src-wide]')
+        .forEach((v) => videoIO.observe(v));
     }
 
     // testimonial a rotazione: dissolvenza fra le citazioni, frecce ai
@@ -214,6 +233,7 @@ export function CourseTemplateShell({ css, html }: CourseTemplateShellProps) {
     }
 
     return () => {
+      videoIO.disconnect();
       if (qTimer) clearInterval(qTimer);
       if (raf) cancelAnimationFrame(raf);
       window.removeEventListener('scroll', onScroll);

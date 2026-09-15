@@ -495,7 +495,7 @@ export const html = `
       <a class="pill pill-outline-ink" href="#panoramica"><span contenteditable="true">Maggiori informazioni</span></a>
     </div>
   </div>
-  <div class="hero-right"><video src="/video/creative-hub-8s-02-1920x1080.mp4" data-src-portrait="/video/creative-hub-8s-02-1080x1920.mp4" poster="/mockup-corso/img/akai.jpg" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video></div>
+  <div class="hero-right"><video data-src-wide="/video/creative-hub-8s-02-1920x1080.mp4" data-src-portrait="/video/creative-hub-8s-02-1080x1920.mp4" poster="/mockup-corso/img/akai.jpg" muted loop playsinline preload="none" aria-hidden="true"></video></div>
 </div>
 
 <div class="marquee-wrap">
@@ -727,7 +727,7 @@ export const html = `
 </section>
 
 <section class="fullshot">
-  <video src="/video/creative-hub-8s-1920x1080.mp4" data-src-portrait="/video/creative-hub-8s-1080x1920.mp4" poster="/mockup-corso/img/wide.jpg" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
+  <video data-src-wide="/video/creative-hub-8s-1920x1080.mp4" data-src-portrait="/video/creative-hub-8s-1080x1920.mp4" poster="/mockup-corso/img/wide.jpg" muted loop playsinline preload="none" aria-hidden="true"></video>
   <div class="in">
     <h2 contenteditable="true">La vita in Academy</h2>
     <p contenteditable="true">Al Creative Hub non produci musica da solo. Lavori in studi professionali, ti confronti con altri studenti e artisti del network, partecipi a sessioni con producer e A&amp;R in visita.</p>
@@ -769,7 +769,7 @@ export const html = `
 
 <section class="block">
   <div class="split">
-    <div class="imgbox"><video src="/video/creative-hub-6s-03-1080x1920.mp4" poster="/mockup-corso/img/class-4.jpg" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video></div>
+    <div class="imgbox"><video data-src-wide="/video/creative-hub-6s-03-1080x1920.mp4" poster="/mockup-corso/img/class-4.jpg" muted loop playsinline preload="none" aria-hidden="true"></video></div>
     <div>
       <h2 contenteditable="true">Nessun genere. Un metodo.</h2>
       <p contenteditable="true">La musica urban cambia continuamente, e lo trattiamo come condizione di studio. Non ti chiediamo di aderire a uno stile o a una scena. <b>Ci concentriamo sul tuo sviluppo artistico e sulla capacità critica</b>: come pensi, come lavori, dove vuoi portare la tua musica.</p>
