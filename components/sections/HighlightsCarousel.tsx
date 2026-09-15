@@ -5,6 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Arrow } from '@/components/ui'
 import academyImg from '@/public/img/sections/node-academy.jpg'
+import { BgVideo } from './BgVideo'
 import studioImg from '@/public/img/sections/node-studio.jpg'
 import spaziImg from '@/public/img/sections/node-spazi.jpg'
 import styles from './HighlightsCarousel.module.css'
@@ -24,8 +25,14 @@ export type HighlightsCarouselProps = {
   hrefs: string[]
 }
 
-/* media e accento di sezione per i tre hi-lights */
-const LOOK = [
+/* media e accento di sezione per i tre hi-lights. `video` e' opzionale:
+   quando c'e', la clip muta in loop prende il posto della foto, che resta
+   come poster */
+const LOOK: {
+  img: typeof studioImg
+  accent: string
+  video?: string
+}[] = [
   { img: studioImg, accent: 'var(--arancio)' },
   { img: spaziImg, accent: 'var(--giallo-fluo)' },
   { img: academyImg, accent: 'var(--azzurro-ink)' },
@@ -244,7 +251,7 @@ export function HighlightsCarousel({
         >
           {ext.map((slide, i) => {
             const logical = ((i - 1) % n + n) % n
-            const { img, accent } = LOOK[logical]
+            const { img, accent, video } = LOOK[logical]
             const active = i === pos
             const clone = i === 0 || i === n + 1
             return (
@@ -268,15 +275,23 @@ export function HighlightsCarousel({
                   }
                 }}
               >
-                <Image
-                  src={img}
-                  alt=""
-                  fill
-                  sizes="(max-width: 860px) 88vw, 64vw"
-                  className={styles.img}
-                  placeholder="blur"
-                  draggable={false}
-                />
+                {video ? (
+                  <BgVideo
+                    src={video}
+                    poster={img.src}
+                    className={styles.img}
+                  />
+                ) : (
+                  <Image
+                    src={img}
+                    alt=""
+                    fill
+                    sizes="(max-width: 860px) 88vw, 64vw"
+                    className={styles.img}
+                    placeholder="blur"
+                    draggable={false}
+                  />
+                )}
                 <div className={styles.shade} />
                 <div className={styles.body}>
                   <span className={`mono ${styles.kicker}`}>{slide.kicker}</span>

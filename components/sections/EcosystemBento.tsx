@@ -27,7 +27,7 @@ const IMAGES = [academyImg, studioImg, spaziImg]
 const SECTIONS = [
   /* accent = colore come TESTO · fill = superficie piena dell'hover ·
      video = clip muta in loop al posto della foto (la foto resta poster) */
-  { label: 'Academy', accent: 'var(--azzurro-ink)', fill: 'var(--azzurro)', video: undefined },
+  { label: 'Academy', accent: 'var(--azzurro-ink)', fill: 'var(--azzurro)', video: '/video/node-academy.mp4' },
   { label: 'Studio', accent: 'var(--arancio)', fill: 'var(--arancio)', video: '/video/node-studio.mp4' },
   {
     label: 'Coworking',

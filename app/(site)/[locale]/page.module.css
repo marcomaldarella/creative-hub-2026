@@ -397,7 +397,9 @@
 .manifestoKicker {
   display: block;
   letter-spacing: 0.08em;
-  color: var(--azzurro-ink);
+  /* etichetta neutra: sulla fascia bianca del manifesto l'azzurro era
+     l'unico colore in pagina e tirava l'occhio più dello statement */
+  color: var(--fg);
 }
 
 /* statement gigante centrato a tutta larghezza (ref endzeit) */
@@ -406,7 +408,9 @@
   font-size: clamp(42px, 7.2vw, 126px);
   line-height: 0.94;
   white-space: pre-line; /* una negazione per riga */
-  margin: clamp(28px, 6vh, 72px) 0;
+  /* l'etichetta sta addosso allo statement: sopra poco spazio, sotto
+     quello di prima */
+  margin: clamp(10px, 1.6vh, 20px) 0 clamp(28px, 6vh, 72px);
 }
 
 /* piede: lead a sinistra (un pelo più stretto) + colonna secondaria più ampia */

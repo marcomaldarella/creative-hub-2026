@@ -128,6 +128,15 @@
   box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 40%, transparent);
 }
 
+/* la clip riempie la slide come farebbe next/image con fill */
+video.img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
 .img {
   object-fit: cover;
   transform: translateX(var(--par, 0%)) scale(1.12);
