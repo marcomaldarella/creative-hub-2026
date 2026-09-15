@@ -33,7 +33,7 @@ const LOOK: {
   accent: string
   video?: string
 }[] = [
-  { img: studioImg, accent: 'var(--arancio)', video: '/video/node-studio.mp4' },
+  { img: studioImg, accent: 'var(--arancio)', video: '/video/hi-studio.mp4' },
   {
     img: spaziImg,
     accent: 'var(--giallo-fluo)',
