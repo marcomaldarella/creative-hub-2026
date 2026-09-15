@@ -126,9 +126,9 @@ export const css = `
      (Academy); dentro, le voci mantengono il loro ritmo */
   .subnav .jump.aligned{position:absolute;top:0;height:100%;overflow:visible;}
   .subnav .tail{display:flex;align-items:center;gap:26px;margin-left:auto;flex-shrink:0;}
-  .subnav .jump a,.subnav .tail .year{position:relative;display:inline-flex;align-items:center;gap:9px;
+  .subnav .jump a,.subnav .tail .year{position:relative;display:inline-flex;align-items:center;gap:6px;
     color:color-mix(in srgb,var(--ink) 62%,transparent);
-    font-size:14px;font-weight:600;letter-spacing:-.015em;text-decoration:none;
+    font-size:14px;font-weight:600;letter-spacing:-.025em;text-decoration:none;
     white-space:nowrap;transition:color .22s ease;}
   /* voce non cliccabile: dato, non link — ma nero pieno */
   .subnav .tail .year{color:var(--ink);cursor:default;}
@@ -140,18 +140,32 @@ export const css = `
     transition:background .2s ease,border-color .2s ease,opacity .2s ease;}
   .subnav .step:hover{background:var(--ink);color:var(--blue);border-color:var(--ink);}
   .subnav .step[disabled]{opacity:.3;pointer-events:none;}
-  .subnav .jump .idx{font-size:11px;font-weight:600;letter-spacing:.02em;
+  .subnav .jump .idx{font-size:11px;font-weight:600;letter-spacing:-.01em;
     color:color-mix(in srgb,var(--ink) 38%,transparent);transition:color .22s ease;}
   .subnav .jump a:hover{color:var(--ink);}
   .subnav .jump a.is-active{color:var(--ink);}
   .subnav .jump a.is-active .idx{color:var(--ink);}
-  /* sottolineatura della voce attiva: sotto la parola, non sul bordo
-     della barra — li' passa la riga di avanzamento */
-  .subnav .jump a::before{content:"";position:absolute;left:0;right:0;bottom:15px;height:2px;
-    background:var(--ink);transform:scaleX(0);transform-origin:left;
-    transition:transform .32s cubic-bezier(.22,1,.36,1);}
-  .subnav .jump a.is-active::before{transform:none;}
-  .subnav .prog{position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--ink);
+  /* voce attiva = mirino: quattro angoli disegnati con otto segmenti di
+     gradiente in un solo pseudo-elemento (niente markup in piu') */
+  .subnav .jump a::before{content:"";position:absolute;inset:15px -9px;pointer-events:none;
+    --c:color-mix(in srgb,var(--ink) 55%,transparent);--t:1.5px;--l:7px;
+    background:
+      linear-gradient(var(--c),var(--c)) 0 0/var(--l) var(--t) no-repeat,
+      linear-gradient(var(--c),var(--c)) 0 0/var(--t) var(--l) no-repeat,
+      linear-gradient(var(--c),var(--c)) 100% 0/var(--l) var(--t) no-repeat,
+      linear-gradient(var(--c),var(--c)) 100% 0/var(--t) var(--l) no-repeat,
+      linear-gradient(var(--c),var(--c)) 0 100%/var(--l) var(--t) no-repeat,
+      linear-gradient(var(--c),var(--c)) 0 100%/var(--t) var(--l) no-repeat,
+      linear-gradient(var(--c),var(--c)) 100% 100%/var(--l) var(--t) no-repeat,
+      linear-gradient(var(--c),var(--c)) 100% 100%/var(--t) var(--l) no-repeat;
+    opacity:0;transform:scale(1.06);
+    transition:opacity .22s ease,transform .3s cubic-bezier(.22,1,.36,1);}
+  .subnav .jump a.is-active::before{opacity:1;transform:none;}
+  /* avanzamento della lettura: staccato dai margini, con una guida
+     leggera sempre visibile sotto la parte gia' percorsa */
+  .subnav .progTrack{position:absolute;left:var(--pad);right:var(--pad);bottom:8px;height:2px;
+    background:color-mix(in srgb,var(--ink) 15%,transparent);pointer-events:none;}
+  .subnav .prog{position:absolute;left:0;top:0;height:100%;width:0;background:var(--ink);
     transition:width .12s linear;}
 
   /* intestazione centrata (titolo + lede) */
@@ -216,7 +230,7 @@ export const css = `
     .subnav .course,.subnav .tail .year{display:none;}
     .subnav .jump{gap:20px;flex:1;margin-right:0;padding-right:4px;}
     .subnav .jump a{font-size:13px;}
-    .subnav .jump a::before{bottom:13px;}
+    .subnav .jump a::before{inset:13px -7px;--l:6px;}
     .subnav .tail{gap:0;}
 
     /* dati della hero: valore e etichetta uno sotto l'altro, altrimenti
@@ -509,7 +523,7 @@ export const html = `
       <button class="step" data-step="1" aria-label="sezione successiva"><span class="arr"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></button>
     </span>
   </span>
-  <span class="prog" aria-hidden="true"></span>
+  <span class="progTrack" aria-hidden="true"><span class="prog"></span></span>
 </div>
 
 <section class="block">
