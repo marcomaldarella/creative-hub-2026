@@ -67,7 +67,57 @@ export function CourseTemplateShell({ css, html }: CourseTemplateShellProps) {
       });
     });
 
+    // indice di sezione: voce attiva + riga di avanzamento della lettura.
+    // Gli id vivono dentro lo shadow root, quindi niente
+    // IntersectionObserver su document: misuriamo a mano le sezioni
+    // bersaglio a ogni frame utile.
+    const links = Array.from(
+      root.querySelectorAll<HTMLAnchorElement>('.subnav .jump a')
+    );
+    const prog = root.querySelector<HTMLElement>('.subnav .prog');
+    const subnav = root.querySelector<HTMLElement>('.subnav');
+    let raf = 0;
+
+    const sync = () => {
+      raf = 0;
+      const targets = links.map((a) =>
+        root.getElementById(a.getAttribute('href')?.slice(1) ?? '')
+      );
+      // la soglia è il bordo inferiore della barra: una sezione è
+      // "attiva" appena passa sotto l'indice, non a metà schermo
+      const line = (subnav?.getBoundingClientRect().bottom ?? 0) + 4;
+      let active = -1;
+      targets.forEach((t, i) => {
+        if (t && t.getBoundingClientRect().top <= line) active = i;
+      });
+      links.forEach((a, i) => a.classList.toggle('is-active', i === active));
+
+      if (prog) {
+        const first = targets.find(Boolean);
+        const last = [...targets].reverse().find(Boolean);
+        if (first && last) {
+          const start = first.getBoundingClientRect().top - line;
+          const end = last.getBoundingClientRect().bottom - line;
+          const ratio = end > start ? -start / (end - start) : 0;
+          prog.style.width = `${Math.min(100, Math.max(0, ratio * 100))}%`;
+        }
+      }
+    };
+
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(sync);
+    };
+
+    if (links.length) {
+      sync();
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll);
+    }
+
     return () => {
+      if (raf) cancelAnimationFrame(raf);
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
       wrap.remove();
       style.remove();
     };

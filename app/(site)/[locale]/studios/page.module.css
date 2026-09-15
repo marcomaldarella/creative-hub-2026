@@ -171,6 +171,7 @@
   color: var(--fg);
   /* stesso peso visivo del tasto accanto: bordo e padding da bottone */
   border: 1px solid color-mix(in srgb, var(--fg) 45%, transparent);
+  border-radius: var(--radius-pill);
   padding: 11px 22px;
 }
 

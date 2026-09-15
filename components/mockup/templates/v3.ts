@@ -2,12 +2,20 @@
 // (nav e footer reali) invece del menu ricostruito a mano.
 export const css = `
   :host{
-    --blue:#57A6FF;
-    --giallo:#DEFF3B;
+    /* un solo azzurro in tutto il sito: quello globale (--azzurro in
+       globals.css). Il fallback serve solo se il template viene montato
+       fuori dal sito. --pad NON e' ridefinito: eredita il gutter del
+       sito, cosi' la pagina si allinea a nav e footer reali. */
+    --blue:var(--azzurro,#71B8FF);
+    --giallo:var(--giallo-fluo,#DEFF3B);
     --ink:#0A0A0A;
     --ink-2:#161616;
     --white:#FFFFFF;
-    --pad:clamp(16px,3vw,60px);
+    --blue-soft:color-mix(in srgb,var(--blue) 62%,var(--white));
+    --blue-hover:color-mix(in srgb,var(--blue) 80%,var(--white));
+    --blue-ink:color-mix(in srgb,var(--ink) 78%,var(--blue));
+    --txt-2:rgba(255,255,255,.62);
+    --hair:.5px;
   }
   :host,:host *{box-sizing:border-box;margin:0;padding:0;}
   :host{scroll-behavior:smooth;}
@@ -18,23 +26,29 @@ export const css = `
   img{display:block;width:100%;height:100%;object-fit:cover;}
   button{font-family:inherit;cursor:pointer;}
   [contenteditable="true"]{outline:none;}
-  [contenteditable="true"]:hover{background:rgba(87,166,255,.10);}
-  [contenteditable="true"]:focus{background:rgba(87,166,255,.16);}
   .arr{display:inline-flex;vertical-align:middle;}
   .arr svg{display:block;}
   .arr.w{transform:rotate(180deg);}
 
 
   header.site{display:flex;align-items:center;justify-content:space-between;
-    padding:22px var(--pad);border-bottom:1px solid rgba(87,166,255,.3);}
+    padding:22px var(--pad);border-bottom:var(--hair) solid color-mix(in srgb,var(--blue) 30%,transparent);}
   header.site .logo{font-weight:700;font-size:20px;letter-spacing:-.01em;}
   nav.mainnav{display:flex;gap:32px;align-items:center;}
   nav.mainnav a{color:var(--blue);text-decoration:none;font-size:15px;font-weight:600;}
-  .pill{appearance:none;border:none;border-radius:0;padding:12px 24px;
-    font-weight:600;font-size:14.5px;white-space:nowrap;}
+  .pill{appearance:none;border:none;border-radius:999px;padding:12px 26px;
+    font-weight:600;font-size:14.5px;white-space:nowrap;
+    display:inline-flex;align-items:center;gap:9px;}
+  /* freccia del download: scende di un filo quando passi sul tasto */
+  .pill .dl{transition:transform .25s cubic-bezier(.22,1,.36,1);}
+  .pill:hover .dl{transform:translateY(2px);}
   .pill-dark{background:var(--blue);color:var(--ink);}
-  .pill-dark:hover{background:#7FBAFF;}
+  .pill-dark:hover{background:var(--blue-hover);}
   .pill-outline{background:transparent;border:1px solid var(--ink);color:var(--ink);}
+  /* variante per i tasti SOPRA una foto */
+  .pill-white{background:transparent;border:1px solid rgba(255,255,255,.55);color:var(--white);
+    backdrop-filter:blur(2px);}
+  .pill-white:hover{background:var(--white);color:var(--ink);border-color:var(--white);}
   .pill-outline-ink{background:transparent;border:1px solid var(--blue);color:var(--blue);}
   .pill-outline-ink:hover{background:var(--blue);color:var(--ink);}
 
@@ -44,20 +58,27 @@ export const css = `
   h1.hero-h1{font-size:clamp(34px,4vw,54px);line-height:1.04;font-weight:700;margin:0 0 22px;letter-spacing:-.02em;}
   .hero-sub{font-size:19px;font-weight:500;line-height:1.4;margin:0 0 40px;max-width:420px;}
   .meta-stack{display:flex;flex-direction:column;margin-top:auto;padding-top:56px;margin-bottom:30px;}
-  .meta-stack>div{padding:16px 0;border-top:1px solid rgba(87,166,255,.3);}
-  .meta-stack>div:last-child{border-bottom:1px solid rgba(87,166,255,.3);}
+  .meta-stack>div{padding:16px 0;border-top:var(--hair) solid color-mix(in srgb,var(--blue) 30%,transparent);}
+  .meta-stack>div:last-child{border-bottom:var(--hair) solid color-mix(in srgb,var(--blue) 30%,transparent);}
   .meta-stack>div{display:flex;align-items:baseline;justify-content:space-between;gap:16px;}
   .meta-stack .m-label{font-size:20px;font-weight:700;}
-  .meta-stack .m-value{font-size:14.5px;color:#7FB4EF;}
+  .meta-stack .m-value{font-size:14.5px;color:var(--blue-soft);}
   .hero-right{position:relative;overflow:hidden;min-height:420px;}
   .hero-right img{position:absolute;inset:0;height:100%;}
 
   .marquee-wrap{background:var(--ink);overflow:hidden;padding:20px 0;white-space:nowrap;
-    border-top:1px solid var(--white);border-bottom:1px solid var(--white);}
-  .marquee-track{display:flex;align-items:center;gap:44px;animation:scroll 22s linear infinite;width:max-content;}
-  .marquee-track span{color:var(--white);font-size:32px;font-weight:700;letter-spacing:-.01em;}
-  .marquee-track .pill{background:var(--white);color:var(--ink);border:1px solid var(--white);padding:11px 22px;font-size:15px;}
-  @keyframes scroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+    border-top:var(--hair) solid var(--white);border-bottom:var(--hair) solid var(--white);}
+  /* due gruppi IDENTICI, ognuno con il proprio distacco di coda (padding-right):
+     cosi' translate3d(-50%) coincide esattamente con la larghezza di un gruppo
+     e la giunta e' invisibile. Con il gap sulla track mancava un distacco
+     proprio nel punto di ricongiunzione. */
+  .marquee-track{display:flex;width:max-content;animation:scroll 28s linear infinite;}
+  .marquee-group{display:flex;align-items:center;gap:56px;padding-right:56px;}
+  .mq-unit{display:flex;align-items:center;gap:22px;}
+  .marquee-track span{color:var(--white);font-size:clamp(22px,2.4vw,30px);font-weight:700;letter-spacing:-.02em;}
+  .marquee-track .pill{background:var(--ink);color:var(--white);border:1px solid var(--white);
+    border-radius:999px;padding:12px 28px;font-size:16px;line-height:1.1;}
+  @keyframes scroll{from{transform:translate3d(0,0,0);}to{transform:translate3d(-50%,0,0);}}
 
   section.block{padding:clamp(56px,8vw,96px) var(--pad);}
   section.block.tight{padding-top:32px;}
@@ -78,37 +99,110 @@ export const css = `
   .video-cap{position:absolute;top:16px;left:16px;color:#fff;font-size:14px;font-weight:600;z-index:1;}
   .video-cap small{display:block;font-weight:400;font-size:11px;opacity:.7;margin-top:2px;color:#fff;}
 
-  .subnav{position:sticky;top:var(--header-h);z-index:40;background:var(--blue);border-bottom:1px solid var(--ink);
-    display:flex;justify-content:space-between;align-items:center;padding:16px var(--pad);gap:16px;}
-  .subnav .course{color:var(--ink);font-weight:700;font-size:15px;}
-  .subnav .jump{display:flex;gap:24px;flex-wrap:wrap;}
-  .subnav .jump a{color:var(--ink);font-size:13px;font-weight:600;text-decoration:none;opacity:.85;}
-  .subnav .jump a:hover{opacity:1;}
+  /* indice di sezione: barra in AZZURRO pieno, tutto cio' che ci sta
+     sopra in nero (l'azzurro e' chiaro: il bianco non reggerebbe) */
+  .subnav{position:sticky;top:var(--header-h);z-index:40;background:var(--blue);
+    border-bottom:var(--hair) solid color-mix(in srgb,var(--ink) 30%,transparent);
+    display:flex;justify-content:space-between;align-items:stretch;gap:20px;
+    padding:0 var(--pad);height:58px;}
+  .subnav .course{display:flex;align-items:center;color:var(--ink);font-weight:700;font-size:14px;
+    letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .subnav .jump{display:flex;align-items:stretch;overflow-x:auto;scrollbar-width:none;
+    margin-right:calc(-1 * var(--pad));padding-right:var(--pad);}
+  .subnav .jump::-webkit-scrollbar{display:none;}
+  .subnav .jump a{position:relative;display:inline-flex;align-items:center;gap:9px;
+    padding:0 18px;color:color-mix(in srgb,var(--ink) 62%,transparent);
+    font-size:13.5px;font-weight:600;text-decoration:none;
+    white-space:nowrap;transition:color .22s ease;}
+  .subnav .jump a:last-child{padding-right:0;}
+  .subnav .jump .idx{font-size:11px;font-weight:600;letter-spacing:.04em;
+    color:color-mix(in srgb,var(--ink) 38%,transparent);transition:color .22s ease;}
+  .subnav .jump a:hover{color:var(--ink);}
+  .subnav .jump a.is-active{color:var(--ink);}
+  .subnav .jump a.is-active .idx{color:var(--ink);}
+  /* indicatore della voce attiva sul bordo SUPERIORE: in basso ci passa
+     gia' la riga di avanzamento, un underline si sarebbe sovrapposto */
+  .subnav .jump a::before{content:"";position:absolute;left:0;right:0;top:0;height:2px;
+    background:var(--ink);transform:scaleX(0);transform-origin:left;
+    transition:transform .32s cubic-bezier(.22,1,.36,1);}
+  .subnav .jump a.is-active::before{transform:none;}
+  .subnav .prog{position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--ink);
+    transition:width .12s linear;}
 
-  ul.skills{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:0 40px;max-width:1100px;}
-  ul.skills li{font-size:17px;font-weight:500;padding:14px 0 14px 24px;position:relative;line-height:1.5;
-    border-top:1px solid rgba(87,166,255,.3);}
-  ul.skills li::before{content:"";position:absolute;left:0;top:22px;width:8px;height:8px;background:var(--blue);}
+  /* intestazione centrata (titolo + lede) */
+  .head-center{text-align:center;max-width:820px;margin:0 auto clamp(44px,5vw,64px);}
+  .head-center h2.sec{margin-bottom:18px;}
+  .head-center .lede{max-width:640px;margin:0 auto;}
+
+  /* modulo competenze: griglia a filo con hairline ricavata dal gap
+     (niente border sulle celle, cosi' le righe non raddoppiano mai) */
+  .skillgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--hair);
+    background:color-mix(in srgb,var(--blue) 28%,transparent);border:var(--hair) solid color-mix(in srgb,var(--blue) 28%,transparent);}
+  .skill{background:var(--ink);padding:clamp(26px,2.2vw,34px) clamp(22px,2vw,30px) clamp(30px,2.6vw,38px);
+    display:flex;flex-direction:column;gap:12px;min-height:220px;transition:background .25s ease;}
+  .skill:hover{background:var(--ink-2);}
+  .skill .n{font-size:12.5px;font-weight:600;letter-spacing:.04em;color:var(--blue);}
+  .skill h3{font-size:clamp(19px,1.5vw,22px);font-weight:700;line-height:1.15;letter-spacing:-.02em;margin:0;}
+  .skill p{font-size:15px;line-height:1.55;color:var(--txt-2);margin:auto 0 0;max-width:30ch;}
+  @media(max-width:1080px){.skillgrid{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:620px){.skillgrid{grid-template-columns:1fr;}.skill{min-height:0;}}
 
   .carousel{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;
     scrollbar-width:none;margin-right:calc(-1 * var(--pad));}
   .carousel::-webkit-scrollbar{display:none;}
-  .fac-card{flex:0 0 calc((100% - 2 * 20px)/2.5);scroll-snap-align:start;background:var(--blue);color:var(--ink);}
+  .fac-card{flex:0 0 calc((100% - 2 * 20px)/2.5);scroll-snap-align:start;background:transparent;color:var(--white);}
   .fac-card .img{aspect-ratio:4/3;overflow:hidden;}
-  .fac-card .txt{padding:18px 20px 24px;}
+  .fac-card .txt{padding:16px 0 0;}
   .fac-card h3{font-size:18px;font-weight:700;margin:0 0 8px;}
-  .fac-card p{font-size:14px;line-height:1.55;margin:0;color:#10233B;}
+  .fac-card p{font-size:14px;line-height:1.55;margin:0;color:var(--txt-2);max-width:38ch;}
   .carousel-nav{display:flex;gap:8px;justify-content:flex-end;margin-top:24px;}
   .cnav-btn{width:42px;height:42px;border-radius:50%;border:1px solid var(--blue);background:transparent;
     color:var(--blue);display:flex;align-items:center;justify-content:center;}
   .cnav-btn:hover{background:var(--blue);color:var(--ink);}
 
+  /* struttura del corso: testo SEO a sinistra, accordion incolonnato
+     sotto al tasto "Scarica il piano di studi" (stesso bordo destro) */
+  .struct-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.08fr);
+    gap:clamp(30px,4.5vw,84px);align-items:start;}
+  .struct-text p{font-size:16px;line-height:1.52;color:var(--txt-2);margin:0 0 16px;max-width:54ch;}
+  .struct-text p:last-child{margin-bottom:0;}
+  .struct-text b{color:var(--white);font-weight:600;}
+  .struct-grid .accordion{max-width:none;margin-top:-22px;}
+  @media(max-width:1000px){
+    .struct-grid{grid-template-columns:1fr;gap:34px;}
+    .struct-grid .accordion{margin-top:0;}
+  }
+
+  /* ammissioni: accordion a sinistra, riepilogo per parole chiave a
+     destra sotto al tasto — si legge tutto a colpo d'occhio senza
+     aprire una per una le voci */
+  .adm-grid{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,1fr);
+    gap:clamp(30px,4.5vw,84px);align-items:start;}
+  .adm-grid .accordion{max-width:none;}
+  /* il riepilogo si appoggia all'angolo in basso a destra della fascia:
+     colonna stirata + contenuto spinto in fondo e a filo del margine */
+  .adm-keys{align-self:stretch;display:flex;flex-direction:column;
+    justify-content:flex-end;align-items:flex-end;}
+  .adm-keys .keysIn{width:max-content;max-width:100%;}
+  /* etichetta allineata a destra: si legge come didascalia del blocco,
+     non come titolo di sezione */
+  .adm-keys .kicker{font-size:12px;font-weight:600;letter-spacing:.04em;color:var(--blue);
+    margin:0 0 12px;text-align:right;}
+  .adm-keys ul{list-style:none;display:grid;gap:5px;}
+  .adm-keys li{position:relative;padding-left:20px;font-size:14.5px;line-height:1.32;color:var(--txt-2);}
+  .adm-keys li::before{content:"";position:absolute;left:0;top:.62em;width:9px;height:1px;background:var(--blue);}
+  .adm-keys li b{color:var(--white);font-weight:600;}
+  @media(max-width:1000px){
+    .adm-grid{grid-template-columns:1fr;gap:34px;}
+    .adm-keys{order:-1;align-items:flex-start;}
+  }
+
   .accordion{max-width:1000px;}
-  .acc-item{border-top:1px solid rgba(87,166,255,.3);}
-  .accordion .acc-item:last-child{border-bottom:1px solid rgba(87,166,255,.3);}
+  .acc-item{border-top:var(--hair) solid color-mix(in srgb,var(--blue) 30%,transparent);}
+  .accordion .acc-item:last-child{border-bottom:var(--hair) solid color-mix(in srgb,var(--blue) 30%,transparent);}
   .acc-head{display:flex;justify-content:space-between;align-items:center;padding:22px 0;cursor:pointer;}
   .acc-head h3{font-size:22px;font-weight:700;margin:0;}
-  .acc-plus{flex-shrink:0;margin-left:20px;width:38px;height:38px;border:1px solid rgba(87,166,255,.4);
+  .acc-plus{flex-shrink:0;margin-left:20px;width:38px;height:38px;border-radius:999px;border:1px solid color-mix(in srgb,var(--blue) 40%,transparent);
     display:grid;place-items:center;}
   .acc-plus svg{transition:transform .25s ease;}
   .acc-item.open .acc-plus svg{transform:rotate(45deg);}
@@ -126,31 +220,52 @@ export const css = `
   .promo-panel{background:var(--blue);color:var(--ink);padding:clamp(32px,4vw,56px);display:flex;flex-direction:column;
     justify-content:center;align-items:flex-start;}
   .promo-panel h2{font-size:clamp(26px,2.6vw,34px);font-weight:700;margin:0 0 18px;letter-spacing:-.01em;}
-  .promo-panel p{font-size:15.5px;line-height:1.65;margin:0 0 26px;color:#10233B;max-width:460px;}
+  .promo-panel p{font-size:15.5px;line-height:1.65;margin:0 0 26px;color:var(--blue-ink);max-width:460px;}
 
-  .split{display:grid;grid-template-columns:480px 1fr;gap:60px;align-items:center;padding:0 var(--pad);}
-  .split .imgbox{aspect-ratio:3/4;overflow:hidden;}
+  /* due colonne uguali e larghe: la foto prende meta' schermo, quindi
+     il taglio passa da verticale a quadrato */
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,3.5vw,68px);
+    align-items:center;padding:0 var(--pad);}
+  .split .imgbox{aspect-ratio:1/1;overflow:hidden;}
   .split h2{font-size:clamp(28px,3vw,42px);font-weight:700;line-height:1.08;margin:0 0 24px;letter-spacing:-.02em;}
   .split p{font-size:16px;line-height:1.65;margin:0 0 16px;}
   .split p b{font-weight:700;}
-  .split-rev{display:grid;grid-template-columns:1fr 460px;gap:60px;align-items:center;padding:0 var(--pad);}
-  .split-rev .imgbox{aspect-ratio:4/3;overflow:hidden;}
+  /* fascia a schermo pieno: foto a tutto campo, testo sopra in basso a
+     sinistra. Il tetto a 940px evita che su monitor alti la foto venga
+     tagliata a striscia e il testo resti sperduto in mezzo al nero. */
+  .fullshot{position:relative;height:90svh;min-height:520px;max-height:940px;
+    display:flex;align-items:flex-end;overflow:hidden;}
+  .fullshot>img{position:absolute;inset:0;}
+  .fullshot::after{content:"";position:absolute;inset:0;pointer-events:none;
+    background:linear-gradient(to top,rgba(10,10,10,.94) 0%,rgba(10,10,10,.6) 38%,
+      rgba(10,10,10,.12) 68%,rgba(10,10,10,.42) 100%);}
+  .fullshot .in{position:relative;z-index:1;width:100%;
+    padding:clamp(40px,5vw,80px) var(--pad);}
+  .fullshot h2{font-size:clamp(32px,4.4vw,64px);font-weight:700;letter-spacing:-.03em;
+    line-height:1.02;margin:0 0 18px;max-width:14ch;}
+  .fullshot p{font-size:14.5px;line-height:1.35;margin:0 0 9px;
+    max-width:56ch;color:rgba(255,255,255,.82);}
+  .fullshot .pill{margin-top:18px;}
 
-  .teacher{display:grid;grid-template-columns:300px 1fr;gap:48px;align-items:center;max-width:1000px;}
+  /* riga divisoria in cima alla sezione: mezzo pixel di bianco al 20%,
+     il bianco pieno faceva da secondo bordo dopo quello del marquee */
+  .sep-top{border-top:var(--hair) solid color-mix(in srgb,var(--white) 20%,transparent);}
+  .teacher{display:grid;grid-template-columns:minmax(0,.4fr) minmax(0,1fr);
+    gap:clamp(28px,4vw,64px);align-items:center;max-width:none;}
   .teacher .ph{aspect-ratio:4/5;overflow:hidden;background:var(--ink-2);}
-  .teacher h3{font-size:24px;font-weight:700;margin:0 0 4px;}
+  .teacher h3{font-size:clamp(24px,2.2vw,32px);font-weight:700;letter-spacing:-.02em;margin:0 0 4px;}
   .teacher .role{font-size:13px;font-family:var(--font-body),system-ui,sans-serif;margin-bottom:16px;color:var(--blue);}
-  .teacher p{font-size:15.5px;line-height:1.65;max-width:52ch;}
+  .teacher p{font-size:15.5px;line-height:1.42;max-width:52ch;}
 
   .cta-dark{margin:0 calc(-1 * var(--pad));position:relative;overflow:hidden;background:var(--blue);min-height:440px;
     display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px 40px;}
   .cta-dark h2{position:relative;color:var(--ink);font-size:clamp(30px,3.4vw,46px);font-weight:700;
     line-height:1.1;margin:0 0 20px;max-width:720px;letter-spacing:-.02em;}
-  .cta-dark p{position:relative;color:#10233B;font-size:17px;margin:0 0 30px;max-width:520px;}
+  .cta-dark p{position:relative;color:var(--blue-ink);font-size:17px;margin:0 0 30px;max-width:520px;}
   .cta-dark .pill{position:relative;background:var(--ink);color:var(--blue);}
 
-  blockquote.pull2{font-size:21px;font-weight:600;line-height:1.5;
-    max-width:900px;margin:50px auto 0;text-align:center;padding:0 var(--pad);}
+  blockquote.pull2{font-size:clamp(22px,2.2vw,30px);font-weight:600;line-height:1.35;letter-spacing:-.02em;
+    max-width:900px;margin:0 auto;text-align:center;}
   blockquote.pull2 cite{display:block;margin-top:14px;font-size:13px;font-style:normal;font-weight:500;opacity:.7;}
 
   .connect-card{flex:0 0 calc((100% - 2 * 20px)/2.5);scroll-snap-align:start;}
@@ -161,18 +276,18 @@ export const css = `
   .connect-card .img img{position:absolute;inset:0;opacity:.55;}
   .connect-card .cap2{font-size:15.5px;font-weight:600;display:flex;align-items:center;gap:8px;}
 
-  footer.site{background:var(--ink);color:var(--white);padding:64px var(--pad) 28px;border-top:1px solid rgba(87,166,255,.3);}
+  footer.site{background:var(--ink);color:var(--white);padding:64px var(--pad) 28px;border-top:var(--hair) solid color-mix(in srgb,var(--blue) 30%,transparent);}
   .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:32px;margin-bottom:44px;}
-  .foot-col h4{font-size:12px;color:#7FB4EF;margin:0 0 14px;font-weight:600;}
+  .foot-col h4{font-size:12px;color:var(--blue-soft);margin:0 0 14px;font-weight:600;}
   .foot-col a{display:block;font-size:14.5px;color:var(--blue);text-decoration:none;margin-bottom:10px;}
   .foot-addr{font-size:14.5px;line-height:1.7;}
   .foot-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:24px;
-    border-top:1px solid rgba(87,166,255,.25);font-size:12.5px;color:#7FB4EF;flex-wrap:wrap;gap:12px;}
-  .foot-bottom a{color:#7FB4EF;text-decoration:none;margin-left:14px;}
+    border-top:var(--hair) solid color-mix(in srgb,var(--blue) 25%,transparent);font-size:12.5px;color:var(--blue-soft);flex-wrap:wrap;gap:12px;}
+  .foot-bottom a{color:var(--blue-soft);text-decoration:none;margin-left:14px;}
 
   @media(max-width:1000px){
     .hero{grid-template-columns:1fr;}
-    .split,.split-rev{grid-template-columns:1fr;gap:30px;}
+    .split{grid-template-columns:1fr;gap:30px;}
     .promo-two{grid-template-columns:1fr;}
     .teacher{grid-template-columns:1fr;gap:24px;}
     .teacher .ph{max-width:300px;}
@@ -190,7 +305,7 @@ export const css = `
   .navItem:hover .navLink{color:var(--white);}
   .navLink .caret{transition:transform .2s ease;}
   .navItem:hover .navLink .caret{transform:rotate(180deg);}
-  .panel{position:absolute;top:100%;left:calc(-1 * var(--pad));right:calc(-1 * var(--pad));background:var(--ink-2);border-top:1px solid rgba(87,166,255,.25);border-bottom:1px solid rgba(87,166,255,.25);opacity:0;visibility:hidden;transform:translateY(-6px);pointer-events:none;transition:opacity .18s ease,transform .22s ease,visibility 0s linear .18s;}
+  .panel{position:absolute;top:100%;left:calc(-1 * var(--pad));right:calc(-1 * var(--pad));background:var(--ink-2);border-top:var(--hair) solid color-mix(in srgb,var(--blue) 25%,transparent);border-bottom:var(--hair) solid color-mix(in srgb,var(--blue) 25%,transparent);opacity:0;visibility:hidden;transform:translateY(-6px);pointer-events:none;transition:opacity .18s ease,transform .22s ease,visibility 0s linear .18s;}
   .navItem:hover .panel,.navItem:focus-within .panel{opacity:1;visibility:visible;transform:none;pointer-events:auto;transition:opacity .2s ease,transform .24s ease;}
   .panelIn{display:grid;grid-template-columns:minmax(260px,400px) 1fr;gap:clamp(36px,5vw,90px);padding:34px var(--pad) 42px;align-items:start;}
   .panelHead{display:flex;flex-direction:column;align-items:flex-start;gap:10px;}
@@ -207,7 +322,7 @@ export const css = `
 
   .topbar{display:flex;align-items:center;justify-content:space-between;gap:24px;
     padding:0 var(--pad);height:34px;font-size:11px;letter-spacing:.06em;
-    border-bottom:1px solid var(--topbar-line, rgba(0,0,0,.2));overflow:hidden;}
+    border-bottom:var(--hair) solid var(--topbar-line, rgba(0,0,0,.2));overflow:hidden;}
   .topbar .topLeft,.topbar .topRight{white-space:nowrap;opacity:.85;}
   .topbar .topRight{display:flex;align-items:center;gap:16px;}
   .topbar .topRight a{color:inherit;text-decoration:none;}
@@ -255,21 +370,25 @@ export const html = `
       </div>
     </div>
 
-    <button class="pill pill-dark" style="align-self:flex-start;" contenteditable="true">scarica il piano di studi</button>
+    <button class="pill pill-dark" style="align-self:flex-start;"><span contenteditable="true">Scarica il piano di studi</span><svg class="dl" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M12 4v13M6 11l6 6 6-6"/></svg></button>
   </div>
   <div class="hero-right"><img src="/mockup-corso/img/akai.jpg" alt="Pad controller Akai in studio"></div>
 </div>
 
 <div class="marquee-wrap">
   <div class="marquee-track">
-    <span contenteditable="true">candidati entro il 30 giugno per iniziare a ottobre</span>
-    <button class="pill" contenteditable="true">candidati ora</button>
-    <span contenteditable="true">candidati entro il 30 giugno per iniziare a ottobre</span>
-    <button class="pill" contenteditable="true">candidati ora</button>
-    <span contenteditable="true">candidati entro il 30 giugno per iniziare a ottobre</span>
-    <button class="pill" contenteditable="true">candidati ora</button>
-    <span contenteditable="true">candidati entro il 30 giugno per iniziare a ottobre</span>
-    <button class="pill" contenteditable="true">candidati ora</button>
+    <div class="marquee-group">
+      <div class="mq-unit"><span>Candidati entro il 30 Giugno per iniziare a Ottobre</span><button class="pill">Candidati ora</button></div>
+      <div class="mq-unit"><span>Candidati entro il 30 Giugno per iniziare a Ottobre</span><button class="pill">Candidati ora</button></div>
+      <div class="mq-unit"><span>Candidati entro il 30 Giugno per iniziare a Ottobre</span><button class="pill">Candidati ora</button></div>
+      <div class="mq-unit"><span>Candidati entro il 30 Giugno per iniziare a Ottobre</span><button class="pill">Candidati ora</button></div>
+    </div>
+    <div class="marquee-group" aria-hidden="true">
+      <div class="mq-unit"><span>Candidati entro il 30 Giugno per iniziare a Ottobre</span><button class="pill" tabindex="-1">Candidati ora</button></div>
+      <div class="mq-unit"><span>Candidati entro il 30 Giugno per iniziare a Ottobre</span><button class="pill" tabindex="-1">Candidati ora</button></div>
+      <div class="mq-unit"><span>Candidati entro il 30 Giugno per iniziare a Ottobre</span><button class="pill" tabindex="-1">Candidati ora</button></div>
+      <div class="mq-unit"><span>Candidati entro il 30 Giugno per iniziare a Ottobre</span><button class="pill" tabindex="-1">Candidati ora</button></div>
+    </div>
   </div>
 </div>
 
@@ -291,25 +410,52 @@ export const html = `
 
 <div class="subnav">
   <div class="course" contenteditable="true">Urban Music Production — Bachelor of Arts</div>
-  <div class="jump">
-    <a href="#panoramica">/ panoramica</a>
-    <a href="#struttura">/ struttura</a>
-    <a href="#ammissioni">/ ammissioni</a>
-    <a href="#connetti">/ connettiti</a>
-  </div>
+  <nav class="jump" aria-label="sezioni del corso">
+    <a href="#panoramica"><span class="idx">01</span><span>panoramica</span></a>
+    <a href="#struttura"><span class="idx">02</span><span>struttura</span></a>
+    <a href="#ammissioni"><span class="idx">03</span><span>ammissioni</span></a>
+    <a href="#connetti"><span class="idx">04</span><span>connettiti</span></a>
+  </nav>
+  <span class="prog" aria-hidden="true"></span>
 </div>
 
 <section class="block">
-  <h2 class="sec" contenteditable="true">Competenze che svilupperai</h2>
-  <p class="lede" contenteditable="true">Durante il corso costruisci le competenze creative e tecniche per portare un'idea dal loop iniziale al brano pubblicato, dallo studio al palco.</p>
-  <ul class="skills">
-    <li contenteditable="true">Beatmaking e produzione: dal loop al brano finito, arrangiamento e programmazione ritmica</li>
-    <li contenteditable="true">Sound design: costruire suoni invece di scaricarli, sintesi e campionamento</li>
-    <li contenteditable="true">Mix e mastering allo standard dello streaming</li>
-    <li contenteditable="true">DJing e performance live: set, mixaggio dal vivo, presenza sul palco</li>
-    <li contenteditable="true">Teoria musicale applicata direttamente su Ableton</li>
-    <li contenteditable="true">Music business: diritto d'autore, distribuzione digitale, contratti</li>
-  </ul>
+  <div class="head-center">
+    <h2 class="sec" contenteditable="true">Competenze che svilupperai</h2>
+    <p class="lede" contenteditable="true">Durante il corso costruisci le competenze creative e tecniche per portare un'idea dal loop iniziale al brano pubblicato, dallo studio al palco.</p>
+  </div>
+  <div class="skillgrid">
+    <article class="skill">
+      <span class="n">01</span>
+      <h3 contenteditable="true">Beatmaking e produzione</h3>
+      <p contenteditable="true">Dal loop al brano finito: arrangiamento e programmazione ritmica.</p>
+    </article>
+    <article class="skill">
+      <span class="n">02</span>
+      <h3 contenteditable="true">Sound design</h3>
+      <p contenteditable="true">Costruire i suoni invece di scaricarli: sintesi e campionamento.</p>
+    </article>
+    <article class="skill">
+      <span class="n">03</span>
+      <h3 contenteditable="true">Mix e mastering</h3>
+      <p contenteditable="true">Allo standard dello streaming, sulle macchine della regia.</p>
+    </article>
+    <article class="skill">
+      <span class="n">04</span>
+      <h3 contenteditable="true">DJing e performance live</h3>
+      <p contenteditable="true">Set, mixaggio dal vivo, presenza sul palco.</p>
+    </article>
+    <article class="skill">
+      <span class="n">05</span>
+      <h3 contenteditable="true">Teoria musicale</h3>
+      <p contenteditable="true">Applicata direttamente su Ableton, non sullo spartito.</p>
+    </article>
+    <article class="skill">
+      <span class="n">06</span>
+      <h3 contenteditable="true">Music business</h3>
+      <p contenteditable="true">Diritto d'autore, distribuzione digitale, contratti.</p>
+    </article>
+  </div>
 </section>
 
 <section class="block tight">
@@ -360,7 +506,14 @@ export const html = `
 <section class="block tight" id="struttura">
   <div class="sec-flex-head">
     <h2 class="sec" style="margin-bottom:0;" contenteditable="true">Struttura del corso</h2>
-    <button class="pill pill-outline-ink" contenteditable="true">scarica il piano di studi</button>
+    <button class="pill pill-outline-ink"><span contenteditable="true">Scarica il piano di studi</span><svg class="dl" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M12 4v13M6 11l6 6 6-6"/></svg></button>
+  </div>
+
+  <div class="struct-grid">
+  <div class="struct-text">
+    <p contenteditable="true">Il <b>corso di produzione musicale</b> del Creative Hub di Bologna dura <b>tre anni full-time</b>, estendibili fino a sei in modalità part-time, e si chiude con un titolo universitario Bachelor of Arts in Urban Music Production.</p>
+    <p contenteditable="true">Ogni anno mette insieme laboratorio e teoria: si lavora in studio su Ableton, Pro Tools e FL Studio, con un'ora di lezione individuale a settimana con il tuo tutor. I tre moduli qui accanto raccontano che cosa impari, in che ordine e con quali strumenti.</p>
+    <p contenteditable="true">Dal <b>beatmaking</b> al <b>sound design</b>, dal <b>mix e mastering</b> al music business: il percorso è costruito perché a fine triennio tu abbia un portfolio di brani pubblicati, non solo un attestato.</p>
   </div>
 
   <div class="accordion" id="yearAccordion">
@@ -377,6 +530,7 @@ export const html = `
       <div class="acc-body"><div><p contenteditable="true">Progetto finale, DJing e performance live, costruzione del portfolio professionale prima del titolo.</p></div></div>
     </div>
   </div>
+  </div>
 </section>
 
 <div class="promo-two">
@@ -391,60 +545,13 @@ export const html = `
   </div>
 </div>
 
-<section class="block">
-  <div class="split">
-    <div class="imgbox"><img src="/mockup-corso/img/class-4.jpg" alt=""></div>
-    <div>
-      <h2 contenteditable="true">Nessun genere. Un metodo.</h2>
-      <p contenteditable="true">La musica urban cambia continuamente, e lo trattiamo come condizione di studio. Non ti chiediamo di aderire a uno stile o a una scena. <b>Ci concentriamo sul tuo sviluppo artistico e sulla capacità critica</b>: come pensi, come lavori, dove vuoi portare la tua musica.</p>
-      <p contenteditable="true">Che la tua base sia trap, hip-hop, R&amp;B o elettronica, diamo priorità alla profondità e alla direzione, non all'etichetta di genere. Ci aspettiamo che tu <b>rischi, testi idee e ampli il tuo raggio creativo</b>, sviluppando la capacità di argomentare le tue scelte.</p>
-      <p contenteditable="true">Le nostre sessioni uniscono la pratica alla riflessione. Esaminiamo le ragioni dietro un lavoro tanto quanto le tecniche usate per produrlo.</p>
-    </div>
-  </div>
-</section>
-
-<section class="block tight">
-  <div class="split-rev">
-    <div>
-      <h2 contenteditable="true">La vita in Academy</h2>
-      <p contenteditable="true">Al Creative Hub non produci musica da solo. Lavori in studi professionali, ti confronti con altri studenti e artisti del network, partecipi a sessioni con producer e A&amp;R in visita.</p>
-      <p contenteditable="true">Presenta i tuoi progetti in ascolti collettivi, collabora con chi studia Film Production o Music Business per progetti trasversali, ricevi feedback costruttivi da chi il mercato lo vive ancora.</p>
-      <button class="pill pill-outline-ink" contenteditable="true">scopri la vita in Academy</button>
-    </div>
-    <div class="imgbox"><img src="/mockup-corso/img/wide.jpg" alt=""></div>
-  </div>
-</section>
-
-<section class="block">
-  <h2 class="sec" contenteditable="true">Chi ti accompagna</h2>
-  <div class="teacher">
-    <div class="ph"><img src="/mockup-corso/img/zilocchi.jpg" alt="Nicolò Zilocchi"></div>
-    <div>
-      <h3 contenteditable="true">Nicolò Zilocchi</h3>
-      <div class="role" contenteditable="true">course leader · urban music production</div>
-      <p contenteditable="true">Producer e beatmaker, guida il percorso di Urban Music Production. Segue ogni studente con un'ora di lezione individuale a settimana, dal primo loop al progetto finale.</p>
-    </div>
-  </div>
-</section>
-
-<section class="block tight">
-  <div class="cta-dark">
-    <h2 contenteditable="true">Non sai quale corso scegliere?</h2>
-    <p contenteditable="true">Nessun problema. Ti aiutiamo a trovare il percorso in musica, sound o visual che parla di più a te.</p>
-    <button class="pill" contenteditable="true">scopri di più</button>
-  </div>
-  <blockquote class="pull2">
-    <span contenteditable="true">"Qui non impari solo a usare un software. Impari a finire un pezzo, a farlo suonare come quelli che ascolti, e a portarlo fuori dalla tua stanza."</span>
-    <cite contenteditable="true">— studente, Urban Music Production, terzo anno</cite>
-  </blockquote>
-</section>
-
 <section class="block" id="ammissioni">
   <div class="sec-flex-head">
     <h2 class="sec" style="margin-bottom:0;" contenteditable="true">Ammissioni</h2>
-    <button class="pill pill-outline-ink" contenteditable="true">come candidarsi</button>
+    <button class="pill pill-outline-ink" contenteditable="true">Come candidarsi</button>
   </div>
 
+  <div class="adm-grid">
   <div class="accordion" id="admAccordion">
     <div class="acc-item">
       <div class="acc-head"><h3 contenteditable="true">Requisiti di ammissione</h3><span class="acc-plus"><svg viewBox="0 0 18 18" width="16" height="16" stroke="currentColor" stroke-width="1.4"><path d="M9 3v12M3 9h12"/></svg></span></div>
@@ -467,9 +574,31 @@ export const html = `
       <div class="acc-body"><div><p contenteditable="true">Vieni a vedere prima di candidarti. Puoi partecipare anche con i tuoi genitori.</p></div></div>
     </div>
   </div>
+
+  <aside class="adm-keys">
+    <div class="keysIn">
+    <p class="kicker" contenteditable="true">In breve</p>
+    <ul>
+      <li contenteditable="true">Serve il <b>diploma</b> di scuola superiore</li>
+      <li contenteditable="true">Colloquio motivazionale, <b>non un'audizione</b></li>
+      <li contenteditable="true">Rette da <b>294€ al mese</b>, a tasso zero</li>
+    </ul>
+    </div>
+  </aside>
+  </div>
 </section>
 
-<section class="block tight" id="connetti" style="padding-bottom:96px;">
+<section class="fullshot">
+  <img src="/mockup-corso/img/wide.jpg" alt="Studenti al lavoro in studio">
+  <div class="in">
+    <h2 contenteditable="true">La vita in Academy</h2>
+    <p contenteditable="true">Al Creative Hub non produci musica da solo. Lavori in studi professionali, ti confronti con altri studenti e artisti del network, partecipi a sessioni con producer e A&amp;R in visita.</p>
+    <p contenteditable="true">Presenta i tuoi progetti in ascolti collettivi, collabora con chi studia Film Production o Music Business per progetti trasversali, ricevi feedback costruttivi da chi il mercato lo vive ancora.</p>
+    <button class="pill pill-white" contenteditable="true">scopri la vita in Academy</button>
+  </div>
+</section>
+
+<section class="block tight" id="connetti">
   <div class="sec-flex-head">
     <div>
       <h2 class="sec" style="margin-bottom:10px;" contenteditable="true">Come conoscerci</h2>
@@ -492,5 +621,44 @@ export const html = `
       <div class="cap2"><span contenteditable="true">Una chiamata individuale per tutte le tue domande</span><span class="arr"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></div>
     </div>
   </div>
+</section>
+
+<section class="block">
+  <div class="split">
+    <div class="imgbox"><img src="/mockup-corso/img/class-4.jpg" alt=""></div>
+    <div>
+      <h2 contenteditable="true">Nessun genere. Un metodo.</h2>
+      <p contenteditable="true">La musica urban cambia continuamente, e lo trattiamo come condizione di studio. Non ti chiediamo di aderire a uno stile o a una scena. <b>Ci concentriamo sul tuo sviluppo artistico e sulla capacità critica</b>: come pensi, come lavori, dove vuoi portare la tua musica.</p>
+      <p contenteditable="true">Che la tua base sia trap, hip-hop, R&amp;B o elettronica, diamo priorità alla profondità e alla direzione, non all'etichetta di genere. Ci aspettiamo che tu <b>rischi, testi idee e ampli il tuo raggio creativo</b>, sviluppando la capacità di argomentare le tue scelte.</p>
+      <p contenteditable="true">Le nostre sessioni uniscono la pratica alla riflessione. Esaminiamo le ragioni dietro un lavoro tanto quanto le tecniche usate per produrlo.</p>
+    </div>
+  </div>
+</section>
+
+<section class="block tight sep-top">
+  <h2 class="sec" contenteditable="true">Chi ti accompagna</h2>
+  <div class="teacher">
+    <div class="ph"><img src="/mockup-corso/img/zilocchi.jpg" alt="Nicolò Zilocchi"></div>
+    <div>
+      <h3 contenteditable="true">Nicolò Zilocchi</h3>
+      <div class="role" contenteditable="true">course leader · urban music production</div>
+      <p contenteditable="true">Producer e beatmaker, guida il percorso di Urban Music Production. Segue ogni studente con un'ora di lezione individuale a settimana, dal primo loop al progetto finale.</p>
+    </div>
+  </div>
+</section>
+
+<section class="block tight">
+  <div class="cta-dark">
+    <h2 contenteditable="true">Non sai quale corso scegliere?</h2>
+    <p contenteditable="true">Nessun problema. Ti aiutiamo a trovare il percorso in musica, sound o visual che parla di più a te.</p>
+    <button class="pill" contenteditable="true">scopri di più</button>
+  </div>
+</section>
+
+<section class="block tight" style="padding-bottom:clamp(72px,8vw,110px);">
+  <blockquote class="pull2">
+    <span contenteditable="true">"Qui non impari solo a usare un software. Impari a finire un pezzo, a farlo suonare come quelli che ascolti, e a portarlo fuori dalla tua stanza."</span>
+    <cite contenteditable="true">— studente, Urban Music Production, terzo anno</cite>
+  </blockquote>
 </section>
 `;

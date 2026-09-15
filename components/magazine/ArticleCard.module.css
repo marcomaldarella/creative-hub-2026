@@ -58,7 +58,7 @@
   letter-spacing: 0.02em;
   color: var(--fg);
   border: 1px solid var(--line);
-  border-radius: 0;
+  border-radius: var(--radius-pill);
   padding: 3px 10px;
   white-space: nowrap;
   transition: border-color var(--dur), color var(--dur);

@@ -1,6 +1,6 @@
 .btn {
   display: inline-block;
-  border-radius: 0;
+  border-radius: var(--radius-pill);
   padding: 10px 22px;
   font-size: var(--fs-small);
   font-weight: 500;

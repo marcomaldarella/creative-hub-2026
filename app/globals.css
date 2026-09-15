@@ -44,7 +44,7 @@
   /* 2026-09-09: palette dal PDF colori del cliente — l'azzurro non è più
      il petrolio scuro ma il blu acceso delle fasce (nero di fondo, testo
      nero sopra i colori pieni) */
-  --azzurro:  #57A6FF;   /* blu brand — academy */
+  --azzurro:  #71B8FF;   /* blu brand — academy */
   --giallo-fluo: #DEFF3B; /* accento coworking */
   --arancio:  #FC732D;   /* accento studio (registrazione) */
   /* l'arancio pieno come testo su chiaro sta a 2.6:1: come inchiostro
@@ -57,18 +57,18 @@
 
   /* derivati */
   --petrolio-hover: #262626;
-  --azzurro-hover:  #3E92F2;
+  --azzurro-hover:  #4E9FEE;
   --osso-60: rgba(237, 230, 218, 0.6);
   --osso-16: rgba(237, 230, 218, 0.16);
-  --azzurro-06: rgba(87, 166, 255, 0.06);
+  --azzurro-06: rgba(113, 184, 255, 0.06);
 
   /* Il blu brand ora è CHIARO: come SUPERFICIE va bene ovunque, come
      TESTO su bianco sta a ~2.5:1 — l'inchiostro è la stessa tinta
      scurita quanto basta (in dark torna quello pieno). */
-  --azzurro-ink: #1867C6;
+  --azzurro-ink: #1C6FD1;
 
   /* il blu brand usato come SUPERFICIE (pastiglie, sezione open day) */
-  --azzurro-fill: #57A6FF;
+  --azzurro-fill: var(--azzurro);
 
   /* accento DI DEFAULT (pagine senza una sezione, es. magazine): era
      l'azzurro brand — restava "un altro blu" proprio nelle parti più
@@ -107,7 +107,7 @@
   --topbar-h: 28px;
   --header-h: calc(var(--nav-h) + var(--topbar-h));
   --radius: 0; /* angoli netti ovunque — taglio svizzero */
-  --radius-pill: 0;
+  --radius-pill: 999px; /* i tasti sono pillole ovunque (set 2026) */
 
   /* sezioni */
   --sez: clamp(72px, 10vw, 140px);
@@ -155,7 +155,7 @@
   /* su nero il blu brand pieno è già leggibile: l'inchiostro torna al
      valore pieno, l'hover schiarisce */
   --azzurro-ink: var(--azzurro);
-  --azzurro-hover: #7FBAFF;
+  --azzurro-hover: #9AC9FF;
   --azzurro-fill: var(--azzurro);
   --arancio-ink: var(--arancio);
   color-scheme: dark;

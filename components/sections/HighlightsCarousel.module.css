@@ -6,7 +6,7 @@
   /* il fondo qui è scuro anche sulla pagina bianca: gli inchiostri della
      pagina sparirebbero, quindi dentro la banda valgono quelli della
      variante scura */
-  --azzurro-ink: #7FA9BE;
+  --azzurro-ink: var(--azzurro);
   --fg: var(--osso);
   --fg-2: var(--osso-60);
   padding: clamp(44px, 5.5vw, 84px) 0;
@@ -206,7 +206,7 @@
   display: inline-block;
   margin-left: auto;
   padding: 9px 20px;
-  border-radius: 0;
+  border-radius: var(--radius-pill);
   background: var(--accent);
   color: #0a0a0a;
   font-size: var(--fs-small);
