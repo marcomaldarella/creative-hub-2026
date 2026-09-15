@@ -1,5 +1,6 @@
 import Image, { type StaticImageData } from 'next/image'
 import { Reveal } from '@/components/ui'
+import { BgVideo } from './BgVideo'
 import styles from './Photo.module.css'
 
 export type PhotoFullProps = {
@@ -12,6 +13,9 @@ export type PhotoFullProps = {
   /** full: uno schermo intero · band: fascia più bassa (prima del footer) */
   height?: 'full' | 'band'
   priority?: boolean
+  /** se presente, al posto della foto va un video muto in loop e `src`
+      resta come poster finché il file non è pronto */
+  video?: { src: string; portrait?: string }
 }
 
 /**
@@ -26,6 +30,7 @@ export function PhotoFull({
   caption,
   height = 'full',
   priority = false,
+  video,
 }: PhotoFullProps) {
   return (
     <figure
@@ -33,15 +38,24 @@ export function PhotoFull({
       /* ParallaxMedia muove l'immagine di queste figure durante lo scroll */
       data-parallax=""
     >
-      <Image
-        src={src}
-        alt={alt}
-        fill
-        sizes="100vw"
-        className={styles.img}
-        placeholder="blur"
-        priority={priority}
-      />
+      {video ? (
+        <BgVideo
+          src={video.src}
+          portrait={video.portrait}
+          poster={src.src}
+          className={styles.img}
+        />
+      ) : (
+        <Image
+          src={src}
+          alt={alt}
+          fill
+          sizes="100vw"
+          className={styles.img}
+          placeholder="blur"
+          priority={priority}
+        />
+      )}
       {(kicker || caption) && (
         <figcaption className={styles.fullCap}>
           {kicker && <span className={`mono ${styles.kicker}`}>{kicker}</span>}

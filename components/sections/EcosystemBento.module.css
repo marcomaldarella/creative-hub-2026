@@ -13,8 +13,9 @@
   border-radius: 0;
   overflow: hidden;
   transition:
-    background 0.25s ease,
-    box-shadow 0.3s ease,
+    background 0.42s cubic-bezier(0.22, 1, 0.36, 1),
+    color 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1),
     opacity var(--dur-slow) ease var(--rvd, 0s),
     transform var(--dur-slow) var(--ease-out) var(--rvd, 0s);
 }
@@ -26,6 +27,11 @@
 .side:hover {
   background: var(--fill, var(--accent));
   color: #000000;
+  /* l'alone esterno resta: il colore pieno riempie la card, il bloom la
+     stacca dal nero della sezione */
+  box-shadow:
+    0 0 24px -2px color-mix(in srgb, var(--accent) 55%, transparent),
+    0 0 78px -12px color-mix(in srgb, var(--accent) 38%, transparent);
 }
 
 .big:hover .n,
@@ -153,11 +159,16 @@
   font-weight: 500;
   letter-spacing: 0.04em;
   line-height: 1.6;
+  transition:
+    background 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+    color 0.32s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .n {
   color: var(--fg); /* bianco su dark, inchiostro su light */
   font-weight: 500;
+  transition: color 0.32s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* cta in tinta con la sezione, leggibile anche col giallo fluo */
@@ -166,6 +177,7 @@
   font-size: var(--fs-small);
   font-weight: 500;
   color: color-mix(in srgb, var(--accent, var(--azzurro)) 70%, var(--fg));
+  transition: color 0.32s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .big:hover .cta,
@@ -196,6 +208,7 @@
 .title {
   /* il titolo del nodo porta il colore del nodo, come il badge */
   color: var(--accent);
+  transition: color 0.32s cubic-bezier(0.22, 1, 0.36, 1);
   font-size: clamp(20px, 1.7vw, 25px);
   font-weight: 600;
   letter-spacing: -0.01em;
@@ -205,6 +218,7 @@
 .text {
   font-size: var(--fs-small);
   color: var(--fg-2);
+  transition: color 0.32s cubic-bezier(0.22, 1, 0.36, 1);
   max-width: 34ch;
 }
 

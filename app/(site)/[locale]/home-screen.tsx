@@ -300,6 +300,10 @@ export async function HomeScreen({
           alt="La regia dello studio di registrazione del Creative Hub, con console SSL, monitor da studio e sintetizzatori"
           kicker={t.home.photoStudio.kicker}
           caption={t.home.photoStudio.caption}
+          video={{
+            src: '/video/hero-5s-1920x1080.mp4',
+            portrait: '/video/hero-5s-1080x1920.mp4',
+          }}
         />
 
         {/* ————— metodo (§ 04) ————— */}
