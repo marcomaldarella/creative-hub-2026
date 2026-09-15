@@ -71,18 +71,21 @@ export function CourseTemplateShell({ css, html }: CourseTemplateShellProps) {
     // 9:16. Lo swap avviene PRIMA che il browser inizi a scaricare (il
     // markup parte con la versione orizzontale, cosi' senza JS il video
     // c'e' comunque) e solo se serve davvero, per non buttare banda.
-    const bg = root.querySelector<HTMLVideoElement>('video[data-src-portrait]');
-    const portrait = bg?.dataset.srcPortrait;
-    if (
-      bg &&
-      portrait &&
-      window.matchMedia('(max-width: 760px) and (orientation: portrait)').matches
-    ) {
-      bg.src = portrait;
-      bg.load();
-      // su iOS il play dopo uno swap va richiesto a mano; se il browser
-      // lo rifiuta resta il poster, nessun errore in console
-      void bg.play().catch(() => {});
+    const wantsPortrait = window.matchMedia(
+      '(max-width: 760px) and (orientation: portrait)'
+    ).matches;
+    if (wantsPortrait) {
+      root
+        .querySelectorAll<HTMLVideoElement>('video[data-src-portrait]')
+        .forEach((v) => {
+          const portrait = v.dataset.srcPortrait;
+          if (!portrait) return;
+          v.src = portrait;
+          v.load();
+          // su iOS il play dopo uno swap va richiesto a mano; se il
+          // browser lo rifiuta resta il poster, nessun errore in console
+          void v.play().catch(() => {});
+        });
     }
 
     // testimonial a rotazione: dissolvenza fra le citazioni, frecce ai

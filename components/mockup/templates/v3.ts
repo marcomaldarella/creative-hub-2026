@@ -66,7 +66,8 @@ export const css = `
   .hero-cta{display:flex;flex-wrap:wrap;gap:12px;align-self:flex-start;}
   .hero-cta .pill{text-decoration:none;}
   .hero-right{position:relative;overflow:hidden;min-height:420px;}
-  .hero-right img{position:absolute;inset:0;height:100%;}
+  .hero-right img,.hero-right video{position:absolute;inset:0;
+    width:100%;height:100%;object-fit:cover;display:block;}
 
   .marquee-wrap{background:var(--ink);overflow:hidden;padding:20px 0;white-space:nowrap;
     border-top:var(--hair) solid var(--white);border-bottom:var(--hair) solid var(--white);}
@@ -479,7 +480,7 @@ export const html = `
       <a class="pill pill-outline-ink" href="#panoramica"><span contenteditable="true">Maggiori informazioni</span></a>
     </div>
   </div>
-  <div class="hero-right"><img src="/mockup-corso/img/akai.jpg" alt="Pad controller Akai in studio"></div>
+  <div class="hero-right"><video src="/video/creative-hub-8s-02-1920x1080.mp4" data-src-portrait="/video/creative-hub-8s-02-1080x1920.mp4" poster="/mockup-corso/img/akai.jpg" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video></div>
 </div>
 
 <div class="marquee-wrap">
