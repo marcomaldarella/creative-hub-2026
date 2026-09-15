@@ -99,7 +99,9 @@ export const css = `
     line-height:1.3;letter-spacing:-.01em;margin-bottom:22px;}
   .pan-grid > div > .lede:first-child b{font-weight:inherit;}
 
-  .pan-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,60px);align-items:start;}
+  /* il video e' piu' alto del testo: le due colonne si centrano fra
+     loro invece di partire entrambe dall'alto e lasciare un vuoto */
+  .pan-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,60px);align-items:center;}
   .video-card{background:var(--ink);overflow:hidden;
     display:flex;align-items:center;justify-content:center;aspect-ratio:16/9;position:relative;}
   .video-card img{position:absolute;inset:0;opacity:.45;}

@@ -98,7 +98,9 @@
   line-height: 0.74;
   margin-top: 56px;
   margin-bottom: -0.16em;
-  color: color-mix(in srgb, var(--fg) 8%, transparent);
+  /* sulle pagine a colore pieno il wordmark gigante è nel colore della
+     sezione come il logo (--giant); altrove resta un velo del testo */
+  color: var(--giant, color-mix(in srgb, var(--fg) 8%, transparent));
   user-select: none;
   pointer-events: none;
 }
