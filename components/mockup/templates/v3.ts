@@ -130,7 +130,7 @@ export const css = `
      delle voci di menu) le faceva toccare. */
   .subnav .jump.aligned{position:absolute;top:0;height:100%;overflow:visible;}
   .subnav .tail{display:flex;align-items:center;gap:26px;margin-left:auto;flex-shrink:0;}
-  .subnav .jump a,.subnav .tail .year{position:relative;display:inline-flex;align-items:center;gap:0;
+  .subnav .jump a,.subnav .tail .year{position:relative;display:inline-flex;align-items:center;gap:3px;
     color:color-mix(in srgb,var(--ink) 62%,transparent);
     font-size:14px;font-weight:600;letter-spacing:-.025em;text-decoration:none;
     white-space:nowrap;transition:color .22s ease;}
@@ -339,9 +339,13 @@ export const css = `
     max-width:56ch;color:rgba(255,255,255,.82);}
   .fullshot .pill{margin-top:18px;}
 
-  /* riga divisoria in cima alla sezione: mezzo pixel di bianco al 20%,
-     il bianco pieno faceva da secondo bordo dopo quello del marquee */
-  .sep-top{border-top:var(--hair) solid color-mix(in srgb,var(--white) 20%,transparent);}
+  /* separatore di sezione: numerino a filo del margine sinistro e riga
+     che corre fino al margine destro — dentro il gutter, non a tutta
+     pagina come il vecchio bordo */
+  .sezRule{display:flex;align-items:center;gap:16px;padding:0 var(--pad);}
+  .sezRule span{flex-shrink:0;font-size:12px;font-weight:600;letter-spacing:.02em;
+    color:var(--txt-2);}
+  .sezRule i{flex:1;height:var(--hair);background:color-mix(in srgb,var(--white) 20%,transparent);}
   .teacher{display:grid;grid-template-columns:minmax(0,.4fr) minmax(0,1fr);
     gap:clamp(28px,4vw,64px);align-items:center;max-width:none;}
   .teacher .ph{aspect-ratio:4/5;overflow:hidden;background:var(--ink-2);}
@@ -503,6 +507,8 @@ export const html = `
   </div>
 </div>
 
+<div class="sezRule"><span>01</span><i></i></div>
+
 <section class="block tight" id="panoramica" style="padding-top:56px;">
   <h2 class="sec" contenteditable="true">Panoramica</h2>
   <div class="pan-grid">
@@ -535,6 +541,8 @@ export const html = `
     </span>
   </span>
 </div>
+
+<div class="sezRule"><span></span><i></i></div>
 
 <section class="block">
   <div class="head-center">
@@ -620,6 +628,8 @@ export const html = `
   </div>
 </section>
 
+<div class="sezRule"><span>02</span><i></i></div>
+
 <section class="block tight" id="struttura">
   <div class="sec-flex-head">
     <h2 class="sec" style="margin-bottom:0;" contenteditable="true">Struttura del corso</h2>
@@ -661,7 +671,9 @@ export const html = `
   </div>
 </div>
 
-<section class="block sep-top" id="ammissioni">
+<div class="sezRule"><span>03</span><i></i></div>
+
+<section class="block" id="ammissioni">
   <div class="adm-grid">
   <aside class="adm-keys">
     <div class="keysIn">
@@ -716,7 +728,9 @@ export const html = `
   </div>
 </section>
 
-<section class="block tight sep-top" id="connetti">
+<div class="sezRule"><span>04</span><i></i></div>
+
+<section class="block tight" id="connetti">
   <div class="sec-flex-head">
     <div>
       <h2 class="sec" style="margin-bottom:4px;" contenteditable="true">Come conoscerci</h2>
@@ -757,7 +771,9 @@ export const html = `
   </div>
 </section>
 
-<section class="block tight sep-top">
+<div class="sezRule"><span></span><i></i></div>
+
+<section class="block tight">
   <h2 class="sec" contenteditable="true">Chi ti accompagna</h2>
   <div class="teacher">
     <div class="ph"><img src="/mockup-corso/img/zilocchi.jpg" alt="Nicolò Zilocchi"></div>
