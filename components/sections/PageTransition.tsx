@@ -92,22 +92,22 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
           tl.fromTo(
             creative,
             { yPercent: 110 },
-            { yPercent: 0, duration: 0.5, ease: 'power3.out', stagger: 0.035 },
+            { yPercent: 0, duration: 0.32, ease: 'power3.out', stagger: 0.022 },
             '<'
           )
           if (dash) {
             tl.fromTo(
               dash,
               { scaleX: 0 },
-              { scaleX: 1, duration: 0.4, ease: 'power3.inOut' },
-              '-=0.35'
+              { scaleX: 1, duration: 0.26, ease: 'power3.inOut' },
+              '-=0.24'
             )
           }
           tl.fromTo(
             hub,
             { yPercent: 110 },
-            { yPercent: 0, duration: 0.5, ease: 'power3.out', stagger: 0.06 },
-            '-=0.25'
+            { yPercent: 0, duration: 0.32, ease: 'power3.out', stagger: 0.038 },
+            '-=0.2'
           )
         }
         return () => tl.kill()
@@ -126,7 +126,7 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
           },
         })
         if (logo) {
-          tl.to(logo, { autoAlpha: 0, duration: 0.25, ease: 'power2.in' })
+          tl.to(logo, { autoAlpha: 0, duration: 0.16, ease: 'power2.in' })
         }
         /* la pila si sfila verso l'alto: prima i colori sotto, per
            ultima la nera che sta sopra */

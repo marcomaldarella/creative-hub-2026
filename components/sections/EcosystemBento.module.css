@@ -19,13 +19,32 @@
     transform var(--dur-slow) var(--ease-out) var(--rvd, 0s);
 }
 
-/* hover alla vercel: bloom morbido nel colore della sezione… */
+/* hover: la card si riempie del colore della sezione e TUTTO quello che
+   ci sta sopra passa al nero (i tre colori sono chiari, il testo chiaro
+   ci sparirebbe) */
 .big:hover,
 .side:hover {
-  background: color-mix(in srgb, var(--surface) 94%, var(--accent) 6%);
-  box-shadow:
-    0 0 18px -2px color-mix(in srgb, var(--accent) 50%, transparent),
-    0 0 56px -10px color-mix(in srgb, var(--accent) 35%, transparent);
+  background: var(--fill, var(--accent));
+  color: #000000;
+}
+
+.big:hover .n,
+.side:hover .n,
+.big:hover .title,
+.side:hover .title,
+.big:hover .text,
+.side:hover .text,
+.big:hover .cta,
+.side:hover .cta {
+  color: #000000;
+}
+
+/* il badge non ha più bisogno del velo colorato: sta già sul colore */
+.big:hover .badge,
+.side:hover .badge {
+  background: transparent;
+  border-color: color-mix(in srgb, #000000 45%, transparent);
+  color: #000000;
 }
 
 /* …e ring animato: un arco di luce percorre il perimetro pulsando.
@@ -53,12 +72,10 @@
   pointer-events: none;
 }
 
+/* il ring luminoso serviva sulla card scura: sul colore pieno sparisce */
 .big:hover::after,
 .side:hover::after {
-  opacity: 1;
-  animation:
-    ringSpin 3s linear infinite,
-    ringPulse 3s ease-in-out infinite;
+  opacity: 0;
 }
 
 @keyframes ringSpin {

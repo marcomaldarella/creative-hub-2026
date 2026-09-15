@@ -8,13 +8,13 @@ import { useEffect } from 'react'
 const BOOT_LIGHT = [1, 1, 1] as const
 
 /** oltre questa attesa la sequenza parte comunque: mai una splash infinita */
-const MAX_WAIT_MS = 900
+const MAX_WAIT_MS = 700
 
 /** durata della materializzazione della nuvola (lerp uForm lato shader) */
-const FORM_S = 1.5
+const FORM_S = 1.05
 
 /** quanto resta in campo il logotipo prima di uscire */
-const HOLD_S = 2.2
+const HOLD_S = 1.35
 
 /* il download parte alla valutazione del modulo, in parallelo con
    l'idratazione: dentro l'effect arrivava troppo tardi e in produzione la
@@ -156,7 +156,7 @@ export function HeroBoot() {
              navigare senza aspettare la fine della sequenza */
           tl.add(() => window.dispatchEvent(new Event('hero-form')))
           if (header) {
-            tl.to(header, { autoAlpha: 1, duration: 0.5 }, 0.25)
+            tl.to(header, { autoAlpha: 1, duration: 0.35 }, 0.18)
           }
           tl.to({}, { duration: FORM_S }, 0)
 
@@ -164,7 +164,7 @@ export function HeroBoot() {
             .fromTo(
               markLines,
               { autoAlpha: 0, y: 26 },
-              { autoAlpha: 1, y: 0, duration: 0.75, stagger: 0.12 },
+              { autoAlpha: 1, y: 0, duration: 0.5, stagger: 0.08 },
               `-=${FORM_S * 0.35}`
             )
 
@@ -185,9 +185,9 @@ export function HeroBoot() {
               {
                 autoAlpha: 0,
                 y: -26,
-                duration: 0.55,
+                duration: 0.38,
                 ease: 'power2.in',
-                stagger: { each: 0.12, from: 'end' },
+                stagger: { each: 0.08, from: 'end' },
               },
               `+=${HOLD_S}`
             )
@@ -204,14 +204,14 @@ export function HeroBoot() {
             .fromTo(
               wordLinks,
               { autoAlpha: 0, y: 26 },
-              { autoAlpha: 1, y: 0, duration: 0.7, stagger: 0.13 },
+              { autoAlpha: 1, y: 0, duration: 0.48, stagger: 0.085 },
               '<'
             )
 
             /* 5 — e infine il resto della pagina */
             .to(
               [annot, sub, ...chrome].filter(Boolean),
-              { autoAlpha: 1, duration: 0.6, stagger: 0.07 },
+              { autoAlpha: 1, duration: 0.42, stagger: 0.05 },
               '-=0.45'
             )
 
@@ -225,7 +225,7 @@ export function HeroBoot() {
               {
                 autoAlpha: 1,
                 filter: 'blur(0px)',
-                duration: 1.3,
+                duration: 0.85,
                 ease: 'power2.out',
                 onStart: () =>
                   window.dispatchEvent(

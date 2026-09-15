@@ -462,7 +462,7 @@ export function HeroOrb({
       let formSafety: ReturnType<typeof setTimeout> | undefined
       if (booting) {
         window.addEventListener('hero-form', onForm, { once: true })
-        formSafety = setTimeout(onForm, 4000)
+        formSafety = setTimeout(onForm, 2800)
       }
 
       /* ——— tinta di sezione: le HeroWords avvisano via CustomEvent ——— */
@@ -557,7 +557,7 @@ export function HeroOrb({
         uniforms.uBurst.value = burstCur
         uniforms.uTint.value += (tintTarget - uniforms.uTint.value) * 0.08
         // la nuvola si compone: lerp lento, curva naturale in uscita (~1.5s)
-        uniforms.uForm.value += (formTarget - uniforms.uForm.value) * 0.035
+        uniforms.uForm.value += (formTarget - uniforms.uForm.value) * 0.055
 
         group.rotation.y = current.ry + t * 0.022
         group.rotation.x = current.rx + Math.sin(t * 0.22) * 0.05

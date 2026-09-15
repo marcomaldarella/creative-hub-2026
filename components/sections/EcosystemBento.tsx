@@ -24,9 +24,10 @@ const IMAGES = [academyImg, studioImg, spaziImg]
 
 /* labeling di sezione: ogni nodo porta il colore della sua area */
 const SECTIONS = [
-  { label: 'Academy', accent: 'var(--azzurro-ink)' },
-  { label: 'Studio', accent: 'var(--arancio)' },
-  { label: 'Coworking', accent: 'var(--giallo-fluo)' },
+  /* accent = colore come TESTO · fill = superficie piena dell'hover */
+  { label: 'Academy', accent: 'var(--azzurro-ink)', fill: 'var(--azzurro)' },
+  { label: 'Studio', accent: 'var(--arancio)', fill: 'var(--arancio)' },
+  { label: 'Coworking', accent: 'var(--giallo-fluo)', fill: 'var(--giallo-fluo)' },
 ] as const
 
 /**
@@ -41,7 +42,12 @@ export function EcosystemBento({ items, hrefs }: EcosystemBentoProps) {
       <Link
         href={hrefs[0]}
         className={`rv ${styles.big}`}
-        style={{ '--accent': SECTIONS[0].accent } as React.CSSProperties}
+        style={
+          {
+            '--accent': SECTIONS[0].accent,
+            '--fill': SECTIONS[0].fill,
+          } as React.CSSProperties
+        }
       >
         <div className={styles.bigMedia}>
           <Image
@@ -77,6 +83,7 @@ export function EcosystemBento({ items, hrefs }: EcosystemBentoProps) {
             {
               transitionDelay: `${(i + 1) * 90}ms`,
               '--accent': SECTIONS[i + 1].accent,
+              '--fill': SECTIONS[i + 1].fill,
             } as React.CSSProperties
           }
         >

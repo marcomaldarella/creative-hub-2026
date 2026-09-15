@@ -98,15 +98,17 @@ export const css = `
      in semibold, poi il testo torna alla misura di lettura.
      :first-child sul FIGLIO DIRETTO, altrimenti prende anche i
      paragrafi dentro altri blocchi della griglia */
-  .pan-grid > div > .lede:first-child{font-size:21px;font-weight:600;
+  .pan-grid > div > .lede:first-of-type{font-size:21px;font-weight:600;
     line-height:1.3;letter-spacing:-.01em;margin-bottom:22px;}
-  .pan-grid > div > .lede:first-child b{font-weight:inherit;}
+  .pan-grid > div > .lede:first-of-type b{font-weight:inherit;}
 
-  /* il video e' piu' alto del testo: le due colonne si centrano fra
-     loro invece di partire entrambe dall'alto e lasciare un vuoto */
-  .pan-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,60px);align-items:center;}
-  .video-card{background:var(--ink);overflow:hidden;
-    display:flex;align-items:center;justify-content:center;aspect-ratio:16/9;position:relative;}
+  /* titolo, testo e video nella stessa griglia: le due colonne sono
+     alte uguali e il video si allunga su tutta la colonna di testo */
+  .pan-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,60px);align-items:stretch;}
+  .pan-grid > div{display:flex;flex-direction:column;}
+  .pan-grid h2.sec{margin-bottom:clamp(24px,3vw,44px);}
+  .video-card{background:var(--ink);overflow:hidden;height:100%;min-height:340px;
+    display:flex;align-items:center;justify-content:center;position:relative;}
   .video-card img{position:absolute;inset:0;opacity:.45;}
   .video-card .play{width:64px;height:64px;border-radius:50%;background:var(--blue);
     display:flex;align-items:center;justify-content:center;position:relative;}
@@ -255,7 +257,7 @@ export const css = `
 
     .skill{padding:22px 22px 26px;}
     .skill .n{margin-bottom:12px;}
-    .pan-grid > div > .lede:first-child{font-size:19px;}
+    .pan-grid > div > .lede:first-of-type{font-size:19px;}
     .head-center{margin-bottom:34px;}
     section.block{padding:52px var(--pad);}
     section.block.tight{padding-top:28px;}
@@ -516,9 +518,9 @@ export const html = `
 <div class="sezRule"><span>01</span><i></i></div>
 
 <section class="block tight" id="panoramica" style="padding-top:56px;">
-  <h2 class="sec" contenteditable="true">Panoramica</h2>
   <div class="pan-grid">
   <div>
+  <h2 class="sec" contenteditable="true">Panoramica</h2>
   <p class="lede" contenteditable="true">Non è una scuola di produzione musicale come le altre: da Creative Hub Academy esci con un <b>titolo universitario</b>, non con un attestato di partecipazione.</p>
   <p class="lede" contenteditable="true">Ableton, Pro Tools, FL Studio, sintetizzatori e plugin professionali dal primo giorno. Le stesse macchine che trovi negli studi dove andrai a lavorare. La teoria c'è, ma è tarata su hip-hop, rap, R&amp;B ed elettronica — non sul solfeggio. Se non sai leggere uno spartito non è un problema: si parte da come funziona un beat.</p>
   <p class="lede" contenteditable="true">Durante il percorso lavori su progetti reali con artisti e aziende del network. Il portfolio te lo costruisci prima del titolo, non dopo.</p>
