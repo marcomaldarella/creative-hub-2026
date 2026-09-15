@@ -120,10 +120,11 @@ export const css = `
   /* le 4 voci si incolonnano sotto le voci del menu vero: la posizione
      arriva da JS (misura le voci nel light DOM), qui c'e' solo il
      ripiego quando il menu non c'e' — mobile o misura non riuscita */
-  .subnav .jump{display:flex;align-items:stretch;gap:26px;overflow-x:auto;scrollbar-width:none;}
+  .subnav .jump{display:flex;align-items:stretch;gap:34px;overflow-x:auto;scrollbar-width:none;}
   .subnav .jump::-webkit-scrollbar{display:none;}
-  /* allineata: il blocco parte alla stessa x della PRIMA voce del menu
-     (Academy); dentro, le voci mantengono il loro ritmo */
+  /* allineata: il blocco parte alla stessa x della PRIMA voce del menu.
+     Incolonnare ogni voce sotto la sua (le etichette sono piu' larghe
+     delle voci di menu) le faceva toccare. */
   .subnav .jump.aligned{position:absolute;top:0;height:100%;overflow:visible;}
   .subnav .tail{display:flex;align-items:center;gap:26px;margin-left:auto;flex-shrink:0;}
   .subnav .jump a,.subnav .tail .year{position:relative;display:inline-flex;align-items:center;gap:6px;
@@ -140,7 +141,9 @@ export const css = `
     transition:background .2s ease,border-color .2s ease,opacity .2s ease;}
   .subnav .step:hover{background:var(--ink);color:var(--blue);border-color:var(--ink);}
   .subnav .step[disabled]{opacity:.3;pointer-events:none;}
-  .subnav .jump .idx{font-size:11px;font-weight:600;letter-spacing:-.01em;
+  /* numero e nome della sezione hanno la STESSA misura: il numero piu'
+     piccolo creava due allineamenti ottici diversi in ogni voce */
+  .subnav .jump .idx{font-size:14px;font-weight:600;letter-spacing:-.025em;
     color:color-mix(in srgb,var(--ink) 38%,transparent);transition:color .22s ease;}
   .subnav .jump a:hover{color:var(--ink);}
   .subnav .jump a.is-active{color:var(--ink);}
@@ -210,6 +213,10 @@ export const css = `
   .struct-text p{font-size:16px;line-height:1.42;color:var(--txt-2);margin:0 0 16px;max-width:54ch;}
   .struct-text p:last-child{margin-bottom:0;}
   .struct-text b{color:var(--white);font-weight:600;}
+  /* stesso attacco svizzero della panoramica */
+  .struct-text p:first-child{font-size:21px;font-weight:600;line-height:1.3;
+    letter-spacing:-.01em;color:var(--white);margin-bottom:22px;max-width:40ch;}
+  .struct-text p:first-child b{font-weight:inherit;}
   .struct-grid .accordion{max-width:none;margin-top:-22px;}
   @media(max-width:1000px){
     .struct-grid{grid-template-columns:1fr;gap:34px;}
@@ -340,7 +347,10 @@ export const css = `
   .cta-dark h2{position:relative;color:var(--ink);font-size:clamp(30px,3.4vw,46px);font-weight:700;
     line-height:1.1;margin:0 0 20px;max-width:720px;letter-spacing:-.02em;}
   .cta-dark p{position:relative;color:var(--blue-ink);font-size:17px;line-height:1.35;margin:0 0 30px;max-width:520px;}
-  .cta-dark .pill{position:relative;background:var(--ink);color:var(--blue);}
+  /* pastiglia nera sul colore pieno: testo BIANCO, l'azzurro su nero
+     restava un terzo colore in mezzo alla fascia */
+  .cta-dark .pill{position:relative;background:var(--ink);color:var(--white);}
+  .cta-dark .pill:hover{background:var(--white);color:var(--ink);}
 
   /* testimonial a rotazione: le citazioni stanno tutte nella stessa
      cella di griglia e si scambiano in dissolvenza — cosi' l'altezza e'
@@ -562,7 +572,7 @@ export const html = `
   <div class="sec-flex-head">
     <div>
       <h2 class="sec" style="margin-bottom:4px;" contenteditable="true">Il tuo studio di lavoro</h2>
-      <p class="lede" style="margin-bottom:0;" contenteditable="true">Progettato per come si impara, si produce e si suona — ogni dettaglio pensato per chi studia qui.</p>
+      <p class="lede" style="margin-bottom:0;" contenteditable="true">Progettato per come si impara, si produce e si suona.<br>Ogni dettaglio pensato per chi studia qui.</p>
     </div>
     <button class="pill pill-outline-ink" contenteditable="true">Esplora lo studio</button>
   </div>
@@ -611,9 +621,9 @@ export const html = `
 
   <div class="struct-grid">
   <div class="struct-text">
-    <p contenteditable="true">Il <b>corso di produzione musicale</b> del Creative Hub di Bologna dura <b>tre anni full-time</b>, estendibili fino a sei in modalità part-time, e si chiude con un titolo universitario Bachelor of Arts in Urban Music Production.</p>
-    <p contenteditable="true">Ogni anno mette insieme laboratorio e teoria: si lavora in studio su Ableton, Pro Tools e FL Studio, con un'ora di lezione individuale a settimana con il tuo tutor. I tre moduli qui accanto raccontano che cosa impari, in che ordine e con quali strumenti.</p>
-    <p contenteditable="true">Dal <b>beatmaking</b> al <b>sound design</b>, dal <b>mix e mastering</b> al music business: il percorso è costruito perché a fine triennio tu abbia un portfolio di brani pubblicati, non solo un attestato.</p>
+    <p contenteditable="true">Il corso di produzione musicale del Creative Hub di Bologna dura tre anni full-time, fino a sei part-time.</p>
+    <p contenteditable="true">Ogni anno mette insieme laboratorio e teoria: si lavora su Ableton, Pro Tools e FL Studio, con un'ora di lezione individuale a settimana.</p>
+    <p contenteditable="true">Dal <b>beatmaking</b> al <b>mix e mastering</b>, fino al music business: a fine triennio hai un portfolio di brani pubblicati, non un attestato.</p>
   </div>
 
   <div class="accordion" id="yearAccordion">

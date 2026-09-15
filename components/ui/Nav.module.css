@@ -342,8 +342,10 @@
 
 .lang {
   font-family: var(--font-body), sans-serif;
-  font-size: var(--fs-mono);
-  letter-spacing: 0.02em;
+  /* stessa misura delle voci di menu: più piccolo sembrava un residuo */
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
   color: var(--fg-2);
   white-space: nowrap;
 }
@@ -398,6 +400,19 @@
   box-shadow:
     0 0 0 2px var(--bg),
     0 0 0 4px var(--cta-bg);
+}
+
+/* barra nel colore di sezione: pastiglia outline nera sul colore,
+   hover pieno nero con testo nel colore della sezione */
+.navFlood .cta {
+  --cta-bg: transparent;
+  color: #000000;
+  border: 1px solid #000000;
+}
+
+.navFlood .cta:hover {
+  --cta-bg: #000000;
+  color: var(--bg);
 }
 
 /* barra nera (fascia scura o scivolata a nero): pastiglia outline —

@@ -210,6 +210,9 @@ export function Nav({
     dark ? styles.dark : '',
     open ? styles.menuOpen : '',
     open && floodMode ? styles.menuOpenFlood : '',
+    /* barra nel colore di sezione: la pastiglia "prenota" ha lo stesso
+       fondo della barra e sparirebbe — le serve un profilo */
+    floodMode && !open && !barToBlack ? styles.navFlood : '',
     barToBlack ? styles.navToBlack : '',
   ]
     .filter(Boolean)
