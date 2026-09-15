@@ -313,6 +313,7 @@ export const css = `
   .split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,3.5vw,68px);
     align-items:center;padding:0 var(--pad);}
   .split .imgbox{aspect-ratio:1/1;overflow:hidden;}
+  .split .imgbox video{width:100%;height:100%;object-fit:cover;display:block;}
   .split h2{font-size:clamp(28px,3vw,42px);font-weight:700;line-height:1.08;margin:0 0 24px;letter-spacing:-.02em;}
   .split p{font-size:16px;line-height:1.45;margin:0 0 16px;}
   .split p b{font-weight:700;}
@@ -744,7 +745,7 @@ export const html = `
 
 <section class="block">
   <div class="split">
-    <div class="imgbox"><img src="/mockup-corso/img/class-4.jpg" alt=""></div>
+    <div class="imgbox"><video src="/video/creative-hub-6s-03-1080x1920.mp4" poster="/mockup-corso/img/class-4.jpg" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video></div>
     <div>
       <h2 contenteditable="true">Nessun genere. Un metodo.</h2>
       <p contenteditable="true">La musica urban cambia continuamente, e lo trattiamo come condizione di studio. Non ti chiediamo di aderire a uno stile o a una scena. <b>Ci concentriamo sul tuo sviluppo artistico e sulla capacità critica</b>: come pensi, come lavori, dove vuoi portare la tua musica.</p>
