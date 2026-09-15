@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { BgVideo } from './BgVideo'
 import { Arrow, RevealGroup } from '@/components/ui'
 import academyImg from '@/public/img/sections/node-academy.jpg'
 import studioImg from '@/public/img/sections/node-studio.jpg'
@@ -24,10 +25,16 @@ const IMAGES = [academyImg, studioImg, spaziImg]
 
 /* labeling di sezione: ogni nodo porta il colore della sua area */
 const SECTIONS = [
-  /* accent = colore come TESTO · fill = superficie piena dell'hover */
-  { label: 'Academy', accent: 'var(--azzurro-ink)', fill: 'var(--azzurro)' },
-  { label: 'Studio', accent: 'var(--arancio)', fill: 'var(--arancio)' },
-  { label: 'Coworking', accent: 'var(--giallo-fluo)', fill: 'var(--giallo-fluo)' },
+  /* accent = colore come TESTO · fill = superficie piena dell'hover ·
+     video = clip muta in loop al posto della foto (la foto resta poster) */
+  { label: 'Academy', accent: 'var(--azzurro-ink)', fill: 'var(--azzurro)', video: undefined },
+  { label: 'Studio', accent: 'var(--arancio)', fill: 'var(--arancio)', video: '/video/node-studio.mp4' },
+  {
+    label: 'Coworking',
+    accent: 'var(--giallo-fluo)',
+    fill: 'var(--giallo-fluo)',
+    video: '/video/node-coworking.mp4',
+  },
 ] as const
 
 /**
@@ -50,14 +57,22 @@ export function EcosystemBento({ items, hrefs }: EcosystemBentoProps) {
         }
       >
         <div className={styles.bigMedia}>
-          <Image
-            src={IMAGES[0]}
-            alt=""
-            fill
-            sizes="(max-width: 900px) 100vw, 50vw"
-            className={styles.img}
-            placeholder="blur"
-          />
+          {SECTIONS[0].video ? (
+            <BgVideo
+              src={SECTIONS[0].video}
+              poster={IMAGES[0].src}
+              className={styles.img}
+            />
+          ) : (
+            <Image
+              src={IMAGES[0]}
+              alt=""
+              fill
+              sizes="(max-width: 900px) 100vw, 50vw"
+              className={styles.img}
+              placeholder="blur"
+            />
+          )}
         </div>
         <div className={styles.bigFoot}>
           <div className={`mono ${styles.head}`}>
@@ -101,14 +116,22 @@ export function EcosystemBento({ items, hrefs }: EcosystemBentoProps) {
             )}
           </div>
           <div className={styles.sideMedia}>
-            <Image
-              src={IMAGES[i + 1]}
-              alt=""
-              fill
-              sizes="(max-width: 900px) 100vw, 25vw"
-              className={styles.img}
-              placeholder="blur"
-            />
+            {SECTIONS[i + 1].video ? (
+              <BgVideo
+                src={SECTIONS[i + 1].video as string}
+                poster={IMAGES[i + 1].src}
+                className={styles.img}
+              />
+            ) : (
+              <Image
+                src={IMAGES[i + 1]}
+                alt=""
+                fill
+                sizes="(max-width: 900px) 100vw, 25vw"
+                className={styles.img}
+                placeholder="blur"
+              />
+            )}
           </div>
         </Link>
       ))}
