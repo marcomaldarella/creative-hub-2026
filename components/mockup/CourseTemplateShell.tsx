@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import { Fluid } from '@/components/sections/FluidTrail';
 
 export type CourseTemplateShellProps = {
   css: string;
@@ -200,6 +201,37 @@ export function CourseTemplateShell({ css, html }: CourseTemplateShellProps) {
       });
     }
 
+    // scia fluida della home sul carosello "come conoscerci" (v3):
+    // stessa simulazione (classe Fluid), inchiostro azzurro, in
+    // difference sopra la sezione — solo mouse, mai con reduced-motion
+    let fluid: Fluid | null = null;
+    let fluidIO: IntersectionObserver | null = null;
+    const connSez = root.getElementById('connetti');
+    if (
+      connSez &&
+      window.matchMedia('(hover: hover) and (pointer: fine)').matches &&
+      !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    ) {
+      const fcanvas = document.createElement('canvas');
+      fcanvas.className = 'fluid-layer';
+      fcanvas.setAttribute('aria-hidden', 'true');
+      connSez.appendChild(fcanvas);
+      try {
+        fluid = new Fluid(fcanvas, connSez as HTMLElement);
+        fluid.setColor([0.443, 0.722, 1.0]); // azzurro brand
+        fluidIO = new IntersectionObserver(
+          ([en]) => {
+            if (en.isIntersecting) fluid?.start();
+            else fluid?.stop();
+          },
+          { threshold: 0.05 },
+        );
+        fluidIO.observe(connSez);
+      } catch {
+        fcanvas.remove(); // niente WebGL: il carosello vive senza scia
+      }
+    }
+
     // testimonial a rotazione: dissolvenza fra le citazioni, frecce ai
     // lati e avanzamento automatico (fermo sotto al puntatore e con
     // prefers-reduced-motion)
@@ -326,6 +358,8 @@ export function CourseTemplateShell({ css, html }: CourseTemplateShellProps) {
     }
 
     return () => {
+      fluidIO?.disconnect();
+      fluid?.dispose();
       window.removeEventListener('keydown', onModalKey);
       document.documentElement.style.overflow = '';
       videoIO.disconnect();

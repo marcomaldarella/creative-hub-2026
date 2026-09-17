@@ -475,6 +475,11 @@ export const css = `
   .carousel[data-loop] .connect-card .img{cursor:none;}
   @media(hover:none){.ccursor{display:none;}.carousel[data-loop] .connect-card .img{cursor:auto;}}
 
+  /* strato della scia fluida sul carosello connettiti */
+  #connetti{position:relative;}
+  .fluid-layer{position:absolute;inset:0;width:100%;height:100%;
+    pointer-events:none;z-index:5;mix-blend-mode:difference;}
+
   footer.site{background:var(--ink);color:var(--white);padding:64px var(--pad) 28px;border-top:var(--hair) solid color-mix(in srgb,var(--blue) 30%,transparent);}
   .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:32px;margin-bottom:44px;}
   .foot-col h4{font-size:12px;color:var(--blue-soft);margin:0 0 14px;font-weight:600;}

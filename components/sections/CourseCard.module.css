@@ -44,6 +44,19 @@ a.courseFlat .courseBody {
   padding: 16px 0 0;
 }
 
+/* hover della variante libera: la foto si muove, il resto respira */
+a.courseFlat > *:first-child {
+  overflow: hidden;
+}
+
+a.courseFlat img {
+  transition: transform 0.55s var(--ease-out);
+}
+
+a.courseFlat:hover img {
+  transform: scale(1.035);
+}
+
 a.courseFlat .courseSummary {
   color: var(--fg-2);
 }

@@ -72,7 +72,7 @@ type Double = {
   swap(): void
 }
 
-class Fluid {
+export class Fluid {
   private renderer: THREE.WebGLRenderer
   private scene = new THREE.Scene()
   private camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1)
