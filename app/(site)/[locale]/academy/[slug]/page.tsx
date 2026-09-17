@@ -1,18 +1,16 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { ArrowLink, Button, Marquee, Reveal, Rule } from '@/components/ui'
-import { PortableBlocks } from '@/components/sections/PortableBlocks'
-import { Thumb } from '@/components/sections/Thumb'
+import { CourseTemplateShell } from '@/components/mockup/CourseTemplateShell'
+import { buildCourseHtml, css } from '@/components/mockup/templates/v3'
 import { SiteChrome, shopHref } from '@/components/sections/SiteChrome'
-import { TeacherStrip } from '@/components/sections/TeacherStrip'
-import { isLocale, localeHref } from '@/lib/i18n/config'
-import { getDictionary } from '@/lib/i18n/dictionaries'
-import { getCourseBySlug, getSiteSettings } from '@/lib/sanity/queries'
-import { l } from '@/lib/sanity/l'
-import { findTopic } from '@/lib/topics'
 import { TopicScreen } from '@/components/sections/TopicScreen'
-import styles from './page.module.css'
+import { isLocale } from '@/lib/i18n/config'
+import { getDictionary } from '@/lib/i18n/dictionaries'
+import { urlFor } from '@/lib/sanity/image'
+import { l } from '@/lib/sanity/l'
+import { getCourseBySlug, getSiteSettings } from '@/lib/sanity/queries'
+import type { SanityImage } from '@/lib/sanity/types'
+import { findTopic } from '@/lib/topics'
 
 export const dynamic = 'force-dynamic'
 
@@ -39,6 +37,38 @@ export async function generateMetadata({
   return title ? { title, description } : {}
 }
 
+/* dal PortableText del body ai paragrafi piani per la panoramica */
+function paragraphs(blocks: unknown): string[] {
+  if (!Array.isArray(blocks)) return []
+  return blocks
+    .filter(
+      (b): b is { _type: string; style?: string; children?: { text?: string }[] } =>
+        typeof b === 'object' &&
+        b !== null &&
+        (b as { _type?: string })._type === 'block' &&
+        (!(b as { style?: string }).style ||
+          (b as { style?: string }).style === 'normal'),
+    )
+    .map((b) => (b.children ?? []).map((c) => c.text ?? '').join('').trim())
+    .filter(Boolean)
+}
+
+function imgUrl(
+  image: SanityImage | undefined,
+  w: number,
+  h: number,
+): string | undefined {
+  return image?.asset
+    ? urlFor(image).width(w).height(h).fit('crop').url()
+    : undefined
+}
+
+/**
+ * Scheda corso: la struttura approvata di corso-v3 (riunione Duessenza
+ * 17/09) applicata a TUTTI i corsi — l'HTML viene generato dal builder
+ * del template con i dati Sanity del corso (hero, fatti, panoramica dal
+ * body, foto della gallery nelle competenze, docente).
+ */
 export default async function CoursePage({
   params,
 }: {
@@ -53,154 +83,56 @@ export default async function CoursePage({
   if (topic) return <TopicScreen locale={locale} topic={topic} />
 
   const t = getDictionary(locale)
-
   const [course, settings] = await Promise.all([
     getCourseBySlug(slug),
     getSiteSettings(),
   ])
   if (!course) notFound()
 
-  const bookHref = course.shopUrl ?? shopHref(settings)
-  const teachers = course.teachers ?? []
+  const gallery = course.gallery ?? []
+  const teacher = course.teachers?.[0]
+  const title = l(course.title, locale) ?? slug
 
-  const facts = [
-    { label: t.common.duration, value: l(course.duration, locale) },
-    { label: t.common.start, value: l(course.startDate, locale) },
-    { label: t.common.level, value: l(course.level, locale) },
-    { label: t.common.language, value: l(course.language, locale) },
-    { label: t.common.mode, value: l(course.mode, locale) },
-  ].filter((f): f is { label: string; value: string } => Boolean(f.value))
+  const html = buildCourseHtml({
+    eyebrow: `Academy · ${
+      l(course.category?.title, locale) ?? t.academy.kicker
+    }`,
+    title,
+    sub: l(course.summary, locale) ?? '',
+    courseLine: [title, l(course.level, locale)].filter(Boolean).join(' — '),
+    meta: [
+      { label: t.common.duration, value: l(course.duration, locale) },
+      { label: t.common.start, value: l(course.startDate, locale) },
+      { label: t.common.level, value: l(course.level, locale) },
+      { label: t.common.language, value: l(course.language, locale) },
+      { label: t.common.mode, value: l(course.mode, locale) },
+    ].filter((m): m is { label: string; value: string } => Boolean(m.value)),
+    heroImage: imgUrl(course.coverImage, 1600, 1200),
+    secondaryCta: {
+      label: t.common.bookOn,
+      href: course.shopUrl ?? shopHref(settings),
+    },
+    panoramica: paragraphs(l(course.body, locale)),
+    panImage: imgUrl(gallery[0] ?? course.coverImage, 1200, 800),
+    skillImages: gallery.length
+      ? Array.from(
+          { length: 6 },
+          (_, i) => imgUrl(gallery[i % gallery.length], 900, 563)!,
+        )
+      : undefined,
+    teacher: teacher?.name
+      ? {
+          name: teacher.name,
+          role: l(teacher.role, locale) ?? '',
+          bio: l(teacher.bio, locale) ?? '',
+          img: imgUrl(teacher.photo, 800, 1000),
+        }
+      : undefined,
+  })
 
   return (
     <SiteChrome locale={locale} path={`/academy/${slug}`}>
-      <main className={styles.main}>
-        {/* ————— hero alla Catalyst: testi e dati chiave a sinistra,
-            cover viva a filo a destra ————— */}
-        <header className={styles.head}>
-          <div className={styles.headText}>
-            <Reveal className={styles.back}>
-              <ArrowLink href={localeHref(locale, '/academy/corsi')} reverse>
-                {t.academy.backToCourses}
-              </ArrowLink>
-            </Reveal>
-            <Reveal as="span" className={`mono ${styles.kicker}`} delay={60}>
-              {l(course.category?.title, locale)?.toLowerCase() ?? t.academy.kicker}
-            </Reveal>
-            <Reveal as="h1" className={`display-thin ${styles.title}`} delay={120}>
-              {l(course.title, locale)}
-            </Reveal>
-            {l(course.summary, locale) && (
-              <Reveal as="p" className={styles.lede} delay={180}>
-                {l(course.summary, locale)}
-              </Reveal>
-            )}
-
-            {/* summary delle feature: i dati chiave del corso */}
-            {facts.length > 0 && (
-              <Reveal delay={220}>
-                <dl className={styles.heroFacts}>
-                  {facts.map((fact) => (
-                    <div key={fact.label} className={styles.heroFact}>
-                      <dt className="mono">{fact.label}</dt>
-                      <dd>{fact.value}</dd>
-                    </div>
-                  ))}
-                </dl>
-              </Reveal>
-            )}
-
-            <Reveal delay={260}>
-              <Button variant="azzurro" href={bookHref} external>
-                {t.common.bookOn}
-              </Button>
-            </Reveal>
-          </div>
-
-          <Reveal className={styles.headMedia} delay={120}>
-            <Thumb
-              image={course.coverImage}
-              ratio="4 / 3"
-              width={1600}
-              index={0}
-              alt={l(course.title, locale) ?? ''}
-            />
-          </Reveal>
-        </header>
-
-        {/* ————— fascia nera: marquee continuo delle iscrizioni ————— */}
-        <section className={`scheme-dark ${styles.enrollBand}`}>
-          <Marquee
-            speed={26}
-            className={styles.enrollMarquee}
-            items={[
-              <span className={styles.enrollText} key="txt">
-                {t.nav.topbar.middle}
-              </span>,
-              <Link
-                className={styles.enrollPill}
-                href={localeHref(locale, '/academy/open-day')}
-                key="cta"
-              >
-                {t.nav.topbar.cta}
-              </Link>,
-            ]}
-          />
-        </section>
-
-        <Rule left={t.nav.academy} right={t.academy.courseInfo} />
-
-        {/* ————— corpo + sidebar sticky ————— */}
-        <section className={`wrap ${styles.layout}`}>
-          <div className={styles.body}>
-            <Reveal>
-              <PortableBlocks value={l(course.body, locale)} />
-            </Reveal>
-
-            {(course.gallery?.length ?? 0) > 0 && (
-              <div className={styles.gallery}>
-                <Reveal as="span" className={`mono ${styles.teachersKicker}`}>
-                  {t.academy.courseGallery}
-                </Reveal>
-                <div className={styles.galleryGrid}>
-                  {course.gallery!.map((shot, i) => (
-                    <Reveal key={shot.asset?._ref ?? i} delay={(i % 3) * 60}>
-                      <Thumb
-                        image={shot}
-                        index={i}
-                        ratio="4 / 3"
-                        width={900}
-                        alt={l(course.title, locale) ?? ''}
-                      />
-                    </Reveal>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {teachers.length > 0 && (
-              <div className={styles.teachers}>
-                <Reveal as="span" className={`mono ${styles.teachersKicker}`}>
-                  {t.academy.courseTeachers}
-                </Reveal>
-                <TeacherStrip
-                  teachers={teachers}
-                  locale={locale}
-                  join={{
-                    label: t.academy.joinUs,
-                    role: t.academy.joinUsRole,
-                    href: `mailto:${settings?.email ?? 'hello@bologna-creativehub.it'}?subject=${encodeURIComponent(t.academy.joinUs)}`,
-                  }}
-                  labels={{
-                    prev: t.academy.teachersPrev,
-                    next: t.academy.teachersNext,
-                    hint: t.academy.teachersHint,
-                  }}
-                />
-              </div>
-            )}
-          </div>
-        </section>
-      </main>
+      <CourseTemplateShell css={css} html={html} />
     </SiteChrome>
   )
 }

@@ -1009,3 +1009,128 @@ export const html = `
   </div>
 </div>
 `;
+
+/* ————— builder per i corsi reali: parte dall'HTML demo qui sopra e
+   innesta i dati del corso (Sanity) nei punti variabili — la struttura
+   approvata resta identica. Il contenteditable viene tolto: era solo
+   per la fase mockup. ————— */
+
+export type CourseHtmlData = {
+  eyebrow: string;
+  title: string;
+  sub: string;
+  /* riga della subnav sticky: "Titolo — Livello" */
+  courseLine: string;
+  meta: { label: string; value: string }[];
+  /* cover del corso al posto del video demo nella hero */
+  heroImage?: string;
+  /* bottone destro della hero (es. prenota sullo shop) */
+  secondaryCta?: { label: string; href: string };
+  /* paragrafi della panoramica (dal body Sanity); fallback: demo */
+  panoramica?: string[];
+  panImage?: string;
+  /* foto della gallery del corso al posto delle 6 demo nelle competenze */
+  skillImages?: string[];
+  teacher?: { name: string; role: string; bio: string; img?: string };
+};
+
+const escapeHtml = (v: string) =>
+  v
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+
+const DL_SVG =
+  '<svg class="dl" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M12 4v13M6 11l6 6 6-6"/></svg>';
+
+export function buildCourseHtml(d: CourseHtmlData): string {
+  const e = escapeHtml;
+  let h = html;
+
+  h = h.replace('Academy · Bachelor of Arts', e(d.eyebrow));
+  h = h.replace(
+    'Corso universitario di produzione musicale a Bologna.',
+    e(d.title),
+  );
+  h = h.replace(
+    'Diventa produttore musicale con il Bachelor of Arts in Urban Music Production.',
+    e(d.sub),
+  );
+  h = h.replace('Urban Music Production — Bachelor of Arts', e(d.courseLine));
+
+  /* meta grid rigenerata dai fatti del corso */
+  const metaHtml = d.meta
+    .map(
+      (m) =>
+        `<div><div class="lab">${e(m.label)}</div><div class="val">${e(m.value)}</div></div>`,
+    )
+    .join('\n      ');
+  h = h.replace(
+    /<div class="meta-grid">[\s\S]*?<div class="hero-cta">/,
+    `<div class="meta-grid">\n      ${metaHtml}\n    </div>\n\n    <div class="hero-cta">`,
+  );
+
+  if (d.secondaryCta) {
+    h = h.replace(
+      /<button class="pill pill-outline pill-reveal">[\s\S]*?<\/button>/,
+      `<a class="pill pill-outline pill-reveal" href="${e(d.secondaryCta.href)}" target="_blank" rel="noreferrer"><span>${e(d.secondaryCta.label)}</span>${DL_SVG}</a>`,
+    );
+  }
+
+  if (d.heroImage) {
+    h = h.replace(
+      /<video[^>]*creative-hub-8s-02-1920x1080[^>]*><\/video>/,
+      `<img src="${e(d.heroImage)}" alt="${e(d.title)}">`,
+    );
+  }
+
+  if (d.panoramica && d.panoramica.length) {
+    const ps = d.panoramica
+      .map((p) => `<p class="lede">${e(p)}</p>`)
+      .join('\n  ');
+    h = h.replace(
+      /(<h2 class="sec"[^>]*>Panoramica<\/h2>)[\s\S]*?(<\/div>\s*<div class="video-card">)/,
+      `$1\n  ${ps}\n  $2`,
+    );
+  }
+  if (d.panImage) {
+    h = h.replace('/mockup-corso/img/class-2.jpg', e(d.panImage));
+  }
+  h = h.replace('Urban Music Production al Creative Hub', e(d.title));
+
+  if (d.skillImages && d.skillImages.length) {
+    let i = 0;
+    h = h.replace(
+      /<div class="ph"><img src="[^"]*" alt=""><\/div>/g,
+      () =>
+        `<div class="ph"><img src="${e(d.skillImages![i++ % d.skillImages!.length])}" alt=""></div>`,
+    );
+  }
+
+  if (d.teacher) {
+    const t = d.teacher;
+    if (t.img) {
+      h = h.replace(
+        '<div class="ph"><img src="/mockup-corso/img/zilocchi.jpg" alt="Nicolò Zilocchi"></div>',
+        `<div class="ph"><img src="${e(t.img)}" alt="${e(t.name)}"></div>`,
+      );
+    }
+    h = h.replace(
+      '<h3 contenteditable="true">Nicolò Zilocchi</h3>',
+      `<h3>${e(t.name)}</h3>`,
+    );
+    h = h.replace('Course leader · Urban Music Production', e(t.role));
+    h = h.replace(
+      /Producer e beatmaker, guida il percorso[\s\S]*?finale\./,
+      e(t.bio),
+    );
+  }
+
+  /* i richiami residui al corso demo prendono il titolo vero */
+  h = h.split('Urban Music Production').join(e(d.title));
+
+  /* niente contenteditable sulle pagine vere */
+  h = h.split(' contenteditable="true"').join('');
+  return h;
+}

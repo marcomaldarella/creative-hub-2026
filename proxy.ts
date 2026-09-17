@@ -19,8 +19,8 @@ export function proxy(request: NextRequest) {
   // /academy, montate nel vero SiteChrome (nav/footer reali, non più
   // ricostruiti a mano) — redirect così i link già condivisi restano validi
   const MOCKUP_REDIRECTS: Record<string, string> = {
-    '/mockup-corso/v1': '/academy/corso-v1',
-    '/mockup-corso/v2': '/academy/corso-v2',
+    '/mockup-corso/v1': '/academy/corso-v3',
+    '/mockup-corso/v2': '/academy/corso-v3',
     '/mockup-corso/v3': '/academy/corso-v3',
   }
   if (pathname in MOCKUP_REDIRECTS) {
