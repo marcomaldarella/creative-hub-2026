@@ -13,7 +13,9 @@
   /* .main spinge già sotto la nav: qui si risale per stare a filo top,
      la barra galleggia sopra il nero */
   margin-top: calc(var(--nav-h) * -1);
-  padding-top: var(--header-h);
+  /* niente padding-top: spostava il centro della griglia sotto il
+     centro della sfera (che è absolute su tutto il box) — le voci
+     devono stare al centro vero dell'hero */
   min-height: min(86svh, 900px);
   display: grid;
   place-items: center;

@@ -56,7 +56,7 @@ export const css = `
      slider. Tre aree di griglia: testi | video, info+CTA sotto i testi
      — così su mobile il video può salire fra sottotitolo e info */
   .hero{display:grid;grid-template-columns:minmax(520px,45%) 1fr;grid-template-rows:auto 1fr;
-    min-height:calc(100dvh - 150px);background:var(--blue);color:var(--ink);}
+    min-height:calc(86dvh - 150px);background:var(--blue);color:var(--ink);}
   .hero-left{grid-area:1/1;padding:44px var(--pad) 0;display:flex;flex-direction:column;}
   .hero-info{grid-area:2/1;padding:0 var(--pad) 48px;display:flex;flex-direction:column;justify-content:flex-end;}
   .eyebrow{font-size:13px;font-weight:600;margin-bottom:18px;font-family:var(--font-body),system-ui,sans-serif;
@@ -77,16 +77,21 @@ export const css = `
   /* Contattaci: nero pieno (a sinistra) */
   .pill-ink{background:var(--ink);color:var(--white);}
   .pill-ink:hover{background:var(--ink-2);}
-  /* Scarica il piano di studi: la freccia compare solo in hover */
-  .pill-reveal .dl{opacity:0;transform:translateY(-4px);}
-  .pill-reveal:hover .dl{opacity:1;transform:translateY(2px);}
+  /* Scarica il piano di studi: la freccia compare solo in hover e il
+     tasto si ALLARGA per farle posto — a riposo la scritta resta
+     centrata, niente vuoto a destra */
+  .pill-reveal{gap:0;}
+  .pill-reveal .dl{width:0;margin-left:0;opacity:0;transform:translateY(-4px);
+    transition:width .25s cubic-bezier(.22,1,.36,1),margin-left .25s cubic-bezier(.22,1,.36,1),
+      opacity .2s ease,transform .25s cubic-bezier(.22,1,.36,1);}
+  .pill-reveal:hover .dl{width:15px;margin-left:9px;opacity:1;transform:translateY(2px);}
   .hero-right{grid-area:1/2/3/3;position:relative;overflow:hidden;min-height:420px;}
   .hero-right img,.hero-right video{position:absolute;inset:0;
     width:100%;height:100%;object-fit:cover;display:block;}
 
   /* slider: sfondo azzurro, testo nero, INTERAMENTE cliccabile (apre la
      modale contatti) — il colore dell'hero corre fino a qui */
-  .marquee-wrap{display:block;background:var(--blue);overflow:hidden;padding:20px 0;white-space:nowrap;
+  .marquee-wrap{display:block;background:var(--blue);overflow:hidden;padding:12px 0;white-space:nowrap;
     border-top:var(--hair) solid color-mix(in srgb,var(--ink) 35%,transparent);
     border-bottom:var(--hair) solid color-mix(in srgb,var(--ink) 35%,transparent);
     cursor:pointer;text-decoration:none;transition:background .25s ease;}
@@ -317,6 +322,8 @@ export const css = `
   }
 
   .accordion{max-width:1000px;}
+  /* FAQ: fila piu' larga delle altre liste */
+  #faq .accordion{max-width:1400px;}
   .acc-item{border-top:var(--hair) solid color-mix(in srgb,var(--blue) 30%,transparent);}
   .accordion .acc-item:last-child{border-bottom:var(--hair) solid color-mix(in srgb,var(--blue) 30%,transparent);}
   .acc-head{display:flex;justify-content:space-between;align-items:center;padding:22px 0;cursor:pointer;}
@@ -457,6 +464,17 @@ export const css = `
   .cmodal-ok{display:none;}
   .cmodal.sent .cmodal-ok{display:block;}
 
+  /* cursore del carosello (riunione): disco azzurro con freccia
+     avanti/indietro, SOLO in hover sull'immagine */
+  .ccursor{position:fixed;top:0;left:0;z-index:150;width:52px;height:52px;border-radius:50%;
+    background:var(--blue);color:var(--ink);display:grid;place-items:center;
+    pointer-events:none;opacity:0;transition:opacity .2s ease;
+    transform:translate(-50%,-50%);}
+  .ccursor svg{transition:transform .3s cubic-bezier(.22,1,.36,1);}
+  .ccursor[data-dir="prev"] svg{transform:scaleX(-1);}
+  .carousel[data-loop] .connect-card .img{cursor:none;}
+  @media(hover:none){.ccursor{display:none;}.carousel[data-loop] .connect-card .img{cursor:auto;}}
+
   footer.site{background:var(--ink);color:var(--white);padding:64px var(--pad) 28px;border-top:var(--hair) solid color-mix(in srgb,var(--blue) 30%,transparent);}
   .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:32px;margin-bottom:44px;}
   .foot-col h4{font-size:12px;color:var(--blue-soft);margin:0 0 14px;font-weight:600;}
@@ -552,7 +570,7 @@ export const html = `
       </div>
       <div>
         <div class="lab" contenteditable="true">livello</div>
-        <div class="val" contenteditable="true">Bachelor of Arts — BA (Hons) Level 6</div>
+        <div class="val" contenteditable="true">Bachelor of Arts<br>BA (Hons) Level 6</div>
       </div>
       <div>
         <div class="lab" contenteditable="true">scadenza candidature</div>
@@ -843,7 +861,7 @@ export const html = `
     <button class="pill pill-outline-ink" data-contact contenteditable="true">Vedi tutti gli eventi</button>
   </div>
 
-  <div class="carousel" id="connCarousel">
+  <div class="carousel" id="connCarousel" data-loop>
     <a class="connect-card" href="/academy/open-day">
       <div class="img"><img src="/mockup-corso/img/class-1.jpg" alt=""><h3 contenteditable="true">Open day</h3></div>
       <div class="cap2"><span contenteditable="true">Partecipa a un open day, in sede o online</span><span class="arr"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></div>
@@ -856,6 +874,27 @@ export const html = `
       <div class="img"><img src="/mockup-corso/img/zilocchi.jpg" alt=""><h3 contenteditable="true">Parla con un tutor</h3></div>
       <div class="cap2"><span contenteditable="true">Una chiamata individuale per tutte le tue domande</span><span class="arr"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></div>
     </a>
+    <a class="connect-card" href="/academy/open-day">
+      <div class="img"><img src="/mockup-corso/img/class-3.jpg" alt=""><h3 contenteditable="true">Workshop di prova</h3></div>
+      <div class="cap2"><span contenteditable="true">Un pomeriggio da producer, in aula con noi</span><span class="arr"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></div>
+    </a>
+    <a class="connect-card" href="/academy/open-day" aria-hidden="true" tabindex="-1" data-clone>
+      <div class="img"><img src="/mockup-corso/img/class-1.jpg" alt=""><h3>Open day</h3></div>
+      <div class="cap2"><span>Partecipa a un open day, in sede o online</span><span class="arr"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></div>
+    </a>
+    <a class="connect-card" href="/academy/open-day" aria-hidden="true" tabindex="-1" data-clone>
+      <div class="img"><img src="/img/sections/studio-regia.jpg" alt=""><h3>Tour dello studio</h3></div>
+      <div class="cap2"><span>Prenota una visita alla regia e alla sala live</span><span class="arr"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></div>
+    </a>
+    <a class="connect-card" href="/academy/open-day" aria-hidden="true" tabindex="-1" data-clone>
+      <div class="img"><img src="/mockup-corso/img/zilocchi.jpg" alt=""><h3>Parla con un tutor</h3></div>
+      <div class="cap2"><span>Una chiamata individuale per tutte le tue domande</span><span class="arr"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></div>
+    </a>
+    <a class="connect-card" href="/academy/open-day" aria-hidden="true" tabindex="-1" data-clone>
+      <div class="img"><img src="/mockup-corso/img/class-3.jpg" alt=""><h3>Workshop di prova</h3></div>
+      <div class="cap2"><span>Un pomeriggio da producer, in aula con noi</span><span class="arr"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></div>
+    </a>
+
   </div>
   <div class="carousel-nav">
     <button class="cnav-btn" aria-label="indietro" data-scroll-id="connCarousel" data-scroll-by="-400"><span class="arr w"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></button>
@@ -945,6 +984,8 @@ export const html = `
     <button class="cnav-btn qnav" data-q="1" aria-label="citazione successiva"><span class="arr"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></button>
   </div>
 </section>
+
+<div class="ccursor" data-dir="next" aria-hidden="true"><span class="arr"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></div>
 
 <div class="cmodal" id="contactModal" hidden>
   <div class="cmodal-back" data-modal-close></div>

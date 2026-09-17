@@ -63,7 +63,63 @@ export function CourseTemplateShell({ css, html }: CourseTemplateShellProps) {
         const id = btn.getAttribute('data-scroll-id');
         const by = Number(btn.getAttribute('data-scroll-by') ?? 0);
         const target = id ? root.getElementById(id) : null;
+        // i caroselli loopati hanno il proprio passo (vedi sotto)
+        if (target?.hasAttribute('data-loop')) return;
         target?.scrollBy({ left: by, behavior: 'smooth' });
+      });
+    });
+
+    // carosello loopato (v3, "come conoscerci"): set clonato in coda e
+    // scroll rinormalizzato — più cursore azzurro avanti/indietro che
+    // compare solo sulle immagini; il click sull'immagine fa scorrere,
+    // la didascalia sotto resta il link vero
+    const ccursor = root.querySelector<HTMLElement>('.ccursor');
+    root.querySelectorAll<HTMLElement>('.carousel[data-loop]').forEach((car) => {
+      const step = () => {
+        const first = car.children[0] as HTMLElement | undefined;
+        return (first?.getBoundingClientRect().width ?? 300) + 20;
+      };
+      const setW = () => car.scrollWidth / 2;
+      car.addEventListener(
+        'scroll',
+        () => {
+          if (car.scrollLeft >= setW()) car.scrollLeft -= setW();
+        },
+        { passive: true },
+      );
+      const go = (dir: number) => {
+        // all'indietro dal bordo sinistro: salto invisibile sul set clone
+        if (dir < 0 && car.scrollLeft < step()) car.scrollLeft += setW();
+        car.scrollBy({ left: dir * step(), behavior: 'smooth' });
+      };
+      root
+        .querySelectorAll<HTMLElement>(`[data-scroll-id="${car.id}"]`)
+        .forEach((btn) => {
+          btn.addEventListener('click', () =>
+            go(Number(btn.getAttribute('data-scroll-by') ?? 0) < 0 ? -1 : 1),
+          );
+        });
+      if (!ccursor) return;
+      const dirAt = (x: number) => {
+        const r = car.getBoundingClientRect();
+        return x > r.left + r.width / 2 ? 1 : -1;
+      };
+      car.addEventListener('pointermove', (e) => {
+        if (e.pointerType !== 'mouse') return;
+        ccursor.style.left = `${e.clientX}px`;
+        ccursor.style.top = `${e.clientY}px`;
+        ccursor.style.opacity = (e.target as HTMLElement).closest('.img')
+          ? '1'
+          : '0';
+        ccursor.dataset.dir = dirAt(e.clientX) > 0 ? 'next' : 'prev';
+      });
+      car.addEventListener('pointerleave', () => {
+        ccursor.style.opacity = '0';
+      });
+      car.addEventListener('click', (e) => {
+        if (!(e.target as HTMLElement).closest('.img')) return;
+        e.preventDefault();
+        go(dirAt(e.clientX));
       });
     });
 
