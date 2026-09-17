@@ -35,7 +35,14 @@ const tintEvent = (rgb: readonly number[] | null) => {
  * illuminano a rotazione da sole. In entrambi i casi la sfera dietro
  * prende lo stesso colore.
  */
-export function HeroWords({ words }: { words: [HeroWord, HeroWord, HeroWord] }) {
+export function HeroWords({
+  words,
+  as: Tag = 'h1',
+}: {
+  words: [HeroWord, HeroWord, HeroWord]
+  /* 'h2' dove il titolo di pagina è un altro (es. hero di /innovazione) */
+  as?: 'h1' | 'h2'
+}) {
   const [auto, setAuto] = useState<number | null>(null)
 
   /* autoplay solo dove non c'è puntatore e il moto non è ridotto */
@@ -94,7 +101,7 @@ export function HeroWords({ words }: { words: [HeroWord, HeroWord, HeroWord] }) 
       <span className={`mono ${styles.mark}`}>
         creative <span aria-hidden="true">—</span> hub
       </span>
-      <h1 className={`display-black ${styles.title}`}>
+      <Tag className={`display-black ${styles.title}`}>
         {words.map((w, i) => (
           <Link
             key={w.href}
@@ -109,7 +116,7 @@ export function HeroWords({ words }: { words: [HeroWord, HeroWord, HeroWord] }) 
             {w.label}
           </Link>
         ))}
-      </h1>
+      </Tag>
     </div>
   )
 }

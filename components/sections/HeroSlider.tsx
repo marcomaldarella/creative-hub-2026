@@ -318,8 +318,12 @@ export function HeroSlider({
       c.x = c.tx
       c.y = c.ty
     }
-    /* sopra link e bottoni si spegne: lì comanda il pointer nativo */
-    c.on = !(e.target as HTMLElement).closest('a, button')
+    c.on = true
+    /* sopra voci/link/tasti il disco resta e mostra il punto centrale
+       (= cliccabile); altrove mostra la freccia avanti/indietro */
+    el.dataset.mode = (e.target as HTMLElement).closest('a, button')
+      ? 'link'
+      : 'nav'
     el.dataset.dir = e.clientX > window.innerWidth / 2 ? 'next' : 'prev'
   }
 
@@ -392,8 +396,11 @@ export function HeroSlider({
             key={`${s.real}-${idx}`}
             className={styles.slide}
             aria-hidden={s.clone || undefined}
-            /* --wcol: colore di sezione della voce, usato dal trattino */
-            style={{ '--wcol': s.accent } as React.CSSProperties}
+            /* --wcol: colore di sezione (trattino); --i: indice reale,
+               detta lo stagger dell'animazione di ingresso */
+            style={
+              { '--wcol': s.accent, '--i': s.real } as React.CSSProperties
+            }
           >
             <Link
               href={s.href}

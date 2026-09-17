@@ -107,6 +107,43 @@ export function CourseTemplateShell({ css, html }: CourseTemplateShellProps) {
         .forEach((v) => videoIO.observe(v));
     }
 
+    // modale contatti (v3): la aprono tutte le CTA marcate data-contact
+    // — cioè tutte tranne "Scarica il piano di studi" (riunione 17/09).
+    // Submit finto da mockup: mostra la conferma, nessun invio reale.
+    const modal = root.getElementById('contactModal');
+    const onModalKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') closeModal();
+    };
+    const openModal = () => {
+      if (!modal) return;
+      modal.hidden = false;
+      document.documentElement.style.overflow = 'hidden';
+      window.addEventListener('keydown', onModalKey);
+      modal.querySelector<HTMLInputElement>('input')?.focus();
+    };
+    const closeModal = () => {
+      if (!modal) return;
+      modal.hidden = true;
+      modal.classList.remove('sent');
+      document.documentElement.style.overflow = '';
+      window.removeEventListener('keydown', onModalKey);
+    };
+    if (modal) {
+      root.querySelectorAll<HTMLElement>('[data-contact]').forEach((el) => {
+        el.addEventListener('click', (e) => {
+          e.preventDefault();
+          openModal();
+        });
+      });
+      modal.querySelectorAll<HTMLElement>('[data-modal-close]').forEach((el) => {
+        el.addEventListener('click', closeModal);
+      });
+      modal.querySelector('form')?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        modal.classList.add('sent');
+      });
+    }
+
     // testimonial a rotazione: dissolvenza fra le citazioni, frecce ai
     // lati e avanzamento automatico (fermo sotto al puntatore e con
     // prefers-reduced-motion)
@@ -233,6 +270,8 @@ export function CourseTemplateShell({ css, html }: CourseTemplateShellProps) {
     }
 
     return () => {
+      window.removeEventListener('keydown', onModalKey);
+      document.documentElement.style.overflow = '';
       videoIO.disconnect();
       if (qTimer) clearInterval(qTimer);
       if (raf) cancelAnimationFrame(raf);

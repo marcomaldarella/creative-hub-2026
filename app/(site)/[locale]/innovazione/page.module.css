@@ -14,38 +14,69 @@
      la barra galleggia sopra il nero */
   margin-top: calc(var(--nav-h) * -1);
   padding-top: var(--header-h);
-  min-height: min(78svh, 820px);
-  display: flex;
-  align-items: flex-end;
+  min-height: min(86svh, 900px);
+  display: grid;
+  place-items: center;
   overflow: hidden;
   background: #000;
   color: var(--fg);
+}
+
+/* le tre voci al centro della sfera, come sulla vecchia home */
+.words {
+  position: relative;
+  z-index: 2;
 }
 
 .orb {
   position: absolute;
   inset: 0;
   margin: auto;
-  width: min(58svh, 88vw, 620px);
+  width: min(66svh, 92vw, 720px);
   aspect-ratio: 1;
   pointer-events: none;
 }
 
-.orbHero .head {
-  position: relative;
+/* annotazioni in alto, stesse della hero home */
+.annot {
+  position: absolute;
+  top: calc(var(--header-h) + clamp(18px, 2.6vh, 30px));
+  left: var(--pad);
+  right: var(--pad);
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
   z-index: 2;
-  width: 100%;
+}
+
+.annot span {
+  letter-spacing: 0.06em;
+  white-space: pre-line;
+  line-height: 1.1;
+  color: var(--fg);
+}
+
+.annot span:last-child {
+  text-align: right;
+}
+
+@media (max-width: 760px) {
+  .annot {
+    display: none; /* come in home: coordinate via sotto i 760px */
+  }
 }
 
 @media (max-width: 760px) {
   .orbHero {
-    min-height: 64svh;
+    min-height: 70svh;
   }
 }
 
 .head {
-  padding-top: clamp(56px, 8vw, 96px);
-  padding-bottom: clamp(48px, 6vw, 80px);
+  /* stretto sotto l'hero: kicker e titolo devono vedersi già a prima
+     vista senza scrollare */
+  padding-top: clamp(28px, 3.5vw, 44px);
+  padding-bottom: clamp(40px, 5vw, 64px);
 }
 
 .kicker {

@@ -3,9 +3,10 @@ import { Fragment } from 'react'
 import { notFound } from 'next/navigation'
 import { Counter, CounterRow, Reveal, Rule, SectionHeader } from '@/components/ui'
 import { HeroOrb } from '@/components/sections/HeroOrb'
+import { HeroWords } from '@/components/sections/HeroWords'
 import { PortableBlocks } from '@/components/sections/PortableBlocks'
 import { SiteChrome } from '@/components/sections/SiteChrome'
-import { isLocale } from '@/lib/i18n/config'
+import { isLocale, localeHref } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
 import { getPageById } from '@/lib/sanity/queries'
 import { l } from '@/lib/sanity/l'
@@ -40,21 +41,39 @@ export default async function InnovazionePage({
   return (
     <SiteChrome locale={locale} path="/innovazione">
       <main className={styles.main}>
-        {/* ————— hero: la sfera particellare ex-home (senza pin né
-            splash), testi in basso a sinistra sul nero ————— */}
+        {/* ————— hero: la sfera ex-home CON le tre voci e la loro logica
+            (hover = parola colorata + sfera tinta, evento hero-tint) ————— */}
         <header className={`${styles.orbHero} scheme-dark`}>
-          <HeroOrb className={styles.orb} pins={false} />
-          <div className={`wrap ${styles.head}`}>
-            <Reveal as="span" className={`mono ${styles.kicker}`}>
-              {t.nav.innovation}
-            </Reveal>
-            <Reveal as="h1" className={`display-thin ${styles.title}`} delay={80}>
-              {l(page?.hero?.title, locale) ?? t.innovation.fallbackTitle}
-            </Reveal>
-            <Reveal as="p" className={styles.lede} delay={160}>
-              {l(page?.hero?.lede, locale) ?? t.innovation.fallbackLede}
-            </Reveal>
+          {/* stessa intestazione della home: college a sinistra,
+              est./coordinate a destra */}
+          <div className={styles.annot}>
+            <span className="mono">{t.hero.since}</span>
+            <span className="mono">{t.hero.coords}</span>
           </div>
+          <HeroOrb className={styles.orb} pins={false} />
+          <div className={styles.words}>
+            <HeroWords
+              as="h2"
+              words={[
+                { label: 'Academy', href: localeHref(locale, '/academy') },
+                { label: 'Rec. Studio', href: localeHref(locale, '/studios') },
+                { label: 'Co-Working', href: localeHref(locale, '/coworking') },
+              ]}
+            />
+          </div>
+        </header>
+
+        {/* ————— intro: kicker/titolo/lede su bianco, sotto l'hero ————— */}
+        <header className={`wrap ${styles.head}`}>
+          <Reveal as="span" className={`mono ${styles.kicker}`}>
+            {t.nav.innovation}
+          </Reveal>
+          <Reveal as="h1" className={`display-thin ${styles.title}`} delay={80}>
+            {l(page?.hero?.title, locale) ?? t.innovation.fallbackTitle}
+          </Reveal>
+          <Reveal as="p" className={styles.lede} delay={160}>
+            {l(page?.hero?.lede, locale) ?? t.innovation.fallbackLede}
+          </Reveal>
         </header>
 
 

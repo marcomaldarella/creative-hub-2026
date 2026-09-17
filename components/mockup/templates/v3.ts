@@ -52,25 +52,45 @@ export const css = `
   .pill-outline-ink{background:transparent;border:1px solid var(--blue);color:var(--blue);}
   .pill-outline-ink:hover{background:var(--blue);color:var(--ink);}
 
-  .hero{display:grid;grid-template-columns:minmax(520px,45%) 1fr;min-height:calc(100dvh - 150px);}
-  .hero-left{padding:44px var(--pad) 48px;display:flex;flex-direction:column;}
-  .eyebrow{font-size:13px;font-weight:600;margin-bottom:18px;font-family:var(--font-body),system-ui,sans-serif;color:var(--blue);}
+  /* hero su AZZURRO pieno (riunione 17/09): il colore corre fino allo
+     slider. Tre aree di griglia: testi | video, info+CTA sotto i testi
+     — così su mobile il video può salire fra sottotitolo e info */
+  .hero{display:grid;grid-template-columns:minmax(520px,45%) 1fr;grid-template-rows:auto 1fr;
+    min-height:calc(100dvh - 150px);background:var(--blue);color:var(--ink);}
+  .hero-left{grid-area:1/1;padding:44px var(--pad) 0;display:flex;flex-direction:column;}
+  .hero-info{grid-area:2/1;padding:0 var(--pad) 48px;display:flex;flex-direction:column;justify-content:flex-end;}
+  .eyebrow{font-size:13px;font-weight:600;margin-bottom:18px;font-family:var(--font-body),system-ui,sans-serif;
+    color:color-mix(in srgb,var(--ink) 68%,transparent);}
   h1.hero-h1{font-size:clamp(34px,4vw,54px);line-height:.96;font-weight:700;margin:0 0 22px;letter-spacing:-.02em;}
   .hero-sub{font-size:19px;font-weight:500;line-height:1.26;margin:0 0 40px;max-width:420px;}
-  .meta-stack{display:flex;flex-direction:column;margin-top:auto;padding-top:40px;margin-bottom:34px;}
-  .meta-stack>div{padding:18px 0;border-top:var(--hair) solid color-mix(in srgb,var(--blue) 30%,transparent);}
-  .meta-stack>div:last-child{border-bottom:var(--hair) solid color-mix(in srgb,var(--blue) 30%,transparent);}
-  .meta-stack>div{display:flex;align-items:baseline;justify-content:space-between;gap:16px;}
-  .meta-stack .m-label{font-size:20px;font-weight:700;}
-  .meta-stack .m-value{font-size:14.5px;color:var(--blue-soft);}
+  /* info corso: griglia 2 colonne etichetta-sopra/valore-sotto (layout
+     approvato) — sinistra durata/livello/modalità, destra inizio/
+     scadenza/lingua */
+  .meta-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px 24px;
+    padding-top:12px;margin-bottom:38px;}
+  .meta-grid .lab{font-size:13.5px;font-weight:500;margin-bottom:6px;
+    color:color-mix(in srgb,var(--ink) 62%,transparent);}
+  .meta-grid .val{font-size:clamp(18px,1.5vw,22px);font-weight:700;
+    letter-spacing:-.01em;line-height:1.18;}
   .hero-cta{display:flex;flex-wrap:wrap;gap:12px;align-self:flex-start;}
   .hero-cta .pill{text-decoration:none;}
-  .hero-right{position:relative;overflow:hidden;min-height:420px;}
+  /* Contattaci: nero pieno (a sinistra) */
+  .pill-ink{background:var(--ink);color:var(--white);}
+  .pill-ink:hover{background:var(--ink-2);}
+  /* Scarica il piano di studi: la freccia compare solo in hover */
+  .pill-reveal .dl{opacity:0;transform:translateY(-4px);}
+  .pill-reveal:hover .dl{opacity:1;transform:translateY(2px);}
+  .hero-right{grid-area:1/2/3/3;position:relative;overflow:hidden;min-height:420px;}
   .hero-right img,.hero-right video{position:absolute;inset:0;
     width:100%;height:100%;object-fit:cover;display:block;}
 
-  .marquee-wrap{background:var(--ink);overflow:hidden;padding:20px 0;white-space:nowrap;
-    border-top:var(--hair) solid var(--white);border-bottom:var(--hair) solid var(--white);}
+  /* slider: sfondo azzurro, testo nero, INTERAMENTE cliccabile (apre la
+     modale contatti) — il colore dell'hero corre fino a qui */
+  .marquee-wrap{display:block;background:var(--blue);overflow:hidden;padding:20px 0;white-space:nowrap;
+    border-top:var(--hair) solid color-mix(in srgb,var(--ink) 35%,transparent);
+    border-bottom:var(--hair) solid color-mix(in srgb,var(--ink) 35%,transparent);
+    cursor:pointer;text-decoration:none;transition:background .25s ease;}
+  .marquee-wrap:hover{background:var(--blue-hover);}
   /* due gruppi IDENTICI, ognuno con il proprio distacco di coda (padding-right):
      cosi' translate3d(-50%) coincide esattamente con la larghezza di un gruppo
      e la giunta e' invisibile. Con il gap sulla track mancava un distacco
@@ -81,8 +101,8 @@ export const css = `
      ritmo salta nel punto di ricongiunzione del loop */
   .marquee-group{display:flex;align-items:center;gap:46px;padding-right:46px;}
   .mq-unit{display:flex;align-items:center;gap:46px;}
-  .marquee-track span{color:var(--white);font-size:clamp(22px,2.4vw,30px);font-weight:700;letter-spacing:-.02em;}
-  .marquee-track .pill{background:var(--ink);color:var(--white);border:1px solid var(--white);
+  .marquee-track span{color:var(--ink);font-size:clamp(22px,2.4vw,30px);font-weight:700;letter-spacing:-.02em;}
+  .marquee-track .pill{background:var(--ink);color:var(--white);border:1px solid var(--ink);
     border-radius:999px;padding:12px 28px;font-size:16px;line-height:1.1;}
   @keyframes scroll{from{transform:translate3d(0,0,0);}to{transform:translate3d(-50%,0,0);}}
 
@@ -184,11 +204,16 @@ export const css = `
     background:color-mix(in srgb,var(--blue) 28%,transparent);border:var(--hair) solid color-mix(in srgb,var(--blue) 28%,transparent);}
   /* misure FISSE, non legate alla larghezza della colonna: le sei celle
      devono leggersi come sei voci della stessa lista */
-  .skill{background:var(--ink);padding:26px 26px 30px;
+  /* card competenza CON foto in testa (riunione 17/09) */
+  .skill{background:var(--ink);padding:0;
     display:flex;flex-direction:column;min-height:210px;transition:background .25s ease;}
   .skill:hover{background:var(--ink-2);}
+  .skill .ph{aspect-ratio:16/10;overflow:hidden;}
+  .skill .ph img{transition:transform .5s cubic-bezier(.22,1,.36,1);}
+  .skill:hover .ph img{transform:scale(1.04);}
+  .skill .txt{padding:20px 24px 28px;display:flex;flex-direction:column;flex:1;}
   .skill .n{font-size:12.5px;font-weight:600;letter-spacing:.04em;color:var(--blue);
-    margin-bottom:16px;}
+    margin-bottom:14px;}
   .skill h3{font-size:21px;font-weight:700;line-height:1.12;letter-spacing:-.02em;margin:0 0 10px;}
   .skill p{font-size:15px;line-height:1.4;color:var(--txt-2);margin:auto 0 0;max-width:30ch;}
   @media(max-width:1080px){.skillgrid{grid-template-columns:repeat(2,1fr);}}
@@ -242,14 +267,14 @@ export const css = `
     .subnav .jump a::before{inset:13px -7px;--l:6px;}
     .subnav .tail{gap:0;}
 
-    /* dati della hero: valore e etichetta uno sotto l'altro, altrimenti
-       "3 anni full-time, fino a 6 part-time" va a capo contro "Durata" */
-    .meta-stack>div{flex-direction:column;align-items:flex-start;gap:3px;padding:14px 0;}
-    .meta-stack .m-label{font-size:18px;}
-    .meta-stack{padding-top:28px;margin-bottom:26px;}
-    .hero-left{padding-top:32px;padding-bottom:36px;}
+    /* dati della hero: griglia compatta, sotto al video */
+    .meta-grid{gap:18px 16px;padding-top:0;margin-bottom:30px;}
+    .meta-grid .val{font-size:17px;}
+    .hero-left{padding-top:32px;}
     h1.hero-h1{font-size:clamp(30px,8.5vw,38px);}
-    .hero-sub{font-size:17px;}
+    .hero-sub{font-size:17px;margin-bottom:26px;}
+    /* primo atterraggio = titolo, sottotitolo e video (stile Catalyst) */
+    .hero-right{min-height:52svh;}
 
     /* titolo e tasto impilati: affiancati restavano schiacciati */
     .sec-flex-head{flex-direction:column;align-items:flex-start;gap:16px;margin-bottom:28px;}
@@ -390,13 +415,47 @@ export const css = `
   }
   blockquote.pull2 cite{display:block;margin-top:14px;font-size:13px;font-style:normal;font-weight:500;opacity:.7;}
 
-  .connect-card{flex:0 0 calc((100% - 2 * 20px)/2.5);scroll-snap-align:start;}
+  /* card "come conoscerci": TUTTA cliccabile, porta alle open date —
+     hover con foto che si accende e freccina che compare (riunione) */
+  .connect-card{flex:0 0 calc((100% - 2 * 20px)/2.5);scroll-snap-align:start;
+    color:var(--white);text-decoration:none;display:block;}
   .connect-card .img{aspect-ratio:4/5;overflow:hidden;position:relative;background:var(--ink-2);
     display:flex;align-items:flex-start;padding:26px;margin-bottom:14px;}
   .connect-card .img h3{position:relative;color:#fff;font-size:32px;font-weight:700;
     line-height:1.02;margin:0;letter-spacing:-.02em;z-index:1;}
-  .connect-card .img img{position:absolute;inset:0;opacity:.55;}
+  .connect-card .img img{position:absolute;inset:0;opacity:.55;transition:opacity .3s ease,transform .5s cubic-bezier(.22,1,.36,1);}
+  .connect-card:hover .img img{opacity:.75;transform:scale(1.03);}
   .connect-card .cap2{font-size:15.5px;font-weight:600;display:flex;align-items:center;gap:8px;}
+  .connect-card .cap2 .arr{opacity:0;transform:translateX(-6px);
+    transition:opacity .25s ease,transform .3s cubic-bezier(.22,1,.36,1);}
+  .connect-card:hover .cap2 .arr{opacity:1;transform:none;}
+
+  /* ————— modale contatti: la aprono TUTTE le CTA tranne "Scarica il
+     piano di studi" (riunione 17/09) ————— */
+  .cmodal{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;
+    padding:20px;}
+  .cmodal[hidden]{display:none;}
+  .cmodal-back{position:absolute;inset:0;background:rgba(0,0,0,.66);}
+  .cmodal-card{position:relative;background:var(--white);color:var(--ink);
+    width:min(480px,94vw);max-height:min(640px,92svh);overflow:auto;padding:36px 34px 34px;}
+  .cmodal-x{position:absolute;top:14px;right:14px;width:38px;height:38px;border-radius:50%;
+    border:1px solid rgba(0,0,0,.25);background:transparent;color:var(--ink);
+    display:grid;place-items:center;}
+  .cmodal-x:hover{background:var(--ink);color:var(--white);border-color:var(--ink);}
+  .cmodal-card h3{font-size:26px;font-weight:700;letter-spacing:-.02em;margin:0 0 8px;}
+  .cmodal-card .sub{font-size:14.5px;line-height:1.4;color:rgba(0,0,0,.6);margin:0 0 24px;}
+  .cmodal-card form{display:flex;flex-direction:column;gap:16px;}
+  .cmodal-card label{display:flex;flex-direction:column;gap:6px;font-size:12.5px;
+    font-weight:600;letter-spacing:.02em;color:rgba(0,0,0,.55);}
+  .cmodal-card input,.cmodal-card textarea{font-family:inherit;font-size:15.5px;color:var(--ink);
+    border:none;border-bottom:1px solid rgba(0,0,0,.3);background:transparent;
+    padding:6px 0 9px;border-radius:0;resize:vertical;}
+  .cmodal-card input:focus,.cmodal-card textarea:focus{outline:none;border-bottom-color:var(--ink);}
+  .cmodal-card .pill{align-self:flex-start;margin-top:8px;}
+  .cmodal-ok{font-size:16px;font-weight:600;margin:14px 0 0;}
+  .cmodal.sent form{display:none;}
+  .cmodal-ok{display:none;}
+  .cmodal.sent .cmodal-ok{display:block;}
 
   footer.site{background:var(--ink);color:var(--white);padding:64px var(--pad) 28px;border-top:var(--hair) solid color-mix(in srgb,var(--blue) 30%,transparent);}
   .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:32px;margin-bottom:44px;}
@@ -408,7 +467,12 @@ export const css = `
   .foot-bottom a{color:var(--blue-soft);text-decoration:none;margin-left:14px;}
 
   @media(max-width:1000px){
-    .hero{grid-template-columns:1fr;}
+    /* mobile (riunione 17/09): titolo e sottotitolo, POI il video, e le
+       info riassuntive scendono sotto */
+    .hero{display:flex;flex-direction:column;}
+    .hero-left{order:1;padding:32px var(--pad) 24px;}
+    .hero-right{order:2;min-height:420px;}
+    .hero-info{order:3;padding:28px var(--pad) 40px;}
     .split{grid-template-columns:1fr;gap:30px;}
     .promo-two{grid-template-columns:1fr;}
     .teacher{grid-template-columns:1fr;gap:24px;}
@@ -474,46 +538,60 @@ export const html = `
     <div class="eyebrow" contenteditable="true">Academy · Bachelor of Arts</div>
     <h1 class="hero-h1" contenteditable="true">Corso universitario di produzione musicale a Bologna.</h1>
     <p class="hero-sub" contenteditable="true">Diventa produttore musicale con il Bachelor of Arts in Urban Music Production.</p>
+  </div>
 
-    <div class="meta-stack">
+  <div class="hero-info">
+    <div class="meta-grid">
       <div>
-        <div class="m-label" contenteditable="true">Ottobre 2026</div>
-        <div class="m-value" contenteditable="true">Inizio corso</div>
+        <div class="lab" contenteditable="true">durata</div>
+        <div class="val" contenteditable="true">3 anni full-time, fino a 6 part-time</div>
       </div>
       <div>
-        <div class="m-label" contenteditable="true">30 giugno 2026</div>
-        <div class="m-value" contenteditable="true">Scadenza candidature (posti limitati)</div>
+        <div class="lab" contenteditable="true">inizio</div>
+        <div class="val" contenteditable="true">ottobre 2026</div>
       </div>
       <div>
-        <div class="m-label" contenteditable="true">3 anni full-time, fino a 6 part-time</div>
-        <div class="m-value" contenteditable="true">Durata</div>
+        <div class="lab" contenteditable="true">livello</div>
+        <div class="val" contenteditable="true">Bachelor of Arts — BA (Hons) Level 6</div>
+      </div>
+      <div>
+        <div class="lab" contenteditable="true">scadenza candidature</div>
+        <div class="val" contenteditable="true">30 giugno 2026</div>
+      </div>
+      <div>
+        <div class="lab" contenteditable="true">modalità</div>
+        <div class="val" contenteditable="true">in sede</div>
+      </div>
+      <div>
+        <div class="lab" contenteditable="true">lingua</div>
+        <div class="val" contenteditable="true">italiano · inglese</div>
       </div>
     </div>
 
     <div class="hero-cta">
-      <button class="pill pill-dark"><span contenteditable="true">Scarica il piano di studi</span><svg class="dl" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M12 4v13M6 11l6 6 6-6"/></svg></button>
-      <a class="pill pill-outline-ink" href="#panoramica"><span contenteditable="true">Maggiori informazioni</span></a>
+      <button class="pill pill-ink" data-contact><span contenteditable="true">Contattaci</span></button>
+      <button class="pill pill-outline pill-reveal"><span contenteditable="true">Scarica il piano di studi</span><svg class="dl" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M12 4v13M6 11l6 6 6-6"/></svg></button>
     </div>
   </div>
   <div class="hero-right"><video data-src-wide="/video/creative-hub-8s-02-1920x1080.mp4" data-src-portrait="/video/creative-hub-8s-02-1080x1920.mp4" poster="/mockup-corso/img/akai.jpg" muted loop playsinline preload="none" aria-hidden="true"></video></div>
 </div>
 
-<div class="marquee-wrap">
+<a class="marquee-wrap" data-contact href="#" aria-label="Candidati ora">
   <div class="marquee-track">
     <div class="marquee-group">
-      <div class="mq-unit"><span>Candidati entro il 30 Giugno per iniziare a Ottobre</span><button class="pill">Candidati ora</button></div>
-      <div class="mq-unit"><span>Candidati entro il 30 Giugno per iniziare a Ottobre</span><button class="pill">Candidati ora</button></div>
-      <div class="mq-unit"><span>Candidati entro il 30 Giugno per iniziare a Ottobre</span><button class="pill">Candidati ora</button></div>
-      <div class="mq-unit"><span>Candidati entro il 30 Giugno per iniziare a Ottobre</span><button class="pill">Candidati ora</button></div>
+      <div class="mq-unit"><span>Candidati entro il 30 Giugno per iniziare a Ottobre</span><span class="pill">Candidati ora</span></div>
+      <div class="mq-unit"><span>Candidati entro il 30 Giugno per iniziare a Ottobre</span><span class="pill">Candidati ora</span></div>
+      <div class="mq-unit"><span>Candidati entro il 30 Giugno per iniziare a Ottobre</span><span class="pill">Candidati ora</span></div>
+      <div class="mq-unit"><span>Candidati entro il 30 Giugno per iniziare a Ottobre</span><span class="pill">Candidati ora</span></div>
     </div>
     <div class="marquee-group" aria-hidden="true">
-      <div class="mq-unit"><span>Candidati entro il 30 Giugno per iniziare a Ottobre</span><button class="pill" tabindex="-1">Candidati ora</button></div>
-      <div class="mq-unit"><span>Candidati entro il 30 Giugno per iniziare a Ottobre</span><button class="pill" tabindex="-1">Candidati ora</button></div>
-      <div class="mq-unit"><span>Candidati entro il 30 Giugno per iniziare a Ottobre</span><button class="pill" tabindex="-1">Candidati ora</button></div>
-      <div class="mq-unit"><span>Candidati entro il 30 Giugno per iniziare a Ottobre</span><button class="pill" tabindex="-1">Candidati ora</button></div>
+      <div class="mq-unit"><span>Candidati entro il 30 Giugno per iniziare a Ottobre</span><span class="pill">Candidati ora</span></div>
+      <div class="mq-unit"><span>Candidati entro il 30 Giugno per iniziare a Ottobre</span><span class="pill">Candidati ora</span></div>
+      <div class="mq-unit"><span>Candidati entro il 30 Giugno per iniziare a Ottobre</span><span class="pill">Candidati ora</span></div>
+      <div class="mq-unit"><span>Candidati entro il 30 Giugno per iniziare a Ottobre</span><span class="pill">Candidati ora</span></div>
     </div>
   </div>
-</div>
+</a>
 
 <div class="sezRule"><span>01</span><i></i></div>
 
@@ -559,34 +637,52 @@ export const html = `
   </div>
   <div class="skillgrid">
     <article class="skill">
+      <div class="ph"><img src="/img/sections/studio-desk.jpg" alt=""></div>
+      <div class="txt">
       <span class="n">01</span>
       <h3 contenteditable="true">Beatmaking e produzione</h3>
       <p contenteditable="true">Dal loop al brano finito: arrangiamento e programmazione ritmica.</p>
+      </div>
     </article>
     <article class="skill">
+      <div class="ph"><img src="/mockup-corso/img/akai.jpg" alt=""></div>
+      <div class="txt">
       <span class="n">02</span>
       <h3 contenteditable="true">Sound design</h3>
       <p contenteditable="true">Costruire i suoni invece di scaricarli: sintesi e campionamento.</p>
+      </div>
     </article>
     <article class="skill">
+      <div class="ph"><img src="/img/sections/studio-regia.jpg" alt=""></div>
+      <div class="txt">
       <span class="n">03</span>
       <h3 contenteditable="true">Mix e mastering</h3>
       <p contenteditable="true">Allo standard dello streaming, sulle macchine della regia.</p>
+      </div>
     </article>
     <article class="skill">
+      <div class="ph"><img src="/img/foto/live-band.jpg" alt=""></div>
+      <div class="txt">
       <span class="n">04</span>
       <h3 contenteditable="true">DJing e performance live</h3>
       <p contenteditable="true">Set, mixaggio dal vivo, presenza sul palco.</p>
+      </div>
     </article>
     <article class="skill">
+      <div class="ph"><img src="/mockup-corso/img/class-2.jpg" alt=""></div>
+      <div class="txt">
       <span class="n">05</span>
       <h3 contenteditable="true">Teoria musicale</h3>
       <p contenteditable="true">Applicata direttamente su Ableton, non sullo spartito.</p>
+      </div>
     </article>
     <article class="skill">
+      <div class="ph"><img src="/mockup-corso/img/class-4.jpg" alt=""></div>
+      <div class="txt">
       <span class="n">06</span>
       <h3 contenteditable="true">Music business</h3>
       <p contenteditable="true">Diritto d'autore, distribuzione digitale, contratti.</p>
+      </div>
     </article>
   </div>
 </section>
@@ -597,7 +693,7 @@ export const html = `
       <h2 class="sec" style="margin-bottom:4px;" contenteditable="true">Il tuo studio di lavoro</h2>
       <p class="lede" style="margin-bottom:0;" contenteditable="true">Progettato per come si impara, si produce e si suona.<br>Ogni dettaglio pensato per chi studia qui.</p>
     </div>
-    <button class="pill pill-outline-ink" contenteditable="true">Esplora lo studio</button>
+    <button class="pill pill-outline-ink" data-contact contenteditable="true">Esplora lo studio</button>
   </div>
 
   <div class="carousel" id="facCarousel">
@@ -675,7 +771,7 @@ export const html = `
   <div class="promo-panel">
     <h2 contenteditable="true">Partecipa a un workshop di prova</h2>
     <p contenteditable="true">Incontra i nostri tutor di Urban Music Production e scopri come il corso può accompagnare il tuo percorso da producer, beatmaker o sound designer.</p>
-    <button class="pill pill-outline" contenteditable="true">Vedi i prossimi workshop</button>
+    <button class="pill pill-outline" data-contact contenteditable="true">Vedi i prossimi workshop</button>
   </div>
 </div>
 
@@ -697,7 +793,7 @@ export const html = `
   <div class="adm-main">
   <div class="sec-flex-head">
     <h2 class="sec" style="margin-bottom:0;" contenteditable="true">Ammissioni</h2>
-    <button class="pill pill-outline-ink" contenteditable="true">Come candidarsi</button>
+    <button class="pill pill-outline-ink" data-contact contenteditable="true">Come candidarsi</button>
   </div>
 
   <div class="accordion" id="admAccordion">
@@ -732,7 +828,7 @@ export const html = `
     <h2 contenteditable="true">La vita in Academy</h2>
     <p contenteditable="true">Al Creative Hub non produci musica da solo. Lavori in studi professionali, ti confronti con altri studenti e artisti del network, partecipi a sessioni con producer e A&amp;R in visita.</p>
     <p contenteditable="true">Presenta i tuoi progetti in ascolti collettivi, collabora con chi studia Film Production o Music Business per progetti trasversali, ricevi feedback costruttivi da chi il mercato lo vive ancora.</p>
-    <button class="pill pill-white" contenteditable="true">Scopri la vita in Academy</button>
+    <button class="pill pill-white" data-contact contenteditable="true">Scopri la vita in Academy</button>
   </div>
 </section>
 
@@ -744,22 +840,22 @@ export const html = `
       <h2 class="sec" style="margin-bottom:4px;" contenteditable="true">Come conoscerci</h2>
       <p class="lede" style="margin-bottom:0;" contenteditable="true">In presenza o online, non vediamo l'ora di incontrarti.</p>
     </div>
-    <button class="pill pill-outline-ink" contenteditable="true">Vedi tutti gli eventi</button>
+    <button class="pill pill-outline-ink" data-contact contenteditable="true">Vedi tutti gli eventi</button>
   </div>
 
   <div class="carousel" id="connCarousel">
-    <div class="connect-card">
+    <a class="connect-card" href="/academy/open-day">
       <div class="img"><img src="/mockup-corso/img/class-1.jpg" alt=""><h3 contenteditable="true">Open day</h3></div>
       <div class="cap2"><span contenteditable="true">Partecipa a un open day, in sede o online</span><span class="arr"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></div>
-    </div>
-    <div class="connect-card">
+    </a>
+    <a class="connect-card" href="/academy/open-day">
       <div class="img"><img src="/img/sections/studio-regia.jpg" alt=""><h3 contenteditable="true">Tour dello studio</h3></div>
       <div class="cap2"><span contenteditable="true">Prenota una visita alla regia e alla sala live</span><span class="arr"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></div>
-    </div>
-    <div class="connect-card">
+    </a>
+    <a class="connect-card" href="/academy/open-day">
       <div class="img"><img src="/mockup-corso/img/zilocchi.jpg" alt=""><h3 contenteditable="true">Parla con un tutor</h3></div>
       <div class="cap2"><span contenteditable="true">Una chiamata individuale per tutte le tue domande</span><span class="arr"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></div>
-    </div>
+    </a>
   </div>
   <div class="carousel-nav">
     <button class="cnav-btn" aria-label="indietro" data-scroll-id="connCarousel" data-scroll-by="-400"><span class="arr w"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></button>
@@ -775,6 +871,34 @@ export const html = `
       <p contenteditable="true">La musica urban cambia continuamente, e lo trattiamo come condizione di studio. Non ti chiediamo di aderire a uno stile o a una scena. <b>Ci concentriamo sul tuo sviluppo artistico e sulla capacità critica</b>: come pensi, come lavori, dove vuoi portare la tua musica.</p>
       <p contenteditable="true">Che la tua base sia trap, hip-hop, R&amp;B o elettronica, diamo priorità alla profondità e alla direzione, non all'etichetta di genere. Ci aspettiamo che tu <b>rischi, testi idee e ampli il tuo raggio creativo</b>, sviluppando la capacità di argomentare le tue scelte.</p>
       <p contenteditable="true">Le nostre sessioni uniscono la pratica alla riflessione. Esaminiamo le ragioni dietro un lavoro tanto quanto le tecniche usate per produrlo.</p>
+    </div>
+  </div>
+</section>
+
+<div class="sezRule"><span></span><i></i></div>
+
+<section class="block tight" id="faq">
+  <h2 class="sec" contenteditable="true">Domande frequenti</h2>
+  <div class="accordion" id="faqAccordion">
+    <div class="acc-item">
+      <div class="acc-head"><h3 contenteditable="true">Serve saper suonare uno strumento per fare beatmaking?</h3><span class="acc-plus"><svg viewBox="0 0 18 18" width="16" height="16" stroke="currentColor" stroke-width="1.4"><path d="M9 3v12M3 9h12"/></svg></span></div>
+      <div class="acc-body"><div><p contenteditable="true">No. Il corso parte da come funziona un beat, non dal solfeggio: la teoria arriva applicata su Ableton. Se suoni già, meglio; se no, non è un requisito.</p></div></div>
+    </div>
+    <div class="acc-item">
+      <div class="acc-head"><h3 contenteditable="true">Quanto tempo passo in studio di registrazione?</h3><span class="acc-plus"><svg viewBox="0 0 18 18" width="16" height="16" stroke="currentColor" stroke-width="1.4"><path d="M9 3v12M3 9h12"/></svg></span></div>
+      <div class="acc-body"><div><p contenteditable="true">Dal primo anno lavori nelle aule di produzione, e dal secondo entri regolarmente in regia SSL per registrazione, mix e mastering dei tuoi brani. Il beatmaking lo impari in studio, non sulle slide.</p></div></div>
+    </div>
+    <div class="acc-item">
+      <div class="acc-head"><h3 contenteditable="true">Che software e che macchine si usano?</h3><span class="acc-plus"><svg viewBox="0 0 18 18" width="16" height="16" stroke="currentColor" stroke-width="1.4"><path d="M9 3v12M3 9h12"/></svg></span></div>
+      <div class="acc-body"><div><p contenteditable="true">Ableton Live, Pro Tools e FL Studio, più sintetizzatori hardware, drum machine e i plugin degli studi professionali. Le stesse macchine che troverai lavorando.</p></div></div>
+    </div>
+    <div class="acc-item">
+      <div class="acc-head"><h3 contenteditable="true">Che titolo ottengo alla fine? È riconosciuto?</h3><span class="acc-plus"><svg viewBox="0 0 18 18" width="16" height="16" stroke="currentColor" stroke-width="1.4"><path d="M9 3v12M3 9h12"/></svg></span></div>
+      <div class="acc-body"><div><p contenteditable="true">Un Bachelor of Arts (Hons) Level 6, titolo universitario internazionale — non un attestato di partecipazione. Puoi proseguire con un Master of Music al Creative Hub o all'estero.</p></div></div>
+    </div>
+    <div class="acc-item">
+      <div class="acc-head"><h3 contenteditable="true">Che lavoro posso fare dopo il corso?</h3><span class="acc-plus"><svg viewBox="0 0 18 18" width="16" height="16" stroke="currentColor" stroke-width="1.4"><path d="M9 3v12M3 9h12"/></svg></span></div>
+      <div class="acc-body"><div><p contenteditable="true">Producer, beatmaker, sound designer, tecnico di studio, DJ: esci con un portfolio di brani pubblicati e i contatti del network — etichette, studi e artisti con cui hai già lavorato durante il triennio.</p></div></div>
     </div>
   </div>
 </section>
@@ -797,7 +921,7 @@ export const html = `
   <div class="cta-dark">
     <h2 contenteditable="true">Non sai quale corso scegliere?</h2>
     <p contenteditable="true">Nessun problema. Ti aiutiamo a trovare il percorso in musica, sound o visual che parla di più a te.</p>
-    <button class="pill" contenteditable="true">Scopri di più</button>
+    <button class="pill" data-contact contenteditable="true">Scopri di più</button>
   </div>
 </section>
 
@@ -821,4 +945,21 @@ export const html = `
     <button class="cnav-btn qnav" data-q="1" aria-label="citazione successiva"><span class="arr"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></button>
   </div>
 </section>
+
+<div class="cmodal" id="contactModal" hidden>
+  <div class="cmodal-back" data-modal-close></div>
+  <div class="cmodal-card" role="dialog" aria-modal="true" aria-label="contattaci">
+    <button class="cmodal-x" data-modal-close aria-label="chiudi"><svg viewBox="0 0 18 18" width="15" height="15" stroke="currentColor" stroke-width="1.6"><path d="M4 4l10 10M14 4L4 14"/></svg></button>
+    <h3 contenteditable="true">Contattaci</h3>
+    <p class="sub" contenteditable="true">Domande su Urban Music Production? Ti rispondiamo entro un giorno lavorativo — o ti richiamiamo noi.</p>
+    <form>
+      <label>nome e cognome<input type="text" name="name" required></label>
+      <label>email<input type="email" name="email" required></label>
+      <label>telefono (facoltativo)<input type="tel" name="phone"></label>
+      <label>messaggio<textarea name="message" rows="4" placeholder="Scrivici cosa vuoi sapere del corso"></textarea></label>
+      <button class="pill pill-ink" type="submit">Invia richiesta</button>
+    </form>
+    <p class="cmodal-ok" contenteditable="true">Grazie! Abbiamo ricevuto la tua richiesta: ti ricontattiamo entro un giorno lavorativo.</p>
+  </div>
+</div>
 `;

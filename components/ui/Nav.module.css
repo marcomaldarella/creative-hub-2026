@@ -42,6 +42,14 @@
   border-bottom-color: transparent;
 }
 
+/* barra bucata → anche il prenota è vuoto: solo profilo, niente fill
+   (torna pieno insieme allo sfondo della barra) */
+:global(html[data-nav-clear]) .nav:not(.menuOpen):not(:hover) .cta {
+  background: transparent;
+  color: var(--fg);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--fg) 60%, transparent);
+}
+
 /* ————— topbar utility (solo desktop) ————— */
 
 .topbar {
@@ -829,6 +837,8 @@
 
   .cta {
     margin-left: auto;
+    /* a ridosso del burger: si mangia il gap 32px della barra */
+    margin-right: -20px;
   }
 
   .burger {
