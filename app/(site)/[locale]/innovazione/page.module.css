@@ -6,7 +6,42 @@
   padding: var(--sez) 0;
 }
 
-/* ————— hero ————— */
+/* ————— hero: sfera particellare ex-home su nero ————— */
+
+.orbHero {
+  position: relative;
+  /* .main spinge già sotto la nav: qui si risale per stare a filo top,
+     la barra galleggia sopra il nero */
+  margin-top: calc(var(--nav-h) * -1);
+  padding-top: var(--header-h);
+  min-height: min(78svh, 820px);
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  background: #000;
+  color: var(--fg);
+}
+
+.orb {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: min(58svh, 88vw, 620px);
+  aspect-ratio: 1;
+  pointer-events: none;
+}
+
+.orbHero .head {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+}
+
+@media (max-width: 760px) {
+  .orbHero {
+    min-height: 64svh;
+  }
+}
 
 .head {
   padding-top: clamp(56px, 8vw, 96px);

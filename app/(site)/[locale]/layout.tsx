@@ -112,37 +112,13 @@ export default async function SiteLayout({
   if (!isLocale(locale)) notFound()
 
   return (
-    // suppressHydrationWarning: lo script della splash scrive data-boot
-    // su <html> prima dell'hydration, il mismatch è voluto
-    <html lang={locale} suppressHydrationWarning>
+    <html lang={locale}>
       <body
         className={`${display.variable} ${body.variable} ${fat.variable} ${swiss.variable}`}
       >
-        {/* ⚠️ <script> RAW, non next/script: con strategy
-            beforeInteractive Next mette il codice in coda al suo runtime
-            (`self.__next_s.push(...)`), quindi in produzione girava DOPO
-            il primo paint — si vedeva la hero completa e solo dopo partiva
-            la splash. Un tag inline viene invece eseguito dal parser prima
-            che il resto del body sia dipinto. */}
-
-        {/* Splash della home. Lo script gira solo al CARICAMENTO del
-            documento: arrivando su / (link esterno, reload, indirizzo
-            digitato) parte sempre; tornando in home navigando dentro al
-            sito non parte, perché il layout non si rimonta e questo codice
-            non viene rieseguito. Nessun flag di sessione: era proprio
-            quello a far vedere la splash una volta sola per scheda.
-            Unica esclusione: prefers-reduced-motion, con try/catch proprio.
-            Il timer di sicurezza toglie il flag anche se React non idrata
-            o se GSAP non carica. */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html:
-              /* niente regex qui dentro: la barra va sfuggita nel sorgente
-                 TS e nell'HTML finiva `replace(//$/,'')`, cioè un errore
-                 di sintassi che spegneva del tutto la splash */
-              "(function(){try{var p=location.pathname;if(p.charAt(p.length-1)==='/')p=p.slice(0,-1);if(p!==''&&p!=='/en')return;try{if(matchMedia('(prefers-reduced-motion: reduce)').matches)return}catch(e){}var d=document.documentElement;d.dataset.boot='1';setTimeout(function(){delete d.dataset.boot},9000)}catch(e){}})()",
-          }}
-        />
+        {/* La splash dell'orb (script data-boot + HeroBoot/GSAP) è stata
+            dismessa col nuovo hero swiper approvato 2026-09-17: l'orb
+            vive ora su /innovazione, senza preloader. */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(ORG_JSONLD) }}

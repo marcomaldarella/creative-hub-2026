@@ -1,10 +1,10 @@
-import { notFound } from 'next/navigation'
-import { isLocale } from '@/lib/i18n/config'
-import { HomeScreen } from '../home-screen'
+import { notFound, redirect } from 'next/navigation'
+import { isLocale, localeHref } from '@/lib/i18n/config'
 
 export const dynamic = 'force-dynamic'
 
-/* seconda versione dell'hero: pin in filigrana + caption, vedi HomeScreen */
+/* l'hero swiper è stato promosso sulla home: i vecchi link a /home-2
+   (girati al cliente durante la lavorazione) atterrano lì */
 export default async function Home2Page({
   params,
 }: {
@@ -12,5 +12,5 @@ export default async function Home2Page({
 }) {
   const { locale } = await params
   if (!isLocale(locale)) notFound()
-  return <HomeScreen locale={locale} heroV2 />
+  redirect(localeHref(locale, '/'))
 }

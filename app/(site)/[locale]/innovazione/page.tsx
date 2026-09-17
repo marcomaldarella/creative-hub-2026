@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Fragment } from 'react'
 import { notFound } from 'next/navigation'
 import { Counter, CounterRow, Reveal, Rule, SectionHeader } from '@/components/ui'
+import { HeroOrb } from '@/components/sections/HeroOrb'
 import { PortableBlocks } from '@/components/sections/PortableBlocks'
 import { SiteChrome } from '@/components/sections/SiteChrome'
 import { isLocale } from '@/lib/i18n/config'
@@ -39,17 +40,21 @@ export default async function InnovazionePage({
   return (
     <SiteChrome locale={locale} path="/innovazione">
       <main className={styles.main}>
-        {/* ————— hero ————— */}
-        <header className={`wrap ${styles.head}`}>
-          <Reveal as="span" className={`mono ${styles.kicker}`}>
-            {t.nav.innovation}
-          </Reveal>
-          <Reveal as="h1" className={`display-thin ${styles.title}`} delay={80}>
-            {l(page?.hero?.title, locale) ?? t.innovation.fallbackTitle}
-          </Reveal>
-          <Reveal as="p" className={styles.lede} delay={160}>
-            {l(page?.hero?.lede, locale) ?? t.innovation.fallbackLede}
-          </Reveal>
+        {/* ————— hero: la sfera particellare ex-home (senza pin né
+            splash), testi in basso a sinistra sul nero ————— */}
+        <header className={`${styles.orbHero} scheme-dark`}>
+          <HeroOrb className={styles.orb} pins={false} />
+          <div className={`wrap ${styles.head}`}>
+            <Reveal as="span" className={`mono ${styles.kicker}`}>
+              {t.nav.innovation}
+            </Reveal>
+            <Reveal as="h1" className={`display-thin ${styles.title}`} delay={80}>
+              {l(page?.hero?.title, locale) ?? t.innovation.fallbackTitle}
+            </Reveal>
+            <Reveal as="p" className={styles.lede} delay={160}>
+              {l(page?.hero?.lede, locale) ?? t.innovation.fallbackLede}
+            </Reveal>
+          </div>
         </header>
 
 

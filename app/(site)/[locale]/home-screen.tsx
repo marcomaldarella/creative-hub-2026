@@ -12,11 +12,8 @@ import {
   SectionHeader,
 } from '@/components/ui'
 import { SiteChrome, shopHref } from '@/components/sections/SiteChrome'
-import { HeroBoot } from '@/components/sections/HeroBoot'
-import { HeroOrb } from '@/components/sections/HeroOrb'
-import { HeroRing } from '@/components/sections/HeroRing'
 import { ParallaxMedia } from '@/components/sections/ParallaxMedia'
-import { HeroWords } from '@/components/sections/HeroWords'
+import { HeroSlider } from '@/components/sections/HeroSlider'
 import { HighlightsCarousel } from '@/components/sections/HighlightsCarousel'
 import { PhotoFull, PhotoSplit } from '@/components/sections/Photo'
 import { EcosystemBento } from '@/components/sections/EcosystemBento'
@@ -53,17 +50,11 @@ function openDayLabel(date: string | undefined, locale: Locale): string | null {
 }
 
 /**
- * La home in due versioni: quella pubblica ('/') e la variante hero
- * raggiungibile a '/home-2' — pin dell'orb sempre visibili in filigrana
- * e caption in basso a sinistra al posto di tagline/lede/CTA.
+ * La home: hero swiper a tre voci su video (modello Indaco, approvato
+ * 2026-09-17). L'hero a sfera è passato a /innovazione, /home-2 ora
+ * redirige qui.
  */
-export async function HomeScreen({
-  locale,
-  heroV2 = false,
-}: {
-  locale: Locale
-  heroV2?: boolean
-}) {
+export async function HomeScreen({ locale }: { locale: Locale }) {
   const t = getDictionary(locale)
 
   const home = await getHomeData()
@@ -87,137 +78,45 @@ export async function HomeScreen({
 
   return (
     // niente flag dark: la hero segue il tema, la nav deve invertirsi con lui
-    <SiteChrome locale={locale} path={heroV2 ? '/home-2' : '/'}>
+    <SiteChrome locale={locale} path="/">
       <main>
-        {!heroV2 && <HeroBoot />}
-        {/* moto dell'anello (boost in apparizione e sullo scroll) e
-            parallasse leggero sulle foto grandi */}
-        <HeroRing />
+        {/* parallasse leggero sulle foto grandi */}
         <ParallaxMedia />
-        {/* ————— hero ————— */}
-        <header
-          className={`${styles.hero} ${heroV2 ? styles.heroFit : ''} scheme-dark`}
-        >
-          <div className={styles.heroAnnot} data-splash="annot">
-            <span className="mono">{t.hero.since}</span>
-            <span className="mono">{t.hero.coords}</span>
-          </div>
-          <div className={styles.orbStage} data-splash="stage">
-            {/* data-splash="disc": e' l'anello, non il palco, a dire dove sta
-                davvero il centro del disco — vedi HeroBoot */}
-            <svg
-              className={styles.ring}
-              data-splash="disc"
-              viewBox="0 0 100 100"
-              aria-hidden="true"
-            >
-              <defs>
-                <path
-                  id="hero-ring"
-                  d="M 50,50 m -46,0 a 46,46 0 1,1 92,0 a 46,46 0 1,1 -92,0"
-                  fill="none"
-                />
-              </defs>
-              <text>
-                {/* startOffset: la linea clippa a fine cerchio (0%),
-                    il testo parte più avanti → aria prima della c */}
-                <textPath href="#hero-ring" startOffset="1.6%">
-                  creative · creative-hub · inspire · innovate · excel ·
-                  bologna · dal 1999{' '}
-                  {/* linea continua alla stessa altezza del type: em-dash
-                      senza tracking; l'eccedenza oltre il cerchio è clippata */}
-                  <tspan className={styles.ringDash} aria-hidden="true">
-                    {'—'.repeat(90)}
-                  </tspan>
-                </textPath>
-              </text>
-            </svg>
-            <HeroOrb
-              className={styles.orb}
-              dimPins={heroV2}
-              pins={heroV2}
-              hrefs={[
-                localeHref(locale, '/academy'),
-                localeHref(locale, '/coworking'),
-                localeHref(locale, '/studios'),
-              ]}
-            />
-            {heroV2 ? (
-              <h1 className={`display-black ${styles.heroTitle}`}>
-                creative
-                <br />
-                hub
-              </h1>
-            ) : (
-              /* sfera nuda: le tre anime dell'hub, hover colorato + glow,
-                 la sfera dietro si tinge (evento 'hero-tint'). Lo slot
-                 serve al preloader per nasconderle mentre il disco è
-                 ancora chiuso */
-              <div className={styles.wordsSlot} data-splash="words">
-                <HeroWords
-                  words={[
-                    {
-                      label: 'Academy',
-                      href: localeHref(locale, '/academy'),
-                    },
-                    {
-                      label: 'Rec. Studio',
-                      href: localeHref(locale, '/studios'),
-                    },
-                    {
-                      label: 'Co-Working',
-                      href: localeHref(locale, '/coworking'),
-                    },
-                  ]}
-                />
-              </div>
-            )}
-          </div>
-          {/* Wordmark del preloader: fuori dal palco, non dentro — la sua
-              misura non dipende da nient'altro (nella splash non c'è
-              nessuna scala in gioco). Le due righe sono due span perché
-              entrano ed escono in stagger. Visibile solo con data-boot. */}
-          {!heroV2 && (
-            <div
-              className={`display-black ${styles.bootMark}`}
-              data-splash="mark"
-              aria-hidden="true"
-            >
-              <span>creative</span>
-              <span>hub</span>
-            </div>
-          )}
-          {heroV2 ? (
-            <div className={styles.heroCaption}>
-              <p>
-                {t.hero.caption}
-                <span className={styles.heroCaptionSub}>
-                  {t.hero.captionSub}
-                </span>
-              </p>
-            </div>
-          ) : (
-            <div className={styles.heroSub} data-splash="sub">
-              <div className={styles.heroSubText}>
-                {/* inciso sopra la caption, giustificato a sinistra */}
-                <span className={`mono ${styles.tagline}`}>
-                  {t.hero.tagline}
-                </span>
-                {/* la caption riscritta dal cliente: prima stava solo su
-                    /home-2, ora è il testo della home */}
-                <p className={styles.lede}>
-                  {t.hero.caption}
-                  <span className={styles.heroCaptionSub}>
-                    {t.hero.captionSub}
-                  </span>
-                </p>
-              </div>
-              <a href="#manifesto" className={styles.heroCta}>
-                {t.hero.discover} <Arrow />
-              </a>
-            </div>
-          )}
-        </header>
+        {/* ————— hero: swiper a tre voci su video con annotazioni,
+            approvato dal cliente 2026-09-17 (l'orb è passato a
+            /innovazione); le clip sono i cut già in libreria dei nodi */}
+        <HeroSlider
+            annot={[t.hero.since, t.hero.coords]}
+            caption={{
+              tagline: t.hero.tagline,
+              text: t.hero.caption,
+              sub: t.hero.captionSub,
+            }}
+            cta={{ label: t.hero.discover, href: '#manifesto' }}
+            slides={[
+              {
+                title: t.home.bento[0].title,
+                text: t.home.bento[0].text,
+                href: localeHref(locale, '/academy'),
+                video: '/video/node-academy.mp4',
+                accent: 'var(--azzurro-ink)',
+              },
+              {
+                title: t.home.bento[1].title,
+                text: t.home.bento[1].text,
+                href: localeHref(locale, '/studios'),
+                video: '/video/node-studio.mp4',
+                accent: 'var(--arancio)',
+              },
+              {
+                title: t.home.bento[2].title,
+                text: t.home.bento[2].text,
+                href: localeHref(locale, '/coworking'),
+                video: '/video/node-coworking.mp4',
+                accent: 'var(--giallo-fluo)',
+              },
+            ]}
+          />
 
         {/* ————— manifesto: titolo centrale + statement gigante (ref endzeit) ————— */}
         <section className={styles.sez} id="manifesto">
@@ -423,12 +322,22 @@ export async function HomeScreen({
               title={t.home.magazineTitle}
             />
             <RevealGroup className={styles.mag}>
-              {latestArticles.map((article) => (
+              {latestArticles.map((article, i) => (
                 <ArticleCard
                   key={article._id}
                   article={article}
                   locale={locale}
                   reveal
+                  /* card piatte senza scatola, e foto di sede al posto
+                     dei gradient placeholder */
+                  flat
+                  fallbackSrc={
+                    [
+                      '/img/foto/studio-ssl.jpg',
+                      '/img/foto/live-band.jpg',
+                      '/img/foto/sede.jpg',
+                    ][i % 3]
+                  }
                 />
               ))}
             </RevealGroup>

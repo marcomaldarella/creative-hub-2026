@@ -15,6 +15,10 @@ export type ArticleCardProps = {
   featured?: boolean
   /** aggiunge la classe .rv — da usare dentro un <RevealGroup> */
   reveal?: boolean
+  /** variante piatta: niente scatola/sfondo, contenuto a filo (home v2) */
+  flat?: boolean
+  /** foto locale usata quando l'articolo non ha coverImage in Sanity */
+  fallbackSrc?: string
   className?: string
 }
 
@@ -31,6 +35,8 @@ export function ArticleCard({
   locale,
   featured = false,
   reveal = false,
+  flat = false,
+  fallbackSrc,
   className,
 }: ArticleCardProps) {
   const title = l(article.title, locale)
@@ -39,17 +45,19 @@ export function ArticleCard({
   const date = formatDate(article.publishedAt, locale)
   const author = article.author?.name
 
-  const imageUrl = article.coverImage?.asset
-    ? urlFor(article.coverImage)
-        .width(featured ? 1400 : 960)
-        .height(featured ? 900 : 540)
-        .fit('crop')
-        .url()
-    : undefined
+  const imageUrl =
+    (article.coverImage?.asset
+      ? urlFor(article.coverImage)
+          .width(featured ? 1400 : 960)
+          .height(featured ? 900 : 540)
+          .fit('crop')
+          .url()
+      : undefined) ?? fallbackSrc
 
   const cls = [
     styles.card,
     featured ? styles.featured : '',
+    flat ? styles.flat : '',
     reveal ? 'rv' : '',
     className,
   ]

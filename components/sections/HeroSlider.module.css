@@ -1,0 +1,441 @@
+/* hero a tre voci (modello Indaco): sezione a schermo pieno, il resto
+   della pagina scorre normalmente sotto */
+.hero {
+  position: relative;
+  height: 100svh;
+  padding-top: var(--header-h);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  /* momento brand fisso come la hero sfera: sempre su nero */
+  background: #000;
+  color: var(--fg);
+}
+
+/* ————— video di sfondo in crossfade ————— */
+.bg {
+  position: absolute;
+  inset: 0;
+}
+
+.video,
+.videoOn {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.7s ease;
+}
+
+.videoOn {
+  opacity: 1;
+}
+
+/* velo per la leggibilità dei titoli sul girato, con vignettatura
+   leggera a nero in testa e in coda */
+.veil {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgb(0 0 0 / 0.66),
+    rgb(0 0 0 / 0.2) 38%,
+    rgb(0 0 0 / 0.24) 62%,
+    rgb(0 0 0 / 0.7)
+  );
+}
+
+/* ————— scia fluida del mouse: in difference SOPRA il video ma SOTTO
+   il type — interagisce con lo sfondo senza invertire i titoli ————— */
+.fluid {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  mix-blend-mode: difference;
+}
+
+@media (hover: none), (max-width: 760px) {
+  .fluid {
+    display: none; /* su touch il sim non parte comunque: via anche il canvas */
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fluid {
+    display: none;
+  }
+}
+
+/* ————— annotazioni in alto (stesse della hero sfera) ————— */
+.annot {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  max-width: var(--max);
+  width: 100%;
+  margin: 0 auto;
+  padding: clamp(20px, 3vh, 34px) var(--pad) 0;
+  position: relative;
+  z-index: 3;
+}
+
+.annot span {
+  letter-spacing: 0.06em;
+  white-space: pre-line;
+  line-height: 1.1; /* interlinea al minimo, richiesta cliente */
+  color: var(--fg); /* vince sul grigio di .mono: sul girato deve essere pieno */
+}
+
+.annot span:last-child {
+  text-align: right;
+}
+
+/* ————— binario dei titoli: rullo infinito, drag col mouse ————— */
+.track {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  padding-inline: var(--pad);
+  gap: clamp(36px, 5.5vw, 110px);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  cursor: grab;
+}
+
+.track::-webkit-scrollbar {
+  display: none;
+}
+
+.slide {
+  display: flex;
+  flex: 0 0 auto;
+  /* il binario parte sotto header + annotazioni: per centrare davvero le
+     voci nel viewport si compensa risalendo di metà di quell'ingombro */
+  transform: translateY(calc(var(--header-h) * -0.5 - 2vh));
+}
+
+/* titoli tutti bianchi, pieni: il colore di sezione lo porta la scia
+   fluida del mouse (FluidTrail), non il testo */
+.title {
+  display: inline-flex;
+  align-items: flex-start;
+  font-size: clamp(48px, 8.6vw, 168px);
+  line-height: 0.94;
+  /* a corpo gigante il -0.05 di display-black impasta: stesso punto
+     dolce del logotipo della page transition */
+  letter-spacing: -0.03em;
+  color: var(--fg);
+  /* voce non selezionata: bianco al 50%, la selezionata piena */
+  opacity: 0.5;
+  transition: opacity 0.5s ease;
+}
+
+.title.on {
+  opacity: 1;
+  /* respiro di luminosità sulla voce attiva: alone bianco leggero che
+     pulsa piano — funziona anche su touch (segue la voce, non il mouse) */
+  animation: titleGlow 3.2s ease-in-out infinite;
+}
+
+@keyframes titleGlow {
+  0%,
+  100% {
+    text-shadow:
+      0 0 14px color-mix(in srgb, var(--fg) 16%, transparent),
+      0 0 44px color-mix(in srgb, var(--fg) 7%, transparent);
+  }
+  50% {
+    text-shadow:
+      0 0 22px color-mix(in srgb, var(--fg) 36%, transparent),
+      0 0 68px color-mix(in srgb, var(--fg) 15%, transparent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .title.on {
+    animation: none;
+  }
+}
+
+/* sottotitolo dentro la slide: solo mobile (vedi media query) */
+.slideSub {
+  display: none;
+}
+
+/* apice numerato: pieno, kerning neutro, a ridosso del titolo */
+.num {
+  font-size: 12px;
+  letter-spacing: 0;
+  line-height: 1;
+  color: var(--fg);
+  margin: 0.5em 0.45em 0 0;
+}
+
+/* ————— sottotitolo con dash, in basso a sinistra ————— */
+.sub {
+  position: absolute;
+  z-index: 2;
+  left: var(--pad);
+  bottom: clamp(88px, 15vh, 150px);
+  max-width: 30ch;
+}
+
+/* trattino nel colore della sezione attiva */
+.sub::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: -22px;
+  width: 20px;
+  height: 2px;
+  background: var(--wcol, var(--fg));
+  transition: background 0.5s ease;
+}
+
+.subOn,
+.subOff {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: max-content;
+  max-width: 30ch;
+  font-size: 15px;
+  line-height: 1.45;
+  white-space: pre-line; /* rispetta l'a capo del dizionario */
+  transition: opacity 0.3s ease;
+}
+
+.subOn {
+  opacity: 1;
+}
+
+.subOff {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ————— caption ancorata a destra, sempre visibile, tutta a destra ————— */
+.captionBox {
+  position: absolute;
+  z-index: 2;
+  right: var(--pad);
+  bottom: clamp(26px, 5vh, 46px);
+  max-width: min(44ch, 44vw);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+  gap: 14px;
+}
+
+.tagline {
+  color: color-mix(in srgb, var(--fg) 55%, transparent);
+  letter-spacing: 0; /* kerning stretto, via il tracking largo del mono */
+}
+
+.captionText {
+  font-size: clamp(17px, 1.4vw, 21px);
+  font-weight: 600;
+  line-height: 1.2; /* interlinea stretta anche su desktop */
+  letter-spacing: -0.01em;
+}
+
+.captionSub {
+  display: block;
+  color: color-mix(in srgb, var(--fg) 55%, transparent);
+}
+
+/* ————— riga in basso a sinistra: paginazione + scopri l'hub ————— */
+.pagRow {
+  position: absolute;
+  z-index: 2;
+  left: var(--pad);
+  bottom: clamp(26px, 5vh, 46px);
+  display: flex;
+  align-items: center;
+  gap: 26px;
+}
+
+.pag {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: var(--fg);
+}
+
+.pagLine {
+  width: 40px;
+  height: 1px;
+  background: color-mix(in srgb, var(--fg) 30%, transparent);
+}
+
+.pagDim {
+  color: color-mix(in srgb, var(--fg) 55%, transparent);
+}
+
+/* tasto scopri l'hub: pill outline come la hero sfera */
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 22px;
+  border: 1px solid color-mix(in srgb, var(--fg) 38%, transparent);
+  border-radius: var(--radius-pill);
+  font-size: var(--fs-small);
+  font-weight: 500;
+  color: var(--fg);
+  transition:
+    border-color var(--dur),
+    background var(--dur),
+    transform var(--dur);
+}
+
+.cta:hover {
+  border-color: var(--fg);
+  background: color-mix(in srgb, var(--fg) 8%, transparent);
+  transform: translateY(-1px);
+}
+
+/* ————— cursore dello slider (desktop): disco-freccia avanti/indietro,
+   uno dei dischi ammessi dalla regola radius (come le frecce carosello) ————— */
+.cursor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 6;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  /* bucato: solo outline, niente riempimento, freccia bianca */
+  background: transparent;
+  border: 1px solid color-mix(in srgb, var(--fg) 85%, transparent);
+  color: var(--fg);
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.cursor svg {
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.cursor[data-dir='prev'] svg {
+  transform: scaleX(-1);
+}
+
+/* col cursore custom il puntatore nativo sparisce dall'hero; sui link
+   torna il pointer (lì il disco si spegne) */
+@media (hover: hover) and (pointer: fine) {
+  .hero,
+  .track {
+    cursor: none;
+  }
+
+  .hero a,
+  .hero button {
+    cursor: pointer;
+  }
+}
+
+@media (hover: none), (max-width: 760px) {
+  .cursor {
+    display: none;
+  }
+}
+
+/* ————— mobile: scroll-snap a viewport interi ————— */
+@media (max-width: 760px) {
+  .annot {
+    display: none; /* come la hero sfera: coordinate via sotto i 760px */
+  }
+
+  .track {
+    scroll-snap-type: x mandatory;
+    gap: 0;
+    padding-inline: 0;
+  }
+
+  /* slide all'86%: titolo a sinistra e la voce dopo che spunta a destra;
+     colonna, col sottotitolo sotto la voce */
+  .slide {
+    flex: 0 0 86%;
+    scroll-snap-align: start;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding-left: var(--pad);
+    transform: translateY(calc(var(--header-h) * -0.5));
+  }
+
+  .title {
+    font-size: 14vw;
+  }
+
+  /* sottotitolo sotto la voce, giustificato a sinistra, viaggia con lei */
+  .slideSub {
+    display: block;
+    margin-top: 8px;
+    max-width: 30ch;
+    font-size: 13px;
+    line-height: 1.45;
+    white-space: pre-line; /* rispetta l'a capo del dizionario */
+  }
+
+  /* trattino nel colore della sezione della voce */
+  .slideSub::before {
+    content: '';
+    display: block;
+    width: 20px;
+    height: 2px;
+    background: var(--wcol, var(--fg));
+    margin-bottom: 8px;
+  }
+
+  /* il blocco sub assoluto è la versione desktop: qui non serve */
+  .sub {
+    display: none;
+  }
+
+  /* caption ancorata a sinistra sopra la riga paginazione + tasto */
+  .captionBox {
+    left: var(--pad);
+    right: var(--pad);
+    bottom: 92px;
+    max-width: 34ch;
+    align-items: flex-start;
+    text-align: left;
+    gap: 10px;
+  }
+
+  .tagline {
+    display: none;
+  }
+
+  .captionText {
+    font-size: 13px;
+  }
+
+  .cta {
+    padding: 10px 16px;
+  }
+
+  /* tasto agganciato a sinistra, counter tutto a destra */
+  .pagRow {
+    right: var(--pad);
+    flex-direction: row-reverse;
+    justify-content: space-between;
+  }
+}

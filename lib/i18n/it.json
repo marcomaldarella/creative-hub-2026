@@ -80,8 +80,8 @@
     }
   },
   "hero": {
-    "since": "international college of music,\nsound, multimedia & visual",
-    "coords": "est.1999\nbologna 44.4929°n, 11.3429°e",
+    "since": "International college of music,\nsound, multimedia & visual",
+    "coords": "Est. 1999\nBologna 44.4929°n, 11.3429°e",
     "lede": "Suono, immagine, codice. Tutto in un edificio.",
     "tagline": "inspire, innovate, excel.",
     "discover": "scopri l'hub",
@@ -203,7 +203,7 @@
     "bento": [
       {
         "title": "Academy",
-        "text": "Titoli internazionali in musica, sound e visual.",
+        "text": "Titoli internazionali in musica,\nsound e visual.",
         "n": "01",
         "tags": "università · master",
         "cta": "Entra nel nodo"

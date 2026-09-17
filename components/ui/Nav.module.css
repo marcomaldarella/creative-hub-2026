@@ -33,6 +33,15 @@
   color: var(--fg);
 }
 
+/* barra "bucata" sull'hero della home v2: html[data-nav-clear] arriva
+   dall'observer di HeroSlider e cade scrollando oltre l'hero; col menu
+   aperto lo sfondo torna (l'overlay sotto è opaco ma la barra deve
+   leggersi da sola) */
+:global(html[data-nav-clear]) .nav:not(.menuOpen):not(:hover) {
+  background: transparent;
+  border-bottom-color: transparent;
+}
+
 /* ————— topbar utility (solo desktop) ————— */
 
 .topbar {
