@@ -29,6 +29,9 @@ const CONFIG = {
   pressureDecay: 0.75,
   threshold: 1.0,
   edgeSoftness: 0.0,
+  /* 0 = tinta piatta come la reference; 1 = colore modulato dalla
+     densità del fluido (core acceso, bordi scuri) */
+  shade: 0.0,
 }
 
 const VERT = `varying vec2 vUv; void main(){ vUv=uv; gl_Position=vec4(position,1.); }`
@@ -62,10 +65,13 @@ const FRAG = {
   clear: `${P} ${S}
     uniform sampler2D uTexture; uniform float value; varying vec2 vUv;
     void main(){ gl_FragColor=value*texture2D(uTexture,vUv); }`,
-  /* display identico al template: soglia netta (step) come da config */
+  /* display identico al template con shade 0 (soglia netta, tinta
+     piatta); con shade 1 il colore segue la densità: core acceso fino a
+     oltre l'inchiostro, bordi che scuriscono — la scia smette di essere
+     una sagoma piatta (usato su touch) */
   display: `${P}
-    uniform sampler2D uTexture; uniform float threshold,edgeSoftness; uniform vec3 inkColor; varying vec2 vUv;
-    void main(){ float d=clamp(length(texture2D(uTexture,vUv).rgb),0.,1.); float a=edgeSoftness>0.?smoothstep(threshold-edgeSoftness*.5,threshold+edgeSoftness*.5,d):step(threshold,d); gl_FragColor=vec4(inkColor,a); }`,
+    uniform sampler2D uTexture; uniform float threshold,edgeSoftness,shade; uniform vec3 inkColor; varying vec2 vUv;
+    void main(){ float d=clamp(length(texture2D(uTexture,vUv).rgb),0.,1.); float a=edgeSoftness>0.?smoothstep(threshold-edgeSoftness*.5,threshold+edgeSoftness*.5,d):step(threshold,d); vec3 col=mix(inkColor,inkColor*(.34+.95*d*d),shade); gl_FragColor=vec4(col,a); }`,
 }
 
 type Double = {
@@ -113,10 +119,19 @@ export class Fluid {
     opts: { coarse?: boolean } = {},
   ) {
     this.host = host
-    /* coarse = touch: dye e iterazioni ridotti, la GPU dei telefoni non
-       regge la config desktop a schermo pieno */
+    /* coarse = touch: dye e iterazioni ridotti (la GPU dei telefoni non
+       regge la config desktop a schermo pieno) e resa NON piatta —
+       bordo morbido + shade: sui video la sagoma a tinta unita leggeva
+       da adesivo, così ha un core acceso e i bordi che sfumano scuri */
     this.cfg = opts.coarse
-      ? { ...CONFIG, dyeResolution: 512, pressureIterations: 24 }
+      ? {
+          ...CONFIG,
+          dyeResolution: 512,
+          pressureIterations: 24,
+          threshold: 0.6,
+          edgeSoftness: 0.5,
+          shade: 1.0,
+        }
       : { ...CONFIG }
     this.renderer = new THREE.WebGLRenderer({ canvas, alpha: true })
     this.renderer.setPixelRatio(Math.min(devicePixelRatio, opts.coarse ? 1.5 : 2))
@@ -274,6 +289,7 @@ export class Fluid {
         uTexture: tex(),
         threshold: num(),
         edgeSoftness: num(),
+        shade: num(),
         inkColor: { value: new THREE.Color() },
       }),
     }
@@ -425,6 +441,7 @@ export class Fluid {
           uTexture: this.dye.read.texture,
           threshold: this.cfg.threshold,
           edgeSoftness: this.cfg.edgeSoftness,
+          shade: this.cfg.shade,
           inkColor: this.ink,
         }),
       )

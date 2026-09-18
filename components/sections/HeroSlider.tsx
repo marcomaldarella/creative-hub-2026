@@ -332,6 +332,16 @@ export function HeroSlider({
   }
 
   const onHeroClick = (e: React.MouseEvent) => {
+    /* il click-per-voltare è del cursore-disco desktop: su touch il tap
+       accende la scia fluida e NON deve muovere lo slider (il glide rAF
+       litigherebbe anche con lo scroll nativo di uno swipe successivo) */
+    const pt = (e.nativeEvent as PointerEvent).pointerType
+    if (pt === 'touch' || pt === 'pen') return
+    if (
+      pt === undefined &&
+      !window.matchMedia('(hover: hover) and (pointer: fine)').matches
+    )
+      return
     if ((e.target as HTMLElement).closest('a, button')) return
     const el = trackRef.current
     if (!el) return
