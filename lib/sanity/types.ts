@@ -74,6 +74,13 @@ export interface CourseCategory {
   slug?: SanitySlug
 }
 
+/** Voce titolo+testo delle sezioni della scheda corso (template v3) */
+export interface CourseEntry {
+  _key?: string
+  title?: LocaleString
+  text?: LocaleText
+}
+
 export interface Course {
   _id: string
   _type: 'course'
@@ -93,6 +100,13 @@ export interface Course {
   shopUrl?: string
   featured?: boolean
   types?: string[]
+  skillsLede?: LocaleText
+  skills?: CourseEntry[]
+  structureIntro?: LocaleText
+  structure?: CourseEntry[]
+  admissionsKeys?: LocaleString[]
+  admissions?: CourseEntry[]
+  faq?: CourseEntry[]
 }
 
 export interface Author {

@@ -59,12 +59,6 @@
   mix-blend-mode: difference;
 }
 
-@media (hover: none), (max-width: 760px) {
-  .fluid {
-    display: none; /* su touch il sim non parte comunque: via anche il canvas */
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .fluid {
     display: none;

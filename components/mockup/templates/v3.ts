@@ -479,6 +479,14 @@ export const css = `
   #connetti{position:relative;}
   .fluid-layer{position:absolute;inset:0;width:100%;height:100%;
     pointer-events:none;z-index:5;mix-blend-mode:difference;}
+  /* i divisori neri tra le slide stanno SOPRA la scia (la scia passa
+     dietro): ogni card copre il proprio gap di destra con una barra
+     nera a z-index maggiore del canvas. Niente stacking context sulla
+     card (position sì, z-index no), altrimenti la barra resterebbe
+     sotto il canvas */
+  #connetti .connect-card{position:relative;}
+  #connetti .connect-card::after{content:"";position:absolute;top:0;bottom:0;
+    left:100%;width:20px;background:var(--ink);z-index:6;pointer-events:none;}
 
   footer.site{background:var(--ink);color:var(--white);padding:64px var(--pad) 28px;border-top:var(--hair) solid color-mix(in srgb,var(--blue) 30%,transparent);}
   .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:32px;margin-bottom:44px;}
@@ -1032,7 +1040,22 @@ export type CourseHtmlData = {
   /* foto della gallery del corso al posto delle 6 demo nelle competenze */
   skillImages?: string[];
   teacher?: { name: string; role: string; bio: string; img?: string };
+  /* ————— sezioni editabili da Sanity (fieldset "Scheda corso"):
+     se assenti resta la copy demo del template ————— */
+  skillsLede?: string;
+  skills?: CourseEntryData[];
+  /* paragrafi a sinistra dell'accordion struttura */
+  structureIntro?: string[];
+  structure?: CourseEntryData[];
+  /* punti elenco della colonna "In breve" delle ammissioni */
+  admissionsKeys?: string[];
+  admissions?: CourseEntryData[];
+  faq?: CourseEntryData[];
 };
+
+/* voce titolo+testo di competenze e accordion; nel testo un a-capo
+   diventa un nuovo paragrafo */
+export type CourseEntryData = { title: string; text: string };
 
 const escapeHtml = (v: string) =>
   v
@@ -1043,6 +1066,39 @@ const escapeHtml = (v: string) =>
 
 const DL_SVG =
   '<svg class="dl" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M12 4v13M6 11l6 6 6-6"/></svg>';
+
+const PLUS_SVG =
+  '<span class="acc-plus"><svg viewBox="0 0 18 18" width="16" height="16" stroke="currentColor" stroke-width="1.4"><path d="M9 3v12M3 9h12"/></svg></span>';
+
+/* testo Sanity → paragrafi: un a-capo = nuovo <p> */
+const parasHtml = (text: string) =>
+  text
+    .split(/\n+/)
+    .map((p) => p.trim())
+    .filter(Boolean)
+    .map((p) => `<p>${escapeHtml(p)}</p>`)
+    .join('');
+
+const accordionHtml = (items: CourseEntryData[]) =>
+  items
+    .map(
+      (it) => `    <div class="acc-item">
+      <div class="acc-head"><h3>${escapeHtml(it.title)}</h3>${PLUS_SVG}</div>
+      <div class="acc-body"><div>${parasHtml(it.text)}</div></div>
+    </div>`,
+    )
+    .join('\n');
+
+/* immagini demo della griglia competenze: restano quando il corso non
+   ha gallery (il replace globale di skillImages le sovrascrive dopo) */
+const SKILL_DEMO_IMGS = [
+  '/img/sections/studio-desk.jpg',
+  '/mockup-corso/img/akai.jpg',
+  '/img/sections/studio-regia.jpg',
+  '/img/foto/live-band.jpg',
+  '/mockup-corso/img/class-2.jpg',
+  '/mockup-corso/img/class-4.jpg',
+];
 
 export function buildCourseHtml(d: CourseHtmlData): string {
   const e = escapeHtml;
@@ -1098,6 +1154,75 @@ export function buildCourseHtml(d: CourseHtmlData): string {
     h = h.replace('/mockup-corso/img/class-2.jpg', e(d.panImage));
   }
   h = h.replace('Urban Music Production al Creative Hub', e(d.title));
+
+  /* ————— sezioni editabili da Sanity: ogni blocco compilato sostituisce
+     la copy demo; i regex si fermano al primo </section> perché dentro
+     le griglie/accordion non ce ne sono ————— */
+
+  if (d.skillsLede) {
+    h = h.replace(
+      "Durante il corso costruisci le competenze creative e tecniche per portare un'idea dal loop iniziale al brano pubblicato, dallo studio al palco.",
+      e(d.skillsLede),
+    );
+  }
+
+  /* PRIMA del replace globale di skillImages: le foto demo emesse qui
+     vengono poi sovrascritte in round-robin dalla gallery, se c'è */
+  if (d.skills && d.skills.length) {
+    const cards = d.skills
+      .map(
+        (s, i) => `    <article class="skill">
+      <div class="ph"><img src="${e(SKILL_DEMO_IMGS[i % SKILL_DEMO_IMGS.length])}" alt=""></div>
+      <div class="txt">
+      <span class="n">0${i + 1}</span>
+      <h3>${e(s.title)}</h3>
+      <p>${e(s.text)}</p>
+      </div>
+    </article>`,
+      )
+      .join('\n');
+    h = h.replace(
+      /<div class="skillgrid">[\s\S]*?<\/section>/,
+      `<div class="skillgrid">\n${cards}\n  </div>\n</section>`,
+    );
+  }
+
+  if (d.structureIntro && d.structureIntro.length) {
+    h = h.replace(
+      /<div class="struct-text">[\s\S]*?<\/div>/,
+      `<div class="struct-text">${d.structureIntro
+        .map((p) => `<p>${e(p)}</p>`)
+        .join('')}</div>`,
+    );
+  }
+
+  if (d.structure && d.structure.length) {
+    h = h.replace(
+      /<div class="accordion" id="yearAccordion">[\s\S]*?<\/section>/,
+      `<div class="accordion" id="yearAccordion">\n${accordionHtml(d.structure)}\n  </div>\n  </div>\n</section>`,
+    );
+  }
+
+  if (d.admissionsKeys && d.admissionsKeys.length) {
+    h = h.replace(
+      /(<p class="kicker"[^>]*>In breve<\/p>\s*<ul>)[\s\S]*?(<\/ul>)/,
+      `$1${d.admissionsKeys.map((k) => `<li>${e(k)}</li>`).join('')}$2`,
+    );
+  }
+
+  if (d.admissions && d.admissions.length) {
+    h = h.replace(
+      /<div class="accordion" id="admAccordion">[\s\S]*?<\/section>/,
+      `<div class="accordion" id="admAccordion">\n${accordionHtml(d.admissions)}\n  </div>\n  </div>\n  </div>\n</section>`,
+    );
+  }
+
+  if (d.faq && d.faq.length) {
+    h = h.replace(
+      /<div class="accordion" id="faqAccordion">[\s\S]*?<\/section>/,
+      `<div class="accordion" id="faqAccordion">\n${accordionHtml(d.faq)}\n  </div>\n</section>`,
+    );
+  }
 
   if (d.skillImages && d.skillImages.length) {
     let i = 0;

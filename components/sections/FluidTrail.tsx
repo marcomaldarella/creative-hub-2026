@@ -9,9 +9,11 @@ type RGB = [number, number, number]
  * Scia fluida dietro al mouse: port 1:1 della reference CodeGrid/Cappen
  * (config, shader e passi identici a js/FluidSimulation.js + script.js).
  * Differenze deliberate: scopata al contenitore invece che al viewport
- * (la pagina sotto scorre normale), niente listener touch, pausa fuori
- * viewport, e l'inchiostro viene lerp-ato verso il colore della voce
- * attiva invece del bianco fisso.
+ * (la pagina sotto scorre normale), pausa fuori viewport, e l'inchiostro
+ * viene lerp-ato verso il colore della voce attiva invece del bianco
+ * fisso. Su touch la scia vive di tap (burst radiale: il dito fermo non
+ * ha velocità) e segue lo swipe con listener PASSIVI: mai preventDefault,
+ * lo scroll nativo dello slider non viene toccato.
  */
 
 /* config IDENTICA alla reference CodeGrid (js/script.js) */
@@ -90,6 +92,9 @@ export class Fluid {
   private pressure!: Double
   private material: Record<string, THREE.ShaderMaterial> = {}
   private mouse = { x: 0, y: 0, vx: 0, vy: 0, moved: false }
+  private touch = { x: 0, y: 0 }
+  /* splat in attesa (tap/swipe): consumati tutti al prossimo frame */
+  private queue: { x: number; y: number; vx: number; vy: number }[] = []
   private ink = new THREE.Color(1, 1, 1)
   private inkTarget = new THREE.Color(1, 1, 1)
   private raf: number | null = null
@@ -97,12 +102,24 @@ export class Fluid {
   private lastTime = 0
   private targets: THREE.WebGLRenderTarget[] = []
   private onMove: (e: PointerEvent) => void
+  private onTouchStart: (e: TouchEvent) => void
+  private onTouchMove: (e: TouchEvent) => void
   private onResize: ResizeObserver
+  private cfg: typeof CONFIG
 
-  constructor(canvas: HTMLCanvasElement, host: HTMLElement) {
+  constructor(
+    canvas: HTMLCanvasElement,
+    host: HTMLElement,
+    opts: { coarse?: boolean } = {},
+  ) {
     this.host = host
+    /* coarse = touch: dye e iterazioni ridotti, la GPU dei telefoni non
+       regge la config desktop a schermo pieno */
+    this.cfg = opts.coarse
+      ? { ...CONFIG, dyeResolution: 512, pressureIterations: 24 }
+      : { ...CONFIG }
     this.renderer = new THREE.WebGLRenderer({ canvas, alpha: true })
-    this.renderer.setPixelRatio(Math.min(devicePixelRatio, 2))
+    this.renderer.setPixelRatio(Math.min(devicePixelRatio, opts.coarse ? 1.5 : 2))
     this.dpr = this.renderer.getPixelRatio()
     this.quad = new THREE.Mesh(new THREE.PlaneGeometry(2, 2))
     this.scene.add(this.quad)
@@ -115,13 +132,49 @@ export class Fluid {
       const r = this.host.getBoundingClientRect()
       const x = (e.clientX - r.left) * this.dpr
       const y = (e.clientY - r.top) * this.dpr
-      this.mouse.vx = (x - this.mouse.x) * CONFIG.forceStrength
-      this.mouse.vy = (y - this.mouse.y) * CONFIG.forceStrength
+      this.mouse.vx = (x - this.mouse.x) * this.cfg.forceStrength
+      this.mouse.vy = (y - this.mouse.y) * this.cfg.forceStrength
       this.mouse.x = x
       this.mouse.y = y
       this.mouse.moved = true
     }
     host.addEventListener('pointermove', this.onMove)
+
+    /* touch: il tap accende un burst radiale sul punto, lo swipe lascia
+       la scia lungo il gesto. Passivi e senza capture: il browser resta
+       padrone dello scroll (slider e pagina scorrono come prima) */
+    this.onTouchStart = (e: TouchEvent) => {
+      const t = e.touches[0]
+      if (!t) return
+      const r = this.host.getBoundingClientRect()
+      const x = (t.clientX - r.left) * this.dpr
+      const y = (t.clientY - r.top) * this.dpr
+      this.touch.x = x
+      this.touch.y = y
+      for (let i = 0; i < 6; i++) {
+        const a = (i / 6) * Math.PI * 2 + Math.random() * 0.9
+        const f = (150 + Math.random() * 240) * this.dpr
+        this.queue.push({ x, y, vx: Math.cos(a) * f, vy: Math.sin(a) * f })
+      }
+    }
+    this.onTouchMove = (e: TouchEvent) => {
+      const t = e.touches[0]
+      if (!t) return
+      const r = this.host.getBoundingClientRect()
+      const x = (t.clientX - r.left) * this.dpr
+      const y = (t.clientY - r.top) * this.dpr
+      this.queue.push({
+        x,
+        y,
+        vx: (x - this.touch.x) * this.cfg.forceStrength,
+        vy: (y - this.touch.y) * this.cfg.forceStrength,
+      })
+      this.touch.x = x
+      this.touch.y = y
+    }
+    host.addEventListener('touchstart', this.onTouchStart, { passive: true })
+    host.addEventListener('touchmove', this.onTouchMove, { passive: true })
+
     this.onResize = new ResizeObserver(() => this.resize())
     this.onResize.observe(host)
   }
@@ -154,12 +207,12 @@ export class Fluid {
       },
     })
     this.simSize = {
-      w: CONFIG.simResolution,
-      h: Math.max(1, Math.round(CONFIG.simResolution / aspect)),
+      w: this.cfg.simResolution,
+      h: Math.max(1, Math.round(this.cfg.simResolution / aspect)),
     }
     this.dyeSize = {
-      w: CONFIG.dyeResolution,
-      h: Math.max(1, Math.round(CONFIG.dyeResolution / aspect)),
+      w: this.cfg.dyeResolution,
+      h: Math.max(1, Math.round(this.cfg.dyeResolution / aspect)),
     }
     this.velocity = double(this.simSize.w, this.simSize.h)
     this.dye = double(this.dyeSize.w, this.dyeSize.h)
@@ -252,7 +305,7 @@ export class Fluid {
         this.mouse.x / this.width,
         1 - this.mouse.y / this.height,
       ),
-      radius: CONFIG.splatRadius / 100,
+      radius: this.cfg.splatRadius / 100,
     })
     this.set(m.splat, {
       uTarget: vel.read.texture,
@@ -281,7 +334,7 @@ export class Fluid {
         uVelocity: vel.read.texture,
         uCurl: this.curl.texture,
         texelSize: simTexel,
-        curlStrength: CONFIG.curl,
+        curlStrength: this.cfg.curl,
         dt,
       }),
       vel.write,
@@ -297,7 +350,7 @@ export class Fluid {
     this.pass(
       this.set(m.clear, {
         uTexture: pres.read.texture,
-        value: CONFIG.pressureDecay,
+        value: this.cfg.pressureDecay,
       }),
       pres.write,
     )
@@ -307,7 +360,7 @@ export class Fluid {
       uDivergence: this.divergence.texture,
       texelSize: simTexel,
     })
-    for (let i = 0; i < CONFIG.pressureIterations; i++) {
+    for (let i = 0; i < this.cfg.pressureIterations; i++) {
       m.pressure.uniforms.uPressure.value = pres.read.texture
       this.pass(m.pressure, pres.write)
       pres.swap()
@@ -328,7 +381,7 @@ export class Fluid {
       uSource: vel.read.texture,
       texelSize: simTexel,
       dt,
-      dissipation: CONFIG.velocityDissipation,
+      dissipation: this.cfg.velocityDissipation,
     })
     this.pass(m.advection, vel.write)
     vel.swap()
@@ -336,7 +389,7 @@ export class Fluid {
     this.set(m.advection, {
       uSource: dye.read.texture,
       texelSize: new THREE.Vector2(1 / this.dyeSize.w, 1 / this.dyeSize.h),
-      dissipation: CONFIG.dyeDissipation,
+      dissipation: this.cfg.dyeDissipation,
     })
     this.pass(m.advection, dye.write)
     dye.swap()
@@ -354,13 +407,24 @@ export class Fluid {
         this.splat()
         this.mouse.moved = false
       }
+      /* splat touch accodati (tap/swipe): passano tutti dal punto mouse */
+      if (this.queue.length) {
+        for (const q of this.queue) {
+          this.mouse.x = q.x
+          this.mouse.y = q.y
+          this.mouse.vx = q.vx
+          this.mouse.vy = q.vy
+          this.splat()
+        }
+        this.queue.length = 0
+      }
       this.ink.lerp(this.inkTarget, 0.08)
       this.simulate(dt)
       this.pass(
         this.set(this.material.display, {
           uTexture: this.dye.read.texture,
-          threshold: CONFIG.threshold,
-          edgeSoftness: CONFIG.edgeSoftness,
+          threshold: this.cfg.threshold,
+          edgeSoftness: this.cfg.edgeSoftness,
           inkColor: this.ink,
         }),
       )
@@ -378,6 +442,8 @@ export class Fluid {
   dispose() {
     this.stop()
     this.host.removeEventListener('pointermove', this.onMove)
+    this.host.removeEventListener('touchstart', this.onTouchStart)
+    this.host.removeEventListener('touchmove', this.onTouchMove)
     this.onResize.disconnect()
     this.targets.forEach((t) => t.dispose())
     Object.values(this.material).forEach((m) => m.dispose())
@@ -401,14 +467,13 @@ export function FluidTrail({
     const canvas = canvasRef.current
     const host = canvas?.parentElement
     if (!canvas || !host) return
-    /* solo puntatori fini e senza reduced-motion: niente sim su touch */
-    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches)
-      return
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    /* su touch la sim gira in versione coarse (tap + swipe, vedi Fluid) */
+    const fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches
 
     let fluid: Fluid
     try {
-      fluid = new Fluid(canvas, host)
+      fluid = new Fluid(canvas, host, { coarse: !fine })
     } catch {
       return /* niente WebGL: la hero vive benissimo senza scia */
     }

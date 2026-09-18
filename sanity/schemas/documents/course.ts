@@ -1,9 +1,31 @@
 import { defineField, defineType } from 'sanity'
 
+/* voce titolo+testo delle sezioni della scheda (competenze, accordion
+   struttura/ammissioni/FAQ): nel testo un a-capo = nuovo paragrafo */
+const schedaEntry = {
+  type: 'object' as const,
+  fields: [
+    defineField({ name: 'title', title: 'Titolo', type: 'localeString' }),
+    defineField({ name: 'text', title: 'Testo', type: 'localeText' }),
+  ],
+  preview: {
+    select: { title: 'title.it', subtitle: 'text.it' },
+  },
+}
+
 export const course = defineType({
   name: 'course',
   title: 'Corso',
   type: 'document',
+  fieldsets: [
+    {
+      name: 'scheda',
+      title: 'Scheda corso — sezioni',
+      description:
+        'Contenuti delle sezioni della pagina corso (competenze, struttura, ammissioni, FAQ). Le sezioni lasciate vuote mostrano la copy di default.',
+      options: { collapsible: true, collapsed: true },
+    },
+  ],
   fields: [
     defineField({
       name: 'title',
@@ -98,6 +120,62 @@ export const course = defineType({
       name: 'language',
       title: 'Lingua del corso',
       type: 'localeString',
+    }),
+    defineField({
+      name: 'skillsLede',
+      title: 'Competenze — sottotitolo',
+      description: 'Il paragrafo sotto "Competenze che svilupperai".',
+      type: 'localeText',
+      fieldset: 'scheda',
+    }),
+    defineField({
+      name: 'skills',
+      title: 'Competenze',
+      description:
+        'Le card della griglia competenze (nella pagina demo sono 6). Le foto arrivano dalla galleria del corso.',
+      type: 'array',
+      of: [schedaEntry],
+      fieldset: 'scheda',
+    }),
+    defineField({
+      name: 'structureIntro',
+      title: 'Struttura — introduzione',
+      description:
+        'I paragrafi a sinistra dell’accordion (un a-capo = nuovo paragrafo).',
+      type: 'localeText',
+      fieldset: 'scheda',
+    }),
+    defineField({
+      name: 'structure',
+      title: 'Struttura del corso',
+      description: 'Le voci dell’accordion (es. Primo anno, Secondo anno…).',
+      type: 'array',
+      of: [schedaEntry],
+      fieldset: 'scheda',
+    }),
+    defineField({
+      name: 'admissionsKeys',
+      title: 'Ammissioni — in breve',
+      description: 'I punti elenco della colonna "In breve".',
+      type: 'array',
+      of: [{ type: 'localeString' }],
+      fieldset: 'scheda',
+    }),
+    defineField({
+      name: 'admissions',
+      title: 'Ammissioni',
+      description: 'Le voci dell’accordion ammissioni.',
+      type: 'array',
+      of: [schedaEntry],
+      fieldset: 'scheda',
+    }),
+    defineField({
+      name: 'faq',
+      title: 'Domande frequenti',
+      description: 'Domanda nel titolo, risposta nel testo.',
+      type: 'array',
+      of: [schedaEntry],
+      fieldset: 'scheda',
     }),
     defineField({
       name: 'shopUrl',

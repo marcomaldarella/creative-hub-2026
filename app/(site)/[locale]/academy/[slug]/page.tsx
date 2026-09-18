@@ -9,7 +9,7 @@ import { getDictionary } from '@/lib/i18n/dictionaries'
 import { urlFor } from '@/lib/sanity/image'
 import { l } from '@/lib/sanity/l'
 import { getCourseBySlug, getSiteSettings } from '@/lib/sanity/queries'
-import type { SanityImage } from '@/lib/sanity/types'
+import type { CourseEntry, SanityImage } from '@/lib/sanity/types'
 import { findTopic } from '@/lib/topics'
 
 export const dynamic = 'force-dynamic'
@@ -93,6 +93,18 @@ export default async function CoursePage({
   const teacher = course.teachers?.[0]
   const title = l(course.title, locale) ?? slug
 
+  /* voci titolo+testo delle sezioni editabili (fieldset "Scheda corso"):
+     una voce senza né titolo né testo non arriva al template */
+  const entries = (arr?: CourseEntry[]) => {
+    const out = (arr ?? [])
+      .map((it) => ({
+        title: l(it.title, locale) ?? '',
+        text: l(it.text, locale) ?? '',
+      }))
+      .filter((it) => it.title || it.text)
+    return out.length ? out : undefined
+  }
+
   const html = buildCourseHtml({
     eyebrow: `Academy · ${
       l(course.category?.title, locale) ?? t.academy.kicker
@@ -120,6 +132,18 @@ export default async function CoursePage({
           (_, i) => imgUrl(gallery[i % gallery.length], 900, 563)!,
         )
       : undefined,
+    skillsLede: l(course.skillsLede, locale) ?? undefined,
+    skills: entries(course.skills),
+    structureIntro: l(course.structureIntro, locale)
+      ?.split(/\n+/)
+      .map((p) => p.trim())
+      .filter(Boolean),
+    structure: entries(course.structure),
+    admissionsKeys: (course.admissionsKeys ?? [])
+      .map((k) => l(k, locale) ?? '')
+      .filter(Boolean),
+    admissions: entries(course.admissions),
+    faq: entries(course.faq),
     teacher: teacher?.name
       ? {
           name: teacher.name,
