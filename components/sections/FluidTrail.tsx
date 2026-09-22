@@ -71,7 +71,7 @@ const FRAG = {
      una sagoma piatta (usato su touch) */
   display: `${P}
     uniform sampler2D uTexture; uniform float threshold,edgeSoftness,shade; uniform vec3 inkColor; varying vec2 vUv;
-    void main(){ float d=clamp(length(texture2D(uTexture,vUv).rgb),0.,1.); float a=edgeSoftness>0.?smoothstep(threshold-edgeSoftness*.5,threshold+edgeSoftness*.5,d):step(threshold,d); vec3 col=mix(inkColor,inkColor*(.34+.95*d*d),shade); gl_FragColor=vec4(col,a); }`,
+    void main(){ float d=clamp(length(texture2D(uTexture,vUv).rgb),0.,1.); float a=edgeSoftness>0.?smoothstep(threshold-edgeSoftness*.5,threshold+edgeSoftness*.5,d):step(threshold,d); vec3 col=mix(inkColor,inkColor*(.34+.95*d*d),shade); gl_FragColor=vec4(col*a,a); }`,
 }
 
 type Double = {
