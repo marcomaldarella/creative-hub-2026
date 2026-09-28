@@ -259,7 +259,9 @@ export const css = `
     background:color-mix(in srgb,var(--blue) 30%,transparent);
     transition:background .25s ease,transform .25s ease;}
   .dot.on{background:var(--blue);transform:scale(1.25);}
-  .cnav-btn{width:42px;height:42px;border-radius:50%;border:1px solid var(--blue);background:transparent;
+  /* flex:none: dentro .quotes la citazione preme sulle frecce e senza
+     il blocco allo shrink il cerchio si schiaccia a ovale (mobile) */
+  .cnav-btn{flex:none;width:42px;height:42px;border-radius:50%;border:1px solid var(--blue);background:transparent;
     color:var(--blue);display:flex;align-items:center;justify-content:center;}
   .cnav-btn:hover{background:var(--blue);color:var(--ink);}
 
@@ -323,6 +325,10 @@ export const css = `
      fascia finale "Venti posti all'anno" con la CTA */
   .adm-intro{font-size:21px;font-weight:600;line-height:1.3;letter-spacing:-.01em;
     margin:0 0 clamp(32px,4vw,48px);max-width:46ch;}
+  /* paragrafi di seguito all'attacco (requisiti per-corso da Sanity) */
+  .adm-note{font-size:15px;line-height:1.45;color:var(--txt-2);max-width:64ch;
+    margin:0 0 14px;}
+  .adm-note:last-of-type{margin-bottom:clamp(32px,4vw,48px);}
   .steps{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
     gap:clamp(20px,3vw,40px);}
   .steps li{border-top:var(--hair) solid color-mix(in srgb,var(--blue) 30%,transparent);
@@ -1323,10 +1329,13 @@ export function buildCourseHtml(d: CourseHtmlData): string {
     );
   }
 
-  /* ammissioni (brief 28/09): le voci Sanity diventano i passaggi
-     numerati del blocco aperto — rette/agevolazioni/fascia restano
-     la copy fissa del template finché non arrivano campi dedicati */
-  if (d.admissions && d.admissions.length) {
+  /* ammissioni (brief 28/09): con 3+ voci Sanity queste diventano i
+     passaggi numerati del blocco aperto; con 1-2 voci (i "requisiti"
+     scritti per il vecchio accordion) i testi diventano l'ATTACCO della
+     sezione e i tre passaggi demo restano — una sequenza da un solo
+     step non si legge. Rette/agevolazioni/fascia restano la copy fissa
+     del template finché non arrivano campi dedicati */
+  if (d.admissions && d.admissions.length >= 3) {
     const steps = d.admissions
       .map(
         (it, i) =>
@@ -1337,6 +1346,21 @@ export function buildCourseHtml(d: CourseHtmlData): string {
       /<ol class="steps"[^>]*>[\s\S]*?<\/ol>/,
       `<ol class="steps" aria-label="come si entra">\n${steps}\n  </ol>`,
     );
+  } else if (d.admissions && d.admissions.length) {
+    const paras = d.admissions
+      .flatMap((it) => it.text.split(/\n+/))
+      .map((p) => p.trim())
+      .filter(Boolean);
+    if (paras.length) {
+      const rest = paras
+        .slice(1)
+        .map((p) => `<p class="adm-note">${e(p)}</p>`)
+        .join('\n  ');
+      h = h.replace(
+        /<p class="adm-intro"[^>]*>[\s\S]*?<\/p>/,
+        `<p class="adm-intro"${rest ? ' style="margin-bottom:14px"' : ''}>${e(paras[0])}</p>${rest ? `\n  ${rest}` : ''}`,
+      );
+    }
   }
 
   /* si ferma PRIMA della coda "Hai altre domande?" (faq-more) */
@@ -1356,7 +1380,10 @@ export function buildCourseHtml(d: CourseHtmlData): string {
     );
   }
 
-  if (d.teachers && d.teachers.length) {
+  /* anche con lista VUOTA la griglia si rigenera: sui corsi senza
+     docenti collegati restano i segnaposto neutri, non lo Zilocchi
+     demo del template (che è il course leader di UMP) */
+  if (d.teachers) {
     const cards = d.teachers.slice(0, 4).map(
       (t, i) => `    <article class="teach${i === 0 ? ' lead' : ''}">
       <div class="ph">${t.img ? `<img src="${e(t.img)}" alt="${e(t.name)}">` : ''}</div>
