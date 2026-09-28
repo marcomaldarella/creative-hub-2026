@@ -90,7 +90,6 @@ export default async function CoursePage({
   if (!course) notFound()
 
   const gallery = course.gallery ?? []
-  const teacher = course.teachers?.[0]
   const title = l(course.title, locale) ?? slug
 
   /* voci titolo+testo delle sezioni editabili (fieldset "Scheda corso"):
@@ -139,19 +138,19 @@ export default async function CoursePage({
       .map((p) => p.trim())
       .filter(Boolean),
     structure: entries(course.structure),
-    admissionsKeys: (course.admissionsKeys ?? [])
-      .map((k) => l(k, locale) ?? '')
-      .filter(Boolean),
     admissions: entries(course.admissions),
     faq: entries(course.faq),
-    teacher: teacher?.name
-      ? {
-          name: teacher.name,
-          role: l(teacher.role, locale) ?? '',
-          bio: l(teacher.bio, locale) ?? '',
-          img: imgUrl(teacher.photo, 800, 1000),
-        }
-      : undefined,
+    /* griglia docenti: il primo collegato in Sanity è il course leader;
+       la griglia si completa a 4 con i segnaposto del brief */
+    teachers: (course.teachers ?? [])
+      .filter((tch) => tch?.name)
+      .slice(0, 4)
+      .map((tch) => ({
+        name: tch.name as string,
+        role: l(tch.role, locale) ?? '',
+        cred: l(tch.bio, locale) ?? '',
+        img: imgUrl(tch.photo, 800, 1000),
+      })),
   })
 
   return (

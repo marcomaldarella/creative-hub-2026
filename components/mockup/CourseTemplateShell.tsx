@@ -164,19 +164,54 @@ export function CourseTemplateShell({ css, html }: CourseTemplateShellProps) {
         .forEach((v) => videoIO.observe(v));
     }
 
-    // modale contatti (v3): la aprono tutte le CTA marcate data-contact
-    // — cioè tutte tranne "Scarica il piano di studi" (riunione 17/09).
+    // modale contatti (v3 + brief 28/09): la aprono tutte le CTA marcate
+    // data-contact, e ognuna passa ORIGINE (quale bottone) e INTENTO
+    // (info | candidatura) — finiscono nei campi nascosti del form, così
+    // a ogni invio sappiamo da quale sezione è partita la richiesta.
+    // L'intento decide anche la versione del popup (titolo/testi).
     // Submit finto da mockup: mostra la conferma, nessun invio reale.
     const modal = root.getElementById('contactModal');
+    const modalTitle = modal?.querySelector<HTMLElement>('h3') ?? null;
+    const modalSub = modal?.querySelector<HTMLElement>('.sub') ?? null;
+    const modalMsg =
+      modal?.querySelector<HTMLTextAreaElement>('textarea[name="message"]') ??
+      null;
+    const fOrigine =
+      modal?.querySelector<HTMLInputElement>('input[name="sezione_origine"]') ??
+      null;
+    const fIntento =
+      modal?.querySelector<HTMLInputElement>('input[name="intento"]') ?? null;
+    // eventi GA4 + Meta Pixel (apertura_form / invio_form) con origine e
+    // intento: se gli script di tracking non ci sono, silenzio
+    const track = (name: string, params: Record<string, string>) => {
+      const w = window as unknown as {
+        gtag?: (...args: unknown[]) => void;
+        fbq?: (...args: unknown[]) => void;
+      };
+      w.gtag?.('event', name, params);
+      w.fbq?.('trackCustom', name, params);
+    };
     const onModalKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') closeModal();
     };
-    const openModal = () => {
+    const openModal = (origine = 'link', intento = 'info') => {
       if (!modal) return;
+      const c = modal.dataset;
+      const cand = intento === 'candidatura';
+      if (modalTitle)
+        modalTitle.textContent =
+          (cand ? c.titleCandidatura : c.titleInfo) ?? 'Contattaci';
+      if (modalSub)
+        modalSub.textContent = (cand ? c.subCandidatura : c.subInfo) ?? '';
+      if (modalMsg)
+        modalMsg.placeholder = (cand ? c.phCandidatura : c.phInfo) ?? '';
+      if (fOrigine) fOrigine.value = origine;
+      if (fIntento) fIntento.value = intento;
       modal.hidden = false;
       document.documentElement.style.overflow = 'hidden';
       window.addEventListener('keydown', onModalKey);
-      modal.querySelector<HTMLInputElement>('input')?.focus();
+      modal.querySelector<HTMLInputElement>('input:not([type="hidden"])')?.focus();
+      track('apertura_form', { origine, intento });
     };
     const closeModal = () => {
       if (!modal) return;
@@ -185,11 +220,25 @@ export function CourseTemplateShell({ css, html }: CourseTemplateShellProps) {
       document.documentElement.style.overflow = '';
       window.removeEventListener('keydown', onModalKey);
     };
+    // il "Contattaci" dell'header vero (light DOM) apre lo stesso popup
+    const navCtas = Array.from(
+      document.querySelectorAll<HTMLElement>('[data-nav-cta]'),
+    );
+    const onNavCta = (e: Event) => {
+      e.preventDefault();
+      openModal('header', 'info');
+    };
+    // apertura da link diretto (#contatti / #candidati) per le campagne
+    const fromHash = () => {
+      if (location.hash === '#contatti') openModal('link', 'info');
+      else if (location.hash === '#candidati')
+        openModal('link', 'candidatura');
+    };
     if (modal) {
       root.querySelectorAll<HTMLElement>('[data-contact]').forEach((el) => {
         el.addEventListener('click', (e) => {
           e.preventDefault();
-          openModal();
+          openModal(el.dataset.origine ?? 'link', el.dataset.intento ?? 'info');
         });
       });
       modal.querySelectorAll<HTMLElement>('[data-modal-close]').forEach((el) => {
@@ -198,7 +247,14 @@ export function CourseTemplateShell({ css, html }: CourseTemplateShellProps) {
       modal.querySelector('form')?.addEventListener('submit', (e) => {
         e.preventDefault();
         modal.classList.add('sent');
+        track('invio_form', {
+          origine: fOrigine?.value ?? '',
+          intento: fIntento?.value ?? '',
+        });
       });
+      navCtas.forEach((el) => el.addEventListener('click', onNavCta));
+      fromHash();
+      window.addEventListener('hashchange', fromHash);
     }
 
     // scia fluida della home sul carosello "come conoscerci" (v3):
@@ -342,6 +398,17 @@ export function CourseTemplateShell({ css, html }: CourseTemplateShellProps) {
       }
       jump.classList.add('aligned');
       jump.style.left = `${first.getBoundingClientRect().left - bar.left}px`;
+      // niente sovrapposizione con la coda ("A.A. 2026/2027"): se la
+      // fila allineata la tocca, si torna al layout a flusso (brief)
+      const tail = jump.parentElement?.querySelector('.tail');
+      if (
+        tail &&
+        jump.getBoundingClientRect().right >
+          tail.getBoundingClientRect().left - 24
+      ) {
+        jump.classList.remove('aligned');
+        jump.style.left = '';
+      }
     };
 
     const onResize = () => {
@@ -361,6 +428,8 @@ export function CourseTemplateShell({ css, html }: CourseTemplateShellProps) {
       fluidIO?.disconnect();
       fluid?.dispose();
       window.removeEventListener('keydown', onModalKey);
+      window.removeEventListener('hashchange', fromHash);
+      navCtas.forEach((el) => el.removeEventListener('click', onNavCta));
       document.documentElement.style.overflow = '';
       videoIO.disconnect();
       if (qTimer) clearInterval(qTimer);

@@ -63,17 +63,30 @@ export const css = `
     color:color-mix(in srgb,var(--ink) 68%,transparent);}
   h1.hero-h1{font-size:clamp(34px,4vw,54px);line-height:.96;font-weight:700;margin:0 0 22px;letter-spacing:-.02em;}
   .hero-sub{font-size:19px;font-weight:500;line-height:1.26;margin:0 0 40px;max-width:420px;}
-  /* info corso: griglia 2 colonne etichetta-sopra/valore-sotto (layout
-     approvato) — sinistra durata/livello/modalità, destra inizio/
-     scadenza/lingua */
-  .meta-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px 24px;
-    padding-top:12px;margin-bottom:38px;}
+  /* info corso: TABELLA a 2 colonne (reference v4) — riga sopra, riga
+     sotto ogni cella e divisore verticale al centro; le celle della
+     stessa riga condividono l'altezza, quindi i fili sono continui */
+  .meta-grid{display:grid;grid-template-columns:1fr 1fr;
+    border-top:var(--hair) solid color-mix(in srgb,var(--ink) 28%,transparent);
+    margin-bottom:38px;}
+  .meta-grid>div{padding:15px 0 18px;
+    border-bottom:var(--hair) solid color-mix(in srgb,var(--ink) 28%,transparent);}
+  .meta-grid>div:nth-child(odd){border-right:var(--hair) solid color-mix(in srgb,var(--ink) 28%,transparent);
+    padding-right:24px;}
+  .meta-grid>div:nth-child(even){padding-left:24px;}
+  /* cella spaiata in chiusura (corsi con 5 voci): niente filo a destra */
+  .meta-grid>div:last-child:nth-child(odd){border-right:0;}
   .meta-grid .lab{font-size:13.5px;font-weight:500;margin-bottom:6px;
     color:color-mix(in srgb,var(--ink) 62%,transparent);}
-  .meta-grid .val{font-size:clamp(18px,1.5vw,22px);font-weight:700;
+  .meta-grid .val{font-size:clamp(17px,1.35vw,20px);font-weight:700;
     letter-spacing:-.01em;line-height:1.18;}
+  /* riga di servizio sotto al valore (brief 28/09: sei voci solo
+     informative, mai cliccabili — l'attenzione resta sulle due CTA) */
+  .meta-grid .sub{font-size:13.5px;line-height:1.35;margin-top:4px;
+    color:color-mix(in srgb,var(--ink) 62%,transparent);}
   .hero-cta{display:flex;flex-wrap:wrap;gap:12px;align-self:flex-start;}
-  .hero-cta .pill{text-decoration:none;}
+  a.pill{text-decoration:none;}
+  .btns{display:flex;flex-wrap:wrap;gap:12px;align-items:center;}
   /* Contattaci: nero pieno (a sinistra) */
   .pill-ink{background:var(--ink);color:var(--white);}
   .pill-ink:hover{background:var(--ink-2);}
@@ -223,6 +236,12 @@ export const css = `
   .skill p{font-size:15px;line-height:1.4;color:var(--txt-2);margin:auto 0 0;max-width:30ch;}
   @media(max-width:1080px){.skillgrid{grid-template-columns:repeat(2,1fr);}}
   @media(max-width:620px){.skillgrid{grid-template-columns:1fr;}.skill{min-height:0;}}
+  /* sotto i 560 la tabella info va a colonna singola (come la reference) */
+  @media(max-width:560px){
+    .meta-grid{grid-template-columns:1fr;}
+    .meta-grid>div:nth-child(odd){border-right:0;padding-right:0;}
+    .meta-grid>div:nth-child(even){padding-left:0;}
+  }
 
   .carousel{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;
     scrollbar-width:none;margin-right:calc(-1 * var(--pad));}
@@ -272,8 +291,11 @@ export const css = `
     .subnav .jump a::before{inset:13px -7px;--l:6px;}
     .subnav .tail{gap:0;}
 
-    /* dati della hero: griglia compatta, sotto al video */
-    .meta-grid{gap:18px 16px;padding-top:0;margin-bottom:30px;}
+    /* dati della hero: tabella compatta, sotto al video */
+    .meta-grid{margin-bottom:30px;}
+    .meta-grid>div{padding-top:13px;padding-bottom:15px;}
+    .meta-grid>div:nth-child(odd){padding-right:16px;}
+    .meta-grid>div:nth-child(even){padding-left:16px;}
     .meta-grid .val{font-size:17px;}
     .hero-left{padding-top:32px;}
     h1.hero-h1{font-size:clamp(30px,8.5vw,38px);}
@@ -295,31 +317,54 @@ export const css = `
   }
 
 
-  /* ammissioni: accordion a sinistra, riepilogo per parole chiave a
-     destra sotto al tasto — si legge tutto a colpo d'occhio senza
-     aprire una per una le voci */
-  /* rientro: colonna stretta a sinistra per le informazioni di servizio,
-     contenuto vero incolonnato piu' a destra (stesso impianto della
-     sezione competenze della v2) */
-  .adm-grid{display:grid;grid-template-columns:280px minmax(0,1fr);
-    gap:clamp(30px,4.5vw,72px);align-items:start;}
-  .adm-grid .accordion{max-width:none;}
-  /* il riepilogo si appoggia in fondo alla colonna, all'altezza
-     dell'ultima voce dell'accordion */
-  .adm-keys{align-self:stretch;display:flex;flex-direction:column;justify-content:flex-end;}
-  .adm-keys .keysIn{max-width:100%;}
-  /* blocco piatto: nessun accento, nessun grassetto — e' informazione
-     di margine, non deve competere con l'accordion */
-  .adm-keys .kicker{font-size:12px;font-weight:400;letter-spacing:.04em;color:var(--txt-2);
-    margin:0 0 12px;}
-  .adm-keys ul{list-style:none;display:grid;gap:5px;}
-  .adm-keys li{position:relative;padding-left:20px;font-size:14.5px;line-height:1.32;color:var(--txt-2);}
-  .adm-keys li::before{content:"";position:absolute;left:0;top:.62em;width:9px;height:1px;background:var(--txt-2);}
-  .adm-keys li b{color:inherit;font-weight:inherit;}
-  @media(max-width:1000px){
-    .adm-grid{grid-template-columns:1fr;gap:28px;}
-    .adm-keys{order:1;}
+  /* ammissioni (brief 28/09): tutto APERTO, niente accordion — le
+     informazioni decisive (requisiti, posti, rette) non stanno dietro
+     un "+". Tre passaggi, rette affiancate, agevolazioni in riga e
+     fascia finale "Venti posti all'anno" con la CTA */
+  .adm-intro{font-size:21px;font-weight:600;line-height:1.3;letter-spacing:-.01em;
+    margin:0 0 clamp(32px,4vw,48px);max-width:46ch;}
+  .steps{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:clamp(20px,3vw,40px);}
+  .steps li{border-top:var(--hair) solid color-mix(in srgb,var(--blue) 30%,transparent);
+    padding-top:16px;}
+  .steps .n{display:block;font-size:12.5px;font-weight:600;letter-spacing:.04em;
+    color:var(--blue);margin-bottom:12px;}
+  .steps h3{font-size:19px;font-weight:700;letter-spacing:-.01em;margin:0 0 8px;}
+  .steps p{font-size:14.5px;line-height:1.4;color:var(--txt-2);margin:0;max-width:34ch;}
+  .fees-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;
+    flex-wrap:wrap;margin:clamp(44px,5vw,64px) 0 16px;}
+  .fees-head h3{font-size:22px;font-weight:700;letter-spacing:-.01em;margin:0;}
+  .fees-head p{font-size:13.5px;color:var(--txt-2);margin:0;}
+  .plans{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;}
+  .plan{background:var(--ink-2);padding:24px 24px 26px;}
+  .plan .n{display:block;font-size:12.5px;font-weight:600;letter-spacing:.04em;
+    color:var(--blue);margin-bottom:12px;}
+  .plan .price{font-size:clamp(30px,3vw,40px);font-weight:700;letter-spacing:-.03em;
+    line-height:1;margin:0;}
+  .plan .price small{font-size:14px;font-weight:500;color:var(--txt-2);
+    letter-spacing:0;margin-left:5px;}
+  .plan p{font-size:14px;line-height:1.4;color:var(--txt-2);margin:10px 0 0;}
+  .perks{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;margin-top:24px;}
+  .perk b{display:block;font-size:14.5px;font-weight:700;margin-bottom:3px;}
+  .perk span{font-size:13px;line-height:1.4;color:var(--txt-2);}
+  .linkbtn{background:none;border:none;padding:0;color:var(--blue);font-size:13px;
+    text-decoration:underline;text-underline-offset:3px;text-align:left;}
+  .linkbtn:hover{color:var(--white);}
+  /* segnaposto in attesa di dati dal cliente */
+  .todo{color:var(--blue);}
+  .adm-band{background:var(--blue);color:var(--ink);display:flex;justify-content:space-between;
+    align-items:center;gap:20px;flex-wrap:wrap;padding:24px 26px;margin-top:30px;}
+  .adm-band p{margin:0;font-size:clamp(20px,2vw,26px);font-weight:700;letter-spacing:-.02em;line-height:1.15;}
+  .adm-band p span{display:block;font-size:13.5px;font-weight:500;letter-spacing:0;margin-top:5px;
+    color:color-mix(in srgb,var(--ink) 65%,transparent);}
+  .adm-band .pill{background:var(--ink);color:var(--white);}
+  .adm-band .pill:hover{background:var(--ink-2);}
+  @media(max-width:900px){
+    .steps{grid-template-columns:1fr;gap:22px;}
+    .plans{grid-template-columns:1fr;}
+    .perks{grid-template-columns:repeat(2,minmax(0,1fr));}
   }
+  @media(max-width:520px){.perks{grid-template-columns:1fr;}}
 
   .accordion{max-width:1000px;}
   /* FAQ: fila piu' larga delle altre liste */
@@ -336,6 +381,10 @@ export const css = `
   .acc-body>div{overflow:hidden;min-height:0;}
   .acc-item.open .acc-body{grid-template-rows:1fr;}
   .acc-body p{font-size:15.5px;line-height:1.45;margin:0;padding:0 0 26px;font-weight:400;max-width:700px;}
+  /* coda delle FAQ: "Hai altre domande?" + Richiedi informazioni */
+  .faq-more{display:flex;justify-content:space-between;align-items:center;gap:16px;
+    flex-wrap:wrap;margin-top:30px;}
+  .faq-more p{margin:0;font-size:17px;font-weight:600;}
 
   .promo-two{display:grid;grid-template-columns:1fr 1fr;min-height:420px;}
   /* foto libera: niente titolo sopra, quindi via anche la sfumatura
@@ -386,12 +435,19 @@ export const css = `
   .sezRule span{flex-shrink:0;font-size:12px;font-weight:600;letter-spacing:.02em;
     color:var(--txt-2);align-self:flex-end;margin-bottom:-9px;}
   .sezRule i{flex:1;height:var(--hair);background:color-mix(in srgb,var(--white) 20%,transparent);}
-  .teacher{display:grid;grid-template-columns:minmax(0,.4fr) minmax(0,1fr);
-    gap:clamp(28px,4vw,64px);align-items:center;max-width:none;}
-  .teacher .ph{aspect-ratio:4/5;overflow:hidden;background:var(--ink-2);}
-  .teacher h3{font-size:clamp(24px,2.2vw,32px);font-weight:700;letter-spacing:-.02em;margin:0 0 4px;}
-  .teacher .role{font-size:13px;font-family:var(--font-body),system-ui,sans-serif;margin-bottom:16px;color:var(--blue);}
-  .teacher p{font-size:15.5px;line-height:1.4;max-width:52ch;}
+  /* docenti (brief 28/09): griglia — foto, nome, ruolo e una riga di
+     credits; il course leader è evidenziato dal filo azzurro */
+  .teachgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:clamp(14px,1.6vw,22px);}
+  .teach .ph{aspect-ratio:4/5;overflow:hidden;background:var(--ink-2);}
+  .teach.lead .ph{outline:1.5px solid var(--blue);outline-offset:-1.5px;}
+  .teach h3{font-size:19px;font-weight:700;letter-spacing:-.01em;margin:14px 0 2px;}
+  .teach .trole{font-size:12.5px;color:var(--blue);margin:0 0 8px;}
+  .teach .tcred{font-size:13.5px;line-height:1.4;color:var(--txt-2);margin:0;max-width:30ch;}
+  .team-cta{display:flex;justify-content:space-between;align-items:center;gap:16px;
+    flex-wrap:wrap;margin-top:clamp(28px,3.5vw,44px);}
+  .team-cta p{margin:0;font-size:17px;font-weight:600;}
+  @media(max-width:900px){.teachgrid{grid-template-columns:repeat(2,minmax(0,1fr));}}
 
   .cta-dark{margin:0 calc(-1 * var(--pad));position:relative;overflow:hidden;background:var(--blue);min-height:440px;
     display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px 40px;}
@@ -438,31 +494,50 @@ export const css = `
   .connect-card:hover .cap2 .arr{opacity:1;transform:none;}
 
   /* ————— modale contatti: la aprono TUTTE le CTA tranne "Scarica il
-     piano di studi" (riunione 17/09) ————— */
+     piano di studi" (riunione 17/09) — tema nero, 4:3, bordino leggero
+     e raggio piccolo (acuto, non pillola), blur sullo sfondo dietro ————— */
   .cmodal{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;
     padding:20px;}
   .cmodal[hidden]{display:none;}
-  .cmodal-back{position:absolute;inset:0;background:rgba(0,0,0,.66);}
-  .cmodal-card{position:relative;background:var(--white);color:var(--ink);
-    width:min(480px,94vw);max-height:min(640px,92svh);overflow:auto;padding:36px 34px 34px;}
-  .cmodal-x{position:absolute;top:14px;right:14px;width:38px;height:38px;border-radius:50%;
-    border:1px solid rgba(0,0,0,.25);background:transparent;color:var(--ink);
+  .cmodal-back{position:absolute;inset:0;background:rgba(0,0,0,.55);
+    backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);}
+  .cmodal-card{position:relative;background:var(--ink);color:var(--white);
+    border:1px solid color-mix(in srgb,var(--blue) 30%,transparent);border-radius:6px;
+    box-shadow:0 24px 64px rgba(0,0,0,.5);
+    width:min(820px,92vw);aspect-ratio:4/3;max-height:92svh;overflow:auto;padding:40px 44px 48px;}
+  .cmodal-x{position:absolute;top:16px;right:16px;width:38px;height:38px;border-radius:50%;
+    border:1px solid color-mix(in srgb,var(--white) 25%,transparent);background:transparent;color:var(--white);
     display:grid;place-items:center;}
-  .cmodal-x:hover{background:var(--ink);color:var(--white);border-color:var(--ink);}
-  .cmodal-card h3{font-size:26px;font-weight:700;letter-spacing:-.02em;margin:0 0 8px;}
-  .cmodal-card .sub{font-size:14.5px;line-height:1.4;color:rgba(0,0,0,.6);margin:0 0 24px;}
-  .cmodal-card form{display:flex;flex-direction:column;gap:16px;}
-  .cmodal-card label{display:flex;flex-direction:column;gap:6px;font-size:12.5px;
-    font-weight:600;letter-spacing:.02em;color:rgba(0,0,0,.55);}
-  .cmodal-card input,.cmodal-card textarea{font-family:inherit;font-size:15.5px;color:var(--ink);
-    border:none;border-bottom:1px solid rgba(0,0,0,.3);background:transparent;
-    padding:6px 0 9px;border-radius:0;resize:vertical;}
-  .cmodal-card input:focus,.cmodal-card textarea:focus{outline:none;border-bottom-color:var(--ink);}
+  .cmodal-x:hover{background:var(--white);color:var(--ink);border-color:var(--white);}
+  .cmodal-kicker{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600;
+    letter-spacing:0;color:var(--blue);margin:0 0 14px;}
+  .cmodal-kicker::before{content:'';width:20px;height:2px;background:var(--blue);flex-shrink:0;}
+  .cmodal-card h3{font-size:clamp(30px,3vw,38px);font-weight:700;letter-spacing:-.03em;
+    line-height:1.04;margin:0 0 10px;}
+  .cmodal-card .sub{font-size:15px;line-height:1.45;color:var(--txt-2);margin:0 0 30px;max-width:46ch;}
+  .cmodal-card form{display:flex;flex-direction:column;gap:18px;}
+  .cmodal-card label{display:flex;flex-direction:column;gap:7px;font-size:10.5px;
+    font-weight:600;letter-spacing:.02em;color:var(--txt-2);}
+  .cmodal-card input,.cmodal-card textarea{font-family:inherit;font-size:16.5px;color:var(--white);
+    border:none;border-bottom:1px solid color-mix(in srgb,var(--white) 25%,transparent);background:transparent;
+    padding:7px 0 10px;border-radius:0;resize:vertical;}
+  .cmodal-card input:focus,.cmodal-card textarea:focus{outline:none;border-bottom-color:var(--blue);}
+  /* consenso privacy (brief 28/09): link all'informativa + checkbox
+     marketing NON preselezionata */
+  .cmodal-card .consent{flex-direction:row;gap:10px;align-items:flex-start;
+    font-size:12.5px;line-height:1.45;font-weight:400;letter-spacing:0;color:var(--txt-2);}
+  .cmodal-card .consent input{width:auto;margin-top:2px;accent-color:var(--blue);}
+  .cmodal-card .consent a{color:var(--blue);}
   .cmodal-card .pill{align-self:flex-start;margin-top:8px;}
+  .cmodal-card .pill-ink{border:1px solid color-mix(in srgb,var(--white) 30%,transparent);}
+  .cmodal-card .pill-ink:hover{border-color:var(--white);}
   .cmodal-ok{font-size:16px;font-weight:600;margin:14px 0 0;}
   .cmodal.sent form{display:none;}
   .cmodal-ok{display:none;}
   .cmodal.sent .cmodal-ok{display:block;}
+  @media(max-width:760px){
+    .cmodal-card{aspect-ratio:auto;width:min(480px,94vw);max-height:88svh;padding:32px 26px 28px;}
+  }
 
   /* cursore del carosello (riunione): disco azzurro con freccia
      avanti/indietro, SOLO in hover sull'immagine */
@@ -506,8 +581,6 @@ export const css = `
     .hero-info{order:3;padding:28px var(--pad) 40px;}
     .split{grid-template-columns:1fr;gap:30px;}
     .promo-two{grid-template-columns:1fr;}
-    .teacher{grid-template-columns:1fr;gap:24px;}
-    .teacher .ph{max-width:300px;}
     nav.mainnav{display:none;}
     .fac-card,.connect-card{flex-basis:calc((100% - 20px)/1.15);}
     .pan-grid{grid-template-columns:1fr;}
@@ -574,52 +647,58 @@ export const html = `
   <div class="hero-info">
     <div class="meta-grid">
       <div>
-        <div class="lab" contenteditable="true">durata</div>
+        <div class="lab" contenteditable="true">formazione</div>
+        <div class="val" contenteditable="true">Bachelor of Arts BA (Hons) Level 6</div>
+        <div class="sub" contenteditable="true">Titolo universitario internazionale</div>
+      </div>
+      <div>
+        <div class="lab" contenteditable="true">durata e frequenza</div>
         <div class="val" contenteditable="true">3 anni full-time, fino a 6 part-time</div>
+        <div class="sub" contenteditable="true">In sede, un'ora individuale a settimana</div>
       </div>
       <div>
-        <div class="lab" contenteditable="true">inizio</div>
-        <div class="val" contenteditable="true">ottobre 2026</div>
+        <div class="lab" contenteditable="true">lingua e sede</div>
+        <div class="val" contenteditable="true">Italiano e inglese</div>
+        <div class="sub" contenteditable="true">Bologna, via del Tappezziere 4</div>
       </div>
       <div>
-        <div class="lab" contenteditable="true">livello</div>
-        <div class="val" contenteditable="true">Bachelor of Arts<br>BA (Hons) Level 6</div>
+        <div class="lab" contenteditable="true">ammissione</div>
+        <div class="val" contenteditable="true">Inizio ottobre 2026 · 20 posti all'anno</div>
+        <div class="sub" contenteditable="true">Si entra con un colloquio individuale: non serve saper suonare</div>
       </div>
       <div>
-        <div class="lab" contenteditable="true">scadenza candidature</div>
-        <div class="val" contenteditable="true">30 giugno 2026</div>
+        <div class="lab" contenteditable="true">docenti</div>
+        <div class="val" contenteditable="true">Producer e fonici in attività</div>
+        <div class="sub" contenteditable="true">Un team di docenti, con un course leader dedicato</div>
       </div>
       <div>
-        <div class="lab" contenteditable="true">modalità</div>
-        <div class="val" contenteditable="true">in sede</div>
-      </div>
-      <div>
-        <div class="lab" contenteditable="true">lingua</div>
-        <div class="val" contenteditable="true">italiano · inglese</div>
+        <div class="lab" contenteditable="true">agevolazioni</div>
+        <div class="val" contenteditable="true">Rate a tasso zero</div>
+        <div class="sub" contenteditable="true">Borse di studio disponibili</div>
       </div>
     </div>
 
     <div class="hero-cta">
-      <button class="pill pill-ink" data-contact><span contenteditable="true">Contattaci</span></button>
+      <button class="pill pill-ink" data-contact data-origine="hero" data-intento="info"><span contenteditable="true">Contattaci</span></button>
       <button class="pill pill-outline pill-reveal"><span contenteditable="true">Scarica il piano di studi</span><svg class="dl" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M12 4v13M6 11l6 6 6-6"/></svg></button>
     </div>
   </div>
   <div class="hero-right"><video data-src-wide="/video/creative-hub-8s-02-1920x1080.mp4" data-src-portrait="/video/creative-hub-8s-02-1080x1920.mp4" poster="/mockup-corso/img/akai.jpg" muted loop playsinline preload="none" aria-hidden="true"></video></div>
 </div>
 
-<a class="marquee-wrap" data-contact href="#" aria-label="Candidati ora">
+<a class="marquee-wrap" data-contact data-origine="marquee" data-intento="candidatura" href="#" aria-label="Candidati ora">
   <div class="marquee-track">
     <div class="marquee-group">
-      <div class="mq-unit"><span>Candidati entro il 30 Giugno per iniziare a Ottobre</span><span class="pill">Candidati ora</span></div>
-      <div class="mq-unit"><span>Candidati entro il 30 Giugno per iniziare a Ottobre</span><span class="pill">Candidati ora</span></div>
-      <div class="mq-unit"><span>Candidati entro il 30 Giugno per iniziare a Ottobre</span><span class="pill">Candidati ora</span></div>
-      <div class="mq-unit"><span>Candidati entro il 30 Giugno per iniziare a Ottobre</span><span class="pill">Candidati ora</span></div>
+      <div class="mq-unit"><span>Candidature aperte per l'a.a. 2026/27</span><span class="pill">Candidati ora</span></div>
+      <div class="mq-unit"><span>Venti posti all'anno</span><span class="pill">Candidati ora</span></div>
+      <div class="mq-unit"><span>Candidature aperte per l'a.a. 2026/27</span><span class="pill">Candidati ora</span></div>
+      <div class="mq-unit"><span>Venti posti all'anno</span><span class="pill">Candidati ora</span></div>
     </div>
     <div class="marquee-group" aria-hidden="true">
-      <div class="mq-unit"><span>Candidati entro il 30 Giugno per iniziare a Ottobre</span><span class="pill">Candidati ora</span></div>
-      <div class="mq-unit"><span>Candidati entro il 30 Giugno per iniziare a Ottobre</span><span class="pill">Candidati ora</span></div>
-      <div class="mq-unit"><span>Candidati entro il 30 Giugno per iniziare a Ottobre</span><span class="pill">Candidati ora</span></div>
-      <div class="mq-unit"><span>Candidati entro il 30 Giugno per iniziare a Ottobre</span><span class="pill">Candidati ora</span></div>
+      <div class="mq-unit"><span>Candidature aperte per l'a.a. 2026/27</span><span class="pill">Candidati ora</span></div>
+      <div class="mq-unit"><span>Venti posti all'anno</span><span class="pill">Candidati ora</span></div>
+      <div class="mq-unit"><span>Candidature aperte per l'a.a. 2026/27</span><span class="pill">Candidati ora</span></div>
+      <div class="mq-unit"><span>Venti posti all'anno</span><span class="pill">Candidati ora</span></div>
     </div>
   </div>
 </a>
@@ -646,9 +725,9 @@ export const html = `
   <div class="course" contenteditable="true">Urban Music Production — Bachelor of Arts</div>
   <nav class="jump" aria-label="sezioni del corso">
     <a href="#panoramica"><span class="idx">01.</span><span>Panoramica</span></a>
-    <a href="#struttura"><span class="idx">02.</span><span>Struttura</span></a>
+    <a href="#struttura"><span class="idx">02.</span><span>Il corso</span></a>
     <a href="#ammissioni"><span class="idx">03.</span><span>Ammissioni</span></a>
-    <a href="#connetti"><span class="idx">04.</span><span>Connettiti</span></a>
+    <a href="#workshop"><span class="idx">04.</span><span>Connettiti</span></a>
   </nav>
   <span class="tail">
     <span class="year">A.A. 2026/2027</span>
@@ -718,13 +797,90 @@ export const html = `
   </div>
 </section>
 
+<div class="sezRule"><span>02</span><i></i></div>
+
+<section class="block tight" id="struttura">
+  <div class="sec-flex-head">
+    <h2 class="sec" style="margin-bottom:0;" contenteditable="true">Struttura del corso</h2>
+    <div class="btns">
+      <button class="pill pill-outline-ink"><span contenteditable="true">Scarica il piano di studi</span><svg class="dl" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M12 4v13M6 11l6 6 6-6"/></svg></button>
+      <button class="pill pill-outline-ink" data-contact data-origine="struttura" data-intento="info" contenteditable="true">Richiedi informazioni</button>
+    </div>
+  </div>
+
+  <div class="struct-grid">
+  <div class="struct-text">
+    <p contenteditable="true">Tre anni per passare dal primo beat a un portfolio professionale.</p>
+    <p contenteditable="true">Il corso dura tre anni full-time, fino a sei part-time. Ogni anno unisce laboratorio e teoria, con un'ora di lezione individuale a settimana.</p>
+  </div>
+
+  <div class="accordion" id="yearAccordion">
+    <div class="acc-item">
+      <div class="acc-head"><h3 contenteditable="true">Primo anno: le basi</h3><span class="acc-plus"><svg viewBox="0 0 18 18" width="16" height="16" stroke="currentColor" stroke-width="1.4"><path d="M9 3v12M3 9h12"/></svg></span></div>
+      <div class="acc-body"><div><p contenteditable="true">Impari a muoverti in Ableton, Pro Tools e FL Studio e a usare la teoria dove serve, dentro la DAW. A fine anno hai i tuoi primi brani finiti.</p></div></div>
+    </div>
+    <div class="acc-item">
+      <div class="acc-head"><h3 contenteditable="true">Secondo anno: in regia</h3><span class="acc-plus"><svg viewBox="0 0 18 18" width="16" height="16" stroke="currentColor" stroke-width="1.4"><path d="M9 3v12M3 9h12"/></svg></span></div>
+      <div class="acc-body"><div><p contenteditable="true">Entri regolarmente in regia SSL e lavori ai primi progetti con artisti del network. Inizi a capire come funziona il mercato: diritti, distribuzione, contratti.</p></div></div>
+    </div>
+    <div class="acc-item">
+      <div class="acc-head"><h3 contenteditable="true">Terzo anno: portfolio e palco</h3><span class="acc-plus"><svg viewBox="0 0 18 18" width="16" height="16" stroke="currentColor" stroke-width="1.4"><path d="M9 3v12M3 9h12"/></svg></span></div>
+      <div class="acc-body"><div><p contenteditable="true">Progetto finale, set dal vivo e un portfolio di brani pubblicati. Esci con il titolo e con un lavoro già da mostrare.</p></div></div>
+    </div>
+  </div>
+  </div>
+</section>
+
+<div class="sezRule"><span></span><i></i></div>
+
+<section class="block tight" id="docenti">
+  <div class="sec-flex-head">
+    <div>
+      <h2 class="sec" style="margin-bottom:4px;" contenteditable="true">Chi ti insegna, la musica la fa.</h2>
+      <p class="lede" style="margin-bottom:0;" contenteditable="true">Ogni docente lavora nell'industria: produce, registra, mixa, suona dal vivo. In aula porta quello che ha fatto la settimana prima in studio.</p>
+    </div>
+  </div>
+  <div class="teachgrid">
+    <article class="teach lead">
+      <div class="ph"><img src="/mockup-corso/img/zilocchi.jpg" alt="Nicolò Zilocchi"></div>
+      <h3 contenteditable="true">Nicolò Zilocchi</h3>
+      <div class="trole" contenteditable="true">Course leader · producer e beatmaker</div>
+      <p class="tcred" contenteditable="true">Segue il percorso di ogni studente, dal primo loop al progetto finale. <span class="todo">[credits da inserire]</span></p>
+    </article>
+    <article class="teach">
+      <div class="ph"></div>
+      <h3 contenteditable="true"><span class="todo">Nome Cognome</span></h3>
+      <div class="trole" contenteditable="true">Mix e mastering</div>
+      <p class="tcred" contenteditable="true"><span class="todo">[artisti, etichette o studi con cui ha lavorato]</span></p>
+    </article>
+    <article class="teach">
+      <div class="ph"></div>
+      <h3 contenteditable="true"><span class="todo">Nome Cognome</span></h3>
+      <div class="trole" contenteditable="true">Sound design</div>
+      <p class="tcred" contenteditable="true"><span class="todo">[artisti, etichette o studi con cui ha lavorato]</span></p>
+    </article>
+    <article class="teach">
+      <div class="ph"></div>
+      <h3 contenteditable="true"><span class="todo">Nome Cognome</span></h3>
+      <div class="trole" contenteditable="true">Music business</div>
+      <p class="tcred" contenteditable="true"><span class="todo">[artisti, etichette o studi con cui ha lavorato]</span></p>
+    </article>
+  </div>
+  <div class="team-cta">
+    <p contenteditable="true">Vuoi sapere chi ti seguirà nel primo anno?</p>
+    <button class="pill pill-outline-ink" data-contact data-origine="docenti" data-intento="info" contenteditable="true">Parla con un tutor</button>
+  </div>
+</section>
+
+<div class="sezRule"><span></span><i></i></div>
+
 <section class="block tight">
   <div class="sec-flex-head">
     <div>
       <h2 class="sec" style="margin-bottom:4px;" contenteditable="true">Il tuo studio di lavoro</h2>
       <p class="lede" style="margin-bottom:0;" contenteditable="true">Progettato per come si impara, si produce e si suona.<br>Ogni dettaglio pensato per chi studia qui.</p>
     </div>
-    <button class="pill pill-outline-ink" data-contact contenteditable="true">Esplora lo studio</button>
+    <a class="pill pill-outline-ink" href="/studios" contenteditable="true">Esplora lo studio</a>
   </div>
 
   <div class="carousel" id="facCarousel">
@@ -746,7 +902,7 @@ export const html = `
       <div class="img"><img src="/img/sections/studio-desk.jpg" alt="Postazione studio"></div>
       <div class="txt">
         <h3 contenteditable="true">Tre cabine B-Ear</h3>
-        <p contenteditable="true">Voce, podcast e doppiaggio: tre cabine dedicate per ogni tipo di registrazione vocale.</p>
+        <p contenteditable="true">Voce, podcast e doppiaggio: tre cabine dedicate a ogni tipo di registrazione vocale.</p>
       </div>
     </div>
     <div class="fac-card">
@@ -763,115 +919,126 @@ export const html = `
   </div>
 </section>
 
-<div class="sezRule"><span>02</span><i></i></div>
-
-<section class="block tight" id="struttura">
-  <div class="sec-flex-head">
-    <h2 class="sec" style="margin-bottom:0;" contenteditable="true">Struttura del corso</h2>
-    <button class="pill pill-outline-ink"><span contenteditable="true">Scarica il piano di studi</span><svg class="dl" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M12 4v13M6 11l6 6 6-6"/></svg></button>
-  </div>
-
-  <div class="struct-grid">
-  <div class="struct-text">
-    <p contenteditable="true">Il corso di produzione musicale del Creative Hub di Bologna dura tre anni full-time, fino a sei part-time.</p>
-    <p contenteditable="true">Ogni anno mette insieme laboratorio e teoria: si lavora su Ableton, Pro Tools e FL Studio, con un'ora di lezione individuale a settimana.</p>
-    <p contenteditable="true">Dal <b>beatmaking</b> al <b>mix e mastering</b>, fino al music business: a fine triennio hai un portfolio di brani pubblicati, non un attestato.</p>
-  </div>
-
-  <div class="accordion" id="yearAccordion">
-    <div class="acc-item">
-      <div class="acc-head"><h3 contenteditable="true">Primo anno</h3><span class="acc-plus"><svg viewBox="0 0 18 18" width="16" height="16" stroke="currentColor" stroke-width="1.4"><path d="M9 3v12M3 9h12"/></svg></span></div>
-      <div class="acc-body"><div><p contenteditable="true">Fondamenti di beatmaking, teoria applicata alla musica elettronica, primi strumenti DAW. Un'ora di lezione individuale a settimana.</p></div></div>
-    </div>
-    <div class="acc-item">
-      <div class="acc-head"><h3 contenteditable="true">Secondo anno</h3><span class="acc-plus"><svg viewBox="0 0 18 18" width="16" height="16" stroke="currentColor" stroke-width="1.4"><path d="M9 3v12M3 9h12"/></svg></span></div>
-      <div class="acc-body"><div><p contenteditable="true">Sound design avanzato, mix e mastering, primi progetti con artisti del network. Music business e diritto d'autore.</p></div></div>
-    </div>
-    <div class="acc-item">
-      <div class="acc-head"><h3 contenteditable="true">Terzo anno</h3><span class="acc-plus"><svg viewBox="0 0 18 18" width="16" height="16" stroke="currentColor" stroke-width="1.4"><path d="M9 3v12M3 9h12"/></svg></span></div>
-      <div class="acc-body"><div><p contenteditable="true">Progetto finale, DJing e performance live, costruzione del portfolio professionale prima del titolo.</p></div></div>
-    </div>
-  </div>
-  </div>
-</section>
-
-<div class="promo-two">
-  <div class="promo-photo">
-    <img src="/mockup-corso/img/class-3.jpg" alt="">
-  </div>
-  <div class="promo-panel">
-    <h2 contenteditable="true">Partecipa a un workshop di prova</h2>
-    <p contenteditable="true">Incontra i nostri tutor di Urban Music Production e scopri come il corso può accompagnare il tuo percorso da producer, beatmaker o sound designer.</p>
-    <button class="pill pill-outline" data-contact contenteditable="true">Vedi i prossimi workshop</button>
-  </div>
-</div>
-
-<div class="sezRule"><span>03</span><i></i></div>
-
-<section class="block" id="ammissioni">
-  <div class="adm-grid">
-  <aside class="adm-keys">
-    <div class="keysIn">
-    <p class="kicker" contenteditable="true">In breve</p>
-    <ul>
-      <li contenteditable="true">Serve il <b>diploma</b> di scuola superiore</li>
-      <li contenteditable="true">Colloquio motivazionale, <b>non un'audizione</b></li>
-      <li contenteditable="true">Rette da <b>294€ al mese</b>, a tasso zero</li>
-    </ul>
-    </div>
-  </aside>
-
-  <div class="adm-main">
-  <div class="sec-flex-head">
-    <h2 class="sec" style="margin-bottom:0;" contenteditable="true">Ammissioni</h2>
-    <button class="pill pill-outline-ink" data-contact contenteditable="true">Come candidarsi</button>
-  </div>
-
-  <div class="accordion" id="admAccordion">
-    <div class="acc-item">
-      <div class="acc-head"><h3 contenteditable="true">Requisiti di ammissione</h3><span class="acc-plus"><svg viewBox="0 0 18 18" width="16" height="16" stroke="currentColor" stroke-width="1.4"><path d="M9 3v12M3 9h12"/></svg></span></div>
-      <div class="acc-body"><div><p contenteditable="true">Diploma di scuola superiore, o titolo estero equivalente. Un colloquio motivazionale, non un'audizione: non serve saper già suonare o leggere la musica.</p></div></div>
-    </div>
-    <div class="acc-item">
-      <div class="acc-head"><h3 contenteditable="true">Date del corso e scadenze</h3><span class="acc-plus"><svg viewBox="0 0 18 18" width="16" height="16" stroke="currentColor" stroke-width="1.4"><path d="M9 3v12M3 9h12"/></svg></span></div>
-      <div class="acc-body"><div><p contenteditable="true">Inizio corso: ottobre 2026. Candidati entro il 30 giugno per 300€ di sconto e uno slot garantito con il tuo tutor. Venti posti all'anno.</p></div></div>
-    </div>
-    <div class="acc-item">
-      <div class="acc-head"><h3 contenteditable="true">Rette — da 294€ al mese</h3><span class="acc-plus"><svg viewBox="0 0 18 18" width="16" height="16" stroke="currentColor" stroke-width="1.4"><path d="M9 3v12M3 9h12"/></svg></span></div>
-      <div class="acc-body"><div><p contenteditable="true">Full-time: anticipo 488€ + 11 rate da 392€, tasso zero. Part-time: anticipo 366€ + 11 rate da 294€. Tassa di certificazione separata. Sconto 5% per pagamento anticipato.</p></div></div>
-    </div>
-    <div class="acc-item">
-      <div class="acc-head"><h3 contenteditable="true">Opportunità di finanziamento</h3><span class="acc-plus"><svg viewBox="0 0 18 18" width="16" height="16" stroke="currentColor" stroke-width="1.4"><path d="M9 3v12M3 9h12"/></svg></span></div>
-      <div class="acc-body"><div><p contenteditable="true">Rate a tasso zero senza interessi. Borse di studio disponibili: scrivici per sapere quali.</p></div></div>
-    </div>
-    <div class="acc-item">
-      <div class="acc-head"><h3 contenteditable="true">Open day, colloqui e workshop di prova</h3><span class="acc-plus"><svg viewBox="0 0 18 18" width="16" height="16" stroke="currentColor" stroke-width="1.4"><path d="M9 3v12M3 9h12"/></svg></span></div>
-      <div class="acc-body"><div><p contenteditable="true">Vieni a vedere prima di candidarti. Puoi partecipare anche con i tuoi genitori.</p></div></div>
-    </div>
-  </div>
-  </div>
-  </div>
-</section>
-
 <section class="fullshot">
   <video data-src-wide="/video/creative-hub-8s-1920x1080.mp4" data-src-portrait="/video/creative-hub-8s-1080x1920.mp4" poster="/mockup-corso/img/wide.jpg" muted loop playsinline preload="none" aria-hidden="true"></video>
   <div class="in">
     <h2 contenteditable="true">La vita in Academy</h2>
     <p contenteditable="true">Al Creative Hub non produci musica da solo. Lavori in studi professionali, ti confronti con altri studenti e artisti del network, partecipi a sessioni con producer e A&amp;R in visita.</p>
     <p contenteditable="true">Presenta i tuoi progetti in ascolti collettivi, collabora con chi studia Film Production o Music Business per progetti trasversali, ricevi feedback costruttivi da chi il mercato lo vive ancora.</p>
-    <button class="pill pill-white" data-contact contenteditable="true">Scopri la vita in Academy</button>
+    <a class="pill pill-white" href="/academy" contenteditable="true">Scopri la vita in Academy</a>
+  </div>
+</section>
+
+<div class="sezRule"><span>03</span><i></i></div>
+
+<section class="block tight" id="ammissioni">
+  <h2 class="sec" contenteditable="true">Ammissioni</h2>
+  <p class="adm-intro" contenteditable="true">Si entra con un colloquio, non con un'audizione: non serve saper già suonare o leggere la musica.</p>
+  <ol class="steps" aria-label="come si entra">
+    <li><span class="n">01</span><h3 contenteditable="true">Candidati online</h3><p contenteditable="true">Compili il modulo con i tuoi dati. Ti ricontattiamo per fissare il colloquio.</p></li>
+    <li><span class="n">02</span><h3 contenteditable="true">Colloquio individuale</h3><p contenteditable="true">Parliamo di te, di cosa ascolti e di cosa vuoi produrre. Puoi venire anche con i tuoi genitori.</p></li>
+    <li><span class="n">03</span><h3 contenteditable="true">Conferma il posto</h3><p contenteditable="true">Ti iscrivi e inizi a ottobre 2026 in via del Tappezziere, a Bologna.</p></li>
+  </ol>
+  <div class="fees-head">
+    <h3 contenteditable="true">Rette e agevolazioni</h3>
+    <p contenteditable="true">Rate mensili a tasso zero, senza interessi</p>
+  </div>
+  <div class="plans">
+    <div class="plan"><span class="n" contenteditable="true">full-time · 3 anni</span><p class="price" contenteditable="true">392€<small>al mese</small></p><p contenteditable="true">Anticipo di 488€, poi 11 rate da 392€ ogni anno.</p></div>
+    <div class="plan"><span class="n" contenteditable="true">part-time · fino a 6 anni</span><p class="price" contenteditable="true">294€<small>al mese</small></p><p contenteditable="true">Anticipo di 366€, poi 11 rate da 294€ ogni anno.</p></div>
+  </div>
+  <div class="perks">
+    <div class="perk"><b contenteditable="true">Tasso zero</b><span contenteditable="true">Nessun interesse sulle rate.</span></div>
+    <div class="perk"><b contenteditable="true">Borse di studio</b><span><button class="linkbtn" data-contact data-origine="ammissioni_borse" data-intento="info" contenteditable="true">Chiedi quali sono disponibili</button></span></div>
+    <div class="perk"><b contenteditable="true">Sconto del 5%</b><span contenteditable="true">Se paghi l'anno in un'unica soluzione.</span></div>
+    <div class="perk"><b contenteditable="true">Certificazione</b><span contenteditable="true">Tassa separata, <span class="todo">importo da confermare</span>.</span></div>
+  </div>
+  <div class="adm-band">
+    <p contenteditable="true">Venti posti all'anno.<span>Requisito: diploma di scuola superiore o titolo estero equivalente · scadenza <span class="todo">da confermare</span></span></p>
+    <button class="pill" data-contact data-origine="ammissioni" data-intento="candidatura" contenteditable="true">Candidati ora</button>
+  </div>
+</section>
+
+<section class="block tight">
+  <div class="quotes" id="quotes">
+    <button class="cnav-btn qnav" data-q="-1" aria-label="citazione precedente"><span class="arr w"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></button>
+    <div class="qtrack">
+      <blockquote class="pull2 is-on">
+        <span contenteditable="true">"Sono entrato che sapevo aprire Ableton e basta. Sono uscito con sei brani pubblicati e due clienti che mi richiamano."</span>
+        <cite contenteditable="true">— studente, Urban Music Production, diplomato 2025</cite>
+      </blockquote>
+      <blockquote class="pull2">
+        <span contenteditable="true">"Qui non impari solo a usare un software. Impari a finire un pezzo, a farlo suonare come quelli che ascolti, e a portarlo fuori dalla tua stanza."</span>
+        <cite contenteditable="true">— studente, Urban Music Production, terzo anno</cite>
+      </blockquote>
+      <blockquote class="pull2">
+        <span contenteditable="true">"L'ora individuale a settimana è la differenza. Qualcuno che ascolta il tuo pezzo davvero, ogni settimana, e ti dice dove non funziona."</span>
+        <cite contenteditable="true">— studentessa, Urban Music Production, secondo anno</cite>
+      </blockquote>
+    </div>
+    <button class="cnav-btn qnav" data-q="1" aria-label="citazione successiva"><span class="arr"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></button>
+  </div>
+</section>
+
+<div class="sezRule"><span></span><i></i></div>
+
+<section class="block tight" id="faq">
+  <h2 class="sec" contenteditable="true">Domande frequenti</h2>
+  <div class="accordion" id="faqAccordion">
+    <div class="acc-item">
+      <div class="acc-head"><h3 contenteditable="true">Serve saper suonare uno strumento per fare beatmaking?</h3><span class="acc-plus"><svg viewBox="0 0 18 18" width="16" height="16" stroke="currentColor" stroke-width="1.4"><path d="M9 3v12M3 9h12"/></svg></span></div>
+      <div class="acc-body"><div><p contenteditable="true">No. Il corso parte da come funziona un beat, non dal solfeggio: la teoria arriva applicata su Ableton. Se suoni già, meglio; se no, non è un requisito.</p></div></div>
+    </div>
+    <div class="acc-item">
+      <div class="acc-head"><h3 contenteditable="true">Che titolo ottengo alla fine? È riconosciuto?</h3><span class="acc-plus"><svg viewBox="0 0 18 18" width="16" height="16" stroke="currentColor" stroke-width="1.4"><path d="M9 3v12M3 9h12"/></svg></span></div>
+      <div class="acc-body"><div><p contenteditable="true">Un Bachelor of Arts (Hons) Level 6, titolo universitario internazionale — non un attestato di partecipazione. Puoi proseguire con un Master of Music al Creative Hub o all'estero.</p></div></div>
+    </div>
+    <div class="acc-item">
+      <div class="acc-head"><h3 contenteditable="true">Quanto tempo passo in studio di registrazione?</h3><span class="acc-plus"><svg viewBox="0 0 18 18" width="16" height="16" stroke="currentColor" stroke-width="1.4"><path d="M9 3v12M3 9h12"/></svg></span></div>
+      <div class="acc-body"><div><p contenteditable="true">Dal primo anno lavori nelle aule di produzione, e dal secondo entri regolarmente in regia SSL per registrazione, mix e mastering dei tuoi brani. Il beatmaking lo impari in studio, non sulle slide.</p></div></div>
+    </div>
+    <div class="acc-item">
+      <div class="acc-head"><h3 contenteditable="true">Che software e che macchine si usano?</h3><span class="acc-plus"><svg viewBox="0 0 18 18" width="16" height="16" stroke="currentColor" stroke-width="1.4"><path d="M9 3v12M3 9h12"/></svg></span></div>
+      <div class="acc-body"><div><p contenteditable="true">Ableton Live, Pro Tools e FL Studio, più sintetizzatori hardware, drum machine e i plugin degli studi professionali. Le stesse macchine che troverai lavorando.</p></div></div>
+    </div>
+    <div class="acc-item">
+      <div class="acc-head"><h3 contenteditable="true">Posso vedere la scuola prima di candidarmi?</h3><span class="acc-plus"><svg viewBox="0 0 18 18" width="16" height="16" stroke="currentColor" stroke-width="1.4"><path d="M9 3v12M3 9h12"/></svg></span></div>
+      <div class="acc-body"><div><p contenteditable="true">Sì. Puoi venire a un open day, prenotare un tour dello studio o fare un workshop di prova. Puoi partecipare anche con i tuoi genitori.</p></div></div>
+    </div>
+    <div class="acc-item">
+      <div class="acc-head"><h3 contenteditable="true">Che lavoro posso fare dopo il corso?</h3><span class="acc-plus"><svg viewBox="0 0 18 18" width="16" height="16" stroke="currentColor" stroke-width="1.4"><path d="M9 3v12M3 9h12"/></svg></span></div>
+      <div class="acc-body"><div><p contenteditable="true">Producer, beatmaker, sound designer, tecnico di studio, DJ: esci con un portfolio di brani pubblicati e i contatti del network — etichette, studi e artisti con cui hai già lavorato durante il triennio.</p></div></div>
+    </div>
+  </div>
+  <div class="faq-more">
+    <p contenteditable="true">Hai altre domande?</p>
+    <button class="pill pill-outline-ink" data-contact data-origine="faq" data-intento="info" contenteditable="true">Richiedi informazioni</button>
   </div>
 </section>
 
 <div class="sezRule"><span>04</span><i></i></div>
 
-<section class="block tight" id="connetti">
+<div class="promo-two" id="workshop">
+  <div class="promo-photo">
+    <img src="/mockup-corso/img/class-3.jpg" alt="">
+  </div>
+  <div class="promo-panel">
+    <h2 contenteditable="true">Partecipa a un workshop di prova</h2>
+    <p contenteditable="true">Incontra i nostri tutor di Urban Music Production e scopri come il corso può accompagnare il tuo percorso da producer, beatmaker o sound designer.</p>
+    <a class="pill pill-outline" href="#connetti" contenteditable="true">Vedi i prossimi workshop</a>
+  </div>
+</div>
+
+<section class="block" id="connetti">
   <div class="sec-flex-head">
     <div>
       <h2 class="sec" style="margin-bottom:4px;" contenteditable="true">Come conoscerci</h2>
       <p class="lede" style="margin-bottom:0;" contenteditable="true">In presenza o online, non vediamo l'ora di incontrarti.</p>
     </div>
-    <button class="pill pill-outline-ink" data-contact contenteditable="true">Vedi tutti gli eventi</button>
+    <div class="btns">
+      <a class="pill pill-outline-ink" href="/academy/open-day" contenteditable="true">Vedi tutti gli eventi</a>
+      <button class="pill pill-outline-ink" data-contact data-origine="eventi" data-intento="info" contenteditable="true">Contattaci</button>
+    </div>
   </div>
 
   <div class="carousel" id="connCarousel" data-loop>
@@ -927,90 +1094,37 @@ export const html = `
   </div>
 </section>
 
-<div class="sezRule"><span></span><i></i></div>
-
-<section class="block tight" id="faq">
-  <h2 class="sec" contenteditable="true">Domande frequenti</h2>
-  <div class="accordion" id="faqAccordion">
-    <div class="acc-item">
-      <div class="acc-head"><h3 contenteditable="true">Serve saper suonare uno strumento per fare beatmaking?</h3><span class="acc-plus"><svg viewBox="0 0 18 18" width="16" height="16" stroke="currentColor" stroke-width="1.4"><path d="M9 3v12M3 9h12"/></svg></span></div>
-      <div class="acc-body"><div><p contenteditable="true">No. Il corso parte da come funziona un beat, non dal solfeggio: la teoria arriva applicata su Ableton. Se suoni già, meglio; se no, non è un requisito.</p></div></div>
-    </div>
-    <div class="acc-item">
-      <div class="acc-head"><h3 contenteditable="true">Quanto tempo passo in studio di registrazione?</h3><span class="acc-plus"><svg viewBox="0 0 18 18" width="16" height="16" stroke="currentColor" stroke-width="1.4"><path d="M9 3v12M3 9h12"/></svg></span></div>
-      <div class="acc-body"><div><p contenteditable="true">Dal primo anno lavori nelle aule di produzione, e dal secondo entri regolarmente in regia SSL per registrazione, mix e mastering dei tuoi brani. Il beatmaking lo impari in studio, non sulle slide.</p></div></div>
-    </div>
-    <div class="acc-item">
-      <div class="acc-head"><h3 contenteditable="true">Che software e che macchine si usano?</h3><span class="acc-plus"><svg viewBox="0 0 18 18" width="16" height="16" stroke="currentColor" stroke-width="1.4"><path d="M9 3v12M3 9h12"/></svg></span></div>
-      <div class="acc-body"><div><p contenteditable="true">Ableton Live, Pro Tools e FL Studio, più sintetizzatori hardware, drum machine e i plugin degli studi professionali. Le stesse macchine che troverai lavorando.</p></div></div>
-    </div>
-    <div class="acc-item">
-      <div class="acc-head"><h3 contenteditable="true">Che titolo ottengo alla fine? È riconosciuto?</h3><span class="acc-plus"><svg viewBox="0 0 18 18" width="16" height="16" stroke="currentColor" stroke-width="1.4"><path d="M9 3v12M3 9h12"/></svg></span></div>
-      <div class="acc-body"><div><p contenteditable="true">Un Bachelor of Arts (Hons) Level 6, titolo universitario internazionale — non un attestato di partecipazione. Puoi proseguire con un Master of Music al Creative Hub o all'estero.</p></div></div>
-    </div>
-    <div class="acc-item">
-      <div class="acc-head"><h3 contenteditable="true">Che lavoro posso fare dopo il corso?</h3><span class="acc-plus"><svg viewBox="0 0 18 18" width="16" height="16" stroke="currentColor" stroke-width="1.4"><path d="M9 3v12M3 9h12"/></svg></span></div>
-      <div class="acc-body"><div><p contenteditable="true">Producer, beatmaker, sound designer, tecnico di studio, DJ: esci con un portfolio di brani pubblicati e i contatti del network — etichette, studi e artisti con cui hai già lavorato durante il triennio.</p></div></div>
-    </div>
-  </div>
-</section>
-
-<div class="sezRule"><span></span><i></i></div>
-
-<section class="block tight">
-  <h2 class="sec" contenteditable="true">Chi ti accompagna</h2>
-  <div class="teacher">
-    <div class="ph"><img src="/mockup-corso/img/zilocchi.jpg" alt="Nicolò Zilocchi"></div>
-    <div>
-      <h3 contenteditable="true">Nicolò Zilocchi</h3>
-      <div class="role" contenteditable="true">Course leader · Urban Music Production</div>
-      <p contenteditable="true">Producer e beatmaker, guida il percorso di Urban Music Production. Segue ogni studente con un'ora di lezione individuale a settimana, dal primo loop al progetto finale.</p>
-    </div>
-  </div>
-</section>
-
-<section class="block tight">
+<section class="block tight" style="padding-bottom:clamp(72px,8vw,110px);">
   <div class="cta-dark">
     <h2 contenteditable="true">Non sai quale corso scegliere?</h2>
     <p contenteditable="true">Nessun problema. Ti aiutiamo a trovare il percorso in musica, sound o visual che parla di più a te.</p>
-    <button class="pill" data-contact contenteditable="true">Scopri di più</button>
-  </div>
-</section>
-
-<section class="block tight" style="padding-bottom:clamp(72px,8vw,110px);">
-  <div class="quotes" id="quotes">
-    <button class="cnav-btn qnav" data-q="-1" aria-label="citazione precedente"><span class="arr w"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></button>
-    <div class="qtrack">
-      <blockquote class="pull2 is-on">
-        <span contenteditable="true">"Qui non impari solo a usare un software. Impari a finire un pezzo, a farlo suonare come quelli che ascolti, e a portarlo fuori dalla tua stanza."</span>
-        <cite contenteditable="true">— studente, Urban Music Production, terzo anno</cite>
-      </blockquote>
-      <blockquote class="pull2">
-        <span contenteditable="true">"Sono entrato che sapevo aprire Ableton e basta. Sono uscito con sei brani pubblicati e due clienti che mi richiamano."</span>
-        <cite contenteditable="true">— studente, Urban Music Production, diplomato 2025</cite>
-      </blockquote>
-      <blockquote class="pull2">
-        <span contenteditable="true">"L'ora individuale a settimana è la differenza. Qualcuno che ascolta il tuo pezzo davvero, ogni settimana, e ti dice dove non funziona."</span>
-        <cite contenteditable="true">— studentessa, Urban Music Production, secondo anno</cite>
-      </blockquote>
-    </div>
-    <button class="cnav-btn qnav" data-q="1" aria-label="citazione successiva"><span class="arr"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></button>
+    <a class="pill" href="/academy" contenteditable="true">Scopri di più</a>
   </div>
 </section>
 
 <div class="ccursor" data-dir="next" aria-hidden="true"><span class="arr"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></div>
 
-<div class="cmodal" id="contactModal" hidden>
+<div class="cmodal" id="contactModal" hidden
+  data-title-info="Contattaci"
+  data-sub-info="Domande su Urban Music Production? Ti rispondiamo entro un giorno lavorativo — o ti richiamiamo noi."
+  data-ph-info="Scrivici cosa vuoi sapere del corso"
+  data-title-candidatura="Candidati a Urban Music Production"
+  data-sub-candidatura="Ti ricontattiamo per fissare il colloquio motivazionale. Non serve saper suonare."
+  data-ph-candidatura="Raccontaci qualcosa di te e della tua musica">
   <div class="cmodal-back" data-modal-close></div>
   <div class="cmodal-card" role="dialog" aria-modal="true" aria-label="contattaci">
     <button class="cmodal-x" data-modal-close aria-label="chiudi"><svg viewBox="0 0 18 18" width="15" height="15" stroke="currentColor" stroke-width="1.6"><path d="M4 4l10 10M14 4L4 14"/></svg></button>
-    <h3 contenteditable="true">Contattaci</h3>
-    <p class="sub" contenteditable="true">Domande su Urban Music Production? Ti rispondiamo entro un giorno lavorativo — o ti richiamiamo noi.</p>
+    <span class="cmodal-kicker" contenteditable="true">Urban Music Production</span>
+    <h3>Contattaci</h3>
+    <p class="sub">Ti rispondiamo entro un giorno lavorativo — o ti richiamiamo noi.</p>
     <form>
+      <input type="hidden" name="sezione_origine">
+      <input type="hidden" name="intento">
       <label>nome e cognome<input type="text" name="name" required></label>
       <label>email<input type="email" name="email" required></label>
       <label>telefono (facoltativo)<input type="tel" name="phone"></label>
       <label>messaggio<textarea name="message" rows="4" placeholder="Scrivici cosa vuoi sapere del corso"></textarea></label>
+      <label class="consent"><input type="checkbox" name="marketing"><span>Voglio ricevere aggiornamenti su corsi, open day e workshop. Ho letto l'<a href="/privacy" target="_blank" rel="noreferrer">informativa privacy</a>.</span></label>
       <button class="pill pill-ink" type="submit">Invia richiesta</button>
     </form>
     <p class="cmodal-ok" contenteditable="true">Grazie! Abbiamo ricevuto la tua richiesta: ti ricontattiamo entro un giorno lavorativo.</p>
@@ -1029,7 +1143,9 @@ export type CourseHtmlData = {
   sub: string;
   /* riga della subnav sticky: "Titolo — Livello" */
   courseLine: string;
-  meta: { label: string; value: string }[];
+  /* sei voci informative della hero: etichetta, valore e riga di
+     servizio opzionale (brief 28/09) — mai cliccabili */
+  meta: { label: string; value: string; sub?: string }[];
   /* cover del corso al posto del video demo nella hero */
   heroImage?: string;
   /* bottone destro della hero (es. prenota sullo shop) */
@@ -1039,7 +1155,10 @@ export type CourseHtmlData = {
   panImage?: string;
   /* foto della gallery del corso al posto delle 6 demo nelle competenze */
   skillImages?: string[];
-  teacher?: { name: string; role: string; bio: string; img?: string };
+  /* griglia docenti (brief 28/09): il primo è il course leader e viene
+     evidenziato; la griglia si completa a 4 con i segnaposto finché il
+     cliente non manda nomi, foto e credits */
+  teachers?: { name: string; role: string; cred?: string; img?: string }[];
   /* ————— sezioni editabili da Sanity (fieldset "Scheda corso"):
      se assenti resta la copy demo del template ————— */
   skillsLede?: string;
@@ -1047,8 +1166,7 @@ export type CourseHtmlData = {
   /* paragrafi a sinistra dell'accordion struttura */
   structureIntro?: string[];
   structure?: CourseEntryData[];
-  /* punti elenco della colonna "In breve" delle ammissioni */
-  admissionsKeys?: string[];
+  /* i tre passaggi delle ammissioni (candidatura, colloquio, conferma) */
   admissions?: CourseEntryData[];
   faq?: CourseEntryData[];
 };
@@ -1119,7 +1237,9 @@ export function buildCourseHtml(d: CourseHtmlData): string {
   const metaHtml = d.meta
     .map(
       (m) =>
-        `<div><div class="lab">${e(m.label)}</div><div class="val">${e(m.value)}</div></div>`,
+        `<div><div class="lab">${e(m.label)}</div><div class="val">${e(m.value)}</div>${
+          m.sub ? `<div class="sub">${e(m.sub)}</div>` : ''
+        }</div>`,
     )
     .join('\n      ');
   h = h.replace(
@@ -1203,24 +1323,27 @@ export function buildCourseHtml(d: CourseHtmlData): string {
     );
   }
 
-  if (d.admissionsKeys && d.admissionsKeys.length) {
-    h = h.replace(
-      /(<p class="kicker"[^>]*>In breve<\/p>\s*<ul>)[\s\S]*?(<\/ul>)/,
-      `$1${d.admissionsKeys.map((k) => `<li>${e(k)}</li>`).join('')}$2`,
-    );
-  }
-
+  /* ammissioni (brief 28/09): le voci Sanity diventano i passaggi
+     numerati del blocco aperto — rette/agevolazioni/fascia restano
+     la copy fissa del template finché non arrivano campi dedicati */
   if (d.admissions && d.admissions.length) {
+    const steps = d.admissions
+      .map(
+        (it, i) =>
+          `    <li><span class="n">0${i + 1}</span><h3>${e(it.title)}</h3>${parasHtml(it.text)}</li>`,
+      )
+      .join('\n');
     h = h.replace(
-      /<div class="accordion" id="admAccordion">[\s\S]*?<\/section>/,
-      `<div class="accordion" id="admAccordion">\n${accordionHtml(d.admissions)}\n  </div>\n  </div>\n  </div>\n</section>`,
+      /<ol class="steps"[^>]*>[\s\S]*?<\/ol>/,
+      `<ol class="steps" aria-label="come si entra">\n${steps}\n  </ol>`,
     );
   }
 
+  /* si ferma PRIMA della coda "Hai altre domande?" (faq-more) */
   if (d.faq && d.faq.length) {
     h = h.replace(
-      /<div class="accordion" id="faqAccordion">[\s\S]*?<\/section>/,
-      `<div class="accordion" id="faqAccordion">\n${accordionHtml(d.faq)}\n  </div>\n</section>`,
+      /<div class="accordion" id="faqAccordion">[\s\S]*?(?=<div class="faq-more">)/,
+      `<div class="accordion" id="faqAccordion">\n${accordionHtml(d.faq)}\n  </div>\n  `,
     );
   }
 
@@ -1233,22 +1356,27 @@ export function buildCourseHtml(d: CourseHtmlData): string {
     );
   }
 
-  if (d.teacher) {
-    const t = d.teacher;
-    if (t.img) {
-      h = h.replace(
-        '<div class="ph"><img src="/mockup-corso/img/zilocchi.jpg" alt="Nicolò Zilocchi"></div>',
-        `<div class="ph"><img src="${e(t.img)}" alt="${e(t.name)}"></div>`,
-      );
+  if (d.teachers && d.teachers.length) {
+    const cards = d.teachers.slice(0, 4).map(
+      (t, i) => `    <article class="teach${i === 0 ? ' lead' : ''}">
+      <div class="ph">${t.img ? `<img src="${e(t.img)}" alt="${e(t.name)}">` : ''}</div>
+      <h3>${e(t.name)}</h3>
+      <div class="trole">${t.role ? e(t.role) : '<span class="todo">[ruolo da definire]</span>'}</div>
+      <p class="tcred">${t.cred ? e(t.cred) : '<span class="todo">[artisti, etichette o studi con cui ha lavorato]</span>'}</p>
+    </article>`,
+    );
+    /* la griglia si completa a 4 con i segnaposto del brief */
+    while (cards.length < 4) {
+      cards.push(`    <article class="teach">
+      <div class="ph"></div>
+      <h3><span class="todo">Nome Cognome</span></h3>
+      <div class="trole"><span class="todo">[ruolo da definire]</span></div>
+      <p class="tcred"><span class="todo">[artisti, etichette o studi con cui ha lavorato]</span></p>
+    </article>`);
     }
     h = h.replace(
-      '<h3 contenteditable="true">Nicolò Zilocchi</h3>',
-      `<h3>${e(t.name)}</h3>`,
-    );
-    h = h.replace('Course leader · Urban Music Production', e(t.role));
-    h = h.replace(
-      /Producer e beatmaker, guida il percorso[\s\S]*?finale\./,
-      e(t.bio),
+      /<div class="teachgrid">[\s\S]*?(?=<div class="team-cta">)/,
+      `<div class="teachgrid">\n${cards.join('\n')}\n  </div>\n  `,
     );
   }
 

@@ -246,11 +246,12 @@ export function Nav({
       target="_blank"
       rel="noopener noreferrer"
       className={styles.cta}
+      data-nav-cta
     >
       {bookLabel}
     </a>
   ) : (
-    <Link href={bookHref} onClick={close} className={styles.cta}>
+    <Link href={bookHref} onClick={close} className={styles.cta} data-nav-cta>
       {bookLabel}
     </Link>
   );

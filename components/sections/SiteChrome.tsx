@@ -249,9 +249,12 @@ export async function SiteChrome({
       items={items}
       locale={locale}
       langHrefs={langHrefs}
-      bookHref={shopHref(settings)}
-      bookLabel={t.nav.book}
-      bookExternal
+      /* brief 28/09: la CTA header è "Contattaci" (i contatti veri stanno
+         in chi-siamo); la prenotazione spazi passa dalla sezione Studio.
+         Sulle schede corso il click viene intercettato via [data-nav-cta]
+         e apre il popup contatti con origine "header" */
+      bookHref={localeHref(locale, '/chi-siamo') + '#contatti'}
+      bookLabel={t.nav.contact}
       homeHref={localeHref(locale, '/')}
       dark={dark}
       menuLabel={t.nav.menu}
