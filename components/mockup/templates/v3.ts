@@ -55,8 +55,13 @@ export const css = `
   /* hero su AZZURRO pieno (riunione 17/09): il colore corre fino allo
      slider. Tre aree di griglia: testi | video, info+CTA sotto i testi
      — così su mobile il video può salire fra sottotitolo e info */
+  /* altezza FISSA sul viewport (non segue il contenuto): con le sei
+     voci della tabella la colonna sinistra si allungava e il video
+     cresceva oltre lo schermo — 68px è il marquee, che resta a filo
+     del fold */
   .hero{display:grid;grid-template-columns:minmax(520px,45%) 1fr;grid-template-rows:auto 1fr;
-    min-height:calc(86dvh - 150px);background:var(--blue);color:var(--ink);}
+    height:calc(100svh - var(--header-h) - 68px);min-height:600px;
+    background:var(--blue);color:var(--ink);}
   .hero-left{grid-area:1/1;padding:44px var(--pad) 0;display:flex;flex-direction:column;}
   .hero-info{grid-area:2/1;padding:0 var(--pad) 48px;display:flex;flex-direction:column;justify-content:flex-end;}
   .eyebrow{font-size:13px;font-weight:600;margin-bottom:18px;font-family:var(--font-body),system-ui,sans-serif;
@@ -99,6 +104,22 @@ export const css = `
       opacity .2s ease,transform .25s cubic-bezier(.22,1,.36,1);}
   .pill-reveal:hover .dl{width:15px;margin-left:9px;opacity:1;transform:translateY(2px);}
   .hero-right{grid-area:1/2/3/3;position:relative;overflow:hidden;min-height:420px;}
+  /* laptop bassi: la colonna sinistra si compatta per stare nell'altezza
+     fissa; sotto i 720px di viewport si torna a flusso (meglio scrollare
+     che tagliare la tabella) */
+  @media(max-height:840px) and (min-width:1001px){
+    .hero-left{padding-top:30px;}
+    h1.hero-h1{font-size:clamp(30px,3.2vw,44px);margin-bottom:16px;}
+    .hero-sub{font-size:17px;margin-bottom:22px;}
+    .meta-grid{margin-bottom:26px;}
+    .meta-grid>div{padding:10px 0 12px;}
+    .meta-grid .val{font-size:16.5px;}
+    .meta-grid .sub{font-size:12.5px;}
+    .hero-info{padding-bottom:34px;}
+  }
+  @media(max-height:720px) and (min-width:1001px){
+    .hero{height:auto;min-height:0;}
+  }
   .hero-right img,.hero-right video{position:absolute;inset:0;
     width:100%;height:100%;object-fit:cover;display:block;}
 
@@ -580,8 +601,8 @@ export const css = `
 
   @media(max-width:1000px){
     /* mobile (riunione 17/09): titolo e sottotitolo, POI il video, e le
-       info riassuntive scendono sotto */
-    .hero{display:flex;flex-direction:column;}
+       info riassuntive scendono sotto — qui l'altezza torna a flusso */
+    .hero{display:flex;flex-direction:column;height:auto;min-height:0;}
     .hero-left{order:1;padding:32px var(--pad) 24px;}
     .hero-right{order:2;min-height:420px;}
     .hero-info{order:3;padding:28px var(--pad) 40px;}
