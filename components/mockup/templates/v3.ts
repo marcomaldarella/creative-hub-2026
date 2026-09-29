@@ -616,7 +616,9 @@ export const css = `
   .cmodal-card input,.cmodal-card textarea{font-family:inherit;font-size:15.5px;color:var(--white);
     border:none;border-bottom:1px solid color-mix(in srgb,var(--white) 25%,transparent);background:transparent;
     padding:7px 0 10px;border-radius:0;resize:vertical;}
-  .cmodal-card ::placeholder{font-size:14.5px;color:color-mix(in srgb,var(--white) 38%,transparent);}
+  /* helper alla stessa misura delle etichette dei campi */
+  .cmodal-card ::placeholder{font-size:12px;font-weight:600;letter-spacing:.03em;
+    color:color-mix(in srgb,var(--white) 38%,transparent);}
   .cmodal-card input:focus,.cmodal-card textarea:focus{outline:none;border-bottom-color:var(--blue);}
   /* consenso privacy (brief 28/09): link all'informativa + checkbox
      marketing NON preselezionata */
