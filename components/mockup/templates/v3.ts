@@ -793,10 +793,12 @@ export const css = `
     #ammissioni .fees-row{order:2;}
     #ammissioni .perks{order:3;margin-top:28px;}
     #ammissioni .adm-band{order:4;margin-top:28px;}
-    /* indice sticky: corpi mini e via i numerini, così entrano tutte
-       le voci senza scorrere */
-    .subnav .jump{gap:10px;}
-    .subnav .jump a{font-size:10.5px;letter-spacing:0;}
+    /* indice sticky: via i numerini e corpo compatto ma leggibile,
+       così entrano tutte le voci senza scorrere. Il padding laterale
+       (compensato dal margine) fa posto agli angoli del mirino sulla
+       prima e ultima voce, che il contenitore scrollabile clippava */
+    .subnav .jump{gap:13px;padding:0 7px;margin-left:-7px;}
+    .subnav .jump a{font-size:12px;letter-spacing:0;}
     .subnav .jump .idx{display:none;}
     .subnav .jump a::before{inset:16px -5px;--l:5px;}
     .subnav .step{width:24px;height:24px;}
@@ -813,6 +815,11 @@ export const css = `
     .meta-grid>div{padding-top:12px;padding-bottom:14px;}
     .meta-grid>div:nth-child(odd){border-right:0;padding-right:0;}
     .meta-grid>div:nth-child(even){padding-left:0;}
+  }
+  /* schermi strettissimi: l'indice scala di un altro punto */
+  @media(max-width:370px){
+    .subnav .jump{gap:10px;}
+    .subnav .jump a{font-size:11px;}
   }
 `;
 
