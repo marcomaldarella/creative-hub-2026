@@ -119,11 +119,12 @@ a.pathCard {
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 0.55s var(--ease-out);
+  /* stesso hover del bento in home e delle card slider */
+  transition: transform 0.6s var(--ease-out);
 }
 
 a.pathCard:hover .pathPhoto {
-  transform: scale(1.035);
+  transform: scale(1.03);
 }
 
 .pathBody {
@@ -172,11 +173,22 @@ h3.pathTitle {
   gap: 12px;
 }
 
-/* conteggio corsi come label pillata */
+/* conteggio corsi come label pillata; in hover si accende: sfondino
+   nero e testo nell'azzurro del flood */
 .pathCount {
   border: 1px solid color-mix(in srgb, var(--fg) 30%, transparent);
   border-radius: 999px;
   padding: 5px 12px 6px;
+  transition:
+    background var(--dur) ease,
+    color var(--dur) ease,
+    border-color var(--dur) ease;
+}
+
+a.pathCard:hover .pathCount {
+  background: var(--fg);
+  color: var(--accent, var(--azzurro));
+  border-color: var(--fg);
 }
 
 /* cta esplora sempre visibile, la freccia scatta in hover */

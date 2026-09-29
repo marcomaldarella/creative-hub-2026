@@ -358,8 +358,11 @@ export const css = `
     color:var(--blue);margin-bottom:12px;}
   .steps h3{font-size:19px;font-weight:700;letter-spacing:-.01em;margin:0 0 8px;}
   .steps p{font-size:14.5px;line-height:1.4;color:var(--txt-2);margin:0;max-width:34ch;}
+  /* rette a sinistra, agevolazioni INCOLONNATE a destra (brief 29/09) */
+  .fees-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(240px,300px);
+    gap:clamp(30px,4.5vw,84px);align-items:start;margin-top:clamp(44px,5vw,64px);}
   .fees-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;
-    flex-wrap:wrap;margin:clamp(44px,5vw,64px) 0 16px;}
+    flex-wrap:wrap;margin:0 0 16px;}
   .fees-head h3{font-size:22px;font-weight:700;letter-spacing:-.01em;margin:0;}
   .fees-head p{font-size:13.5px;color:var(--txt-2);margin:0;}
   .plans{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;}
@@ -371,7 +374,10 @@ export const css = `
   .plan .price small{font-size:14px;font-weight:500;color:var(--txt-2);
     letter-spacing:0;margin-left:5px;}
   .plan p{font-size:14px;line-height:1.4;color:var(--txt-2);margin:10px 0 0;}
-  .perks{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;margin-top:24px;}
+  .perks{display:flex;flex-direction:column;}
+  .perk{border-top:var(--hair) solid color-mix(in srgb,var(--blue) 30%,transparent);
+    padding:13px 0 15px;}
+  .perks .perk:last-child{border-bottom:var(--hair) solid color-mix(in srgb,var(--blue) 30%,transparent);}
   .perk b{display:block;font-size:14.5px;font-weight:700;margin-bottom:3px;}
   .perk span{font-size:13px;line-height:1.4;color:var(--txt-2);}
   .linkbtn{background:none;border:none;padding:0;color:var(--blue);font-size:13px;
@@ -388,10 +394,9 @@ export const css = `
   .adm-band .pill:hover{background:var(--ink-2);}
   @media(max-width:900px){
     .steps{grid-template-columns:1fr;gap:22px;}
+    .fees-grid{grid-template-columns:1fr;gap:26px;}
     .plans{grid-template-columns:1fr;}
-    .perks{grid-template-columns:repeat(2,minmax(0,1fr));}
   }
-  @media(max-width:520px){.perks{grid-template-columns:1fr;}}
 
   .accordion{max-width:1000px;}
   /* FAQ: fila piu' larga delle altre liste */
@@ -973,19 +978,23 @@ export const html = `
     <li><span class="n">02</span><h3 contenteditable="true">Colloquio individuale</h3><p contenteditable="true">Parliamo di te, di cosa ascolti e di cosa vuoi produrre. Puoi venire anche con i tuoi genitori.</p></li>
     <li><span class="n">03</span><h3 contenteditable="true">Conferma il posto</h3><p contenteditable="true">Ti iscrivi e inizi a ottobre 2026 in via del Tappezziere, a Bologna.</p></li>
   </ol>
-  <div class="fees-head">
-    <h3 contenteditable="true">Rette e agevolazioni</h3>
-    <p contenteditable="true">Rate mensili a tasso zero, senza interessi</p>
-  </div>
-  <div class="plans">
-    <div class="plan"><span class="n" contenteditable="true">full-time · 3 anni</span><p class="price" contenteditable="true">392€<small>al mese</small></p><p contenteditable="true">Anticipo di 488€, poi 11 rate da 392€ ogni anno.</p></div>
-    <div class="plan"><span class="n" contenteditable="true">part-time · fino a 6 anni</span><p class="price" contenteditable="true">294€<small>al mese</small></p><p contenteditable="true">Anticipo di 366€, poi 11 rate da 294€ ogni anno.</p></div>
-  </div>
-  <div class="perks">
-    <div class="perk"><b contenteditable="true">Tasso zero</b><span contenteditable="true">Nessun interesse sulle rate.</span></div>
-    <div class="perk"><b contenteditable="true">Borse di studio</b><span><button class="linkbtn" data-contact data-origine="ammissioni_borse" data-intento="info" contenteditable="true">Chiedi quali sono disponibili</button></span></div>
-    <div class="perk"><b contenteditable="true">Sconto del 5%</b><span contenteditable="true">Se paghi l'anno in un'unica soluzione.</span></div>
-    <div class="perk"><b contenteditable="true">Certificazione</b><span contenteditable="true">Tassa separata, <span class="todo">importo da confermare</span>.</span></div>
+  <div class="fees-grid">
+    <div>
+      <div class="fees-head">
+        <h3 contenteditable="true">Rette e agevolazioni</h3>
+        <p contenteditable="true">Rate mensili a tasso zero, senza interessi</p>
+      </div>
+      <div class="plans">
+        <div class="plan"><span class="n" contenteditable="true">full-time · 3 anni</span><p class="price" contenteditable="true">392€<small>al mese</small></p><p contenteditable="true">Anticipo di 488€, poi 11 rate da 392€ ogni anno.</p></div>
+        <div class="plan"><span class="n" contenteditable="true">part-time · fino a 6 anni</span><p class="price" contenteditable="true">294€<small>al mese</small></p><p contenteditable="true">Anticipo di 366€, poi 11 rate da 294€ ogni anno.</p></div>
+      </div>
+    </div>
+    <aside class="perks">
+      <div class="perk"><b contenteditable="true">Tasso zero</b><span contenteditable="true">Nessun interesse sulle rate.</span></div>
+      <div class="perk"><b contenteditable="true">Borse di studio</b><span><button class="linkbtn" data-contact data-origine="ammissioni_borse" data-intento="info" contenteditable="true">Chiedi quali sono disponibili</button></span></div>
+      <div class="perk"><b contenteditable="true">Sconto del 5%</b><span contenteditable="true">Se paghi l'anno in un'unica soluzione.</span></div>
+      <div class="perk"><b contenteditable="true">Certificazione</b><span contenteditable="true">Tassa separata, <span class="todo">importo da confermare</span>.</span></div>
+    </aside>
   </div>
   <div class="adm-band">
     <p contenteditable="true">Venti posti all'anno.<span>Requisito: diploma di scuola superiore o titolo estero equivalente · scadenza <span class="todo">da confermare</span></span></p>

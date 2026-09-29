@@ -59,7 +59,7 @@ function imgUrl(
   h: number,
 ): string | undefined {
   return image?.asset
-    ? urlFor(image).width(w).height(h).fit('crop').url()
+    ? urlFor(image).width(w).height(h).fit('crop').auto('format').quality(82).url()
     : undefined
 }
 
