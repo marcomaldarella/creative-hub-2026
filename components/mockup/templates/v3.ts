@@ -83,6 +83,9 @@ export const css = `
   .meta-grid>div:last-child:nth-child(odd){border-right:0;}
   .meta-grid .lab{font-size:12.5px;font-weight:500;margin-bottom:6px;
     color:color-mix(in srgb,var(--ink) 62%,transparent);}
+  /* label sempre con l'iniziale maiuscola, da qualunque fonte arrivino */
+  .meta-grid .lab::first-letter,.plan .n::first-letter,
+  .fac-card h3::first-letter{text-transform:uppercase;}
   .meta-grid .val{font-size:clamp(15px,1.1vw,17px);font-weight:700;
     letter-spacing:-.025em;line-height:1.18;}
   /* riga di servizio sotto al valore (brief 28/09: sei voci solo
@@ -239,8 +242,13 @@ export const css = `
 
   /* modulo competenze: griglia a filo con hairline ricavata dal gap
      (niente border sulle celle, cosi' le righe non raddoppiano mai) */
-  .skillgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--hair);
+  /* griglia a 6 tracce così l'ultima riga non lascia MAI buchi: cella
+     normale = 2 tracce (3 per riga), .half = 3 (due a metà riga),
+     .wide = riga intera con foto a fianco del testo */
+  .skillgrid{display:grid;grid-template-columns:repeat(6,1fr);gap:var(--hair);
     background:color-mix(in srgb,var(--blue) 28%,transparent);border:var(--hair) solid color-mix(in srgb,var(--blue) 28%,transparent);}
+  .skill{grid-column:span 2;}
+  .skill.half{grid-column:span 3;}
   /* misure FISSE, non legate alla larghezza della colonna: le sei celle
      devono leggersi come sei voci della stessa lista */
   /* card competenza CON foto in testa (riunione 17/09) */
@@ -261,21 +269,24 @@ export const css = `
      assoluta dentro la sua metà: l'altezza la decide la card, non il
      taglio dell'immagine */
   .skill.wide{grid-column:1/-1;flex-direction:row;align-items:stretch;min-height:0;}
-  /* stesso ratio delle celle: a parità di larghezza colonna le foto
-     hanno SEMPRE la stessa altezza (50% su griglia a 2, 1/3 su 3) */
-  .skill.wide .ph{aspect-ratio:16/10;width:50%;flex:none;position:relative;}
+  /* stesso ratio delle celle, larghezza foto = larghezza delle celle
+     accanto: le foto hanno SEMPRE la stessa altezza. .w2 = la wide
+     convive con celle a metà riga (n=4 o da sola) → foto al 50% */
+  .skill.wide .ph{aspect-ratio:16/10;width:calc(100%/3);flex:none;position:relative;}
+  .skill.wide.w2 .ph{width:50%;}
   .skill.wide .ph img{position:absolute;inset:0;}
   .skill.wide .txt{flex:1;padding:22px 28px 28px;}
   .skill.wide p{margin:8px 0 0;max-width:52ch;}
-  .skillgrid:not(.four) .skill.wide .ph{width:calc(100%/3);}
-  /* con ESATTAMENTE 4 voci la griglia va a 2 colonne: 01 larga, 02+03
-     divise a metà sulla stessa riga, 04 larga (sandwich) */
-  .skillgrid.four{grid-template-columns:repeat(2,1fr);}
-  @media(max-width:1080px){.skillgrid{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:1080px){
+    /* due per riga: celle e metà coincidono, la wide tiene foto al 50% */
+    .skill,.skill.half{grid-column:span 3;}
+    .skill.wide .ph,.skill.wide.w2 .ph{width:50%;}
+  }
   @media(max-width:620px){
     .skillgrid{grid-template-columns:1fr;}.skill{min-height:0;}
+    .skill,.skill.half,.skill.wide{grid-column:auto;}
     .skill.wide{flex-direction:column;}
-    .skill.wide .ph{width:100%;aspect-ratio:16/10;}
+    .skill.wide .ph,.skill.wide.w2 .ph{width:100%;aspect-ratio:16/10;}
   }
   /* sotto i 560 la tabella info va a colonna singola (come la reference) */
   @media(max-width:560px){
@@ -371,21 +382,31 @@ export const css = `
     margin:0 0 14px;}
   .adm-note:last-of-type{margin-bottom:clamp(32px,4vw,48px);}
   .steps{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
-    gap:clamp(20px,3vw,40px);}
+    gap:clamp(16px,2.2vw,30px);}
   .steps li{border-top:var(--hair) solid color-mix(in srgb,var(--blue) 30%,transparent);
     padding-top:16px;}
   .steps .n{display:block;font-size:12.5px;font-weight:600;letter-spacing:.04em;
     color:var(--blue);margin-bottom:12px;}
   .steps h3{font-size:19px;font-weight:700;letter-spacing:-.01em;margin:0 0 8px;}
   .steps p{font-size:14.5px;line-height:1.4;color:var(--txt-2);margin:0;max-width:34ch;}
-  /* rette a sinistra, agevolazioni INCOLONNATE a destra (brief 29/09) */
-  .fees-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(240px,300px);
-    gap:clamp(30px,4.5vw,84px);align-items:start;margin-top:clamp(44px,5vw,64px);}
-  .fees-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;
-    flex-wrap:wrap;margin:0 0 16px;}
+  /* intestazione a sinistra, agevolazioni INCOLONNATE a destra nella
+     riga alta della sezione (brief 29/09); le rette sotto, a tutta
+     larghezza. STESSA griglia degli step qui sotto: il blocchetto si
+     incolonna esattamente sulla colonna del passaggio 03 — linee e
+     testi allineati */
+  .adm-head{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:clamp(16px,2.2vw,30px);align-items:start;}
+  .adm-head>div{grid-column:1/3;}
+  .adm-head .perks{grid-column:3;}
+  .adm-head .adm-intro{margin-bottom:0;}
+  .adm-head+.steps{margin-top:clamp(32px,4vw,48px);}
+  /* riga rette: STESSA griglia a 3 colonne degli step — intestazione
+     (titolo + sottotitolo sotto) in colonna 1, le due caselle prezzo
+     allineate alle colonne 02 e 03 */
+  .fees-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:clamp(16px,2.2vw,30px);align-items:stretch;margin-top:clamp(44px,5vw,64px);}
   .fees-head h3{font-size:22px;font-weight:700;letter-spacing:-.01em;margin:0;}
-  .fees-head p{font-size:13.5px;color:var(--txt-2);margin:0;}
-  .plans{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;}
+  .fees-head p{font-size:13.5px;color:var(--txt-2);margin:8px 0 0;max-width:30ch;}
   .plan{background:var(--ink-2);padding:24px 24px 26px;}
   .plan .n{display:block;font-size:12.5px;font-weight:600;letter-spacing:.04em;
     color:var(--blue);margin-bottom:12px;}
@@ -414,8 +435,9 @@ export const css = `
   .adm-band .pill:hover{background:var(--ink-2);}
   @media(max-width:900px){
     .steps{grid-template-columns:1fr;gap:22px;}
-    .fees-grid{grid-template-columns:1fr;gap:26px;}
-    .plans{grid-template-columns:1fr;}
+    .adm-head{grid-template-columns:1fr;gap:26px;}
+    .adm-head>div,.adm-head .perks{grid-column:auto;}
+    .fees-row{grid-template-columns:1fr;gap:14px;}
   }
 
   .accordion{max-width:1000px;}
@@ -529,6 +551,18 @@ export const css = `
     .cnav-btn{width:36px;height:36px;}
   }
   blockquote.pull2 cite{display:block;margin-top:14px;font-size:13px;font-style:normal;font-weight:500;opacity:.7;}
+  /* stagger per RIGA: le parole sono wrappate in .qw dalla shell, che
+     raggruppa per offsetTop e assegna il ritardo riga per riga */
+  .qtrack blockquote .qw{display:inline-block;opacity:0;transform:translateY(14px);
+    transition:opacity .5s ease,transform .65s cubic-bezier(.22,1,.36,1);
+    transition-delay:var(--qd,0s);}
+  .qtrack blockquote.is-on .qw{opacity:1;transform:none;}
+  .qtrack blockquote cite{opacity:0;transform:translateY(8px);
+    transition:opacity .45s ease .4s,transform .5s cubic-bezier(.22,1,.36,1) .4s;}
+  .qtrack blockquote.is-on cite{opacity:1;transform:none;}
+  @media(prefers-reduced-motion:reduce){
+    .qtrack blockquote .qw,.qtrack blockquote cite{transition:none;}
+  }
 
   /* card "come conoscerci": TUTTA cliccabile, porta alle open date —
      hover con foto che si accende e freccina che compare (riunione) */
@@ -538,6 +572,9 @@ export const css = `
     display:flex;align-items:flex-start;padding:26px;margin-bottom:14px;}
   .connect-card .img h3{position:relative;color:#fff;font-size:32px;font-weight:700;
     line-height:1.02;margin:0;letter-spacing:-.02em;z-index:1;}
+  /* trattino piccino sotto il titolo, come sulle card di academy */
+  .connect-card .img h3::after{content:"";display:block;width:20px;height:2px;
+    background:#fff;margin-top:10px;}
   .connect-card .img img{position:absolute;inset:0;opacity:.55;transition:opacity .3s ease,transform .5s cubic-bezier(.22,1,.36,1);}
   .connect-card:hover .img img{opacity:.75;transform:scale(1.03);}
   .connect-card .cap2{font-size:15.5px;font-weight:600;display:flex;align-items:center;gap:8px;}
@@ -571,14 +608,15 @@ export const css = `
     line-height:1.04;margin:0 0 10px;}
   .cmodal-card .sub{font-size:15px;line-height:1.45;color:var(--txt-2);margin:0 0 22px;max-width:46ch;}
   .cmodal-card form{display:flex;flex-direction:column;gap:15px;}
-  /* due campi sulla stessa riga: la colonna si accorcia e il popup
-     resta tutto in vista */
-  .cmodal-card .frow{display:grid;grid-template-columns:1fr 1fr;gap:15px 28px;}
-  .cmodal-card label{display:flex;flex-direction:column;gap:7px;font-size:10.5px;
-    font-weight:600;letter-spacing:.02em;color:var(--txt-2);}
-  .cmodal-card input,.cmodal-card textarea{font-family:inherit;font-size:16.5px;color:var(--white);
+  /* i tre campi corti sulla stessa riga: la colonna si accorcia, il
+     popup resta tutto in vista e niente vuoti a destra */
+  .cmodal-card .frow{display:grid;grid-template-columns:1fr 1fr 1fr;gap:15px 30px;}
+  .cmodal-card label{display:flex;flex-direction:column;gap:8px;font-size:12px;
+    font-weight:600;letter-spacing:.03em;color:color-mix(in srgb,var(--white) 60%,transparent);}
+  .cmodal-card input,.cmodal-card textarea{font-family:inherit;font-size:15.5px;color:var(--white);
     border:none;border-bottom:1px solid color-mix(in srgb,var(--white) 25%,transparent);background:transparent;
     padding:7px 0 10px;border-radius:0;resize:vertical;}
+  .cmodal-card ::placeholder{font-size:14.5px;color:color-mix(in srgb,var(--white) 38%,transparent);}
   .cmodal-card input:focus,.cmodal-card textarea:focus{outline:none;border-bottom-color:var(--blue);}
   /* consenso privacy (brief 28/09): link all'informativa + checkbox
      marketing NON preselezionata */
@@ -596,6 +634,9 @@ export const css = `
   @media(max-width:760px){
     .cmodal-card{width:min(480px,94vw);max-height:88svh;padding:32px 26px 28px;}
     .cmodal-card .frow{grid-template-columns:1fr;}
+  }
+  @media(min-width:761px) and (max-width:1000px){
+    .cmodal-card .frow{grid-template-columns:1fr 1fr;}
   }
 
   /* cursore del carosello (riunione): disco azzurro con freccia
@@ -1011,23 +1052,10 @@ export const html = `
 <div class="sezRule"><span>03</span><i></i></div>
 
 <section class="block tight" id="ammissioni">
-  <h2 class="sec" contenteditable="true">Ammissioni</h2>
-  <p class="adm-intro" contenteditable="true">Si entra con un colloquio, non con un'audizione: non serve saper già suonare o leggere la musica.</p>
-  <ol class="steps" aria-label="come si entra">
-    <li><span class="n">01</span><h3 contenteditable="true">Candidati online</h3><p contenteditable="true">Compili il modulo con i tuoi dati. Ti ricontattiamo per fissare il colloquio.</p></li>
-    <li><span class="n">02</span><h3 contenteditable="true">Colloquio individuale</h3><p contenteditable="true">Parliamo di te, di cosa ascolti e di cosa vuoi produrre. Puoi venire anche con i tuoi genitori.</p></li>
-    <li><span class="n">03</span><h3 contenteditable="true">Conferma il posto</h3><p contenteditable="true">Ti iscrivi e inizi a ottobre 2026 in via del Tappezziere, a Bologna.</p></li>
-  </ol>
-  <div class="fees-grid">
+  <div class="adm-head">
     <div>
-      <div class="fees-head">
-        <h3 contenteditable="true">Rette e agevolazioni</h3>
-        <p contenteditable="true">Rate mensili a tasso zero, senza interessi</p>
-      </div>
-      <div class="plans">
-        <div class="plan"><span class="n" contenteditable="true">full-time · 3 anni</span><p class="price" contenteditable="true">392€<small>al mese</small></p><p contenteditable="true">Anticipo di 488€, poi 11 rate da 392€ ogni anno.</p></div>
-        <div class="plan"><span class="n" contenteditable="true">part-time · fino a 6 anni</span><p class="price" contenteditable="true">294€<small>al mese</small></p><p contenteditable="true">Anticipo di 366€, poi 11 rate da 294€ ogni anno.</p></div>
-      </div>
+      <h2 class="sec" contenteditable="true">Ammissioni</h2>
+      <p class="adm-intro" contenteditable="true">Si entra con un colloquio, non con un'audizione: non serve saper già suonare o leggere la musica.</p>
     </div>
     <aside class="perks">
       <div class="perk"><b contenteditable="true">Tasso zero</b><span contenteditable="true">Nessun interesse sulle rate.</span></div>
@@ -1035,6 +1063,19 @@ export const html = `
       <div class="perk"><b contenteditable="true">Sconto del 5%</b><span contenteditable="true">Se paghi l'anno in un'unica soluzione.</span></div>
       <div class="perk"><b contenteditable="true">Certificazione</b><span contenteditable="true">Tassa separata, <span class="todo">importo da confermare</span>.</span></div>
     </aside>
+  </div>
+  <ol class="steps" aria-label="come si entra">
+    <li><span class="n">01</span><h3 contenteditable="true">Candidati online</h3><p contenteditable="true">Compili il modulo con i tuoi dati. Ti ricontattiamo per fissare il colloquio.</p></li>
+    <li><span class="n">02</span><h3 contenteditable="true">Colloquio individuale</h3><p contenteditable="true">Parliamo di te, di cosa ascolti e di cosa vuoi produrre. Puoi venire anche con i tuoi genitori.</p></li>
+    <li><span class="n">03</span><h3 contenteditable="true">Conferma il posto</h3><p contenteditable="true">Ti iscrivi e inizi a ottobre 2026 in via del Tappezziere, a Bologna.</p></li>
+  </ol>
+  <div class="fees-row">
+    <div class="fees-head">
+      <h3 contenteditable="true">Rette e agevolazioni</h3>
+      <p contenteditable="true">Rate mensili a tasso zero, senza interessi</p>
+    </div>
+    <div class="plan"><span class="n" contenteditable="true">full-time · 3 anni</span><p class="price" contenteditable="true">392€<small>al mese</small></p><p contenteditable="true">Anticipo di 488€, poi 11 rate da 392€ ogni anno.</p></div>
+    <div class="plan"><span class="n" contenteditable="true">part-time · fino a 6 anni</span><p class="price" contenteditable="true">294€<small>al mese</small></p><p contenteditable="true">Anticipo di 366€, poi 11 rate da 294€ ogni anno.</p></div>
   </div>
   <div class="adm-band">
     <p contenteditable="true">Venti posti all'anno.<span>Requisito: diploma di scuola superiore o titolo estero equivalente · scadenza <span class="todo">da confermare</span></span></p>
@@ -1177,7 +1218,7 @@ export const html = `
   </div>
 </section>
 
-<section class="block tight" style="padding-bottom:clamp(72px,8vw,110px);">
+<section class="block tight" style="padding-bottom:0;">
   <div class="cta-dark">
     <h2 contenteditable="true">Non sai quale corso scegliere?</h2>
     <p contenteditable="true">Nessun problema. Ti aiutiamo a trovare il percorso in musica, sound o visual che parla di più a te.</p>
@@ -1204,11 +1245,11 @@ export const html = `
       <input type="hidden" name="sezione_origine">
       <input type="hidden" name="intento">
       <div class="frow">
-        <label>nome e cognome<input type="text" name="name" required></label>
-        <label>email<input type="email" name="email" required></label>
+        <label>Nome e cognome<input type="text" name="name" required></label>
+        <label>Email<input type="email" name="email" required></label>
+        <label>Telefono (facoltativo)<input type="tel" name="phone"></label>
       </div>
-      <label>telefono (facoltativo)<input type="tel" name="phone"></label>
-      <label>messaggio<textarea name="message" rows="3" placeholder="Scrivici cosa vuoi sapere del corso"></textarea></label>
+      <label>Messaggio<textarea name="message" rows="3" placeholder="Scrivici cosa vuoi sapere del corso"></textarea></label>
       <label class="consent"><input type="checkbox" name="marketing"><span>Voglio ricevere aggiornamenti su corsi, open day e workshop. Ho letto l'<a href="/privacy" target="_blank" rel="noreferrer">informativa privacy</a>.</span></label>
       <button class="pill pill-ink" type="submit">Invia richiesta</button>
     </form>
@@ -1374,18 +1415,23 @@ export function buildCourseHtml(d: CourseHtmlData): string {
   /* PRIMA del replace globale di skillImages: le foto demo emesse qui
      vengono poi sovrascritte in round-robin dalla gallery, se c'è */
   if (d.skills && d.skills.length) {
-    /* CON 4 VOCI: sandwich a 2 colonne — 01 larga (foto 50/testo 50),
-       02+03 sulla stessa riga divise a metà, 04 larga. Con altri
-       conteggi che lasciano una voce sola nell'ultima riga della
-       griglia a 3, solo l'ultima diventa "wide" */
+    /* griglia a 6 tracce, MAI buchi qualunque sia il conteggio (la 3×2
+       da 6 resta com'è): avanzo di 1 → ultima card "wide" (foto a
+       fianco del testo); avanzo di 2 → ultime due a metà riga (.half);
+       4 voci → sandwich wide/half/half/wide; 1-2 voci → wide o metà */
     const n = d.skills.length;
-    const four = n === 4;
-    const orphan = !four && n % 3 === 1;
-    const isWide = (i: number) =>
-      four ? i === 0 || i === 3 : orphan && i === n - 1;
+    const cls = (i: number) => {
+      if (n === 1) return ' wide w2';
+      if (n === 2) return ' half';
+      if (n === 4) return i === 0 || i === 3 ? ' wide w2' : ' half';
+      const rest = n % 3;
+      if (rest === 1 && i === n - 1) return ' wide';
+      if (rest === 2 && i >= n - 2) return ' half';
+      return '';
+    };
     const cards = d.skills
       .map(
-        (s, i) => `    <article class="skill${isWide(i) ? ' wide' : ''}">
+        (s, i) => `    <article class="skill${cls(i)}">
       <div class="ph"><img src="${e(SKILL_DEMO_IMGS[i % SKILL_DEMO_IMGS.length])}" alt=""></div>
       <div class="txt">
       <span class="n">0${i + 1}</span>
@@ -1397,7 +1443,7 @@ export function buildCourseHtml(d: CourseHtmlData): string {
       .join('\n');
     h = h.replace(
       /<div class="skillgrid">[\s\S]*?<\/section>/,
-      `<div class="skillgrid${four ? ' four' : ''}">\n${cards}\n  </div>\n</section>`,
+      `<div class="skillgrid">\n${cards}\n  </div>\n</section>`,
     );
   }
 

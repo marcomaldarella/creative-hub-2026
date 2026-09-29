@@ -305,10 +305,37 @@ export function CourseTemplateShell({ css, html }: CourseTemplateShellProps) {
     let qTimer: ReturnType<typeof setInterval> | undefined;
     if (quotes.length > 1) {
       let i = 0;
+      // stagger per RIGA: ogni parola in uno span .qw; le righe si
+      // riconoscono dall'offsetTop (misurabile anche da nascoste:
+      // sono in visibility, non display none) e prendono il ritardo
+      const escapeText = (v: string) =>
+        v.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      quotes.forEach((q) => {
+        const span = q.querySelector('span');
+        if (!span) return;
+        span.innerHTML = (span.textContent ?? '')
+          .split(/\s+/)
+          .filter(Boolean)
+          .map((w) => `<span class="qw">${escapeText(w)}</span>`)
+          .join(' ');
+      });
+      const staggerLines = (q: HTMLElement) => {
+        let lastTop: number | null = null;
+        let line = -1;
+        q.querySelectorAll<HTMLElement>('.qw').forEach((w) => {
+          if (w.offsetTop !== lastTop) {
+            line += 1;
+            lastTop = w.offsetTop;
+          }
+          w.style.setProperty('--qd', `${line * 0.09}s`);
+        });
+      };
       const show = (n: number) => {
         i = (n + quotes.length) % quotes.length;
+        staggerLines(quotes[i]);
         quotes.forEach((q, k) => q.classList.toggle('is-on', k === i));
       };
+      staggerLines(quotes[0]);
       const calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       const start = () => {
         if (!calm && !qTimer) qTimer = setInterval(() => show(i + 1), 7000);
