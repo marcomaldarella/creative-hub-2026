@@ -86,10 +86,31 @@ export function CourseTemplateShell({ css, html }: CourseTemplateShellProps) {
         return (first?.getBoundingClientRect().width ?? 300) + 20;
       };
       const setW = () => car.scrollWidth / 2;
+      // pallini di posizione: uno per card reale (i cloni non contano),
+      // l'attivo segue lo scroll — utile soprattutto su mobile
+      const realCount = car.querySelectorAll(':scope > :not([data-clone])').length;
+      const dotsBox = root.querySelector<HTMLElement>(`[data-dots="${car.id}"]`);
+      const dots: HTMLElement[] = [];
+      if (dotsBox && realCount > 1) {
+        for (let k = 0; k < realCount; k++) {
+          const d = document.createElement('span');
+          d.className = k === 0 ? 'dot on' : 'dot';
+          dotsBox.appendChild(d);
+          dots.push(d);
+        }
+      }
+      const syncDots = () => {
+        if (!dots.length) return;
+        const idx =
+          ((Math.round(car.scrollLeft / step()) % realCount) + realCount) %
+          realCount;
+        dots.forEach((d, k) => d.classList.toggle('on', k === idx));
+      };
       car.addEventListener(
         'scroll',
         () => {
           if (car.scrollLeft >= setW()) car.scrollLeft -= setW();
+          syncDots();
         },
         { passive: true },
       );

@@ -363,8 +363,6 @@ export const css = `
 
     .skill{padding:22px 22px 26px;}
     .skill .n{margin-bottom:12px;}
-    .pan-grid > div > .lede:first-of-type{font-size:19px;}
-    .head-center{margin-bottom:34px;}
     section.block{padding:52px var(--pad);}
     section.block.tight{padding-top:28px;}
     .carousel-nav{justify-content:space-between;}
@@ -740,6 +738,53 @@ export const css = `
   .langsw b{font-weight:600;opacity:1;}
 
   .siteHead{position:sticky;top:0;z-index:100;background:var(--ink);}
+
+  /* ————— mobile, IN CODA: i corpi grandi ridotti con giudizio devono
+     vincere sulle regole base dichiarate dopo il primo blocco mobile ————— */
+  @media(max-width:760px){
+    h2.sec{font-size:26px;}
+    .lede{font-size:15.5px;}
+    .hero-sub{font-size:16px;}
+    .pan-grid > div > .lede:first-of-type,
+    .struct-text p:first-child,
+    .adm-intro{font-size:18px;}
+    .acc-head h3{font-size:18px;}
+    .acc-body p{font-size:14.5px;}
+    .skill h3{font-size:18px;}
+    .skill p{font-size:14px;}
+    .steps h3,.teach h3{font-size:17px;}
+    .fees-head h3{font-size:19px;}
+    .plan .price{font-size:30px;}
+    .adm-band p{font-size:19px;}
+    .marquee-track span{font-size:19px;}
+    blockquote.pull2{font-size:19px;}
+    .fullshot h2{font-size:30px;}
+    .cta-dark h2{font-size:26px;}
+    .promo-panel h2{font-size:22px;}
+    .connect-card .img h3{font-size:24px;}
+    .team-cta p,.faq-more p{font-size:16px;}
+    /* niente centrato su schermo stretto: tutto a sinistra */
+    .head-center{text-align:left;margin-left:0;}
+    .head-center .lede{margin-left:0;margin-right:0;}
+    /* struttura: la CTA scende DOPO l'intestazione col testo, non in
+       mezzo — le due gabbie si aprono (display:contents) e l'ordine
+       lo decide il flex della sezione */
+    #struttura{display:flex;flex-direction:column;}
+    #struttura .sec-flex-head,#struttura .struct-grid{display:contents;}
+    #struttura h2.sec{order:0;margin-bottom:16px;}
+    #struttura .struct-text{order:1;}
+    #struttura .btns{order:2;margin:20px 0 28px;}
+    #struttura .accordion{order:3;}
+    /* ammissioni: prima il procedimento numerato, le info extra
+       (agevolazioni) DOPO i prezzi */
+    #ammissioni{display:flex;flex-direction:column;}
+    #ammissioni .adm-head{display:contents;}
+    #ammissioni .adm-head>div{order:0;}
+    #ammissioni ol.steps{order:1;margin-top:26px;}
+    #ammissioni .fees-row{order:2;}
+    #ammissioni .perks{order:3;margin-top:28px;}
+    #ammissioni .adm-band{order:4;margin-top:28px;}
+  }
 `;
 
 export const html = `
@@ -1036,6 +1081,7 @@ export const html = `
     </div>
   </div>
   <div class="carousel-nav">
+    <span class="dots" data-dots="facCarousel" aria-hidden="true"></span>
     <button class="cnav-btn" aria-label="indietro" data-scroll-id="facCarousel" data-scroll-by="-400"><span class="arr w"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></button>
     <button class="cnav-btn" aria-label="avanti" data-scroll-id="facCarousel" data-scroll-by="400"><span class="arr"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></button>
   </div>
@@ -1203,6 +1249,7 @@ export const html = `
 
   </div>
   <div class="carousel-nav">
+    <span class="dots" data-dots="connCarousel" aria-hidden="true"></span>
     <button class="cnav-btn" aria-label="indietro" data-scroll-id="connCarousel" data-scroll-by="-400"><span class="arr w"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></button>
     <button class="cnav-btn" aria-label="avanti" data-scroll-id="connCarousel" data-scroll-by="400"><span class="arr"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></button>
   </div>
@@ -1212,7 +1259,7 @@ export const html = `
   <div class="split">
     <div class="imgbox"><video data-src-wide="/video/creative-hub-6s-03-1080x1920.mp4" poster="/mockup-corso/img/class-4.jpg" muted loop playsinline preload="none" aria-hidden="true"></video></div>
     <div>
-      <h2 contenteditable="true">Nessun genere. Un metodo.</h2>
+      <h2 contenteditable="true">Nessun genere.<br>Un metodo.</h2>
       <p contenteditable="true">La musica urban cambia continuamente, e lo trattiamo come condizione di studio. Non ti chiediamo di aderire a uno stile o a una scena. <b>Ci concentriamo sul tuo sviluppo artistico e sulla capacità critica</b>: come pensi, come lavori, dove vuoi portare la tua musica.</p>
       <p contenteditable="true">Che la tua base sia trap, hip-hop, R&amp;B o elettronica, diamo priorità alla profondità e alla direzione, non all'etichetta di genere. Ci aspettiamo che tu <b>rischi, testi idee e ampli il tuo raggio creativo</b>, sviluppando la capacità di argomentare le tue scelte.</p>
       <p contenteditable="true">Le nostre sessioni uniscono la pratica alla riflessione. Esaminiamo le ragioni dietro un lavoro tanto quanto le tecniche usate per produrlo.</p>
