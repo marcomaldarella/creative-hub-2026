@@ -255,8 +255,19 @@ export const css = `
     margin-bottom:14px;}
   .skill h3{font-size:21px;font-weight:700;line-height:1.12;letter-spacing:-.02em;margin:0 0 10px;}
   .skill p{font-size:15px;line-height:1.4;color:var(--txt-2);margin:auto 0 0;max-width:30ch;}
+  /* voce ORFANA nell'ultima riga (es. 4 competenze su griglia a 3): la
+     card si allarga su tutta la riga, foto a sinistra e testo a destra,
+     stessa grammatica delle celle — niente buco nero a fianco */
+  .skill.wide{grid-column:1/-1;flex-direction:row;align-items:stretch;min-height:0;}
+  .skill.wide .ph{aspect-ratio:auto;width:clamp(260px,38%,560px);flex:none;}
+  .skill.wide .txt{padding:22px 28px 28px;}
+  .skill.wide p{margin:8px 0 0;max-width:52ch;}
   @media(max-width:1080px){.skillgrid{grid-template-columns:repeat(2,1fr);}}
-  @media(max-width:620px){.skillgrid{grid-template-columns:1fr;}.skill{min-height:0;}}
+  @media(max-width:620px){
+    .skillgrid{grid-template-columns:1fr;}.skill{min-height:0;}
+    .skill.wide{flex-direction:column;}
+    .skill.wide .ph{width:100%;aspect-ratio:16/10;}
+  }
   /* sotto i 560 la tabella info va a colonna singola (come la reference) */
   @media(max-width:560px){
     .meta-grid{grid-template-columns:1fr;}
@@ -1334,9 +1345,12 @@ export function buildCourseHtml(d: CourseHtmlData): string {
   /* PRIMA del replace globale di skillImages: le foto demo emesse qui
      vengono poi sovrascritte in round-robin dalla gallery, se c'è */
   if (d.skills && d.skills.length) {
+    /* conteggio che lascia una voce sola nell'ultima riga della griglia
+       a 3: l'ultima card diventa "wide" (foto sx, testo dx) */
+    const orphan = d.skills.length % 3 === 1;
     const cards = d.skills
       .map(
-        (s, i) => `    <article class="skill">
+        (s, i) => `    <article class="skill${orphan && i === d.skills!.length - 1 ? ' wide' : ''}">
       <div class="ph"><img src="${e(SKILL_DEMO_IMGS[i % SKILL_DEMO_IMGS.length])}" alt=""></div>
       <div class="txt">
       <span class="n">0${i + 1}</span>
