@@ -382,7 +382,7 @@ export const css = `
     margin:0 0 14px;}
   .adm-note:last-of-type{margin-bottom:clamp(32px,4vw,48px);}
   .steps{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
-    gap:clamp(16px,2.2vw,30px);}
+    gap:clamp(12px,1.2vw,16px);}
   .steps li{border-top:var(--hair) solid color-mix(in srgb,var(--blue) 30%,transparent);
     padding-top:16px;}
   .steps .n{display:block;font-size:12.5px;font-weight:600;letter-spacing:.04em;
@@ -395,7 +395,7 @@ export const css = `
      incolonna esattamente sulla colonna del passaggio 03 — linee e
      testi allineati */
   .adm-head{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
-    gap:clamp(16px,2.2vw,30px);align-items:start;}
+    gap:clamp(12px,1.2vw,16px);align-items:start;}
   .adm-head>div{grid-column:1/3;}
   .adm-head .perks{grid-column:3;}
   .adm-head .adm-intro{margin-bottom:0;}
@@ -404,7 +404,7 @@ export const css = `
      (titolo + sottotitolo sotto) in colonna 1, le due caselle prezzo
      allineate alle colonne 02 e 03 */
   .fees-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
-    gap:clamp(16px,2.2vw,30px);align-items:stretch;margin-top:clamp(44px,5vw,64px);}
+    gap:clamp(12px,1.2vw,16px);align-items:stretch;margin-top:clamp(44px,5vw,64px);}
   .fees-head h3{font-size:22px;font-weight:700;letter-spacing:-.01em;margin:0;}
   .fees-head p{font-size:13.5px;color:var(--txt-2);margin:8px 0 0;max-width:30ch;}
   .plan{background:var(--ink-2);padding:24px 24px 26px;}
@@ -540,10 +540,10 @@ export const css = `
      parti uguali, quindi la citazione resta comunque centrata */
   .quotes{display:flex;align-items:center;justify-content:space-between;gap:clamp(14px,3vw,44px);}
   .qtrack{display:grid;flex:0 1 900px;min-width:0;}
-  .qtrack blockquote{grid-area:1/1;opacity:0;visibility:hidden;transform:translateY(10px);
-    transition:opacity .45s ease,transform .6s cubic-bezier(.22,1,.36,1),visibility 0s linear .45s;}
-  .qtrack blockquote.is-on{opacity:1;visibility:visible;transform:none;
-    transition:opacity .45s ease,transform .6s cubic-bezier(.22,1,.36,1);}
+  /* il CONTENITORE non anima: appare secco e l'ingresso lo fanno le
+     parole riga per riga — col fade del blocco lo stagger si perdeva */
+  .qtrack blockquote{grid-area:1/1;opacity:0;visibility:hidden;pointer-events:none;}
+  .qtrack blockquote.is-on{opacity:1;visibility:visible;pointer-events:auto;}
   blockquote.pull2{font-size:clamp(22px,2.2vw,30px);font-weight:600;line-height:1.35;letter-spacing:-.02em;
     max-width:900px;margin:0 auto;text-align:center;}
   @media(max-width:700px){
