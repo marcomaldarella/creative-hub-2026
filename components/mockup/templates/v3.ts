@@ -459,6 +459,8 @@ export const css = `
   .faq-more p{margin:0;font-size:17px;font-weight:600;}
 
   .promo-two{display:grid;grid-template-columns:1fr 1fr;min-height:420px;}
+  /* respiro dal separatore: senza, la foto copre il numerino 04 */
+  .sezRule+.promo-two{margin-top:26px;}
   /* foto libera: niente titolo sopra, quindi via anche la sfumatura
      che serviva solo a renderlo leggibile */
   .promo-photo{position:relative;overflow:hidden;}
@@ -685,6 +687,9 @@ export const css = `
     .hero-info{order:3;padding:28px var(--pad) 40px;}
     .split{grid-template-columns:1fr;gap:30px;}
     .promo-two{grid-template-columns:1fr;}
+    /* a colonna singola la foto ha bisogno di un taglio proprio:
+       senza, l'assoluta dentro resta una strisciolina */
+    .promo-photo{aspect-ratio:16/10;}
     nav.mainnav{display:none;}
     .fac-card,.connect-card{flex-basis:calc((100% - 20px)/1.15);}
     .pan-grid{grid-template-columns:1fr;}
@@ -757,7 +762,7 @@ export const css = `
     .plan .price{font-size:30px;}
     .adm-band p{font-size:19px;}
     .marquee-track span{font-size:19px;}
-    blockquote.pull2{font-size:19px;}
+    blockquote.pull2{font-size:19px;line-height:1.25;}
     .fullshot h2{font-size:30px;}
     .cta-dark h2{font-size:26px;}
     .promo-panel h2{font-size:22px;}
@@ -766,6 +771,10 @@ export const css = `
     /* niente centrato su schermo stretto: tutto a sinistra */
     .head-center{text-align:left;margin-left:0;}
     .head-center .lede{margin-left:0;margin-right:0;}
+    /* card competenze: gutter UNIFORME — il testo si allinea ai bordi
+       della foto invece di sommare il proprio padding a quello card */
+    .skill{padding:20px;}
+    .skill .txt{padding:18px 0 4px;}
     /* struttura: la CTA scende DOPO l'intestazione col testo, non in
        mezzo — le due gabbie si aprono (display:contents) e l'ordine
        lo decide il flex della sezione */
