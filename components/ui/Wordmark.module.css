@@ -14,3 +14,14 @@
   vertical-align: middle;
   margin: 0 6px;
 }
+
+/* barra mobile più leggera */
+@media (max-width: 760px) {
+  .wordmark {
+    font-size: 15px;
+  }
+
+  .wordmark em {
+    width: 20px;
+  }
+}

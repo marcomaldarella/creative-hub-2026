@@ -835,10 +835,18 @@
     display: none;
   }
 
+  /* barra più leggera su mobile: pastiglia e wordmark scalati */
+  .inner {
+    gap: 20px;
+  }
+
   .cta {
     margin-left: auto;
-    /* a ridosso del burger: si mangia il gap 32px della barra */
-    margin-right: -20px;
+    /* a ridosso del burger: si mangia il gap della barra */
+    margin-right: -12px;
+    height: 30px;
+    padding: 0 14px;
+    font-size: 12.5px;
   }
 
   .burger {

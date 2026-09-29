@@ -82,6 +82,24 @@
   }
 }
 
+/* mobile: body dell'intestazione più piccolo e con interlinea corta */
+@media (max-width: 760px) {
+  .title {
+    margin-bottom: 14px;
+  }
+
+  .lede {
+    font-size: 15.5px;
+    line-height: 1.35;
+  }
+
+  .point {
+    font-size: 15px;
+    line-height: 1.35;
+    padding: 13px 0;
+  }
+}
+
 a.course {
   display: flex;
   flex-direction: column;

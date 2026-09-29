@@ -793,6 +793,26 @@ export const css = `
     #ammissioni .fees-row{order:2;}
     #ammissioni .perks{order:3;margin-top:28px;}
     #ammissioni .adm-band{order:4;margin-top:28px;}
+    /* indice sticky: corpi mini e via i numerini, così entrano tutte
+       le voci senza scorrere */
+    .subnav .jump{gap:10px;}
+    .subnav .jump a{font-size:10.5px;letter-spacing:0;}
+    .subnav .jump .idx{display:none;}
+    .subnav .jump a::before{inset:16px -5px;--l:5px;}
+    .subnav .step{width:24px;height:24px;}
+    .subnav .steps{gap:4px;}
+    /* caption delle card connettiti: più piccola, interlinea corta */
+    .connect-card .cap2{font-size:13.5px;font-weight:500;line-height:1.3;}
+    /* caselle prezzo compatte */
+    .plan{padding:18px 18px 20px;}
+    /* frecce delle citazioni più discrete */
+    .quotes .cnav-btn{width:30px;height:30px;}
+    .quotes .cnav-btn svg{width:12px;height:12px;}
+    /* tabella hero a colonna singola SENZA rientri alternati */
+    .meta-grid{grid-template-columns:1fr;}
+    .meta-grid>div{padding-top:12px;padding-bottom:14px;}
+    .meta-grid>div:nth-child(odd){border-right:0;padding-right:0;}
+    .meta-grid>div:nth-child(even){padding-left:0;}
   }
 `;
 
