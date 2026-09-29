@@ -98,53 +98,70 @@
 }
 
 a.pathCard {
-  /* stessa grammatica delle card corso: foto 4:5 sopra, corpo nero.
-     Testi BIANCHI: il colore di sezione resta solo sul numerino */
+  /* card pulita sul flood (brief 29/09): niente scatola nera né padding
+     in eccesso — foto viva, testi neri direttamente sull'azzurro */
   display: flex;
   flex-direction: column;
-  overflow: hidden;
-  background: #0A0A0A;
-  --fg: #FAFAFA;
-  --fg-2: #B3B3B3;
-  --accent-ink: var(--accent, var(--osso));
-  --line: rgba(255, 255, 255, 0.14);
   color: var(--fg);
   transition:
     opacity var(--dur-slow) ease var(--rvd, 0s),
     transform var(--dur-slow) var(--ease-out) var(--rvd, 0s);
 }
 
+/* hover come gli slider: la foto si muove dentro la cornice */
+.pathPhotoBox {
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+}
+
 .pathPhoto {
   width: 100%;
-  aspect-ratio: 4 / 5;
+  height: 100%;
   object-fit: cover;
   display: block;
+  transition: transform 0.55s var(--ease-out);
+}
+
+a.pathCard:hover .pathPhoto {
+  transform: scale(1.035);
 }
 
 .pathBody {
   display: flex;
   flex-direction: column;
   flex: 1;
-  padding: 26px 22px 30px;
+  padding: 16px 0 0;
 }
 
 .pathKicker {
   display: block;
-  margin-bottom: 18px;
-  color: var(--accent, var(--osso));
+  margin-bottom: 10px;
+  color: var(--accent-ink, var(--fg));
 }
 
 h3.pathTitle {
   font-size: 20px;
   font-weight: 600;
   letter-spacing: -0.01em;
-  margin-bottom: 10px;
+  margin-bottom: 0;
 }
 
+/* trattino come in home tra titolo e descrizione, interlinea corta */
 .pathText {
   font-size: var(--fs-small);
-  color: var(--fg-2);
-  margin-bottom: 28px;
+  line-height: 1.35;
+  color: color-mix(in srgb, var(--fg) 72%, transparent);
+  margin-bottom: 22px;
+  max-width: 34ch;
+}
+
+.pathText::before {
+  content: '';
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: var(--fg);
+  margin: 10px 0;
 }
 
 .pathMeta {
@@ -155,19 +172,27 @@ h3.pathTitle {
   gap: 12px;
 }
 
+/* conteggio corsi come label pillata */
+.pathCount {
+  border: 1px solid color-mix(in srgb, var(--fg) 30%, transparent);
+  border-radius: 999px;
+  padding: 5px 12px 6px;
+}
+
+/* cta esplora sempre visibile, la freccia scatta in hover */
 .pathGo {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
   color: var(--fg);
-  opacity: 0;
-  transform: translateX(-4px);
-  transition: opacity var(--dur) ease, transform var(--dur) var(--ease-out);
 }
 
-a.pathCard:hover .pathGo {
-  opacity: 1;
-  transform: translateX(0);
+.pathGo svg {
+  transition: transform var(--dur) var(--ease-out);
+}
+
+a.pathCard:hover .pathGo svg {
+  transform: translateX(3px);
 }
 
 /* ————— tutto intorno allo studio ————— */

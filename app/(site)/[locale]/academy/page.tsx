@@ -128,19 +128,21 @@ export default async function AcademyPage({
                   className={`rv ${styles.pathCard}`}
                   style={{ '--rvd': `${i * 60}ms` } as CSSProperties}
                 >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={path.photo}
-                    alt=""
-                    className={styles.pathPhoto}
-                    loading="lazy"
-                  />
+                  <div className={styles.pathPhotoBox}>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={path.photo}
+                      alt=""
+                      className={styles.pathPhoto}
+                      loading="lazy"
+                    />
+                  </div>
                   <div className={styles.pathBody}>
                     <span className={`mono ${styles.pathKicker}`}>{`0${i + 1}`}</span>
                     <h3 className={styles.pathTitle}>{item.title}</h3>
                     <p className={styles.pathText}>{item.text}</p>
                     <span className={`mono ${styles.pathMeta}`}>
-                      <span>
+                      <span className={styles.pathCount}>
                         {count} {t.academy.pathsCourses}
                       </span>
                       <span className={styles.pathGo}>

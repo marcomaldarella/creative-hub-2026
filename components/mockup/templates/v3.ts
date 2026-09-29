@@ -81,13 +81,13 @@ export const css = `
   .meta-grid>div:nth-child(even){padding-left:24px;}
   /* cella spaiata in chiusura (corsi con 5 voci): niente filo a destra */
   .meta-grid>div:last-child:nth-child(odd){border-right:0;}
-  .meta-grid .lab{font-size:13.5px;font-weight:500;margin-bottom:6px;
+  .meta-grid .lab{font-size:12.5px;font-weight:500;margin-bottom:6px;
     color:color-mix(in srgb,var(--ink) 62%,transparent);}
-  .meta-grid .val{font-size:clamp(17px,1.35vw,20px);font-weight:700;
-    letter-spacing:-.01em;line-height:1.18;}
+  .meta-grid .val{font-size:clamp(15px,1.1vw,17px);font-weight:700;
+    letter-spacing:-.025em;line-height:1.18;}
   /* riga di servizio sotto al valore (brief 28/09: sei voci solo
      informative, mai cliccabili — l'attenzione resta sulle due CTA) */
-  .meta-grid .sub{font-size:13.5px;line-height:1.35;margin-top:4px;
+  .meta-grid .sub{font-size:12.5px;line-height:1.35;margin-top:4px;
     color:color-mix(in srgb,var(--ink) 62%,transparent);}
   .hero-cta{display:flex;flex-wrap:wrap;gap:12px;align-self:flex-start;}
   a.pill{text-decoration:none;}
@@ -113,8 +113,8 @@ export const css = `
     .hero-sub{font-size:17px;margin-bottom:22px;}
     .meta-grid{margin-bottom:26px;}
     .meta-grid>div{padding:10px 0 12px;}
-    .meta-grid .val{font-size:16.5px;}
-    .meta-grid .sub{font-size:12.5px;}
+    .meta-grid .val{font-size:14.5px;}
+    .meta-grid .sub{font-size:12px;}
     .hero-info{padding-bottom:34px;}
   }
   @media(max-height:720px) and (min-width:1001px){
@@ -319,7 +319,7 @@ export const css = `
     .meta-grid>div{padding-top:13px;padding-bottom:15px;}
     .meta-grid>div:nth-child(odd){padding-right:16px;}
     .meta-grid>div:nth-child(even){padding-left:16px;}
-    .meta-grid .val{font-size:17px;}
+    .meta-grid .val{font-size:15px;}
     .hero-left{padding-top:32px;}
     h1.hero-h1{font-size:clamp(30px,8.5vw,38px);}
     .hero-sub{font-size:17px;margin-bottom:26px;}
@@ -528,10 +528,13 @@ export const css = `
   .cmodal[hidden]{display:none;}
   .cmodal-back{position:absolute;inset:0;background:rgba(0,0,0,.55);
     backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);}
+  /* niente scroll interno (brief 29/09): la card è più larga e alta e
+     tutto il form sta nel formato — nome/email affiancati accorciano
+     la colonna. overflow:auto resta solo come rete per schermi minuscoli */
   .cmodal-card{position:relative;background:var(--ink);color:var(--white);
     border:1px solid color-mix(in srgb,var(--blue) 30%,transparent);border-radius:6px;
     box-shadow:0 24px 64px rgba(0,0,0,.5);
-    width:min(820px,92vw);aspect-ratio:4/3;max-height:92svh;overflow:auto;padding:40px 44px 48px;}
+    width:min(980px,94vw);max-height:94svh;overflow:auto;padding:clamp(32px,4vh,48px) 52px;}
   .cmodal-x{position:absolute;top:16px;right:16px;width:38px;height:38px;border-radius:50%;
     border:1px solid color-mix(in srgb,var(--white) 25%,transparent);background:transparent;color:var(--white);
     display:grid;place-items:center;}
@@ -541,8 +544,11 @@ export const css = `
   .cmodal-kicker::before{content:'';width:20px;height:2px;background:var(--blue);flex-shrink:0;}
   .cmodal-card h3{font-size:clamp(30px,3vw,38px);font-weight:700;letter-spacing:-.03em;
     line-height:1.04;margin:0 0 10px;}
-  .cmodal-card .sub{font-size:15px;line-height:1.45;color:var(--txt-2);margin:0 0 30px;max-width:46ch;}
-  .cmodal-card form{display:flex;flex-direction:column;gap:18px;}
+  .cmodal-card .sub{font-size:15px;line-height:1.45;color:var(--txt-2);margin:0 0 22px;max-width:46ch;}
+  .cmodal-card form{display:flex;flex-direction:column;gap:15px;}
+  /* due campi sulla stessa riga: la colonna si accorcia e il popup
+     resta tutto in vista */
+  .cmodal-card .frow{display:grid;grid-template-columns:1fr 1fr;gap:15px 28px;}
   .cmodal-card label{display:flex;flex-direction:column;gap:7px;font-size:10.5px;
     font-weight:600;letter-spacing:.02em;color:var(--txt-2);}
   .cmodal-card input,.cmodal-card textarea{font-family:inherit;font-size:16.5px;color:var(--white);
@@ -563,7 +569,8 @@ export const css = `
   .cmodal-ok{display:none;}
   .cmodal.sent .cmodal-ok{display:block;}
   @media(max-width:760px){
-    .cmodal-card{aspect-ratio:auto;width:min(480px,94vw);max-height:88svh;padding:32px 26px 28px;}
+    .cmodal-card{width:min(480px,94vw);max-height:88svh;padding:32px 26px 28px;}
+    .cmodal-card .frow{grid-template-columns:1fr;}
   }
 
   /* cursore del carosello (riunione): disco azzurro con freccia
@@ -1147,10 +1154,12 @@ export const html = `
     <form>
       <input type="hidden" name="sezione_origine">
       <input type="hidden" name="intento">
-      <label>nome e cognome<input type="text" name="name" required></label>
-      <label>email<input type="email" name="email" required></label>
+      <div class="frow">
+        <label>nome e cognome<input type="text" name="name" required></label>
+        <label>email<input type="email" name="email" required></label>
+      </div>
       <label>telefono (facoltativo)<input type="tel" name="phone"></label>
-      <label>messaggio<textarea name="message" rows="4" placeholder="Scrivici cosa vuoi sapere del corso"></textarea></label>
+      <label>messaggio<textarea name="message" rows="3" placeholder="Scrivici cosa vuoi sapere del corso"></textarea></label>
       <label class="consent"><input type="checkbox" name="marketing"><span>Voglio ricevere aggiornamenti su corsi, open day e workshop. Ho letto l'<a href="/privacy" target="_blank" rel="noreferrer">informativa privacy</a>.</span></label>
       <button class="pill pill-ink" type="submit">Invia richiesta</button>
     </form>
