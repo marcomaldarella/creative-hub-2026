@@ -132,6 +132,10 @@ a.pathCard:hover .pathPhoto {
   flex-direction: column;
   flex: 1;
   padding: 16px 0 0;
+  /* sopra il canvas della scia fluida: il testo non si inverte (come
+     in home, dove il type sta sopra il layer in difference) */
+  position: relative;
+  z-index: 6;
 }
 
 .pathKicker {

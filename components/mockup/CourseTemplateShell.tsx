@@ -22,8 +22,13 @@ export function CourseTemplateShell({ css, html }: CourseTemplateShellProps) {
 
   useEffect(() => {
     const host = hostRef.current;
-    if (!host || host.shadowRoot) return;
-    const root = host.attachShadow({ mode: 'open' });
+    if (!host) return;
+    // ⚠️ lo shadowRoot NON si può staccare: sopravvive al cleanup (dev
+    // StrictMode monta due volte) — si riusa e si svuota, altrimenti il
+    // secondo mount trovava il root e usciva lasciando la pagina VUOTA
+    // (si vedeva solo il footer)
+    const root = host.shadowRoot ?? host.attachShadow({ mode: 'open' });
+    root.replaceChildren();
 
     const style = document.createElement('style');
     style.textContent = css;
@@ -257,35 +262,38 @@ export function CourseTemplateShell({ css, html }: CourseTemplateShellProps) {
       window.addEventListener('hashchange', fromHash);
     }
 
-    // scia fluida della home sul carosello "come conoscerci" (v3):
-    // stessa simulazione (classe Fluid), inchiostro azzurro, in
-    // difference sopra la sezione — solo mouse, mai con reduced-motion
-    let fluid: Fluid | null = null;
-    let fluidIO: IntersectionObserver | null = null;
-    const connSez = root.getElementById('connetti');
+    // scia fluida della home sui caroselli marcati data-fluid (studio e
+    // "come conoscerci"): stessa simulazione (classe Fluid), inchiostro
+    // azzurro, in difference sopra la sezione — solo mouse, mai con
+    // reduced-motion
+    const fluids: Fluid[] = [];
+    const fluidIOs: IntersectionObserver[] = [];
     if (
-      connSez &&
       window.matchMedia('(hover: hover) and (pointer: fine)').matches &&
       !window.matchMedia('(prefers-reduced-motion: reduce)').matches
     ) {
-      const fcanvas = document.createElement('canvas');
-      fcanvas.className = 'fluid-layer';
-      fcanvas.setAttribute('aria-hidden', 'true');
-      connSez.appendChild(fcanvas);
-      try {
-        fluid = new Fluid(fcanvas, connSez as HTMLElement);
-        fluid.setColor([0.443, 0.722, 1.0]); // azzurro brand
-        fluidIO = new IntersectionObserver(
-          ([en]) => {
-            if (en.isIntersecting) fluid?.start();
-            else fluid?.stop();
-          },
-          { threshold: 0.05 },
-        );
-        fluidIO.observe(connSez);
-      } catch {
-        fcanvas.remove(); // niente WebGL: il carosello vive senza scia
-      }
+      root.querySelectorAll<HTMLElement>('[data-fluid]').forEach((sez) => {
+        const fcanvas = document.createElement('canvas');
+        fcanvas.className = 'fluid-layer';
+        fcanvas.setAttribute('aria-hidden', 'true');
+        sez.appendChild(fcanvas);
+        try {
+          const fluid = new Fluid(fcanvas, sez);
+          fluid.setColor([0.443, 0.722, 1.0]); // azzurro brand
+          const io = new IntersectionObserver(
+            ([en]) => {
+              if (en.isIntersecting) fluid.start();
+              else fluid.stop();
+            },
+            { threshold: 0.05 },
+          );
+          io.observe(sez);
+          fluids.push(fluid);
+          fluidIOs.push(io);
+        } catch {
+          fcanvas.remove(); // niente WebGL: il carosello vive senza scia
+        }
+      });
     }
 
     // testimonial a rotazione: dissolvenza fra le citazioni, frecce ai
@@ -425,8 +433,8 @@ export function CourseTemplateShell({ css, html }: CourseTemplateShellProps) {
     }
 
     return () => {
-      fluidIO?.disconnect();
-      fluid?.dispose();
+      fluidIOs.forEach((io) => io.disconnect());
+      fluids.forEach((f) => f.dispose());
       window.removeEventListener('keydown', onModalKey);
       window.removeEventListener('hashchange', fromHash);
       navCtas.forEach((el) => el.removeEventListener('click', onNavCta));
@@ -446,6 +454,15 @@ export function CourseTemplateShell({ css, html }: CourseTemplateShellProps) {
     // sito (`* { padding: 0 }`, globals.css) matcha anche l'host da fuori
     // e vinceva su ":host{padding-top:var(--header-h)}" nonostante la
     // specificità inferiore — inline sull'host bypassa la contesa.
-    <div ref={hostRef} style={{ paddingTop: 'var(--header-h)' }} />
+    // minHeight+fondo: finché lo shadow DOM non è montato l'host sarebbe
+    // alto zero e alla navigazione si vedeva SOLO il footer.
+    <div
+      ref={hostRef}
+      style={{
+        paddingTop: 'var(--header-h)',
+        minHeight: '100svh',
+        background: '#0A0A0A',
+      }}
+    />
   );
 }

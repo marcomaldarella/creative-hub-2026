@@ -12,6 +12,7 @@ import {
 } from '@/components/ui'
 import { SiteChrome } from '@/components/sections/SiteChrome'
 import { CourseCard } from '@/components/sections/CourseCard'
+import { FluidZone } from '@/components/sections/FluidZone'
 import { CourseSlider } from '@/components/sections/CourseSlider'
 import { TeacherStrip } from '@/components/sections/TeacherStrip'
 import { isLocale, localeHref } from '@/lib/i18n/config'
@@ -115,6 +116,9 @@ export default async function AcademyPage({
           <Reveal as="span" className={`mono ${styles.sectionLabel}`}>
             {t.academy.pathsKicker}
           </Reveal>
+          {/* scia fluida della home sopra le tre foto; il corpo testo
+              sta sopra il canvas (z-index) e non si inverte */}
+          <FluidZone>
           <RevealGroup className={styles.pathsGrid}>
             {PATHS.map((path, i) => {
               const item = t.academy.pathsItems[i]
@@ -155,6 +159,7 @@ export default async function AcademyPage({
               )
             })}
           </RevealGroup>
+          </FluidZone>
         </section>
 
         {/* ————— tutto intorno allo studio ————— */}

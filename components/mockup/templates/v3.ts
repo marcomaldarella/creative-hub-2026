@@ -256,12 +256,21 @@ export const css = `
   .skill h3{font-size:21px;font-weight:700;line-height:1.12;letter-spacing:-.02em;margin:0 0 10px;}
   .skill p{font-size:15px;line-height:1.4;color:var(--txt-2);margin:auto 0 0;max-width:30ch;}
   /* voce ORFANA nell'ultima riga (es. 4 competenze su griglia a 3): la
-     card si allarga su tutta la riga, foto a sinistra e testo a destra,
-     stessa grammatica delle celle — niente buco nero a fianco */
+     card si allarga su tutta la riga come DUE COLONNE 50/50 — foto a
+     sinistra, testo a destra, stessa grammatica delle celle. La foto è
+     assoluta dentro la sua metà: l'altezza la decide la card, non il
+     taglio dell'immagine */
   .skill.wide{grid-column:1/-1;flex-direction:row;align-items:stretch;min-height:0;}
-  .skill.wide .ph{aspect-ratio:auto;width:clamp(260px,38%,560px);flex:none;}
-  .skill.wide .txt{padding:22px 28px 28px;}
+  /* stesso ratio delle celle: a parità di larghezza colonna le foto
+     hanno SEMPRE la stessa altezza (50% su griglia a 2, 1/3 su 3) */
+  .skill.wide .ph{aspect-ratio:16/10;width:50%;flex:none;position:relative;}
+  .skill.wide .ph img{position:absolute;inset:0;}
+  .skill.wide .txt{flex:1;padding:22px 28px 28px;}
   .skill.wide p{margin:8px 0 0;max-width:52ch;}
+  .skillgrid:not(.four) .skill.wide .ph{width:calc(100%/3);}
+  /* con ESATTAMENTE 4 voci la griglia va a 2 colonne: 01 larga, 02+03
+     divise a metà sulla stessa riga, 04 larga (sandwich) */
+  .skillgrid.four{grid-template-columns:repeat(2,1fr);}
   @media(max-width:1080px){.skillgrid{grid-template-columns:repeat(2,1fr);}}
   @media(max-width:620px){
     .skillgrid{grid-template-columns:1fr;}.skill{min-height:0;}
@@ -600,8 +609,9 @@ export const css = `
   .carousel[data-loop] .connect-card .img{cursor:none;}
   @media(hover:none){.ccursor{display:none;}.carousel[data-loop] .connect-card .img{cursor:auto;}}
 
-  /* strato della scia fluida sul carosello connettiti */
-  #connetti{position:relative;}
+  /* strato della scia fluida sui caroselli (connettiti e studio):
+     le sezioni marcate [data-fluid] ricevono il canvas dalla shell */
+  [data-fluid]{position:relative;}
   .fluid-layer{position:absolute;inset:0;width:100%;height:100%;
     pointer-events:none;z-index:5;mix-blend-mode:difference;}
   /* i divisori neri tra le slide stanno SOPRA la scia (la scia passa
@@ -609,9 +619,12 @@ export const css = `
      nera a z-index maggiore del canvas. Niente stacking context sulla
      card (position sì, z-index no), altrimenti la barra resterebbe
      sotto il canvas */
-  #connetti .connect-card{position:relative;}
-  #connetti .connect-card::after{content:"";position:absolute;top:0;bottom:0;
+  [data-fluid] .connect-card,[data-fluid] .fac-card{position:relative;}
+  [data-fluid] .connect-card::after,[data-fluid] .fac-card::after{content:"";position:absolute;top:0;bottom:0;
     left:100%;width:20px;background:var(--ink);z-index:6;pointer-events:none;}
+  /* il cursore azzurro vale anche sulle foto dello studio */
+  .carousel[data-loop] .fac-card .img{cursor:none;}
+  @media(hover:none){.carousel[data-loop] .fac-card .img{cursor:auto;}}
 
   footer.site{background:var(--ink);color:var(--white);padding:64px var(--pad) 28px;border-top:var(--hair) solid color-mix(in srgb,var(--blue) 30%,transparent);}
   .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:32px;margin-bottom:44px;}
@@ -924,7 +937,7 @@ export const html = `
 
 <div class="sezRule"><span></span><i></i></div>
 
-<section class="block tight">
+<section class="block tight" id="studio" data-fluid>
   <div class="sec-flex-head">
     <div>
       <h2 class="sec" style="margin-bottom:4px;" contenteditable="true">Il tuo studio di lavoro</h2>
@@ -933,7 +946,7 @@ export const html = `
     <a class="pill pill-outline-ink" href="/studios" contenteditable="true">Esplora lo studio</a>
   </div>
 
-  <div class="carousel" id="facCarousel">
+  <div class="carousel" id="facCarousel" data-loop>
     <div class="fac-card">
       <div class="img"><img src="/img/sections/studio-regia.jpg" alt="Regia SSL"></div>
       <div class="txt">
@@ -961,6 +974,22 @@ export const html = `
         <h3 contenteditable="true">Aule di produzione</h3>
         <p contenteditable="true">Postazioni individuali con DAW, monitor e controller — le stesse macchine dei corsi.</p>
       </div>
+    </div>
+    <div class="fac-card" aria-hidden="true" data-clone>
+      <div class="img"><img src="/img/sections/studio-regia.jpg" alt=""></div>
+      <div class="txt"><h3>Regia SSL XL Desk</h3><p>55 m² di regia con console SSL XL Desk, per registrazione, mix e mastering a livello professionale.</p></div>
+    </div>
+    <div class="fac-card" aria-hidden="true" data-clone>
+      <div class="img"><img src="/img/sections/studio-regia-b.jpg" alt=""></div>
+      <div class="txt"><h3>Sala live</h3><p>Presa diretta con la band intera nella stessa stanza, ISO box incluso.</p></div>
+    </div>
+    <div class="fac-card" aria-hidden="true" data-clone>
+      <div class="img"><img src="/img/sections/studio-desk.jpg" alt=""></div>
+      <div class="txt"><h3>Tre cabine B-Ear</h3><p>Voce, podcast e doppiaggio: tre cabine dedicate a ogni tipo di registrazione vocale.</p></div>
+    </div>
+    <div class="fac-card" aria-hidden="true" data-clone>
+      <div class="img"><img src="/mockup-corso/img/class-1.jpg" alt=""></div>
+      <div class="txt"><h3>Aule di produzione</h3><p>Postazioni individuali con DAW, monitor e controller — le stesse macchine dei corsi.</p></div>
     </div>
   </div>
   <div class="carousel-nav">
@@ -1083,7 +1112,7 @@ export const html = `
   </div>
 </div>
 
-<section class="block" id="connetti">
+<section class="block" id="connetti" data-fluid>
   <div class="sec-flex-head">
     <div>
       <h2 class="sec" style="margin-bottom:4px;" contenteditable="true">Come conoscerci</h2>
@@ -1345,12 +1374,18 @@ export function buildCourseHtml(d: CourseHtmlData): string {
   /* PRIMA del replace globale di skillImages: le foto demo emesse qui
      vengono poi sovrascritte in round-robin dalla gallery, se c'è */
   if (d.skills && d.skills.length) {
-    /* conteggio che lascia una voce sola nell'ultima riga della griglia
-       a 3: l'ultima card diventa "wide" (foto sx, testo dx) */
-    const orphan = d.skills.length % 3 === 1;
+    /* CON 4 VOCI: sandwich a 2 colonne — 01 larga (foto 50/testo 50),
+       02+03 sulla stessa riga divise a metà, 04 larga. Con altri
+       conteggi che lasciano una voce sola nell'ultima riga della
+       griglia a 3, solo l'ultima diventa "wide" */
+    const n = d.skills.length;
+    const four = n === 4;
+    const orphan = !four && n % 3 === 1;
+    const isWide = (i: number) =>
+      four ? i === 0 || i === 3 : orphan && i === n - 1;
     const cards = d.skills
       .map(
-        (s, i) => `    <article class="skill${orphan && i === d.skills!.length - 1 ? ' wide' : ''}">
+        (s, i) => `    <article class="skill${isWide(i) ? ' wide' : ''}">
       <div class="ph"><img src="${e(SKILL_DEMO_IMGS[i % SKILL_DEMO_IMGS.length])}" alt=""></div>
       <div class="txt">
       <span class="n">0${i + 1}</span>
@@ -1362,7 +1397,7 @@ export function buildCourseHtml(d: CourseHtmlData): string {
       .join('\n');
     h = h.replace(
       /<div class="skillgrid">[\s\S]*?<\/section>/,
-      `<div class="skillgrid">\n${cards}\n  </div>\n</section>`,
+      `<div class="skillgrid${four ? ' four' : ''}">\n${cards}\n  </div>\n</section>`,
     );
   }
 
