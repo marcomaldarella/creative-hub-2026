@@ -1,27 +1,33 @@
-/* pagina di una voce di menu — stessa grammatica delle pagine sezione */
+/* pagina di una voce di menu — portata al linguaggio della landing corso
+   v3 (set 2026): testata compatta, banda video full-bleed, fasce nere che
+   si alternano al colore di pagina, padding più serrati. Tutto via token:
+   la stessa pagina vive su azzurro (academy), arancio (studios), giallo
+   fluo (coworking) e bianco (innovazione, chi-siamo). */
 
 .main {
   padding-top: var(--nav-h);
 }
 
+/* ————— testata ————— */
+
 .head {
-  padding-top: clamp(40px, 6vw, 72px);
+  padding-top: clamp(32px, 4.5vw, 56px);
 }
 
 .back {
   display: block;
-  margin-bottom: clamp(24px, 3vw, 40px);
+  margin-bottom: clamp(20px, 2.5vw, 32px);
 }
 
 .kicker {
   display: block;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   color: var(--accent-ink);
 }
 
 .title {
   font-size: var(--fs-h2);
-  margin-bottom: 18px;
+  margin-bottom: 16px;
   max-width: 20ch;
 }
 
@@ -36,34 +42,92 @@
   font-size: var(--fs-lede);
 }
 
+/* ————— banda video full-bleed ————— */
+
+/* nera di suo (come le fasce): finché il file non arriva la banda legge
+   comunque come fascia scura, niente buchi bianchi */
+.heroMedia {
+  position: relative;
+  margin-top: clamp(32px, 5vw, 56px);
+  height: clamp(300px, 42vw, 560px);
+  background: #000;
+  overflow: hidden;
+}
+
+.heroVideo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 /* ————— punti elenco del documento testi ————— */
 
+/* nel colore di pagina (topic con corsi): la fascia nera arriva subito
+   dopo con la griglia */
 .points {
   padding-top: clamp(36px, 4.5vw, 56px);
 }
 
+/* celle numerate alla corso-v3: filo sopra, numero mono in accento,
+   testo pieno — due colonne da desktop, una sola sotto i 900px */
 .pointsList {
   display: grid;
-  gap: 0;
-  max-width: 68ch;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(20px, 2.6vw, 36px) clamp(20px, 3vw, 48px);
 }
 
 .point {
   border-top: 1px solid var(--line);
-  padding: 16px 0;
-  font-size: var(--fs-lede);
+  padding-top: 14px;
 }
 
-.point:last-child {
+.pointNum {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--accent-ink);
+}
+
+.pointText {
+  font-size: var(--fs-lede);
+  max-width: 52ch;
+}
+
+@media (max-width: 900px) {
+  .pointsList {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+}
+
+/* ————— fascia nera ————— */
+
+/* il wrapper va in coppia con la classe globale scheme-dark, che porta i
+   token scuri completi; qui solo sfondo pieno e padding compatti. La
+   banda video le siede sopra a filo: video + fascia leggono come un
+   unico blocco scuro, poi la pagina torna al suo colore */
+.band {
+  background: #000;
+  padding: clamp(44px, 6vw, 84px) 0;
+}
+
+/* testatina della fascia corsi: etichetta e conteggio ai due margini,
+   filo sotto — stessa grammatica dei sezRule della corso-v3 */
+.bandHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
   border-bottom: 1px solid var(--line);
+  padding-bottom: 14px;
+  margin-bottom: clamp(24px, 3vw, 40px);
 }
 
 /* ————— corsi della tipologia ————— */
 
-.sez {
-  padding: clamp(40px, 5vw, 64px) 0;
-}
-
+/* stessa griglia di /academy/corsi: 4 → 2 → 1 colonne, card CourseCard
+   (nere, testi nel colore di sezione: ri-asseriscono i token da sole) */
 .grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -82,76 +146,15 @@
   }
 }
 
-/* mobile: body dell'intestazione più piccolo e con interlinea corta */
-@media (max-width: 760px) {
-  .title {
-    margin-bottom: 14px;
-  }
-
-  .lede {
-    font-size: 15.5px;
-    line-height: 1.35;
-  }
-
-  .point {
-    font-size: 15px;
-    line-height: 1.35;
-    padding: 13px 0;
-  }
-}
-
-a.course {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  border: 1px solid var(--line);
-  border-radius: 0;
-  overflow: hidden;
-  background: var(--surface);
-  transition: border-color var(--dur) ease;
-}
-
-a.course:hover {
-  border-color: var(--fg);
-}
-
-.courseBody {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  padding: 22px 22px 26px;
-}
-
-.courseKicker {
-  display: block;
-  margin-bottom: 12px;
-  color: var(--accent-ink);
-}
-
-.courseTitle {
-  font-size: 19px;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  line-height: 1.3;
-  margin-bottom: 8px;
-}
-
-.courseSummary {
-  font-size: var(--fs-small);
-  color: var(--fg-2);
-  margin-bottom: 18px;
-}
-
-.courseMeta {
-  display: block;
-  margin-top: auto;
-}
-
 .empty {
   color: var(--fg-2);
 }
 
 /* ————— corpo editoriale da Sanity ————— */
+
+.sez {
+  padding: clamp(44px, 6vw, 84px) 0;
+}
 
 .editorial {
   display: grid;
@@ -174,5 +177,32 @@ a.course:hover {
   align-items: center;
   gap: 24px;
   padding-top: clamp(32px, 4vw, 48px);
-  padding-bottom: var(--sez);
+  padding-bottom: clamp(56px, 7vw, 96px);
+}
+
+/* ————— mobile (414px first) ————— */
+
+@media (max-width: 760px) {
+  .title {
+    margin-bottom: 12px;
+  }
+
+  .lede {
+    font-size: 15.5px;
+    line-height: 1.35;
+  }
+
+  /* banda video: taglio più alto, da fascia a quadro */
+  .heroMedia {
+    height: min(72vw, 420px);
+  }
+
+  .pointText {
+    font-size: 15px;
+    line-height: 1.4;
+  }
+
+  .band {
+    padding: 44px 0;
+  }
 }

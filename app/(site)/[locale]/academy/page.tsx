@@ -11,6 +11,7 @@ import {
   SectionHeader,
 } from '@/components/ui'
 import { SiteChrome } from '@/components/sections/SiteChrome'
+import { BgVideo } from '@/components/sections/BgVideo'
 import { CourseCard } from '@/components/sections/CourseCard'
 import { FluidZone } from '@/components/sections/FluidZone'
 import { CourseSlider } from '@/components/sections/CourseSlider'
@@ -24,22 +25,28 @@ export const dynamic = 'force-dynamic'
 
 /* le 3 card "scegli il tuo percorso": stessi filtri già usati sopra,
    ma come vetrina editoriale — slug della pagina topic + tipologie
-   corso da contare (lib/topics.ts) */
+   corso da contare (lib/topics.ts). Ogni card ha la sua clip muta in
+   loop (BgVideo, lazy): la foto di prima resta come poster, quindi il
+   primo paint è identico e il video arriva solo quando la card entra
+   in viewport. Clip già in uso altrove nel sito (home/bento). */
 const PATHS = [
   {
     slug: 'corsi-universitari',
     types: ['triennio', 'magistrale'],
     photo: '/img/sections/academy-universitari.jpg',
+    video: '/video/node-academy.mp4',
   },
   {
     slug: 'corsi-custom',
     types: ['custom'],
     photo: '/img/sections/academy-custom.jpg',
+    video: '/video/hi-corsi.mp4',
   },
   {
     slug: 'formazione-finanziata',
     types: ['finanziato', 'gratuito'],
     photo: '/img/sections/academy-finanziata.jpg',
+    video: '/video/node-studio.mp4',
   },
 ] as const
 
@@ -133,12 +140,12 @@ export default async function AcademyPage({
                   style={{ '--rvd': `${i * 60}ms` } as CSSProperties}
                 >
                   <div className={styles.pathPhotoBox}>
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={path.photo}
-                      alt=""
+                    {/* clip in loop al posto della foto: la foto resta
+                        poster, lo scale in hover vale anche sul video */}
+                    <BgVideo
+                      src={path.video}
+                      poster={path.photo}
                       className={styles.pathPhoto}
-                      loading="lazy"
                     />
                   </div>
                   <div className={styles.pathBody}>
@@ -192,8 +199,12 @@ export default async function AcademyPage({
 
         <Rule left={t.academy.aroundKicker} right={t.common.courses} />
 
-        {/* ————— corsi in evidenza: fascia nera, strip a 2 card e mezzo ————— */}
-        <div className={styles.highlightBand}>
+        {/* ————— colata nera (linguaggio corso-v3): corsi in evidenza,
+            fascia video a tutto campo e storia vivono in un'unica fascia
+            scura full-bleed — scheme-dark ribalta i token (globals) e
+            dentro l'accento torna osso, come nelle fasce del corso ————— */}
+        <div className={`scheme-dark ${styles.darkBand}`}>
+          {/* corsi in evidenza: strip a 2 card e mezzo sul nero */}
           <section className={`wrap ${styles.highlightSez}`}>
             <div className={styles.highlightHead}>
               <Reveal as="span" className={`mono ${styles.sectionLabel}`}>
@@ -224,23 +235,47 @@ export default async function AcademyPage({
               ))}
             </CourseSlider>
           </section>
+
+          <Rule dark left={t.common.courses} right={t.academy.storiaKicker} />
+
+          {/* fascia video a tutto campo (fullshot della landing corso):
+              la regia SSL in movimento fa da intestazione alla storia —
+              il titolo "Dal 1999" sta SOPRA il video, in basso a sinistra */}
+          <section className={styles.filmSez}>
+            <BgVideo
+              src="/video/hero-5s-1920x1080.mp4"
+              portrait="/video/hero-5s-1080x1920.mp4"
+              poster="/img/sections/studio-regia.jpg"
+              className={styles.filmVideo}
+            />
+            <div className={`wrap ${styles.filmIn}`}>
+              <Reveal as="span" className={`mono ${styles.filmKicker}`}>
+                {t.academy.storiaKicker}
+              </Reveal>
+              <Reveal
+                as="h2"
+                className={`display-thin ${styles.filmTitle}`}
+                delay={80}
+              >
+                {t.academy.storiaTitle}
+              </Reveal>
+            </div>
+          </section>
+
+          {/* ————— dal 1999: la griglia resta sul nero, il titolo è già
+              sulla fascia video qui sopra ————— */}
+          <section className={`wrap ${styles.storiaSez}`}>
+            <RevealGroup className={styles.storiaGrid}>
+              {t.academy.storiaItems.map((item, i) => (
+                <div key={item.title} className={styles.storiaItem}>
+                  <span className={styles.storiaNum}>{`0${i + 1}`}</span>
+                  <h3 className={styles.storiaTitle}>{item.title}</h3>
+                  <p className={styles.storiaText}>{item.text}</p>
+                </div>
+              ))}
+            </RevealGroup>
+          </section>
         </div>
-
-        <Rule left={t.common.courses} right={t.academy.storiaKicker} />
-
-        {/* ————— dal 1999 ————— */}
-        <section className={`wrap ${styles.storiaSez}`}>
-          <SectionHeader kicker={t.academy.storiaKicker} title={t.academy.storiaTitle} />
-          <RevealGroup className={styles.storiaGrid}>
-            {t.academy.storiaItems.map((item, i) => (
-              <div key={item.title} className={styles.storiaItem}>
-                <span className={styles.storiaNum}>{`0${i + 1}`}</span>
-                <h3 className={styles.storiaTitle}>{item.title}</h3>
-                <p className={styles.storiaText}>{item.text}</p>
-              </div>
-            ))}
-          </RevealGroup>
-        </section>
 
         <Rule left={t.academy.storiaKicker} right={t.academy.teachersKicker} />
 
