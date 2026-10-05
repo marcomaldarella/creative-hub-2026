@@ -1,0 +1,488 @@
+[
+ {
+  "id": 3142,
+  "name": "SALA LIVE",
+  "slug": "sala-live",
+  "permalink": "https://bologna-creativehub.it/prodotto/sala-live/",
+  "prices": {
+   "price": "0",
+   "regular_price": "0",
+   "sale_price": "0",
+   "currency_minor_unit": 2
+  },
+  "on_sale": false,
+  "categories": [
+   {
+    "name": "Co-Playing",
+    "slug": "coplaying"
+   }
+  ],
+  "short_description": "",
+  "description": "<p><span style=\"color: #000000;font-family: arial, sans-serif\">Sala di 50mq per registrazione di band, voci, overdub, doppiaggi.</span></p>\n<p><strong><span style=\"color: #000000;font-family: arial, sans-serif\">Caratteristiche:</span></strong></p>\n<ul>\n<li><span style=\"color: #000000;font-family: arial, sans-serif\">Sala Boxy di 50mq</span></li>\n<li><span style=\"color: #000000;font-family: arial, sans-serif\">Impianto audio<br />\n</span></li>\n<li><span style=\"color: #000000;font-family: arial, sans-serif\">Backline (batteria, amplificatori)<br />\n</span></li>\n<li><span style=\"color: #000000;font-family: arial, sans-serif\">Impianto PA per voce</span></li>\n<li><span style=\"color: #000000;font-family: arial, sans-serif\">Cablaggio con regia</span></li>\n<li><span style=\"color: #000000;font-family: arial, sans-serif\">Con o senza tecnico residente</span></li>\n</ul>",
+  "images": [
+   {
+    "src": "https://bologna-creativehub.it/wp-content/uploads/2025/10/Sala-Live-A.jpeg",
+    "alt": ""
+   }
+  ]
+ },
+ {
+  "id": 3096,
+  "name": "STUDIO DI REGISTRAZIONE",
+  "slug": "studio-di-registrazione",
+  "permalink": "https://bologna-creativehub.it/prodotto/studio-di-registrazione/",
+  "prices": {
+   "price": "0",
+   "regular_price": "0",
+   "sale_price": "0",
+   "currency_minor_unit": 2
+  },
+  "on_sale": false,
+  "categories": [
+   {
+    "name": "Co-Playing",
+    "slug": "coplaying"
+   }
+  ],
+  "short_description": "",
+  "description": "<p><span style=\"color: #000000;font-family: arial, sans-serif\">Studio di 50mq per registrazione, mix, podcasting, mastering e post-produzione audio-video.</span></p>\n<p><strong><span style=\"color: #000000;font-family: arial, sans-serif\">Caratteristiche:</span></strong></p>\n<ul>\n<li style=\"list-style-type: none\">\n<ul>\n<li><span style=\"color: #000000;font-family: arial, sans-serif\">Regia Boxy di 50mq</span></li>\n<li><span style=\"color: #000000;font-family: arial, sans-serif\">Sistema Dolby Atmos 7.4.1</span></li>\n<li><span style=\"color: #000000;font-family: arial, sans-serif\">Dolby Commissioning</span></li>\n<li><span style=\"color: #000000;font-family: arial, sans-serif\">Mixer SSL </span></li>\n<li><span style=\"color: #000000;font-family: arial, sans-serif\">Software, plugin ed outboard</span></li>\n<li><span style=\"color: #000000;font-family: arial, sans-serif\">Cablaggio con sala live</span></li>\n<li><span style=\"color: #000000;font-family: arial, sans-serif\">Con o senza fonico residente</span></li>\n</ul>\n</li>\n</ul>",
+  "images": [
+   {
+    "src": "https://bologna-creativehub.it/wp-content/uploads/2025/10/Foto-studio-A.jpeg",
+    "alt": ""
+   }
+  ]
+ },
+ {
+  "id": 3084,
+  "name": "VIP QUICK PASS ANNUALE",
+  "slug": "vip-quick-pass-annuale",
+  "permalink": "https://bologna-creativehub.it/prodotto/vip-quick-pass-annuale/",
+  "prices": {
+   "price": "95000",
+   "regular_price": "95000",
+   "sale_price": "95000",
+   "currency_minor_unit": 2
+  },
+  "on_sale": false,
+  "categories": [
+   {
+    "name": "Co-Working",
+    "slug": "coworking"
+   }
+  ],
+  "short_description": "<p>Con questo Pass è possibile accedere alla struttura e usufruire di un desk flessibile ogni giorno dal lunedi al venerdi per un anno (eccetto le settimane di chiusura del centro: 2 a capodanno e 2 a ferragosto).</p>\n<p>Questi pass giornalieri non permettono di prenotare una particolare postazione, ma in base alla disponibilità verrà individuata la scrivania più adatta alle tue esigenze.</p>\n<p>Servizi compresi:<br />\n– Scrivania flessibile<br />\n– Accesso alle aree comuni<br />\n– Accesso a eventi pubblici<br />\n– Wi-Fi e prese di corrente</p>",
+  "description": "",
+  "images": [
+   {
+    "src": "https://bologna-creativehub.it/wp-content/uploads/2022/03/94.jpg",
+    "alt": ""
+   }
+  ]
+ },
+ {
+  "id": 2624,
+  "name": "PACCHETTO 20 ORE in SALA PROVE CON BATTERIA",
+  "slug": "sala-prove-con-batteria-pacchetto-20-ore",
+  "permalink": "https://bologna-creativehub.it/prodotto/sala-prove-con-batteria-pacchetto-20-ore/",
+  "prices": {
+   "price": "18000",
+   "regular_price": "24700",
+   "sale_price": "18000",
+   "currency_minor_unit": 2
+  },
+  "on_sale": true,
+  "categories": [
+   {
+    "name": "Co-Playing",
+    "slug": "coplaying"
+   }
+  ],
+  "short_description": "<p>Acquista un pacchetto di 20 ore da utilizzare nelle nostre sale prova con batteria Ludwig e Impianto Audio.</p>\n<p>Una volta acquistato il pacchetto potrai prenotare le tue ore direttamente in sede presso il nostro Front Desk.</p>",
+  "description": "<p>Spazio 2,70 x 2,30 con trattamento acustico B-Ear ed allestimento Aramini/Ludwig. Impianto PA audio RDF, smart TV e connessione fibra+WiFi.</p>",
+  "images": [
+   {
+    "src": "https://bologna-creativehub.it/wp-content/uploads/2022/05/IMG_3907-scaled.jpg",
+    "alt": "DRUM BOXES"
+   }
+  ]
+ },
+ {
+  "id": 2408,
+  "name": "DAY PASS (Pacchetto 10 ingressi)",
+  "slug": "day-pass-pacchetto-10-ingressi",
+  "permalink": "https://bologna-creativehub.it/prodotto/day-pass-pacchetto-10-ingressi/",
+  "prices": {
+   "price": "8500",
+   "regular_price": "9500",
+   "sale_price": "8500",
+   "currency_minor_unit": 2
+  },
+  "on_sale": true,
+  "categories": [
+   {
+    "name": "Co-Working",
+    "slug": "coworking"
+   }
+  ],
+  "short_description": "<p><span style=\"font-weight: 400\">Con questo Pass è possibile acquistare in blocco 10 ingressi utilizzabili entro 1 anno dall&#8217;acquisto. </span></p>\n<p><span style=\"font-weight: 400\">Potrai accedere alla struttura e usufruire di un desk flessibile per tutta la giornata. I pass giornalieri non permettono di prenotare una particolare postazione, ma in base alla disponibilità verrà individuata la scrivania più adatta alle tue esigenze.</span></p>\n<p><span style=\"font-weight: 400\">Servizi compresi:</span><br />\n<span style=\"font-weight: 400\">&#8211; Scrivania flessibile</span><br />\n<span style=\"font-weight: 400\">&#8211; Accesso alle aree comuni</span><br />\n<span style=\"font-weight: 400\">&#8211; 1 Stampa gratuita</span><br />\n<span style=\"font-weight: 400\">&#8211; Accesso a eventi pubblici</span><br />\n<span style=\"font-weight: 400\">&#8211; Wi-Fi e prese di corrente</span></p>",
+  "description": "<p>[et_pb_section fb_built=&#8221;1&#8243; _builder_version=&#8221;4.16&#8243; custom_padding=&#8221;0px||||false|false&#8221; da_disable_devices=&#8221;off|off|off&#8221; global_colors_info=&#8221;{}&#8221; da_is_popup=&#8221;off&#8221; da_exit_intent=&#8221;off&#8221; da_has_close=&#8221;on&#8221; da_alt_close=&#8221;off&#8221; da_dark_close=&#8221;off&#8221; da_not_modal=&#8221;on&#8221; da_is_singular=&#8221;off&#8221; da_with_loader=&#8221;off&#8221; da_has_shadow=&#8221;on&#8221;][et_pb_row _builder_version=&#8221;4.16&#8243; background_size=&#8221;initial&#8221; background_position=&#8221;top_left&#8221; background_repeat=&#8221;repeat&#8221; width=&#8221;100%&#8221; custom_padding=&#8221;0px||0px||false|false&#8221; global_colors_info=&#8221;{}&#8221;][et_pb_column type=&#8221;4_4&#8243; _builder_version=&#8221;4.16&#8243; custom_padding=&#8221;|||&#8221; global_colors_info=&#8221;{}&#8221; custom_padding__hover=&#8221;|||&#8221;][et_pb_wc_breadcrumb _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_breadcrumb][et_pb_wc_cart_notice _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_cart_notice][/et_pb_column][/et_pb_row][et_pb_row column_structure=&#8221;1_2,1_2&#8243; _builder_version=&#8221;4.16&#8243; background_size=&#8221;initial&#8221; background_position=&#8221;top_left&#8221; background_repeat=&#8221;repeat&#8221; width=&#8221;100%&#8221; custom_padding=&#8221;0px||||false|false&#8221; global_colors_info=&#8221;{}&#8221;][et_pb_column type=&#8221;1_2&#8243; _builder_version=&#8221;4.16&#8243; custom_padding=&#8221;|||&#8221; global_colors_info=&#8221;{}&#8221; custom_padding__hover=&#8221;|||&#8221;][et_pb_wc_images _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_images][/et_pb_column][et_pb_column type=&#8221;1_2&#8243; _builder_version=&#8221;4.16&#8243; custom_padding=&#8221;|||&#8221; global_colors_info=&#8221;{}&#8221; custom_padding__hover=&#8221;|||&#8221;][et_pb_wc_title _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_title][et_pb_wc_rating _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_rating][et_pb_wc_price _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_price][et_pb_wc_description _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_description][et_pb_wc_add_to_cart _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_add_to_cart][et_pb_wc_meta _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_meta][/et_pb_column][/et_pb_row][et_pb_row _builder_version=&#8221;4.16&#8243; background_size=&#8221;initial&#8221; background_position=&#8221;top_left&#8221; background_repeat=&#8221;repeat&#8221; width=&#8221;100%&#8221; global_colors_info=&#8221;{}&#8221;][et_pb_column type=&#8221;4_4&#8243; _builder_version=&#8221;4.16&#8243; custom_padding=&#8221;|||&#8221; global_colors_info=&#8221;{}&#8221; custom_padding__hover=&#8221;|||&#8221;][et_pb_wc_tabs _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;]\t\t\t\t\t[/et_pb_wc_tabs][et_pb_wc_upsells _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_upsells][et_pb_wc_related_products _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_related_products][/et_pb_column][/et_pb_row][/et_pb_section]</p>",
+  "images": [
+   {
+    "src": "https://bologna-creativehub.it/wp-content/uploads/2022/03/08.jpeg",
+    "alt": ""
+   }
+  ]
+ },
+ {
+  "id": 2398,
+  "name": "AREA CULTURE",
+  "slug": "area-culture",
+  "permalink": "https://bologna-creativehub.it/prodotto/area-culture/",
+  "prices": {
+   "price": "17500",
+   "regular_price": "17500",
+   "sale_price": "17500",
+   "currency_minor_unit": 2
+  },
+  "on_sale": false,
+  "categories": [
+   {
+    "name": "Co-Working",
+    "slug": "coworking"
+   }
+  ],
+  "short_description": "<p><span style=\"color: #000000\">Area utilizzabile per incontri aziendali, piccole conferenze, rinfreschi . Possibilità di avere area circoscritta mediante pannellature divisorie</span></p>\n<p><span style=\"color: #000000\">Servizi compresi:<br />\n– Accesso alle aree comuni<br />\n– Servizi<br />\n– Tavoli e sedie<br />\n– Wi-Fi e prese di corrente</span><br />\n<span style=\"color: #000000\">– Cucina con frigorifero (opzionale)</span></p>",
+  "description": "<p>[et_pb_section fb_built=&#8221;1&#8243; _builder_version=&#8221;4.16&#8243; custom_padding=&#8221;0px||||false|false&#8221; da_disable_devices=&#8221;off|off|off&#8221; global_colors_info=&#8221;{}&#8221; da_is_popup=&#8221;off&#8221; da_exit_intent=&#8221;off&#8221; da_has_close=&#8221;on&#8221; da_alt_close=&#8221;off&#8221; da_dark_close=&#8221;off&#8221; da_not_modal=&#8221;on&#8221; da_is_singular=&#8221;off&#8221; da_with_loader=&#8221;off&#8221; da_has_shadow=&#8221;on&#8221;][et_pb_row _builder_version=&#8221;4.16&#8243; background_size=&#8221;initial&#8221; background_position=&#8221;top_left&#8221; background_repeat=&#8221;repeat&#8221; width=&#8221;100%&#8221; custom_padding=&#8221;0px||0px||false|false&#8221; global_colors_info=&#8221;{}&#8221;][et_pb_column type=&#8221;4_4&#8243; _builder_version=&#8221;4.16&#8243; custom_padding=&#8221;|||&#8221; global_colors_info=&#8221;{}&#8221; custom_padding__hover=&#8221;|||&#8221;][et_pb_wc_breadcrumb _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_breadcrumb][et_pb_wc_cart_notice _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_cart_notice][/et_pb_column][/et_pb_row][et_pb_row column_structure=&#8221;1_2,1_2&#8243; _builder_version=&#8221;4.16&#8243; background_size=&#8221;initial&#8221; background_position=&#8221;top_left&#8221; background_repeat=&#8221;repeat&#8221; width=&#8221;100%&#8221; custom_padding=&#8221;0px||||false|false&#8221; global_colors_info=&#8221;{}&#8221;][et_pb_column type=&#8221;1_2&#8243; _builder_version=&#8221;4.16&#8243; custom_padding=&#8221;|||&#8221; global_colors_info=&#8221;{}&#8221; custom_padding__hover=&#8221;|||&#8221;][et_pb_wc_images _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_images][/et_pb_column][et_pb_column type=&#8221;1_2&#8243; _builder_version=&#8221;4.16&#8243; custom_padding=&#8221;|||&#8221; global_colors_info=&#8221;{}&#8221; custom_padding__hover=&#8221;|||&#8221;][et_pb_wc_title _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_title][et_pb_wc_rating _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_rating][et_pb_wc_price _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_price][et_pb_wc_description _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_description][et_pb_wc_add_to_cart _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_add_to_cart][et_pb_wc_meta _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_meta][/et_pb_column][/et_pb_row][et_pb_row _builder_version=&#8221;4.16&#8243; background_size=&#8221;initial&#8221; background_position=&#8221;top_left&#8221; background_repeat=&#8221;repeat&#8221; width=&#8221;100%&#8221; global_colors_info=&#8221;{}&#8221;][et_pb_column type=&#8221;4_4&#8243; _builder_version=&#8221;4.16&#8243; custom_padding=&#8221;|||&#8221; global_colors_info=&#8221;{}&#8221; custom_padding__hover=&#8221;|||&#8221;][et_pb_wc_tabs _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;]\t\t\t\t\t[/et_pb_wc_tabs][et_pb_wc_upsells _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_upsells][et_pb_wc_related_products _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_related_products][/et_pb_column][/et_pb_row][/et_pb_section]</p>",
+  "images": [
+   {
+    "src": "https://bologna-creativehub.it/wp-content/uploads/2023/02/FOTO-PER-NUOVO-SITO.png",
+    "alt": "Area Culture"
+   }
+  ]
+ },
+ {
+  "id": 1309,
+  "name": "MAIN STAGE con Poltrone e Tavolino / HP100",
+  "slug": "main-stage-con-divanetto-hp100",
+  "permalink": "https://bologna-creativehub.it/prodotto/main-stage-con-divanetto-hp100/",
+  "prices": {
+   "price": "17500",
+   "regular_price": "17500",
+   "sale_price": "17500",
+   "currency_minor_unit": 2
+  },
+  "on_sale": false,
+  "categories": [
+   {
+    "name": "Co-Playing",
+    "slug": "coplaying"
+   }
+  ],
+  "short_description": "<p>Un grande spazio (350mq) innovativo e flessibile, che si adatta a diversi tipi di eventi come talk, presentazione e showcasse.</p>",
+  "description": "<p>[et_pb_section fb_built=&#8221;1&#8243; _builder_version=&#8221;4.16&#8243; custom_padding=&#8221;0px||||false|false&#8221; hover_enabled=&#8221;0&#8243; da_disable_devices=&#8221;off|off|off&#8221; global_colors_info=&#8221;{}&#8221; sticky_enabled=&#8221;0&#8243; da_is_popup=&#8221;off&#8221; da_exit_intent=&#8221;off&#8221; da_has_close=&#8221;on&#8221; da_alt_close=&#8221;off&#8221; da_dark_close=&#8221;off&#8221; da_not_modal=&#8221;on&#8221; da_is_singular=&#8221;off&#8221; da_with_loader=&#8221;off&#8221; da_has_shadow=&#8221;on&#8221;][et_pb_row _builder_version=&#8221;4.16&#8243; background_size=&#8221;initial&#8221; background_position=&#8221;top_left&#8221; background_repeat=&#8221;repeat&#8221; width=&#8221;100%&#8221; custom_padding=&#8221;0px||0px||false|false&#8221; global_colors_info=&#8221;{}&#8221;][et_pb_column type=&#8221;4_4&#8243; _builder_version=&#8221;4.16&#8243; custom_padding=&#8221;|||&#8221; global_colors_info=&#8221;{}&#8221; custom_padding__hover=&#8221;|||&#8221;][et_pb_wc_breadcrumb _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_breadcrumb][et_pb_wc_cart_notice _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_cart_notice][/et_pb_column][/et_pb_row][et_pb_row column_structure=&#8221;1_2,1_2&#8243; _builder_version=&#8221;4.16&#8243; background_size=&#8221;initial&#8221; background_position=&#8221;top_left&#8221; background_repeat=&#8221;repeat&#8221; width=&#8221;100%&#8221; custom_padding=&#8221;0px||||false|false&#8221; global_colors_info=&#8221;{}&#8221;][et_pb_column type=&#8221;1_2&#8243; _builder_version=&#8221;4.16&#8243; custom_padding=&#8221;|||&#8221; global_colors_info=&#8221;{}&#8221; custom_padding__hover=&#8221;|||&#8221;][et_pb_wc_images _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_images][/et_pb_column][et_pb_column type=&#8221;1_2&#8243; _builder_version=&#8221;4.16&#8243; custom_padding=&#8221;|||&#8221; global_colors_info=&#8221;{}&#8221; custom_padding__hover=&#8221;|||&#8221;][et_pb_wc_title _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_title][et_pb_wc_rating _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_rating][et_pb_wc_price _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_price][et_pb_wc_description _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_description][et_pb_wc_add_to_cart _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_add_to_cart][et_pb_wc_meta _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_meta][/et_pb_column][/et_pb_row][et_pb_row _builder_version=&#8221;4.16&#8243; background_size=&#8221;initial&#8221; background_position=&#8221;top_left&#8221; background_repeat=&#8221;repeat&#8221; width=&#8221;100%&#8221; global_colors_info=&#8221;{}&#8221;][et_pb_column type=&#8221;4_4&#8243; _builder_version=&#8221;4.16&#8243; custom_padding=&#8221;|||&#8221; global_colors_info=&#8221;{}&#8221; custom_padding__hover=&#8221;|||&#8221;][et_pb_wc_tabs _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;]\t\t\t\t\t[/et_pb_wc_tabs][et_pb_wc_upsells _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_upsells][et_pb_wc_related_products _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_related_products][/et_pb_column][/et_pb_row][/et_pb_section]</p>",
+  "images": [
+   {
+    "src": "https://bologna-creativehub.it/wp-content/uploads/2022/08/14.jpg",
+    "alt": ""
+   }
+  ]
+ },
+ {
+  "id": 1308,
+  "name": "MAIN STAGE con Strumentazione/ HP100",
+  "slug": "main-stage-hp100",
+  "permalink": "https://bologna-creativehub.it/prodotto/main-stage-hp100/",
+  "prices": {
+   "price": "25000",
+   "regular_price": "25000",
+   "sale_price": "25000",
+   "currency_minor_unit": 2
+  },
+  "on_sale": false,
+  "categories": [
+   {
+    "name": "Co-Playing",
+    "slug": "coplaying"
+   }
+  ],
+  "short_description": "<p>Un grande spazio (350mq) innovativo e flessibile, che si adatta a diversi tipi di eventi come talk, presentazione e showcasse.</p>",
+  "description": "<p>[et_pb_section fb_built=&#8221;1&#8243; _builder_version=&#8221;4.16&#8243; custom_padding=&#8221;0px||||false|false&#8221; da_disable_devices=&#8221;off|off|off&#8221; global_colors_info=&#8221;{}&#8221; da_is_popup=&#8221;off&#8221; da_exit_intent=&#8221;off&#8221; da_has_close=&#8221;on&#8221; da_alt_close=&#8221;off&#8221; da_dark_close=&#8221;off&#8221; da_not_modal=&#8221;on&#8221; da_is_singular=&#8221;off&#8221; da_with_loader=&#8221;off&#8221; da_has_shadow=&#8221;on&#8221;][et_pb_row _builder_version=&#8221;4.16&#8243; background_size=&#8221;initial&#8221; background_position=&#8221;top_left&#8221; background_repeat=&#8221;repeat&#8221; width=&#8221;100%&#8221; custom_padding=&#8221;0px||0px||false|false&#8221; global_colors_info=&#8221;{}&#8221;][et_pb_column type=&#8221;4_4&#8243; _builder_version=&#8221;4.16&#8243; custom_padding=&#8221;|||&#8221; global_colors_info=&#8221;{}&#8221; custom_padding__hover=&#8221;|||&#8221;][et_pb_wc_breadcrumb _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_breadcrumb][et_pb_wc_cart_notice _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_cart_notice][/et_pb_column][/et_pb_row][et_pb_row column_structure=&#8221;1_2,1_2&#8243; _builder_version=&#8221;4.16&#8243; background_size=&#8221;initial&#8221; background_position=&#8221;top_left&#8221; background_repeat=&#8221;repeat&#8221; width=&#8221;100%&#8221; custom_padding=&#8221;0px||||false|false&#8221; global_colors_info=&#8221;{}&#8221;][et_pb_column type=&#8221;1_2&#8243; _builder_version=&#8221;4.16&#8243; custom_padding=&#8221;|||&#8221; global_colors_info=&#8221;{}&#8221; custom_padding__hover=&#8221;|||&#8221;][et_pb_wc_images _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_images][/et_pb_column][et_pb_column type=&#8221;1_2&#8243; _builder_version=&#8221;4.16&#8243; custom_padding=&#8221;|||&#8221; global_colors_info=&#8221;{}&#8221; custom_padding__hover=&#8221;|||&#8221;][et_pb_wc_title _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_title][et_pb_wc_rating _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_rating][et_pb_wc_price _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_price][et_pb_wc_description _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_description][et_pb_wc_add_to_cart _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_add_to_cart][et_pb_wc_meta _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_meta][/et_pb_column][/et_pb_row][et_pb_row _builder_version=&#8221;4.16&#8243; background_size=&#8221;initial&#8221; background_position=&#8221;top_left&#8221; background_repeat=&#8221;repeat&#8221; width=&#8221;100%&#8221; global_colors_info=&#8221;{}&#8221;][et_pb_column type=&#8221;4_4&#8243; _builder_version=&#8221;4.16&#8243; custom_padding=&#8221;|||&#8221; global_colors_info=&#8221;{}&#8221; custom_padding__hover=&#8221;|||&#8221;][et_pb_wc_tabs _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;]\t\t\t\t\t[/et_pb_wc_tabs][et_pb_wc_upsells _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_upsells][et_pb_wc_related_products _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_related_products][/et_pb_column][/et_pb_row][/et_pb_section]</p>",
+  "images": [
+   {
+    "src": "https://bologna-creativehub.it/wp-content/uploads/2022/08/19.jpg",
+    "alt": ""
+   }
+  ]
+ },
+ {
+  "id": 1003,
+  "name": "DOUBLE DRUM BOX / HP103",
+  "slug": "double-drum-box-hp103",
+  "permalink": "https://bologna-creativehub.it/prodotto/double-drum-box-hp103/",
+  "prices": {
+   "price": "3800",
+   "regular_price": "3800",
+   "sale_price": "3800",
+   "currency_minor_unit": 2
+  },
+  "on_sale": false,
+  "categories": [
+   {
+    "name": "Co-Playing",
+    "slug": "coplaying"
+   }
+  ],
+  "short_description": "",
+  "description": "<p>[et_pb_section fb_built=&#8221;1&#8243; _builder_version=&#8221;4.16&#8243; custom_padding=&#8221;0px||||false|false&#8221; da_disable_devices=&#8221;off|off|off&#8221; global_colors_info=&#8221;{}&#8221; da_is_popup=&#8221;off&#8221; da_exit_intent=&#8221;off&#8221; da_has_close=&#8221;on&#8221; da_alt_close=&#8221;off&#8221; da_dark_close=&#8221;off&#8221; da_not_modal=&#8221;on&#8221; da_is_singular=&#8221;off&#8221; da_with_loader=&#8221;off&#8221; da_has_shadow=&#8221;on&#8221;][et_pb_row _builder_version=&#8221;4.16&#8243; background_size=&#8221;initial&#8221; background_position=&#8221;top_left&#8221; background_repeat=&#8221;repeat&#8221; width=&#8221;100%&#8221; custom_padding=&#8221;0px||0px||false|false&#8221; global_colors_info=&#8221;{}&#8221;][et_pb_column type=&#8221;4_4&#8243; _builder_version=&#8221;4.16&#8243; custom_padding=&#8221;|||&#8221; global_colors_info=&#8221;{}&#8221; custom_padding__hover=&#8221;|||&#8221;][et_pb_wc_breadcrumb _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_breadcrumb][et_pb_wc_cart_notice _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_cart_notice][/et_pb_column][/et_pb_row][et_pb_row column_structure=&#8221;1_2,1_2&#8243; _builder_version=&#8221;4.16&#8243; background_size=&#8221;initial&#8221; background_position=&#8221;top_left&#8221; background_repeat=&#8221;repeat&#8221; width=&#8221;100%&#8221; custom_padding=&#8221;0px||||false|false&#8221; global_colors_info=&#8221;{}&#8221;][et_pb_column type=&#8221;1_2&#8243; _builder_version=&#8221;4.16&#8243; custom_padding=&#8221;|||&#8221; global_colors_info=&#8221;{}&#8221; custom_padding__hover=&#8221;|||&#8221;][et_pb_wc_images _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_images][/et_pb_column][et_pb_column type=&#8221;1_2&#8243; _builder_version=&#8221;4.16&#8243; custom_padding=&#8221;|||&#8221; global_colors_info=&#8221;{}&#8221; custom_padding__hover=&#8221;|||&#8221;][et_pb_wc_title _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_title][et_pb_wc_rating _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_rating][et_pb_wc_price _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_price][et_pb_wc_description _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_description][et_pb_wc_add_to_cart _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_add_to_cart][et_pb_wc_meta _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_meta][/et_pb_column][/et_pb_row][et_pb_row _builder_version=&#8221;4.16&#8243; background_size=&#8221;initial&#8221; background_position=&#8221;top_left&#8221; background_repeat=&#8221;repeat&#8221; width=&#8221;100%&#8221; global_colors_info=&#8221;{}&#8221;][et_pb_column type=&#8221;4_4&#8243; _builder_version=&#8221;4.16&#8243; custom_padding=&#8221;|||&#8221; global_colors_info=&#8221;{}&#8221; custom_padding__hover=&#8221;|||&#8221;][et_pb_wc_tabs _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;]\t\t\t\t\t[/et_pb_wc_tabs][et_pb_wc_upsells _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_upsells][et_pb_wc_related_products _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_related_products][/et_pb_column][/et_pb_row][/et_pb_section]</p>",
+  "images": [
+   {
+    "src": "https://bologna-creativehub.it/wp-content/uploads/2022/05/IMG_3905-scaled.jpg",
+    "alt": "HP103"
+   }
+  ]
+ },
+ {
+  "id": 998,
+  "name": "SALA PROVE CON BATTERIA / HP108",
+  "slug": "sala-prove-con-batteria-hp108",
+  "permalink": "https://bologna-creativehub.it/prodotto/sala-prove-con-batteria-hp108/",
+  "prices": {
+   "price": "3000",
+   "regular_price": "3000",
+   "sale_price": "3000",
+   "currency_minor_unit": 2
+  },
+  "on_sale": false,
+  "categories": [
+   {
+    "name": "Co-Playing",
+    "slug": "coplaying"
+   }
+  ],
+  "short_description": "<p>Spazi 2,70 x 2,30 con trattamento acustico B-Ear ed allestimento Aramini/Ludwig, impianto PA audio RCF, smart tv e connessione fibra+WiFi.</p>",
+  "description": "<p>Spazio 2,70 x 2,30 con trattamento acustico B-Ear ed allestimento Aramini/Ludwig. Impianto PA audio RDF, smart TV e connessione fibra+WiFi.</p>",
+  "images": [
+   {
+    "src": "https://bologna-creativehub.it/wp-content/uploads/2022/05/IMG_3907-scaled.jpg",
+    "alt": "DRUM BOXES"
+   }
+  ]
+ },
+ {
+  "id": 963,
+  "name": "SALA DIDATTICA",
+  "slug": "sala-didattica",
+  "permalink": "https://bologna-creativehub.it/prodotto/sala-didattica/",
+  "prices": {
+   "price": "15950",
+   "regular_price": "15950",
+   "sale_price": "15950",
+   "currency_minor_unit": 2
+  },
+  "on_sale": false,
+  "categories": [
+   {
+    "name": "Co-Working",
+    "slug": "coworking"
+   }
+  ],
+  "short_description": "<p>Sala didattica per workshop, adatte per eventi o corsi di formazione.</p>\n<p>Caratteristiche:<br />\n&#8211; Lavagna LIM e<br />\n&#8211; Sedie con tavolini<br />\n&#8211; Wi-Fi e prese di corrente<br />\n&#8211; Capienza fino a 30 persone</p>",
+  "description": "<p>[et_pb_section fb_built=&#8221;1&#8243; _builder_version=&#8221;4.16&#8243; custom_padding=&#8221;0px||||false|false&#8221; da_disable_devices=&#8221;off|off|off&#8221; global_colors_info=&#8221;{}&#8221; da_is_popup=&#8221;off&#8221; da_exit_intent=&#8221;off&#8221; da_has_close=&#8221;on&#8221; da_alt_close=&#8221;off&#8221; da_dark_close=&#8221;off&#8221; da_not_modal=&#8221;on&#8221; da_is_singular=&#8221;off&#8221; da_with_loader=&#8221;off&#8221; da_has_shadow=&#8221;on&#8221;][et_pb_row _builder_version=&#8221;4.16&#8243; background_size=&#8221;initial&#8221; background_position=&#8221;top_left&#8221; background_repeat=&#8221;repeat&#8221; width=&#8221;100%&#8221; custom_padding=&#8221;0px||0px||false|false&#8221; global_colors_info=&#8221;{}&#8221;][et_pb_column type=&#8221;4_4&#8243; _builder_version=&#8221;4.16&#8243; custom_padding=&#8221;|||&#8221; global_colors_info=&#8221;{}&#8221; custom_padding__hover=&#8221;|||&#8221;][et_pb_wc_breadcrumb _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_breadcrumb][et_pb_wc_cart_notice _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_cart_notice][/et_pb_column][/et_pb_row][et_pb_row column_structure=&#8221;1_2,1_2&#8243; _builder_version=&#8221;4.16&#8243; background_size=&#8221;initial&#8221; background_position=&#8221;top_left&#8221; background_repeat=&#8221;repeat&#8221; width=&#8221;100%&#8221; custom_padding=&#8221;0px||||false|false&#8221; global_colors_info=&#8221;{}&#8221;][et_pb_column type=&#8221;1_2&#8243; _builder_version=&#8221;4.16&#8243; custom_padding=&#8221;|||&#8221; global_colors_info=&#8221;{}&#8221; custom_padding__hover=&#8221;|||&#8221;][et_pb_wc_images _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_images][/et_pb_column][et_pb_column type=&#8221;1_2&#8243; _builder_version=&#8221;4.16&#8243; custom_padding=&#8221;|||&#8221; global_colors_info=&#8221;{}&#8221; custom_padding__hover=&#8221;|||&#8221;][et_pb_wc_title _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_title][et_pb_wc_rating _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_rating][et_pb_wc_price _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_price][et_pb_wc_description _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_description][et_pb_wc_add_to_cart _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_add_to_cart][et_pb_wc_meta _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_meta][/et_pb_column][/et_pb_row][et_pb_row _builder_version=&#8221;4.16&#8243; background_size=&#8221;initial&#8221; background_position=&#8221;top_left&#8221; background_repeat=&#8221;repeat&#8221; width=&#8221;100%&#8221; global_colors_info=&#8221;{}&#8221;][et_pb_column type=&#8221;4_4&#8243; _builder_version=&#8221;4.16&#8243; custom_padding=&#8221;|||&#8221; global_colors_info=&#8221;{}&#8221; custom_padding__hover=&#8221;|||&#8221;][et_pb_wc_tabs _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;]\t\t\t\t\t[/et_pb_wc_tabs][et_pb_wc_upsells _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_upsells][et_pb_wc_related_products _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_related_products][/et_pb_column][/et_pb_row][/et_pb_section]</p>",
+  "images": [
+   {
+    "src": "https://bologna-creativehub.it/wp-content/uploads/2022/03/29.jpeg",
+    "alt": ""
+   }
+  ]
+ },
+ {
+  "id": 838,
+  "name": "PRODUCTION BOXES",
+  "slug": "production-boxes",
+  "permalink": "https://bologna-creativehub.it/prodotto/production-boxes/",
+  "prices": {
+   "price": "3000",
+   "regular_price": "3000",
+   "sale_price": "3000",
+   "currency_minor_unit": 2
+  },
+  "on_sale": false,
+  "categories": [
+   {
+    "name": "Co-Playing",
+    "slug": "coplaying"
+   }
+  ],
+  "short_description": "",
+  "description": "<p>Spazio 2,70 x 2,30 con trattamento acustico B-Ear  ed allestimento Midiware. Ideale per Pre-Produzione.</p>",
+  "images": [
+   {
+    "src": "https://bologna-creativehub.it/wp-content/uploads/2022/05/Schermata-2024-07-04-alle-10.10.04.png",
+    "alt": ""
+   }
+  ]
+ },
+ {
+  "id": 825,
+  "name": "DOUBLE DRUM BOX / HP101",
+  "slug": "double-drum-box-hp101",
+  "permalink": "https://bologna-creativehub.it/prodotto/double-drum-box-hp101/",
+  "prices": {
+   "price": "3800",
+   "regular_price": "3800",
+   "sale_price": "3800",
+   "currency_minor_unit": 2
+  },
+  "on_sale": false,
+  "categories": [
+   {
+    "name": "Co-Playing",
+    "slug": "coplaying"
+   }
+  ],
+  "short_description": "",
+  "description": "<p>Spazi 4,65 x 2,70 con trattamento acustico B-Ear ed allestimento Aramini/Ludwig, Bogner, Hiwatt e GR Bass. Impianto PA audio RCF, smart TV e connessione fibra+WiFi.</p>",
+  "images": [
+   {
+    "src": "https://bologna-creativehub.it/wp-content/uploads/2022/05/Box-House-of-Performance-1.png",
+    "alt": "HP101"
+   }
+  ]
+ },
+ {
+  "id": 822,
+  "name": "SALA PROVE CON BATTERIA / HP107",
+  "slug": "sala-prove-con-batteria",
+  "permalink": "https://bologna-creativehub.it/prodotto/sala-prove-con-batteria/",
+  "prices": {
+   "price": "3000",
+   "regular_price": "3000",
+   "sale_price": "3000",
+   "currency_minor_unit": 2
+  },
+  "on_sale": false,
+  "categories": [
+   {
+    "name": "Co-Playing",
+    "slug": "coplaying"
+   }
+  ],
+  "short_description": "<p>Spazi 2,70 x 2,30 con trattamento acustico B-Ear ed allestimento Aramini/Ludwig, impianto PA audio RCF, smart tv e connessione fibra+WiFi.</p>",
+  "description": "<p>Spazio 2,70 x 2,30 con trattamento acustico B-Ear ed allestimento Aramini/Ludwig. Impianto PA audio RDF, smart TV e connessione fibra+WiFi.</p>",
+  "images": [
+   {
+    "src": "https://bologna-creativehub.it/wp-content/uploads/2022/05/1.png",
+    "alt": "HP107"
+   }
+  ]
+ },
+ {
+  "id": 819,
+  "name": "SALA RIUNIONI",
+  "slug": "sala-riunioni",
+  "permalink": "https://bologna-creativehub.it/prodotto/sala-riunioni/",
+  "prices": {
+   "price": "9000",
+   "regular_price": "9000",
+   "sale_price": "9000",
+   "currency_minor_unit": 2
+  },
+  "on_sale": false,
+  "categories": [
+   {
+    "name": "Co-Working",
+    "slug": "coworking"
+   }
+  ],
+  "short_description": "<p>Sala meeting adatta per organizzare riunioni e incontri privati.</p>\n<p>Caratteristiche:<br />\n&#8211; Sala finestrata e molto luminosa<br />\n&#8211; Smart tv 55”<br />\n&#8211; Lavagna, tavoli e sedie.<br />\n&#8211; Wi-Fi e prese di corrente<br />\n&#8211; Capienza fino a 20 persone</p>",
+  "description": "<p>[et_pb_section fb_built=&#8221;1&#8243; _builder_version=&#8221;4.16&#8243; custom_padding=&#8221;0px||||false|false&#8221; da_disable_devices=&#8221;off|off|off&#8221; global_colors_info=&#8221;{}&#8221; da_is_popup=&#8221;off&#8221; da_exit_intent=&#8221;off&#8221; da_has_close=&#8221;on&#8221; da_alt_close=&#8221;off&#8221; da_dark_close=&#8221;off&#8221; da_not_modal=&#8221;on&#8221; da_is_singular=&#8221;off&#8221; da_with_loader=&#8221;off&#8221; da_has_shadow=&#8221;on&#8221;][et_pb_row _builder_version=&#8221;4.16&#8243; background_size=&#8221;initial&#8221; background_position=&#8221;top_left&#8221; background_repeat=&#8221;repeat&#8221; width=&#8221;100%&#8221; custom_padding=&#8221;0px||0px||false|false&#8221; global_colors_info=&#8221;{}&#8221;][et_pb_column type=&#8221;4_4&#8243; _builder_version=&#8221;4.16&#8243; custom_padding=&#8221;|||&#8221; global_colors_info=&#8221;{}&#8221; custom_padding__hover=&#8221;|||&#8221;][et_pb_wc_breadcrumb _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_breadcrumb][et_pb_wc_cart_notice _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_cart_notice][/et_pb_column][/et_pb_row][et_pb_row column_structure=&#8221;1_2,1_2&#8243; _builder_version=&#8221;4.16&#8243; background_size=&#8221;initial&#8221; background_position=&#8221;top_left&#8221; background_repeat=&#8221;repeat&#8221; width=&#8221;100%&#8221; custom_padding=&#8221;0px||||false|false&#8221; global_colors_info=&#8221;{}&#8221;][et_pb_column type=&#8221;1_2&#8243; _builder_version=&#8221;4.16&#8243; custom_padding=&#8221;|||&#8221; global_colors_info=&#8221;{}&#8221; custom_padding__hover=&#8221;|||&#8221;][et_pb_wc_images _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_images][/et_pb_column][et_pb_column type=&#8221;1_2&#8243; _builder_version=&#8221;4.16&#8243; custom_padding=&#8221;|||&#8221; global_colors_info=&#8221;{}&#8221; custom_padding__hover=&#8221;|||&#8221;][et_pb_wc_title _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_title][et_pb_wc_rating _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_rating][et_pb_wc_price _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_price][et_pb_wc_description _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_description][et_pb_wc_add_to_cart _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_add_to_cart][et_pb_wc_meta _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_meta][/et_pb_column][/et_pb_row][et_pb_row _builder_version=&#8221;4.16&#8243; background_size=&#8221;initial&#8221; background_position=&#8221;top_left&#8221; background_repeat=&#8221;repeat&#8221; width=&#8221;100%&#8221; global_colors_info=&#8221;{}&#8221;][et_pb_column type=&#8221;4_4&#8243; _builder_version=&#8221;4.16&#8243; custom_padding=&#8221;|||&#8221; global_colors_info=&#8221;{}&#8221; custom_padding__hover=&#8221;|||&#8221;][et_pb_wc_tabs _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;]\t\t\t\t\t[/et_pb_wc_tabs][et_pb_wc_upsells _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_upsells][et_pb_wc_related_products _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_related_products][/et_pb_column][/et_pb_row][/et_pb_section]</p>",
+  "images": [
+   {
+    "src": "https://bologna-creativehub.it/wp-content/uploads/2022/03/27.jpeg",
+    "alt": ""
+   }
+  ]
+ },
+ {
+  "id": 810,
+  "name": "FULL DESK",
+  "slug": "full-desk",
+  "permalink": "https://bologna-creativehub.it/prodotto/full-desk/",
+  "prices": {
+   "price": "15500",
+   "regular_price": "15500",
+   "sale_price": "15500",
+   "currency_minor_unit": 2
+  },
+  "on_sale": false,
+  "categories": [
+   {
+    "name": "Co-Working",
+    "slug": "coworking"
+   }
+  ],
+  "short_description": "<p><span style=\"font-weight: 400\">Con questo Pass è possibile accedere alla struttura e usufruire di un desk fisso per un periodo di almeno un mese usufruendo di ulteriori servizi.</span></p>\n<p><span style=\"font-weight: 400\">Servizi compresi:</span><br />\n<span style=\"font-weight: 400\">&#8211; Scrivania fissa prenotata</span><br />\n<span style=\"font-weight: 400\">&#8211; Accesso alle aree comuni</span><br />\n<span style=\"font-weight: 400\">&#8211; Utilizzo sala meeting (3 ore mensili)</span><br />\n<span style=\"font-weight: 400\">&#8211; Utilizzo locker con chiave</span><br />\n<span style=\"font-weight: 400\">&#8211; Utilizzo stampanti</span><br />\n<span style=\"font-weight: 400\">&#8211; Accesso a eventi pubblici</span><br />\n<span style=\"font-weight: 400\">&#8211; Wi-Fi e prese di corrente</span></p>\n<p>Questo servizio ha una durata mensile.</p>",
+  "description": "",
+  "images": [
+   {
+    "src": "https://bologna-creativehub.it/wp-content/uploads/2022/03/21.jpeg",
+    "alt": "FULL DESK"
+   }
+  ]
+ },
+ {
+  "id": 809,
+  "name": "QUICK DESK",
+  "slug": "quick-desk",
+  "permalink": "https://bologna-creativehub.it/prodotto/quick-desk/",
+  "prices": {
+   "price": "9500",
+   "regular_price": "9500",
+   "sale_price": "9500",
+   "currency_minor_unit": 2
+  },
+  "on_sale": false,
+  "categories": [
+   {
+    "name": "Co-Working",
+    "slug": "coworking"
+   }
+  ],
+  "short_description": "<p>Con questo Pass è possibile accedere alla struttura e usufruire di un desk flessibile ogni giorno per un mese. Questi pass giornalieri non permettono di prenotare una particolare postazione, ma in base alla disponibilità verrà individuata la scrivania più adatta alle tue esigenze.</p>\n<p>Servizi compresi:<br />\n&#8211; Scrivania flessibile<br />\n&#8211; Accesso alle aree comuni<br />\n&#8211; 1 Stampa gratuita<br />\n&#8211; Accesso a eventi pubblici<br />\n&#8211; Wi-Fi e prese di corrente</p>",
+  "description": "",
+  "images": [
+   {
+    "src": "https://bologna-creativehub.it/wp-content/uploads/2022/03/94.jpg",
+    "alt": ""
+   }
+  ]
+ },
+ {
+  "id": 808,
+  "name": "DAY PASS",
+  "slug": "day-pass",
+  "permalink": "https://bologna-creativehub.it/prodotto/day-pass/",
+  "prices": {
+   "price": "950",
+   "regular_price": "950",
+   "sale_price": "950",
+   "currency_minor_unit": 2
+  },
+  "on_sale": false,
+  "categories": [
+   {
+    "name": "Co-Working",
+    "slug": "coworking"
+   }
+  ],
+  "short_description": "<p><span style=\"font-weight: 400\">Con questo Pass è possibile accedere alla struttura e usufruire di un desk flessibile per tutta la giornata. I pass giornalieri non permettono di prenotare una particolare postazione, ma in base alla disponibilità verrà individuata la scrivania più adatta alle tue esigenze.</span></p>\n<p><span style=\"font-weight: 400\">Servizi compresi:</span><br />\n<span style=\"font-weight: 400\">&#8211; Scrivania flessibile</span><br />\n<span style=\"font-weight: 400\">&#8211; Accesso alle aree comuni</span><br />\n<span style=\"font-weight: 400\">&#8211; 1 Stampa gratuita</span><br />\n<span style=\"font-weight: 400\">&#8211; Accesso a eventi pubblici</span><br />\n<span style=\"font-weight: 400\">&#8211; Wi-Fi e prese di corrente</span></p>",
+  "description": "<p>[et_pb_section fb_built=&#8221;1&#8243; _builder_version=&#8221;4.16&#8243; custom_padding=&#8221;0px||||false|false&#8221; da_disable_devices=&#8221;off|off|off&#8221; global_colors_info=&#8221;{}&#8221; da_is_popup=&#8221;off&#8221; da_exit_intent=&#8221;off&#8221; da_has_close=&#8221;on&#8221; da_alt_close=&#8221;off&#8221; da_dark_close=&#8221;off&#8221; da_not_modal=&#8221;on&#8221; da_is_singular=&#8221;off&#8221; da_with_loader=&#8221;off&#8221; da_has_shadow=&#8221;on&#8221;][et_pb_row _builder_version=&#8221;4.16&#8243; background_size=&#8221;initial&#8221; background_position=&#8221;top_left&#8221; background_repeat=&#8221;repeat&#8221; width=&#8221;100%&#8221; custom_padding=&#8221;0px||0px||false|false&#8221; global_colors_info=&#8221;{}&#8221;][et_pb_column type=&#8221;4_4&#8243; _builder_version=&#8221;4.16&#8243; custom_padding=&#8221;|||&#8221; global_colors_info=&#8221;{}&#8221; custom_padding__hover=&#8221;|||&#8221;][et_pb_wc_breadcrumb _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_breadcrumb][et_pb_wc_cart_notice _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_cart_notice][/et_pb_column][/et_pb_row][et_pb_row column_structure=&#8221;1_2,1_2&#8243; _builder_version=&#8221;4.16&#8243; background_size=&#8221;initial&#8221; background_position=&#8221;top_left&#8221; background_repeat=&#8221;repeat&#8221; width=&#8221;100%&#8221; custom_padding=&#8221;0px||||false|false&#8221; global_colors_info=&#8221;{}&#8221;][et_pb_column type=&#8221;1_2&#8243; _builder_version=&#8221;4.16&#8243; custom_padding=&#8221;|||&#8221; global_colors_info=&#8221;{}&#8221; custom_padding__hover=&#8221;|||&#8221;][et_pb_wc_images _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_images][/et_pb_column][et_pb_column type=&#8221;1_2&#8243; _builder_version=&#8221;4.16&#8243; custom_padding=&#8221;|||&#8221; global_colors_info=&#8221;{}&#8221; custom_padding__hover=&#8221;|||&#8221;][et_pb_wc_title _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_title][et_pb_wc_rating _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_rating][et_pb_wc_price _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_price][et_pb_wc_description _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_description][et_pb_wc_add_to_cart _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_add_to_cart][et_pb_wc_meta _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_meta][/et_pb_column][/et_pb_row][et_pb_row _builder_version=&#8221;4.16&#8243; background_size=&#8221;initial&#8221; background_position=&#8221;top_left&#8221; background_repeat=&#8221;repeat&#8221; width=&#8221;100%&#8221; global_colors_info=&#8221;{}&#8221;][et_pb_column type=&#8221;4_4&#8243; _builder_version=&#8221;4.16&#8243; custom_padding=&#8221;|||&#8221; global_colors_info=&#8221;{}&#8221; custom_padding__hover=&#8221;|||&#8221;][et_pb_wc_tabs _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;]\t\t\t\t\t[/et_pb_wc_tabs][et_pb_wc_upsells _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_upsells][et_pb_wc_related_products _builder_version=&#8221;4.16&#8243; global_colors_info=&#8221;{}&#8221;][/et_pb_wc_related_products][/et_pb_column][/et_pb_row][/et_pb_section]</p>",
+  "images": [
+   {
+    "src": "https://bologna-creativehub.it/wp-content/uploads/2022/03/08.jpeg",
+    "alt": ""
+   }
+  ]
+ }
+]

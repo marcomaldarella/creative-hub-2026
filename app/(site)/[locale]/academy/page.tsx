@@ -18,6 +18,7 @@ import { CourseSlider } from '@/components/sections/CourseSlider'
 import { TeacherStrip } from '@/components/sections/TeacherStrip'
 import { isLocale, localeHref } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
+import { pageAlternates } from '@/lib/seo'
 import { getAllCourses, getAllTeachers, getSiteSettings } from '@/lib/sanity/queries'
 import styles from './page.module.css'
 
@@ -72,7 +73,11 @@ export async function generateMetadata({
   const { locale } = await params
   if (!isLocale(locale)) return {}
   const t = getDictionary(locale)
-  return { title: t.nav.academy, description: t.academy.lede }
+  return {
+    title: t.nav.academy,
+    description: t.academy.lede,
+    alternates: pageAlternates(locale, '/academy'),
+  }
 }
 
 export default async function AcademyPage({

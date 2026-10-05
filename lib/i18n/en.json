@@ -107,6 +107,7 @@
     "search": "search this section…"
   },
   "home": {
+    "seoH1": "Creative hub — academy, recording studio and coworking in Bologna",
     "manifestoRuleLeft": "creative hub",
     "manifestoRuleRight": "Manifesto",
     "manifestoPre": "We are ",
@@ -465,6 +466,26 @@
     "corridoiPrev": "previous photos",
     "corridoiNext": "more photos",
     "corridoiHint": "scroll to see every photo"
+  },
+  "prenota": {
+    "kicker": "book",
+    "title": "Book a space.",
+    "lede": "Desks, meeting rooms, rehearsal rooms and the recording studio: pick a space, check the price and book online. Payment is completed on the Creative Hub shop.",
+    "coworkingKicker": "co-working",
+    "coworkingTitle": "Desks and rooms.",
+    "coworkingText": "Day passes, dedicated desks, meeting rooms and classrooms.",
+    "coplayingKicker": "co-playing",
+    "coplayingTitle": "Rehearsal rooms, boxes and studio.",
+    "coplayingText": "Drum-ready rehearsal rooms, production boxes, main stage and the recording studio.",
+    "book": "Book now",
+    "bookNote": "Booking is completed on the secure Creative Hub shop.",
+    "contact": "Contact us",
+    "detailsKicker": "details",
+    "detailsTitle": "What's included.",
+    "othersKicker": "more spaces",
+    "othersTitle": "You might also need.",
+    "onRequest": "on request",
+    "backAll": "All spaces"
   },
   "innovation": {
     "fallbackTitle": "Creative companies start here.",

@@ -59,10 +59,9 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     images: ['/og.png'],
   },
-  alternates: {
-    canonical: '/',
-    languages: { it: '/', en: '/en' },
-  },
+  /* NIENTE alternates qui: canonical e hreflang sono per-pagina
+     (lib/seo.ts pageAlternates) — un canonical globale '/' canonicalizzava
+     tutto il sito alla home */
 }
 
 /* La barra del browser (Safari iOS in testa) si tinge di theme-color.

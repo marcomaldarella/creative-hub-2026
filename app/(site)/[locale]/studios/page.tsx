@@ -13,6 +13,7 @@ import { SiteChrome, shopHref } from '@/components/sections/SiteChrome'
 import { ArticleCard } from '@/components/magazine/ArticleCard'
 import { isLocale, localeHref } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
+import { pageAlternates } from '@/lib/seo'
 import {
   getAllArticles,
   getArticlesByCategory,
@@ -32,7 +33,11 @@ export async function generateMetadata({
   const { locale } = await params
   if (!isLocale(locale)) return {}
   const t = getDictionary(locale)
-  return { title: t.nav.studio, description: t.studios.lede }
+  return {
+    title: t.nav.studio,
+    description: t.studios.lede,
+    alternates: pageAlternates(locale, '/studios'),
+  }
 }
 
 export default async function StudiosPage({

@@ -8,6 +8,7 @@ import { SiteChrome, shopHref } from '@/components/sections/SiteChrome'
 import { TeacherGrid } from '@/components/sections/TeacherGrid'
 import { isLocale } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
+import { pageAlternates } from '@/lib/seo'
 import {
   getAllPartners,
   getAllTeachers,
@@ -27,7 +28,11 @@ export async function generateMetadata({
   const { locale } = await params
   if (!isLocale(locale)) return {}
   const t = getDictionary(locale)
-  return { title: t.nav.about, description: t.about.fallbackLede }
+  return {
+    title: t.nav.about,
+    description: t.about.fallbackLede,
+    alternates: pageAlternates(locale, '/chi-siamo'),
+  }
 }
 
 export default async function ChiSiamoPage({

@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 import { TopicScreen } from '@/components/sections/TopicScreen'
 import { isLocale } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
+import { pageAlternates } from '@/lib/seo'
 import { findTopic, topicsOf } from '@/lib/topics'
 
 export const dynamic = 'force-dynamic'
@@ -27,7 +28,11 @@ export async function generateMetadata({
     title: string
     lede: string
   }
-  return { title: copy.title, description: copy.lede }
+  return {
+    title: copy.title,
+    description: copy.lede,
+    alternates: pageAlternates(locale, `/innovazione/${slug}`),
+  }
 }
 
 export default async function TopicRoute({

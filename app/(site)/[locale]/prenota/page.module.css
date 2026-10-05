@@ -1,0 +1,126 @@
+.main {
+  padding-top: var(--nav-h);
+}
+
+.sez {
+  padding: var(--sez) 0;
+}
+
+/* ————— testata ————— */
+
+.head {
+  padding-top: clamp(28px, 4vw, 56px);
+  padding-bottom: clamp(44px, 6vw, 76px);
+}
+
+.kicker {
+  display: block;
+  margin-bottom: 20px;
+}
+
+.title {
+  font-size: var(--fs-h2);
+  margin-bottom: 18px;
+}
+
+.lede {
+  max-width: 52ch;
+  color: var(--fg-2);
+  font-size: var(--fs-lede);
+}
+
+/* ————— griglia prodotti ————— */
+
+.sezText {
+  max-width: 52ch;
+  color: var(--fg-2);
+  margin: -8px 0 28px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  background: var(--surface);
+  color: inherit;
+  text-decoration: none;
+  height: 100%;
+  transition: background 0.25s ease;
+}
+
+.card:hover {
+  background: color-mix(in srgb, var(--surface) 86%, var(--fg));
+}
+
+.cardMedia {
+  display: block;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--line);
+}
+
+.cardMedia img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.card:hover .cardMedia img {
+  transform: scale(1.04);
+}
+
+.cardBody {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 16px 16px 18px;
+}
+
+.cardTitle {
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: -0.01em;
+  min-width: 0;
+}
+
+.cardPrice {
+  white-space: nowrap;
+  color: var(--accent-ink, var(--azzurro-ink));
+}
+
+/* ————— fascia scura co-playing ————— */
+
+.dark {
+  background: var(--bg);
+  color: var(--fg);
+}
+
+/* dentro la fascia nera le card restano superfici scure coerenti */
+.dark .card {
+  background: var(--surface);
+}
+
+.note {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: clamp(32px, 5vw, 56px);
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+
+.note p {
+  color: var(--fg-2);
+  max-width: 52ch;
+}

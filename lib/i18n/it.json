@@ -107,6 +107,7 @@
     "search": "cerca nella sezione…"
   },
   "home": {
+    "seoH1": "Creative hub — academy, studio di registrazione e coworking a Bologna",
     "manifestoRuleLeft": "creative hub",
     "manifestoRuleRight": "Manifesto",
     "manifestoPre": "Siamo ",
@@ -465,6 +466,26 @@
     "corridoiPrev": "foto precedenti",
     "corridoiNext": "altre foto",
     "corridoiHint": "scorri per vedere tutte le foto"
+  },
+  "prenota": {
+    "kicker": "prenota",
+    "title": "Prenota uno spazio.",
+    "lede": "Postazioni, sale riunioni, sale prove e studio di registrazione: scegli lo spazio, vedi il prezzo e prenota online. Il pagamento si completa sullo shop Creative Hub.",
+    "coworkingKicker": "co-working",
+    "coworkingTitle": "Postazioni e sale.",
+    "coworkingText": "Day pass, desk dedicati, sale riunioni e aule per la formazione.",
+    "coplayingKicker": "co-playing",
+    "coplayingTitle": "Sale prove, boxes e studio.",
+    "coplayingText": "Sale prove con batteria, production boxes, main stage e studio di registrazione.",
+    "book": "Prenota ora",
+    "bookNote": "La prenotazione si completa sullo shop sicuro di Creative Hub.",
+    "contact": "Contattaci",
+    "detailsKicker": "dettagli",
+    "detailsTitle": "Cosa include.",
+    "othersKicker": "altri spazi",
+    "othersTitle": "Potrebbe servirti anche.",
+    "onRequest": "su richiesta",
+    "backAll": "Tutti gli spazi"
   },
   "innovation": {
     "fallbackTitle": "Le imprese creative nascono qui.",

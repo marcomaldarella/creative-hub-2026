@@ -6,6 +6,7 @@ import { SiteChrome, shopHref } from '@/components/sections/SiteChrome'
 import { TopicScreen } from '@/components/sections/TopicScreen'
 import { isLocale } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
+import { pageAlternates } from '@/lib/seo'
 import { urlFor } from '@/lib/sanity/image'
 import { l } from '@/lib/sanity/l'
 import { getCourseBySlug, getSiteSettings } from '@/lib/sanity/queries'
@@ -29,12 +30,18 @@ export async function generateMetadata({
       title: string
       lede: string
     }
-    return { title: copy.title, description: copy.lede }
+    return {
+      title: copy.title,
+      description: copy.lede,
+      alternates: pageAlternates(locale, `/academy/${slug}`),
+    }
   }
   const course = await getCourseBySlug(slug)
   const title = l(course?.title, locale)
   const description = l(course?.summary, locale)
-  return title ? { title, description } : {}
+  return title
+    ? { title, description, alternates: pageAlternates(locale, `/academy/${slug}`) }
+    : {}
 }
 
 /* dal PortableText del body ai paragrafi piani per la panoramica */
@@ -155,6 +162,9 @@ export default async function CoursePage({
 
   return (
     <SiteChrome locale={locale} path={`/academy/${slug}`}>
+      {/* l'h1 vero del template vive nello shadow DOM dello shell:
+          per crawler e screen reader serve un h1 nel light DOM */}
+      <h1 className="sr-only">{title}</h1>
       <CourseTemplateShell css={css} html={html} />
     </SiteChrome>
   )

@@ -6,6 +6,7 @@ import { CategoryBar } from '@/components/magazine/CategoryBar'
 import { SiteChrome } from '@/components/sections/SiteChrome'
 import { isLocale, localeHref } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
+import { pageAlternates } from '@/lib/seo'
 import { l } from '@/lib/sanity/l'
 import { getAllCategories, getArticlesByCategory } from '@/lib/sanity/queries'
 import { matchesQuery } from '@/lib/search'
@@ -29,6 +30,7 @@ export async function generateMetadata({
   return {
     title: title ? `${title} — ${t.magazine.metaTitle}` : t.magazine.metaTitle,
     description: t.magazine.metaDescription,
+    alternates: pageAlternates(locale, `/magazine/categoria/${slug}`),
   }
 }
 
@@ -67,6 +69,7 @@ export default async function MagazineCategoryPage({
           <SectionHeader
             kicker={`${t.magazine.kicker} — ${t.magazine.categoryKicker}`}
             title={categoryTitle}
+            as="h1"
           />
           <div className={styles.toolbar}>
             <CategoryBar

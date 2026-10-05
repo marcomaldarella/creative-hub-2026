@@ -6,6 +6,7 @@ import { CategoryBar } from '@/components/magazine/CategoryBar'
 import { SiteChrome } from '@/components/sections/SiteChrome'
 import { isLocale } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
+import { pageAlternates } from '@/lib/seo'
 import { getAllArticles, getAllCategories } from '@/lib/sanity/queries'
 import { l } from '@/lib/sanity/l'
 import { matchesQuery } from '@/lib/search'
@@ -26,6 +27,7 @@ export async function generateMetadata({
   return {
     title: t.magazine.metaTitle,
     description: t.magazine.metaDescription,
+    alternates: pageAlternates(locale, '/magazine'),
   }
 }
 

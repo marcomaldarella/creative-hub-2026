@@ -99,6 +99,8 @@ export async function SiteChrome({
      su una sezione reale della pagina indice, o la pagina indice stessa */
   const hrefSub = (base: string, anchor: string | null) => {
     if (!anchor) return base
+    /* percorso assoluto: voce che vive fuori dalla sezione (es. /prenota) */
+    if (anchor.startsWith('/')) return anchor
     /* già un percorso (es. categoria/…) oppure una voce con pagina propria */
     if (anchor.includes('/') || findTopic(base as TopicBase, anchor)) {
       return `${base}/${anchor}`
@@ -137,7 +139,7 @@ export async function SiteChrome({
       key: 'coworking',
       label: t.nav.coworking,
       base: '/coworking',
-      anchors: ['coworking', null, 'prenota', 'sale-eventi', 'metaverso'],
+      anchors: ['coworking', null, '/prenota', 'sale-eventi', 'metaverso'],
       cross: { 1: 'studio' },
     },
     {
@@ -263,7 +265,9 @@ export async function SiteChrome({
         left: t.nav.topbar.left,
         middle: t.nav.topbar.middle,
         cta: t.nav.topbar.cta,
-        ctaHref: shopHref(settings),
+        /* la label è "prenota l'open day": si va alla pagina open day,
+           non allo shop (lo shopUrl generico resta per le CTA corso) */
+        ctaHref: localeHref(locale, '/academy/open-day'),
         phone: settings?.phone,
         email: settings?.email,
       }}

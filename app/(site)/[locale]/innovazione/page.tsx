@@ -8,6 +8,7 @@ import { PortableBlocks } from '@/components/sections/PortableBlocks'
 import { SiteChrome } from '@/components/sections/SiteChrome'
 import { isLocale, localeHref } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
+import { pageAlternates } from '@/lib/seo'
 import { getPageById } from '@/lib/sanity/queries'
 import { l } from '@/lib/sanity/l'
 import styles from './page.module.css'
@@ -22,7 +23,11 @@ export async function generateMetadata({
   const { locale } = await params
   if (!isLocale(locale)) return {}
   const t = getDictionary(locale)
-  return { title: t.nav.innovation, description: t.innovation.fallbackLede }
+  return {
+    title: t.nav.innovation,
+    description: t.innovation.fallbackLede,
+    alternates: pageAlternates(locale, '/innovazione'),
+  }
 }
 
 export default async function InnovazionePage({

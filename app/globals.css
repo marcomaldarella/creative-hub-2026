@@ -316,3 +316,17 @@ img { max-width: 100%; height: auto; display: block; }
 [id] {
   scroll-margin-top: calc(var(--header-h) + 18px);
 }
+
+/* testo solo per screen reader e crawler (ricetta clip standard):
+   usato per gli h1 nascosti di home e schede corso (shadow DOM) */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

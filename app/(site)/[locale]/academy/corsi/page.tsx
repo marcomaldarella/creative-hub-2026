@@ -7,6 +7,7 @@ import { SiteChrome } from '@/components/sections/SiteChrome'
 import { CourseCard } from '@/components/sections/CourseCard'
 import { isLocale, localeHref } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
+import { pageAlternates } from '@/lib/seo'
 import { getAllCourses } from '@/lib/sanity/queries'
 import { l } from '@/lib/sanity/l'
 import { matchesQuery } from '@/lib/search'
@@ -25,6 +26,7 @@ export async function generateMetadata({
   return {
     title: `${t.academy.backToCourses} — ${t.nav.academy}`,
     description: t.academy.lede,
+    alternates: pageAlternates(locale, '/academy/corsi'),
   }
 }
 

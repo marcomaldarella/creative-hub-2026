@@ -2,12 +2,13 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { Button, Card, Reveal, Rule, SectionHeader } from '@/components/ui'
-import { SiteChrome, shopHref } from '@/components/sections/SiteChrome'
+import { SiteChrome } from '@/components/sections/SiteChrome'
 import { PhotoDuo } from '@/components/sections/Photo'
 import { PhotoStrip } from '@/components/sections/PhotoStrip'
-import { isLocale } from '@/lib/i18n/config'
+import { isLocale, localeHref } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
-import { getSiteSettings, getSpacesByKind } from '@/lib/sanity/queries'
+import { pageAlternates } from '@/lib/seo'
+import { getSpacesByKind } from '@/lib/sanity/queries'
 import { l } from '@/lib/sanity/l'
 import corridoio1Img from '@/public/img/foto/corridoio-1.jpg'
 import corridoio2Img from '@/public/img/foto/corridoio-2.jpg'
@@ -30,7 +31,11 @@ export async function generateMetadata({
   const { locale } = await params
   if (!isLocale(locale)) return {}
   const t = getDictionary(locale)
-  return { title: t.nav.coworking, description: t.coworking.lede }
+  return {
+    title: t.nav.coworking,
+    description: t.coworking.lede,
+    alternates: pageAlternates(locale, '/coworking'),
+  }
 }
 
 export default async function CoworkingPage({
@@ -42,10 +47,7 @@ export default async function CoworkingPage({
   if (!isLocale(locale)) notFound()
   const t = getDictionary(locale)
 
-  const [spaces, settings] = await Promise.all([
-    getSpacesByKind('coworking'),
-    getSiteSettings(),
-  ])
+  const spaces = await getSpacesByKind('coworking')
 
   return (
     <SiteChrome locale={locale} path="/coworking">
@@ -185,7 +187,7 @@ export default async function CoworkingPage({
               </h2>
               <p className={styles.ctaText}>{t.coworking.ctaText}</p>
             </div>
-            <Button href={shopHref(settings)} external>
+            <Button href={localeHref(locale, '/prenota/day-pass')}>
               {t.coworking.ctaDayPass}
             </Button>
           </div>

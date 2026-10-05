@@ -13,6 +13,7 @@ import {
 import gradients from '@/components/magazine/gradients.module.css'
 import { isLocale, localeHref } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
+import { pageAlternates } from '@/lib/seo'
 import { l } from '@/lib/sanity/l'
 import { urlFor } from '@/lib/sanity/image'
 import {
@@ -41,6 +42,7 @@ export async function generateMetadata({
   return {
     title: l(article.title, locale),
     description: l(article.excerpt, locale),
+    alternates: pageAlternates(locale, `/magazine/${slug}`),
   }
 }
 

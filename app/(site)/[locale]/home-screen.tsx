@@ -11,7 +11,7 @@ import {
   RevealGroup,
   SectionHeader,
 } from '@/components/ui'
-import { SiteChrome, shopHref } from '@/components/sections/SiteChrome'
+import { SiteChrome } from '@/components/sections/SiteChrome'
 import { ParallaxMedia } from '@/components/sections/ParallaxMedia'
 import { HeroSlider } from '@/components/sections/HeroSlider'
 import { HighlightsCarousel } from '@/components/sections/HighlightsCarousel'
@@ -74,7 +74,14 @@ export async function HomeScreen({ locale }: { locale: Locale }) {
 
   const openDate = openDayLabel(settings?.openDay?.date, locale)
   const openTitle = l(settings?.openDay?.title, locale)
-  const openHref = settings?.openDay?.ctaUrl ?? shopHref(settings)
+  /* la CTA open day va su un URL esterno SOLO se impostato nel CMS;
+     altrimenti sulla pagina interna /academy/open-day (lo shopUrl di
+     fallback puntava a shop.bologna-creativehub.it, dominio inesistente) */
+  const openUrl = settings?.openDay?.ctaUrl
+  const openExternal = Boolean(openUrl && /^https?:/.test(openUrl))
+  const openHref = openExternal
+    ? (openUrl as string)
+    : localeHref(locale, '/academy/open-day')
 
   return (
     // niente flag dark: la hero segue il tema, la nav deve invertirsi con lui
@@ -85,6 +92,9 @@ export async function HomeScreen({ locale }: { locale: Locale }) {
         {/* ————— hero: swiper a tre voci su video con annotazioni,
             approvato dal cliente 2026-09-17 (l'orb è passato a
             /innovazione); le clip sono i cut già in libreria dei nodi */}
+        {/* i titoli dello slider sono link: l'h1 della pagina è questo,
+            nascosto ma letto da crawler e screen reader */}
+        <h1 className="sr-only">{t.home.seoH1}</h1>
         <HeroSlider
             annot={[t.hero.since, t.hero.coords]}
             caption={{
@@ -368,7 +378,7 @@ export async function HomeScreen({ locale }: { locale: Locale }) {
                 {t.home.opendayTitleLine2}
               </h2>
             </div>
-            <Button href={openHref} external variant="osso">
+            <Button href={openHref} external={openExternal} variant="osso">
               {t.home.opendayCta}
             </Button>
           </div>

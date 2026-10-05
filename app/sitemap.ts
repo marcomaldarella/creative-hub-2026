@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next'
 import { client } from '@/lib/sanity/client'
 import { TOPIC_PATHS } from '@/lib/topics'
+import { getBookableProducts } from '@/lib/woocommerce'
 
 const BASE = 'https://bologna-creativehub.it'
 
@@ -11,6 +12,7 @@ const SECTIONS = [
   '/coworking',
   '/innovazione',
   '/magazine',
+  '/prenota',
   '/chi-siamo',
   '/privacy',
   '/cookie',
@@ -19,13 +21,14 @@ const SECTIONS = [
 
 /** sitemap IT (root) + EN (/en), con gli slug reali da Sanity */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [courses, articles] = await Promise.all([
+  const [courses, articles, products] = await Promise.all([
     client.fetch<{ slug: string }[]>(
       `*[_type == "course" && defined(slug.current)]{ "slug": slug.current }`
     ),
     client.fetch<{ slug: string; _updatedAt: string }[]>(
       `*[_type == "article" && defined(slug.current)]{ "slug": slug.current, _updatedAt }`
     ),
+    getBookableProducts(),
   ])
 
   const now = new Date()
@@ -34,6 +37,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     /* le pagine delle voci di menu (lib/topics) */
     ...TOPIC_PATHS.map((p) => ({ path: p, lastModified: now, priority: 0.7 })),
     ...courses.map((c) => ({ path: `/academy/${c.slug}`, lastModified: now, priority: 0.6 })),
+    ...products.map((p) => ({ path: `/prenota/${p.slug}`, lastModified: now, priority: 0.6 })),
     ...articles.map((a) => ({
       path: `/magazine/${a.slug}`,
       lastModified: new Date(a._updatedAt),
