@@ -9,6 +9,10 @@ import fallbackRaw from './wc-fallback.json'
 const WC_BASE =
   process.env.NEXT_PUBLIC_WC_BASE ?? 'https://bologna-creativehub.it'
 
+/* dove si COMPRA: finché il restyling WP vive su /staging, le CTA puntano
+   lì (NEXT_PUBLIC_WC_SHOP_BASE); al go-live tornerà = WC_BASE */
+const SHOP_BASE = process.env.NEXT_PUBLIC_WC_SHOP_BASE ?? WC_BASE
+
 export type WcCategory = 'coworking' | 'coplaying'
 
 export type WcProduct = {
@@ -78,7 +82,7 @@ function normalize(raw: RawProduct): WcProduct {
     id: raw.id,
     name: sentenceCase(raw.name),
     slug: raw.slug,
-    permalink: raw.permalink,
+    permalink: `${SHOP_BASE}/prodotto/${raw.slug}/`,
     price: Number(raw.prices.price) || 0,
     regularPrice: Number(raw.prices.regular_price) || 0,
     onSale: Boolean(raw.on_sale),
