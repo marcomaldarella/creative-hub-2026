@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { Button, Reveal, Rule, SectionHeader } from '@/components/ui'
 import { SiteChrome } from '@/components/sections/SiteChrome'
@@ -43,10 +42,9 @@ function ProductCard({
   const price = formatPrice(product.price, locale)
   return (
     <Reveal delay={(index % 3) * 60}>
-      <Link
-        href={localeHref(locale, `/prenota/${product.slug}`)}
-        className={styles.card}
-      >
+      {/* dritti alla scheda WooCommerce (staging ora, shop al go-live):
+          la scheda intermedia /prenota/[slug] duplicava il WP restylato */}
+      <a href={product.permalink} className={styles.card}>
         <span className={styles.cardMedia}>
           {product.image && (
             /* eslint-disable-next-line @next/next/no-img-element */
@@ -63,7 +61,7 @@ function ProductCard({
             {price || t.prenota.onRequest}
           </span>
         </span>
-      </Link>
+      </a>
     </Reveal>
   )
 }
