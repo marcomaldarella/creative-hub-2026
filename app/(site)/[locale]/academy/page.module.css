@@ -37,7 +37,9 @@
 .lede {
   max-width: 52ch;
   color: var(--fg-2);
-  font-size: var(--fs-lede);
+  /* stesso corpo delle voci del menu (14px) */
+  font-size: 14px;
+  line-height: 1.5;
 }
 
 .heroCtas {
@@ -669,7 +671,7 @@ h3.storiaTitle {
 
 .teachersIntro {
   display: grid;
-  gap: 14px;
+  gap: 10px;
   max-width: 68ch;
   margin: 14px 0 clamp(18px, 2.5vw, 28px);
 }
@@ -677,7 +679,7 @@ h3.storiaTitle {
 .teachersP {
   font-size: var(--fs-lede);
   color: var(--fg-2);
-  line-height: 1.6;
+  line-height: 1.35;
 }
 
 .teachersP strong {
