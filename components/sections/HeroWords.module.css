@@ -10,15 +10,17 @@
 }
 
 /* un gradino più grande del mono di sistema: il cliente lo voleva più
-   leggibile sopra al titolo (correzione 2026-08-07) */
+   leggibile sopra al titolo (correzione 2026-08-07); dal 2026-10-15 è
+   il marchio "creativehub" a due pesi, kerning come in nav */
 .mark {
   font-size: 15px;
-  letter-spacing: 0.14em;
+  font-weight: 400;
+  letter-spacing: -0.01em;
   color: var(--fg);
 }
 
-.mark span {
-  letter-spacing: 0;
+.mark b {
+  font-weight: 700;
 }
 
 .title {

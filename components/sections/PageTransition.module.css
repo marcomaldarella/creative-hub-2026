@@ -26,33 +26,26 @@
   place-items: center;
 }
 
-/* logotipo come in nav: "creative — hub" col trattino a mezzo.
-   Stesso peso del marchio (600) e kerning più stretto: alla misura
-   grande il -0.01em del menu leggeva largo */
+/* logotipo come in nav: "creativehub" una parola, due pesi.
+   Kerning più stretto del menu: alla misura grande il -0.01em
+   leggeva largo */
 .logo {
   color: #fafafa;
   font-size: clamp(22px, 3vw, 34px);
-  font-weight: 600;
+  font-weight: 400;
   letter-spacing: -0.03em;
   display: inline-flex;
   align-items: center;
-  gap: 0.38em;
   opacity: 0;
   visibility: hidden;
 }
 
-.logo i {
-  display: inline-block;
-  /* proporzioni del trattino del Wordmark (26px×1px a corpo 17) */
-  width: 1.5em;
-  height: 2px;
-  background: currentColor;
-  /* il trattino cresce in scaleX da sinistra (senso di lettura) */
-  transform-origin: left center;
-}
-
 .word {
   display: inline-flex;
+}
+
+.word[data-word='creative'] {
+  font-weight: 700;
 }
 
 .mask {

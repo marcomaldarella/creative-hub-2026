@@ -5,17 +5,15 @@ export type WordmarkProps = {
 };
 
 /**
- * Wordmark "creative——hub": l'em dash è un elemento grafico
- * (linea 1px in currentColor), non testo.
+ * Wordmark "creativehub": una parola sola, due pesi —
+ * "creative" bold, "hub" regular.
  */
 export function Wordmark({ className }: WordmarkProps) {
   return (
     <span
       className={className ? `${styles.wordmark} ${className}` : styles.wordmark}
     >
-      creative
-      <em aria-hidden="true" />
-      hub
+      <b>creative</b>hub
     </span>
   );
 }

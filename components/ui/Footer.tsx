@@ -117,8 +117,8 @@ export function Footer({
         <div className={styles.giantTrack}>
           {[0, 1].map((half) => (
             <span key={half} className={styles.giantGroup}>
-              <span className={styles.giantWord}>creative hub</span>
-              <span className={styles.giantWord}>creative hub</span>
+              <span className={styles.giantWord}><b>creative</b>hub</span>
+              <span className={styles.giantWord}><b>creative</b>hub</span>
             </span>
           ))}
         </div>

@@ -48,7 +48,6 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
         logo: null as HTMLElement | null,
         creative: [] as HTMLElement[],
         hub: [] as HTMLElement[],
-        dash: null as HTMLElement | null,
       }
     const q = (sel: string) => Array.from(veil.querySelectorAll<HTMLElement>(sel))
     return {
@@ -56,7 +55,6 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
       logo: veil.querySelector<HTMLElement>('[data-logo]'),
       creative: q('[data-word="creative"] [data-letter]'),
       hub: q('[data-word="hub"] [data-letter]'),
-      dash: veil.querySelector<HTMLElement>('[data-dash]'),
     }
   }
 
@@ -69,7 +67,7 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
           return
         }
         setActive(true)
-        const { stripes, logo, creative, hub, dash } = parts()
+        const { stripes, logo, creative, hub } = parts()
         const tl = gsap.timeline({ onComplete: next })
         /* y: 0 obbligatorio — il translateY(100%) del CSS arriva a GSAP
            già risolto in pixel (900px) e verrebbe tenuto come offset fisso
@@ -86,8 +84,8 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
         )
         if (logo) {
           /* logotipo composto: "creative" sale lettera per lettera dentro
-             le maschere, il trattino cresce in scaleX, "hub" segue in
-             stagger. Il contenitore appare secco (set, niente fade) */
+             le maschere, "hub" segue in stagger. Il contenitore appare
+             secco (set, niente fade) */
           tl.set(logo, { autoAlpha: 1 }, '-=0.15')
           tl.fromTo(
             creative,
@@ -95,14 +93,6 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
             { yPercent: 0, duration: 0.32, ease: 'power3.out', stagger: 0.022 },
             '<'
           )
-          if (dash) {
-            tl.fromTo(
-              dash,
-              { scaleX: 0 },
-              { scaleX: 1, duration: 0.26, ease: 'power3.inOut' },
-              '-=0.24'
-            )
-          }
           tl.fromTo(
             hub,
             { yPercent: 110 },
@@ -156,7 +146,6 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
         <div className={`${styles.stripe} ${styles.nero}`} data-stripe>
           <span className={styles.logo} data-logo>
             <Word text="creative" />
-            <i data-dash />
             <Word text="hub" />
           </span>
         </div>

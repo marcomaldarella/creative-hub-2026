@@ -119,6 +119,11 @@
 
 .giantWord {
   padding-right: 0.45em;
+  font-weight: 400;
+}
+
+.giantWord b {
+  font-weight: 700;
 }
 
 @keyframes giantScroll {

@@ -43,14 +43,14 @@ const swiss = localFont({
 export const metadata: Metadata = {
   metadataBase: new URL('https://bologna-creativehub.it'),
   title: {
-    default: 'creative hub — bologna',
-    template: '%s — creative hub',
+    default: 'creativehub — bologna',
+    template: '%s — creativehub',
   },
   description:
     "International college of music, sound, multimedia & visual. L'infrastruttura che trasforma suono, immagine e codice in professione. Bologna, dal 1999.",
   openGraph: {
     type: 'website',
-    siteName: 'creative hub — bologna',
+    siteName: 'creativehub — bologna',
     images: [{ url: '/og.png', width: 1200, height: 630 }],
     locale: 'it_IT',
     alternateLocale: 'en_GB',

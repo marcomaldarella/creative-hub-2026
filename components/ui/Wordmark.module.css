@@ -1,27 +1,17 @@
 .wordmark {
-  font-weight: 600;
+  font-weight: 400;
   font-size: 17px;
   letter-spacing: -0.01em;
   white-space: nowrap;
 }
 
-.wordmark em {
-  font-style: normal;
-  display: inline-block;
-  width: 26px;
-  height: 1px;
-  background: currentColor;
-  vertical-align: middle;
-  margin: 0 6px;
+.wordmark b {
+  font-weight: 700;
 }
 
 /* barra mobile più leggera */
 @media (max-width: 760px) {
   .wordmark {
     font-size: 15px;
-  }
-
-  .wordmark em {
-    width: 20px;
   }
 }

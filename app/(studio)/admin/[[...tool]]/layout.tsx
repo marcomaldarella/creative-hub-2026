@@ -4,7 +4,7 @@ import { metadata as studioMetadata } from 'next-sanity/studio'
 // Secondo root layout: lo studio vive fuori da [locale] e senza chrome del sito.
 export const metadata: Metadata = {
   ...studioMetadata,
-  title: 'sanity studio — creative hub',
+  title: 'sanity studio — creativehub',
 }
 
 export const viewport: Viewport = {

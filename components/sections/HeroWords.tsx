@@ -99,7 +99,7 @@ export function HeroWords({
   return (
     <div className={styles.words}>
       <span className={`mono ${styles.mark}`}>
-        creative <span aria-hidden="true">—</span> hub
+        <b>creative</b>hub
       </span>
       <Tag className={`display-black ${styles.title}`}>
         {words.map((w, i) => (

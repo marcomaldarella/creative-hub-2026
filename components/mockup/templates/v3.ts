@@ -734,10 +734,9 @@ export const css = `
   .topClose:hover{opacity:1;}
   @media(max-width:900px){.topbar{display:none;}}
 
-  .wordmark{font-weight:600;font-size:17px;letter-spacing:-.01em;white-space:nowrap;
+  .wordmark{font-weight:400;font-size:17px;letter-spacing:-.01em;white-space:nowrap;
     display:inline-flex;align-items:center;}
-  .wordmark em{font-style:normal;display:inline-block;width:26px;height:1px;
-    background:currentColor;margin:0 6px;}
+  .wordmark b{font-weight:700;}
 
   .langsw{font-size:12px;letter-spacing:.02em;color:inherit;opacity:.7;white-space:nowrap;}
   .langsw b{font-weight:600;opacity:1;}
