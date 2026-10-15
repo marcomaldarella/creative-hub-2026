@@ -55,7 +55,7 @@ a.card {
   aspect-ratio: 1.42;
   /* squircle del riferimento: UNICA eccezione tonda oltre ai dischi
      freccia, chiesta esplicitamente su questa sezione */
-  border-radius: clamp(24px, 2.6vw, 36px);
+  border-radius: clamp(16px, 1.7vw, 24px);
   overflow: hidden;
   isolation: isolate;
   color: #ffffff;
