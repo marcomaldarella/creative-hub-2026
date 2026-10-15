@@ -144,7 +144,8 @@ a.allBar:hover {
   margin-top: 10px;
 }
 
-/* disco-freccia: una delle eccezioni tonde ammesse */
+/* disco-freccia: una delle eccezioni tonde ammesse — OUTLINE,
+   si riempie solo in hover */
 .allBarDisc {
   flex: none;
   display: flex;
@@ -153,13 +154,19 @@ a.allBar:hover {
   width: clamp(52px, 5vw, 68px);
   height: clamp(52px, 5vw, 68px);
   border-radius: 50%;
-  background: var(--accent-on);
-  color: var(--accent);
-  transition: transform 0.3s var(--ease-out);
+  background: transparent;
+  border: 1px solid var(--accent-on);
+  color: var(--accent-on);
+  transition:
+    transform 0.3s var(--ease-out),
+    background var(--dur) ease,
+    color var(--dur) ease;
 }
 
 a.allBar:hover .allBarDisc {
   transform: translateX(8px);
+  background: var(--accent-on);
+  color: var(--accent);
 }
 
 /* ————— fascia video a tutto campo (fullshot corso-v3) ————— */
