@@ -101,6 +101,14 @@
   color: var(--accent);
 }
 
+/* sottotitolo descrittivo, come le card del bento */
+.text {
+  margin-top: 8px;
+  font-size: var(--fs-small);
+  color: var(--fg-2);
+  max-width: 38ch;
+}
+
 @media (max-width: 900px) {
   .row {
     grid-template-columns: 1fr;

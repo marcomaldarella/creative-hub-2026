@@ -13,7 +13,7 @@
   /* il nastro sborda oltre il gutter destro della gabbia: la card
      tagliata arriva a filo del bordo viewport, senza margine */
   margin-right: calc(var(--pad) * -1);
-  gap: clamp(24px, 3vw, 40px);
+  gap: clamp(14px, 1.8vw, 24px);
   overflow-x: auto;
   /* il gesto orizzontale muore qui: niente scroll chaining sul documento */
   overscroll-behavior-x: contain;

@@ -183,7 +183,8 @@ a.allBar:hover .allBarDisc {
 
 .filmKicker {
   display: block;
-  margin-bottom: 14px;
+  margin-bottom: 10px;
+  letter-spacing: 0.08em;
   color: var(--accent-ink); /* dentro scheme-dark = osso */
 }
 
@@ -211,8 +212,11 @@ a.allBar:hover .allBarDisc {
 /* ————— etichetta condivisa dei blocchi editoriali sotto l'hero ————— */
 
 .sectionLabel {
+  /* come i kicker numerati della home, attaccato alla sua heading */
   display: block;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
+  letter-spacing: 0.08em;
+  color: var(--accent-ink);
 }
 
 /* ————— scegli il tuo percorso ————— */
@@ -226,7 +230,7 @@ h2.pathsTitle {
   font-size: clamp(52px, 9vw, 140px);
   letter-spacing: -0.05em;
   line-height: 0.84;
-  margin: 10px 0 clamp(36px, 5vw, 64px);
+  margin: 2px 0 clamp(36px, 5vw, 64px);
 }
 
 .pathsTitleAccent {
@@ -239,9 +243,27 @@ h2.pathsTitle {
   gap: 14px;
 }
 
+/* mobile: slider orizzontale snap — si vede una card e mezzo,
+   l'autoplay di PathsSlider avanza di una card ogni 7s */
 @media (max-width: 800px) {
   .pathsGrid {
-    grid-template-columns: 1fr;
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    margin-right: calc(var(--pad) * -1);
+    padding-right: var(--pad);
+  }
+
+  .pathsGrid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .pathsGrid > a {
+    flex: 0 0 66%;
+    scroll-snap-align: start;
   }
 }
 
@@ -304,13 +326,20 @@ a.pathCard:hover .pathPhoto {
   transform: scale(1.03);
 }
 
-/* titolo grande al piede della foto, col disco-freccia a destra */
-h3.pathTitle {
+/* tutto il contenuto vive al piede della foto */
+.pathOverlay {
   position: absolute;
   left: 18px;
   right: 18px;
   bottom: 16px;
   z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* titolo grande sempre visibile, col disco-freccia a destra */
+h3.pathTitle {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
@@ -320,6 +349,54 @@ h3.pathTitle {
   font-weight: 600;
   letter-spacing: -0.035em;
   line-height: 0.98;
+}
+
+/* testo+conteggio si scoprono SOLO in hover: grid-rows 0fr→1fr
+   (niente misure in px, stessa tecnica dell'accordion del menu) */
+.pathReveal {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-rows 0.45s var(--ease-out),
+    opacity 0.35s ease;
+}
+
+.pathRevealIn {
+  overflow: hidden;
+  min-height: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.pathRevealIn > * {
+  margin-top: 14px;
+}
+
+a.pathCard:hover .pathReveal,
+a.pathCard:focus-visible .pathReveal {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+/* in hover lo scrim si scurisce per reggere anche il testo piccolo */
+a.pathCard:hover .pathPhotoBox::after {
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.86),
+    rgba(0, 0, 0, 0.26) 52%,
+    rgba(0, 0, 0, 0.1) 100%
+  );
+}
+
+/* su touch non esiste hover: tutto sempre visibile dentro la card */
+@media (hover: none) {
+  .pathReveal {
+    grid-template-rows: 1fr;
+    opacity: 1;
+  }
 }
 
 /* disco-freccia: eccezione tonda ammessa (come i dischi dei caroselli) */
@@ -376,11 +453,20 @@ a.pathCard:hover .pathDisc {
   padding-bottom: clamp(40px, 5vw, 72px);
 }
 
-/* titolo di sezione grande (richiesta: "tutto intorno allo studio"
-   più evidente) */
+/* split sul ritmo della griglia percorso sopra (3 colonne, gap 14):
+   il titolo occupa la prima colonna, le card le altre due */
+.aroundSplit {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  gap: 14px;
+  align-items: start;
+}
+
 h2.aroundTitle {
-  font-size: var(--fs-h2);
-  margin-bottom: clamp(28px, 4vw, 44px);
+  font-size: clamp(26px, 2.4vw, 40px);
+  letter-spacing: -0.03em;
+  line-height: 1.02;
+  max-width: 14ch;
 }
 
 /* card affiancate senza foto, come le card della home: superficie
@@ -444,9 +530,9 @@ a.aroundCard:hover .aroundArrow {
 .aroundCardTitle {
   margin-top: auto;
   padding-top: 48px;
-  font-size: clamp(22px, 2.2vw, 32px);
+  font-size: clamp(20px, 1.8vw, 27px);
   font-weight: 600;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.02em;
   line-height: 1.02;
 }
 
@@ -458,6 +544,11 @@ a.aroundCard:hover .aroundArrow {
 }
 
 @media (max-width: 860px) {
+  .aroundSplit {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
   .aroundGrid {
     grid-template-columns: 1fr;
   }
@@ -527,7 +618,7 @@ h3.storiaTitle {
   display: grid;
   gap: 14px;
   max-width: 68ch;
-  margin: 20px 0 clamp(32px, 4vw, 48px);
+  margin: 14px 0 clamp(18px, 2.5vw, 28px);
 }
 
 .teachersP {

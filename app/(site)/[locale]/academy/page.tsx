@@ -18,11 +18,13 @@ import {
   type ExploreWord,
 } from '@/components/sections/ExploreField'
 import { FluidZone } from '@/components/sections/FluidZone'
+import { PathsSlider } from '@/components/sections/PathsSlider'
 import { TeacherStrip } from '@/components/sections/TeacherStrip'
 import { isLocale, localeHref } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
 import { pageAlternates } from '@/lib/seo'
 import { l } from '@/lib/sanity/l'
+import { urlFor } from '@/lib/sanity/image'
 import type { Course } from '@/lib/sanity/types'
 import { getAllCourses, getAllTeachers, getSiteSettings } from '@/lib/sanity/queries'
 import styles from './page.module.css'
@@ -40,13 +42,15 @@ const PATHS = [
     slug: 'corsi-universitari',
     types: ['triennio', 'magistrale'],
     photo: '/img/sections/academy-universitari.jpg',
-    video: '/video/node-academy.mp4',
+    /* due CUT DIVERSI della stessa clip (ffmpeg): sessione di canto
+       qui, mani sui pad sulla card custom — mai la stessa scena */
+    video: '/video/percorso-uni.mp4',
   },
   {
     slug: 'corsi-custom',
     types: ['custom'],
     photo: '/img/sections/academy-custom.jpg',
-    video: '/video/hi-corsi.mp4',
+    video: '/video/percorso-custom.mp4',
   },
   {
     slug: 'formazione-finanziata',
@@ -59,10 +63,11 @@ const PATHS = [
 /* la lista "tutto intorno allo studio": altre 3 pagine topic */
 const AROUND = ['stage-placement', 'servizi-studenti', 'open-day'] as const
 
-/* ————— campo esplora: tutta l'offerta in un muro statico di titoli.
-   Le foto sono TUTTE della stessa misura (la dimensione vive nel CSS
-   del componente); qui si decide solo quali e ogni quanti titoli ————— */
-const EXPLORE_PICS = [
+/* ————— campo esplora: tre marquee a coppie parola/foto — ogni titolo
+   ha la SUA immagine (la cover del corso da Sanity; per i finanziati,
+   che in Sanity non esistono ancora, le foto della sede a giro).
+   Le foto sono TUTTE della stessa misura (dimensione nel CSS) ————— */
+const EXPLORE_FALLBACK_PICS = [
   '/img/foto/studio-ssl.jpg',
   '/img/foto/live-band.jpg',
   '/img/foto/sede.jpg',
@@ -70,9 +75,6 @@ const EXPLORE_PICS = [
   '/img/foto/corridoio-2.jpg',
   '/img/sections/studio-regia-b.jpg',
 ] as const
-
-/* in quali punti di ogni riga si infilano le foto */
-const EXPLORE_PIC_SLOTS = [[2], [1, 4], [3], [2, 5]] as const
 
 /** avvolge in <strong> i nomi propri dentro un paragrafo (Angela Madonia
  *  ecc.): evita di portare markup nei dizionari JSON. */
@@ -119,6 +121,10 @@ export default async function AcademyPage({
   const corsiPath = localeHref(locale, '/academy/corsi')
   const email = settings?.email ?? 'hello@bologna-creativehub.it'
 
+  /* titoletti numerati come in home ("02 — metodo"): il numero vive
+     qui, così i dizionari e le Rule restano senza numerazione */
+  const kick = (n: number, label: string) => `0${n} — ${label}`
+
   /* ————— parole del campo esplora: i corsi veri da Sanity più i
      finanziati del dizionario (non ancora in Sanity: puntano alla
      pagina della formazione finanziata). I pool si alternano a giro
@@ -132,39 +138,47 @@ export default async function AcademyPage({
       href: `${basePath}/${c.slug?.current ?? ''}`,
     }
   }
-  const pools: ExploreWord[][] = [
+  /* coppie parola+foto: ogni corso porta la SUA cover */
+  const toPair = (c: Course) => ({
+    word: toWord(c),
+    picSrc: c.coverImage
+      ? urlFor(c.coverImage).width(640).height(480).fit('crop').auto('format').url()
+      : undefined,
+  })
+  const pools = [
     courses
       .filter((c) => c.types?.some((ty) => ty === 'triennio' || ty === 'magistrale'))
-      .map(toWord),
-    courses.filter((c) => c.types?.includes('custom')).map(toWord),
+      .map(toPair),
+    courses.filter((c) => c.types?.includes('custom')).map(toPair),
     t.academy.exploreFunded.map((label) => ({
-      kind: 'word' as const,
-      label,
-      tag: t.academy.exploreFundedTag,
-      href: localeHref(locale, '/academy/formazione-finanziata'),
+      word: {
+        kind: 'word' as const,
+        label,
+        tag: t.academy.exploreFundedTag,
+        href: localeHref(locale, '/academy/formazione-finanziata'),
+      },
+      picSrc: undefined as string | undefined,
     })),
   ]
-  const words: ExploreWord[] = []
+  const pairs: { word: ExploreWord; picSrc?: string }[] = []
   const maxLen = Math.max(...pools.map((p) => p.length))
   for (let i = 0; i < pools.length * maxLen; i++) {
-    const w = pools[i % pools.length][Math.floor(i / pools.length)]
-    if (w) words.push(w)
+    const p = pools[i % pools.length][Math.floor(i / pools.length)]
+    if (p) pairs.push(p)
   }
-  const exploreRows: ExploreItem[][] = [[], [], [], []]
-  words.forEach((w, i) => exploreRows[i % exploreRows.length].push(w))
-  let picIdx = 0
-  EXPLORE_PIC_SLOTS.forEach((slots, r) => {
-    slots.forEach((at, k) => {
-      const caption = t.academy.exploreCaptions[picIdx]
-      if (picIdx < EXPLORE_PICS.length && caption) {
-        exploreRows[r].splice(at + k, 0, {
-          kind: 'pic',
-          src: EXPLORE_PICS[picIdx],
-          alt: caption,
-          caption,
-        })
-        picIdx++
-      }
+  /* 3 righe, pattern parola/foto/parola/foto; i senza-cover pescano
+     dalle foto della sede, a giro */
+  let fb = 0
+  const exploreRows: ExploreItem[][] = [[], [], []]
+  pairs.forEach((p, i) => {
+    const row = exploreRows[i % exploreRows.length]
+    row.push(p.word)
+    row.push({
+      kind: 'pic',
+      src:
+        p.picSrc ??
+        EXPLORE_FALLBACK_PICS[fb++ % EXPLORE_FALLBACK_PICS.length],
+      alt: p.word.label,
     })
   })
 
@@ -204,7 +218,7 @@ export default async function AcademyPage({
         {/* ————— scegli il tuo percorso ————— */}
         <section className={`wrap ${styles.pathsSez}`}>
           <Reveal as="span" className={`mono ${styles.sectionLabel}`}>
-            {t.academy.pathsKicker}
+            {kick(1, t.academy.pathsKicker)}
           </Reveal>
           {/* titolone alla mock: ultima riga nell'azzurro di sezione */}
           <Reveal
@@ -221,7 +235,10 @@ export default async function AcademyPage({
           {/* scia fluida della home sopra le tre foto; il corpo testo
               sta sopra il canvas (z-index) e non si inverte */}
           <FluidZone>
-          <RevealGroup className={styles.pathsGrid}>
+          <RevealGroup>
+          {/* su mobile il CSS trasforma la griglia in slider snap:
+              PathsSlider aggiunge solo l'autoplay ogni 7s */}
+          <PathsSlider className={styles.pathsGrid}>
             {PATHS.map((path, i) => {
               const item = t.academy.pathsItems[i]
               const count = courses.filter((c) =>
@@ -242,37 +259,50 @@ export default async function AcademyPage({
                       poster={path.photo}
                       className={styles.pathPhoto}
                     />
-                    {/* titolo SULLA foto (ref landing): scrim al piede
-                        per la lettura, numerino in alto, disco-freccia */}
+                    {/* tutto DENTRO la card: titolo sempre visibile al
+                        piede, testo e conteggio si scoprono solo in
+                        hover (grid-rows 0fr→1fr, niente misure);
+                        su touch restano visibili */}
                     <span className={`mono ${styles.pathNum}`}>{`0${i + 1}`}</span>
-                    <h3 className={styles.pathTitle}>
-                      <span>{item.title}</span>
-                      <span className={styles.pathDisc} aria-hidden="true">
-                        <Arrow dir="ne" size={16} />
-                      </span>
-                    </h3>
-                  </div>
-                  <div className={styles.pathBody}>
-                    <p className={styles.pathText}>{item.text}</p>
-                    {count > 0 && (
-                      <b className={styles.pathCount}>
-                        {count} {t.academy.pathsCourses}
-                      </b>
-                    )}
+                    <div className={styles.pathOverlay}>
+                      <h3 className={styles.pathTitle}>
+                        <span>{item.title}</span>
+                        <span className={styles.pathDisc} aria-hidden="true">
+                          <Arrow dir="ne" size={16} />
+                        </span>
+                      </h3>
+                      <div className={styles.pathReveal}>
+                        <div className={styles.pathRevealIn}>
+                          <p className={styles.pathText}>{item.text}</p>
+                          {count > 0 && (
+                            <b className={styles.pathCount}>
+                              {count} {t.academy.pathsCourses}
+                            </b>
+                          )}
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </Link>
               )
             })}
+          </PathsSlider>
           </RevealGroup>
           </FluidZone>
         </section>
 
         {/* ————— tutto intorno allo studio ————— */}
         <section className={`wrap ${styles.aroundSez}`}>
-          {/* niente kicker: ripeterebbe il titolo parola per parola */}
+          <Reveal as="span" className={`mono ${styles.sectionLabel}`}>
+            {kick(2, t.academy.aroundKicker)}
+          </Reveal>
+          {/* split sul ritmo della griglia sopra: titolo largo quanto
+              la prima colonna, le tre card nelle due colonne restanti */}
+          <div className={styles.aroundSplit}>
           <Reveal
             as="h2"
             className={`display-thin ${styles.aroundTitle}`}
+            delay={60}
           >
             {t.academy.aroundTitle}
           </Reveal>
@@ -298,6 +328,7 @@ export default async function AcademyPage({
               )
             })}
           </RevealGroup>
+          </div>
         </section>
 
         <Rule dark left={t.academy.aroundKicker} right={t.common.courses} />
@@ -308,7 +339,7 @@ export default async function AcademyPage({
           <section className={styles.exploreSez}>
             <div className={`wrap ${styles.exploreHead}`}>
               <Reveal as="span" className={`mono ${styles.sectionLabel}`}>
-                {t.academy.exploreKicker}
+                {kick(3, t.academy.exploreKicker)}
               </Reveal>
               <Reveal
                 as="h2"
@@ -353,7 +384,7 @@ export default async function AcademyPage({
             />
             <div className={`wrap ${styles.filmIn}`}>
               <Reveal as="span" className={`mono ${styles.filmKicker}`}>
-                {t.academy.storiaKicker}
+                {kick(4, t.academy.storiaKicker)}
               </Reveal>
               <Reveal
                 as="h2"
@@ -385,7 +416,7 @@ export default async function AcademyPage({
         {/* ————— docenti ————— */}
         <section className={`wrap ${styles.teachersSez}`}>
           <SectionHeader
-            kicker={t.academy.teachersKicker}
+            kicker={kick(5, t.academy.teachersKicker)}
             title={t.academy.teachersTitle}
           />
           <div className={styles.teachersIntro}>
@@ -415,7 +446,7 @@ export default async function AcademyPage({
             scelto — open day, colloquio, telefono ————— */}
         <section className={`wrap ${styles.orientSez}`}>
           <Reveal as="span" className={`mono ${styles.sectionLabel}`}>
-            {t.academy.orientKicker}
+            {kick(6, t.academy.orientKicker)}
           </Reveal>
           <Reveal
             as="h2"

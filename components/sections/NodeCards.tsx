@@ -17,8 +17,9 @@ export type NodeCardsProps = {
 }
 
 /**
- * I nodi secondari, ridotti all'osso: eyebrow "n° 0X" + titolo in basso.
- * Testo e CTA nascosti (i campi restano nei dizionari), hover bianco.
+ * I nodi secondari: eyebrow "n° 0X", titolo in basso e sottotitolo
+ * (la riga descrittiva dei dizionari, come le card del bento sopra).
+ * CTA nascosta (il campo resta nei dizionari), hover bianco.
  */
 export function NodeCards({ cards, hrefs, className }: NodeCardsProps) {
   return (
@@ -36,6 +37,7 @@ export function NodeCards({ cards, hrefs, className }: NodeCardsProps) {
             <span className={styles.n}>{card.n}</span>
           </div>
           <h3 className={styles.title}>{card.title}</h3>
+          <p className={styles.text}>{card.text}</p>
         </Link>
       ))}
     </RevealGroup>

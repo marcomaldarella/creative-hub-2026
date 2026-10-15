@@ -2,7 +2,6 @@
 
 import { useEffect, useRef } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
 import styles from './ExploreField.module.css'
 
 /**
@@ -27,7 +26,6 @@ export type ExplorePic = {
   kind: 'pic'
   src: string
   alt: string
-  caption: string
 }
 
 export type ExploreItem = ExploreWord | ExplorePic
@@ -140,16 +138,18 @@ export function ExploreField({ rows }: { rows: ExploreItem[][] }) {
           </Link>
         ) : (
           <figure key={`pic-${i}`} className={styles.pic}>
-            <Image
+            {/* img puro come in Thumb: le cover arrivano dalla CDN
+                Sanity, che non è tra i domini di next/image */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
               src={item.src}
               alt={hidden ? '' : item.alt}
               width={320}
               height={240}
+              loading="lazy"
               draggable={false}
               className={styles.picImg}
-              sizes="(max-width: 760px) 46vw, 280px"
             />
-            <figcaption className={styles.picCap}>{item.caption}</figcaption>
           </figure>
         )
       )}
