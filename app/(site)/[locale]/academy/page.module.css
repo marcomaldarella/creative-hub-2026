@@ -46,6 +46,14 @@
   flex-wrap: wrap;
 }
 
+/* mobile: la lede sotto il titolone si fa piccina */
+@media (max-width: 800px) {
+  .head .lede {
+    font-size: 12px;
+    line-height: 1.45;
+  }
+}
+
 /* ————— colata nera: in evidenza + fascia video + storia ————— */
 
 /* fascia scura full-bleed come la landing corso approvata (corso-v3):
