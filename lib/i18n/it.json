@@ -308,10 +308,10 @@
   "academy": {
     "kicker": "academy · iscrizioni aperte · a.a. 2026/27",
     "titleLines": [
-      "Accademia di musica, produzione",
-      "e tecnico del suono a Bologna."
+      "Accademia di musica",
+      "e arti creative."
     ],
-    "lede": "Corsi universitari — Bachelor of Arts, Bachelor of Science e Master of Music — in musica, produzione cinematografica e videomaking. Sei corsi di primo ciclo, tre Master, venti posti per corso.",
+    "lede": "Dal 1999 a Bologna formiamo musicisti, produttori, tecnici del suono e professionisti del cinema e della musica. Corsi universitari internazionali, corsi su misura e formazione finanziata dalla Regione.",
     "categoryLabel": "filtra per categoria",
     "empty": "nessun corso in questa categoria.",
     "teachersKicker": "i docenti",
@@ -344,7 +344,7 @@
     "pathsItems": [
       {
         "title": "Corsi universitari",
-        "text": "Titoli universitari internazionali. Tre anni, venti posti per corso."
+        "text": "Bachelor e Master of Music internazionali. Tre anni, venti posti per corso."
       },
       {
         "title": "Corsi su misura",
@@ -352,7 +352,7 @@
       },
       {
         "title": "Formazione finanziata",
-        "text": "Corsi gratuiti finanziati dalla Regione Emilia-Romagna."
+        "text": "Percorsi finanziati dalla Regione Emilia-Romagna, con selezione all'ingresso."
       }
     ],
     "aroundKicker": "tutto intorno allo studio",
@@ -407,7 +407,51 @@
       "Stefania Martin"
     ],
     "inMemoriaTitle": "In memoria",
-    "inMemoriaText": "Bologna ha avuto tra i suoi maestri anche Celso Valli, arrangiatore e produttore che ha firmato il suono di Vasco Rossi, Laura Pausini, Mina, Eros Ramazzotti. Ci ha lasciati nel 2025. Quello che ha insegnato qui resta nel modo in cui l'Academy lavora ancora oggi."
+    "inMemoriaText": "Bologna ha avuto tra i suoi maestri anche Celso Valli, arrangiatore e produttore che ha firmato il suono di Vasco Rossi, Laura Pausini, Mina, Eros Ramazzotti. Ci ha lasciati nel 2025. Quello che ha insegnato qui resta nel modo in cui l'Academy lavora ancora oggi.",
+    "heroCtaPrimary": "prenota l'open day",
+    "heroCtaSecondary": "chiedi informazioni",
+    "exploreKicker": "tutta l'offerta",
+    "exploreTitle": "Tutto quello che si impara qui.",
+    "exploreLead": "Corsi universitari, su misura e finanziati tra musica, suono, cinema e business. Trascina per esplorare, apri un titolo per vedere il corso.",
+    "exploreHint": "trascina per esplorare",
+    "exploreFunded": [
+      "Digital Composer and Producer",
+      "Songwriter & Vocal Artist",
+      "Tecnico modellatore 3D",
+      "Multimedia Sound Designer",
+      "Sound design immersivo"
+    ],
+    "exploreCaptions": [
+      "regia ssl",
+      "sala live",
+      "la sede",
+      "aula corsi",
+      "i corridoi",
+      "regia b"
+    ],
+    "exploreAllTitle": "Vedi tutti i corsi",
+    "exploreAllSub": "Universitari, su misura e finanziati, con i filtri per area e tipologia.",
+    "orientKicker": "vieni a trovarci",
+    "orientTitle": "Non sai ancora quale scegliere?",
+    "orientLead": "È normale. Vieni a vedere dove si studia, parla con i docenti, ascolta cosa fanno gli studenti. Poi decidi.",
+    "orientItems": [
+      {
+        "title": "Open day",
+        "text": "Un pomeriggio dentro l'hub, anche con i tuoi genitori.",
+        "cta": "prenota il tuo posto"
+      },
+      {
+        "title": "Colloquio orientativo",
+        "text": "Mezz'ora con un tutor, in sede o online, per capire quale percorso fa per te.",
+        "cta": "fissa un colloquio"
+      },
+      {
+        "title": "Chiamaci",
+        "text": "Per una domanda veloce, risponde una persona del team.",
+        "cta": "+39 051 6313706"
+      }
+    ],
+    "exploreFundedTag": "finanziato"
   },
   "studios": {
     "kicker": "studio · bologna",

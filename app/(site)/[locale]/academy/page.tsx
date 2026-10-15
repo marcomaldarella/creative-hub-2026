@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import {
   Arrow,
-  ArrowLink,
+  Button,
   Reveal,
   RevealGroup,
   Rule,
@@ -12,13 +12,18 @@ import {
 } from '@/components/ui'
 import { SiteChrome } from '@/components/sections/SiteChrome'
 import { BgVideo } from '@/components/sections/BgVideo'
-import { CourseCard } from '@/components/sections/CourseCard'
+import {
+  ExploreField,
+  type ExploreItem,
+  type ExploreWord,
+} from '@/components/sections/ExploreField'
 import { FluidZone } from '@/components/sections/FluidZone'
-import { CourseSlider } from '@/components/sections/CourseSlider'
 import { TeacherStrip } from '@/components/sections/TeacherStrip'
 import { isLocale, localeHref } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
 import { pageAlternates } from '@/lib/seo'
+import { l } from '@/lib/sanity/l'
+import type { Course } from '@/lib/sanity/types'
 import { getAllCourses, getAllTeachers, getSiteSettings } from '@/lib/sanity/queries'
 import styles from './page.module.css'
 
@@ -53,6 +58,30 @@ const PATHS = [
 
 /* la lista "tutto intorno allo studio": altre 3 pagine topic */
 const AROUND = ['stage-placement', 'servizi-studenti', 'open-day'] as const
+
+/* ————— campo esplora: tutta l'offerta in un marquee trascinabile.
+   Le foto sono TUTTE della stessa misura (la dimensione vive nel CSS
+   del componente); qui si decide solo quali e dove ————— */
+const EXPLORE_PICS = [
+  '/img/foto/studio-ssl.jpg',
+  '/img/foto/live-band.jpg',
+  '/img/foto/sede.jpg',
+  '/img/sections/aula-corsi.jpg',
+  '/img/foto/corridoio-2.jpg',
+  '/img/sections/studio-regia-b.jpg',
+] as const
+
+/* corpo tipografico per posizione di riga: un xl per riga, mai nello
+   stesso punto su righe adiacenti */
+const EXPLORE_SIZES: ExploreWord['size'][][] = [
+  ['xl', 'm', 'l', 'm', 'l', 'm'],
+  ['m', 'l', 'xl', 'm', 'l', 'm'],
+  ['l', 'm', 'm', 'xl', 'm', 'l'],
+  ['m', 'xl', 'l', 'm', 'l', 'm'],
+]
+
+/* in quali punti di ogni riga si infilano le foto */
+const EXPLORE_PIC_SLOTS = [[2], [1, 4], [3], [2, 5]] as const
 
 /** avvolge in <strong> i nomi propri dentro un paragrafo (Angela Madonia
  *  ecc.): evita di portare markup nei dizionari JSON. */
@@ -97,13 +126,64 @@ export default async function AcademyPage({
 
   const basePath = localeHref(locale, '/academy')
   const corsiPath = localeHref(locale, '/academy/corsi')
+  const email = settings?.email ?? 'hello@bologna-creativehub.it'
 
-  /* i 3 corsi in evidenza: flag featured di Sanity, completati con i
-     primi in ordine di apparizione se non bastano */
-  const highlights = [
-    ...courses.filter((c) => c.featured),
-    ...courses.filter((c) => !c.featured),
-  ].slice(0, 3)
+  /* ————— parole del campo esplora: i corsi veri da Sanity più i
+     finanziati del dizionario (non ancora in Sanity: puntano alla
+     pagina della formazione finanziata). I pool si alternano a giro
+     così ogni riga mescola le tipologie invece di raggrupparle ————— */
+  const toWord = (c: Course): ExploreWord => {
+    const ty = c.types?.[0] as keyof typeof t.academy.types | undefined
+    return {
+      kind: 'word',
+      label: l(c.title, locale) ?? '',
+      tag: ty ? t.academy.types[ty] : undefined,
+      href: `${basePath}/${c.slug?.current ?? ''}`,
+      size: 'm',
+    }
+  }
+  const pools: ExploreWord[][] = [
+    courses
+      .filter((c) => c.types?.some((ty) => ty === 'triennio' || ty === 'magistrale'))
+      .map(toWord),
+    courses.filter((c) => c.types?.includes('custom')).map(toWord),
+    t.academy.exploreFunded.map((label) => ({
+      kind: 'word' as const,
+      label,
+      tag: t.academy.exploreFundedTag,
+      href: localeHref(locale, '/academy/formazione-finanziata'),
+      size: 'm' as const,
+    })),
+  ]
+  const words: ExploreWord[] = []
+  const maxLen = Math.max(...pools.map((p) => p.length))
+  for (let i = 0; i < pools.length * maxLen; i++) {
+    const w = pools[i % pools.length][Math.floor(i / pools.length)]
+    if (w) words.push(w)
+  }
+  const exploreRows: ExploreItem[][] = [[], [], [], []]
+  words.forEach((w, i) => {
+    const r = i % exploreRows.length
+    exploreRows[r].push({
+      ...w,
+      size: EXPLORE_SIZES[r][exploreRows[r].length % EXPLORE_SIZES[r].length],
+    })
+  })
+  let picIdx = 0
+  EXPLORE_PIC_SLOTS.forEach((slots, r) => {
+    slots.forEach((at, k) => {
+      const caption = t.academy.exploreCaptions[picIdx]
+      if (picIdx < EXPLORE_PICS.length && caption) {
+        exploreRows[r].splice(at + k, 0, {
+          kind: 'pic',
+          src: EXPLORE_PICS[picIdx],
+          alt: caption,
+          caption,
+        })
+        picIdx++
+      }
+    })
+  })
 
   return (
     <SiteChrome locale={locale} path="/academy">
@@ -118,9 +198,21 @@ export default async function AcademyPage({
             <br className={styles.titleBreak} />
             {t.academy.titleLines[1]}
           </Reveal>
-          <Reveal as="p" className={styles.lede} delay={160}>
-            {t.academy.lede}
-          </Reveal>
+          {/* riga alla landing: lede a sinistra, CTA appaiate a destra
+              (prenota = pastiglia scura, info = ghost) */}
+          <div className={styles.heroRow}>
+            <Reveal as="p" className={styles.lede} delay={160}>
+              {t.academy.lede}
+            </Reveal>
+            <Reveal className={styles.heroCtas} delay={220}>
+              <Button href={localeHref(locale, '/academy/open-day')}>
+                {t.academy.heroCtaPrimary}
+              </Button>
+              <Button variant="ghost" href={`mailto:${email}`}>
+                {t.academy.heroCtaSecondary}
+              </Button>
+            </Reveal>
+          </div>
         </header>
 
         {/* ————— scegli il tuo percorso ————— */}
@@ -152,20 +244,23 @@ export default async function AcademyPage({
                       poster={path.photo}
                       className={styles.pathPhoto}
                     />
+                    {/* titolo SULLA foto (ref landing): scrim al piede
+                        per la lettura, numerino in alto, disco-freccia */}
+                    <span className={`mono ${styles.pathNum}`}>{`0${i + 1}`}</span>
+                    <h3 className={styles.pathTitle}>
+                      <span>{item.title}</span>
+                      <span className={styles.pathDisc} aria-hidden="true">
+                        <Arrow dir="ne" size={16} />
+                      </span>
+                    </h3>
                   </div>
                   <div className={styles.pathBody}>
-                    <span className={`mono ${styles.pathKicker}`}>{`0${i + 1}`}</span>
-                    <h3 className={styles.pathTitle}>{item.title}</h3>
                     <p className={styles.pathText}>{item.text}</p>
-                    <span className={`mono ${styles.pathMeta}`}>
-                      <span className={styles.pathCount}>
+                    {count > 0 && (
+                      <b className={styles.pathCount}>
                         {count} {t.academy.pathsCourses}
-                      </span>
-                      <span className={styles.pathGo}>
-                        {t.academy.pathsExplore}
-                        <Arrow dir="e" size={12} />
-                      </span>
-                    </span>
+                      </b>
+                    )}
                   </div>
                 </Link>
               )
@@ -209,36 +304,41 @@ export default async function AcademyPage({
             scura full-bleed — scheme-dark ribalta i token (globals) e
             dentro l'accento torna osso, come nelle fasce del corso ————— */}
         <div className={`scheme-dark ${styles.darkBand}`}>
-          {/* corsi in evidenza: strip a 2 card e mezzo sul nero */}
-          <section className={`wrap ${styles.highlightSez}`}>
-            <div className={styles.highlightHead}>
+          {/* ————— tutta l'offerta: campo-marquee trascinabile con i
+              corsi veri e le foto della sede (tutte della stessa
+              misura), chiuso dalla barra "vedi tutti i corsi" ————— */}
+          <section className={styles.exploreSez}>
+            <div className={`wrap ${styles.exploreHead}`}>
               <Reveal as="span" className={`mono ${styles.sectionLabel}`}>
-                {t.academy.highlightKicker}
+                {t.academy.exploreKicker}
               </Reveal>
-              <ArrowLink href={corsiPath} className={styles.highlightCta}>
-                {t.academy.highlightCta}
-              </ArrowLink>
+              <Reveal
+                as="h2"
+                className={`display-thin ${styles.exploreTitle}`}
+                delay={80}
+              >
+                {t.academy.exploreTitle}
+              </Reveal>
+              <Reveal as="p" className={styles.exploreLead} delay={160}>
+                {t.academy.exploreLead}
+              </Reveal>
             </div>
-            <CourseSlider
-              labels={{
-                prev: t.academy.sliderPrev,
-                next: t.academy.sliderNext,
-                hint: t.academy.sliderHint,
-              }}
-            >
-              {highlights.map((course, i) => (
-                <CourseCard
-                  key={course._id}
-                  course={course}
-                  locale={locale}
-                  index={i}
-                  ratio="16 / 9"
-                  flat
-                  href={`${basePath}/${course.slug?.current ?? ''}`}
-                  className={styles.highlightCard}
-                />
-              ))}
-            </CourseSlider>
+            <ExploreField rows={exploreRows} hint={t.academy.exploreHint} />
+            <Link href={corsiPath} className={styles.allBar}>
+              <div className={`wrap ${styles.allBarIn}`}>
+                <span className={styles.allBarBody}>
+                  <span className={styles.allBarTitle}>
+                    {t.academy.exploreAllTitle}
+                  </span>
+                  <span className={styles.allBarSub}>
+                    {t.academy.exploreAllSub}
+                  </span>
+                </span>
+                <span className={styles.allBarDisc} aria-hidden="true">
+                  <Arrow dir="e" size={22} />
+                </span>
+              </div>
+            </Link>
           </section>
 
           <Rule dark left={t.common.courses} right={t.academy.storiaKicker} />
@@ -315,6 +415,45 @@ export default async function AcademyPage({
             <h3 className={styles.inMemoriaTitle}>{t.academy.inMemoriaTitle}</h3>
             <p className={styles.inMemoriaText}>{t.academy.inMemoriaText}</p>
           </Reveal>
+        </section>
+
+        <Rule left={t.academy.teachersKicker} right={t.academy.orientKicker} />
+
+        {/* ————— orientamento: tre strade per chi non ha ancora
+            scelto — open day, colloquio, telefono ————— */}
+        <section className={`wrap ${styles.orientSez}`}>
+          <Reveal as="span" className={`mono ${styles.sectionLabel}`}>
+            {t.academy.orientKicker}
+          </Reveal>
+          <Reveal
+            as="h2"
+            className={`display-thin ${styles.orientTitle}`}
+            delay={80}
+          >
+            {t.academy.orientTitle}
+          </Reveal>
+          <Reveal as="p" className={styles.orientLead} delay={160}>
+            {t.academy.orientLead}
+          </Reveal>
+          <RevealGroup className={styles.orientGrid}>
+            {t.academy.orientItems.map((item, i) => {
+              const hrefs = [
+                localeHref(locale, '/academy/open-day'),
+                `mailto:${email}?subject=${encodeURIComponent(item.title)}`,
+                'tel:+390516313706',
+              ]
+              return (
+                <div key={item.title} className={`rv ${styles.orientOpt}`}>
+                  <span className={`mono ${styles.orientIdx}`}>{`0${i + 1}`}</span>
+                  <h3 className={styles.orientOptTitle}>{item.title}</h3>
+                  <p className={styles.orientOptText}>{item.text}</p>
+                  <div className={styles.orientCta}>
+                    <Button href={hrefs[i]}>{item.cta}</Button>
+                  </div>
+                </div>
+              )
+            })}
+          </RevealGroup>
         </section>
       </main>
     </SiteChrome>

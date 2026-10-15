@@ -16,14 +16,32 @@
 }
 
 .title {
-  font-size: var(--fs-h2);
-  margin-bottom: 14px;
+  /* un gradino sopra fs-h2: è l'ingresso della landing (ref mock) */
+  font-size: clamp(36px, 4.8vw, 72px);
+  letter-spacing: -0.045em;
+  line-height: 0.98;
+  margin-bottom: 20px;
+}
+
+/* lede a sinistra, CTA appaiate in basso a destra (ref mock) */
+.heroRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 32px;
+  flex-wrap: wrap;
 }
 
 .lede {
   max-width: 52ch;
   color: var(--fg-2);
   font-size: var(--fs-lede);
+}
+
+.heroCtas {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
 /* ————— colata nera: in evidenza + fascia video + storia ————— */
@@ -39,39 +57,81 @@
   background: #000;
 }
 
-.highlightSez {
-  /* padding asimmetrici alla corso-v3: attacco corto, coda più lunga
-     verso la regola interna */
+/* ————— tutta l'offerta: testa + campo-marquee + barra finale ————— */
+
+.exploreSez {
   padding-top: clamp(36px, 5vw, 60px);
-  padding-bottom: clamp(44px, 6vw, 84px);
 }
 
-.highlightHead {
+.exploreHead {
+  margin-bottom: clamp(8px, 1.5vw, 16px);
+}
+
+.exploreTitle {
+  font-size: var(--fs-h2);
+  margin-bottom: 12px;
+}
+
+.exploreLead {
+  max-width: 56ch;
+  color: var(--fg-2);
+  font-size: var(--fs-lede);
+}
+
+/* barra "vedi tutti i corsi": fascia piena nell'azzurro di sezione,
+   full-bleed a chiudere il campo (ref mock) */
+a.allBar {
+  display: block;
+  margin-top: clamp(28px, 4vw, 48px);
+  background: var(--accent);
+  color: var(--accent-on);
+  transition: background var(--dur) ease;
+}
+
+a.allBar:hover {
+  background: var(--azzurro-hover);
+}
+
+.allBarIn {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
-  gap: 16px;
-  margin-bottom: clamp(20px, 3vw, 32px);
+  gap: 24px;
+  padding-top: clamp(28px, 4vw, 44px);
+  padding-bottom: clamp(28px, 4vw, 44px);
 }
 
-.highlightHead .sectionLabel {
-  margin-bottom: 0;
+.allBarTitle {
+  display: block;
+  font-size: clamp(28px, 4vw, 56px);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  line-height: 1;
 }
 
-.highlightCta {
-  flex-shrink: 0;
+.allBarSub {
+  display: block;
+  font-size: var(--fs-small);
+  color: color-mix(in srgb, var(--accent-on) 68%, transparent);
+  margin-top: 10px;
 }
 
-/* 2 card e mezzo visibili nel nastro (CourseSlider): la mezza card e i
-   controlli invitano a scorrere */
-.highlightCard {
-  flex: 0 0 calc((100% - 2 * 20px) / 2.5);
+/* disco-freccia: una delle eccezioni tonde ammesse */
+.allBarDisc {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(52px, 5vw, 68px);
+  height: clamp(52px, 5vw, 68px);
+  border-radius: 50%;
+  background: var(--accent-on);
+  color: var(--accent);
+  transition: transform 0.3s var(--ease-out);
 }
 
-@media (max-width: 800px) {
-  .highlightCard {
-    flex-basis: calc((100% - 20px) / 1.2);
-  }
+a.allBar:hover .allBarDisc {
+  transform: translateX(8px);
 }
 
 /* ————— fascia video a tutto campo (fullshot corso-v3) ————— */
@@ -182,10 +242,37 @@ a.pathCard {
     transform var(--dur-slow) var(--ease-out) var(--rvd, 0s);
 }
 
-/* hover come gli slider: il media si muove dentro la cornice */
+/* hover come gli slider: il media si muove dentro la cornice.
+   Il titolo sta SULLA foto (ref mock): la scatola fa da contesto
+   per numerino, scrim e titolo */
 .pathPhotoBox {
+  position: relative;
   overflow: hidden;
   aspect-ratio: 4 / 5;
+  isolation: isolate;
+}
+
+/* scrim di lettura al piede, sopra il video e sotto i testi */
+.pathPhotoBox::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.72),
+    rgba(0, 0, 0, 0.12) 46%,
+    rgba(0, 0, 0, 0.1) 100%
+  );
+}
+
+.pathNum {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  z-index: 2;
+  color: rgba(255, 255, 255, 0.85);
 }
 
 /* vale sia per il video (BgVideo) sia per il suo poster: object-fit
@@ -203,88 +290,68 @@ a.pathCard:hover .pathPhoto {
   transform: scale(1.03);
 }
 
+/* titolo grande al piede della foto, col disco-freccia a destra */
+h3.pathTitle {
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  bottom: 16px;
+  z-index: 2;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+  color: #ffffff;
+  font-size: clamp(26px, 2.3vw, 38px);
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  line-height: 0.98;
+}
+
+/* disco-freccia: eccezione tonda ammessa (come i dischi dei caroselli) */
+.pathDisc {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--accent, var(--azzurro));
+  color: #000000;
+  transition: transform 0.3s var(--ease-out);
+}
+
+a.pathCard:hover .pathDisc {
+  transform: rotate(45deg);
+}
+
+/* riga info sotto la foto: testo a sinistra, conteggio secco a destra */
 .pathBody {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
   flex: 1;
-  padding: 16px 0 0;
+  padding: 14px 2px 0;
   /* sopra il canvas della scia fluida: il testo non si inverte (come
      in home, dove il type sta sopra il layer in difference) */
   position: relative;
   z-index: 6;
 }
 
-.pathKicker {
-  display: block;
-  margin-bottom: 10px;
-  color: var(--accent-ink, var(--fg));
-}
-
-h3.pathTitle {
-  font-size: 20px;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  margin-bottom: 0;
-}
-
-/* trattino come in home tra titolo e descrizione, interlinea corta */
 .pathText {
   font-size: var(--fs-small);
-  line-height: 1.35;
-  color: color-mix(in srgb, var(--fg) 72%, transparent);
-  margin-bottom: 22px;
+  line-height: 1.4;
+  color: color-mix(in srgb, var(--fg) 74%, transparent);
   max-width: 34ch;
 }
 
-.pathText::before {
-  content: '';
-  display: block;
-  width: 20px;
-  height: 2px;
-  background: var(--fg);
-  margin: 10px 0;
-}
-
-.pathMeta {
-  margin-top: auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-}
-
-/* conteggio corsi come label pillata; in hover si accende: sfondino
-   nero e testo nell'azzurro del flood */
 .pathCount {
-  border: 1px solid color-mix(in srgb, var(--fg) 30%, transparent);
-  border-radius: 999px;
-  padding: 5px 12px 6px;
-  transition:
-    background var(--dur) ease,
-    color var(--dur) ease,
-    border-color var(--dur) ease;
-}
-
-a.pathCard:hover .pathCount {
-  background: var(--fg);
-  color: var(--accent, var(--azzurro));
-  border-color: var(--fg);
-}
-
-/* cta esplora sempre visibile, la freccia scatta in hover */
-.pathGo {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  color: var(--fg);
-}
-
-.pathGo svg {
-  transition: transform var(--dur) var(--ease-out);
-}
-
-a.pathCard:hover .pathGo svg {
-  transform: translateX(3px);
+  flex: none;
+  font-size: var(--fs-small);
+  font-weight: 600;
+  white-space: nowrap;
 }
 
 /* ————— tutto intorno allo studio ————— */
@@ -444,4 +511,84 @@ h3.storiaTitle {
   color: var(--fg-2);
   line-height: 1.6;
   max-width: 64ch;
+}
+
+/* ————— orientamento ————— */
+
+.orientSez {
+  padding-top: clamp(44px, 6vw, 80px);
+  padding-bottom: clamp(56px, 8vw, 120px);
+}
+
+.orientTitle {
+  font-size: clamp(32px, 4.4vw, 64px);
+  letter-spacing: -0.04em;
+  max-width: 14ch;
+  margin-bottom: 14px;
+}
+
+.orientLead {
+  font-size: var(--fs-lede);
+  color: var(--fg-2);
+  max-width: 48ch;
+}
+
+/* tre colonne hairline, come la griglia della storia */
+.orientGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0 clamp(20px, 2.5vw, 32px);
+  margin-top: clamp(32px, 4.5vw, 56px);
+  border-top: 1px solid var(--line);
+}
+
+.orientOpt {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-top: 20px;
+}
+
+.orientOpt + .orientOpt {
+  padding-left: clamp(20px, 2.5vw, 32px);
+  border-left: 1px solid var(--line);
+}
+
+.orientIdx {
+  color: var(--fg-2);
+}
+
+h3.orientOptTitle {
+  font-size: clamp(20px, 1.9vw, 25px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-top: clamp(20px, 3vw, 36px);
+}
+
+.orientOptText {
+  font-size: var(--fs-small);
+  color: var(--fg-2);
+  line-height: 1.5;
+  margin: 10px 0 20px;
+  max-width: 34ch;
+}
+
+.orientCta {
+  margin-top: auto;
+}
+
+@media (max-width: 860px) {
+  .orientGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .orientOpt {
+    padding-bottom: 24px;
+  }
+
+  .orientOpt + .orientOpt {
+    padding-left: 0;
+    border-left: 0;
+    border-top: 1px solid var(--line);
+  }
 }
