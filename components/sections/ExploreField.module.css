@@ -9,8 +9,8 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: clamp(14px, 1.8vw, 24px);
-  padding: clamp(28px, 4vw, 56px) 0 clamp(16px, 2vw, 24px);
+  gap: clamp(10px, 1.2vw, 16px);
+  padding: clamp(18px, 2.4vw, 36px) 0 clamp(12px, 1.5vw, 18px);
   overflow: hidden;
   mask-image: linear-gradient(
     to right,
@@ -30,6 +30,15 @@
 
 .row {
   white-space: nowrap;
+  /* drag orizzontale per riga; il gesto verticale resta della pagina */
+  cursor: grab;
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.row.dragging {
+  cursor: grabbing;
 }
 
 .track {
@@ -55,7 +64,7 @@ a.card {
   aspect-ratio: 1.42;
   /* squircle del riferimento: UNICA eccezione tonda oltre ai dischi
      freccia, chiesta esplicitamente su questa sezione */
-  border-radius: clamp(16px, 1.7vw, 24px);
+  border-radius: clamp(10px, 1vw, 14px);
   overflow: hidden;
   isolation: isolate;
   color: #ffffff;
@@ -85,10 +94,20 @@ a.card:hover .cardImg {
   z-index: 2;
   pointer-events: none;
   border-radius: inherit;
+  /* scrim di lettura: più alto e con più stop — il testo regge anche
+     su foto chiare, la parte alta resta pulita */
   background:
-    linear-gradient(to top, rgba(0, 0, 0, 0.52), rgba(0, 0, 0, 0.08) 46%, rgba(0, 0, 0, 0) 60%),
+    linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.82) 0%,
+      rgba(0, 0, 0, 0.6) 16%,
+      rgba(0, 0, 0, 0.34) 36%,
+      rgba(0, 0, 0, 0.12) 52%,
+      rgba(0, 0, 0, 0) 66%
+    ),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0) 18%),
     linear-gradient(168deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.14) 16%, rgba(255, 255, 255, 0) 38%),
-    radial-gradient(130% 100% at 50% 125%, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0) 55%);
+    radial-gradient(130% 100% at 50% 125%, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0) 55%);
   box-shadow:
     inset 0 2px 1px rgba(255, 255, 255, 0.6),
     inset 0 -2px 8px rgba(255, 255, 255, 0.16),
@@ -134,7 +153,7 @@ a.card:hover .cardImg {
   z-index: 3;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
   white-space: normal;
 }
 
@@ -150,16 +169,19 @@ a.card:hover .cardImg {
   overflow: hidden;
 }
 
+/* descrizione SEMPRE visibile per intero: niente ellissi */
 .cardSub {
   font-size: 12px;
-  color: rgba(255, 255, 255, 0.78);
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+  line-height: 1.35;
+  color: rgba(255, 255, 255, 0.82);
 }
 
 @media (max-width: 760px) {
+  /* su mobile solo DUE righe */
+  .row:nth-child(3) {
+    display: none;
+  }
+
   a.card {
     width: clamp(240px, 72vw, 300px);
   }

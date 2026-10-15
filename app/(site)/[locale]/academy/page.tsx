@@ -65,14 +65,17 @@ const AROUND = ['stage-placement', 'servizi-studenti', 'open-day'] as const
    ha la SUA immagine (la cover del corso da Sanity; per i finanziati,
    che in Sanity non esistono ancora, le foto della sede a giro).
    Le foto sono TUTTE della stessa misura (dimensione nel CSS) ————— */
-const EXPLORE_FALLBACK_PICS = [
-  '/img/foto/studio-ssl.jpg',
-  '/img/foto/live-band.jpg',
-  '/img/foto/sede.jpg',
-  '/img/sections/aula-corsi.jpg',
-  '/img/foto/corridoio-2.jpg',
-  '/img/sections/studio-regia-b.jpg',
+/* foto SCELTE per corso (ordine = exploreFunded nei dizionari):
+   niente giro cieco, ogni finanziato ha un'immagine pertinente */
+const EXPLORE_FUNDED_PICS = [
+  '/img/foto/studio-ssl.jpg' /* Digital Composer and Producer */,
+  '/img/foto/live-band.jpg' /* Songwriter & Vocal Artist */,
+  '/img/sections/node-innovazione.jpg' /* Tecnico modellatore 3D */,
+  '/img/sections/studio-regia-b.jpg' /* Multimedia Sound Designer */,
+  '/img/sections/studio-regia.jpg' /* Sound design immersivo */,
 ] as const
+/* rete di sicurezza per corsi Sanity senza cover */
+const EXPLORE_FALLBACK = '/img/foto/sede.jpg'
 
 /** avvolge in <strong> i nomi propri dentro un paragrafo (Angela Madonia
  *  ecc.): evita di portare markup nei dizionari JSON. */
@@ -146,12 +149,13 @@ export default async function AcademyPage({
       .filter((c) => c.types?.some((ty) => ty === 'triennio' || ty === 'magistrale'))
       .map(toCard),
     courses.filter((c) => c.types?.includes('custom')).map(toCard),
-    t.academy.exploreFunded.map((label) => ({
+    t.academy.exploreFunded.map((label, i) => ({
       label,
       tag: t.academy.exploreFundedTag,
       meta: t.academy.exploreCardMeta,
+      sub: t.academy.exploreFundedSubs[i],
       href: localeHref(locale, '/academy/formazione-finanziata'),
-      img: '',
+      img: EXPLORE_FUNDED_PICS[i] ?? EXPLORE_FALLBACK,
     })),
   ]
   const cards: ExploreCard[] = []
@@ -160,14 +164,11 @@ export default async function AcademyPage({
     const c = pools[i % pools.length][Math.floor(i / pools.length)]
     if (c) cards.push(c)
   }
-  /* 3 righe; chi non ha cover pesca dalle foto della sede, a giro */
-  let fb = 0
+  /* 3 righe; un corso Sanity senza cover pesca la foto della sede */
   const exploreRows: ExploreCard[][] = [[], [], []]
   cards.forEach((c, i) => {
     exploreRows[i % exploreRows.length].push(
-      c.img
-        ? c
-        : { ...c, img: EXPLORE_FALLBACK_PICS[fb++ % EXPLORE_FALLBACK_PICS.length] }
+      c.img ? c : { ...c, img: EXPLORE_FALLBACK }
     )
   })
 
@@ -439,13 +440,23 @@ export default async function AcademyPage({
                   <span className={styles.teacherName}>{teacher.name}</span>
                 </li>
               ))}
-              <li className={styles.teacherJoin}>
+              {/* join us: cella UGUALE alle altre (box 4:5, niente nome) */}
+              <li className={styles.teacherCell}>
                 <a
+                  className={styles.joinBox}
                   href={`mailto:${email}?subject=${encodeURIComponent(t.academy.joinUs)}`}
                 >
                   <b>{t.academy.joinUs}</b>
                   <span>{t.academy.joinUsRole}</span>
                 </a>
+              </li>
+              {/* in memoria riempie lo spazio avanzato dell'ultima
+                  riga: blocco testuale a destra, ancorato in basso */}
+              <li className={styles.memoriaCell}>
+                <h3 className={styles.inMemoriaTitle}>
+                  {t.academy.inMemoriaTitle}
+                </h3>
+                <p className={styles.inMemoriaText}>{t.academy.inMemoriaText}</p>
               </li>
             </ul>
           </section>
@@ -488,18 +499,6 @@ export default async function AcademyPage({
           </RevealGroup>
         </section>
 
-        {/* in memoria: ULTIMO elemento della pagina, su nero come il
-            footer che segue */}
-        <div className={`scheme-dark ${styles.darkBand}`}>
-          <section className="wrap">
-            <Reveal className={styles.inMemoria}>
-              <h3 className={styles.inMemoriaTitle}>
-                {t.academy.inMemoriaTitle}
-              </h3>
-              <p className={styles.inMemoriaText}>{t.academy.inMemoriaText}</p>
-            </Reveal>
-          </section>
-        </div>
       </main>
     </SiteChrome>
   )

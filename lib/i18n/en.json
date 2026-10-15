@@ -456,7 +456,14 @@
       "path."
     ],
     "aroundTitle": "What's there beyond the classroom.",
-    "exploreCardMeta": "a.y. 2026/27"
+    "exploreCardMeta": "a.y. 2026/27",
+    "exploreFundedSubs": [
+      "Digital composition and production for music, media and live.",
+      "Writing, performance and vocal identity, from demo to stage.",
+      "3D modelling for audiovisual, gaming and virtual environments.",
+      "Sound for video, installations and interactive media.",
+      "Immersive and spatial audio, from Dolby Atmos to VR."
+    ]
   },
   "studios": {
     "kicker": "studio · bologna",

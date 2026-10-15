@@ -456,7 +456,14 @@
       "percorso."
     ],
     "aroundTitle": "Quello che c'è oltre l'aula.",
-    "exploreCardMeta": "a.a. 2026/27"
+    "exploreCardMeta": "a.a. 2026/27",
+    "exploreFundedSubs": [
+      "Composizione e produzione digitale per musica, media e live.",
+      "Scrittura, interpretazione e identità vocale, dal provino al palco.",
+      "Modellazione 3D per audiovisivo, gaming e ambienti virtuali.",
+      "Suono per video, installazioni e media interattivi.",
+      "Audio immersivo e spaziale, da Dolby Atmos alla realtà virtuale."
+    ]
   },
   "studios": {
     "kicker": "studio · bologna",
