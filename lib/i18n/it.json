@@ -107,8 +107,8 @@
     "search": "cerca nella sezione…"
   },
   "home": {
-    "seoH1": "Creative hub — academy, studio di registrazione e coworking a Bologna",
-    "manifestoRuleLeft": "creative hub",
+    "seoH1": "Creativehub — academy, studio di registrazione e coworking a Bologna",
+    "manifestoRuleLeft": "creativehub",
     "manifestoRuleRight": "Manifesto",
     "manifestoPre": "Siamo ",
     "manifestoBold": "l'infrastruttura",
@@ -200,7 +200,7 @@
     "networkTitle": "L'industria creativa\npassa di qui.",
     "networkRight": "partner attivi · 2026",
     "opendayFrameA": "inspire, innovate, excel.",
-    "opendayFrameB": "bologna · creative hub",
+    "opendayFrameB": "bologna · creativehub",
     "manifestoNeg": "Un'infrastruttura creativa dove impari un mestiere e trovi il tuo spazio.",
     "bento": [
       {
@@ -518,7 +518,7 @@
   },
   "footer": {
     "address": "via del Tappezziere 4, 40138 Bologna",
-    "copyright": "© 2026 creative hub — since 1999",
+    "copyright": "© 2026 creativehub — since 1999",
     "legal": "privacy · cookie · trasparenza",
     "privacy": "privacy",
     "cookie": "cookie",
@@ -532,7 +532,7 @@
     "title": "Il mestiere, raccontato da chi lo fa.",
     "lede": "Quattro linee. Un solo settore.",
     "metaTitle": "editorial",
-    "metaDescription": "Il mestiere raccontato da chi lo fa — l'editorial di creative hub bologna.",
+    "metaDescription": "Il mestiere raccontato da chi lo fa — l'editorial di creativehub bologna.",
     "featuredLabel": "in evidenza",
     "latestLabel": "tutti gli articoli",
     "categoriesLabel": "categorie",
@@ -669,6 +669,341 @@
       "title": "Chi risponde di cosa.",
       "lede": "Assetto societario, organi e responsabilità di Creative Hub.",
       "points": []
+    }
+  },
+  "uni": {
+    "kicker": "academy · corsi universitari · a.a. 2026/27",
+    "title": "Corsi universitari a Bologna.",
+    "lede": "Musica, suono, cinema e music business. Bachelor of Arts, Bachelor of Science e Master of Music: sei corsi di primo ciclo, tre Master, venti posti per corso.",
+    "ctaOpenDay": "prenota l'open day",
+    "ctaInfo": "chiedi informazioni",
+    "subnav": {
+      "corsi": "i corsi",
+      "numeri": "in numeri",
+      "titolo": "il titolo",
+      "ammissioni": "ammissioni e costi",
+      "docenti": "docenti",
+      "storie": "storie",
+      "faq": "domande",
+      "orientamento": "vieni a trovarci"
+    },
+    "filters": {
+      "pathLabel": "percorso",
+      "areaLabel": "area",
+      "all": "tutti",
+      "allAreas": "tutte",
+      "primo": "primo ciclo",
+      "master": "master",
+      "areas": {
+        "musica": "musica",
+        "suono": "suono",
+        "visual": "visual",
+        "business": "business"
+      },
+      "countOne": "corso",
+      "countMany": "corsi"
+    },
+    "cycles": {
+      "primo": "primo ciclo · bachelor · tre anni",
+      "master": "secondo ciclo · master of music · due anni"
+    },
+    "cards": {
+      "urban-music-production": {
+        "ciclo": "primo",
+        "area": "suono",
+        "areaLabel": "produzione musicale",
+        "tag": "bachelor",
+        "desc": "Beatmaking, sound design, DJing e mix su hip-hop, trap ed elettronica. Dal controller alla release.",
+        "meta": [
+          "3 anni",
+          "ottobre 2026",
+          "Bologna e online"
+        ]
+      },
+      "music-technology": {
+        "ciclo": "primo",
+        "area": "suono",
+        "areaLabel": "tecnico del suono",
+        "tag": "bachelor",
+        "desc": "Registrare, mixare e masterizzare a livello professionale: in studio, dal vivo, per i media interattivi.",
+        "meta": [
+          "3 anni",
+          "ottobre 2026",
+          "Bologna e online"
+        ]
+      },
+      "popular-music-performance-songwriting": {
+        "ciclo": "primo",
+        "area": "musica",
+        "areaLabel": "performance e scrittura",
+        "tag": "bachelor",
+        "desc": "Dal palco alla stesura del brano, con produzioni reali e docenti che lavorano nell'industria.",
+        "meta": [
+          "3 anni",
+          "ottobre 2026",
+          "Bologna e online"
+        ]
+      },
+      "creative-musicianship": {
+        "ciclo": "primo",
+        "area": "musica",
+        "areaLabel": "canto e strumento",
+        "tag": "bachelor",
+        "desc": "Un'ora individuale a settimana sul tuo strumento, musica d'insieme, produzione e live. Scegli da dove partire:",
+        "instruments": [
+          "canto",
+          "chitarra",
+          "basso",
+          "batteria e percussioni",
+          "pianoforte e tastiere",
+          "fiati",
+          "archi"
+        ],
+        "meta": [
+          "3 anni",
+          "ottobre 2026",
+          "Bologna e online"
+        ]
+      },
+      "film-production": {
+        "ciclo": "primo",
+        "area": "visual",
+        "areaLabel": "cinema",
+        "tag": "bachelor",
+        "desc": "Regia, ripresa, montaggio e post-produzione, su set reali: il film dalla sceneggiatura alla copia finale.",
+        "meta": [
+          "3 anni",
+          "ottobre 2026",
+          "Bologna e online"
+        ]
+      },
+      "music-business": {
+        "ciclo": "primo",
+        "area": "business",
+        "areaLabel": "industria musicale",
+        "tag": "bachelor",
+        "desc": "Il mestiere dietro la musica: management, editoria, distribuzione, live e diritti, su progetti reali.",
+        "meta": [
+          "3 anni",
+          "ottobre 2026",
+          "Bologna e online"
+        ]
+      },
+      "professional-production-sound-design": {
+        "ciclo": "master",
+        "area": "suono",
+        "areaLabel": "produzione",
+        "tag": "master of music",
+        "desc": "Produzione e sound design avanzati: dal progetto artistico al master, con la strumentazione dello studio SSL.",
+        "meta": [
+          "2 anni",
+          "ottobre 2026",
+          "Bologna e online"
+        ]
+      },
+      "professional-arrangement-composition": {
+        "ciclo": "master",
+        "area": "musica",
+        "areaLabel": "composizione",
+        "tag": "master of music",
+        "desc": "Arrangiamento e composizione a livello professionale, per disco, scena e immagine.",
+        "meta": [
+          "2 anni",
+          "ottobre 2026",
+          "Bologna e online"
+        ]
+      },
+      "musical-direction-planning-leadership": {
+        "ciclo": "master",
+        "area": "musica",
+        "areaLabel": "direzione",
+        "tag": "master of music",
+        "desc": "Da esecutore a direzione: guidare una formazione, progettare una produzione, condurre un team.",
+        "meta": [
+          "2 anni",
+          "ottobre 2026",
+          "Bologna e online"
+        ]
+      }
+    },
+    "numbers": {
+      "n": "02 / in numeri",
+      "title": "Classi piccole, lezioni individuali, lavoro vero.",
+      "stats": [
+        {
+          "n": "83%",
+          "l": "dei nostri allievi lavora nelle industrie creative.",
+          "src": "fonte: dati Regione Emilia-Romagna"
+        },
+        {
+          "n": "20",
+          "l": "posti per corso. Ti conoscono per nome, non per matricola."
+        },
+        {
+          "n": "1h",
+          "l": "di lezione individuale a settimana, per tutto il percorso."
+        },
+        {
+          "n": "1999",
+          "l": "l'anno in cui abbiamo portato in Italia il metodo statunitense sulla popular music."
+        }
+      ]
+    },
+    "degree": {
+      "n": "03 / il titolo",
+      "title": "Un titolo universitario internazionale.\nNon un attestato.",
+      "lead": "I Bachelor e i Master sono conferiti in partnership con Coventry University. Studi a Bologna, ottieni un titolo britannico di primo o secondo ciclo.",
+      "cols": [
+        {
+          "k": "primo ciclo",
+          "title": "Bachelor of Arts\nBachelor of Science",
+          "text": "Tre anni, 180 crediti. È il primo livello universitario del sistema europeo: dà accesso al lavoro e ai Master."
+        },
+        {
+          "k": "secondo ciclo",
+          "title": "Master of Music",
+          "text": "Per chi ha già un titolo di primo ciclo o un'esperienza professionale equivalente. Specializzazione su produzione, composizione o direzione."
+        },
+        {
+          "k": "in italia e all'estero",
+          "title": "Cosa vale il titolo",
+          "text": "Riconoscimento, accesso a concorsi e ulteriori studi: ti spieghiamo cosa vale il titolo nel tuo caso, senza approssimazioni. Parlane con noi a un colloquio orientativo."
+        }
+      ],
+      "partners": [
+        "Coventry University",
+        "Los Angeles College of Music",
+        "Regione Emilia-Romagna",
+        "ISO 9001 · EA37"
+      ]
+    },
+    "admissions": {
+      "n": "04 / ammissioni e costi",
+      "title": "Come si entra. Quanto costa.",
+      "lead": "Venti posti per corso: l'ammissione serve a capire se il percorso è quello giusto per te, prima ancora di iscriverti.",
+      "steps": [
+        {
+          "title": "Ci conosciamo",
+          "text": "Open day o colloquio orientativo, in sede o online. Anche con i tuoi genitori."
+        },
+        {
+          "title": "Candidatura",
+          "text": "Compili la domanda e ci mandi un tuo lavoro: un brano, una produzione, un video."
+        },
+        {
+          "title": "Audizione o colloquio",
+          "text": "Una prova pratica sul tuo ambito e un colloquio motivazionale. Ti diamo l'esito entro pochi giorni."
+        },
+        {
+          "title": "Iscrizione",
+          "text": "Confermi il posto e scegli come pagare. Le lezioni iniziano a ottobre."
+        }
+      ],
+      "prices": [
+        {
+          "k": "iscrizione anticipata",
+          "v": "−500 €",
+          "text": "Entro il 31 marzo 2027: sconto sulla quota, slot orario garantito con il tutor, accesso alle borse di merito."
+        },
+        {
+          "k": "early bird",
+          "v": "−300 €",
+          "text": "Entro il 30 giugno 2027, con gli stessi vantaggi su orario e borse."
+        },
+        {
+          "k": "rate e borse di studio",
+          "v": "tasso zero",
+          "text": "Rateizzazione a tasso zero, borse di studio di merito ed Erasmus+.",
+          "linkLabel": "servizi studenti"
+        }
+      ],
+      "ctaApply": "candidati",
+      "ctaCosts": "chiedi i costi del tuo corso"
+    },
+    "teachers": {
+      "n": "05 / i docenti",
+      "title": "Chi insegna, lavora.",
+      "lead": "I docenti dei corsi universitari sono professionisti attivi: in tour, in studio, sul set. Quello che porti in aula lo stanno facendo anche fuori da qui. Tra loro Angela Madonia, vocal coach nota al pubblico di Amici, e Stefania Martin, che ha lavorato al fianco di Renato Zero e Mina.",
+      "allLink": "tutti i docenti dell'academy"
+    },
+    "stories": {
+      "n": "06 / storie",
+      "title": "Dove sono arrivati.",
+      "lead": "Tre ex studenti, tre corsi diversi, quello che fanno oggi.",
+      "items": [
+        {
+          "quote": "Testimonianza in arrivo: una frase concreta su cosa fa oggi e cosa gli è servito del corso.",
+          "who": "Nome Cognome",
+          "detail": "Urban Music Production · 2023 · producer"
+        },
+        {
+          "quote": "Testimonianza in arrivo: una frase concreta su cosa fa oggi e cosa gli è servito del corso.",
+          "who": "Nome Cognome",
+          "detail": "Music Technology · 2022 · fonico live"
+        },
+        {
+          "quote": "Testimonianza in arrivo: una frase concreta su cosa fa oggi e cosa gli è servito del corso.",
+          "who": "Nome Cognome",
+          "detail": "Creative Musicianship canto · 2024 · artista"
+        }
+      ]
+    },
+    "faq": {
+      "n": "07 / domande",
+      "title": "Le domande che ci fate prima di scegliere.",
+      "items": [
+        {
+          "q": "Che differenza c'è tra un Bachelor e una laurea italiana?",
+          "a": "Il Bachelor è il titolo universitario di primo ciclo del sistema britannico ed europeo: stesso livello, rilasciato da un'università straniera. Cambia l'impostazione: più ore di pratica, classi piccole, docenti che lavorano nel settore."
+        },
+        {
+          "q": "Come funziona l'ammissione?",
+          "a": "Ci conosciamo a un open day o in un colloquio, poi mandi la candidatura con un tuo lavoro e fai un'audizione o un colloquio sul tuo ambito. Non cerchiamo chi sa già tutto: cerchiamo chi ha una direzione."
+        },
+        {
+          "q": "Posso frequentare mentre lavoro?",
+          "a": "Le lezioni sono organizzate in fasce orarie concordate con il tutor, e parte del percorso è seguibile online. Verifica con noi la compatibilità con i tuoi orari prima di iscriverti."
+        },
+        {
+          "q": "Devo avere già esperienza o attrezzatura?",
+          "a": "Serve una base nel tuo ambito, non un curriculum. In sede hai a disposizione studi di registrazione, production box e la regia SSL. Per lo studio a casa ti diciamo noi cosa serve, corso per corso."
+        },
+        {
+          "q": "Quanto costa e si può rateizzare?",
+          "a": "La quota dipende dal corso. Si paga a rate a tasso zero, con sconti per l'iscrizione anticipata e borse di studio di merito. Chiedici il dettaglio del corso che ti interessa."
+        }
+      ]
+    },
+    "visit": {
+      "n": "08 / vieni a trovarci",
+      "title": "Non sai ancora quale scegliere?",
+      "lead": "È normale. Vieni a vedere dove si studia, parla con i docenti, ascolta cosa fanno gli studenti. Poi decidi.",
+      "opts": [
+        {
+          "title": "Open day",
+          "text": "Un pomeriggio dentro l'hub, anche con i tuoi genitori.",
+          "cta": "prenota il tuo posto"
+        },
+        {
+          "title": "Colloquio orientativo",
+          "text": "Mezz'ora con un tutor, in sede o online, per capire quale corso fa per te.",
+          "cta": "fissa un colloquio"
+        },
+        {
+          "title": "Scrivici su WhatsApp",
+          "text": "Per una domanda veloce, risponde una persona del team.",
+          "cta": "apri la chat"
+        }
+      ]
+    },
+    "seo": {
+      "title": "Corsi universitari a Bologna: musica, suono, cinema e music business",
+      "description": "Bachelor of Arts, Bachelor of Science e Master of Music in produzione musicale, tecnico del suono, canto e strumento, cinema, music business. Bologna, dal 1999. Venti posti per corso."
+    },
+    "goCta": "entra nel corso",
+    "final": {
+      "alt": "Un'aula dell'academy durante una lezione",
+      "caption": "Bologna, dal 1999."
     }
   }
 }

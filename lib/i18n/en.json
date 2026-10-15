@@ -107,8 +107,8 @@
     "search": "search this section…"
   },
   "home": {
-    "seoH1": "Creative hub — academy, recording studio and coworking in Bologna",
-    "manifestoRuleLeft": "creative hub",
+    "seoH1": "Creativehub — academy, recording studio and coworking in Bologna",
+    "manifestoRuleLeft": "creativehub",
     "manifestoRuleRight": "Manifesto",
     "manifestoPre": "We are ",
     "manifestoBold": "the infrastructure",
@@ -200,7 +200,7 @@
     "networkTitle": "The creative industry\ncomes through here.",
     "networkRight": "active partners · 2026",
     "opendayFrameA": "inspire, innovate, excel.",
-    "opendayFrameB": "bologna · creative hub",
+    "opendayFrameB": "bologna · creativehub",
     "manifestoNeg": "A creative infrastructure where you learn a trade and find your space.",
     "bento": [
       {
@@ -518,7 +518,7 @@
   },
   "footer": {
     "address": "via del Tappezziere 4, 40138 Bologna",
-    "copyright": "© 2026 creative hub — since 1999",
+    "copyright": "© 2026 creativehub — since 1999",
     "legal": "privacy · cookies · transparency",
     "privacy": "privacy",
     "cookie": "cookies",
@@ -532,7 +532,7 @@
     "title": "The trade, told by those who do it.",
     "lede": "Four strands. One industry.",
     "metaTitle": "editorial",
-    "metaDescription": "The trade told by those who do it — the creative hub bologna editorial.",
+    "metaDescription": "The trade told by those who do it — the creativehub bologna editorial.",
     "featuredLabel": "featured",
     "latestLabel": "all articles",
     "categoriesLabel": "categories",
@@ -669,6 +669,341 @@
       "title": "Who answers for what.",
       "lede": "Creative Hub’s corporate structure, bodies and responsibilities.",
       "points": []
+    }
+  },
+  "uni": {
+    "kicker": "academy · university programmes · a.y. 2026/27",
+    "title": "University programmes in Bologna.",
+    "lede": "Music, sound, film and music business. Bachelor of Arts, Bachelor of Science and Master of Music: six first-cycle programmes, three Masters, twenty places per course.",
+    "ctaOpenDay": "book the open day",
+    "ctaInfo": "ask for information",
+    "subnav": {
+      "corsi": "the courses",
+      "numeri": "in numbers",
+      "titolo": "the degree",
+      "ammissioni": "admissions and fees",
+      "docenti": "faculty",
+      "storie": "stories",
+      "faq": "questions",
+      "orientamento": "come visit us"
+    },
+    "filters": {
+      "pathLabel": "path",
+      "areaLabel": "area",
+      "all": "all",
+      "allAreas": "all",
+      "primo": "first cycle",
+      "master": "masters",
+      "areas": {
+        "musica": "music",
+        "suono": "sound",
+        "visual": "visual",
+        "business": "business"
+      },
+      "countOne": "course",
+      "countMany": "courses"
+    },
+    "cycles": {
+      "primo": "first cycle · bachelor · three years",
+      "master": "second cycle · master of music · two years"
+    },
+    "cards": {
+      "urban-music-production": {
+        "ciclo": "primo",
+        "area": "suono",
+        "areaLabel": "music production",
+        "tag": "bachelor",
+        "desc": "Beatmaking, sound design, DJing and mixing across hip-hop, trap and electronic music. From the controller to the release.",
+        "meta": [
+          "3 years",
+          "October 2026",
+          "Bologna and online"
+        ]
+      },
+      "music-technology": {
+        "ciclo": "primo",
+        "area": "suono",
+        "areaLabel": "sound engineering",
+        "tag": "bachelor",
+        "desc": "Record, mix and master at a professional level: in the studio, live, and for interactive media.",
+        "meta": [
+          "3 years",
+          "October 2026",
+          "Bologna and online"
+        ]
+      },
+      "popular-music-performance-songwriting": {
+        "ciclo": "primo",
+        "area": "musica",
+        "areaLabel": "performance and writing",
+        "tag": "bachelor",
+        "desc": "From the stage to the finished song, with real productions and teachers who work in the industry.",
+        "meta": [
+          "3 years",
+          "October 2026",
+          "Bologna and online"
+        ]
+      },
+      "creative-musicianship": {
+        "ciclo": "primo",
+        "area": "musica",
+        "areaLabel": "voice and instrument",
+        "tag": "bachelor",
+        "desc": "One individual hour a week on your instrument, ensemble playing, production and live work. Choose where to start:",
+        "instruments": [
+          "voice",
+          "guitar",
+          "bass",
+          "drums and percussion",
+          "piano and keyboards",
+          "winds",
+          "strings"
+        ],
+        "meta": [
+          "3 years",
+          "October 2026",
+          "Bologna and online"
+        ]
+      },
+      "film-production": {
+        "ciclo": "primo",
+        "area": "visual",
+        "areaLabel": "film",
+        "tag": "bachelor",
+        "desc": "Directing, shooting, editing and post-production on real sets: the film from script to final cut.",
+        "meta": [
+          "3 years",
+          "October 2026",
+          "Bologna and online"
+        ]
+      },
+      "music-business": {
+        "ciclo": "primo",
+        "area": "business",
+        "areaLabel": "music industry",
+        "tag": "bachelor",
+        "desc": "The craft behind the music: management, publishing, distribution, live and rights, on real projects.",
+        "meta": [
+          "3 years",
+          "October 2026",
+          "Bologna and online"
+        ]
+      },
+      "professional-production-sound-design": {
+        "ciclo": "master",
+        "area": "suono",
+        "areaLabel": "production",
+        "tag": "master of music",
+        "desc": "Advanced production and sound design: from artistic concept to final master, with the SSL studio at your disposal.",
+        "meta": [
+          "2 years",
+          "October 2026",
+          "Bologna and online"
+        ]
+      },
+      "professional-arrangement-composition": {
+        "ciclo": "master",
+        "area": "musica",
+        "areaLabel": "composition",
+        "tag": "master of music",
+        "desc": "Arrangement and composition at a professional level, for records, stage and screen.",
+        "meta": [
+          "2 years",
+          "October 2026",
+          "Bologna and online"
+        ]
+      },
+      "musical-direction-planning-leadership": {
+        "ciclo": "master",
+        "area": "musica",
+        "areaLabel": "direction",
+        "tag": "master of music",
+        "desc": "From performer to director: leading an ensemble, planning a production, running a team.",
+        "meta": [
+          "2 years",
+          "October 2026",
+          "Bologna and online"
+        ]
+      }
+    },
+    "numbers": {
+      "n": "02 / in numbers",
+      "title": "Small classes, one-to-one lessons, real work.",
+      "stats": [
+        {
+          "n": "83%",
+          "l": "of our alumni work in the creative industries.",
+          "src": "source: Emilia-Romagna Region data"
+        },
+        {
+          "n": "20",
+          "l": "places per course. They know you by name, not by student number."
+        },
+        {
+          "n": "1h",
+          "l": "of one-to-one tuition a week, for the whole programme."
+        },
+        {
+          "n": "1999",
+          "l": "the year we brought the American popular-music method to Italy."
+        }
+      ]
+    },
+    "degree": {
+      "n": "03 / the degree",
+      "title": "An international university degree.\nNot a certificate.",
+      "lead": "Bachelors and Masters are awarded in partnership with Coventry University. You study in Bologna and earn a British first- or second-cycle degree.",
+      "cols": [
+        {
+          "k": "first cycle",
+          "title": "Bachelor of Arts\nBachelor of Science",
+          "text": "Three years, 180 credits. It is the first university level of the European system: it opens the door to work and to Masters."
+        },
+        {
+          "k": "second cycle",
+          "title": "Master of Music",
+          "text": "For those who already hold a first-cycle degree or equivalent professional experience. Specialise in production, composition or direction."
+        },
+        {
+          "k": "in italy and abroad",
+          "title": "What the degree is worth",
+          "text": "Recognition, access to public competitions and further study: we explain what the degree is worth in your case, with no approximations. Talk it through with us at a guidance interview."
+        }
+      ],
+      "partners": [
+        "Coventry University",
+        "Los Angeles College of Music",
+        "Regione Emilia-Romagna",
+        "ISO 9001 · EA37"
+      ]
+    },
+    "admissions": {
+      "n": "04 / admissions and fees",
+      "title": "How you get in. What it costs.",
+      "lead": "Twenty places per course: admission is about understanding whether the path is right for you, before you even enrol.",
+      "steps": [
+        {
+          "title": "We meet",
+          "text": "Open day or guidance interview, on site or online. Your parents are welcome too."
+        },
+        {
+          "title": "Application",
+          "text": "You fill in the form and send us a piece of your work: a track, a production, a video."
+        },
+        {
+          "title": "Audition or interview",
+          "text": "A practical test in your field and a motivational interview. We give you the outcome within a few days."
+        },
+        {
+          "title": "Enrolment",
+          "text": "You confirm your place and choose how to pay. Classes start in October."
+        }
+      ],
+      "prices": [
+        {
+          "k": "early enrolment",
+          "v": "−€500",
+          "text": "By 31 March 2027: a discount on the fee, a guaranteed time slot with your tutor, access to merit scholarships."
+        },
+        {
+          "k": "early bird",
+          "v": "−€300",
+          "text": "By 30 June 2027, with the same benefits on scheduling and scholarships."
+        },
+        {
+          "k": "instalments and scholarships",
+          "v": "zero interest",
+          "text": "Zero-interest instalments, merit scholarships and Erasmus+.",
+          "linkLabel": "student services"
+        }
+      ],
+      "ctaApply": "apply",
+      "ctaCosts": "ask about your course fees"
+    },
+    "teachers": {
+      "n": "05 / faculty",
+      "title": "Those who teach, work.",
+      "lead": "The university faculty are working professionals: on tour, in the studio, on set. What you bring into the classroom, they are doing outside it too. Among them Angela Madonia, vocal coach known to the Amici audience, and Stefania Martin, who has worked alongside Renato Zero and Mina.",
+      "allLink": "all academy faculty"
+    },
+    "stories": {
+      "n": "06 / stories",
+      "title": "Where they ended up.",
+      "lead": "Three alumni, three different courses, what they do today.",
+      "items": [
+        {
+          "quote": "Testimonial coming soon: a concrete line on what they do today and what the course gave them.",
+          "who": "Name Surname",
+          "detail": "Urban Music Production · 2023 · producer"
+        },
+        {
+          "quote": "Testimonial coming soon: a concrete line on what they do today and what the course gave them.",
+          "who": "Name Surname",
+          "detail": "Music Technology · 2022 · live sound engineer"
+        },
+        {
+          "quote": "Testimonial coming soon: a concrete line on what they do today and what the course gave them.",
+          "who": "Name Surname",
+          "detail": "Creative Musicianship voice · 2024 · artist"
+        }
+      ]
+    },
+    "faq": {
+      "n": "07 / questions",
+      "title": "The questions you ask us before choosing.",
+      "items": [
+        {
+          "q": "What is the difference between a Bachelor and an Italian degree?",
+          "a": "The Bachelor is the first-cycle university degree of the British and European system: same level, awarded by a foreign university. What changes is the approach: more hours of practice, small classes, teachers who work in the industry."
+        },
+        {
+          "q": "How does admission work?",
+          "a": "We meet at an open day or an interview, then you send your application with a piece of your work and take an audition or an interview in your field. We are not looking for people who already know everything: we are looking for people with a direction."
+        },
+        {
+          "q": "Can I study while working?",
+          "a": "Lessons are scheduled in time slots agreed with your tutor, and part of the programme can be followed online. Check with us that it fits your schedule before enrolling."
+        },
+        {
+          "q": "Do I need experience or equipment already?",
+          "a": "You need a foundation in your field, not a CV. On site you have recording studios, production boxes and the SSL control room. For studying at home, we tell you what you need, course by course."
+        },
+        {
+          "q": "How much does it cost, and can I pay in instalments?",
+          "a": "The fee depends on the course. You pay in zero-interest instalments, with discounts for early enrolment and merit scholarships. Ask us for the details of the course you are interested in."
+        }
+      ]
+    },
+    "visit": {
+      "n": "08 / come visit us",
+      "title": "Still not sure which one to choose?",
+      "lead": "That is normal. Come see where you would study, talk to the teachers, hear what the students are making. Then decide.",
+      "opts": [
+        {
+          "title": "Open day",
+          "text": "An afternoon inside the hub, parents welcome too.",
+          "cta": "book your place"
+        },
+        {
+          "title": "Guidance interview",
+          "text": "Half an hour with a tutor, on site or online, to find the right course for you.",
+          "cta": "book an interview"
+        },
+        {
+          "title": "Message us on WhatsApp",
+          "text": "For a quick question, a member of the team replies.",
+          "cta": "open the chat"
+        }
+      ]
+    },
+    "seo": {
+      "title": "University programmes in Bologna: music, sound, film and music business",
+      "description": "Bachelor of Arts, Bachelor of Science and Master of Music in music production, sound engineering, voice and instrument, film, music business. Bologna, since 1999. Twenty places per course."
+    },
+    "goCta": "enter the course",
+    "final": {
+      "alt": "An academy classroom during a lesson",
+      "caption": "Bologna, since 1999."
     }
   }
 }

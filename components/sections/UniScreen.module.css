@@ -1,0 +1,1101 @@
+/* landing corsi universitari — disposizione dal layout B del cliente
+   (ott 2026), rimessa nella lingua del sito: flood azzurro di sezione,
+   fasce separate da hairline nera, card corsi a foto piena con testo
+   sovrapposto, indice sticky copiato dalla scheda corso. */
+
+.main {
+  padding-top: var(--nav-h);
+}
+
+/* hairline sul colore di sezione: nero velato, mai grigio */
+.main {
+  --hairline: color-mix(in srgb, #0a0a0a 22%, transparent);
+}
+
+/* ————— testata ————— */
+
+.head {
+  padding-top: clamp(32px, 4.5vw, 56px);
+  padding-bottom: clamp(36px, 5vw, 64px);
+}
+
+.back {
+  display: block;
+  margin-bottom: clamp(20px, 2.5vw, 32px);
+}
+
+.kicker {
+  display: block;
+  margin-bottom: 16px;
+  color: var(--accent-ink);
+}
+
+.title {
+  font-size: var(--fs-h2);
+  margin-bottom: 20px;
+  max-width: 16ch;
+}
+
+/* lede e CTA affiancate, allineate in basso come nel layout B */
+.headRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.lede {
+  max-width: 52ch;
+  font-size: var(--fs-lede);
+}
+
+.ctaRow {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* ————— indice sticky (UI della scheda corso) ————— */
+
+.subnav {
+  position: sticky;
+  top: var(--header-h);
+  z-index: 40;
+  background: var(--azzurro);
+  border-top: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--hairline);
+}
+
+.subnavIn {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 20px;
+  height: 58px;
+}
+
+.subnavCourse {
+  display: flex;
+  align-items: center;
+  color: #0a0a0a;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.jump {
+  display: flex;
+  align-items: stretch;
+  gap: 34px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.jump::-webkit-scrollbar {
+  display: none;
+}
+
+.jump a {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  color: color-mix(in srgb, #0a0a0a 62%, transparent);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.22s ease;
+}
+
+.jump a .idx {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  color: color-mix(in srgb, #0a0a0a 38%, transparent);
+  transition: color 0.22s ease;
+}
+
+.jump a:hover,
+.jump a.on,
+.jump a.on .idx {
+  color: #0a0a0a;
+}
+
+/* voce attiva = mirino: quattro angoli in un solo pseudo-elemento */
+.jump a::before {
+  content: '';
+  position: absolute;
+  inset: 15px -9px;
+  pointer-events: none;
+  --c: color-mix(in srgb, #0a0a0a 55%, transparent);
+  --t: 1.5px;
+  --l: 7px;
+  background:
+    linear-gradient(var(--c), var(--c)) 0 0 / var(--l) var(--t) no-repeat,
+    linear-gradient(var(--c), var(--c)) 0 0 / var(--t) var(--l) no-repeat,
+    linear-gradient(var(--c), var(--c)) 100% 0 / var(--l) var(--t) no-repeat,
+    linear-gradient(var(--c), var(--c)) 100% 0 / var(--t) var(--l) no-repeat,
+    linear-gradient(var(--c), var(--c)) 0 100% / var(--l) var(--t) no-repeat,
+    linear-gradient(var(--c), var(--c)) 0 100% / var(--t) var(--l) no-repeat,
+    linear-gradient(var(--c), var(--c)) 100% 100% / var(--l) var(--t) no-repeat,
+    linear-gradient(var(--c), var(--c)) 100% 100% / var(--t) var(--l) no-repeat;
+  opacity: 0;
+  transform: scale(1.06);
+  transition:
+    opacity 0.22s ease,
+    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.jump a.on::before {
+  opacity: 1;
+  transform: none;
+}
+
+.tail {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.year {
+  color: #0a0a0a;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  white-space: nowrap;
+  cursor: default;
+}
+
+.steps {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.step {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  border: 1px solid color-mix(in srgb, #0a0a0a 35%, transparent);
+  background: transparent;
+  color: #0a0a0a;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.step:hover {
+  background: #0a0a0a;
+  color: var(--azzurro);
+  border-color: #0a0a0a;
+}
+
+.step:disabled {
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.stepPrev svg {
+  transform: scaleX(-1);
+}
+
+/* le sezioni ancorate atterrano sotto nav + indice */
+.main section[id] {
+  scroll-margin-top: calc(var(--header-h) + 76px);
+}
+
+/* ————— sezioni ————— */
+
+/* solo il padding verticale: la sezione porta anche la classe wrap e lo
+   shorthand `padding: X 0` le azzererebbe i gutter laterali */
+.sez {
+  padding-block: clamp(44px, 6vw, 84px);
+}
+
+.sez + .sez {
+  border-top: 1px solid var(--hairline);
+}
+
+/* ————— 01 corsi: filtri ————— */
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: clamp(24px, 3vw, 36px);
+}
+
+.filterLab {
+  margin-right: 4px;
+}
+
+.filterSep {
+  width: 1px;
+  height: 20px;
+  background: var(--hairline);
+  margin: 0 8px;
+}
+
+.pill {
+  display: inline-block;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-pill);
+  padding: 7px 18px;
+  font-size: var(--fs-small);
+  color: color-mix(in srgb, #0a0a0a 72%, transparent);
+  background: none;
+  cursor: pointer;
+  transition:
+    color var(--dur) ease,
+    border-color var(--dur) ease,
+    background var(--dur) ease;
+}
+
+.pill:hover {
+  color: #0a0a0a;
+  border-color: #0a0a0a;
+}
+
+.pillOn,
+.pillOn:hover {
+  background: #0a0a0a;
+  border-color: #0a0a0a;
+  color: var(--accent, var(--osso));
+}
+
+.count {
+  margin-left: auto;
+}
+
+/* ————— 01 corsi: griglia a foto piena (layout B) ————— */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.cycle {
+  grid-column: 1 / -1;
+  padding: 28px 0 4px;
+}
+
+.cycle:first-child {
+  padding-top: 0;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 480px;
+  padding: 22px;
+  color: #fff;
+  overflow: hidden;
+  isolation: isolate;
+  background: #111;
+  text-decoration: none;
+}
+
+.ph {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  margin: 0;
+}
+
+.ph > div {
+  width: 100%;
+  height: 100%;
+}
+
+.ph img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.card:hover .ph img {
+  transform: scale(1.05);
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 10, 10, 0.55) 0%,
+    rgba(10, 10, 10, 0) 30%,
+    rgba(10, 10, 10, 0.25) 50%,
+    rgba(10, 10, 10, 0.92) 100%
+  );
+  transition: background 0.3s ease;
+}
+
+.card:hover::before {
+  background: linear-gradient(
+    180deg,
+    rgba(10, 10, 10, 0.55) 0%,
+    rgba(10, 10, 10, 0.1) 30%,
+    rgba(10, 10, 10, 0.45) 50%,
+    rgba(10, 10, 10, 0.96) 100%
+  );
+}
+
+.cardTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* inline-block, non flex: su un flex container ::first-letter non
+   scatta e la maiuscola d'attacco sparirebbe */
+.area {
+  display: inline-block;
+  background: var(--azzurro);
+  color: #0a0a0a;
+  padding: 5px 11px;
+  border-radius: var(--radius-pill);
+  font-weight: 500;
+}
+
+/* maiuscola d'attacco su categorie, filtri e tasto (stessa regola dei
+   tag del carosello: mai caps, solo la prima lettera) */
+.area::first-letter,
+.pill::first-letter,
+.goLabel::first-letter,
+.cycle::first-letter {
+  text-transform: uppercase;
+}
+
+.cardTitle {
+  margin-top: auto;
+  font-size: clamp(24px, 2vw, 30px);
+  font-weight: 600;
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+}
+
+.cardDesc {
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 15px;
+  max-width: 34ch;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  margin-top: 0;
+  transition:
+    max-height 0.4s ease,
+    opacity 0.3s ease,
+    margin 0.3s ease;
+}
+
+.card:hover .cardDesc,
+.card:focus-visible .cardDesc,
+.card:focus-within .cardDesc {
+  max-height: 140px;
+  opacity: 1;
+  margin-top: 12px;
+}
+
+.instr {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 14px;
+}
+
+.instr a {
+  font-size: 12px;
+  padding: 5px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: var(--radius-pill);
+  color: #fff;
+  background: rgba(10, 10, 10, 0.35);
+  backdrop-filter: blur(6px);
+  text-decoration: none;
+  transition:
+    border-color var(--dur) ease,
+    color var(--dur) ease;
+}
+
+.instr a:hover {
+  border-color: var(--azzurro);
+  color: var(--azzurro);
+}
+
+.cardMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  margin-top: 16px;
+  padding-top: 16px;
+  padding-right: 48px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.cardMeta b {
+  font-weight: 500;
+  color: #fff;
+}
+
+/* tasto della card: a riposo è un disco, in hover si apre in pastiglia
+   e mostra la label — stesso gesto della pill "scarica" della scheda
+   corso. Su touch resta sempre aperta. */
+.go {
+  position: absolute;
+  right: 22px;
+  bottom: 18px;
+  min-width: 36px;
+  height: 36px;
+  padding: 0 10px;
+  border-radius: var(--radius-pill);
+  background: var(--azzurro);
+  color: #0a0a0a;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.goLabel {
+  display: inline-block;
+  max-width: 0;
+  opacity: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  transition:
+    max-width 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.25s ease,
+    margin 0.3s ease;
+}
+
+.card:hover .goLabel,
+.card:focus-within .goLabel {
+  max-width: 170px;
+  opacity: 1;
+  margin-right: 7px;
+}
+
+.hide {
+  display: none;
+}
+
+/* su touch l'hover non esiste: descrizione sempre aperta e tasto già
+   in pastiglia, messo in flusso sotto i meta così non copre niente */
+@media (hover: none) {
+  .cardDesc {
+    max-height: none;
+    opacity: 1;
+    margin-top: 12px;
+  }
+
+  .goLabel {
+    max-width: none;
+    opacity: 1;
+    margin-right: 7px;
+  }
+
+  .go {
+    position: static;
+    align-self: flex-start;
+    margin-top: 14px;
+  }
+
+  .cardMeta {
+    padding-right: 0;
+  }
+}
+
+@media (max-width: 960px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 620px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    min-height: 400px;
+  }
+}
+
+/* ————— 02 in numeri ————— */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-top: 1px solid #0a0a0a;
+  margin-top: clamp(28px, 4vw, 48px);
+}
+
+.stat {
+  padding: 20px 24px 0 0;
+}
+
+.stat + .stat {
+  padding-left: 24px;
+  border-left: 1px solid var(--hairline);
+}
+
+.statN {
+  font-size: clamp(40px, 5vw, 64px);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.statL {
+  font-size: 14px;
+  color: color-mix(in srgb, #0a0a0a 72%, transparent);
+  margin-top: 10px;
+  max-width: 26ch;
+}
+
+.statSrc {
+  display: block;
+  margin-top: 6px;
+}
+
+@media (max-width: 960px) {
+  .stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .stat:nth-child(odd) {
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  .stat {
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 620px) {
+  .stats {
+    grid-template-columns: 1fr;
+  }
+
+  .stat + .stat {
+    padding-left: 0;
+    border-left: 0;
+    border-top: 1px solid var(--hairline);
+    margin-top: 4px;
+    padding-top: 20px;
+  }
+}
+
+/* ————— 03 il titolo ————— */
+
+.cols3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1px solid #0a0a0a;
+  margin-top: clamp(28px, 4vw, 48px);
+}
+
+.col {
+  padding: 24px 28px 0 0;
+}
+
+.col + .col {
+  padding-left: 28px;
+  border-left: 1px solid var(--hairline);
+}
+
+.colTitle {
+  font-size: clamp(20px, 1.8vw, 24px);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.08;
+  margin-top: 28px;
+  white-space: pre-line;
+}
+
+.colText {
+  font-size: 15px;
+  margin-top: 12px;
+  max-width: 40ch;
+}
+
+.partners {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 20px 40px;
+  margin-top: clamp(32px, 4vw, 56px);
+  color: #0a0a0a;
+}
+
+@media (max-width: 860px) {
+  .cols3 {
+    grid-template-columns: 1fr;
+  }
+
+  .col + .col {
+    padding-left: 0;
+    border-left: 0;
+    border-top: 1px solid var(--hairline);
+    margin-top: 24px;
+  }
+}
+
+/* ————— 04 ammissioni e costi ————— */
+
+.steps4 {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-top: 1px solid #0a0a0a;
+  margin-top: clamp(28px, 4vw, 48px);
+}
+
+.stepCell {
+  padding: 24px 24px 28px 0;
+}
+
+.stepCell + .stepCell {
+  padding-left: 24px;
+  border-left: 1px solid var(--hairline);
+}
+
+.stepN {
+  display: block;
+  color: var(--accent-ink);
+}
+
+.stepTitle {
+  font-size: clamp(18px, 1.6vw, 22px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin-top: 36px;
+}
+
+.stepText {
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+/* schede prezzo: la lingua delle card del PDF — corpo nero, testi nel
+   colore di sezione */
+.price {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: clamp(28px, 4vw, 44px);
+}
+
+.pcard {
+  background: #0a0a0a;
+  color: var(--accent, var(--osso));
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.pcardV {
+  font-size: clamp(28px, 2.4vw, 34px);
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  line-height: 1;
+  margin-top: 24px;
+}
+
+.pcardText {
+  font-size: 14px;
+  margin-top: 10px;
+  color: color-mix(in srgb, var(--accent, var(--osso)) 72%, #fafafa);
+}
+
+/* l'etichetta mono sul nero: il grigio di --fg-2 spariva, va in azzurro
+   pieno come il resto della card */
+.pcard :global(.mono) {
+  color: var(--azzurro);
+}
+
+.pcardInvert :global(.mono) {
+  color: color-mix(in srgb, #0a0a0a 62%, transparent);
+}
+
+.pcardLink {
+  margin-top: 14px;
+}
+
+/* la card "tasso zero" è invertita: quadrato azzurro su azzurro, tenuto
+   insieme dall'outline nero, testi neri */
+.pcardInvert {
+  background: var(--azzurro);
+  color: #0a0a0a;
+  border: 1px solid #0a0a0a;
+}
+
+.pcardInvert .pcardText {
+  color: color-mix(in srgb, #0a0a0a 78%, transparent);
+}
+
+.pcardInvert :global(.mono) {
+  color: color-mix(in srgb, #0a0a0a 62%, transparent);
+}
+
+.admCta {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: clamp(32px, 4vw, 44px);
+}
+
+@media (max-width: 960px) {
+  .steps4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .stepCell:nth-child(odd) {
+    padding-left: 0;
+    border-left: 0;
+  }
+}
+
+@media (max-width: 620px) {
+  .steps4,
+  .price {
+    grid-template-columns: 1fr;
+  }
+
+  .stepCell + .stepCell {
+    padding-left: 0;
+    border-left: 0;
+    border-top: 1px solid var(--hairline);
+  }
+
+  .stepCell {
+    padding-bottom: 20px;
+  }
+
+  .stepTitle {
+    margin-top: 20px;
+  }
+}
+
+/* ————— 05 docenti ————— */
+
+.docGrid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: clamp(28px, 4vw, 48px);
+}
+
+.doc {
+  display: flex;
+  flex-direction: column;
+}
+
+.docName {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.15;
+  margin-top: 12px;
+}
+
+.docRole {
+  margin-top: 4px;
+}
+
+.docFoot {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: clamp(24px, 3vw, 36px);
+  /* la freccia dell'ArrowLink sporge oltre il box del link: a filo
+     destro sforava il viewport di 3px */
+  padding-right: 8px;
+}
+
+@media (max-width: 960px) {
+  .docGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 620px) {
+  .docGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* ————— 06 storie ————— */
+
+.testi {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: clamp(28px, 4vw, 48px);
+}
+
+.tcard {
+  border: 1px dashed color-mix(in srgb, #0a0a0a 35%, transparent);
+  padding: 28px;
+  min-height: 260px;
+  display: flex;
+  flex-direction: column;
+}
+
+.tquote {
+  font-size: clamp(17px, 1.6vw, 20px);
+  letter-spacing: -0.015em;
+  line-height: 1.3;
+}
+
+/* attribuzione nella stessa lingua delle caption delle card corso:
+   filo sopra, riga 13px, nome pieno e dettaglio attenuato in fila */
+.twho {
+  margin-top: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  padding-top: 16px;
+  border-top: 1px solid var(--hairline);
+  font-size: 13px;
+  font-weight: 500;
+  color: #0a0a0a;
+}
+
+.twho span {
+  font-weight: 400;
+  color: color-mix(in srgb, #0a0a0a 62%, transparent);
+}
+
+@media (max-width: 860px) {
+  .testi {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ————— 07 domande ————— */
+
+/* l'accordion rientra come nel layout del cliente (colonna vuota a
+   sinistra del body-grid); sotto gli 860px torna a tutta riga */
+.faq {
+  border-top: 1px solid #0a0a0a;
+  margin-top: clamp(28px, 4vw, 48px);
+  margin-left: clamp(0px, 17vw, 252px);
+}
+
+@media (max-width: 860px) {
+  .faq {
+    margin-left: 0;
+  }
+}
+
+.faq details {
+  border-bottom: 1px solid var(--hairline);
+}
+
+.faq summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  padding: 22px 0;
+  font-size: clamp(17px, 1.7vw, 20px);
+  letter-spacing: -0.015em;
+  font-weight: 500;
+}
+
+.faq summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq summary::after {
+  content: '+';
+  font-weight: 300;
+  font-size: 28px;
+  line-height: 0.8;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.faq details[open] summary::after {
+  transform: rotate(45deg);
+}
+
+.ans {
+  padding: 0 0 26px;
+  max-width: 70ch;
+  font-size: 15px;
+}
+
+/* ————— 08 vieni a trovarci (fascia nera) ————— */
+
+.visit {
+  background: #000;
+  padding: clamp(64px, 9vw, 120px) 0;
+}
+
+.visitTitle {
+  font-size: clamp(36px, 5.5vw, 72px);
+  max-width: 14ch;
+  margin: 16px 0;
+}
+
+.visitLede {
+  max-width: 52ch;
+  color: var(--fg-2);
+  font-size: var(--fs-lede);
+}
+
+.opts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1px solid var(--line);
+  margin-top: clamp(36px, 5vw, 56px);
+}
+
+.opt {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 24px 24px 0 0;
+}
+
+.opt + .opt {
+  padding-left: 24px;
+  border-left: 1px solid var(--line);
+}
+
+.optTitle {
+  font-size: clamp(20px, 1.8vw, 24px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-top: 28px;
+}
+
+.optText {
+  font-size: 14px;
+  color: var(--fg-2);
+  margin: 10px 0 22px;
+}
+
+/* CTA della fascia nera: outline — fondo nero, bordo e testo bianchi,
+   hover invertito (stessa lingua della CTA prenota sul menu nero) */
+.visit .optBtn {
+  background: #000;
+  color: #fff;
+  border: 1px solid #fff;
+}
+
+.visit .optBtn:hover {
+  background: #fff;
+  color: #000;
+}
+
+@media (max-width: 860px) {
+  .opts {
+    grid-template-columns: 1fr;
+  }
+
+  .opt + .opt {
+    padding-left: 0;
+    border-left: 0;
+    border-top: 1px solid var(--line);
+    margin-top: 24px;
+  }
+}
+
+/* ————— foto finale ————— */
+
+/* la didascalia eredita l'inchiostro nero della pagina: sulla foto
+   scura va in bianco */
+.finalPhoto figcaption {
+  color: #fff;
+}
+
+/* ————— mobile: indice compatto ————— */
+
+@media (max-width: 960px) {
+  .subnavCourse,
+  .year {
+    display: none;
+  }
+
+  .subnavIn {
+    height: 54px;
+    gap: 12px;
+  }
+
+  .jump {
+    gap: 20px;
+    flex: 1;
+  }
+
+  .jump a {
+    font-size: 13px;
+  }
+
+  .jump a::before {
+    inset: 13px -7px;
+    --l: 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  /* il padding interno evita che gli angoli del mirino della prima e
+     ultima voce vengano clippati dall'overflow della fila (stesso fix
+     della scheda corso) */
+  .jump {
+    gap: 13px;
+    padding: 0 7px;
+    margin-left: -7px;
+  }
+
+  .jump a {
+    font-size: 12px;
+    letter-spacing: 0;
+  }
+
+  .jump a .idx {
+    display: none;
+  }
+
+  .step {
+    width: 24px;
+    height: 24px;
+  }
+
+  .steps {
+    gap: 4px;
+  }
+}

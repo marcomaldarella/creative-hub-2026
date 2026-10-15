@@ -4,6 +4,7 @@ import { CourseTemplateShell } from '@/components/mockup/CourseTemplateShell'
 import { buildCourseHtml, css } from '@/components/mockup/templates/v3'
 import { SiteChrome, shopHref } from '@/components/sections/SiteChrome'
 import { TopicScreen } from '@/components/sections/TopicScreen'
+import { UniScreen } from '@/components/sections/UniScreen'
 import { isLocale } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
 import { pageAlternates } from '@/lib/seo'
@@ -22,6 +23,15 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale, slug } = await params
   if (!isLocale(locale)) return {}
+  /* corsi-universitari ha una landing propria con la sua SEO */
+  if (slug === 'corsi-universitari') {
+    const t = getDictionary(locale)
+    return {
+      title: t.uni.seo.title,
+      description: t.uni.seo.description,
+      alternates: pageAlternates(locale, `/academy/${slug}`),
+    }
+  }
   /* le voci di menu vivono nello stesso spazio degli slug dei corsi */
   const topic = findTopic('/academy', slug)
   if (topic) {
@@ -85,7 +95,9 @@ export default async function CoursePage({
   if (!isLocale(locale)) notFound()
 
   /* /academy/corsi-universitari e simili non sono corsi: sono le pagine
-     delle voci di menu, hanno la precedenza sullo slug del corso */
+     delle voci di menu, hanno la precedenza sullo slug del corso.
+     corsi-universitari ha la landing dedicata (layout B del cliente). */
+  if (slug === 'corsi-universitari') return <UniScreen locale={locale} />
   const topic = findTopic('/academy', slug)
   if (topic) return <TopicScreen locale={locale} topic={topic} />
 
