@@ -18,9 +18,20 @@
   }
 }
 
+/* mobile: MAI una colonna sola — brand a tutta riga, voci su due
+   colonne compatte */
 @media (max-width: 540px) {
   .cols {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px 20px;
+  }
+
+  .cols > :first-child {
+    grid-column: 1 / -1;
+  }
+
+  .col {
+    line-height: 1.9;
   }
 }
 
