@@ -93,6 +93,18 @@
   gap: 34px;
   overflow-x: auto;
   scrollbar-width: none;
+  /* la voce tagliata a destra sfuma nell'azzurro invece di troncarsi
+     di netto (mask sul contenuto: il fondo resta pieno) */
+  mask-image: linear-gradient(
+    to right,
+    #000 calc(100% - 48px),
+    transparent
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    #000 calc(100% - 48px),
+    transparent
+  );
 }
 
 .jump::-webkit-scrollbar {
