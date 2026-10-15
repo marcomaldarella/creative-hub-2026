@@ -54,10 +54,15 @@ export function ExploreField({ rows }: { rows: ExploreCard[][] }) {
     if (tracks.length === 0) return
 
     let reduced = false
+    let mobile = false
     try {
       reduced = matchMedia('(prefers-reduced-motion: reduce)').matches
+      mobile = matchMedia('(max-width: 760px)').matches
     } catch {}
     if (reduced) return
+    /* su mobile si vedono solo le prime due righe: devono andare in
+       versi OPPOSTI (sul desktop vale l'alternanza ++−) */
+    const dirs = mobile ? [1, -1, 1] : DIRS
 
     /* stato per riga: posizione, easing della pausa, mezzo nastro,
        velocità residua del drag (momentum) */
@@ -94,7 +99,7 @@ export function ExploreField({ rows }: { rows: ExploreCard[][] }) {
       last = now
       tracks.forEach((tr, i) => {
         eases[i] += (targets[i] - eases[i]) * 0.08
-        const dir = DIRS[i % DIRS.length]
+        const dir = dirs[i % dirs.length]
         /* spinta periodica: campana coseno (parte e muore morbida) */
         if (now >= boostAt[i]) {
           boostStart[i] = now
