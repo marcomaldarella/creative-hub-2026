@@ -199,4 +199,14 @@ a.card:hover .cardImg {
   .cardTitle {
     font-size: 21px;
   }
+
+  /* testi descrittivi mini su mobile */
+  .cardSub {
+    font-size: 10.5px;
+    line-height: 1.3;
+  }
+
+  .cardMeta {
+    font-size: 10px;
+  }
 }

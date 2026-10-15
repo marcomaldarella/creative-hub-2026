@@ -244,27 +244,29 @@ h2.pathsTitle {
   gap: 14px;
 }
 
-/* mobile: slider orizzontale snap — si vede una card e mezzo,
-   l'autoplay di PathsSlider avanza di una card ogni 7s */
+/* mobile: PathsSlider trasforma la griglia in nastro infinito che
+   non si ferma mai — qui solo il layout: card GRANDI, gap corto
+   (il padding-right fa da giunto del loop), testi descrittivi mini */
 @media (max-width: 800px) {
   .pathsGrid {
     display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    overscroll-behavior-x: contain;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    margin-right: calc(var(--pad) * -1);
-    padding-right: var(--pad);
-  }
-
-  .pathsGrid::-webkit-scrollbar {
-    display: none;
+    gap: 10px;
+    padding-right: 10px;
   }
 
   .pathsGrid > a {
-    flex: 0 0 66%;
-    scroll-snap-align: start;
+    flex: 0 0 min(82vw, 380px);
+  }
+
+  /* specificità alzata: le regole base di .pathText/.pathCount
+     stanno più in basso nel file e altrimenti vincerebbero */
+  a.pathCard .pathText {
+    font-size: 11px;
+    line-height: 1.35;
+  }
+
+  a.pathCard .pathCount {
+    font-size: 11px;
   }
 }
 
@@ -556,6 +558,11 @@ a.aroundCard:hover .aroundArrow {
 
   a.aroundCard {
     min-height: 180px;
+  }
+
+  .aroundText {
+    font-size: 11px;
+    line-height: 1.4;
   }
 }
 

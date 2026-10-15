@@ -1,0 +1,43 @@
+/* desktop: il wrapper sparisce e resta la griglia della pagina;
+   la copia clone non esiste proprio */
+.outer,
+.track {
+  display: contents;
+}
+
+.clone {
+  display: none;
+}
+
+/* mobile: nastro infinito full-bleed, sfumato ai bordi */
+@media (max-width: 800px) {
+  .outer {
+    display: block;
+    overflow: hidden;
+    margin-inline: calc(var(--pad) * -1);
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      #000 4%,
+      #000 96%,
+      transparent
+    );
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent,
+      #000 4%,
+      #000 96%,
+      transparent
+    );
+  }
+
+  .track {
+    display: flex;
+    width: max-content;
+    will-change: transform;
+  }
+
+  .clone {
+    display: flex;
+  }
+}

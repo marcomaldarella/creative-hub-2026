@@ -1,16 +1,17 @@
 'use client'
 
 import { useEffect, useRef, type ReactNode } from 'react'
+import styles from './PathsSlider.module.css'
 
 /**
- * Wrapper dello "scegli il tuo percorso": sul desktop è una griglia
- * inerte (il layout vive nel CSS della pagina), quando il CSS lo fa
- * diventare uno slider orizzontale (mobile, scroll-snap) avanza DA
- * SOLO di una card ogni AUTOPLAY_MS, tornando alla prima in fondo.
- * L'autoplay si ferma mentre l'utente tocca/trascina e riparte dopo;
- * gira solo in viewport e mai con prefers-reduced-motion.
+ * Wrapper dello "scegli il tuo percorso": sul desktop è TRASPARENTE
+ * (display: contents, resta la griglia a 3 colonne della pagina); su
+ * mobile diventa un nastro infinito che scorre DA SOLO e non si
+ * ferma mai — contenuto duplicato, wrap al 50%, un rAF time-based.
+ * Il dito in appoggio mette solo in pausa (per il tap sui link),
+ * al rilascio riparte. Mai con prefers-reduced-motion.
  */
-const AUTOPLAY_MS = 7000
+const SPEED = 26 // px/s
 
 export function PathsSlider({
   className,
@@ -19,55 +20,90 @@ export function PathsSlider({
   className?: string
   children: ReactNode
 }) {
-  const ref = useRef<HTMLDivElement | null>(null)
+  const outerRef = useRef<HTMLDivElement | null>(null)
+  const trackRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
-    const el = ref.current
-    if (!el) return
+    const outer = outerRef.current
+    const track = trackRef.current
+    if (!outer || !track) return
+    let reduced = false
+    let mobile = false
     try {
-      if (matchMedia('(prefers-reduced-motion: reduce)').matches) return
+      reduced = matchMedia('(prefers-reduced-motion: reduce)').matches
+      mobile = matchMedia('(max-width: 800px)').matches
     } catch {}
+    if (reduced || !mobile) return
 
-    let visible = false
-    let holdUntil = 0
-
-    const io = new IntersectionObserver(([entry]) => {
-      visible = entry.isIntersecting
+    let x = 0
+    let half = track.scrollWidth / 2
+    const ro = new ResizeObserver(() => {
+      half = track.scrollWidth / 2
     })
-    io.observe(el)
+    ro.observe(track)
 
-    /* il dito ha la precedenza: pausa durante il gesto e per un giro
-       intero dopo l'ultimo tocco */
-    const hold = () => {
-      holdUntil = performance.now() + AUTOPLAY_MS
+    let running = false
+    let holding = false
+    let raf = 0
+    let last = 0
+
+    const frame = (now: number) => {
+      if (!running) return
+      const dt = Math.min(48, now - last) / 1000
+      last = now
+      if (!holding) {
+        x += SPEED * dt
+        if (half > 0) x = ((x % half) + half) % half
+        track.style.transform = `translate3d(${-x}px,0,0)`
+      }
+      raf = requestAnimationFrame(frame)
     }
-    el.addEventListener('pointerdown', hold)
-    el.addEventListener('touchmove', hold, { passive: true })
+    const start = () => {
+      if (running) return
+      running = true
+      last = performance.now()
+      raf = requestAnimationFrame(frame)
+    }
+    const stop = () => {
+      running = false
+      cancelAnimationFrame(raf)
+    }
 
-    const timer = setInterval(() => {
-      /* attivo solo quando il CSS l'ha reso scorrevole (mobile) */
-      if (!visible || el.scrollWidth <= el.clientWidth + 8) return
-      if (performance.now() < holdUntil) return
-      const cards = [...el.children] as HTMLElement[]
-      const next = cards.find((c) => c.offsetLeft > el.scrollLeft + 8)
-      const atEnd = el.scrollLeft >= el.scrollWidth - el.clientWidth - 8
-      el.scrollTo({
-        left: atEnd || !next ? 0 : next.offsetLeft,
-        behavior: 'smooth',
-      })
-    }, AUTOPLAY_MS)
+    const io = new IntersectionObserver(
+      ([entry]) => (entry.isIntersecting ? start() : stop()),
+      { rootMargin: '80px' }
+    )
+    io.observe(outer)
+
+    /* pausa solo col dito appoggiato: serve a centrare il tap */
+    const down = () => {
+      holding = true
+    }
+    const up = () => {
+      holding = false
+    }
+    outer.addEventListener('pointerdown', down)
+    outer.addEventListener('pointerup', up)
+    outer.addEventListener('pointercancel', up)
 
     return () => {
-      clearInterval(timer)
+      stop()
       io.disconnect()
-      el.removeEventListener('pointerdown', hold)
-      el.removeEventListener('touchmove', hold)
+      ro.disconnect()
+      outer.removeEventListener('pointerdown', down)
+      outer.removeEventListener('pointerup', up)
+      outer.removeEventListener('pointercancel', up)
     }
   }, [])
 
   return (
-    <div ref={ref} className={className}>
-      {children}
+    <div ref={outerRef} className={styles.outer}>
+      <div ref={trackRef} className={styles.track}>
+        <div className={className}>{children}</div>
+        <div className={`${styles.clone} ${className ?? ''}`} aria-hidden inert>
+          {children}
+        </div>
+      </div>
     </div>
   )
 }
