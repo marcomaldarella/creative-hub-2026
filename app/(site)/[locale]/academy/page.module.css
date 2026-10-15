@@ -7,9 +7,9 @@
 /* attacco più compatto (linguaggio corso-v3): meno aria morta fra
    kicker, titolo e lede — la pagina entra subito nel vivo */
 .head {
-  /* respiro anche sotto: la lede non deve toccare la colata nera */
+  /* respiro anche sotto, ma corto: la lede non tocca la colata nera */
   padding-top: clamp(44px, 6vw, 72px);
-  padding-bottom: clamp(48px, 6.5vw, 88px);
+  padding-bottom: clamp(24px, 3vw, 44px);
 }
 
 .kicker {
@@ -225,7 +225,7 @@ a.allBar:hover .allBarDisc {
 h2.pathsTitle {
   font-size: clamp(52px, 9vw, 140px);
   letter-spacing: -0.05em;
-  line-height: 0.9;
+  line-height: 0.84;
   margin: 10px 0 clamp(36px, 5vw, 64px);
 }
 
@@ -376,61 +376,95 @@ a.pathCard:hover .pathDisc {
   padding-bottom: clamp(40px, 5vw, 72px);
 }
 
-.aroundList {
+/* titolo di sezione grande (richiesta: "tutto intorno allo studio"
+   più evidente) */
+h2.aroundTitle {
+  font-size: var(--fs-h2);
+  margin-bottom: clamp(28px, 4vw, 44px);
+}
+
+/* card affiancate senza foto, come le card della home: superficie
+   piena sul nero, hover che schiarisce, numerino in alto, titolo
+   ancorato al piede, disco-freccia in alto a destra */
+.aroundGrid {
   display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
 }
 
-a.aroundRow {
+a.aroundCard {
+  position: relative;
   display: flex;
-  align-items: center;
-  gap: 20px;
-  padding: 22px 0;
-  border-top: 1px solid var(--line);
-  transition: background var(--dur) ease;
+  flex-direction: column;
+  min-height: clamp(220px, 22vw, 290px);
+  padding: 22px 24px 26px;
+  background: var(--surface);
+  color: var(--fg);
+  transition:
+    background var(--dur) ease,
+    opacity var(--dur-slow) ease var(--rvd, 0s),
+    transform var(--dur-slow) var(--ease-out) var(--rvd, 0s);
 }
 
-a.aroundRow:last-child {
-  border-bottom: 1px solid var(--line);
-}
-
-a.aroundRow:hover {
-  background: color-mix(in srgb, var(--accent) 6%, transparent);
+a.aroundCard:hover {
+  background: color-mix(in srgb, var(--surface) 88%, #ffffff);
 }
 
 .aroundIdx {
-  flex-shrink: 0;
-  width: 24px;
+  color: var(--fg-2);
 }
 
-.aroundBody {
+/* disco-freccia: eccezione tonda ammessa */
+.aroundArrow {
+  position: absolute;
+  top: 18px;
+  right: 18px;
   display: flex;
-  flex-direction: column;
-  gap: 4px;
-  flex: 1;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  color: var(--fg);
+  transition:
+    background var(--dur) ease,
+    color var(--dur) ease,
+    border-color var(--dur) ease,
+    transform 0.3s var(--ease-out);
 }
 
-.aroundTitle {
-  font-size: 18px;
+a.aroundCard:hover .aroundArrow {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #000000;
+  transform: rotate(45deg);
+}
+
+.aroundCardTitle {
+  margin-top: auto;
+  padding-top: 48px;
+  font-size: clamp(22px, 2.2vw, 32px);
   font-weight: 600;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.025em;
+  line-height: 1.02;
 }
 
 .aroundText {
   font-size: var(--fs-small);
   color: var(--fg-2);
-  max-width: 56ch;
+  margin-top: 10px;
+  max-width: 36ch;
 }
 
-.aroundArrow {
-  flex-shrink: 0;
-  display: inline-flex;
-  color: var(--fg-2);
-  transition: transform var(--dur) var(--ease-out), color var(--dur) ease;
-}
+@media (max-width: 860px) {
+  .aroundGrid {
+    grid-template-columns: 1fr;
+  }
 
-a.aroundRow:hover .aroundArrow {
-  color: var(--accent-ink);
-  transform: translateX(4px);
+  a.aroundCard {
+    min-height: 180px;
+  }
 }
 
 /* ————— dal 1999 (dentro la colata nera) ————— */
@@ -508,8 +542,9 @@ h3.storiaTitle {
 }
 
 .inMemoria {
-  margin-top: clamp(32px, 4vw, 48px);
+  /* chiude la pagina: hairline sopra, coda d'aria prima del footer */
   padding-top: 24px;
+  padding-bottom: clamp(48px, 6vw, 88px);
   border-top: 1px solid var(--line);
 }
 

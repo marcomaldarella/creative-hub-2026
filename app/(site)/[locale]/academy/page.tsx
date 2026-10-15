@@ -71,8 +71,8 @@ const EXPLORE_PICS = [
   '/img/sections/studio-regia-b.jpg',
 ] as const
 
-/* una foto ogni quanti titoli */
-const EXPLORE_PIC_EVERY = 4
+/* in quali punti di ogni riga si infilano le foto */
+const EXPLORE_PIC_SLOTS = [[2], [1, 4], [3], [2, 5]] as const
 
 /** avvolge in <strong> i nomi propri dentro un paragrafo (Angela Madonia
  *  ecc.): evita di portare markup nei dizionari JSON. */
@@ -150,24 +150,22 @@ export default async function AcademyPage({
     const w = pools[i % pools.length][Math.floor(i / pools.length)]
     if (w) words.push(w)
   }
-  const exploreItems: ExploreItem[] = []
+  const exploreRows: ExploreItem[][] = [[], [], [], []]
+  words.forEach((w, i) => exploreRows[i % exploreRows.length].push(w))
   let picIdx = 0
-  words.forEach((w, i) => {
-    exploreItems.push(w)
-    const caption = t.academy.exploreCaptions[picIdx]
-    if (
-      (i + 1) % EXPLORE_PIC_EVERY === 0 &&
-      picIdx < EXPLORE_PICS.length &&
-      caption
-    ) {
-      exploreItems.push({
-        kind: 'pic',
-        src: EXPLORE_PICS[picIdx],
-        alt: caption,
-        caption,
-      })
-      picIdx++
-    }
+  EXPLORE_PIC_SLOTS.forEach((slots, r) => {
+    slots.forEach((at, k) => {
+      const caption = t.academy.exploreCaptions[picIdx]
+      if (picIdx < EXPLORE_PICS.length && caption) {
+        exploreRows[r].splice(at + k, 0, {
+          kind: 'pic',
+          src: EXPLORE_PICS[picIdx],
+          alt: caption,
+          caption,
+        })
+        picIdx++
+      }
+    })
   })
 
   return (
@@ -271,26 +269,31 @@ export default async function AcademyPage({
 
         {/* ————— tutto intorno allo studio ————— */}
         <section className={`wrap ${styles.aroundSez}`}>
-          <Reveal as="span" className={`mono ${styles.sectionLabel}`}>
-            {t.academy.aroundKicker}
+          {/* niente kicker: ripeterebbe il titolo parola per parola */}
+          <Reveal
+            as="h2"
+            className={`display-thin ${styles.aroundTitle}`}
+          >
+            {t.academy.aroundTitle}
           </Reveal>
-          <RevealGroup className={styles.aroundList}>
+          {/* card affiancate SENZA foto, linguaggio delle card in home:
+              superficie piena, numerino, disco-freccia, titolo al piede */}
+          <RevealGroup className={styles.aroundGrid}>
             {AROUND.map((slug, i) => {
               const item = t.academy.aroundItems[i]
               return (
                 <Link
                   key={slug}
                   href={localeHref(locale, `/academy/${slug}`)}
-                  className={`rv ${styles.aroundRow}`}
+                  className={`rv ${styles.aroundCard}`}
+                  style={{ '--rvd': `${i * 60}ms` } as CSSProperties}
                 >
                   <span className={`mono ${styles.aroundIdx}`}>{`0${i + 1}`}</span>
-                  <span className={styles.aroundBody}>
-                    <span className={styles.aroundTitle}>{item.title}</span>
-                    <span className={styles.aroundText}>{item.text}</span>
-                  </span>
                   <span className={styles.aroundArrow} aria-hidden="true">
-                    <Arrow dir="e" size={18} />
+                    <Arrow dir="ne" size={16} />
                   </span>
+                  <span className={styles.aroundCardTitle}>{item.title}</span>
+                  <span className={styles.aroundText}>{item.text}</span>
                 </Link>
               )
             })}
@@ -318,9 +321,7 @@ export default async function AcademyPage({
                 {t.academy.exploreLead}
               </Reveal>
             </div>
-            <div className="wrap">
-              <ExploreField items={exploreItems} />
-            </div>
+            <ExploreField rows={exploreRows} />
             <Link href={corsiPath} className={styles.allBar}>
               <div className={`wrap ${styles.allBarIn}`}>
                 <span className={styles.allBarBody}>
@@ -408,13 +409,7 @@ export default async function AcademyPage({
               hint: t.academy.teachersHint,
             }}
           />
-          <Reveal className={styles.inMemoria}>
-            <h3 className={styles.inMemoriaTitle}>{t.academy.inMemoriaTitle}</h3>
-            <p className={styles.inMemoriaText}>{t.academy.inMemoriaText}</p>
-          </Reveal>
         </section>
-
-        <Rule left={t.academy.teachersKicker} right={t.academy.orientKicker} />
 
         {/* ————— orientamento: tre strade per chi non ha ancora
             scelto — open day, colloquio, telefono ————— */}
@@ -451,6 +446,14 @@ export default async function AcademyPage({
               )
             })}
           </RevealGroup>
+        </section>
+
+        {/* in memoria: ULTIMO elemento della pagina, prima del footer */}
+        <section className="wrap">
+          <Reveal className={styles.inMemoria}>
+            <h3 className={styles.inMemoriaTitle}>{t.academy.inMemoriaTitle}</h3>
+            <p className={styles.inMemoriaText}>{t.academy.inMemoriaText}</p>
+          </Reveal>
         </section>
       </main>
     </SiteChrome>
