@@ -19,7 +19,6 @@ import {
 } from '@/components/sections/ExploreField'
 import { FluidZone } from '@/components/sections/FluidZone'
 import { PathsSlider } from '@/components/sections/PathsSlider'
-import { TeacherStrip } from '@/components/sections/TeacherStrip'
 import { isLocale, localeHref } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
 import { pageAlternates } from '@/lib/seo'
@@ -413,34 +412,54 @@ export default async function AcademyPage({
 
         <Rule left={t.academy.storiaKicker} right={t.academy.teachersKicker} />
 
-        {/* ————— docenti ————— */}
-        <section className={`wrap ${styles.teachersSez}`}>
-          <SectionHeader
-            kicker={kick(5, t.academy.teachersKicker)}
-            title={t.academy.teachersTitle}
-          />
-          <div className={styles.teachersIntro}>
-            {t.academy.teachersIntro.map((p, i) => (
-              <Reveal as="p" key={p} delay={i * 60} className={styles.teachersP}>
-                {i === 1 ? withNames(p, t.academy.teachersNames) : p}
-              </Reveal>
-            ))}
-          </div>
-          <TeacherStrip
-            teachers={teachers}
-            locale={locale}
-            join={{
-              label: t.academy.joinUs,
-              role: t.academy.joinUsRole,
-              href: `mailto:${settings?.email ?? 'hello@bologna-creativehub.it'}?subject=${encodeURIComponent(t.academy.joinUs)}`,
-            }}
-            labels={{
-              prev: t.academy.teachersPrev,
-              next: t.academy.teachersNext,
-              hint: t.academy.teachersHint,
-            }}
-          />
-        </section>
+        {/* ————— docenti: griglia ESTESA su nero, tutti i ritratti
+            in bianco e nero (il colore torna in hover), tabella
+            hairline alla mock ————— */}
+        <div className={`scheme-dark ${styles.darkBand}`}>
+          <section className={`wrap ${styles.teachersSez}`}>
+            <SectionHeader
+              kicker={kick(5, t.academy.teachersKicker)}
+              title={t.academy.teachersTitle}
+            />
+            <div className={styles.teachersIntro}>
+              {t.academy.teachersIntro.map((p, i) => (
+                <Reveal as="p" key={p} delay={i * 60} className={styles.teachersP}>
+                  {i === 1 ? withNames(p, t.academy.teachersNames) : p}
+                </Reveal>
+              ))}
+            </div>
+            <ul className={styles.teacherGrid}>
+              {teachers.map((teacher) => (
+                <li key={teacher._id} className={styles.teacherCell}>
+                  <div className={styles.teacherPh}>
+                    {teacher.photo && (
+                      /* eslint-disable-next-line @next/next/no-img-element */
+                      <img
+                        src={urlFor(teacher.photo)
+                          .width(400)
+                          .height(500)
+                          .fit('crop')
+                          .auto('format')
+                          .url()}
+                        alt={teacher.name ?? ''}
+                        loading="lazy"
+                      />
+                    )}
+                  </div>
+                  <span className={styles.teacherName}>{teacher.name}</span>
+                </li>
+              ))}
+              <li className={styles.teacherJoin}>
+                <a
+                  href={`mailto:${email}?subject=${encodeURIComponent(t.academy.joinUs)}`}
+                >
+                  <b>{t.academy.joinUs}</b>
+                  <span>{t.academy.joinUsRole}</span>
+                </a>
+              </li>
+            </ul>
+          </section>
+        </div>
 
         {/* ————— orientamento: tre strade per chi non ha ancora
             scelto — open day, colloquio, telefono ————— */}
@@ -479,13 +498,18 @@ export default async function AcademyPage({
           </RevealGroup>
         </section>
 
-        {/* in memoria: ULTIMO elemento della pagina, prima del footer */}
-        <section className="wrap">
-          <Reveal className={styles.inMemoria}>
-            <h3 className={styles.inMemoriaTitle}>{t.academy.inMemoriaTitle}</h3>
-            <p className={styles.inMemoriaText}>{t.academy.inMemoriaText}</p>
-          </Reveal>
-        </section>
+        {/* in memoria: ULTIMO elemento della pagina, su nero come il
+            footer che segue */}
+        <div className={`scheme-dark ${styles.darkBand}`}>
+          <section className="wrap">
+            <Reveal className={styles.inMemoria}>
+              <h3 className={styles.inMemoriaTitle}>
+                {t.academy.inMemoriaTitle}
+              </h3>
+              <p className={styles.inMemoriaText}>{t.academy.inMemoriaText}</p>
+            </Reveal>
+          </section>
+        </div>
       </main>
     </SiteChrome>
   )
