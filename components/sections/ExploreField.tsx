@@ -5,36 +5,30 @@ import Link from 'next/link'
 import styles from './ExploreField.module.css'
 
 /**
- * Campo-marquee dell'offerta: righe di titoli corso — tutti dello
- * stesso corpo — con le foto della sede intercalate, tutte della
- * stessa misura. Le righe scorrono DA SOLE in direzioni alterne a
- * velocità vicine ma mai uguali (mai sincronizzate); niente drag.
- * L'hover ferma dolcemente SOLO la riga sotto al mouse, così i titoli
- * si cliccano da fermi mentre le altre righe continuano a girare.
- * Un solo rAF time-based per tutto il campo, fermo fuori viewport e
- * con prefers-reduced-motion.
+ * Campo-marquee dell'offerta: TRE righe automatiche di card "jelly
+ * glass" (ref infinite-jelly-glass.shader.se) — cover del corso sotto
+ * un vetro bombato disegnato in CSS (riflessi, rim light, hairline),
+ * meta mono negli angoli, titolo grande e sottotitolo al piede. Le
+ * card sono TUTTE della stessa misura. Le righe scorrono da sole in
+ * direzioni alterne a velocità vicine ma mai uguali; niente drag.
+ * L'hover ferma dolcemente SOLO la riga sotto al mouse. Un solo rAF
+ * time-based, fermo fuori viewport e con prefers-reduced-motion.
  */
 
-export type ExploreWord = {
-  kind: 'word'
+export type ExploreCard = {
   label: string
   tag?: string
+  meta?: string
+  sub?: string
   href: string
+  img: string
 }
-
-export type ExplorePic = {
-  kind: 'pic'
-  src: string
-  alt: string
-}
-
-export type ExploreItem = ExploreWord | ExplorePic
 
 /* px/s per riga: vicine ma mai uguali, le righe non battono mai
    il tempo insieme */
-const SPEEDS = [24, 18, 28, 21]
+const SPEEDS = [24, 18, 28]
 
-export function ExploreField({ rows }: { rows: ExploreItem[][] }) {
+export function ExploreField({ rows }: { rows: ExploreCard[][] }) {
   const fieldRef = useRef<HTMLDivElement | null>(null)
   const rowRefs = useRef<(HTMLDivElement | null)[]>([])
   const trackRefs = useRef<(HTMLDivElement | null)[]>([])
@@ -122,46 +116,45 @@ export function ExploreField({ rows }: { rows: ExploreItem[][] }) {
     }
   }, [])
 
-  const group = (items: ExploreItem[], hidden: boolean) => (
+  const group = (items: ExploreCard[], hidden: boolean) => (
     <div className={styles.group} aria-hidden={hidden || undefined}>
-      {items.map((item, i) =>
-        item.kind === 'word' ? (
-          <Link
-            key={`${item.label}-${i}`}
-            href={item.href}
-            className={styles.word}
+      {items.map((card, i) => (
+        <Link
+          key={`${card.label}-${i}`}
+          href={card.href}
+          className={styles.card}
+          draggable={false}
+          tabIndex={hidden ? -1 : undefined}
+        >
+          {/* img puro come in Thumb: le cover arrivano dalla CDN
+              Sanity, che non è tra i domini di next/image */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={card.img}
+            alt={hidden ? '' : card.label}
+            width={680}
+            height={480}
+            loading="lazy"
             draggable={false}
-            tabIndex={hidden ? -1 : undefined}
-          >
-            <span className={styles.wordLabel}>{item.label}</span>
-            {item.tag && <small className={styles.tag}>{item.tag}</small>}
-          </Link>
-        ) : (
-          <figure key={`pic-${i}`} className={styles.pic}>
-            {/* img puro come in Thumb: le cover arrivano dalla CDN
-                Sanity, che non è tra i domini di next/image */}
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={item.src}
-              alt={hidden ? '' : item.alt}
-              width={320}
-              height={240}
-              loading="lazy"
-              draggable={false}
-              className={styles.picImg}
-            />
-          </figure>
-        )
-      )}
+            className={styles.cardImg}
+          />
+          {/* vetro: velo di lettura + riflessi, tutto nel CSS */}
+          <span className={styles.glass} aria-hidden="true" />
+          <span className={`mono ${styles.cardMeta}`}>
+            <span>{card.tag}</span>
+            {card.meta && <span>{card.meta}</span>}
+          </span>
+          <span className={styles.cardBody}>
+            <span className={styles.cardTitle}>{card.label}</span>
+            {card.sub && <span className={styles.cardSub}>{card.sub}</span>}
+          </span>
+        </Link>
+      ))}
     </div>
   )
 
   return (
-    <div
-      className={styles.field}
-      ref={fieldRef}
-      onDragStart={(e) => e.preventDefault()}
-    >
+    <div className={styles.field} ref={fieldRef} onDragStart={(e) => e.preventDefault()}>
       {rows.map((items, r) => (
         <div
           key={r}

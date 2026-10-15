@@ -14,8 +14,7 @@ import { SiteChrome } from '@/components/sections/SiteChrome'
 import { BgVideo } from '@/components/sections/BgVideo'
 import {
   ExploreField,
-  type ExploreItem,
-  type ExploreWord,
+  type ExploreCard,
 } from '@/components/sections/ExploreField'
 import { FluidZone } from '@/components/sections/FluidZone'
 import { PathsSlider } from '@/components/sections/PathsSlider'
@@ -124,61 +123,52 @@ export default async function AcademyPage({
      qui, così i dizionari e le Rule restano senza numerazione */
   const kick = (n: number, label: string) => `0${n} — ${label}`
 
-  /* ————— parole del campo esplora: i corsi veri da Sanity più i
-     finanziati del dizionario (non ancora in Sanity: puntano alla
-     pagina della formazione finanziata). I pool si alternano a giro
-     così ogni riga mescola le tipologie invece di raggrupparle ————— */
-  const toWord = (c: Course): ExploreWord => {
+  /* ————— card del campo esplora: i corsi veri da Sanity (cover,
+     titolo, summary, tipologia) più i finanziati del dizionario (non
+     ancora in Sanity: puntano alla pagina della formazione finanziata
+     e pescano le foto della sede, a giro). I pool si alternano così
+     ogni riga mescola le tipologie invece di raggrupparle ————— */
+  const toCard = (c: Course): ExploreCard => {
     const ty = c.types?.[0] as keyof typeof t.academy.types | undefined
     return {
-      kind: 'word',
       label: l(c.title, locale) ?? '',
       tag: ty ? t.academy.types[ty] : undefined,
+      meta: t.academy.exploreCardMeta,
+      sub: l(c.summary, locale) ?? undefined,
       href: `${basePath}/${c.slug?.current ?? ''}`,
+      img: c.coverImage
+        ? urlFor(c.coverImage).width(680).height(480).fit('crop').auto('format').url()
+        : '',
     }
   }
-  /* coppie parola+foto: ogni corso porta la SUA cover */
-  const toPair = (c: Course) => ({
-    word: toWord(c),
-    picSrc: c.coverImage
-      ? urlFor(c.coverImage).width(640).height(480).fit('crop').auto('format').url()
-      : undefined,
-  })
-  const pools = [
+  const pools: ExploreCard[][] = [
     courses
       .filter((c) => c.types?.some((ty) => ty === 'triennio' || ty === 'magistrale'))
-      .map(toPair),
-    courses.filter((c) => c.types?.includes('custom')).map(toPair),
+      .map(toCard),
+    courses.filter((c) => c.types?.includes('custom')).map(toCard),
     t.academy.exploreFunded.map((label) => ({
-      word: {
-        kind: 'word' as const,
-        label,
-        tag: t.academy.exploreFundedTag,
-        href: localeHref(locale, '/academy/formazione-finanziata'),
-      },
-      picSrc: undefined as string | undefined,
+      label,
+      tag: t.academy.exploreFundedTag,
+      meta: t.academy.exploreCardMeta,
+      href: localeHref(locale, '/academy/formazione-finanziata'),
+      img: '',
     })),
   ]
-  const pairs: { word: ExploreWord; picSrc?: string }[] = []
+  const cards: ExploreCard[] = []
   const maxLen = Math.max(...pools.map((p) => p.length))
   for (let i = 0; i < pools.length * maxLen; i++) {
-    const p = pools[i % pools.length][Math.floor(i / pools.length)]
-    if (p) pairs.push(p)
+    const c = pools[i % pools.length][Math.floor(i / pools.length)]
+    if (c) cards.push(c)
   }
-  /* 3 righe, pattern parola/foto/parola/foto; i senza-cover pescano
-     dalle foto della sede, a giro */
+  /* 3 righe; chi non ha cover pesca dalle foto della sede, a giro */
   let fb = 0
-  const exploreRows: ExploreItem[][] = [[], [], []]
-  pairs.forEach((p, i) => {
-    const row = exploreRows[i % exploreRows.length]
-    row.push(p.word)
-    row.push({
-      kind: 'pic',
-      src:
-        p.picSrc ??
-        EXPLORE_FALLBACK_PICS[fb++ % EXPLORE_FALLBACK_PICS.length],
-      alt: p.word.label,
-    })
+  const exploreRows: ExploreCard[][] = [[], [], []]
+  cards.forEach((c, i) => {
+    exploreRows[i % exploreRows.length].push(
+      c.img
+        ? c
+        : { ...c, img: EXPLORE_FALLBACK_PICS[fb++ % EXPLORE_FALLBACK_PICS.length] }
+    )
   })
 
   return (
