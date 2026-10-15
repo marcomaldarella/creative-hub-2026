@@ -210,7 +210,6 @@ a.allBar:hover .allBarDisc {
 .filmKicker {
   display: block;
   margin-bottom: 10px;
-  letter-spacing: 0.08em;
   color: var(--accent-ink); /* dentro scheme-dark = osso */
 }
 
@@ -238,10 +237,10 @@ a.allBar:hover .allBarDisc {
 /* ————— etichetta condivisa dei blocchi editoriali sotto l'hero ————— */
 
 .sectionLabel {
-  /* come i kicker numerati della home, attaccato alla sua heading */
+  /* kicker numerato attaccato alla sua heading, kerning stretto
+     (il 0.02em arriva dalla classe mono) */
   display: block;
   margin-bottom: 10px;
-  letter-spacing: 0.08em;
   color: var(--accent-ink);
 }
 
@@ -643,6 +642,7 @@ h3.storiaTitle {
   color: var(--fg-2);
   line-height: 1.6;
   max-width: 42ch;
+  padding-right: clamp(12px, 2vw, 28px);
 }
 
 /* ————— intro docenti + in memoria ————— */

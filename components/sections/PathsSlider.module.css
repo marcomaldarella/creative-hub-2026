@@ -15,6 +15,9 @@
     display: block;
     overflow: hidden;
     margin-inline: calc(var(--pad) * -1);
+    touch-action: pan-y;
+    user-select: none;
+    -webkit-user-select: none;
     mask-image: linear-gradient(
       to right,
       transparent,

@@ -122,9 +122,11 @@ export default async function AcademyPage({
   const corsiPath = localeHref(locale, '/academy/corsi')
   const email = settings?.email ?? 'hello@bologna-creativehub.it'
 
-  /* titoletti numerati come in home ("02 — metodo"): il numero vive
-     qui, così i dizionari e le Rule restano senza numerazione */
-  const kick = (n: number, label: string) => `0${n} — ${label}`
+  /* titoletti numerati come in home ("02 — Metodo"): il numero vive
+     qui — e qui si alza anche l'iniziale, così i dizionari e le Rule
+     restano minuscoli */
+  const kick = (n: number, label: string) =>
+    `0${n} — ${label.charAt(0).toUpperCase()}${label.slice(1)}`
 
   /* ————— card del campo esplora: i corsi veri da Sanity (cover,
      titolo, summary, tipologia) più i finanziati del dizionario (non
