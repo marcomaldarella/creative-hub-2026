@@ -428,7 +428,9 @@
 .area {
   display: inline-block;
   background: var(--azzurro);
-  color: var(--ink);
+  /* SEMPRE nero: il fondo della badge è sempre azzurro, ovunque viva
+     (colata nera, flood, /academy/corsi) */
+  color: #0a0a0a;
   padding: 5px 11px;
   border-radius: var(--radius-pill);
   font-weight: 500;

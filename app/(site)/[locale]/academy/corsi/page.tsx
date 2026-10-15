@@ -4,7 +4,10 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { ArrowLink, Reveal, RevealGroup, SearchBox } from '@/components/ui'
 import { SiteChrome } from '@/components/sections/SiteChrome'
-import { CourseCard } from '@/components/sections/CourseCard'
+import { Thumb } from '@/components/sections/Thumb'
+/* stesse card a foto piena della landing universitari (layout B):
+   il modulo si condivide, la UI resta UNA */
+import uni from '@/components/sections/UniScreen.module.css'
 import { isLocale, localeHref } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
 import { pageAlternates } from '@/lib/seo'
@@ -153,18 +156,57 @@ export default async function CorsiPage({
             {filtered.length === 0 ? (
               <p className="mono">{t.academy.empty}</p>
             ) : (
-              <RevealGroup className={styles.grid}>
-                {filtered.map((course, i) => (
-                  <CourseCard
-                    key={course._id}
-                    course={course}
-                    locale={locale}
-                    index={i}
-                    href={`${academyPath}/${course.slug?.current ?? ''}`}
-                    className="rv"
-                    style={{ '--rvd': `${(i % 3) * 60}ms` } as CSSProperties}
-                  />
-                ))}
+              <RevealGroup className={uni.grid}>
+                {filtered.map((course, i) => {
+                  const ty = course.types?.[0] as
+                    | keyof typeof t.academy.types
+                    | undefined
+                  const catLabel = l(course.category?.title, locale)
+                  const meta = [
+                    l(course.duration, locale),
+                    l(course.mode, locale),
+                  ].filter(Boolean) as string[]
+                  return (
+                    <Link
+                      key={course._id}
+                      href={`${academyPath}/${course.slug?.current ?? ''}`}
+                      className={`${uni.card} rv`}
+                      style={{ '--rvd': `${(i % 3) * 60}ms` } as CSSProperties}
+                    >
+                      <figure className={uni.ph}>
+                        <Thumb
+                          image={course.coverImage}
+                          index={i}
+                          fill
+                          alt={l(course.title, locale) ?? ''}
+                        />
+                      </figure>
+                      <div className={uni.cardTop}>
+                        {catLabel && (
+                          <span className={uni.area}>
+                            {catLabel.toLowerCase()}
+                          </span>
+                        )}
+                        {ty && <span>{t.academy.types[ty] ?? ty}</span>}
+                      </div>
+                      <h3 className={uni.cardTitle}>
+                        {l(course.title, locale)}
+                      </h3>
+                      {l(course.summary, locale) && (
+                        <p className={uni.cardDesc}>
+                          {l(course.summary, locale)}
+                        </p>
+                      )}
+                      {meta.length > 0 && (
+                        <div className={uni.cardMeta}>
+                          {meta.map((m, k) =>
+                            k === 0 ? <b key={m}>{m}</b> : <span key={m}>{m}</span>
+                          )}
+                        </div>
+                      )}
+                    </Link>
+                  )
+                })}
               </RevealGroup>
             )}
           </section>

@@ -113,13 +113,14 @@
 a.allBar {
   display: block;
   margin-top: clamp(28px, 4vw, 48px);
-  background: var(--accent);
-  color: var(--accent-on);
+  /* sul flood azzurro la barra è NERA col testo azzurro */
+  background: #0a0a0a;
+  color: var(--azzurro);
   transition: background var(--dur) ease;
 }
 
 a.allBar:hover {
-  background: var(--azzurro-hover);
+  background: #000000;
 }
 
 .allBarIn {
@@ -142,7 +143,7 @@ a.allBar:hover {
 .allBarSub {
   display: block;
   font-size: var(--fs-small);
-  color: color-mix(in srgb, var(--accent-on) 68%, transparent);
+  color: rgba(255, 255, 255, 0.6);
   margin-top: 10px;
 }
 
@@ -157,8 +158,8 @@ a.allBar:hover {
   height: clamp(52px, 5vw, 68px);
   border-radius: 50%;
   background: transparent;
-  border: 1px solid var(--accent-on);
-  color: var(--accent-on);
+  border: 1px solid var(--azzurro);
+  color: var(--azzurro);
   transition:
     transform 0.3s var(--ease-out),
     background var(--dur) ease,
@@ -167,8 +168,8 @@ a.allBar:hover {
 
 a.allBar:hover .allBarDisc {
   transform: translateX(8px);
-  background: var(--accent-on);
-  color: var(--accent);
+  background: var(--azzurro);
+  color: #000000;
 }
 
 /* ————— fascia video a tutto campo (fullshot corso-v3) ————— */
@@ -214,12 +215,15 @@ a.allBar:hover .allBarDisc {
   width: 100%;
   padding-top: clamp(36px, 5vw, 72px);
   padding-bottom: clamp(32px, 4.5vw, 64px);
+  /* i testi stanno sopra il video con scrim scuro: chiari SEMPRE,
+     anche ora che la fascia vive sul flood azzurro */
+  color: var(--osso);
 }
 
 .filmKicker {
   display: block;
   margin-bottom: 10px;
-  color: var(--accent-ink); /* dentro scheme-dark = osso */
+  color: var(--osso);
 }
 
 .filmTitle {
@@ -522,27 +526,31 @@ a.aroundCard {
   flex-direction: column;
   min-height: clamp(220px, 22vw, 290px);
   padding: 22px 24px 26px;
+  /* sul flood la scheda è il fondo stesso col bordo hairline
+     (regola del sito), l'hover la INVERTE in nero */
   background: var(--surface);
+  border: 1px solid var(--line);
   color: var(--fg);
   transition:
     background var(--dur) ease,
+    color var(--dur) ease,
+    border-color var(--dur) ease,
     opacity var(--dur-slow) ease var(--rvd, 0s),
     transform var(--dur-slow) var(--ease-out) var(--rvd, 0s);
 }
 
-/* hover alla mock: la card si accende nell'azzurro di sezione,
-   tutti i testi passano al nero */
 a.aroundCard:hover {
-  background: var(--accent);
-  color: #000000;
+  background: #0a0a0a;
+  border-color: #0a0a0a;
+  color: #ffffff;
 }
 
 a.aroundCard:hover .aroundText {
-  color: rgba(0, 0, 0, 0.72);
+  color: rgba(255, 255, 255, 0.75);
 }
 
 a.aroundCard:hover .aroundIdx {
-  color: rgba(0, 0, 0, 0.6);
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .aroundIdx {
@@ -571,9 +579,9 @@ a.aroundCard:hover .aroundIdx {
 }
 
 a.aroundCard:hover .aroundArrow {
-  background: #000000;
-  border-color: #000000;
-  color: var(--accent);
+  background: var(--azzurro);
+  border-color: var(--azzurro);
+  color: #000000;
   transform: rotate(45deg);
 }
 
@@ -664,7 +672,7 @@ h3.storiaTitle {
 .storiaText {
   font-size: var(--fs-small);
   color: var(--fg-2);
-  line-height: 1.6;
+  line-height: 1.4;
   max-width: 42ch;
   padding-right: clamp(12px, 2vw, 28px);
 }
@@ -747,9 +755,11 @@ a.joinBox {
   aspect-ratio: 4 / 5;
   padding: 14px;
   background: var(--surface);
+  border: 1px solid var(--line);
   color: var(--fg);
   transition:
     background var(--dur) ease,
+    border-color var(--dur) ease,
     color var(--dur) ease;
 }
 
@@ -766,12 +776,13 @@ a.joinBox span {
 }
 
 a.joinBox:hover {
-  background: var(--accent);
-  color: #000000;
+  background: #0a0a0a;
+  border-color: #0a0a0a;
+  color: var(--azzurro);
 }
 
 a.joinBox:hover span {
-  color: rgba(0, 0, 0, 0.72);
+  color: rgba(255, 255, 255, 0.65);
 }
 
 /* in memoria dentro la griglia: riempie le colonne avanzate

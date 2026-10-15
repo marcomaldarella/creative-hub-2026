@@ -282,6 +282,8 @@ export default async function AcademyPage({
           </RevealGroup>
           </FluidZone>
         </section>
+        </div>
+        {/* ————— dal 02 in poi si torna all'azzurro di sezione ————— */}
 
         {/* ————— tutto intorno allo studio ————— */}
         <section className={`wrap ${styles.aroundSez}`}>
@@ -323,7 +325,7 @@ export default async function AcademyPage({
           </div>
         </section>
 
-        <Rule dark left={cap(t.academy.aroundKicker)} right={cap(t.common.courses)} />
+        <Rule left={cap(t.academy.aroundKicker)} right={cap(t.common.courses)} />
 
           {/* ————— tutta l'offerta: muro statico di titoli con i corsi
               veri e le foto della sede (tutte della stessa misura),
@@ -362,7 +364,7 @@ export default async function AcademyPage({
             </Link>
           </section>
 
-          <Rule dark left={cap(t.common.courses)} right={cap(t.academy.storiaKicker)} />
+          <Rule left={cap(t.common.courses)} right={cap(t.academy.storiaKicker)} />
 
           {/* fascia video a tutto campo (fullshot della landing corso):
               la regia SSL in movimento fa da intestazione alla storia —
@@ -401,14 +403,11 @@ export default async function AcademyPage({
               ))}
             </RevealGroup>
           </section>
-        </div>
 
         <Rule left={cap(t.academy.storiaKicker)} right={cap(t.academy.teachersKicker)} />
 
-        {/* ————— docenti: griglia ESTESA su nero, tutti i ritratti
-            in bianco e nero (il colore torna in hover), tabella
-            hairline alla mock ————— */}
-        <div className={`scheme-dark ${styles.darkBand}`}>
+        {/* ————— docenti: griglia estesa sull'azzurro, ritratti
+            sempre in bianco e nero (il colore torna in hover) ————— */}
           <section className={`wrap ${styles.teachersSez}`}>
             <SectionHeader
               kicker={kick(5, t.academy.teachersKicker)}
@@ -462,7 +461,6 @@ export default async function AcademyPage({
               </li>
             </ul>
           </section>
-        </div>
 
         {/* ————— orientamento: tre strade per chi non ha ancora
             scelto — open day, colloquio, telefono ————— */}
