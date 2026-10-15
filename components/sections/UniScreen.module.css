@@ -5,11 +5,40 @@
 
 .main {
   padding-top: var(--nav-h);
+  /* inchiostro delle sezioni: nero sull'azzurro della testata, si
+     ribalta in chiaro dentro la colata nera (.dark) */
+  --ink: #0a0a0a;
 }
 
 /* hairline sul colore di sezione: nero velato, mai grigio */
 .main {
-  --hairline: color-mix(in srgb, #0a0a0a 22%, transparent);
+  --hairline: color-mix(in srgb, var(--ink) 22%, transparent);
+}
+
+/* ————— colata nera: dai corsi in giù tutto su #000 — l'inchiostro
+   si inverte via token, le pill attive passano all'azzurro ————— */
+.dark {
+  background: #000;
+  --ink: var(--fg);
+  --hairline: color-mix(in srgb, var(--fg) 24%, transparent);
+}
+
+.dark .pillOn,
+.dark .pillOn:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #000000;
+}
+
+.dark .pill:hover {
+  color: var(--fg);
+  border-color: var(--fg);
+}
+
+/* dentro la card azzurra "tasso zero" l'inchiostro torna nero anche
+   nella colata scura */
+.dark .pcardInvert {
+  --ink: #0a0a0a;
 }
 
 /* ————— testata ————— */
@@ -78,7 +107,7 @@
 .subnavCourse {
   display: flex;
   align-items: center;
-  color: #0a0a0a;
+  color: var(--ink);
   font-weight: 700;
   font-size: 14px;
   letter-spacing: -0.01em;
@@ -93,6 +122,10 @@
   gap: 34px;
   overflow-x: auto;
   scrollbar-width: none;
+  /* respiro a sinistra per gli angoli del mirino della prima voce
+     (il ::before sborda di 9px e l'overflow lo taglierebbe) */
+  padding-left: 10px;
+  margin-left: -10px;
   /* la voce tagliata a destra sfuma nell'azzurro invece di troncarsi
      di netto (mask sul contenuto: il fondo resta pieno) */
   mask-image: linear-gradient(
@@ -116,7 +149,7 @@
   display: inline-flex;
   align-items: center;
   gap: 3px;
-  color: color-mix(in srgb, #0a0a0a 62%, transparent);
+  color: color-mix(in srgb, var(--ink) 62%, transparent);
   font-size: 14px;
   font-weight: 600;
   letter-spacing: -0.025em;
@@ -129,14 +162,14 @@
   font-size: 14px;
   font-weight: 600;
   letter-spacing: -0.025em;
-  color: color-mix(in srgb, #0a0a0a 38%, transparent);
+  color: color-mix(in srgb, var(--ink) 38%, transparent);
   transition: color 0.22s ease;
 }
 
 .jump a:hover,
 .jump a.on,
 .jump a.on .idx {
-  color: #0a0a0a;
+  color: var(--ink);
 }
 
 /* voce attiva = mirino: quattro angoli in un solo pseudo-elemento */
@@ -145,7 +178,7 @@
   position: absolute;
   inset: 15px -9px;
   pointer-events: none;
-  --c: color-mix(in srgb, #0a0a0a 55%, transparent);
+  --c: color-mix(in srgb, var(--ink) 55%, transparent);
   --t: 1.5px;
   --l: 7px;
   background:
@@ -178,7 +211,7 @@
 }
 
 .year {
-  color: #0a0a0a;
+  color: var(--ink);
   font-size: 14px;
   font-weight: 600;
   letter-spacing: -0.025em;
@@ -197,9 +230,9 @@
   height: 28px;
   border-radius: 50%;
   flex-shrink: 0;
-  border: 1px solid color-mix(in srgb, #0a0a0a 35%, transparent);
+  border: 1px solid color-mix(in srgb, var(--ink) 35%, transparent);
   background: transparent;
-  color: #0a0a0a;
+  color: var(--ink);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -213,9 +246,9 @@
 }
 
 .step:hover {
-  background: #0a0a0a;
+  background: var(--ink);
   color: var(--azzurro);
-  border-color: #0a0a0a;
+  border-color: var(--ink);
 }
 
 .step:disabled {
@@ -242,6 +275,13 @@
 
 .sez + .sez {
   border-top: 1px solid var(--hairline);
+}
+
+/* ponte alla griglia completa, sotto le card */
+.allCta {
+  display: flex;
+  justify-content: center;
+  margin-top: clamp(28px, 4vw, 44px);
 }
 
 /* ————— 01 corsi: filtri ————— */
@@ -271,7 +311,7 @@
   border-radius: var(--radius-pill);
   padding: 7px 18px;
   font-size: var(--fs-small);
-  color: color-mix(in srgb, #0a0a0a 72%, transparent);
+  color: color-mix(in srgb, var(--ink) 72%, transparent);
   background: none;
   cursor: pointer;
   transition:
@@ -281,14 +321,14 @@
 }
 
 .pill:hover {
-  color: #0a0a0a;
-  border-color: #0a0a0a;
+  color: var(--ink);
+  border-color: var(--ink);
 }
 
 .pillOn,
 .pillOn:hover {
-  background: #0a0a0a;
-  border-color: #0a0a0a;
+  background: var(--ink);
+  border-color: var(--ink);
   color: var(--accent, var(--osso));
 }
 
@@ -388,7 +428,7 @@
 .area {
   display: inline-block;
   background: var(--azzurro);
-  color: #0a0a0a;
+  color: var(--ink);
   padding: 5px 11px;
   border-radius: var(--radius-pill);
   font-weight: 500;
@@ -488,7 +528,7 @@
   padding: 0 10px;
   border-radius: var(--radius-pill);
   background: var(--azzurro);
-  color: #0a0a0a;
+  color: var(--ink);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -567,7 +607,7 @@
 .stats {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  border-top: 1px solid #0a0a0a;
+  border-top: 1px solid var(--ink);
   margin-top: clamp(28px, 4vw, 48px);
 }
 
@@ -589,7 +629,7 @@
 
 .statL {
   font-size: 14px;
-  color: color-mix(in srgb, #0a0a0a 72%, transparent);
+  color: color-mix(in srgb, var(--ink) 72%, transparent);
   margin-top: 10px;
   max-width: 26ch;
 }
@@ -633,7 +673,7 @@
 .cols3 {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  border-top: 1px solid #0a0a0a;
+  border-top: 1px solid var(--ink);
   margin-top: clamp(28px, 4vw, 48px);
 }
 
@@ -667,7 +707,7 @@
   align-items: center;
   gap: 20px 40px;
   margin-top: clamp(32px, 4vw, 56px);
-  color: #0a0a0a;
+  color: var(--ink);
 }
 
 @media (max-width: 860px) {
@@ -688,7 +728,7 @@
 .steps4 {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  border-top: 1px solid #0a0a0a;
+  border-top: 1px solid var(--ink);
   margin-top: clamp(28px, 4vw, 48px);
 }
 
@@ -729,7 +769,7 @@
 }
 
 .pcard {
-  background: #0a0a0a;
+  background: var(--ink);
   color: var(--accent, var(--osso));
   padding: 24px;
   display: flex;
@@ -758,7 +798,7 @@
 }
 
 .pcardInvert :global(.mono) {
-  color: color-mix(in srgb, #0a0a0a 62%, transparent);
+  color: color-mix(in srgb, var(--ink) 62%, transparent);
 }
 
 .pcardLink {
@@ -769,16 +809,16 @@
    insieme dall'outline nero, testi neri */
 .pcardInvert {
   background: var(--azzurro);
-  color: #0a0a0a;
-  border: 1px solid #0a0a0a;
+  color: var(--ink);
+  border: 1px solid var(--ink);
 }
 
 .pcardInvert .pcardText {
-  color: color-mix(in srgb, #0a0a0a 78%, transparent);
+  color: color-mix(in srgb, var(--ink) 78%, transparent);
 }
 
 .pcardInvert :global(.mono) {
-  color: color-mix(in srgb, #0a0a0a 62%, transparent);
+  color: color-mix(in srgb, var(--ink) 62%, transparent);
 }
 
 .admCta {
@@ -876,7 +916,7 @@
 }
 
 .tcard {
-  border: 1px dashed color-mix(in srgb, #0a0a0a 35%, transparent);
+  border: 1px dashed color-mix(in srgb, var(--ink) 35%, transparent);
   padding: 28px;
   min-height: 260px;
   display: flex;
@@ -900,12 +940,12 @@
   border-top: 1px solid var(--hairline);
   font-size: 13px;
   font-weight: 500;
-  color: #0a0a0a;
+  color: var(--ink);
 }
 
 .twho span {
   font-weight: 400;
-  color: color-mix(in srgb, #0a0a0a 62%, transparent);
+  color: color-mix(in srgb, var(--ink) 62%, transparent);
 }
 
 @media (max-width: 860px) {
@@ -919,7 +959,7 @@
 /* l'accordion rientra come nel layout del cliente (colonna vuota a
    sinistra del body-grid); sotto gli 860px torna a tutta riga */
 .faq {
-  border-top: 1px solid #0a0a0a;
+  border-top: 1px solid var(--ink);
   margin-top: clamp(28px, 4vw, 48px);
   margin-left: clamp(0px, 17vw, 252px);
 }
@@ -979,7 +1019,8 @@
 
 .visitTitle {
   font-size: clamp(36px, 5.5vw, 72px);
-  max-width: 14ch;
+  /* niente gabbia stretta: "scegliere?" non va più a capo da solo */
+  max-width: 26ch;
   margin: 16px 0;
 }
 

@@ -125,8 +125,8 @@ export default async function AcademyPage({
   /* titoletti numerati come in home ("02 — Metodo"): il numero vive
      qui — e qui si alza anche l'iniziale, così i dizionari e le Rule
      restano minuscoli */
-  const kick = (n: number, label: string) =>
-    `0${n} — ${label.charAt(0).toUpperCase()}${label.slice(1)}`
+  const cap = (s: string) => `${s.charAt(0).toUpperCase()}${s.slice(1)}`
+  const kick = (n: number, label: string) => `0${n} — ${cap(label)}`
 
   /* ————— card del campo esplora: i corsi veri da Sanity (cover,
      titolo, summary, tipologia) più i finanziati del dizionario (non
@@ -323,7 +323,7 @@ export default async function AcademyPage({
           </div>
         </section>
 
-        <Rule dark left={t.academy.aroundKicker} right={t.common.courses} />
+        <Rule dark left={cap(t.academy.aroundKicker)} right={cap(t.common.courses)} />
 
           {/* ————— tutta l'offerta: muro statico di titoli con i corsi
               veri e le foto della sede (tutte della stessa misura),
@@ -362,7 +362,7 @@ export default async function AcademyPage({
             </Link>
           </section>
 
-          <Rule dark left={t.common.courses} right={t.academy.storiaKicker} />
+          <Rule dark left={cap(t.common.courses)} right={cap(t.academy.storiaKicker)} />
 
           {/* fascia video a tutto campo (fullshot della landing corso):
               la regia SSL in movimento fa da intestazione alla storia —
@@ -403,7 +403,7 @@ export default async function AcademyPage({
           </section>
         </div>
 
-        <Rule left={t.academy.storiaKicker} right={t.academy.teachersKicker} />
+        <Rule left={cap(t.academy.storiaKicker)} right={cap(t.academy.teachersKicker)} />
 
         {/* ————— docenti: griglia ESTESA su nero, tutti i ritratti
             in bianco e nero (il colore torna in hover), tabella

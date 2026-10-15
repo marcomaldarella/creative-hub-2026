@@ -260,11 +260,12 @@ a.allBar:hover .allBarDisc {
 }
 
 /* titolone alla mock: due righe, l'ultima nell'azzurro di sezione */
+/* stessa scala del titolo hero: gigante era troppo */
 h2.pathsTitle {
-  font-size: clamp(52px, 9vw, 140px);
-  letter-spacing: -0.05em;
-  line-height: 0.84;
-  margin: 2px 0 clamp(36px, 5vw, 64px);
+  font-size: clamp(36px, 4.8vw, 72px);
+  letter-spacing: -0.045em;
+  line-height: 0.95;
+  margin: 2px 0 clamp(30px, 4vw, 52px);
 }
 
 .pathsTitleAccent {
@@ -502,7 +503,8 @@ h2.aroundTitle {
   font-size: clamp(26px, 2.4vw, 40px);
   letter-spacing: -0.03em;
   line-height: 1.02;
-  max-width: 14ch;
+  /* l'a capo lo decide il dizionario (\n dopo "c'è") */
+  white-space: pre-line;
 }
 
 /* card affiancate senza foto, come le card della home: superficie
@@ -834,7 +836,8 @@ a.joinBox:hover span {
 .orientTitle {
   font-size: clamp(32px, 4.4vw, 64px);
   letter-spacing: -0.04em;
-  max-width: 14ch;
+  /* niente gabbia stretta: "scegliere?" non va a capo da solo */
+  max-width: 26ch;
   margin-bottom: 14px;
 }
 

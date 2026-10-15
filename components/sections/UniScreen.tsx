@@ -132,6 +132,9 @@ export async function UniScreen({ locale }: { locale: Locale }) {
           nextLabel={locale === 'it' ? 'sezione successiva' : 'next section'}
         />
 
+        {/* ————— colata nera: dai corsi alle domande tutto su #000 —
+            azzurra resta solo la testata con l'indice sticky ————— */}
+        <div className={`scheme-dark ${styles.dark}`}>
         {/* ————— 01 i corsi ————— */}
         <section className={`wrap ${styles.sez}`} id="corsi">
           <UniCourses
@@ -142,6 +145,12 @@ export async function UniScreen({ locale }: { locale: Locale }) {
               goLabel: u.goCta,
             }}
           />
+          {/* ponte alla griglia completa con i filtri */}
+          <Reveal className={styles.allCta}>
+            <Button href={localeHref(locale, '/academy/corsi')} variant="azzurro">
+              {t.academy.exploreAllTitle}
+            </Button>
+          </Reveal>
         </section>
 
         {/* ————— 02 in numeri ————— */}
@@ -301,6 +310,7 @@ export async function UniScreen({ locale }: { locale: Locale }) {
             ))}
           </Reveal>
         </section>
+        </div>
 
         {/* ————— 08 vieni a trovarci: fascia nera ————— */}
         <section className={`scheme-dark ${styles.visit}`} id="orientamento">
