@@ -46,8 +46,25 @@
   flex-wrap: wrap;
 }
 
-/* mobile: la lede sotto il titolone si fa piccina */
+/* mobile: hero compatta — lede piccina e margini corti ovunque */
 @media (max-width: 800px) {
+  .head {
+    padding-top: 22px;
+    padding-bottom: 18px;
+  }
+
+  .head .kicker {
+    margin-bottom: 8px;
+  }
+
+  .head .title {
+    margin-bottom: 12px;
+  }
+
+  .heroRow {
+    gap: 14px;
+  }
+
   .head .lede {
     font-size: 12px;
     line-height: 1.45;
