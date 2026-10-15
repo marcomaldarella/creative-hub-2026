@@ -5,10 +5,10 @@ import Link from 'next/link'
 import styles from './ExploreField.module.css'
 
 /**
- * Campo-marquee dell'offerta: TRE righe automatiche di card "jelly
- * glass" (ref infinite-jelly-glass.shader.se) — cover del corso sotto
- * un vetro bombato disegnato in CSS (riflessi, rim light, hairline),
- * meta mono negli angoli, titolo grande e sottotitolo al piede. Le
+ * Campo-marquee dell'offerta: TRE righe automatiche di card flat a
+ * spigoli vivi su fascia nera — cover del corso sotto un velo scuro
+ * di lettura al piede, meta mono negli angoli, titolo grande e
+ * sottotitolo al piede. Le
  * card sono TUTTE della stessa misura. Le righe scorrono da sole in
  * direzioni alterne a velocità vicine ma mai uguali. L'hover ferma
  * dolcemente SOLO la riga sotto al mouse, e ogni riga si trascina
@@ -242,7 +242,7 @@ export function ExploreField({ rows }: { rows: ExploreCard[][] }) {
             draggable={false}
             className={styles.cardImg}
           />
-          {/* vetro: velo di lettura + riflessi, tutto nel CSS */}
+          {/* velo scuro di lettura al piede, tutto nel CSS */}
           <span className={styles.glass} aria-hidden="true" />
           <span className={`mono ${styles.cardMeta}`}>
             <span>{card.tag}</span>

@@ -4,11 +4,10 @@ import { useEffect, useRef, type ReactNode } from 'react'
 import styles from './PathsSlider.module.css'
 
 /**
- * Wrapper dello "scegli il tuo percorso": sul desktop è TRASPARENTE
- * (display: contents, resta la griglia a 3 colonne della pagina); su
- * mobile diventa un nastro infinito che scorre DA SOLO e non si
- * ferma mai — contenuto duplicato, wrap al 50%, un rAF time-based.
- * Si trascina 1:1 col dito (axis lock: il gesto verticale resta
+ * Wrapper dello "scegli il tuo percorso": nastro infinito a OGNI
+ * misura (come il campo dell'offerta) — scorre DA SOLO e non si
+ * ferma mai: contenuto duplicato, wrap al 50%, un rAF time-based.
+ * Si trascina 1:1 col puntatore (axis lock: il gesto verticale resta
  * scroll di pagina) con momentum al rilascio; il click subito dopo
  * un drag è soppresso. Mai con prefers-reduced-motion.
  */
@@ -30,12 +29,10 @@ export function PathsSlider({
     const track = trackRef.current
     if (!outer || !track) return
     let reduced = false
-    let mobile = false
     try {
       reduced = matchMedia('(prefers-reduced-motion: reduce)').matches
-      mobile = matchMedia('(max-width: 800px)').matches
     } catch {}
-    if (reduced || !mobile) return
+    if (reduced) return
 
     let x = 0
     let vel = 0

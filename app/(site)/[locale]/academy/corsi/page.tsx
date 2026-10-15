@@ -150,8 +150,11 @@ export default async function CorsiPage({
             ))}
             <SearchBox placeholder={t.common.search} className={styles.search} />
           </nav>
+        </div>
 
-          {/* ————— griglia corsi ————— */}
+        {/* ————— griglia corsi: dalla prima card in giù la pagina è
+            NERA (testata e filtri restano azzurri) ————— */}
+        <div className={`scheme-dark ${styles.gridBand}`}>
           <section className={`wrap ${styles.gridSez}`}>
             {filtered.length === 0 ? (
               <p className="mono">{t.academy.empty}</p>

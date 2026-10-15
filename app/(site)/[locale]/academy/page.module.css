@@ -89,6 +89,9 @@
 /* ————— tutta l'offerta: testa + campo-marquee + barra finale ————— */
 
 .exploreSez {
+  /* fascia nera: il nero esplicito doppia lo scheme-dark sul wrapper,
+     come già fa .darkBand */
+  background: #000;
   padding-top: clamp(36px, 5vw, 60px);
 }
 
@@ -102,25 +105,20 @@
   margin-bottom: 12px;
 }
 
-.exploreLead {
-  max-width: 56ch;
-  color: var(--fg-2);
-  font-size: var(--fs-lede);
-}
-
-/* barra "vedi tutti i corsi": fascia piena nell'azzurro di sezione,
-   full-bleed a chiudere il campo (ref mock) */
+/* barra "vedi tutti i corsi": full-bleed a chiudere il campo (ref
+   mock). La sezione ora è una fascia nera: la barra si stacca dal
+   fondo con la hairline in alto, non col colore */
 a.allBar {
   display: block;
   margin-top: clamp(28px, 4vw, 48px);
-  /* sul flood azzurro la barra è NERA col testo azzurro */
   background: #0a0a0a;
   color: var(--azzurro);
+  border-top: 1px solid var(--line);
   transition: background var(--dur) ease;
 }
 
 a.allBar:hover {
-  background: #000000;
+  background: #161616;
 }
 
 .allBarIn {
@@ -276,18 +274,21 @@ h2.pathsTitle {
   color: var(--accent);
 }
 
+/* nastro infinito a ogni misura (PathsSlider): card a misura fissa,
+   il padding-right fa da giunto del loop */
 .pathsGrid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  display: flex;
   gap: 14px;
+  padding-right: 14px;
 }
 
-/* mobile: PathsSlider trasforma la griglia in nastro infinito che
-   non si ferma mai — qui solo il layout: card GRANDI, gap corto
-   (il padding-right fa da giunto del loop), testi descrittivi mini */
+.pathsGrid > a {
+  flex: 0 0 clamp(320px, 32vw, 520px);
+}
+
+/* mobile: card GRANDI, gap corto, testi descrittivi mini */
 @media (max-width: 800px) {
   .pathsGrid {
-    display: flex;
     gap: 10px;
     padding-right: 10px;
   }
@@ -526,9 +527,10 @@ a.aroundCard {
   flex-direction: column;
   min-height: clamp(220px, 22vw, 290px);
   padding: 22px 24px 26px;
-  /* sul flood la scheda è il fondo stesso col bordo hairline
-     (regola del sito), l'hover la INVERTE in nero */
-  background: var(--surface);
+  /* dentro la colata nera la scheda è quasi nera — più scura della
+     --surface di tema — col bordo hairline a darle il perimetro;
+     l'hover SCHIARISCE */
+  background: #070707;
   border: 1px solid var(--line);
   color: var(--fg);
   transition:
@@ -540,8 +542,8 @@ a.aroundCard {
 }
 
 a.aroundCard:hover {
-  background: #0a0a0a;
-  border-color: #0a0a0a;
+  background: #1d1d1d;
+  border-color: #333333;
   color: #ffffff;
 }
 
@@ -713,6 +715,16 @@ h3.storiaTitle {
   background: transparent;
 }
 
+/* trattino sopra ogni nome, nello stesso colore del testo */
+.teacherName::before {
+  content: '';
+  display: block;
+  width: 28px;
+  height: 2px;
+  background: currentColor;
+  margin-bottom: 8px;
+}
+
 .teacherPh {
   aspect-ratio: 4 / 5;
   overflow: hidden;
@@ -745,44 +757,42 @@ h3.storiaTitle {
   padding: 10px 0 0;
 }
 
-/* cella "join us": UGUALE alle altre — box 4:5 su superficie,
-   testi ancorati in basso, hover in accento */
-a.joinBox {
+/* cella "join us" come un docente: il riquadro 4:5 tiene solo
+   l'invito al cv ancorato in basso, "join us" sta SOTTO come fosse
+   il nome (trattino compreso, via .teacherName) */
+a.joinCell {
+  display: block;
+  color: var(--fg);
+}
+
+.joinBox {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  gap: 4px;
   aspect-ratio: 4 / 5;
   padding: 14px;
-  background: var(--surface);
+  /* quasi nero come le card della 02 */
+  background: #070707;
   border: 1px solid var(--line);
-  color: var(--fg);
   transition:
     background var(--dur) ease,
-    border-color var(--dur) ease,
-    color var(--dur) ease;
+    border-color var(--dur) ease;
 }
 
-a.joinBox b {
-  font-size: 20px;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-}
-
-a.joinBox span {
+.joinBox span {
   font-size: 12.5px;
   color: var(--fg-2);
   transition: color var(--dur) ease;
 }
 
-a.joinBox:hover {
-  background: #0a0a0a;
-  border-color: #0a0a0a;
-  color: var(--azzurro);
+/* sulla fascia nera l'hover schiarisce (il nero pieno sparirebbe) */
+a.joinCell:hover .joinBox {
+  background: #1d1d1d;
+  border-color: #333333;
 }
 
-a.joinBox:hover span {
-  color: rgba(255, 255, 255, 0.65);
+a.joinCell:hover .joinBox span {
+  color: var(--azzurro);
 }
 
 /* in memoria dentro la griglia: riempie le colonne avanzate
@@ -815,7 +825,6 @@ a.joinBox:hover span {
   }
 
   .teacherName,
-  a.joinBox b,
   .inMemoriaText {
     font-size: 16px;
   }

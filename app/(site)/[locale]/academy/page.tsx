@@ -282,8 +282,8 @@ export default async function AcademyPage({
           </RevealGroup>
           </FluidZone>
         </section>
-        </div>
-        {/* ————— dal 02 in poi si torna all'azzurro di sezione ————— */}
+        {/* ————— la colata nera continua: 02, Rule e poi l'offerta
+            (che è nera di suo) — l'azzurro torna dopo ————— */}
 
         {/* ————— tutto intorno allo studio ————— */}
         <section className={`wrap ${styles.aroundSez}`}>
@@ -325,12 +325,13 @@ export default async function AcademyPage({
           </div>
         </section>
 
-        <Rule left={cap(t.academy.aroundKicker)} right={cap(t.common.courses)} />
+        </div>
 
           {/* ————— tutta l'offerta: muro statico di titoli con i corsi
               veri e le foto della sede (tutte della stessa misura),
-              chiuso dalla barra "vedi tutti i corsi" ————— */}
-          <section className={styles.exploreSez}>
+              chiuso dalla barra "vedi tutti i corsi". Fascia NERA:
+              scheme-dark ribalta i token e dipinge il fondo ————— */}
+          <section className={`scheme-dark ${styles.exploreSez}`}>
             <div className={`wrap ${styles.exploreHead}`}>
               <Reveal as="span" className={`mono ${styles.sectionLabel}`}>
                 {kick(3, t.academy.exploreKicker)}
@@ -341,9 +342,6 @@ export default async function AcademyPage({
                 delay={80}
               >
                 {t.academy.exploreTitle}
-              </Reveal>
-              <Reveal as="p" className={styles.exploreLead} delay={160}>
-                {t.academy.exploreLead}
               </Reveal>
             </div>
             <ExploreField rows={exploreRows} />
@@ -363,8 +361,6 @@ export default async function AcademyPage({
               </div>
             </Link>
           </section>
-
-          <Rule left={cap(t.common.courses)} right={cap(t.academy.storiaKicker)} />
 
           {/* fascia video a tutto campo (fullshot della landing corso):
               la regia SSL in movimento fa da intestazione alla storia —
@@ -406,8 +402,9 @@ export default async function AcademyPage({
 
         <Rule left={cap(t.academy.storiaKicker)} right={cap(t.academy.teachersKicker)} />
 
-        {/* ————— docenti: griglia estesa sull'azzurro, ritratti
-            sempre in bianco e nero (il colore torna in hover) ————— */}
+        {/* ————— docenti: fascia NERA, ritratti sempre in bianco e
+            nero (il colore torna in hover) ————— */}
+        <div className={`scheme-dark ${styles.darkBand}`}>
           <section className={`wrap ${styles.teachersSez}`}>
             <SectionHeader
               kicker={kick(5, t.academy.teachersKicker)}
@@ -441,14 +438,17 @@ export default async function AcademyPage({
                   <span className={styles.teacherName}>{teacher.name}</span>
                 </li>
               ))}
-              {/* join us: cella UGUALE alle altre (box 4:5, niente nome) */}
+              {/* join us come un docente: box 4:5 col solo invito al
+                  cv, "join us" sotto come fosse il nome */}
               <li className={styles.teacherCell}>
                 <a
-                  className={styles.joinBox}
+                  className={styles.joinCell}
                   href={`mailto:${email}?subject=${encodeURIComponent(t.academy.joinUs)}`}
                 >
-                  <b>{t.academy.joinUs}</b>
-                  <span>{t.academy.joinUsRole}</span>
+                  <span className={styles.joinBox}>
+                    <span>{t.academy.joinUsRole}</span>
+                  </span>
+                  <span className={styles.teacherName}>{t.academy.joinUs}</span>
                 </a>
               </li>
               {/* in memoria riempie lo spazio avanzato dell'ultima
@@ -461,6 +461,7 @@ export default async function AcademyPage({
               </li>
             </ul>
           </section>
+        </div>
 
         {/* ————— orientamento: tre strade per chi non ha ancora
             scelto — open day, colloquio, telefono ————— */}

@@ -44,10 +44,15 @@
   margin: 0 6px;
 }
 
-/* niente più fascia nera: la pagina resta nel colore di sezione, sono
-   le card a diventare nere (PDF colori set 2026) */
+/* testata e filtri restano nel colore di sezione */
 .filterBand {
   padding-top: clamp(28px, 4vw, 44px);
+  padding-bottom: clamp(28px, 4vw, 44px);
+}
+
+/* dalla prima card in giù la pagina è NERA */
+.gridBand {
+  background: #000;
 }
 
 .pill {
