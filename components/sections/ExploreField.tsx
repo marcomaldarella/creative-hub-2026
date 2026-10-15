@@ -30,8 +30,9 @@ export type ExploreCard = {
 /* px/s per riga: vicine ma mai uguali, le righe non battono mai
    il tempo insieme */
 const SPEEDS = [36, 28, 42]
-/* alternanza non banale: le prime due vanno insieme, la terza contro */
-const DIRS = [1, 1, -1]
+/* alternanza semplice: ogni riga contro la vicina — vale anche per
+   le due sole righe visibili su mobile */
+const DIRS = [1, -1, 1]
 /* ogni tot una SPINTA con curva a campana (ease-in/out): periodi e
    attacchi diversi per riga, così i surge non battono mai insieme */
 const BOOST_PERIODS = [7000, 9500, 8200]
@@ -54,15 +55,11 @@ export function ExploreField({ rows }: { rows: ExploreCard[][] }) {
     if (tracks.length === 0) return
 
     let reduced = false
-    let mobile = false
     try {
       reduced = matchMedia('(prefers-reduced-motion: reduce)').matches
-      mobile = matchMedia('(max-width: 760px)').matches
     } catch {}
     if (reduced) return
-    /* su mobile si vedono solo le prime due righe: devono andare in
-       versi OPPOSTI (sul desktop vale l'alternanza ++−) */
-    const dirs = mobile ? [1, -1, 1] : DIRS
+    const dirs = DIRS
 
     /* stato per riga: posizione, easing della pausa, mezzo nastro,
        velocità residua del drag (momentum) */

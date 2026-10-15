@@ -5,7 +5,9 @@
   display: contents;
 }
 
-.clone {
+/* doppia classe: deve vincere sul display della griglia di pagina,
+   che vive in un altro module e può arrivare dopo nel bundle */
+.clone.clone {
   display: none;
 }
 
@@ -40,7 +42,7 @@
     will-change: transform;
   }
 
-  .clone {
+  .clone.clone {
     display: flex;
   }
 }
