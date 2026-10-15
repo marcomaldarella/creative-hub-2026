@@ -723,11 +723,13 @@ h3.storiaTitle {
   transform: scale(1.04);
 }
 
+/* nomi grandi quanto il "join us" della cella finale */
 .teacherName {
   display: block;
-  font-size: 13px;
-  font-weight: 500;
-  line-height: 1.2;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
   padding: 10px 0 0;
 }
 
@@ -771,13 +773,13 @@ a.joinBox:hover span {
 /* in memoria dentro la griglia: riempie le colonne avanzate
    dell'ultima riga, testo ancorato al FONDO DELLE FOTO — il
    padding-bottom compensa la riga del nome sotto i ritratti
-   (10px di stacco + 13px × 1.2 di interlinea) */
+   (10px di stacco + 20px × 1.05 di interlinea) */
 .memoriaCell {
   grid-column: span 4;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding-bottom: 26px;
+  padding-bottom: 31px;
 }
 
 @media (max-width: 1100px) {
@@ -796,6 +798,12 @@ a.joinBox:hover span {
   .teacherGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  .teacherName,
+  a.joinBox b,
+  .inMemoriaText {
+    font-size: 16px;
+  }
 }
 
 .inMemoriaTitle {
@@ -805,11 +813,13 @@ a.joinBox:hover span {
   margin-bottom: 10px;
 }
 
+/* stesso corpo del "join us" */
 .inMemoriaText {
-  font-size: var(--fs-small);
+  font-size: 20px;
+  letter-spacing: -0.02em;
   color: var(--fg-2);
-  line-height: 1.6;
-  max-width: 64ch;
+  line-height: 1.35;
+  max-width: 52ch;
 }
 
 /* ————— orientamento ————— */

@@ -12,20 +12,27 @@
   gap: clamp(10px, 1.2vw, 16px);
   padding: clamp(18px, 2.4vw, 36px) 0 clamp(12px, 1.5vw, 18px);
   overflow: hidden;
-  mask-image: linear-gradient(
-    to right,
-    transparent,
-    #000 5%,
-    #000 95%,
-    transparent
-  );
-  -webkit-mask-image: linear-gradient(
-    to right,
-    transparent,
-    #000 5%,
-    #000 95%,
-    transparent
-  );
+}
+
+/* la sfumatura ai bordi resta solo su mobile: su web le card
+   arrivano vive al taglio del viewport */
+@media (max-width: 760px) {
+  .field {
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      #000 5%,
+      #000 95%,
+      transparent
+    );
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent,
+      #000 5%,
+      #000 95%,
+      transparent
+    );
+  }
 }
 
 .row {
