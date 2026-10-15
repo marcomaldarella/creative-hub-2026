@@ -216,7 +216,19 @@ a.allBar:hover .allBarDisc {
 /* ————— scegli il tuo percorso ————— */
 
 .pathsSez {
-  padding-top: clamp(32px, 4.5vw, 56px);
+  padding-top: clamp(40px, 6vw, 88px);
+}
+
+/* titolone alla mock: due righe, l'ultima nell'azzurro di sezione */
+h2.pathsTitle {
+  font-size: clamp(52px, 9vw, 140px);
+  letter-spacing: -0.05em;
+  line-height: 0.9;
+  margin: 10px 0 clamp(36px, 5vw, 64px);
+}
+
+.pathsTitleAccent {
+  color: var(--accent);
 }
 
 .pathsGrid {

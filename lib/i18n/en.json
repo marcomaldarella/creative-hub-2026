@@ -412,8 +412,7 @@
     "heroCtaSecondary": "ask for information",
     "exploreKicker": "the full offer",
     "exploreTitle": "Everything you can learn here.",
-    "exploreLead": "University, tailor-made and funded courses across music, sound, film and business. Drag to explore, open a title to see the course.",
-    "exploreHint": "drag to explore",
+    "exploreLead": "University, tailor-made and funded courses across music, sound, film and business. Open a title to see the course.",
     "exploreFunded": [
       "Digital Composer and Producer",
       "Songwriter & Vocal Artist",
@@ -451,7 +450,11 @@
         "cta": "+39 051 6313706"
       }
     ],
-    "exploreFundedTag": "funded"
+    "exploreFundedTag": "funded",
+    "pathsTitle": [
+      "Choose your",
+      "path."
+    ]
   },
   "studios": {
     "kicker": "studio · bologna",

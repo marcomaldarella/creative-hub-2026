@@ -412,8 +412,7 @@
     "heroCtaSecondary": "chiedi informazioni",
     "exploreKicker": "tutta l'offerta",
     "exploreTitle": "Tutto quello che si impara qui.",
-    "exploreLead": "Corsi universitari, su misura e finanziati tra musica, suono, cinema e business. Trascina per esplorare, apri un titolo per vedere il corso.",
-    "exploreHint": "trascina per esplorare",
+    "exploreLead": "Corsi universitari, su misura e finanziati tra musica, suono, cinema e business. Apri un titolo per vedere il corso.",
     "exploreFunded": [
       "Digital Composer and Producer",
       "Songwriter & Vocal Artist",
@@ -451,7 +450,11 @@
         "cta": "+39 051 6313706"
       }
     ],
-    "exploreFundedTag": "finanziato"
+    "exploreFundedTag": "finanziato",
+    "pathsTitle": [
+      "Scegli il tuo",
+      "percorso."
+    ]
   },
   "studios": {
     "kicker": "studio · bologna",

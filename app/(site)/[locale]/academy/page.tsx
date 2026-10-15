@@ -59,9 +59,9 @@ const PATHS = [
 /* la lista "tutto intorno allo studio": altre 3 pagine topic */
 const AROUND = ['stage-placement', 'servizi-studenti', 'open-day'] as const
 
-/* ————— campo esplora: tutta l'offerta in un marquee trascinabile.
+/* ————— campo esplora: tutta l'offerta in un muro statico di titoli.
    Le foto sono TUTTE della stessa misura (la dimensione vive nel CSS
-   del componente); qui si decide solo quali e dove ————— */
+   del componente); qui si decide solo quali e ogni quanti titoli ————— */
 const EXPLORE_PICS = [
   '/img/foto/studio-ssl.jpg',
   '/img/foto/live-band.jpg',
@@ -71,17 +71,8 @@ const EXPLORE_PICS = [
   '/img/sections/studio-regia-b.jpg',
 ] as const
 
-/* corpo tipografico per posizione di riga: un xl per riga, mai nello
-   stesso punto su righe adiacenti */
-const EXPLORE_SIZES: ExploreWord['size'][][] = [
-  ['xl', 'm', 'l', 'm', 'l', 'm'],
-  ['m', 'l', 'xl', 'm', 'l', 'm'],
-  ['l', 'm', 'm', 'xl', 'm', 'l'],
-  ['m', 'xl', 'l', 'm', 'l', 'm'],
-]
-
-/* in quali punti di ogni riga si infilano le foto */
-const EXPLORE_PIC_SLOTS = [[2], [1, 4], [3], [2, 5]] as const
+/* una foto ogni quanti titoli */
+const EXPLORE_PIC_EVERY = 4
 
 /** avvolge in <strong> i nomi propri dentro un paragrafo (Angela Madonia
  *  ecc.): evita di portare markup nei dizionari JSON. */
@@ -139,7 +130,6 @@ export default async function AcademyPage({
       label: l(c.title, locale) ?? '',
       tag: ty ? t.academy.types[ty] : undefined,
       href: `${basePath}/${c.slug?.current ?? ''}`,
-      size: 'm',
     }
   }
   const pools: ExploreWord[][] = [
@@ -152,7 +142,6 @@ export default async function AcademyPage({
       label,
       tag: t.academy.exploreFundedTag,
       href: localeHref(locale, '/academy/formazione-finanziata'),
-      size: 'm' as const,
     })),
   ]
   const words: ExploreWord[] = []
@@ -161,28 +150,24 @@ export default async function AcademyPage({
     const w = pools[i % pools.length][Math.floor(i / pools.length)]
     if (w) words.push(w)
   }
-  const exploreRows: ExploreItem[][] = [[], [], [], []]
-  words.forEach((w, i) => {
-    const r = i % exploreRows.length
-    exploreRows[r].push({
-      ...w,
-      size: EXPLORE_SIZES[r][exploreRows[r].length % EXPLORE_SIZES[r].length],
-    })
-  })
+  const exploreItems: ExploreItem[] = []
   let picIdx = 0
-  EXPLORE_PIC_SLOTS.forEach((slots, r) => {
-    slots.forEach((at, k) => {
-      const caption = t.academy.exploreCaptions[picIdx]
-      if (picIdx < EXPLORE_PICS.length && caption) {
-        exploreRows[r].splice(at + k, 0, {
-          kind: 'pic',
-          src: EXPLORE_PICS[picIdx],
-          alt: caption,
-          caption,
-        })
-        picIdx++
-      }
-    })
+  words.forEach((w, i) => {
+    exploreItems.push(w)
+    const caption = t.academy.exploreCaptions[picIdx]
+    if (
+      (i + 1) % EXPLORE_PIC_EVERY === 0 &&
+      picIdx < EXPLORE_PICS.length &&
+      caption
+    ) {
+      exploreItems.push({
+        kind: 'pic',
+        src: EXPLORE_PICS[picIdx],
+        alt: caption,
+        caption,
+      })
+      picIdx++
+    }
   })
 
   return (
@@ -215,10 +200,25 @@ export default async function AcademyPage({
           </div>
         </header>
 
+        {/* ————— colata nera: dal percorso alla storia, come nel mock —
+            la pagina passa al nero subito dopo l'hero azzurra ————— */}
+        <div className={`scheme-dark ${styles.darkBand}`}>
         {/* ————— scegli il tuo percorso ————— */}
         <section className={`wrap ${styles.pathsSez}`}>
           <Reveal as="span" className={`mono ${styles.sectionLabel}`}>
             {t.academy.pathsKicker}
+          </Reveal>
+          {/* titolone alla mock: ultima riga nell'azzurro di sezione */}
+          <Reveal
+            as="h2"
+            className={`display-black ${styles.pathsTitle}`}
+            delay={60}
+          >
+            {t.academy.pathsTitle[0]}
+            <br />
+            <span className={styles.pathsTitleAccent}>
+              {t.academy.pathsTitle[1]}
+            </span>
           </Reveal>
           {/* scia fluida della home sopra le tre foto; il corpo testo
               sta sopra il canvas (z-index) e non si inverte */}
@@ -297,16 +297,11 @@ export default async function AcademyPage({
           </RevealGroup>
         </section>
 
-        <Rule left={t.academy.aroundKicker} right={t.common.courses} />
+        <Rule dark left={t.academy.aroundKicker} right={t.common.courses} />
 
-        {/* ————— colata nera (linguaggio corso-v3): corsi in evidenza,
-            fascia video a tutto campo e storia vivono in un'unica fascia
-            scura full-bleed — scheme-dark ribalta i token (globals) e
-            dentro l'accento torna osso, come nelle fasce del corso ————— */}
-        <div className={`scheme-dark ${styles.darkBand}`}>
-          {/* ————— tutta l'offerta: campo-marquee trascinabile con i
-              corsi veri e le foto della sede (tutte della stessa
-              misura), chiuso dalla barra "vedi tutti i corsi" ————— */}
+          {/* ————— tutta l'offerta: muro statico di titoli con i corsi
+              veri e le foto della sede (tutte della stessa misura),
+              chiuso dalla barra "vedi tutti i corsi" ————— */}
           <section className={styles.exploreSez}>
             <div className={`wrap ${styles.exploreHead}`}>
               <Reveal as="span" className={`mono ${styles.sectionLabel}`}>
@@ -323,7 +318,9 @@ export default async function AcademyPage({
                 {t.academy.exploreLead}
               </Reveal>
             </div>
-            <ExploreField rows={exploreRows} hint={t.academy.exploreHint} />
+            <div className="wrap">
+              <ExploreField items={exploreItems} />
+            </div>
             <Link href={corsiPath} className={styles.allBar}>
               <div className={`wrap ${styles.allBarIn}`}>
                 <span className={styles.allBarBody}>
