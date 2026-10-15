@@ -51,8 +51,8 @@
 .group {
   display: flex;
   align-items: center;
-  gap: clamp(14px, 1.8vw, 24px);
-  padding-right: clamp(14px, 1.8vw, 24px);
+  gap: clamp(8px, 0.9vw, 12px);
+  padding-right: clamp(8px, 0.9vw, 12px);
 }
 
 /* ————— card jelly: TUTTE della stessa misura ————— */
@@ -131,6 +131,8 @@ a.card:hover .cardImg {
 
 /* ————— testi ————— */
 
+/* etichette agli angoli come il riferimento: maiuscole piccole con
+   kerning largo (eccezione caps concessa solo qui, come sull'anello) */
 .cardMeta {
   position: absolute;
   top: 13px;
@@ -140,8 +142,9 @@ a.card:hover .cardImg {
   display: flex;
   justify-content: space-between;
   gap: 12px;
-  font-size: 10.5px;
-  letter-spacing: 0.08em;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
   color: rgba(255, 255, 255, 0.85);
 }
 
