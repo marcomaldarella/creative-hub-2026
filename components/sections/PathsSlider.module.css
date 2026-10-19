@@ -1,6 +1,7 @@
 /* nastro infinito a ogni misura: full-bleed (il wrap è 100% con
    soli gutter, basta il margine negativo), contenuto duplicato —
-   il wrap al 50% lo fa il JS */
+   il wrap al 50% lo fa il JS. touch-action: pan-y lascia al nastro
+   il gesto orizzontale e alla pagina quello verticale */
 .outer {
   display: block;
   overflow: hidden;

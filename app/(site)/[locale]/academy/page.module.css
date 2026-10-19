@@ -274,6 +274,15 @@ h2.pathsTitle {
   color: var(--accent);
 }
 
+/* il canvas della scia copre il box della zona (inset 0): la zona
+   si prende anche i gutter del wrap — e li ridà come padding, così
+   il layout non si muove — perché lo slider sotto è full-bleed e la
+   scia non deve tagliarsi ai bordi del viewport */
+.fluidBleed {
+  margin-inline: calc(var(--pad) * -1);
+  padding-inline: var(--pad);
+}
+
 /* nastro infinito a ogni misura (PathsSlider): card a misura fissa,
    il padding-right fa da giunto del loop */
 .pathsGrid {
@@ -282,8 +291,14 @@ h2.pathsTitle {
   padding-right: 14px;
 }
 
+/* width + max-width OLTRE alla flex-basis: nel track a max-content
+   la larghezza intrinseca della card la detterebbe il testo non
+   wrappato — le copie si gonfierebbero di vuoto (e in modo diverso
+   tra loro), rompendo il wrap del loop */
 .pathsGrid > a {
   flex: 0 0 clamp(320px, 32vw, 520px);
+  width: clamp(320px, 32vw, 520px);
+  max-width: clamp(320px, 32vw, 520px);
 }
 
 /* mobile: card GRANDI, gap corto, testi descrittivi mini */
@@ -295,6 +310,8 @@ h2.pathsTitle {
 
   .pathsGrid > a {
     flex: 0 0 min(82vw, 380px);
+    width: min(82vw, 380px);
+    max-width: min(82vw, 380px);
   }
 
   /* specificità alzata: le regole base di .pathText/.pathCount
@@ -685,7 +702,9 @@ h3.storiaTitle {
   display: grid;
   gap: 10px;
   max-width: 68ch;
-  margin: 14px 0 clamp(18px, 2.5vw, 28px);
+  /* il margine negativo mangia lo stacco del SectionHeader (40–56px,
+     componente condiviso): titolo e intro restano a ~20px */
+  margin: clamp(-34px, -2.5vw, -22px) 0 clamp(18px, 2.5vw, 28px);
 }
 
 .teachersP {
@@ -715,13 +734,14 @@ h3.storiaTitle {
   background: transparent;
 }
 
-/* trattino sopra ogni nome, nello stesso colore del testo */
+/* trattino sopra ogni nome, stesso colore del testo al 50% */
 .teacherName::before {
   content: '';
   display: block;
   width: 28px;
   height: 2px;
   background: currentColor;
+  opacity: 0.5;
   margin-bottom: 8px;
 }
 
@@ -766,6 +786,7 @@ a.joinCell {
 }
 
 .joinBox {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -793,6 +814,29 @@ a.joinCell:hover .joinBox {
 
 a.joinCell:hover .joinBox span {
   color: var(--azzurro);
+}
+
+/* in hover si crea un + al centro della card */
+.joinBox::before {
+  content: '+';
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 64px;
+  font-weight: 300;
+  line-height: 1;
+  color: var(--azzurro);
+  opacity: 0;
+  transform: scale(0.7);
+  transition:
+    opacity var(--dur) ease,
+    transform 0.3s var(--ease-out);
+}
+
+a.joinCell:hover .joinBox::before {
+  opacity: 1;
+  transform: none;
 }
 
 /* in memoria dentro la griglia: riempie le colonne avanzate

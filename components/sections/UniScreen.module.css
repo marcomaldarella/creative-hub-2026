@@ -524,13 +524,18 @@
 .go {
   position: absolute;
   right: 22px;
-  bottom: 18px;
+  /* centrata tra la hairline dei meta e il fondo card (richiesta
+     cliente): la fascia sotto la riga è ~57px (16 padding + riga
+     testo + 22 di padding card), la pill è 36 */
+  bottom: 10px;
   min-width: 36px;
   height: 36px;
   padding: 0 10px;
   border-radius: var(--radius-pill);
   background: var(--azzurro);
-  color: var(--ink);
+  /* SEMPRE nero come la badge .area: il fondo è sempre azzurro,
+     anche nella colata nera dove --ink si ribalta in chiaro */
+  color: #0a0a0a;
   display: inline-flex;
   align-items: center;
   justify-content: center;

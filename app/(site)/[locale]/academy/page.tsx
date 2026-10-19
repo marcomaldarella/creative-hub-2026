@@ -226,7 +226,7 @@ export default async function AcademyPage({
           </Reveal>
           {/* scia fluida della home sopra le tre foto; il corpo testo
               sta sopra il canvas (z-index) e non si inverte */}
-          <FluidZone>
+          <FluidZone className={styles.fluidBleed}>
           <RevealGroup>
           {/* su mobile il CSS trasforma la griglia in slider snap:
               PathsSlider aggiunge solo l'autoplay ogni 7s */}
@@ -439,17 +439,18 @@ export default async function AcademyPage({
                 </li>
               ))}
               {/* join us come un docente: box 4:5 col solo invito al
-                  cv, "join us" sotto come fosse il nome */}
+                  cv (in hover spunta il +), "join us" sotto come
+                  fosse il nome; il clic porta ai contatti */}
               <li className={styles.teacherCell}>
-                <a
+                <Link
                   className={styles.joinCell}
-                  href={`mailto:${email}?subject=${encodeURIComponent(t.academy.joinUs)}`}
+                  href={`${localeHref(locale, '/chi-siamo')}#contatti`}
                 >
                   <span className={styles.joinBox}>
                     <span>{t.academy.joinUsRole}</span>
                   </span>
                   <span className={styles.teacherName}>{t.academy.joinUs}</span>
-                </a>
+                </Link>
               </li>
               {/* in memoria riempie lo spazio avanzato dell'ultima
                   riga: blocco testuale a destra, ancorato in basso */}

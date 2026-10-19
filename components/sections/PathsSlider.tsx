@@ -5,11 +5,18 @@ import styles from './PathsSlider.module.css'
 
 /**
  * Wrapper dello "scegli il tuo percorso": nastro infinito a OGNI
- * misura (come il campo dell'offerta) — scorre DA SOLO e non si
- * ferma mai: contenuto duplicato, wrap al 50%, un rAF time-based.
- * Si trascina 1:1 col puntatore (axis lock: il gesto verticale resta
- * scroll di pagina) con momentum al rilascio; il click subito dopo
- * un drag è soppresso. Mai con prefers-reduced-motion.
+ * misura (stessa ricetta del campo dell'offerta) — scorre DA SOLO e
+ * non si ferma mai: contenuto duplicato, wrap al 50%, un rAF
+ * time-based. Si trascina 1:1 col puntatore (axis lock: il gesto
+ * verticale resta scroll di pagina) con momentum al rilascio; il
+ * click subito dopo un drag è soppresso. Mai con
+ * prefers-reduced-motion.
+ *
+ * NOTA: il wrap al 50% regge solo se le due copie sono IDENTICHE in
+ * larghezza — le card devono avere width esplicita (non solo
+ * flex-basis), altrimenti nel track a max-content la larghezza
+ * intrinseca la detta il testo non wrappato e il loop salta nel
+ * vuoto (il bug storico di questo slider su mobile).
  */
 const SPEED = 26 // px/s
 
@@ -22,12 +29,22 @@ export function PathsSlider({
 }) {
   const outerRef = useRef<HTMLDivElement | null>(null)
   const trackRef = useRef<HTMLDivElement | null>(null)
+  const cloneRef = useRef<HTMLDivElement | null>(null)
   const movedRef = useRef(false)
 
   useEffect(() => {
     const outer = outerRef.current
     const track = trackRef.current
     if (!outer || !track) return
+
+    /* la copia resta fuori dal tab order ma DEVE restare interattiva:
+       col nastro che scorre metà delle card a schermo sono cloni, e
+       con inert non rispondevano né all'hover né al click */
+    cloneRef.current
+      ?.querySelectorAll<HTMLAnchorElement>('a')
+      .forEach((a) => {
+        a.tabIndex = -1
+      })
     let reduced = false
     try {
       reduced = matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -157,7 +174,11 @@ export function PathsSlider({
     >
       <div ref={trackRef} className={styles.track}>
         <div className={className}>{children}</div>
-        <div className={`${styles.clone} ${className ?? ''}`} aria-hidden inert>
+        <div
+          ref={cloneRef}
+          className={`${styles.clone} ${className ?? ''}`}
+          aria-hidden
+        >
           {children}
         </div>
       </div>
