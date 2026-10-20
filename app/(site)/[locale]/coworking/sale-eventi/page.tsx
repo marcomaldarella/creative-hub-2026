@@ -16,7 +16,15 @@ import corridoio2Img from '@/public/img/foto/corridoio-2.jpg'
 import sedeImg from '@/public/img/foto/sede.jpg'
 import loungeImg from '@/public/img/sections/coworking-lounge.jpg'
 import designingImg from '@/public/img/sections/designing-the.jpg'
+/* le card a foto piena dei corsi (layout B): modulo condiviso */
+import uni from '@/components/sections/UniScreen.module.css'
 import styles from './page.module.css'
+
+/* foto degli eventi passati, nell'ordine del documento Sanity */
+const PAST_PHOTOS = [
+  { src: banano2Img, alt: 'Networking nella banano room: grande banano al centro e divani' },
+  { src: loungeImg, alt: 'La lounge del coworking durante un talk' },
+]
 
 export const dynamic = 'force-dynamic'
 
@@ -157,23 +165,24 @@ export default async function SaleEventiPage({
               <Reveal as="h2" className={`display-thin ${styles.h2}`}>
                 {t.saleEventiPage.pastTitle}
               </Reveal>
-              <div className={styles.past}>
-                <Reveal className={styles.pastPh}>
-                  <Image
-                    src={banano2Img}
-                    alt="Networking nella banano room"
-                    className={styles.roomImg}
-                  />
-                </Reveal>
-                <div className={styles.pastList}>
-                  {past.map((p) => (
-                    <Reveal key={p.title} className={styles.pastItem}>
-                      <h3 className={styles.roomTitle}>{p.title}</h3>
-                      {p.text && <p className={styles.roomText}>{p.text}</p>}
-                    </Reveal>
-                  ))}
-                </div>
-              </div>
+              {/* stesse card a foto piena dei corsi: il modulo si
+                  condivide, la UI resta UNA */}
+              <RevealGroup className={styles.pastGrid}>
+                {past.map((p, i) => (
+                  <div key={p.title} className={`rv ${uni.card}`}>
+                    <figure className={uni.ph}>
+                      <Image
+                        src={PAST_PHOTOS[i % PAST_PHOTOS.length].src}
+                        alt={PAST_PHOTOS[i % PAST_PHOTOS.length].alt}
+                        fill
+                        sizes="(max-width: 700px) 100vw, 50vw"
+                      />
+                    </figure>
+                    <h3 className={uni.cardTitle}>{p.title}</h3>
+                    {p.text && <p className={uni.cardDesc}>{p.text}</p>}
+                  </div>
+                ))}
+              </RevealGroup>
             </section>
           </>
         )}
