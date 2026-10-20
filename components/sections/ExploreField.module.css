@@ -79,13 +79,34 @@ a.card {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: saturate(0.92);
+  /* a riposo le foto stanno sotto un velo scuro: il campo è calmo,
+     è l'hover ad accendere una card per volta (richiesta cliente) */
+  filter: saturate(0.92) brightness(0.55);
   transform: scale(1.03);
-  transition: transform 0.6s var(--ease-out);
+  transition:
+    transform 0.6s var(--ease-out),
+    filter 0.35s ease;
 }
 
 a.card:hover .cardImg {
   transform: scale(1.08);
+  filter: saturate(1) brightness(1);
+}
+
+/* mentre una card è accesa, il resto del campo si spegne: bianco e
+   nero + opacità ridotta, l'occhio sta solo sul corso illuminato.
+   :has() sul campo e non :hover sulla riga: sfiorare i gap non deve
+   spegnere tutto senza accendere niente */
+a.card {
+  transition: opacity 0.35s ease;
+}
+
+.field:has(a.card:hover) a.card:not(:hover) {
+  opacity: 0.45;
+}
+
+.field:has(a.card:hover) a.card:not(:hover) .cardImg {
+  filter: grayscale(1) brightness(0.5);
 }
 
 /* solo lo scrim di lettura al piede: più alto e con più stop — il
@@ -169,6 +190,14 @@ a.card:hover .glass {
   font-size: 10.5px;
   line-height: 1.35;
   color: rgba(255, 255, 255, 0.82);
+}
+
+/* su touch l'hover non esiste: niente velo di base che nessuno
+   potrebbe togliere, le foto restano come prima */
+@media (hover: none) {
+  .cardImg {
+    filter: saturate(0.92);
+  }
 }
 
 @media (max-width: 760px) {
