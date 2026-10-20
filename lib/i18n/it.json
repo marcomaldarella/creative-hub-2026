@@ -612,13 +612,13 @@
       ]
     },
     "formazioneFinanziata": {
-      "title": "Formazione finanziata dalla Regione.",
-      "lede": "Percorsi cofinanziati dalla Regione Emilia-Romagna: requisiti, tempi e modalità di accesso.",
+      "title": "Corsi gratuiti finanziati dalla Regione Emilia-Romagna.",
+      "lede": "Formazione professionale per le industrie culturali e creative: suono, musica, dati e 3D. Docenti del settore, poche settimane o pochi mesi, zero costi per te.",
       "points": []
     },
     "stagePlacement": {
-      "title": "Stage veri. L'83% lavora nel settore.",
-      "lede": "Tirocini dentro studi, etichette e produzioni della rete, non a fine corso ma durante.",
+      "title": "Stage e lavoro nella musica.\nDurante il corso, non dopo.",
+      "lede": "Stage in studi, club e produzioni. Un'etichetta interna distribuita da Orchard Italia. Audizioni con agenzie di management. Dal primo anno.",
       "points": []
     },
     "corsiCustom": {
@@ -632,54 +632,33 @@
       ]
     },
     "openDay": {
-      "title": "Vieni a vedere.\nAnche con i tuoi.",
-      "lede": "Un pomeriggio dentro l'hub: aule, studi, docenti e studenti. Si prenota online.",
+      "title": "Open day a Bologna.\nVieni a vedere, anche con i tuoi.",
+      "lede": "Due open day, per due strade diverse: i corsi universitari, per chi vuole fare della musica un lavoro, e le lezioni su misura, per chi vuole suonare o cantare per passione. Gratuiti, in sede o in diretta online.",
       "points": []
     },
     "serviziStudenti": {
-      "title": "Tutto intorno allo studio.",
-      "lede": "Quello che c'è oltre le lezioni, dalla borsa di studio all'alloggio.",
-      "points": [
-        {
-          "title": "Borse di studio",
-          "text": "Borse di studio a copertura parziale o totale della retta, assegnate su merito e su base ISEE. La domanda si presenta in fase di iscrizione, insieme al resto della documentazione: l'ufficio segreteria segue ogni pratica caso per caso."
-        },
-        {
-          "title": "Erasmus+",
-          "text": "Mobilità internazionale con partner in Europa attraverso il programma Erasmus+: un semestre di studio o un tirocinio fuori sede, con crediti riconosciuti al rientro. La rete di scuole e studi partner cresce ogni anno."
-        },
-        {
-          "title": "Orientamento",
-          "text": "Colloqui individuali prima e durante il percorso, per scegliere il corso giusto e, più avanti, il primo passo nel mestiere: dallo stage al primo contratto, l'orientamento accompagna sia chi arriva sia chi sta per uscire."
-        },
-        {
-          "title": "Alloggio",
-          "text": "Un servizio di supporto nella ricerca dell'alloggio a Bologna, con una rete di soluzioni vicine alla sede — utile soprattutto per chi arriva da fuori regione o dall'estero per il primo anno."
-        },
-        {
-          "title": "Eventi live",
-          "text": "Concerti, showcase e serate aperte al pubblico dentro e fuori l'hub, spesso con studenti e docenti sullo stesso palco: un modo per portare il lavoro fatto in aula davanti a un pubblico vero."
-        }
-      ]
+      "title": "Servizi studenti.\nTutto intorno allo studio.",
+      "lede": "Borse di studio e rate, casa a Bologna, esperienze all'estero, un tutor che ti segue. Parti da quello che ti serve.",
+      "points": []
     },
     "dolbyAtmos": {
-      "title": "Audio immersivo. Musica, cinema, gaming.",
-      "lede": "Suite certificata Dolby Atmos per missaggio immersivo, dal disco alla colonna sonora.",
+      "title": "Studio Dolby Atmos 7.1.4 a Bologna.",
+      "lede": "Una regia certificata Dolby per mixare musica, colonne sonore e contenuti in audio immersivo: i suoni non stanno più solo a destra e a sinistra, ma tutto intorno e sopra chi ascolta.",
       "points": []
     },
     "soundDesign": {
-      "title": "Suono per immagini.",
-      "lede": "Sound design e post-produzione audio per cinema, serie, pubblicità e branded content.",
+      "title": "Sound design e post-produzione audio per video e cinema.",
+      "lede": "Dal montaggio al master: suoni, foley, colonne sonore e mix finale, anche in Dolby Atmos. Per film, serie, pubblicità, videogiochi e installazioni.",
       "points": []
     },
     "podcast": {
-      "title": "Tre cabine. Voce, podcast, doppiaggio.",
-      "lede": "Tre cabine B-Ear per registrazione voce, produzione podcast e doppiaggio.",
+      "title": "Registrare podcast e voice over a Bologna.",
+      "lede": "Una cabina isolata con Neumann U87 e catena analogica, un fonico in regia, e il file pronto da pubblicare.",
       "points": []
     },
     "saleEventi": {
-      "title": "Riunioni, showcase, riprese.",
-      "lede": "Spazi per incontri di lavoro, presentazioni, live e set fotografici in zona Roveri.",
+      "title": "Sale riunioni e spazi per eventi a Bologna.",
+      "lede": "Sala riunioni da 10 persone, sala didattica, aula magna per eventi dal vivo e in streaming, catering. Scrivici e ricevi una proposta.",
       "points": []
     },
     "metaverso": {
