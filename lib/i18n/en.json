@@ -308,10 +308,10 @@
   "academy": {
     "kicker": "Academy · Enrolment open · A.y. 2026/27",
     "titleLines": [
-      "Academy of music",
-      "and creative arts."
+      "Academy of music, production",
+      "and sound engineering in Bologna."
     ],
-    "lede": "Since 1999 in Bologna we train musicians, producers, sound engineers and film and music professionals. International university courses, tailor-made courses and regionally funded training.",
+    "lede": "University programmes — Bachelor of Arts, Bachelor of Science and Master of Music — in music, film production and videomaking. Six undergraduate programmes, three Masters, twenty places per course.",
     "categoryLabel": "filter by category",
     "empty": "no courses in this category.",
     "teachersKicker": "the teachers",
@@ -344,7 +344,7 @@
     "pathsItems": [
       {
         "title": "University courses",
-        "text": "International Bachelor and Master of Music degrees. Three years, twenty places per course."
+        "text": "International university degrees. Three years, twenty places per course."
       },
       {
         "title": "Tailor-made courses",
@@ -352,7 +352,7 @@
       },
       {
         "title": "Funded training",
-        "text": "Programmes funded by the Emilia-Romagna Region, with selection on entry."
+        "text": "Free courses funded by the Emilia-Romagna Region."
       }
     ],
     "aroundKicker": "everything around your studies",
@@ -463,55 +463,157 @@
       "3D modelling for audiovisual, gaming and virtual environments.",
       "Sound for video, installations and interactive media.",
       "Immersive and spatial audio, from Dolby Atmos to VR."
+    ],
+    "faqKicker": "academy · faq",
+    "faqTitle": "The most common questions.",
+    "faq": [
+      {
+        "title": "What's the difference between university programmes and custom lessons?",
+        "text": "University programmes last three years (two for Masters) and award an international academic degree — Bachelor of Arts, Bachelor of Science or Master of Music. Custom lessons are flexible packages with no exams or final degree: for those who want to learn an instrument without committing to a multi-year programme."
+      },
+      {
+        "title": "How does Region-funded training work?",
+        "text": "These are free courses funded by the European Social Fund Plus and the Emilia-Romagna Region, lasting a few months, with an internship included and a specialisation certificate recognised at regional level. They are not equivalent to a university degree."
+      },
+      {
+        "title": "Can I visit an open day before choosing a course?",
+        "text": "Yes, that's exactly what it's for. You can visit the studios, meet the teachers and get a concrete idea before applying — even if you haven't decided which course is right for you."
+      },
+      {
+        "title": "Can I study part-time if I already work?",
+        "text": "Yes, every university programme has a part-time option: same programme, spread over more time."
+      }
     ]
   },
   "studios": {
-    "kicker": "studio · bologna",
-    "title": "Record like the industry.",
-    "lede": "55 m² SSL XL Desk control room. Live room. ISO box. Three B-Ear cabins.",
+    "kicker": "studio · roveri district, bologna",
+    "title": "Recording studio in Bologna.\nSSL control room, Dolby Atmos, a 60 m² live room.",
+    "lede": "Creative Hub SSL Recording Studio: 120 m² of tracking and control rooms, for artists, bands, productions and companies. From the idea to the master.",
     "spacesKicker": "the spaces",
-    "spacesTitle": "The whole band.\nIn the same room.",
+    "spacesTitle": "Inside the studio.",
     "servicesKicker": "the services",
-    "servicesTitle": "From tracking to the international soundtrack",
+    "servicesTitle": "Record. Mix. Deliver.",
     "services": {
       "recording": {
-        "n": "01",
+        "n": "st.01",
         "title": "Recording",
-        "text": "The whole band, in the same room."
+        "text": "Full-band live tracking, overdubs, remote recording with professional musicians."
       },
       "mix": {
-        "n": "02",
+        "n": "st.02",
         "title": "Mix & mastering",
-        "text": "Calibrated monitoring. No surprises."
+        "text": "Stereo and Dolby Atmos mixing, mastering for every platform, also as a standalone service."
       },
       "atmos": {
-        "n": "03",
+        "n": "st.03",
         "title": "Dolby Atmos",
-        "text": "Immersive audio. Music, film, gaming."
+        "text": "A Dolby-certified 7.1.4 room for music, cinema, media and education."
       },
       "cinema": {
-        "n": "04",
+        "n": "st.04",
         "title": "Sound design",
-        "text": "Sound for image."
+        "text": "Audio for video and cinema: post-production, scores, foley, Atmos mixing."
+      },
+      "podcast": {
+        "n": "st.05",
+        "title": "Podcast & voice over",
+        "text": "Isolated booth with a Neumann U87 for vocals, podcasts and voice work."
+      },
+      "rental": {
+        "n": "st.06",
+        "title": "Studio rental",
+        "text": "The full studio for productions with your own engineer, live rehearsals and tour prep."
       }
     },
     "ctaKicker": "quote",
     "ctaTitle": "Tell us about your project.",
-    "ctaText": "Tell us what you want to record or mix: we reply within one working day.",
+    "ctaText": "Write us what you want to record, mix or produce. We get back to you Monday to Friday for a consultation and to schedule the session.",
     "ctaBook": "book a session",
     "ctaContact": "write to us",
     "editorialKicker": "from the magazine",
-    "editorialTitle": "Stories from the studio."
+    "editorialTitle": "Stories from the studio.",
+    "spacesLede": "Control room, live room and booth are connected: musicians see and hear each other in their headphones, even when playing in different rooms.",
+    "servicesLede": "Six services, one studio. Choose where to start: we follow you all the way to the final file.",
+    "manifesto": "We don't work for you. We work with you. Real musicians in the same room, real instruments, and an engineer who stays until the track sounds right.",
+    "numbersKicker": "the studio in numbers",
+    "numbers": [
+      {
+        "n": "120 m²",
+        "label": "of tracking and control rooms"
+      },
+      {
+        "n": "60 m²",
+        "label": "live room with variable acoustics"
+      },
+      {
+        "n": "32",
+        "label": "channels on the SSL XL-Desk console"
+      },
+      {
+        "n": "7.1.4",
+        "label": "Dolby Atmos, Dolby certified"
+      }
+    ],
+    "whyKicker": "why here",
+    "whyTitle": "Why record here.",
+    "why": [
+      {
+        "n": "01",
+        "kicker": "people",
+        "title": "Real instruments, real people",
+        "text": "Beyond the studio, a network of musicians and industry professionals to bring into your project."
+      },
+      {
+        "n": "02",
+        "kicker": "technology",
+        "title": "Dolby Atmos 7.1.4",
+        "text": "Genelec and SSL, with Dolby certification: for records, home entertainment and gaming."
+      },
+      {
+        "n": "03",
+        "kicker": "space",
+        "title": "A room to play together",
+        "text": "Big enough for full bands, string sections and small orchestras."
+      }
+    ],
+    "engineerKicker": "in the control room",
+    "engineerName": "Alessandro Cosentino",
+    "engineerRole": "Studio manager and sound engineer",
+    "engineerBio": "Violinist and multi-instrumentalist, graduated with honours from the G.B. Martini Conservatory in Bologna. Ten years with the Luigi Cherubini Orchestra conducted by Riccardo Muti. In the studio and live he has worked with Italian pop and rock artists. He specialises in live recording.",
+    "faqKicker": "faq",
+    "faqTitle": "Frequently asked questions.",
+    "faq": [
+      {
+        "title": "Is the studio open to everyone?",
+        "text": "Yes. The studio works with artists, bands, video productions, companies and institutions. You don't need to be an Academy student."
+      },
+      {
+        "title": "How do I book a session?",
+        "text": "Tell us about the project through the form or by phone. We get back to you Monday to Friday for a consultation and schedule the session."
+      },
+      {
+        "title": "How much does a session cost?",
+        "text": "It depends on the service, duration and number of musicians: we send you a quote after the consultation."
+      },
+      {
+        "title": "Can I bring my own engineer?",
+        "text": "Yes, with the full studio rental."
+      },
+      {
+        "title": "Can I record remotely?",
+        "text": "Yes, with remote recording: you send us the project, we record with professional musicians and return the tracks ready for mixing. You can follow the session in audio and video."
+      }
+    ]
   },
   "coworking": {
     "kicker": "coworking · roveri district, bologna",
-    "title": "A space worthy of your work.",
-    "lede": "Coworking, rooms and events. Roveri district, Bologna.",
-    "spacesKicker": "the spaces",
-    "spacesTitle": "A hot desk. A fixed desk. An office.",
+    "title": "Coworking in Bologna.\nA space that matches your work.",
+    "lede": "A bright open space inside a 2,000 m² hub for the creative industries. At the next desk there may be a designer, a startup or an agency: at break time you all meet in the banano room.",
+    "spacesKicker": "the plans",
+    "spacesTitle": "The plans, compared.",
     "ctaKicker": "book",
-    "ctaTitle": "Pick the space. Lock the date.",
-    "ctaText": "The day pass is the simplest way to get to know the space: book online, pay only when you need it.",
+    "ctaTitle": "Pick your plan.",
+    "ctaText": "From €9.50 a day. We confirm within one working day.",
     "ctaDayPass": "book a day pass",
     "bananoKicker": "banano room",
     "bananoTitle": "The banano room.",
@@ -521,7 +623,43 @@
     "corridoiText": "Classrooms, offices, rehearsal rooms, the library: the corridors hold together everything that happens in the hub — and always tell you where you are.",
     "corridoiPrev": "previous photos",
     "corridoiNext": "more photos",
-    "corridoiHint": "scroll to see every photo"
+    "corridoiHint": "scroll to see every photo",
+    "spacesLede": "Come for a day with a day pass, take a desk for the month or an office for your team.",
+    "amenitiesKicker": "what you get",
+    "amenitiesTitle": "What you get.",
+    "amenities": [
+      "FTTH fibre wifi",
+      "Monitor and ergonomic chair",
+      "Call booths and phone booths",
+      "Printer and scanner",
+      "Lockable drawer unit (full desk)",
+      "@creativehub email and mail at reception",
+      "Google Workspace and unlimited cloud",
+      "Coffee and kitchen",
+      "Air conditioning",
+      "Garden and break areas",
+      "Library and bookshop",
+      "Reception for your clients"
+    ],
+    "faqKicker": "before you book",
+    "faqTitle": "Before you book.",
+    "faq": [
+      {
+        "title": "Can I see it first?",
+        "text": "Yes, get a day pass: it's the easiest way to try it."
+      },
+      {
+        "title": "Can I receive clients and mail?",
+        "text": "Yes, reception welcomes your guests and handles your mail."
+      }
+    ],
+    "whereKicker": "where we are",
+    "whereTitle": "Where we are.",
+    "where": [
+      "Via del Tappezziere 4, Bologna — Roveri district",
+      "15 minutes from Bologna Centrale, TPER Bologna–Portomaggiore line",
+      "051 631 3706, ext. 1 — Mon–Fri 11–13 and 14–18"
+    ]
   },
   "prenota": {
     "kicker": "book",
@@ -708,8 +846,8 @@
   },
   "uni": {
     "kicker": "academy · university programmes · a.y. 2026/27",
-    "title": "University programmes in Bologna.",
-    "lede": "Music, sound, film and music business. Bachelor of Arts, Bachelor of Science and Master of Music: six first-cycle programmes, three Masters, twenty places per course.",
+    "title": "University programmes in music, production and sound engineering in Bologna.",
+    "lede": "Bachelor of Arts, Bachelor of Science, Master of Music. Internationally recognised degrees. Six programmes, three Masters, twenty places a year.",
     "ctaOpenDay": "book the open day",
     "ctaInfo": "ask for information",
     "subnav": {
@@ -748,7 +886,7 @@
         "area": "suono",
         "areaLabel": "music production",
         "tag": "bachelor",
-        "desc": "Beatmaking, sound design, DJing and mixing across hip-hop, trap and electronic music. From the controller to the release.",
+        "desc": "University programme in music production. Beatmaking, sound design and mixing across hip-hop, trap and electronic music.",
         "meta": [
           "3 years",
           "October 2026",
@@ -760,7 +898,7 @@
         "area": "suono",
         "areaLabel": "sound engineering",
         "tag": "bachelor",
-        "desc": "Record, mix and master at a professional level: in the studio, live, and for interactive media.",
+        "desc": "University programme for sound engineers. Recording, mixing and production at a professional level.",
         "meta": [
           "3 years",
           "October 2026",
@@ -772,7 +910,7 @@
         "area": "musica",
         "areaLabel": "performance and writing",
         "tag": "bachelor",
-        "desc": "From the stage to the finished song, with real productions and teachers who work in the industry.",
+        "desc": "Performance and songwriting: from the stage to the finished song, with real productions and teachers working in the industry.",
         "meta": [
           "3 years",
           "October 2026",
@@ -784,7 +922,7 @@
         "area": "musica",
         "areaLabel": "voice and instrument",
         "tag": "bachelor",
-        "desc": "One individual hour a week on your instrument, ensemble playing, production and live work. Choose where to start:",
+        "desc": "University programme in voice and instrument, with one individual lesson a week and ensemble playing. Choose where to start:",
         "instruments": [
           "voice",
           "guitar",
@@ -805,7 +943,7 @@
         "area": "visual",
         "areaLabel": "film",
         "tag": "bachelor",
-        "desc": "Directing, shooting, editing and post-production on real sets: the film from script to final cut.",
+        "desc": "University programme in film production and videomaking. Directing, shooting, editing and post-production.",
         "meta": [
           "3 years",
           "October 2026",
@@ -817,7 +955,7 @@
         "area": "business",
         "areaLabel": "music industry",
         "tag": "bachelor",
-        "desc": "The craft behind the music: management, publishing, distribution, live and rights, on real projects.",
+        "desc": "The craft behind the music: management, publishing, distribution, live and rights.",
         "meta": [
           "3 years",
           "October 2026",
@@ -829,7 +967,7 @@
         "area": "suono",
         "areaLabel": "production",
         "tag": "master of music",
-        "desc": "Advanced production and sound design: from artistic concept to final master, with the SSL studio at your disposal.",
+        "desc": "Advanced production and sound design: from the artistic project to the master, with the studio's equipment.",
         "meta": [
           "2 years",
           "October 2026",
@@ -958,7 +1096,7 @@
     "teachers": {
       "n": "05 / faculty",
       "title": "Those who teach, work.",
-      "lead": "The university faculty are working professionals: on tour, in the studio, on set. What you bring into the classroom, they are doing outside it too. Among them Angela Madonia, vocal coach known to the Amici audience, and Stefania Martin, who has worked alongside Renato Zero and Mina.",
+      "lead": "The teachers of the university programmes are professionals active in the music industry. What you bring into the classroom, they are also doing outside of here.",
       "allLink": "all academy faculty"
     },
     "stories": {
@@ -988,24 +1126,24 @@
       "title": "The questions you ask us before choosing.",
       "items": [
         {
-          "q": "What is the difference between a Bachelor and an Italian degree?",
-          "a": "The Bachelor is the first-cycle university degree of the British and European system: same level, awarded by a foreign university. What changes is the approach: more hours of practice, small classes, teachers who work in the industry."
+          "q": "What's the difference between a Bachelor and an Italian degree?",
+          "a": "The Bachelor of Arts or Bachelor of Science is a foreign first-cycle academic degree, EQF level 6. Outside Italy it is immediately spendable. For Italy, we support you in obtaining the Dichiarazione di Valore."
         },
         {
           "q": "How does admission work?",
-          "a": "We meet at an open day or an interview, then you send your application with a piece of your work and take an audition or an interview in your field. We are not looking for people who already know everything: we are looking for people with a direction."
+          "a": "A motivational interview, not an exam. You need a high-school diploma, or an equivalent foreign qualification. Twenty places a year per programme."
         },
         {
-          "q": "Can I study while working?",
-          "a": "Lessons are scheduled in time slots agreed with your tutor, and part of the programme can be followed online. Check with us that it fits your schedule before enrolling."
+          "q": "Can I study part-time?",
+          "a": "Yes. Part-time means 60 credits a year instead of 120: the same programme, spread over more time. You can switch between modes during the course."
         },
         {
-          "q": "Do I need experience or equipment already?",
-          "a": "You need a foundation in your field, not a CV. On site you have recording studios, production boxes and the SSL control room. For studying at home, we tell you what you need, course by course."
+          "q": "Do I need to already play, sing or shoot video?",
+          "a": "No. Each programme starts from the basics of its field. What you need is motivation: technique is built over the three years."
         },
         {
           "q": "How much does it cost, and can I pay in instalments?",
-          "a": "The fee depends on the course. You pay in zero-interest instalments, with discounts for early enrolment and merit scholarships. Ask us for the details of the course you are interested in."
+          "a": "Each programme has a zero-interest instalment plan. Details vary by programme and mode (full-time or part-time): you'll find them on each programme's page."
         }
       ]
     },

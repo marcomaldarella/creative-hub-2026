@@ -17,6 +17,7 @@ import {
   type ExploreCard,
 } from '@/components/sections/ExploreField'
 import { FluidZone } from '@/components/sections/FluidZone'
+import { PointsAccordion } from '@/components/sections/PointsAccordion'
 import { PathsSlider } from '@/components/sections/PathsSlider'
 import { isLocale, localeHref } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
@@ -499,6 +500,21 @@ export default async function AcademyPage({
               )
             })}
           </RevealGroup>
+        </section>
+
+        {/* ————— domande frequenti (dal mockup v2) ————— */}
+        <section className={`wrap ${styles.faqSez}`}>
+          <Reveal as="span" className={`mono ${styles.sectionLabel}`}>
+            {kick(7, t.academy.faqKicker)}
+          </Reveal>
+          <Reveal
+            as="h2"
+            className={`display-thin ${styles.faqTitle}`}
+            delay={80}
+          >
+            {t.academy.faqTitle}
+          </Reveal>
+          <PointsAccordion items={t.academy.faq} />
         </section>
 
       </main>

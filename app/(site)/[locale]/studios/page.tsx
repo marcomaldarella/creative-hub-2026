@@ -10,6 +10,7 @@ import {
   SectionHeader,
 } from '@/components/ui'
 import { SiteChrome, shopHref } from '@/components/sections/SiteChrome'
+import { PointsAccordion } from '@/components/sections/PointsAccordion'
 import { ArticleCard } from '@/components/magazine/ArticleCard'
 import { isLocale, localeHref } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
@@ -69,6 +70,8 @@ export default async function StudiosPage({
     t.studios.services.mix,
     t.studios.services.atmos,
     t.studios.services.cinema,
+    t.studios.services.podcast,
+    t.studios.services.rental,
   ]
 
   return (
@@ -107,6 +110,7 @@ export default async function StudiosPage({
             <SectionHeader
               kicker={t.studios.spacesKicker}
               title={t.studios.spacesTitle}
+              lede={t.studios.spacesLede}
             />
             <div className={styles.spaces}>
               {spaces.map((space, i) => (
@@ -159,6 +163,7 @@ export default async function StudiosPage({
             <SectionHeader
               kicker={t.studios.servicesKicker}
               title={t.studios.servicesTitle}
+              lede={t.studios.servicesLede}
             />
             <div className={styles.services}>
               {services.map((service, i) => (
@@ -173,6 +178,73 @@ export default async function StudiosPage({
                 </Reveal>
               ))}
             </div>
+          </div>
+        </section>
+
+        {/* ————— manifesto + numeri (dal mockup v2): statement grande e
+            fascia dati come la home ————— */}
+        <section className={`scheme-dark ${styles.sez} ${styles.manifesto}`}>
+          <div className="wrap">
+            <Reveal as="p" className={`display-thin ${styles.manifestoText}`}>
+              {t.studios.manifesto}
+            </Reveal>
+            <Reveal as="span" className={`mono ${styles.numbersKicker}`} delay={80}>
+              {t.studios.numbersKicker}
+            </Reveal>
+            <div className={styles.numbers}>
+              {t.studios.numbers.map((num, i) => (
+                <Reveal key={num.n} className={styles.number} delay={i * 60}>
+                  <span className={`display-thin ${styles.numberN}`}>{num.n}</span>
+                  <span className={styles.numberLabel}>{num.label}</span>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ————— perché registrare qui ————— */}
+        <section className={styles.sez}>
+          <div className="wrap">
+            <SectionHeader kicker={t.studios.whyKicker} title={t.studios.whyTitle} />
+            <div className={styles.services}>
+              {t.studios.why.map((item, i) => (
+                <Reveal key={item.n} delay={i * 60}>
+                  <Card
+                    kicker={`${item.n} ${item.kicker}`}
+                    title={item.title}
+                    className={styles.spaceCard}
+                  >
+                    {item.text}
+                  </Card>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ————— in regia: lo studio manager ————— */}
+        <section className={`${styles.sez} ${styles.engineer}`}>
+          <div className="wrap">
+            <SectionHeader
+              kicker={t.studios.engineerKicker}
+              title={t.studios.engineerName}
+            />
+            <div className={styles.engineerBody}>
+              <Reveal as="p" className={`mono ${styles.engineerRole}`}>
+                {t.studios.engineerRole}
+              </Reveal>
+              <Reveal as="p" className={styles.engineerBio} delay={80}>
+                {t.studios.engineerBio}
+              </Reveal>
+            </div>
+          </div>
+        </section>
+
+        {/* ————— faq ————— */}
+        <section className={styles.sez}>
+          <div className="wrap">
+            <SectionHeader kicker={t.studios.faqKicker} title={t.studios.faqTitle} />
+            <PointsAccordion items={t.studios.faq} />
           </div>
         </section>
 

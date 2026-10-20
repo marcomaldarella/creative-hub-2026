@@ -308,10 +308,10 @@
   "academy": {
     "kicker": "Academy · Iscrizioni aperte · A.a. 2026/27",
     "titleLines": [
-      "Accademia di musica",
-      "e arti creative."
+      "Accademia di musica, produzione",
+      "e tecnico del suono a Bologna."
     ],
-    "lede": "Dal 1999 a Bologna formiamo musicisti, produttori, tecnici del suono e professionisti del cinema e della musica. Corsi universitari internazionali, corsi su misura e formazione finanziata dalla Regione.",
+    "lede": "Corsi universitari — Bachelor of Arts, Bachelor of Science e Master of Music — in musica, produzione cinematografica e videomaking. Sei corsi di primo ciclo, tre Master, venti posti per corso.",
     "categoryLabel": "filtra per categoria",
     "empty": "nessun corso in questa categoria.",
     "teachersKicker": "i docenti",
@@ -344,7 +344,7 @@
     "pathsItems": [
       {
         "title": "Corsi universitari",
-        "text": "Bachelor e Master of Music internazionali. Tre anni, venti posti per corso."
+        "text": "Titoli universitari internazionali. Tre anni, venti posti per corso."
       },
       {
         "title": "Corsi su misura",
@@ -352,7 +352,7 @@
       },
       {
         "title": "Formazione finanziata",
-        "text": "Percorsi finanziati dalla Regione Emilia-Romagna, con selezione all'ingresso."
+        "text": "Corsi gratuiti finanziati dalla Regione Emilia-Romagna."
       }
     ],
     "aroundKicker": "tutto intorno allo studio",
@@ -463,55 +463,157 @@
       "Modellazione 3D per audiovisivo, gaming e ambienti virtuali.",
       "Suono per video, installazioni e media interattivi.",
       "Audio immersivo e spaziale, da Dolby Atmos alla realtà virtuale."
+    ],
+    "faqKicker": "academy · domande frequenti",
+    "faqTitle": "Le domande più comuni.",
+    "faq": [
+      {
+        "title": "Che differenza c'è tra corsi universitari e corsi su misura?",
+        "text": "I corsi universitari durano tre anni (o due per i Master) e rilasciano un titolo accademico internazionale — Bachelor of Arts, Bachelor of Science o Master of Music. I corsi su misura sono pacchetti flessibili di lezioni, senza esami né titolo finale: pensati per chi vuole imparare uno strumento senza impegnarsi in un percorso pluriennale."
+      },
+      {
+        "title": "Come funziona la formazione finanziata dalla Regione?",
+        "text": "Sono corsi gratuiti finanziati dal Fondo Sociale Europeo Plus e dalla Regione Emilia-Romagna, della durata di alcuni mesi, con stage incluso e attestato di specializzazione riconosciuto a livello regionale. Non sono equivalenti a un titolo universitario."
+      },
+      {
+        "title": "Si può venire all'open day prima di scegliere il corso?",
+        "text": "Sì, è pensato proprio per questo. Puoi visitare gli studi, incontrare i docenti e farti un'idea concreta prima di candidarti — anche se non hai ancora deciso quale corso fa per te."
+      },
+      {
+        "title": "Si può studiare part-time, se si lavora già?",
+        "text": "Sì, tutti i corsi universitari prevedono una modalità part-time: stesso programma, distribuito su più tempo."
+      }
     ]
   },
   "studios": {
-    "kicker": "studio · bologna",
-    "title": "Registra come l'industria.",
-    "lede": "Regia SSL XL Desk da 55 m². Sala live. ISO box. Tre cabine B-Ear.",
+    "kicker": "studio · zona roveri, bologna",
+    "title": "Studio di registrazione a Bologna.\nRegia SSL, Dolby Atmos, una sala da 60 m².",
+    "lede": "Creative Hub SSL Recording Studio: 120 m² tra sala di ripresa e regia, per artisti, band, produzioni e aziende. Dall'idea al master.",
     "spacesKicker": "gli spazi",
-    "spacesTitle": "Tutta la band.\nNella stessa stanza.",
+    "spacesTitle": "Lo studio, dentro.",
     "servicesKicker": "i servizi",
-    "servicesTitle": "Dal tracking alla colonna internazionale",
+    "servicesTitle": "Registra. Mixa. Consegna.",
     "services": {
       "recording": {
-        "n": "01",
+        "n": "st.01",
         "title": "Registrazione",
-        "text": "Tutta la band, nella stessa stanza."
+        "text": "Band in presa diretta, overdub, remote recording con musicisti professionisti."
       },
       "mix": {
-        "n": "02",
+        "n": "st.02",
         "title": "Mix & mastering",
-        "text": "Monitoraggio calibrato. Nessuna sorpresa."
+        "text": "Mix stereo e Dolby Atmos, mastering per tutte le piattaforme, anche separato."
       },
       "atmos": {
-        "n": "03",
+        "n": "st.03",
         "title": "Dolby Atmos",
-        "text": "Audio immersivo. Musica, cinema, gaming."
+        "text": "Una regia 7.1.4 certificata Dolby per musica, cinema, media e didattica."
       },
       "cinema": {
-        "n": "04",
+        "n": "st.04",
         "title": "Sound design",
-        "text": "Suono per immagini."
+        "text": "Audio per video e cinema: post-produzione, colonne sonore, foley, mix in Atmos."
+      },
+      "podcast": {
+        "n": "st.05",
+        "title": "Podcast & voice over",
+        "text": "Cabina isolata con Neumann U87 per voci, podcast e speakeraggio."
+      },
+      "rental": {
+        "n": "st.06",
+        "title": "Affitto studio",
+        "text": "Lo studio completo per produzioni con il tuo fonico, prove per live e allestimento tour."
       }
     },
     "ctaKicker": "preventivo",
-    "ctaTitle": "Raccontaci il progetto.",
-    "ctaText": "Raccontaci cosa vuoi registrare o mixare: rispondiamo entro un giorno lavorativo.",
+    "ctaTitle": "Raccontaci il tuo progetto.",
+    "ctaText": "Scrivici cosa vuoi registrare, mixare o produrre. Ti ricontattiamo dal lunedì al venerdì per una consulenza e per fissare la sessione.",
     "ctaBook": "prenota una sessione",
     "ctaContact": "scrivici",
     "editorialKicker": "dal magazine",
-    "editorialTitle": "Storie dallo studio."
+    "editorialTitle": "Storie dallo studio.",
+    "spacesLede": "Regia, sala di ripresa e cabina comunicano: i musicisti si vedono e si sentono in cuffia, anche quando suonano in stanze diverse.",
+    "servicesLede": "Sei servizi, uno studio. Scegli da dove partire: ti seguiamo fino al file finale.",
+    "manifesto": "Non lavoriamo per te. Lavoriamo con te. Musicisti veri nella stessa stanza, strumenti veri, e un fonico che resta finché il pezzo non suona.",
+    "numbersKicker": "lo studio in numeri",
+    "numbers": [
+      {
+        "n": "120 m²",
+        "label": "tra sala di ripresa e regia"
+      },
+      {
+        "n": "60 m²",
+        "label": "di live room ad acustica variabile"
+      },
+      {
+        "n": "32",
+        "label": "canali sulla console SSL XL-Desk"
+      },
+      {
+        "n": "7.1.4",
+        "label": "Dolby Atmos, con certificazione Dolby"
+      }
+    ],
+    "whyKicker": "perché qui",
+    "whyTitle": "Perché registrare qui.",
+    "why": [
+      {
+        "n": "01",
+        "kicker": "persone",
+        "title": "Strumenti veri, persone vere",
+        "text": "Oltre allo studio, una rete di musicisti e professionisti del settore da coinvolgere nel tuo progetto."
+      },
+      {
+        "n": "02",
+        "kicker": "tecnologia",
+        "title": "Dolby Atmos 7.1.4",
+        "text": "Genelec e SSL, con certificazione Dolby: per discografia, home entertainment e gaming."
+      },
+      {
+        "n": "03",
+        "kicker": "spazio",
+        "title": "Una sala per suonare insieme",
+        "text": "Abbastanza grande per band complete, sezioni d'archi e piccole orchestre."
+      }
+    ],
+    "engineerKicker": "in regia",
+    "engineerName": "Alessandro Cosentino",
+    "engineerRole": "Studio manager e sound engineer",
+    "engineerBio": "Violinista e polistrumentista, diplomato con 110 e lode al Conservatorio G.B. Martini di Bologna. Per dieci anni nell'Orchestra Luigi Cherubini diretta da Riccardo Muti. In studio e dal vivo ha lavorato con artisti pop e rock italiani. È specializzato nella registrazione dal vivo.",
+    "faqKicker": "domande frequenti",
+    "faqTitle": "Domande frequenti.",
+    "faq": [
+      {
+        "title": "Lo studio è aperto a tutti?",
+        "text": "Sì. Lo studio lavora con artisti, band, produzioni video, aziende e istituzioni. Non serve essere studenti dell'Academy."
+      },
+      {
+        "title": "Come si prenota una sessione?",
+        "text": "Ci racconti il progetto con il form o al telefono. Ti ricontattiamo dal lunedì al venerdì per una consulenza e fissiamo la sessione."
+      },
+      {
+        "title": "Quanto costa una sessione?",
+        "text": "Dipende da servizio, durata e numero di musicisti: ti facciamo un preventivo dopo la consulenza."
+      },
+      {
+        "title": "Posso venire con il mio fonico?",
+        "text": "Sì, con l'affitto dello studio completo."
+      },
+      {
+        "title": "Posso registrare a distanza?",
+        "text": "Sì, con il remote recording: ci mandi il progetto, registriamo con musicisti professionisti e ti restituiamo le tracce pronte per il mix. Puoi seguire la sessione in audio e video."
+      }
+    ]
   },
   "coworking": {
     "kicker": "coworking · zona roveri, bologna",
-    "title": "Uno spazio all'altezza del tuo lavoro.",
-    "lede": "Coworking, sale ed eventi. Zona Roveri, Bologna.",
-    "spacesKicker": "gli spazi",
-    "spacesTitle": "Una postazione. Una scrivania fissa. Un ufficio.",
+    "title": "Coworking a Bologna.\nUno spazio all'altezza del tuo lavoro.",
+    "lede": "Un open space luminoso dentro un hub di 2.000 m² dedicato alle industrie creative. Alla scrivania accanto può esserci un grafico, una startup o un'agenzia: in pausa vi trovate tutti nella banano room.",
+    "spacesKicker": "le formule",
+    "spacesTitle": "Le formule a confronto.",
     "ctaKicker": "prenota",
-    "ctaTitle": "Scegli lo spazio. Blocca la data.",
-    "ctaText": "Il day pass è il modo più semplice per conoscere lo spazio: si prenota online e si paga solo quando serve.",
+    "ctaTitle": "Scegli la formula.",
+    "ctaText": "Da 9,50€ al giorno. Ti confermiamo entro un giorno lavorativo.",
     "ctaDayPass": "prenota un day pass",
     "bananoKicker": "banano room",
     "bananoTitle": "La banano room.",
@@ -521,7 +623,43 @@
     "corridoiText": "Aule, uffici, sale prova, library: i corridoi tengono insieme tutto quello che succede in hub — e ti dicono sempre dove sei.",
     "corridoiPrev": "foto precedenti",
     "corridoiNext": "altre foto",
-    "corridoiHint": "scorri per vedere tutte le foto"
+    "corridoiHint": "scorri per vedere tutte le foto",
+    "spacesLede": "Vieni un giorno con il day pass, prendi una postazione per il mese o un ufficio per il tuo team.",
+    "amenitiesKicker": "cosa trovi",
+    "amenitiesTitle": "Cosa trovi.",
+    "amenities": [
+      "Wifi in fibra FTTH",
+      "Monitor e seduta ergonomica",
+      "Cabine call e phone booth",
+      "Stampante e scanner",
+      "Cassettiera con chiave (full desk)",
+      "Email @creativehub e posta in reception",
+      "Google Workspace e cloud illimitato",
+      "Caffè e cucina",
+      "Aria condizionata",
+      "Giardino e aree relax",
+      "Library e bookshop",
+      "Reception per i tuoi clienti"
+    ],
+    "faqKicker": "prima di prenotare",
+    "faqTitle": "Prima di prenotare.",
+    "faq": [
+      {
+        "title": "Posso venire a vederlo prima?",
+        "text": "Sì, prendi un day pass: è il modo più semplice per provarlo."
+      },
+      {
+        "title": "Posso ricevere clienti e posta?",
+        "text": "Sì, la reception accoglie i tuoi ospiti e gestisce la posta."
+      }
+    ],
+    "whereKicker": "dove siamo",
+    "whereTitle": "Dove siamo.",
+    "where": [
+      "Via del Tappezziere 4, Bologna — zona Roveri",
+      "15 minuti dalla stazione Centrale, linea TPER Bologna–Portomaggiore",
+      "051 631 3706, interno 1 — lun–ven 11–13 e 14–18"
+    ]
   },
   "prenota": {
     "kicker": "prenota",
@@ -708,8 +846,8 @@
   },
   "uni": {
     "kicker": "academy · corsi universitari · a.a. 2026/27",
-    "title": "Corsi universitari a Bologna.",
-    "lede": "Musica, suono, cinema e music business. Bachelor of Arts, Bachelor of Science e Master of Music: sei corsi di primo ciclo, tre Master, venti posti per corso.",
+    "title": "Corsi universitari di musica, produzione e tecnico del suono a Bologna.",
+    "lede": "Bachelor of Arts, Bachelor of Science, Master of Music. Titoli riconosciuti a livello internazionale. Sei corsi, tre Master, venti posti all'anno.",
     "ctaOpenDay": "prenota l'open day",
     "ctaInfo": "chiedi informazioni",
     "subnav": {
@@ -748,7 +886,7 @@
         "area": "suono",
         "areaLabel": "produzione musicale",
         "tag": "bachelor",
-        "desc": "Beatmaking, sound design, DJing e mix su hip-hop, trap ed elettronica. Dal controller alla release.",
+        "desc": "Corso universitario di produzione musicale. Beatmaking, sound design e mix su hip-hop, trap ed elettronica.",
         "meta": [
           "3 anni",
           "ottobre 2026",
@@ -760,7 +898,7 @@
         "area": "suono",
         "areaLabel": "tecnico del suono",
         "tag": "bachelor",
-        "desc": "Registrare, mixare e masterizzare a livello professionale: in studio, dal vivo, per i media interattivi.",
+        "desc": "Corso universitario per tecnico del suono. Registrazione, mix e produzione a livello professionale.",
         "meta": [
           "3 anni",
           "ottobre 2026",
@@ -772,7 +910,7 @@
         "area": "musica",
         "areaLabel": "performance e scrittura",
         "tag": "bachelor",
-        "desc": "Dal palco alla stesura del brano, con produzioni reali e docenti che lavorano nell'industria.",
+        "desc": "Performance e scrittura di canzoni: dal palco alla stesura del brano, con produzioni reali e docenti che lavorano nell'industria.",
         "meta": [
           "3 anni",
           "ottobre 2026",
@@ -784,7 +922,7 @@
         "area": "musica",
         "areaLabel": "canto e strumento",
         "tag": "bachelor",
-        "desc": "Un'ora individuale a settimana sul tuo strumento, musica d'insieme, produzione e live. Scegli da dove partire:",
+        "desc": "Corso universitario di canto e strumento, con un'ora di lezione individuale a settimana e musica d'insieme. Scegli da dove partire:",
         "instruments": [
           "canto",
           "chitarra",
@@ -805,7 +943,7 @@
         "area": "visual",
         "areaLabel": "cinema",
         "tag": "bachelor",
-        "desc": "Regia, ripresa, montaggio e post-produzione, su set reali: il film dalla sceneggiatura alla copia finale.",
+        "desc": "Corso universitario di produzione cinematografica e videomaking. Regia, ripresa, montaggio e post-produzione.",
         "meta": [
           "3 anni",
           "ottobre 2026",
@@ -817,7 +955,7 @@
         "area": "business",
         "areaLabel": "industria musicale",
         "tag": "bachelor",
-        "desc": "Il mestiere dietro la musica: management, editoria, distribuzione, live e diritti, su progetti reali.",
+        "desc": "Il mestiere dietro la musica: management, editoria, distribuzione, live e diritti.",
         "meta": [
           "3 anni",
           "ottobre 2026",
@@ -829,7 +967,7 @@
         "area": "suono",
         "areaLabel": "produzione",
         "tag": "master of music",
-        "desc": "Produzione e sound design avanzati: dal progetto artistico al master, con la strumentazione dello studio SSL.",
+        "desc": "Produzione e sound design avanzati: dal progetto artistico al master, con la strumentazione dello studio.",
         "meta": [
           "2 anni",
           "ottobre 2026",
@@ -958,7 +1096,7 @@
     "teachers": {
       "n": "05 / i docenti",
       "title": "Chi insegna, lavora.",
-      "lead": "I docenti dei corsi universitari sono professionisti attivi: in tour, in studio, sul set. Quello che porti in aula lo stanno facendo anche fuori da qui. Tra loro Angela Madonia, vocal coach nota al pubblico di Amici, e Stefania Martin, che ha lavorato al fianco di Renato Zero e Mina.",
+      "lead": "I docenti dei corsi universitari sono professionisti attivi nell'industria musicale. Quello che porti in aula lo stanno facendo anche fuori da qui.",
       "allLink": "tutti i docenti dell'academy"
     },
     "stories": {
@@ -989,23 +1127,23 @@
       "items": [
         {
           "q": "Che differenza c'è tra un Bachelor e una laurea italiana?",
-          "a": "Il Bachelor è il titolo universitario di primo ciclo del sistema britannico ed europeo: stesso livello, rilasciato da un'università straniera. Cambia l'impostazione: più ore di pratica, classi piccole, docenti che lavorano nel settore."
+          "a": "Il Bachelor of Arts o Bachelor of Science è un titolo accademico estero di primo ciclo, livello EQF 6. Fuori dall'Italia è immediatamente spendibile. Per l'Italia ti affianchiamo nell'ottenimento della Dichiarazione di Valore."
         },
         {
           "q": "Come funziona l'ammissione?",
-          "a": "Ci conosciamo a un open day o in un colloquio, poi mandi la candidatura con un tuo lavoro e fai un'audizione o un colloquio sul tuo ambito. Non cerchiamo chi sa già tutto: cerchiamo chi ha una direzione."
+          "a": "Un colloquio motivazionale, non un esame. Serve il diploma di scuola superiore, o un titolo estero equivalente. Venti posti all'anno per corso."
         },
         {
-          "q": "Posso frequentare mentre lavoro?",
-          "a": "Le lezioni sono organizzate in fasce orarie concordate con il tutor, e parte del percorso è seguibile online. Verifica con noi la compatibilità con i tuoi orari prima di iscriverti."
+          "q": "Posso studiare part-time?",
+          "a": "Sì. La modalità part-time prevede 60 crediti l'anno invece di 120: stesso programma, distribuito su più tempo. Puoi passare da una modalità all'altra durante il percorso."
         },
         {
-          "q": "Devo avere già esperienza o attrezzatura?",
-          "a": "Serve una base nel tuo ambito, non un curriculum. In sede hai a disposizione studi di registrazione, production box e la regia SSL. Per lo studio a casa ti diciamo noi cosa serve, corso per corso."
+          "q": "Devo saper già suonare, cantare o girare video?",
+          "a": "No. Ogni corso parte dalle basi del proprio ambito. Quello che serve è motivazione: la tecnica si costruisce durante i tre anni."
         },
         {
-          "q": "Quanto costa e si può rateizzare?",
-          "a": "La quota dipende dal corso. Si paga a rate a tasso zero, con sconti per l'iscrizione anticipata e borse di studio di merito. Chiedici il dettaglio del corso che ti interessa."
+          "q": "Quanto costa, e si può rateizzare?",
+          "a": "Ogni corso ha un piano rate a tasso zero, senza interessi. I dettagli variano per corso e modalità (full-time o part-time): li trovi nella pagina di ciascun corso."
         }
       ]
     },

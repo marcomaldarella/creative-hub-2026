@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation'
 import { Button, Card, Reveal, Rule, SectionHeader } from '@/components/ui'
 import { SiteChrome } from '@/components/sections/SiteChrome'
 import { PhotoDuo } from '@/components/sections/Photo'
+import { PointsAccordion } from '@/components/sections/PointsAccordion'
 import { PhotoStrip } from '@/components/sections/PhotoStrip'
 import { isLocale, localeHref } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
@@ -87,6 +88,7 @@ export default async function CoworkingPage({
             <SectionHeader
               kicker={t.coworking.spacesKicker}
               title={t.coworking.spacesTitle}
+              lede={t.coworking.spacesLede}
             />
             <div className={styles.spaces}>
               {spaces.map((space, i) => (
@@ -110,6 +112,23 @@ export default async function CoworkingPage({
                 </Reveal>
               ))}
             </div>
+          </div>
+        </section>
+
+        {/* ————— cosa trovi: la dotazione, in griglia mono ————— */}
+        <section className={styles.sez}>
+          <div className="wrap">
+            <SectionHeader
+              kicker={t.coworking.amenitiesKicker}
+              title={t.coworking.amenitiesTitle}
+            />
+            <ul className={`mono ${styles.amenities}`}>
+              {t.coworking.amenities.map((a, i) => (
+                <Reveal as="li" key={a} delay={(i % 4) * 50} className={styles.amenity}>
+                  {a}
+                </Reveal>
+              ))}
+            </ul>
           </div>
         </section>
 
@@ -172,6 +191,24 @@ export default async function CoworkingPage({
                 },
               ]}
             />
+          </div>
+        </section>
+
+        {/* ————— prima di prenotare + dove siamo ————— */}
+        <section className={styles.sez}>
+          <div className="wrap">
+            <SectionHeader kicker={t.coworking.faqKicker} title={t.coworking.faqTitle} />
+            <PointsAccordion items={t.coworking.faq} />
+            <div className={styles.where}>
+              <span className={`mono ${styles.whereKicker}`}>
+                {t.coworking.whereKicker}
+              </span>
+              <ul className={styles.whereList}>
+                {t.coworking.where.map((w) => (
+                  <li key={w}>{w}</li>
+                ))}
+              </ul>
+            </div>
           </div>
         </section>
 

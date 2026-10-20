@@ -196,3 +196,73 @@
 .editorialAll {
   margin-top: clamp(24px, 3vw, 40px);
 }
+
+/* ————— manifesto + numeri (fascia nera, dal mockup v2) ————— */
+
+.manifestoText {
+  font-size: clamp(26px, 3.6vw, 52px);
+  line-height: 1.08;
+  max-width: 26ch;
+  margin-bottom: clamp(40px, 6vw, 80px);
+}
+
+.numbersKicker {
+  display: block;
+  color: var(--fg-2);
+  margin-bottom: 18px;
+}
+
+.numbers {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-top: 1px solid var(--line);
+}
+
+.number {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: clamp(18px, 2.4vw, 30px) 18px clamp(20px, 2.6vw, 34px) 0;
+  border-right: 1px solid var(--line);
+}
+
+.number:last-child {
+  border-right: 0;
+}
+
+.numberN {
+  font-size: clamp(30px, 4vw, 56px);
+  line-height: 1;
+}
+
+.numberLabel {
+  color: var(--fg-2);
+  font-size: 14px;
+  max-width: 22ch;
+}
+
+@media (max-width: 760px) {
+  .numbers {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .number:nth-child(2n) {
+    border-right: 0;
+  }
+}
+
+/* ————— in regia ————— */
+
+.engineerBody {
+  max-width: 62ch;
+}
+
+.engineerRole {
+  color: var(--fg-2);
+  margin-bottom: 14px;
+}
+
+.engineerBio {
+  font-size: var(--fs-lede);
+  line-height: 1.5;
+}

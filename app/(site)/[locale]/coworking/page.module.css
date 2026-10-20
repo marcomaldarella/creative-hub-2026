@@ -143,3 +143,58 @@
 .ctaText {
   max-width: 44ch;
 }
+
+/* ————— cosa trovi: dotazione in griglia mono ————— */
+
+.amenities {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+  border-top: 1px solid var(--line);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.amenity {
+  padding: 16px 18px 16px 0;
+  border-bottom: 1px solid var(--line);
+  color: var(--fg);
+}
+
+@media (max-width: 960px) {
+  .amenities {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .amenities {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ————— dove siamo, sotto le domande ————— */
+
+.where {
+  margin-top: clamp(32px, 4vw, 56px);
+}
+
+.whereKicker {
+  display: block;
+  color: var(--fg-2);
+  margin-bottom: 12px;
+}
+
+.whereList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-width: 60ch;
+}
+
+.whereList li {
+  padding: 10px 0;
+  border-top: 1px solid var(--line);
+  font-size: var(--fs-small);
+}
