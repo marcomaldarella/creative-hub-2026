@@ -54,44 +54,122 @@ const SECTION_MEDIA: Record<
   },
 }
 
-/* dal portable text alle coppie titolo+testo: se il corpo è fatto solo
-   di h3/h4 seguiti dal loro paragrafo (più un eventuale cappello), la
-   sezione può diventare FAQ ad accordion (tutte domande) o tabella
-   numerata come nelle pagine corso (1. 2. 3.). Liste e forme miste
-   restano al renderer libero. */
-type SectionPairs = {
-  lead: string[]
-  pairs: { title: string; text: string }[]
-}
+/* dal portable text alla struttura disegnata: il corpo scritto in
+   Sanity viene letto per forma e ricostruito nella grammatica del
+   sito — paragrafi, righe etichetta—testo (• col label in grassetto),
+   etichette di gruppo (h4), card in griglia hairline (h3 + testo),
+   FAQ ad accordion (tutte domande), tabella numerata (1. 2. 3.).
+   Le sezioni con immagini inline restano al renderer libero. */
+type Def = { label?: string; text: string }
+type Cell = { title: string; text: string; defs: Def[] }
+type ShapeItem =
+  | { kind: 'p'; text: string }
+  | { kind: 'label'; text: string }
+  | { kind: 'defs'; defs: Def[] }
+  | { kind: 'cells'; cells: Cell[] }
 
-function pairsOf(blocks?: unknown[] | null): SectionPairs | null {
+function shapeBody(blocks?: unknown[] | null): ShapeItem[] | null {
   if (!blocks || blocks.length === 0) return null
-  const lead: string[] = []
-  const pairs: { title: string; text: string }[] = []
+  const items: ShapeItem[] = []
+  let cell: Cell | null = null
+  let pendingLabel: string | null = null
+
+  const lastDefs = () => {
+    const last = items[items.length - 1]
+    if (last?.kind === 'defs') return last.defs
+    const defs: Def[] = []
+    items.push({ kind: 'defs', defs })
+    return defs
+  }
+
   for (const raw of blocks) {
     const b = raw as {
       _type?: string
       style?: string
       listItem?: string
-      children?: { text?: string }[]
+      children?: { text?: string; marks?: string[] }[]
     }
-    if (b._type !== 'block' || b.listItem) return null
-    const text = (b.children ?? [])
-      .map((c) => c.text ?? '')
-      .join('')
-      .trim()
+    if (b._type !== 'block') return null
+    const spans = b.children ?? []
+    const text = spans.map((c) => c.text ?? '').join('').trim()
     if (!text) continue
-    if (b.style === 'h3' || b.style === 'h4') {
-      pairs.push({ title: text, text: '' })
-    } else if (pairs.length === 0) {
-      lead.push(text)
+
+    if (b.listItem) {
+      /* riga elenco: col primo span in grassetto diventa etichetta—testo */
+      const first = spans[0]
+      const strongLead =
+        spans.length > 1 && (first?.marks ?? []).includes('strong')
+      const def: Def = strongLead
+        ? {
+            label: (first?.text ?? '').trim(),
+            text: spans.slice(1).map((c) => c.text ?? '').join('')
+              .replace(/^\s*—\s*/, '').trim(),
+          }
+        : { text }
+      if (cell) {
+        cell.defs.push(def)
+      } else {
+        if (pendingLabel) {
+          items.push({ kind: 'label', text: pendingLabel })
+          pendingLabel = null
+          items.push({ kind: 'defs', defs: [def] })
+        } else {
+          lastDefs().push(def)
+        }
+      }
+      continue
+    }
+
+    if (b.style === 'h4') {
+      cell = null
+      if (pendingLabel) items.push({ kind: 'label', text: pendingLabel })
+      pendingLabel = text
+      continue
+    }
+
+    if (b.style === 'h3') {
+      if (pendingLabel) {
+        items.push({ kind: 'label', text: pendingLabel })
+        pendingLabel = null
+      }
+      cell = { title: text, text: '', defs: [] }
+      const last = items[items.length - 1]
+      if (last?.kind === 'cells') last.cells.push(cell)
+      else items.push({ kind: 'cells', cells: [cell] })
+      continue
+    }
+
+    /* paragrafo */
+    if (pendingLabel) {
+      /* h4 + paragrafo = riga etichetta—testo (es. programma, orari) */
+      lastDefs().push({ label: pendingLabel, text })
+      pendingLabel = null
+    } else if (cell && cell.defs.length === 0) {
+      cell.text = cell.text ? `${cell.text}\n${text}` : text
     } else {
-      const last = pairs[pairs.length - 1]
-      last.text = last.text ? `${last.text}\n${text}` : text
+      cell = null
+      items.push({ kind: 'p', text })
     }
   }
-  if (pairs.length < 2 || pairs.some((p) => !p.text)) return null
-  return { lead, pairs }
+  if (pendingLabel) items.push({ kind: 'label', text: pendingLabel })
+
+  /* solo paragrafi = testo libero: non serve dare forma */
+  if (items.every((it) => it.kind === 'p')) return null
+  return items
+}
+
+/* la sezione è fatta SOLO di card semplici (niente etichette né righe
+   elenco): se tutte domande o tutte numerate prende la forma speciale */
+function plainPairs(items: ShapeItem[]) {
+  const lead: string[] = []
+  const pairs: { title: string; text: string }[] = []
+  for (const it of items) {
+    if (it.kind === 'p' && pairs.length === 0) lead.push(it.text)
+    else if (it.kind === 'cells' && it.cells.every((c) => c.text && c.defs.length === 0))
+      pairs.push(...it.cells.map((c) => ({ title: c.title, text: c.text })))
+    else return null
+  }
+  return pairs.length >= 2 ? { lead, pairs } : null
 }
 
 /* le sezioni "flood" (SiteChrome le dipinge per intero nel colore di
@@ -261,11 +339,12 @@ export async function TopicScreen({
             pagine corso, il resto resta portable text ————— */}
         {sections.map((section, i) => {
           const body = l(section.body, locale)
-          const shaped = pairsOf(body)
+          const shaped = shapeBody(body)
+          const pp = shaped ? plainPairs(shaped) : null
           const isFaq =
-            (shaped?.pairs.every((p) => p.title.trim().endsWith('?')) ?? false)
+            (pp?.pairs.every((p) => p.title.trim().endsWith('?')) ?? false)
           const isSteps =
-            (shaped?.pairs.every((p) => /^\d+[.)]\s/.test(p.title)) ?? false)
+            (pp?.pairs.every((p) => /^\d+[.)]\s/.test(p.title)) ?? false)
           return (
             <Fragment key={section._key}>
               <Rule
@@ -278,23 +357,18 @@ export async function TopicScreen({
                     kicker={l(section.kicker, locale)?.toLowerCase()}
                     title={l(section.title, locale)}
                   />
-                  {shaped && (isFaq || isSteps) ? (
+                  {pp && (isFaq || isSteps) ? (
                     <div>
-                      {shaped.lead.map((p) => (
+                      {pp.lead.map((p) => (
                         <p key={p} className={styles.sezLead}>
                           {p}
                         </p>
                       ))}
                       {isFaq ? (
-                        <PointsAccordion
-                          items={shaped.pairs.map((p) => ({
-                            title: p.title,
-                            text: p.text,
-                          }))}
-                        />
+                        <PointsAccordion items={pp.pairs} />
                       ) : (
                         <div className={styles.steps}>
-                          {shaped.pairs.map((p, j) => (
+                          {pp.pairs.map((p, j) => (
                             <div key={p.title} className={styles.step}>
                               <span className={`mono ${styles.stepNum}`}>
                                 {String(j + 1).padStart(2, '0')}
@@ -307,6 +381,81 @@ export async function TopicScreen({
                           ))}
                         </div>
                       )}
+                    </div>
+                  ) : shaped ? (
+                    <div>
+                      {shaped.map((it, j) => {
+                        if (it.kind === 'p')
+                          return (
+                            <p
+                              key={j}
+                              className={j === 0 ? styles.sezLead : styles.sezP}
+                            >
+                              {it.text}
+                            </p>
+                          )
+                        if (it.kind === 'label')
+                          return (
+                            <span key={j} className={`mono ${styles.groupLabel}`}>
+                              {it.text.toLowerCase()}
+                            </span>
+                          )
+                        if (it.kind === 'defs')
+                          return (
+                            <div key={j} className={styles.defs}>
+                              {it.defs.map((d, k) => (
+                                <div key={k} className={styles.def}>
+                                  {d.label && (
+                                    <span className={styles.defLabel}>
+                                      {d.label}
+                                    </span>
+                                  )}
+                                  <span
+                                    className={
+                                      d.label ? styles.defText : styles.defWide
+                                    }
+                                  >
+                                    {d.text}
+                                  </span>
+                                </div>
+                              ))}
+                            </div>
+                          )
+                        return (
+                          <div key={j} className={styles.cells}>
+                            {it.cells.map((c) => (
+                              <div key={c.title} className={styles.cell}>
+                                <h3 className={styles.cellTitle}>{c.title}</h3>
+                                {c.text && (
+                                  <p className={styles.cellText}>{c.text}</p>
+                                )}
+                                {c.defs.length > 0 && (
+                                  <div className={styles.cellDefs}>
+                                    {c.defs.map((d, k) => (
+                                      <div key={k} className={styles.def}>
+                                        {d.label && (
+                                          <span className={styles.defLabel}>
+                                            {d.label}
+                                          </span>
+                                        )}
+                                        <span
+                                          className={
+                                            d.label
+                                              ? styles.defText
+                                              : styles.defWide
+                                          }
+                                        >
+                                          {d.text}
+                                        </span>
+                                      </div>
+                                    ))}
+                                  </div>
+                                )}
+                              </div>
+                            ))}
+                          </div>
+                        )
+                      })}
                     </div>
                   ) : (
                     <PortableBlocks value={body} />
