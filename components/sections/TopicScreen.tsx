@@ -54,6 +54,46 @@ const SECTION_MEDIA: Record<
   },
 }
 
+/* dal portable text alle coppie titolo+testo: se il corpo è fatto solo
+   di h3/h4 seguiti dal loro paragrafo (più un eventuale cappello), la
+   sezione può diventare FAQ ad accordion (tutte domande) o tabella
+   numerata come nelle pagine corso (1. 2. 3.). Liste e forme miste
+   restano al renderer libero. */
+type SectionPairs = {
+  lead: string[]
+  pairs: { title: string; text: string }[]
+}
+
+function pairsOf(blocks?: unknown[] | null): SectionPairs | null {
+  if (!blocks || blocks.length === 0) return null
+  const lead: string[] = []
+  const pairs: { title: string; text: string }[] = []
+  for (const raw of blocks) {
+    const b = raw as {
+      _type?: string
+      style?: string
+      listItem?: string
+      children?: { text?: string }[]
+    }
+    if (b._type !== 'block' || b.listItem) return null
+    const text = (b.children ?? [])
+      .map((c) => c.text ?? '')
+      .join('')
+      .trim()
+    if (!text) continue
+    if (b.style === 'h3' || b.style === 'h4') {
+      pairs.push({ title: text, text: '' })
+    } else if (pairs.length === 0) {
+      lead.push(text)
+    } else {
+      const last = pairs[pairs.length - 1]
+      last.text = last.text ? `${last.text}\n${text}` : text
+    }
+  }
+  if (pairs.length < 2 || pairs.some((p) => !p.text)) return null
+  return { lead, pairs }
+}
+
 /* le sezioni "flood" (SiteChrome le dipinge per intero nel colore di
    sezione): lì --accent È il colore pieno e dentro la fascia nera resta
    leggibile — diventa anche inchiostro. Nelle sezioni neutre l'accento
@@ -216,24 +256,66 @@ export async function TopicScreen({
           </section>
         )}
 
-        {/* ————— corpo lungo, se il cliente lo scrive in Sanity ————— */}
-        {sections.map((section, i) => (
-          <Fragment key={section._key}>
-            <Rule
-              left={String(i + 1).padStart(2, '0')}
-              right={l(section.kicker, locale)?.toLowerCase()}
-            />
-            <section className={styles.sez}>
-              <div className={`wrap ${styles.editorial}`}>
-                <SectionHeader
-                  kicker={l(section.kicker, locale)?.toLowerCase()}
-                  title={l(section.title, locale)}
-                />
-                <PortableBlocks value={l(section.body, locale)} />
-              </div>
-            </section>
-          </Fragment>
-        ))}
+        {/* ————— corpo lungo, se il cliente lo scrive in Sanity: le FAQ
+            diventano accordion, i processi numerati tabella come nelle
+            pagine corso, il resto resta portable text ————— */}
+        {sections.map((section, i) => {
+          const body = l(section.body, locale)
+          const shaped = pairsOf(body)
+          const isFaq =
+            (shaped?.pairs.every((p) => p.title.trim().endsWith('?')) ?? false)
+          const isSteps =
+            (shaped?.pairs.every((p) => /^\d+[.)]\s/.test(p.title)) ?? false)
+          return (
+            <Fragment key={section._key}>
+              <Rule
+                left={String(i + 1).padStart(2, '0')}
+                right={l(section.kicker, locale)?.toLowerCase()}
+              />
+              <section className={styles.sez}>
+                <div className={`wrap ${styles.editorial}`}>
+                  <SectionHeader
+                    kicker={l(section.kicker, locale)?.toLowerCase()}
+                    title={l(section.title, locale)}
+                  />
+                  {shaped && (isFaq || isSteps) ? (
+                    <div>
+                      {shaped.lead.map((p) => (
+                        <p key={p} className={styles.sezLead}>
+                          {p}
+                        </p>
+                      ))}
+                      {isFaq ? (
+                        <PointsAccordion
+                          items={shaped.pairs.map((p) => ({
+                            title: p.title,
+                            text: p.text,
+                          }))}
+                        />
+                      ) : (
+                        <div className={styles.steps}>
+                          {shaped.pairs.map((p, j) => (
+                            <div key={p.title} className={styles.step}>
+                              <span className={`mono ${styles.stepNum}`}>
+                                {String(j + 1).padStart(2, '0')}
+                              </span>
+                              <h3 className={styles.stepTitle}>
+                                {p.title.replace(/^\d+[.)]\s*/, '')}
+                              </h3>
+                              <p className={styles.stepText}>{p.text}</p>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  ) : (
+                    <PortableBlocks value={body} />
+                  )}
+                </div>
+              </section>
+            </Fragment>
+          )
+        })}
 
         {/* ————— cta ————— */}
         <section className={`wrap ${styles.cta}`}>
@@ -243,7 +325,7 @@ export async function TopicScreen({
             </Button>
           </Reveal>
           <Reveal delay={80}>
-            <ArrowLink href={localeHref(locale, topic.base)}>
+            <ArrowLink href={localeHref(locale, topic.base)} dir="e">
               {t.nav.explore}
             </ArrowLink>
           </Reveal>

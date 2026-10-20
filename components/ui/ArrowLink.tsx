@@ -10,6 +10,8 @@ export type ArrowLinkProps = {
   reverse?: boolean;
   /** target _blank + rel noopener */
   external?: boolean;
+  /** direzione della freccia: ↙ di default, 'e' per i link in avanti */
+  dir?: 'sw' | 'e';
   className?: string;
 };
 
@@ -21,6 +23,7 @@ export function ArrowLink({
   children,
   reverse = false,
   external = false,
+  dir = 'sw',
   className,
 }: ArrowLinkProps) {
   const cls = [styles.link, reverse ? styles.reverse : '', className]
@@ -31,7 +34,7 @@ export function ArrowLink({
     <>
       <span>{children}</span>
       <span className={styles.arrow} aria-hidden="true">
-        <Arrow dir="sw" size={15} />
+        <Arrow dir={dir} size={15} />
       </span>
     </>
   );

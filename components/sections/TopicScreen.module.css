@@ -206,3 +206,59 @@
     padding: 44px 0;
   }
 }
+
+/* ————— sezioni Sanity in forma: cappello, tabella dei passi ————— */
+
+.sezLead {
+  font-size: var(--fs-lede);
+  max-width: 54ch;
+  margin-bottom: clamp(20px, 2.5vw, 32px);
+}
+
+.sezLead + .sezLead {
+  margin-top: calc(clamp(20px, 2.5vw, 32px) * -0.5);
+}
+
+/* tabella dei passi: numero mono, titolo, testo — le righe hairline
+   delle pagine corso */
+.steps {
+  border-top: 1px solid var(--hairline, var(--line));
+}
+
+.step {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 0.8fr) minmax(0, 1.6fr);
+  gap: 12px clamp(14px, 2vw, 28px);
+  align-items: baseline;
+  padding: clamp(14px, 1.8vw, 22px) 0;
+  border-bottom: 1px solid var(--hairline, var(--line));
+}
+
+.stepNum {
+  font-size: 12px;
+  color: var(--fg-2);
+}
+
+.stepTitle {
+  font-size: clamp(17px, 1.6vw, 21px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.stepText {
+  color: var(--fg-2);
+  font-size: 15px;
+  line-height: 1.45;
+  white-space: pre-line;
+}
+
+@media (max-width: 700px) {
+  .step {
+    grid-template-columns: 36px minmax(0, 1fr);
+  }
+
+  .stepText {
+    grid-column: 2;
+  }
+}
