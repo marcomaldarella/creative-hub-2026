@@ -1178,5 +1178,28 @@
       "alt": "An academy classroom during a lesson",
       "caption": "Bologna, since 1999."
     }
+  },
+  "lesson": {
+    "kicker": "academy · custom lessons",
+    "titlePrefix": "Lessons:",
+    "titleSuffix": "in Bologna.",
+    "back": "back to academy",
+    "ctaBook": "book your free first lesson",
+    "ctaInfo": "ask us anything",
+    "metodoKicker": "the method",
+    "metodoTitle": "How you learn here.",
+    "teachersKicker": "the teachers",
+    "teachersTitle": "Those who teach, play.",
+    "skillsKicker": "what you learn",
+    "modiKicker": "three ways to study",
+    "modiTitle": "Choose how to study.",
+    "comeKicker": "how it works",
+    "comeTitle": "From request to first lesson.",
+    "faqKicker": "faq",
+    "faqTitle": "The most common questions.",
+    "othersKicker": "more custom lessons",
+    "othersTitle": "Not just this instrument.",
+    "ctaTitle": "The first lesson is free.",
+    "ctaText": "A full lesson, not a consultation: you try, meet the teacher and then decide. We get back to you within 24 hours on working days."
   }
 }

@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { CourseTemplateShell } from '@/components/mockup/CourseTemplateShell'
 import { buildCourseHtml, css } from '@/components/mockup/templates/v3'
+import { LessonScreen } from '@/components/sections/LessonScreen'
 import { SiteChrome, shopHref } from '@/components/sections/SiteChrome'
 import { TopicScreen } from '@/components/sections/TopicScreen'
 import { UniScreen } from '@/components/sections/UniScreen'
@@ -10,7 +11,7 @@ import { getDictionary } from '@/lib/i18n/dictionaries'
 import { pageAlternates } from '@/lib/seo'
 import { urlFor } from '@/lib/sanity/image'
 import { l } from '@/lib/sanity/l'
-import { getCourseBySlug, getSiteSettings } from '@/lib/sanity/queries'
+import { getAllCourses, getCourseBySlug, getSiteSettings } from '@/lib/sanity/queries'
 import type { CourseEntry, SanityImage } from '@/lib/sanity/types'
 import { findTopic } from '@/lib/topics'
 
@@ -107,6 +108,22 @@ export default async function CoursePage({
     getSiteSettings(),
   ])
   if (!course) notFound()
+
+  /* i corsi custom hanno la landing delle lezioni su misura (dai
+     mockup v2), non la scheda universitaria */
+  if (course.types?.includes('custom')) {
+    const siblings = (await getAllCourses()).filter(
+      (c) => c.types?.includes('custom') && c._id !== course._id
+    )
+    return (
+      <LessonScreen
+        course={course}
+        siblings={siblings}
+        settings={settings}
+        locale={locale}
+      />
+    )
+  }
 
   const gallery = course.gallery ?? []
   const title = l(course.title, locale) ?? slug

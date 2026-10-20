@@ -1178,5 +1178,28 @@
       "alt": "Un'aula dell'academy durante una lezione",
       "caption": "Bologna, dal 1999."
     }
+  },
+  "lesson": {
+    "kicker": "academy · lezioni su misura",
+    "titlePrefix": "Lezioni di",
+    "titleSuffix": "a Bologna.",
+    "back": "torna a academy",
+    "ctaBook": "prenota la prima lezione gratuita",
+    "ctaInfo": "chiedi informazioni",
+    "metodoKicker": "il metodo",
+    "metodoTitle": "Come si impara qui.",
+    "teachersKicker": "gli insegnanti",
+    "teachersTitle": "Chi insegna, suona.",
+    "skillsKicker": "cosa impari",
+    "modiKicker": "tre modi di studiare",
+    "modiTitle": "Scegli come studiare.",
+    "comeKicker": "come funziona",
+    "comeTitle": "Dalla richiesta alla prima lezione.",
+    "faqKicker": "domande frequenti",
+    "faqTitle": "Le domande più comuni.",
+    "othersKicker": "altre lezioni su misura",
+    "othersTitle": "Non solo questo strumento.",
+    "ctaTitle": "La prima lezione è gratuita.",
+    "ctaText": "Una lezione completa, non una consulenza: provi, conosci l'insegnante e poi decidi. Ti ricontattiamo entro 24 ore nei giorni feriali."
   }
 }
