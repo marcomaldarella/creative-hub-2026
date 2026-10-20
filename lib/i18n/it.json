@@ -659,7 +659,69 @@
       "Via del Tappezziere 4, Bologna — zona Roveri",
       "15 minuti dalla stazione Centrale, linea TPER Bologna–Portomaggiore",
       "051 631 3706, interno 1 — lun–ven 11–13 e 14–18"
-    ]
+    ],
+    "galleryCta": "vedi tutte le foto",
+    "facts": [
+      "Zona Roveri, Bologna",
+      "Fibra FTTH",
+      "Freelance, startup e team"
+    ],
+    "hereKicker": "com'è lavorare qui",
+    "hereTitle": "Com'è lavorare qui.",
+    "hereText": [
+      "Un open space luminoso dentro un hub di 2.000 m² dedicato alle industrie creative. Alla scrivania accanto può esserci un grafico, una startup o un'agenzia: in pausa vi trovate tutti nella banano room.",
+      "Vieni un giorno con il day pass, prendi una postazione per il mese o un ufficio per il tuo team."
+    ],
+    "tableHead": [
+      "formula",
+      "prezzo",
+      "postazione",
+      "per chi"
+    ],
+    "tableRows": [
+      [
+        "Day pass",
+        "9,50€ al giorno",
+        "libera",
+        "chi viene ogni tanto"
+      ],
+      [
+        "10 ingressi",
+        "85€",
+        "libera",
+        "chi viene una volta a settimana"
+      ],
+      [
+        "Quick desk",
+        "95€",
+        "libera",
+        "chi viene spesso"
+      ],
+      [
+        "Full desk",
+        "155€",
+        "fissa, con cassettiera",
+        "chi lavora qui ogni giorno"
+      ],
+      [
+        "VIP Quick Pass",
+        "950€ all'anno",
+        "libera",
+        "chi resta tutto l'anno"
+      ],
+      [
+        "Ufficio",
+        "su richiesta",
+        "stanza chiusa",
+        "team e startup"
+      ]
+    ],
+    "salaCta": "Ti serve una sala riunioni? Da 90€",
+    "bookFrom": "da",
+    "bookPrice": "9,50€",
+    "bookUnit": "al giorno",
+    "bookCta": "prenota il tuo spazio",
+    "bookNote": "Ti confermiamo entro un giorno lavorativo."
   },
   "prenota": {
     "kicker": "prenota",
@@ -1201,5 +1263,23 @@
     "othersTitle": "Non solo questo strumento.",
     "ctaTitle": "La prima lezione è gratuita.",
     "ctaText": "Una lezione completa, non una consulenza: provi, conosci l'insegnante e poi decidi. Ti ricontattiamo entro 24 ore nei giorni feriali."
+  },
+  "saleEventiPage": {
+    "kicker": "coworking · sale & eventi",
+    "facts": [
+      "Da 10 persone all'aula magna",
+      "Dirette streaming dall'aula magna",
+      "Catering su richiesta"
+    ],
+    "roomsKicker": "le sale",
+    "roomsTitle": "Scegli la sala.",
+    "pastKicker": "già successo qui",
+    "pastTitle": "Già successo qui.",
+    "faqKicker": "prima di prenotare",
+    "faqTitle": "Prima di prenotare.",
+    "ctaTitle": "Componi il tuo evento.",
+    "ctaText": "Raccontaci che evento è, per quante persone e cosa ti serve: ti mandiamo una proposta con sala, servizi e preventivo entro un giorno lavorativo.",
+    "ctaBook": "chiedi una proposta",
+    "back": "torna a coworking"
   }
 }

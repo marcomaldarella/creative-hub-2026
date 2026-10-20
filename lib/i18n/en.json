@@ -659,7 +659,69 @@
       "Via del Tappezziere 4, Bologna — Roveri district",
       "15 minutes from Bologna Centrale, TPER Bologna–Portomaggiore line",
       "051 631 3706, ext. 1 — Mon–Fri 11–13 and 14–18"
-    ]
+    ],
+    "galleryCta": "see all photos",
+    "facts": [
+      "Roveri district, Bologna",
+      "FTTH fibre",
+      "Freelancers, startups and teams"
+    ],
+    "hereKicker": "what it's like",
+    "hereTitle": "What it's like to work here.",
+    "hereText": [
+      "A bright open space inside a 2,000 m² hub for the creative industries. At the next desk there may be a designer, a startup or an agency: at break time you all meet in the banano room.",
+      "Come for a day with a day pass, take a desk for the month or an office for your team."
+    ],
+    "tableHead": [
+      "plan",
+      "price",
+      "desk",
+      "for whom"
+    ],
+    "tableRows": [
+      [
+        "Day pass",
+        "€9.50 a day",
+        "flexible",
+        "occasional visits"
+      ],
+      [
+        "10 entries",
+        "€85",
+        "flexible",
+        "once a week"
+      ],
+      [
+        "Quick desk",
+        "€95",
+        "flexible",
+        "frequent visits"
+      ],
+      [
+        "Full desk",
+        "€155",
+        "fixed, with drawers",
+        "working here every day"
+      ],
+      [
+        "VIP Quick Pass",
+        "€950 a year",
+        "flexible",
+        "staying all year"
+      ],
+      [
+        "Office",
+        "on request",
+        "private room",
+        "teams and startups"
+      ]
+    ],
+    "salaCta": "Need a meeting room? From €90",
+    "bookFrom": "from",
+    "bookPrice": "€9.50",
+    "bookUnit": "a day",
+    "bookCta": "book your space",
+    "bookNote": "We confirm within one working day."
   },
   "prenota": {
     "kicker": "book",
@@ -1201,5 +1263,23 @@
     "othersTitle": "Not just this instrument.",
     "ctaTitle": "The first lesson is free.",
     "ctaText": "A full lesson, not a consultation: you try, meet the teacher and then decide. We get back to you within 24 hours on working days."
+  },
+  "saleEventiPage": {
+    "kicker": "coworking · rooms & events",
+    "facts": [
+      "From 10 people to the main hall",
+      "Live streaming from the main hall",
+      "Catering on request"
+    ],
+    "roomsKicker": "the rooms",
+    "roomsTitle": "Pick your room.",
+    "pastKicker": "it happened here",
+    "pastTitle": "It happened here.",
+    "faqKicker": "before you book",
+    "faqTitle": "Before you book.",
+    "ctaTitle": "Build your event.",
+    "ctaText": "Tell us what kind of event it is, for how many people and what you need: we send you a proposal with room, services and quote within one working day.",
+    "ctaBook": "request a proposal",
+    "back": "back to coworking"
   }
 }

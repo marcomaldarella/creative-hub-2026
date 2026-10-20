@@ -198,3 +198,283 @@
   border-top: 1px solid var(--line);
   font-size: var(--fs-small);
 }
+
+/* ————————————————————————————————————————————————————————————————
+   pagina di prodotto (mockup v3): mosaico, fatti, colonna + riquadro
+   prenota. Le regole qui sotto rimpiazzano la vecchia testata. */
+
+.mosaic {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  padding-top: clamp(16px, 2vw, 28px);
+  position: relative;
+  height: clamp(360px, 56vh, 640px);
+}
+
+.mosaicMain {
+  grid-row: 1 / -1;
+  position: relative;
+  overflow: hidden;
+}
+
+.mosaicVideo {
+  position: absolute;
+  inset: 0;
+}
+
+.mosaicVideo video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.mosaicSide {
+  position: relative;
+  overflow: hidden;
+}
+
+.mosaicImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.galleryCta {
+  position: absolute;
+  right: calc(var(--pad) + 10px);
+  bottom: 10px;
+  font-size: 12px;
+  color: var(--fg);
+  background: var(--bg);
+  padding: 8px 14px;
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+}
+
+.galleryCta::first-letter {
+  text-transform: uppercase;
+}
+
+@media (max-width: 760px) {
+  .mosaic {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1.4fr 1fr;
+    height: clamp(300px, 52vh, 460px);
+  }
+
+  .mosaicMain {
+    grid-column: 1 / -1;
+    grid-row: 1;
+  }
+}
+
+/* testata sotto il mosaico: solo testi, piena colonna */
+.head {
+  display: block;
+  padding-top: clamp(26px, 3.2vw, 44px);
+  padding-bottom: clamp(26px, 3.2vw, 44px);
+}
+
+.titleLine {
+  display: block;
+}
+
+.facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 26px;
+  margin-top: clamp(16px, 2vw, 24px);
+}
+
+.fact {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--fg-2);
+}
+
+.fact svg {
+  color: var(--fg);
+  flex-shrink: 0;
+}
+
+/* ————— due colonne: contenuto + riquadro prenota ————— */
+
+.lay {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(280px, 1fr);
+  gap: clamp(28px, 4vw, 72px);
+  align-items: start;
+  padding-bottom: clamp(44px, 6vw, 84px);
+}
+
+.colL {
+  min-width: 0;
+}
+
+.block {
+  padding: clamp(22px, 2.8vw, 36px) 0;
+  border-top: 1px solid var(--line);
+}
+
+.block:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.h2 {
+  font-size: clamp(22px, 2.2vw, 30px);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  margin-bottom: clamp(14px, 1.8vw, 22px);
+}
+
+.p {
+  font-size: 15px;
+  line-height: 1.5;
+  max-width: 58ch;
+  margin-bottom: 12px;
+}
+
+/* dotazione: due colonne compatte dentro la colonna sinistra */
+.amenities2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 clamp(16px, 2vw, 28px);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-top: 1px solid var(--line);
+}
+
+.amenities2 li {
+  font-size: 14px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+@media (max-width: 560px) {
+  .amenities2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* formule: tabella vera, hairline, prezzi in mono */
+.tableWrap {
+  overflow-x: auto;
+}
+
+.cmp {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.cmp thead th {
+  text-align: left;
+  font-weight: 400;
+  font-size: 12px;
+  color: var(--fg-2);
+  padding: 0 14px 10px 0;
+  border-bottom: 1px solid var(--fg);
+}
+
+.cmp tbody th {
+  text-align: left;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  padding: 12px 14px 12px 0;
+  border-bottom: 1px solid var(--line);
+  white-space: nowrap;
+}
+
+.cmp tbody td {
+  padding: 12px 14px 12px 0;
+  border-bottom: 1px solid var(--line);
+  color: var(--fg-2);
+}
+
+.price {
+  font-weight: 600;
+  color: var(--fg);
+  white-space: nowrap;
+}
+
+.salaCta {
+  margin-top: clamp(14px, 1.8vw, 20px);
+}
+
+/* dove siamo: foto della sede sotto la lista */
+.whereImg {
+  width: 100%;
+  height: auto;
+  margin-top: clamp(14px, 1.8vw, 20px);
+}
+
+/* ————— riquadro prenota: fisso accanto al contenuto ————— */
+
+.book {
+  position: sticky;
+  top: calc(var(--header-h, 64px) + 16px);
+  border: 1px solid var(--fg);
+  padding: clamp(18px, 2.2vw, 26px);
+  background: var(--bg);
+}
+
+.bookFrom {
+  font-size: 15px;
+  margin-bottom: 14px;
+}
+
+.bookFrom b {
+  font-size: 22px;
+  letter-spacing: -0.02em;
+}
+
+.bookList {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 16px;
+  border-top: 1px solid var(--line);
+}
+
+.bookRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 14px;
+}
+
+.bookPrice {
+  font-size: 12px;
+  color: var(--fg-2);
+  white-space: nowrap;
+}
+
+.bookBtn {
+  width: 100%;
+  justify-content: center;
+}
+
+.bookNote {
+  font-size: 12px;
+  color: var(--fg-2);
+  margin: 10px 0 12px;
+}
+
+@media (max-width: 900px) {
+  .lay {
+    grid-template-columns: 1fr;
+  }
+
+  .book {
+    position: static;
+    order: -1;
+  }
+}
