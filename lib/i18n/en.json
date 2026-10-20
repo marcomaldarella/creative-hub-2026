@@ -639,28 +639,7 @@
     "serviziStudenti": {
       "title": "Everything around your studies.",
       "lede": "What comes beyond the lessons, from scholarships to housing.",
-      "points": [
-        {
-          "title": "Scholarships",
-          "text": "Scholarships covering part or all of the tuition fee, awarded on merit and household income (ISEE). Applications are submitted at enrolment, together with the rest of the paperwork: the student office follows each case individually."
-        },
-        {
-          "title": "Erasmus+",
-          "text": "International mobility with partners across Europe through the Erasmus+ programme: a semester of study or a placement abroad, with credits recognised on return. The network of partner schools and studios grows every year."
-        },
-        {
-          "title": "Guidance",
-          "text": "One-to-one meetings before and during the course, to choose the right path and, later, the first step into the profession: from placement to first contract, guidance is there for those arriving and those about to leave."
-        },
-        {
-          "title": "Housing",
-          "text": "Support finding accommodation in Bologna, with a network of solutions close to campus — especially useful for those arriving from outside the region or from abroad for their first year."
-        },
-        {
-          "title": "Live events",
-          "text": "Concerts, showcases and public evenings inside and outside the hub, often with students and teachers sharing the same stage: a way of bringing what happens in the classroom in front of a real audience."
-        }
-      ]
+      "points": []
     },
     "dolbyAtmos": {
       "title": "Immersive audio. Music, film, gaming.",
