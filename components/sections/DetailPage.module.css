@@ -12,21 +12,31 @@
 
 .head {
   padding-top: clamp(32px, 4.5vw, 56px);
-  padding-bottom: clamp(32px, 4.5vw, 56px);
+  /* la foto arriva a filo della barra di sezione che segue:
+     il respiro inferiore ce l'ha solo la colonna testo */
+  padding-bottom: 0;
 }
 
 .headGrid {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
   gap: clamp(24px, 4vw, 64px);
-  align-items: start;
+  /* mockup: la foto riempie TUTTA l'altezza della colonna testo */
+  align-items: stretch;
+}
+
+.headGrid > :first-child {
+  padding-bottom: clamp(32px, 4.5vw, 56px);
 }
 
 .headPh {
   position: relative;
-  aspect-ratio: 4 / 3;
   overflow: hidden;
   background: #000;
+  height: 100%;
+  min-height: clamp(380px, 40vw, 640px);
+  /* a filo col bordo destro del viewport, come nei mockup */
+  margin-right: calc(-1 * var(--pad));
 }
 
 .headImg {
@@ -492,5 +502,13 @@
   .headPh {
     order: -1;
     aspect-ratio: 3 / 2;
+    height: auto;
+    min-height: 0;
+    /* su mobile la foto sanguina su ENTRAMBI i lati */
+    margin-left: calc(-1 * var(--pad));
+  }
+
+  .headGrid > :first-child {
+    padding-bottom: 36px;
   }
 }

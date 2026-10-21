@@ -11,6 +11,7 @@ import {
   SectionHeader,
 } from '@/components/ui'
 import { SiteChrome, shopHref } from '@/components/sections/SiteChrome'
+import { SectionPagesNav } from '@/components/sections/SectionPagesNav'
 import { PointsAccordion } from '@/components/sections/PointsAccordion'
 import { ArticleCard } from '@/components/magazine/ArticleCard'
 import { isLocale, localeHref } from '@/lib/i18n/config'
@@ -104,6 +105,9 @@ export default async function StudiosPage({
             </Reveal>
           </div>
         </header>
+
+        {/* ————— barra delle pagine di sezione (mockup) ————— */}
+        <SectionPagesNav locale={locale} base="/studios" current="/studios" />
 
         <Rule left={t.studios.kicker} right={t.studios.spacesKicker} />
 

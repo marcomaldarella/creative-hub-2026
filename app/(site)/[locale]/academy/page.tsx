@@ -269,7 +269,10 @@ export default async function AcademyPage({
                           <p className={styles.pathText}>{item.text}</p>
                           {count > 0 && (
                             <b className={styles.pathCount}>
-                              {count} {t.academy.pathsCourses}
+                              {count}{' '}
+                              {count === 1
+                                ? t.academy.pathsCourse
+                                : t.academy.pathsCourses}
                             </b>
                           )}
                         </div>

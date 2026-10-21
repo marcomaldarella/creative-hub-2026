@@ -1,0 +1,79 @@
+/* barra delle pagine di sezione (mockup ott 2026): sticky sotto il nav,
+   nera, etichetta a sinistra e le pagine sorelle a destra. La voce
+   attiva prende l'accento di sezione (arancio su studio, bianco su
+   innovazione) via --pn-accent impostata dal componente. */
+
+.bar {
+  position: sticky;
+  /* sotto nav + topbar: stessa quota dello subnav delle schede corso */
+  top: var(--header-h);
+  z-index: 40;
+  background: #000000;
+  color: #ffffff;
+}
+
+.in {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(16px, 3vw, 48px);
+}
+
+.label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  padding: 15px 0;
+}
+
+/* la fila scorre quando non ci sta: niente scrollbar a vista */
+.row {
+  display: flex;
+  align-items: stretch;
+  gap: clamp(14px, 1.8vw, 26px);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.row::-webkit-scrollbar {
+  display: none;
+}
+
+.row a {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 15px 0;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  color: rgba(255, 255, 255, 0.55);
+  transition: color 0.15s ease;
+}
+
+.row a:hover {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* la barretta prima di ogni voce, come nel mockup */
+.slash {
+  opacity: 0.35;
+}
+
+.row a.on {
+  color: var(--pn-accent, #ffffff);
+}
+
+.row a.on .slash {
+  opacity: 0.6;
+}
+
+@media (max-width: 760px) {
+  /* su mobile l'etichetta lascia tutta la riga alle voci */
+  .label {
+    display: none;
+  }
+}

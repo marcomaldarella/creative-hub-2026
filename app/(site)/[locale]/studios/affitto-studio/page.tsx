@@ -11,6 +11,7 @@ import {
   SectionHeader,
 } from '@/components/ui'
 import { SiteChrome } from '@/components/sections/SiteChrome'
+import { SectionPagesNav } from '@/components/sections/SectionPagesNav'
 import { PointsAccordion } from '@/components/sections/PointsAccordion'
 import { isLocale, localeHref } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
@@ -111,6 +112,9 @@ export default async function AffittoStudioPage({
             </Reveal>
           </div>
         </header>
+
+        {/* ————— barra delle pagine di sezione (mockup) ————— */}
+        <SectionPagesNav locale={locale} base="/studios" current="/studios/affitto-studio" />
 
         {/* ————— le tre formule ————— */}
         <Rule left="01" right={d.formKicker} />

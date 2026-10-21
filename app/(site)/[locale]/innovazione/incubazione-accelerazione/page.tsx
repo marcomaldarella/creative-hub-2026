@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { ArrowLink, Button, Card, Reveal, RevealGroup, Rule } from '@/components/ui'
 import { SiteChrome } from '@/components/sections/SiteChrome'
+import { SectionPagesNav } from '@/components/sections/SectionPagesNav'
 import { isLocale, localeHref } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
 import { pageAlternates } from '@/lib/seo'
@@ -118,6 +119,9 @@ export default async function IncubazioneAccelerazionePage({
             </Button>
           </div>
         </div>
+
+        {/* ————— barra delle pagine di sezione (mockup) ————— */}
+        <SectionPagesNav locale={locale} base="/innovazione" current="/innovazione/incubazione-accelerazione" />
 
         {/* ————— il programma ————— */}
         <Rule left="01" right={c.introKicker} />

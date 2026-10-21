@@ -482,7 +482,8 @@
         "title": "Si può studiare part-time, se si lavora già?",
         "text": "Sì, tutti i corsi universitari prevedono una modalità part-time: stesso programma, distribuito su più tempo."
       }
-    ]
+    ],
+    "pathsCourse": "corso"
   },
   "studios": {
     "kicker": "studio · zona roveri, bologna",
@@ -1897,7 +1898,8 @@
         }
       ],
       "ctaTitle": "Raccontaci il tuo progetto.",
-      "ctaText": "Scrivici cosa vuoi registrare, mixare o produrre. Ti ricontattiamo dal lunedì al venerdì per una consulenza e per fissare la sessione."
+      "ctaText": "Scrivici cosa vuoi registrare, mixare o produrre. Ti ricontattiamo dal lunedì al venerdì per una consulenza e per fissare la sessione.",
+      "marquee": "Musicisti veri, nella stessa stanza"
     },
     "mix": {
       "metaTitle": "Mix e mastering a Bologna, stereo e Dolby Atmos | Creative Hub Studio",

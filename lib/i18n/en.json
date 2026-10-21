@@ -482,7 +482,8 @@
         "title": "Can I study part-time if I already work?",
         "text": "Yes, every university programme has a part-time option: same programme, spread over more time."
       }
-    ]
+    ],
+    "pathsCourse": "course"
   },
   "studios": {
     "kicker": "studio · roveri district, bologna",
@@ -1897,7 +1898,8 @@
         }
       ],
       "ctaTitle": "Tell us about your project.",
-      "ctaText": "Write to us about what you want to record, mix or produce. We get back to you Monday to Friday for a consultation and to book the session."
+      "ctaText": "Write to us about what you want to record, mix or produce. We get back to you Monday to Friday for a consultation and to book the session.",
+      "marquee": "Real musicians, in the same room"
     },
     "mix": {
       "metaTitle": "Mix and mastering in Bologna, stereo and Dolby Atmos | Creative Hub Studio",

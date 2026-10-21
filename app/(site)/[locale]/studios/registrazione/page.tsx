@@ -5,12 +5,14 @@ import {
   ArrowLink,
   Button,
   Card,
+  Marquee,
   Reveal,
   RevealGroup,
   Rule,
   SectionHeader,
 } from '@/components/ui'
 import { SiteChrome } from '@/components/sections/SiteChrome'
+import { SectionPagesNav } from '@/components/sections/SectionPagesNav'
 import { isLocale, localeHref } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
 import { pageAlternates } from '@/lib/seo'
@@ -102,6 +104,31 @@ export default async function RegistrazionePage({
             </Reveal>
           </div>
         </header>
+
+        {/* ————— fascia marquee: la frase del mockup, nel nostro stile ————— */}
+        <div className={`scheme-dark ${styles.mq}`}>
+          <Marquee
+            dark
+            speed={30}
+            items={[
+              <span key="t" className={styles.mqText}>
+                {d.marquee}
+              </span>,
+              <Button
+                key="b"
+                variant="azzurro"
+                className={styles.mqBtn}
+                href={mailBook}
+                external
+              >
+                {d.book}
+              </Button>,
+            ]}
+          />
+        </div>
+
+        {/* ————— barra delle pagine di sezione (mockup) ————— */}
+        <SectionPagesNav locale={locale} base="/studios" current="/studios/registrazione" />
 
         {/* ————— tre modi di registrare ————— */}
         <Rule left="01" right={d.modesKicker} />

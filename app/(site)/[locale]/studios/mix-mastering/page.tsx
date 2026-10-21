@@ -9,6 +9,7 @@ import {
   Rule,
 } from '@/components/ui'
 import { SiteChrome } from '@/components/sections/SiteChrome'
+import { SectionPagesNav } from '@/components/sections/SectionPagesNav'
 import { isLocale, localeHref } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
 import { pageAlternates } from '@/lib/seo'
@@ -99,6 +100,9 @@ export default async function MixMasteringPage({
             </Reveal>
           </div>
         </header>
+
+        {/* ————— barra delle pagine di sezione (mockup) ————— */}
+        <SectionPagesNav locale={locale} base="/studios" current="/studios/mix-mastering" />
 
         {/* ————— i due servizi: mix e mastering ————— */}
         <Rule left="01" right={d.svcKicker} />

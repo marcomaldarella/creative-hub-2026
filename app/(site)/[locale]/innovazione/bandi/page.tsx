@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { ArrowLink, Button, Reveal, RevealGroup, Rule } from '@/components/ui'
 import { SiteChrome } from '@/components/sections/SiteChrome'
+import { SectionPagesNav } from '@/components/sections/SectionPagesNav'
 import { isLocale, localeHref } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
 import { pageAlternates } from '@/lib/seo'
@@ -102,6 +103,9 @@ export default async function BandiPage({
             {d.lede}
           </Reveal>
         </header>
+
+        {/* ————— barra delle pagine di sezione (mockup) ————— */}
+        <SectionPagesNav locale={locale} base="/innovazione" current="/innovazione/bandi" />
 
         {/* ————— l'elenco, con le pillole filtro ————— */}
         <Rule left="01" right={listKicker} />
