@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import {
+  Arrow,
   ArrowLink,
   Button,
   Card,
@@ -65,13 +66,15 @@ export default async function StudiosPage({
     ),
   ].slice(0, 2)
 
+  /* mockup ott 2026: ogni card servizio porta alla sua pagina — le tre
+     ex-ancora (registrazione, mix, affitto) ora sono route vere */
   const services = [
-    t.studios.services.recording,
-    t.studios.services.mix,
-    t.studios.services.atmos,
-    t.studios.services.cinema,
-    t.studios.services.podcast,
-    t.studios.services.rental,
+    { ...t.studios.services.recording, href: '/studios/registrazione' },
+    { ...t.studios.services.mix, href: '/studios/mix-mastering' },
+    { ...t.studios.services.atmos, href: '/studios/dolby-atmos' },
+    { ...t.studios.services.cinema, href: '/studios/sound-design' },
+    { ...t.studios.services.podcast, href: '/studios/podcast' },
+    { ...t.studios.services.rental, href: '/studios/affitto-studio' },
   ]
 
   return (
@@ -171,9 +174,14 @@ export default async function StudiosPage({
                   <Card
                     kicker={service.n}
                     title={service.title}
+                    href={localeHref(locale, service.href)}
                     className={styles.spaceCard}
                   >
                     {service.text}
+                    <span className={styles.cardGo}>
+                      {t.studios.cardCta}
+                      <Arrow dir="e" size={13} />
+                    </span>
                   </Card>
                 </Reveal>
               ))}
@@ -236,6 +244,23 @@ export default async function StudiosPage({
               <Reveal as="p" className={styles.engineerBio} delay={80}>
                 {t.studios.engineerBio}
               </Reveal>
+            </div>
+          </div>
+        </section>
+
+        {/* ————— tecnologia e partner (mockup ott 2026) ————— */}
+        <section className={styles.sez}>
+          <div className="wrap">
+            <SectionHeader
+              kicker={t.studios.techKicker}
+              title={t.studios.techTitle}
+            />
+            <div className={styles.tech}>
+              {t.studios.tech.map((name, i) => (
+                <Reveal key={name} className={styles.techName} delay={(i % 4) * 50}>
+                  {name}
+                </Reveal>
+              ))}
             </div>
           </div>
         </section>

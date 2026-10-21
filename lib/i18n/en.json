@@ -47,10 +47,9 @@
       "innovation": {
         "desc": "Incubation · B2B · creative startups.",
         "items": [
+          "Incubation & acceleration",
           "Services for companies",
-          "Acceleration",
-          "Grants & opportunities",
-          "Incubation",
+          "Calls & opportunities",
           "CTE COBO"
         ]
       },
@@ -603,6 +602,19 @@
         "title": "Can I record remotely?",
         "text": "Yes, with remote recording: you send us the project, we record with professional musicians and return the tracks ready for mixing. You can follow the session in audio and video."
       }
+    ],
+    "cardCta": "explore",
+    "techKicker": "technology & partners",
+    "techTitle": "Who we work with.",
+    "tech": [
+      "Solid State Logic",
+      "Dolby",
+      "Genelec",
+      "Universal Audio",
+      "Avid",
+      "Ableton",
+      "IK Multimedia",
+      "Emilia-Romagna Film Commission"
     ]
   },
   "coworking": {
@@ -744,22 +756,136 @@
     "backAll": "All spaces"
   },
   "innovation": {
-    "fallbackTitle": "Creative companies start here.",
-    "fallbackLede": "Incubation, acceleration, services for companies.",
-    "statsRuleLeft": "numbers",
-    "statsRuleRight": "innovation",
-    "stats": {
-      "startups": {
-        "value": 14,
-        "suffix": "",
-        "label": "startups incubated per year"
+    "metaTitle": "Incubator and accelerator for creative startups in Bologna | Creative Hub",
+    "metaDesc": "Free incubation, acceleration and business services for music, audiovisual, immersive tech and AI. CreaTech Venture Club, open calls and CTE COBO.",
+    "kicker": "innovation · creative hub bologna",
+    "title": "Creative businesses are born here.",
+    "lede": "Incubation, acceleration and business services for music, audiovisual, immersive technologies and artificial intelligence. Inside a hub that already has studios, classrooms and talent.",
+    "heroCta": "Find your path",
+    "startKicker": "where you start from",
+    "startTitle": "An idea, a startup, a company.",
+    "startLede": "Choose your starting point: each path has a page with requirements, timelines and contacts.",
+    "paths": [
+      {
+        "n": "in.01",
+        "tag": "you have an idea or a startup",
+        "title": "Incubation & acceleration",
+        "text": "CreaTech Venture Club: a free nine-month programme for startups and professionals in the cultural and creative industries. Mentoring, coworking, training and a Pitch Day in front of investors.",
+        "badge": "applications open",
+        "cta": "discover the programme",
+        "href": "/innovazione/incubazione-accelerazione"
       },
-      "partners": {
-        "value": 300,
-        "suffix": "+",
-        "label": "partner companies"
+      {
+        "n": "in.02",
+        "tag": "you are a company or an established startup",
+        "title": "Services for companies and startups",
+        "text": "Legal, tax, commercial and strategic consulting, access to capital, mentorship. For companies, scouting of startups with the technologies you are looking for.",
+        "badge": "",
+        "cta": "see the services",
+        "href": "/innovazione/aziende"
+      },
+      {
+        "n": "in.03",
+        "tag": "you are looking for an opportunity",
+        "title": "Calls & opportunities",
+        "text": "Startup calls, regional and European programmes, investor events: the open ones and the upcoming ones.",
+        "badge": "",
+        "cta": "see the calls",
+        "href": "/innovazione/bandi"
+      },
+      {
+        "n": "in.04",
+        "tag": "the project with the city of bologna",
+        "title": "CTE COBO",
+        "text": "The Bologna House of Emerging Technologies: thirteen partners across universities, research centres and companies, with Creative Hub among them.",
+        "badge": "",
+        "cta": "discover the project",
+        "href": "/innovazione/cte-cobo"
       }
-    }
+    ],
+    "manifesto": "A creative startup needs more than an office. Here it finds the studio to record, the classroom to train the team and the talent coming out of the Academy.",
+    "fieldsKicker": "what we experiment with",
+    "fieldsTitle": "Three fields of work.",
+    "fields": [
+      {
+        "kicker": "01 immersive audio",
+        "title": "A permanent lab on Atmos",
+        "text": "The 7.1.4 suite is also a research lab on immersive formats, spatial audio for XR and new mixing practices, tested with technology partners."
+      },
+      {
+        "kicker": "02 artificial intelligence",
+        "title": "AI as a tool, not a shortcut",
+        "text": "Assisted-production tools tested in courses and studio projects, to understand where they bring real value."
+      },
+      {
+        "kicker": "03 network",
+        "title": "With companies, inside the city",
+        "text": "Pilot projects with labels, broadcasters and software houses: the hub as a meeting point between industry demand and talent in training."
+      }
+    ],
+    "numbersKicker": "innovation in numbers",
+    "numbers": [
+      {
+        "n": "13",
+        "label": "partners in the House of Emerging Technologies"
+      },
+      {
+        "n": "9 months",
+        "label": "of free incubation with CreaTech"
+      }
+    ],
+    "ecoKicker": "the ecosystem",
+    "ecoTitle": "All in the same building.",
+    "ecoLede": "Whoever joins an innovation path works next to the other souls of the hub.",
+    "eco": [
+      {
+        "kicker": "01 academy",
+        "title": "Talent to involve",
+        "text": "Music, sound and visual students for internships, pilot projects and new teams.",
+        "cta": "Academy",
+        "href": "/academy"
+      },
+      {
+        "kicker": "02 studio",
+        "title": "A studio to produce",
+        "text": "SSL control room and Dolby Atmos 7.1.4 for audio prototypes, content and testing.",
+        "cta": "Studio",
+        "href": "/studios"
+      },
+      {
+        "kicker": "03 coworking",
+        "title": "A space to work",
+        "text": "Desks, meeting rooms and a main hall for events and pitches.",
+        "cta": "Coworking",
+        "href": "/coworking"
+      }
+    ],
+    "partnersKicker": "who we work with",
+    "partnersTitle": "Partners.",
+    "partners": [
+      "Regione Emilia-Romagna",
+      "Comune di Bologna",
+      "Università di Bologna",
+      "CNR Bologna",
+      "Music Innovation Hub",
+      "MISTER Smart Innovation",
+      "Cineca",
+      "BI-REX"
+    ],
+    "ctaKicker": "contacts",
+    "ctaTitle": "Let's talk about your project.",
+    "ctaText": "Tell us where you are: an idea, a startup, a company looking for innovation. We get back to you Monday to Friday.",
+    "ctaWrite": "Write to us",
+    "mailNotes": [
+      {
+        "mail": "info@createch.it",
+        "note": "incubation and acceleration"
+      },
+      {
+        "mail": "hello@bologna-creativehub.it",
+        "note": "company services, projects, CTE COBO"
+      }
+    ]
   },
   "about": {
     "fallbackTitle": "Since 1999.",
@@ -1281,5 +1407,656 @@
     "ctaText": "Tell us what kind of event it is, for how many people and what you need: we send you a proposal with room, services and quote within one working day.",
     "ctaBook": "request a proposal",
     "back": "back to coworking"
+  },
+  "innovationSub": {
+    "back": "back to innovation",
+    "createch": {
+      "metaTitle": "Free incubator for creative startups in Bologna | CreaTech Venture Club",
+      "metaDesc": "Nine months of incubation and acceleration for startups and professionals in the cultural and creative industries. Funded by Regione Emilia-Romagna.",
+      "kicker": "Innovation · Incubation & acceleration",
+      "title": "CreaTech Venture Club: free incubation for creative startups in Bologna.",
+      "lede": "Nine months to turn a cultural and creative industries project into a business: mentoring, coworking, training and investors.",
+      "facts": [
+        {
+          "t": "Free",
+          "s": "funded by Regione Emilia-Romagna, PR FESR 2021-2027"
+        },
+        {
+          "t": "9 months",
+          "s": "from January 2027, in Bologna"
+        },
+        {
+          "t": "6 places",
+          "s": "for startups and professionals"
+        }
+      ],
+      "status": "Applications open for the edition starting in January 2027.",
+      "apply": "Apply",
+      "introKicker": "the programme",
+      "introTitle": "From idea to business.",
+      "intro": [
+        "CreaTech Venture Club is Creative Hub’s incubation and acceleration programme for the cultural and creative industries: music, audiovisual, immersive technologies, artificial intelligence, digital innovation.",
+        "You work in a shared environment at Creative Hub, with a mentor following your project, the hub’s technological resources and a network of experts, investors and local and European partners. It is free."
+      ],
+      "whoTitle": "Who it is for.",
+      "who": [
+        {
+          "kicker": "01 startups",
+          "title": "Startups and companies",
+          "text": "Startups, companies and SMEs in the cultural and creative industries that want to grow."
+        },
+        {
+          "kicker": "02 professionals",
+          "title": "Independent professionals",
+          "text": "Freelancers working with immersive technologies, artificial intelligence and digital innovation."
+        },
+        {
+          "kicker": "03 ideas",
+          "title": "Ideas not yet businesses",
+          "text": "Projects that are not a company yet, but have an idea to validate."
+        }
+      ],
+      "howKicker": "the path",
+      "howTitle": "How it works.",
+      "how": [
+        {
+          "title": "Scouting and validation",
+          "text": "We select the most promising projects. Meetings with mentors and success stories to validate the idea and explore the market."
+        },
+        {
+          "title": "Incubation and development",
+          "text": "You work at Creative Hub with personalised mentoring, training on business model, marketing and European funds, and you consolidate the team."
+        },
+        {
+          "title": "Acceleration",
+          "text": "With MISTER Smart Innovation, at the Bologna CNR Technopole."
+        },
+        {
+          "title": "Pitch Day",
+          "text": "You present the project to potential investors."
+        }
+      ],
+      "getTitle": "What you get.",
+      "gets": [
+        "Access to the Creative Hub coworking",
+        "Personalised tutoring and mentoring",
+        "Training on business model, marketing and European funds",
+        "The hub’s technological resources",
+        "A network of industry experts",
+        "Meetings with investors and European partners",
+        "A validated business model",
+        "More visibility on new markets"
+      ],
+      "orgKicker": "who runs it",
+      "orgTitle": "The CreaTech partners.",
+      "org": [
+        {
+          "role": "lead partner",
+          "name": "Creative Hub Bologna (MPDA Aps)",
+          "text": "Coworking, recording studios, audiovisual production spaces and events. Training since 1999."
+        },
+        {
+          "role": "partner",
+          "name": "Music Innovation Hub",
+          "text": "National and European hub for innovation in the creative industries: Linecheck, Music Tech Europe Academy, GetIt!4Music."
+        },
+        {
+          "role": "acceleration",
+          "name": "MISTER Smart Innovation",
+          "text": "Runs the Bologna CNR Technopole and manages the acceleration programme."
+        },
+        {
+          "role": "partner",
+          "name": "CNR – Bologna Research Area (ISMN)",
+          "text": "Science outreach, events, impact monitoring and dedicated spaces."
+        }
+      ],
+      "supportLabel": "With the support of",
+      "support": [
+        "BAM Strategie Culturali",
+        "Città Metropolitana di Bologna",
+        "Cluster CREATE",
+        "CRICC – Unibo",
+        "CFP Futura",
+        "Kilowatt",
+        "Melazeta",
+        "Spindox",
+        "Tecnoscienza"
+      ],
+      "finTitle": "Funding.",
+      "finText": "Project approved under the Regional Programme FESR Emilia-Romagna 2021-2027, Priority 1, Specific objective 1.1, Action 1.1.6, 2026 call for incubators and accelerators (DGR n. 2228 of 22/12/2025). CUP E38D25000400007.",
+      "ctaTitle": "Apply to CreaTech Venture Club.",
+      "ctaText": "Leave us your details and a couple of lines about the project: a tutor gets back to you to explain the selection.",
+      "ctaWrite": "Send your application"
+    },
+    "aziende": {
+      "metaTitle": "Services for companies and startups in Bologna: consulting and scouting | Creative Hub",
+      "metaDesc": "Legal, tax and strategic consulting desks, access to capital and mentorship for startups. Startup scouting for companies.",
+      "kicker": "Innovation · Services for companies and startups",
+      "title": "Services for creative companies and startups in Bologna.",
+      "lede": "Consulting, access to capital and mentorship for startups. Startup scouting and innovation support for companies.",
+      "facts": [
+        {
+          "t": "Consulting desks",
+          "s": "legal, tax, commercial, strategic"
+        },
+        {
+          "t": "Access to capital",
+          "s": "subsidised finance, business angels, venture capital"
+        },
+        {
+          "t": "Startup scouting",
+          "s": "for companies looking for innovation"
+        }
+      ],
+      "talk": "Let's talk",
+      "colsKicker": "the services",
+      "colsTitle": "For those starting. For those searching.",
+      "startupLabel": "az.01 · for startups",
+      "startup": [
+        {
+          "title": "Access to capital",
+          "text": "We guide you through subsidised and non-repayable finance, microcredit, business angels and venture capital."
+        },
+        {
+          "title": "Consulting desks",
+          "text": "Professionals available on: legal and tax; commercial and business development (business plan, marketing plan, business model, intellectual property, growth hacking, digital marketing); strategy."
+        },
+        {
+          "title": "Mentorship and managerial support",
+          "text": "Company organisation and business management, with people who have already done it."
+        },
+        {
+          "title": "Training",
+          "text": "Workshops on innovation, startups, growth strategies, emerging technologies and their applications."
+        }
+      ],
+      "companyLabel": "az.02 · for companies",
+      "scoutingTitle": "Startup scouting",
+      "scoutingText": "A tailor-made corporate incubator: we find the startups with the technology, product or know-how you need.",
+      "scoutingSteps": [
+        "Analysis of your innovation needs.",
+        "Scouting of startups with useful technologies, products or skills.",
+        "Proposal of the selected startups.",
+        "Integration or joint venture, with our support."
+      ],
+      "company": [
+        {
+          "title": "Funding search",
+          "text": "We find the calls and incentives suited to your projects and support you through the application."
+        },
+        {
+          "title": "Managerial support",
+          "text": "Side-by-side work on new projects and business lines."
+        }
+      ],
+      "glossKicker": "getting oriented",
+      "glossTitle": "Incubator, accelerator, startup studio.",
+      "glossLede": "Three words often used as synonyms. They are not.",
+      "gloss": [
+        {
+          "kicker": "incubator",
+          "title": "For the early stages",
+          "text": "Supports newborn startups with consulting, mentoring, networking and a workspace. It usually charges a fee; some take equity."
+        },
+        {
+          "kicker": "accelerator",
+          "title": "For those already running",
+          "text": "Works with established startups: a consulting path in exchange for equity. It often offers funds and spaces too."
+        },
+        {
+          "kicker": "startup studio",
+          "title": "A startup factory",
+          "text": "Founds and grows several startups in parallel, as creator and investor at once."
+        }
+      ],
+      "glossNote": "At Creative Hub the incubation and acceleration programme is CreaTech Venture Club, free of charge:",
+      "glossCta": "discover the programme",
+      "ctaTitle": "Tell us what you need.",
+      "ctaText": "Startup or company: a couple of lines about who you are and what you are looking for. We set up a first meeting.",
+      "ctaWrite": "Write to us"
+    },
+    "bandi": {
+      "metaTitle": "Calls for creative startups and companies in Bologna | Creative Hub",
+      "metaDesc": "Incubation and acceleration calls, regional and European programmes for the cultural and creative industries.",
+      "kicker": "innovation · calls & opportunities",
+      "title": "Calls and opportunities for creative startups and companies.",
+      "lede": "Incubation calls, acceleration programmes, regional and European projects. Open ones on top.",
+      "listTitle": "All the opportunities.",
+      "filters": [
+        {
+          "key": "tutte",
+          "label": "All"
+        },
+        {
+          "key": "aperte",
+          "label": "Open"
+        },
+        {
+          "key": "call",
+          "label": "Calls"
+        },
+        {
+          "key": "progetti",
+          "label": "Projects"
+        },
+        {
+          "key": "eventi",
+          "label": "Events"
+        },
+        {
+          "key": "archivio",
+          "label": "Archive"
+        }
+      ],
+      "perLabel": "for:",
+      "typeLabels": {
+        "call": "call",
+        "progetto": "project",
+        "evento": "event"
+      },
+      "items": [
+        {
+          "date": "from January 2027",
+          "type": "call",
+          "open": true,
+          "statusLabel": "Applications open",
+          "title": "CreaTech Venture Club 2027",
+          "text": "Nine months of free incubation for startups and professionals in the cultural and creative industries.",
+          "per": "Startups, professionals and CCI ideas based in Emilia-Romagna",
+          "cta": "Apply",
+          "href": "/innovazione/incubazione-accelerazione"
+        },
+        {
+          "date": "April 2026",
+          "type": "progetto",
+          "open": false,
+          "statusLabel": "Project",
+          "title": "Cultural innovation: CCI and new digital approaches",
+          "text": "A model of immersive cultural outreach with VR/AR, artificial intelligence and Dolby Atmos audio, and a 3D platform. PR FESR 2021-2027, Action 1.3.4.",
+          "per": "Cultural and creative companies",
+          "cta": "",
+          "href": ""
+        },
+        {
+          "date": "December 2023",
+          "type": "call",
+          "open": false,
+          "statusLabel": "Closed",
+          "title": "Call 4 Startup – COBO Accelerator",
+          "text": "2024 acceleration programme for startups in the cultural and creative industries, with Creative Hub among the partners.",
+          "per": "CCI startups",
+          "cta": "",
+          "href": ""
+        },
+        {
+          "date": "January 2023",
+          "type": "call",
+          "open": false,
+          "statusLabel": "Ended",
+          "title": "Cherry and Arsoluta: the projects selected by Battiti",
+          "text": "Two out of six projects from the fourth edition of Battiti get free support, with Emil Banca and Kilowatt.",
+          "per": "Impact startups",
+          "cta": "",
+          "href": ""
+        },
+        {
+          "date": "October 2022",
+          "type": "evento",
+          "open": false,
+          "statusLabel": "Ended",
+          "title": "Investor Day of the in-ER network",
+          "text": "The startups of the in-ER network incubators presented to investors.",
+          "per": "Startups raising capital",
+          "cta": "",
+          "href": ""
+        },
+        {
+          "date": "August 2022",
+          "type": "call",
+          "open": false,
+          "statusLabel": "Ended",
+          "title": "Battiti Creativi 2022/23",
+          "text": "Acceleration path for business projects with environmental, cultural and social impact, with Emil Banca and Kilowatt.",
+          "per": "Impact business projects",
+          "cta": "",
+          "href": ""
+        }
+      ],
+      "crossText": "Looking for free courses funded by the Region? They are in the Academy:",
+      "crossCta": "funded training",
+      "ctaTitle": "Tell me when a call opens.",
+      "ctaText": "Leave us your contact and the type of project: we write to you when a call that fits you opens.",
+      "ctaWrite": "Notify me"
+    },
+    "cte": {
+      "metaTitle": "CTE COBO, Bologna House of Emerging Technologies | Creative Hub",
+      "metaDesc": "The City of Bologna project with universities, research centres and companies. Creative Hub is among the 13 partners.",
+      "kicker": "Innovation · CTE COBO",
+      "title": "CTE COBO, the Bologna House of Emerging Technologies.",
+      "lede": "A City of Bologna project bringing together universities, research centres and companies to take emerging technologies into local businesses. Creative Hub is among the partners.",
+      "facts": [
+        {
+          "t": "13 partners",
+          "s": "public and private, led by the City of Bologna"
+        },
+        {
+          "t": "2023 – 2026",
+          "s": "from 1 February 2023 to 31 January 2026"
+        },
+        {
+          "t": "PSC MISE 2014-2020",
+          "s": "Ministry of Economic Development"
+        }
+      ],
+      "siteCta": "Project website",
+      "siteUrl": "https://www.ctecobo.it",
+      "introKicker": "the project",
+      "introTitle": "From research to business.",
+      "intro": "The Bologna House of Emerging Technologies connects universities, research centres and local companies, focusing on the strategic sectors for the territory’s competitiveness. Creatibo, the company running Creative Hub, is an active partner of the project.",
+      "cells": [
+        {
+          "kicker": "01 bridge",
+          "title": "Research and business",
+          "text": "A bridge between university research and local companies."
+        },
+        {
+          "kicker": "02 spaces",
+          "title": "Experiment",
+          "text": "Spaces and resources to develop business ideas and try emerging technologies."
+        },
+        {
+          "kicker": "03 skills",
+          "title": "Transfer",
+          "text": "Digital skills for companies and startups, to face technological transformations."
+        }
+      ],
+      "wpTitle": "The activities.",
+      "wpLede": "The project is organised in eight work packages.",
+      "wps": [
+        "Strategic definition of the CTE",
+        "Setup and management of the spaces",
+        "Research and development on emerging technologies",
+        "Technology transfer and services for SMEs",
+        "Startup incubation and acceleration",
+        "Collaborative ecosystem and networking",
+        "Animation of the spaces",
+        "Project coordination and management"
+      ],
+      "partnersKicker": "the network",
+      "partnersTitle": "The partners.",
+      "partners": [
+        "Comune di Bologna (lead partner)",
+        "Università di Bologna",
+        "Almacube",
+        "Cineca",
+        "CNIT – WiLab",
+        "BI-REX",
+        "Creative Hub Bologna",
+        "G-Factor",
+        "Gellify",
+        "Search-On Media Group",
+        "Comune di Ravenna",
+        "Porto di Ravenna – AdSP",
+        "START 4.0"
+      ],
+      "finTitle": "Funding.",
+      "finText": "Project funded under the PSC MISE 2014-2020, approved by ministerial decree of 7 January 2020. CUP F39I22001840004.",
+      "ctaTitle": "Want to know more?",
+      "ctaText": "For information on Creative Hub’s activities in the CTE COBO project, write to us.",
+      "ctaWrite": "Write to us"
+    }
+  },
+  "studioSub": {
+    "back": "back to studio",
+    "email": "recordingstudio@bologna-creativehub.it",
+    "registrazione": {
+      "metaTitle": "Audio recording in Bologna, live tracking and remote recording | Creative Hub Studio",
+      "metaDesc": "Bands tracked live in a 60 m² live room, vocals in a booth with a Neumann U87, remote recording with professional musicians.",
+      "kicker": "Studio · Recording",
+      "title": "Audio recording in Bologna, tracked live or in overdub.",
+      "lede": "Whole bands in the same room, vocals in the booth, strings and small orchestras. Or professional musicians recording for you, remotely.",
+      "facts": [
+        {
+          "t": "60 m²",
+          "s": "live room with variable acoustics"
+        },
+        {
+          "t": "Live tracking or overdub",
+          "s": "whatever suits your project best"
+        },
+        {
+          "t": "Remote recording",
+          "s": "follow the session in audio and video"
+        }
+      ],
+      "book": "Book a session",
+      "modesKicker": "three ways",
+      "modesTitle": "Three ways to record.",
+      "modesLede": "We choose the method together, based on genre, budget and how you want the record to sound.",
+      "modes": [
+        {
+          "kicker": "01 live tracking",
+          "title": "All together",
+          "text": "The band plays in the same session, each instrument on its own track. The energy of a live take, with the option to fix things in the mix."
+        },
+        {
+          "kicker": "02 overdub",
+          "title": "One at a time",
+          "text": "Overdubs instrument by instrument: drums, bass, guitars, keys, vocals. For productions built layer by layer."
+        },
+        {
+          "kicker": "03 remote recording",
+          "title": "From a distance",
+          "text": "You send us the project, we pick the right musicians for the genre and record for you. You follow live, wherever you are."
+        }
+      ],
+      "liveKicker": "the room",
+      "liveTitle": "Live tracking, done right.",
+      "liveText": "Live room, control room and outer spaces are connected: musicians are isolated but see and hear each other in headphones, like on stage.",
+      "livePoints": [
+        "Full bands: bass, drums, guitars, vocals and keys in the same session.",
+        "Strings and small orchestras: besides the live room you can use the natural reverb of the outer hall.",
+        "Every instrument stays on its own track, so the mix stays flexible."
+      ],
+      "whatTitle": "What we record.",
+      "what": [
+        "Vocals, in an isolated booth with a Neumann U87",
+        "Guitars and bass, amplified or DI",
+        "Drums, in the 60 m² live room",
+        "Keys, piano and synths",
+        "String quartets, orchestral sections and small orchestras",
+        "Horns and big bands"
+      ],
+      "remoteTitle": "Remote recording, in four steps.",
+      "remoteSteps": [
+        "You send us the project",
+        "We pick the musician",
+        "We record",
+        "We deliver the tracks"
+      ],
+      "arrKicker": "arrangement",
+      "arrTitle": "Only have guitar and vocals?",
+      "arrText": "We complete the song with real or programmed instruments: from the demo to the arrangement, all the way to the recording.",
+      "arrCta": "Tell us about the song",
+      "whereKicker": "where you record",
+      "whereTitle": "Where you record.",
+      "whereLede": "Three connected rooms.",
+      "where": [
+        {
+          "title": "Live room",
+          "text": "60 m² with variable acoustics, for bands, drums and ensembles."
+        },
+        {
+          "title": "Vocal booth",
+          "text": "Isolated booth with a Neumann U87 and a vintage analogue chain."
+        },
+        {
+          "title": "Control room",
+          "text": "32-channel SSL XL-Desk console, Genelec monitors, valve outboard."
+        }
+      ],
+      "ctaTitle": "Tell us about your project.",
+      "ctaText": "Write to us about what you want to record, mix or produce. We get back to you Monday to Friday for a consultation and to book the session."
+    },
+    "mix": {
+      "metaTitle": "Mix and mastering in Bologna, stereo and Dolby Atmos | Creative Hub Studio",
+      "metaDesc": "Mixing on an SSL console and mastering for every platform, also online and on mixes made elsewhere.",
+      "kicker": "Studio · Mix & mastering",
+      "title": "Mix and mastering in Bologna, in stereo and in Dolby Atmos.",
+      "lede": "On an SSL console and Genelec monitors. Record with us or send us the tracks: the master comes out ready for every platform.",
+      "facts": [
+        {
+          "t": "SSL XL-Desk",
+          "s": "32-channel analogue console"
+        },
+        {
+          "t": "Stereo and Dolby Atmos",
+          "s": "the same song, two formats"
+        },
+        {
+          "t": "Also online",
+          "s": "you send the tracks, we send the master"
+        }
+      ],
+      "book": "Send your project",
+      "svcKicker": "two services",
+      "svcTitle": "Mix. Master. Together or separately.",
+      "services": [
+        {
+          "n": "mx.01",
+          "title": "Mix",
+          "lede": "Balance, space, dynamics: the tracks become a song that sounds.",
+          "rows": [
+            "stereo mix on the SSL console",
+            "Dolby Atmos 7.1.4 mix",
+            "stems and versions (instrumental, a cappella)"
+          ]
+        },
+        {
+          "n": "mx.02",
+          "title": "Mastering",
+          "lede": "The last step before release: loudness, consistency and the right formats for every platform.",
+          "rows": [
+            "for streaming, download and physical media",
+            "also on mixes made elsewhere",
+            "single, EP or album"
+          ]
+        }
+      ],
+      "howTitle": "How we work.",
+      "how": [
+        {
+          "title": "You send the tracks",
+          "text": "The separate tracks of the song, with one or two references you like."
+        },
+        {
+          "title": "We talk about the sound",
+          "text": "A call or a meeting in the studio to understand where you want to go."
+        },
+        {
+          "title": "First mix",
+          "text": "We send you the first mix to listen to on your systems, in the car, on headphones."
+        },
+        {
+          "title": "Revisions",
+          "text": "We fine-tune the details together."
+        },
+        {
+          "title": "Master and delivery",
+          "text": "Masters for the platforms and formats you need, ready for distribution."
+        }
+      ],
+      "needTitle": "What we need.",
+      "needLede": "To start without hiccups, prepare this for us.",
+      "needs": [
+        "Separate WAV tracks, same starting point",
+        "Sample rate and bit depth of the original session",
+        "BPM and key of the song",
+        "One or two references",
+        "Your rough mix, if you have one",
+        "Notes on what you like and what you don’t"
+      ],
+      "atmosTitle": "Your song, also in Dolby Atmos.",
+      "atmosText": "Besides the stereo mix, we can deliver an immersive audio version, mixed in our Dolby-certified 7.1.4 room. Also as a remix of already released songs.",
+      "atmosCta": "Discover Dolby Atmos",
+      "ctaTitle": "Send us the song.",
+      "ctaText": "Tell us about the project and, if you want, add a link to the tracks or the rough mix. We reply with a proposal and a quote."
+    },
+    "affitto": {
+      "metaTitle": "Recording studio and rehearsal room rental in Bologna | Creative Hub Studio",
+      "metaDesc": "Full studio with SSL control room and 60 m² live room, for productions with your engineer, live rehearsals and tour pre-production.",
+      "kicker": "Studio · Studio rental",
+      "title": "Recording studio rental in Bologna.",
+      "lede": "The full studio for your production: SSL control room, 60 m² live room, booth, Dolby Atmos. With your engineer, for live rehearsals or tour pre-production.",
+      "facts": [
+        {
+          "t": "Full studio",
+          "s": "control room, live room, booth"
+        },
+        {
+          "t": "With your engineer",
+          "s": "or with ours, if needed"
+        },
+        {
+          "t": "Half day or several days",
+          "s": "depending on the project"
+        }
+      ],
+      "book": "Check the dates",
+      "formKicker": "the formulas",
+      "formTitle": "A production. A rehearsal. A tour.",
+      "formule": [
+        {
+          "n": "af.01",
+          "title": "Production",
+          "text": "Bring your team and your engineer, use the studio as if it were yours.",
+          "rows": [
+            "SSL XL-Desk control room",
+            "live room and booth"
+          ]
+        },
+        {
+          "n": "af.02",
+          "title": "Live rehearsals",
+          "text": "A 60 m² room to rehearse the show with the full band, before the dates.",
+          "rows": [
+            "live room with variable acoustics"
+          ]
+        },
+        {
+          "n": "af.03",
+          "title": "Tour pre-production",
+          "text": "Several days in the studio to build the set, the sounds and the setlists before leaving.",
+          "rows": [
+            "multi-day packages",
+            "space for backline and control room"
+          ]
+        }
+      ],
+      "findKicker": "the gear",
+      "findTitle": "What you find in the studio.",
+      "howKicker": "how to book",
+      "howTitle": "How to book.",
+      "how": [
+        {
+          "kicker": "01 dates",
+          "title": "Pick the dates",
+          "text": "Write to us with day and duration: we check availability."
+        },
+        {
+          "kicker": "02 visit",
+          "title": "Come and see",
+          "text": "If you want, you visit the studio with your engineer before the session."
+        },
+        {
+          "kicker": "03 confirm",
+          "title": "Lock the studio",
+          "text": "We send you the confirmation with times, access and what you find in the room."
+        }
+      ],
+      "ctaTitle": "Pick the dates. Lock the studio.",
+      "ctaText": "Write to us about what you need to do in the studio and when: we reply with availability and a quote."
+    }
   }
 }

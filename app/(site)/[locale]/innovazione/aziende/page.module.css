@@ -1,0 +1,31 @@
+/* aziende & startup: solo gli scarti locali dai moduli condivisi
+   (DetailPage + TopicScreen). La doppia classe serve a vincere sui moduli
+   condivisi qualunque sia l'ordine dei fogli nel bundle. */
+
+/* pastiglia in bianco e nero: su innovazione niente accento, il bottone
+   è inchiostro pieno — e dentro scheme-dark si inverte da solo coi token */
+.btnBn.btnBn {
+  background: var(--fg);
+  color: var(--bg);
+  border: 1px solid var(--fg);
+}
+
+.btnBn.btnBn:hover {
+  background: color-mix(in srgb, var(--fg) 86%, var(--bg));
+}
+
+/* tp.cells a una campata: le due colonne qui le fa già det.grid2 */
+.cols1.cols1 {
+  grid-template-columns: 1fr;
+  margin-bottom: 0;
+}
+
+/* mini-tabella dello scouting dentro la cella: un filo di respiro sopra */
+.stepsMini {
+  margin-top: 16px;
+}
+
+/* passo senza colonna testo: solo numero + titolo */
+.stepRow.stepRow {
+  grid-template-columns: 44px minmax(0, 1fr);
+}

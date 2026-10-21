@@ -19,7 +19,8 @@ import type {
 const courseFields = groq`
   _id, _type, title, slug, summary, body, coverImage, gallery,
   duration, startDate, level, mode, language, shopUrl, featured, types,
-  skillsLede, skills, structureIntro, structure, admissionsKeys, admissions, faq,
+  skillsLede, skills, structureIntro, structure, admissionsKeys, admissions,
+  selectionLede, selection, networkLede, network, faq,
   category->{ _id, _type, title, slug },
   teachers[]->{ _id, _type, name, slug, role, bio, photo, links }
 `

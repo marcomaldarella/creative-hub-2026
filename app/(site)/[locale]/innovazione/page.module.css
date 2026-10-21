@@ -1,117 +1,132 @@
-.main {
-  padding-top: var(--nav-h);
+/* landing innovazione (mockup ott 2026): pagina neutra in bianco/nero,
+   nessun colore d'accento — solo i token --fg/--bg/--line. L'impianto
+   (testata, griglie, chiusura nera) viene da DetailPage.module.css: qui
+   restano solo le classi proprie della pagina. */
+
+/* pastiglia piena nei toni della zona: nera su bianco, bianca nella
+   chiusura scura. Classe doppiata per vincere sulla variante ghost
+   del Button senza toccare il componente. */
+.btnSolid.btnSolid {
+  background: var(--fg);
+  color: var(--bg);
+  border-color: var(--fg);
 }
 
-.sez {
-  padding: var(--sez) 0;
+.btnSolid.btnSolid:hover {
+  background: color-mix(in srgb, var(--fg) 85%, var(--bg));
+  border-color: color-mix(in srgb, var(--fg) 85%, var(--bg));
 }
 
-/* ————— hero: sfera particellare ex-home su nero ————— */
+/* ————— i quattro percorsi ————— */
 
-.orbHero {
-  position: relative;
-  /* .main spinge già sotto la nav: qui si risale per stare a filo top,
-     la barra galleggia sopra il nero */
-  margin-top: calc(var(--nav-h) * -1);
-  /* niente padding-top: spostava il centro della griglia sotto il
-     centro della sfera (che è absolute su tutto il box) — le voci
-     devono stare al centro vero dell'hero */
-  min-height: min(86svh, 900px);
-  display: grid;
-  place-items: center;
-  overflow: hidden;
-  background: #000;
-  color: var(--fg);
+.path {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  height: 100%;
+  padding: clamp(18px, 2.2vw, 28px);
+  border: 1px solid var(--line);
+  /* hover sobrio: sale solo il contrasto del bordo */
+  transition: border-color 200ms cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
-/* le tre voci al centro della sfera, come sulla vecchia home */
-.words {
-  position: relative;
-  z-index: 2;
+.path:hover {
+  border-color: color-mix(in srgb, var(--fg) 45%, var(--line));
 }
 
-.orb {
-  position: absolute;
-  inset: 0;
-  margin: auto;
-  width: min(66svh, 92vw, 720px);
-  aspect-ratio: 1;
-  pointer-events: none;
+/* la card in evidenza: scheme-dark dipinge già lo sfondo nero,
+   il bordo si fonde col fondo */
+.pathDark {
+  border-color: var(--bg);
 }
 
-/* annotazioni in alto, stesse della hero home */
-.annot {
-  position: absolute;
-  top: calc(var(--header-h) + clamp(18px, 2.6vh, 30px));
-  left: var(--pad);
-  right: var(--pad);
+.pathDark:hover {
+  border-color: var(--bg);
+}
+
+.pathMeta {
   display: flex;
   justify-content: space-between;
-  gap: 12px;
-  z-index: 2;
-}
-
-.annot span {
-  letter-spacing: 0.06em;
-  white-space: pre-line;
-  line-height: 1.1;
-  color: var(--fg);
-}
-
-.annot span:last-child {
-  text-align: right;
-}
-
-@media (max-width: 760px) {
-  .annot {
-    display: none; /* come in home: coordinate via sotto i 760px */
-  }
-}
-
-@media (max-width: 760px) {
-  .orbHero {
-    min-height: 70svh;
-  }
-}
-
-.head {
-  /* stretto sotto l'hero: kicker e titolo devono vedersi già a prima
-     vista senza scrollare */
-  padding-top: clamp(28px, 3.5vw, 44px);
-  padding-bottom: clamp(40px, 5vw, 64px);
-}
-
-.kicker {
-  display: block;
-  margin-bottom: 20px;
-}
-
-.title {
-  font-size: var(--fs-h2);
-  margin-bottom: 18px;
-}
-
-.lede {
-  max-width: 52ch;
+  gap: 16px;
+  font-size: 12px;
   color: var(--fg-2);
-  font-size: var(--fs-lede);
 }
 
-/* ————— layout editoriale ————— */
-
-.editorial {
-  display: grid;
-  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-  gap: clamp(32px, 5vw, 80px);
-  align-items: start;
+.pathTitle {
+  font-size: clamp(22px, 2.2vw, 28px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
 }
 
-.sectionHead {
-  margin-bottom: 0;
+.pathText {
+  font-size: 14.5px;
+  line-height: 1.45;
+  color: var(--fg-2);
+  max-width: 48ch;
 }
 
-@media (max-width: 860px) {
-  .editorial {
-    grid-template-columns: 1fr;
-  }
+/* pillola di stato (candidature aperte): bordo pieno, mai colore */
+.badge {
+  align-self: flex-start;
+  padding: 5px 12px;
+  border: 1px solid currentColor;
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+}
+
+.pathCta {
+  margin-top: auto;
+  padding-top: 10px;
+}
+
+/* ————— manifesto: statement grande su bianco ————— */
+
+.manifesto {
+  padding-top: clamp(56px, 8vw, 120px);
+  padding-bottom: clamp(56px, 8vw, 120px);
+}
+
+.manifestoText {
+  font-size: clamp(30px, 4.6vw, 72px);
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+  max-width: 24ch;
+}
+
+/* ————— i numeri: fascia nera ————— */
+
+.numbersKicker {
+  display: block;
+  color: var(--fg-2);
+  margin-bottom: clamp(24px, 3vw, 44px);
+}
+
+.numbers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(32px, 6vw, 100px);
+}
+
+.number {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.numberN {
+  font-size: clamp(48px, 7vw, 120px);
+  line-height: 1;
+}
+
+.numberLabel {
+  font-size: 14px;
+  color: var(--fg-2);
+  max-width: 26ch;
+}
+
+/* ————— rimando in fondo alle card ecosistema ————— */
+
+.cardCta {
+  margin-top: 14px;
 }

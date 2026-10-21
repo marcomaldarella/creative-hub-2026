@@ -1,0 +1,496 @@
+/* grammatica condivisa delle pagine di dettaglio nate dai mockup ott 2026
+   (sottopagine innovazione e studio): testata con fatti, griglie di card
+   hairline, checklist, elenco bandi, chiusura nera. Vive accanto a
+   TopicScreen.module.css (steps/cells/defs) e lavora tutta via token:
+   bianco/nero su innovazione, arancio pieno sulle pagine studio. */
+
+.main {
+  padding-top: var(--nav-h);
+}
+
+/* ————— testata: testo a sinistra, foto a destra ————— */
+
+.head {
+  padding-top: clamp(32px, 4.5vw, 56px);
+  padding-bottom: clamp(32px, 4.5vw, 56px);
+}
+
+.headGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(24px, 4vw, 64px);
+  align-items: start;
+}
+
+.headPh {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #000;
+}
+
+.headImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.back {
+  display: block;
+  margin-bottom: clamp(20px, 2.5vw, 32px);
+}
+
+.kicker {
+  display: block;
+  margin-bottom: 16px;
+}
+
+.title {
+  font-size: var(--fs-h2);
+  max-width: 22ch;
+  margin-bottom: 16px;
+}
+
+.lede {
+  max-width: 52ch;
+  color: var(--fg-2);
+  font-size: var(--fs-lede);
+  margin-bottom: clamp(20px, 2.5vw, 30px);
+}
+
+/* fatti in testata: titolo pieno + riga piccola, righe hairline */
+.facts {
+  border-top: 1px solid var(--line);
+  margin-bottom: clamp(20px, 2.5vw, 30px);
+  max-width: 440px;
+}
+
+.fact {
+  padding: 11px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.factT {
+  display: block;
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: -0.01em;
+}
+
+.factS {
+  display: block;
+  font-size: 13px;
+  color: var(--fg-2);
+  margin-top: 2px;
+}
+
+.heroRow {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+
+/* ————— fascia di stato (candidature aperte) ————— */
+
+.status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  padding: 14px 0;
+}
+
+.statusText {
+  font-size: 14px;
+}
+
+/* ————— sezioni ————— */
+
+.sez {
+  padding-top: clamp(36px, 4.5vw, 64px);
+  padding-bottom: clamp(44px, 6vw, 84px);
+}
+
+.h2 {
+  font-size: clamp(28px, 3.6vw, 52px);
+  letter-spacing: -0.04em;
+  margin-bottom: clamp(24px, 3vw, 40px);
+}
+
+.sezLede {
+  font-size: var(--fs-lede);
+  color: var(--fg-2);
+  max-width: 54ch;
+  margin-top: calc(clamp(24px, 3vw, 40px) * -0.55);
+  margin-bottom: clamp(24px, 3vw, 40px);
+}
+
+/* titolo a sinistra, contenuto a destra */
+.duo {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+  gap: clamp(24px, 4vw, 72px);
+  align-items: start;
+}
+
+@media (max-width: 860px) {
+  .duo {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ————— griglie di card ————— */
+
+.grid3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(14px, 1.8vw, 24px);
+}
+
+.grid2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(14px, 1.8vw, 24px);
+}
+
+@media (max-width: 860px) {
+  .grid3,
+  .grid2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* righe interne di una card (formule, servizi mix/master) */
+.cardRows {
+  margin-top: 14px;
+  border-top: 1px solid var(--line);
+  list-style: none;
+  padding: 0;
+}
+
+.cardRows li {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 13.5px;
+  color: var(--fg-2);
+}
+
+/* ————— checklist: spunta disegnata coi bordi (mai glifi/emoji) ————— */
+
+.check {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 clamp(20px, 3vw, 48px);
+  list-style: none;
+  padding: 0;
+  border-top: 1px solid var(--line);
+}
+
+.check li {
+  position: relative;
+  padding: 12px 0 12px 26px;
+  border-bottom: 1px solid var(--line);
+  font-size: 15px;
+}
+
+.check li::before {
+  content: '';
+  position: absolute;
+  left: 2px;
+  top: 19px;
+  width: 11px;
+  height: 5px;
+  border-left: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(-45deg);
+}
+
+@media (max-width: 700px) {
+  .check {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ————— partner: nomi in griglia hairline ————— */
+
+.partners {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0 clamp(20px, 2.5vw, 36px);
+  border-top: 1px solid var(--line);
+}
+
+.partner {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.partnerNote {
+  display: block;
+  font-weight: 400;
+  font-size: 13px;
+  color: var(--fg-2);
+  margin-top: 2px;
+}
+
+@media (max-width: 1000px) {
+  .partners {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .partners {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* nomi secondari (con il sostegno di): riga continua, divisi da punto */
+.supportLabel {
+  display: block;
+  margin: clamp(22px, 2.6vw, 34px) 0 10px;
+  font-size: 12px;
+  color: var(--fg-2);
+}
+
+.support {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--fg-2);
+  max-width: 70ch;
+}
+
+/* ————— finanziamento: nota istituzionale ————— */
+
+.fin {
+  border-top: 1px solid var(--line);
+  padding-top: 16px;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--fg-2);
+  max-width: 72ch;
+}
+
+/* ————— elenco bandi ————— */
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: clamp(24px, 3vw, 40px);
+}
+
+.filter {
+  font-size: 13px;
+  padding: 7px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  color: var(--fg-2);
+}
+
+.filterOn {
+  background: var(--fg);
+  border-color: var(--fg);
+  color: var(--bg);
+}
+
+.bandi {
+  border-top: 1px solid var(--line);
+}
+
+.bando {
+  display: grid;
+  grid-template-columns: 170px minmax(0, 1fr) auto;
+  gap: 8px clamp(18px, 2.5vw, 40px);
+  padding: clamp(18px, 2.2vw, 28px) 0;
+  border-bottom: 1px solid var(--line);
+  align-items: start;
+}
+
+.bandoMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 12px;
+}
+
+.bandoStatus {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  font-size: 12px;
+}
+
+/* pallino di stato: un cerchio CSS, nessun glifo */
+.bandoStatus::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.35;
+}
+
+.bandoOpen::before {
+  opacity: 1;
+}
+
+.bandoDate {
+  color: var(--fg-2);
+}
+
+.bandoType {
+  color: var(--fg-2);
+}
+
+.bandoTitle {
+  font-size: clamp(18px, 1.8vw, 24px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin-bottom: 6px;
+}
+
+.bandoText {
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--fg-2);
+  max-width: 64ch;
+}
+
+.bandoPer {
+  display: block;
+  font-size: 12.5px;
+  color: var(--fg-2);
+  margin-top: 8px;
+}
+
+/* il bando aperto in evidenza: fascia nera dentro l'elenco */
+.bandoHot {
+  background: var(--fg);
+  color: var(--bg);
+  padding-left: clamp(16px, 2vw, 28px);
+  padding-right: clamp(16px, 2vw, 28px);
+  margin: 0 calc(clamp(16px, 2vw, 28px) * -1);
+}
+
+.bandoHot .bandoText,
+.bandoHot .bandoDate,
+.bandoHot .bandoType,
+.bandoHot .bandoPer {
+  color: color-mix(in srgb, var(--bg) 72%, transparent);
+}
+
+@media (max-width: 760px) {
+  .bando {
+    grid-template-columns: 1fr;
+  }
+
+  .bandoMeta {
+    flex-direction: row;
+    align-items: center;
+    gap: 14px;
+  }
+}
+
+/* riga di rimando sotto l'elenco */
+.crossRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px;
+  margin-top: clamp(20px, 2.5vw, 32px);
+  font-size: 14px;
+  color: var(--fg-2);
+}
+
+/* ————— promo in fascia nera (arrangiamento, atmos) ————— */
+
+.promo {
+  background: var(--bg);
+}
+
+.promoTitle {
+  font-size: clamp(26px, 3.2vw, 44px);
+  letter-spacing: -0.04em;
+  margin-bottom: 12px;
+}
+
+.promoText {
+  font-size: var(--fs-lede);
+  color: var(--fg-2);
+  max-width: 52ch;
+  margin-bottom: clamp(20px, 2.5vw, 30px);
+}
+
+/* ————— chiusura nera ————— */
+
+.dark {
+  background: var(--bg);
+}
+
+.ctaTitle {
+  font-size: clamp(34px, 5vw, 68px);
+  margin-bottom: 14px;
+}
+
+.ctaText {
+  font-size: var(--fs-lede);
+  color: var(--fg-2);
+  max-width: 52ch;
+  margin-bottom: clamp(22px, 2.6vw, 32px);
+}
+
+.ctaRow {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 22px;
+}
+
+/* recapiti con nota piccola sotto (info@createch / hello@) */
+.mailRows {
+  margin-top: clamp(22px, 2.6vw, 32px);
+  border-top: 1px solid var(--line);
+  max-width: 440px;
+}
+
+.mailRow {
+  display: block;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.mailAddr {
+  display: block;
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: -0.01em;
+}
+
+.mailNote {
+  display: block;
+  font-size: 12.5px;
+  color: var(--fg-2);
+  margin-top: 2px;
+}
+
+/* ————— mobile ————— */
+
+@media (max-width: 860px) {
+  .headGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .headPh {
+    order: -1;
+    aspect-ratio: 3 / 2;
+  }
+}

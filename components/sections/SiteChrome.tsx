@@ -146,7 +146,7 @@ export async function SiteChrome({
       key: 'innovation',
       label: t.nav.innovation,
       base: '/innovazione',
-      anchors: ['aziende', 'accelerazione', 'bandi', 'incubazione', 'cte-cobo'],
+      anchors: ['incubazione-accelerazione', 'aziende', 'bandi', 'cte-cobo'],
     },
     {
       key: 'magazine',

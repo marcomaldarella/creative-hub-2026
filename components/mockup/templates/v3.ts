@@ -431,8 +431,16 @@ export const css = `
     color:color-mix(in srgb,var(--ink) 65%,transparent);}
   .adm-band .pill{background:var(--ink);color:var(--white);}
   .adm-band .pill:hover{background:var(--ink-2);}
+  /* selezione pesata (corsi finanziati): la percentuale fa da etichetta
+     grossa della voce, sulla stessa griglia hairline dei passaggi */
+  .steps .n.pct{font-size:clamp(26px,2.2vw,32px);font-weight:700;
+    letter-spacing:-.03em;color:var(--blue);margin-bottom:10px;}
+  /* rete del corso ("Con chi lavori."): due colonne, stessa grammatica
+     degli step — il testo è la fila di nomi separati da " · " */
+  .steps.cols2{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .steps.cols2 p{max-width:60ch;}
   @media(max-width:900px){
-    .steps{grid-template-columns:1fr;gap:22px;}
+    .steps,.steps.cols2{grid-template-columns:1fr;gap:22px;}
     .adm-head{grid-template-columns:1fr;gap:26px;}
     .adm-head>div,.adm-head .perks{grid-column:auto;}
     .fees-row{grid-template-columns:1fr;gap:14px;}
@@ -757,6 +765,7 @@ export const css = `
     .skill h3{font-size:18px;}
     .skill p{font-size:14px;}
     .steps h3,.teach h3{font-size:17px;}
+    .steps .n.pct{font-size:24px;}
     .fees-head h3{font-size:19px;}
     .plan .price{font-size:30px;}
     .adm-band p{font-size:19px;}
@@ -1378,6 +1387,13 @@ export type CourseHtmlData = {
   structure?: CourseEntryData[];
   /* i tre passaggi delle ammissioni (candidatura, colloquio, conferma) */
   admissions?: CourseEntryData[];
+  /* "Come funziona la selezione." (corsi finanziati): voci pesate — la
+     percentuale è l'etichetta grossa; la sezione compare solo se c'è */
+  selectionLede?: string;
+  selection?: { weight: string; title: string; text: string }[];
+  /* "Con chi lavori.": colonne della rete del corso (attuatori/promotori) */
+  networkLede?: string;
+  network?: CourseEntryData[];
   faq?: CourseEntryData[];
 };
 
@@ -1579,6 +1595,55 @@ export function buildCourseHtml(d: CourseHtmlData): string {
         `<p class="adm-intro"${rest ? ' style="margin-bottom:14px"' : ''}>${e(paras[0])}</p>${rest ? `\n  ${rest}` : ''}`,
       );
     }
+  }
+
+  /* ————— sezioni del mockup finanziati, SOLO se compilate in Sanity:
+     si innestano fra le ammissioni e le citazioni, con lo stesso
+     separatore hairline senza numero delle altre sezioni intermedie ————— */
+  const extraSections: string[] = [];
+
+  /* "Come funziona la selezione.": stessi step hairline delle
+     ammissioni, ma con il peso (55%/40%/5%) come etichetta grossa */
+  if (d.selection && d.selection.length) {
+    const voci = d.selection
+      .map(
+        (s) =>
+          `    <li><span class="n pct">${e(s.weight)}</span><h3>${e(s.title)}</h3>${parasHtml(s.text)}</li>`,
+      )
+      .join('\n');
+    extraSections.push(`<div class="sezRule"><span></span><i></i></div>
+
+<section class="block tight" id="selezione">
+  <h2 class="sec">Come funziona la selezione.</h2>
+  ${d.selectionLede ? `<p class="adm-intro">${e(d.selectionLede)}</p>` : ''}
+  <ol class="steps" aria-label="criteri di selezione">
+${voci}
+  </ol>
+</section>`);
+  }
+
+  /* "Con chi lavori.": le colonne della rete (attuatori/promotori) */
+  if (d.network && d.network.length) {
+    const colonne = d.network
+      .map((n) => `    <li><h3>${e(n.title)}</h3>${parasHtml(n.text)}</li>`)
+      .join('\n');
+    extraSections.push(`<div class="sezRule"><span></span><i></i></div>
+
+<section class="block tight" id="rete">
+  <h2 class="sec">Con chi lavori.</h2>
+  ${d.networkLede ? `<p class="adm-intro">${e(d.networkLede)}</p>` : ''}
+  <ul class="steps cols2" aria-label="rete del corso">
+${colonne}
+  </ul>
+</section>`);
+  }
+
+  if (extraSections.length) {
+    /* subito prima della sezione citazioni (l'unica block tight senza id) */
+    h = h.replace(
+      /(<section class="block tight">\s*<div class="quotes")/,
+      `${extraSections.join('\n\n')}\n\n$1`,
+    );
   }
 
   /* si ferma PRIMA della coda "Hai altre domande?" (faq-more) */

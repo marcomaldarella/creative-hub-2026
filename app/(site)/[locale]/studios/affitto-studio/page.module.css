@@ -1,0 +1,29 @@
+/* solo le poche classi locali che la grammatica condivisa (DetailPage)
+   non copre: la card bordata delle formule di affitto */
+
+.formula {
+  border: 1px solid var(--line);
+  padding: clamp(18px, 2.2vw, 28px);
+}
+
+/* sigla mono della formula (af.01 / af.02 / af.03) */
+.formulaN {
+  display: block;
+  font-size: 12px;
+  color: var(--fg-2);
+  margin-bottom: 10px;
+}
+
+.formulaTitle {
+  font-size: clamp(20px, 2vw, 24px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin-bottom: 8px;
+}
+
+.formulaText {
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--fg-2);
+}

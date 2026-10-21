@@ -1,0 +1,43 @@
+/* bandi & opportunità: solo gli scarti locali da DetailPage. La doppia
+   classe serve a vincere sul modulo condiviso qualunque sia l'ordine
+   dei fogli nel bundle. */
+
+/* pastiglia in bianco e nero: su innovazione niente accento, il bottone
+   è inchiostro pieno — e dentro scheme-dark si inverte da solo coi token */
+.btnBn.btnBn {
+  background: var(--fg);
+  color: var(--bg);
+  border: 1px solid var(--fg);
+}
+
+.btnBn.btnBn:hover {
+  background: color-mix(in srgb, var(--fg) 86%, var(--bg));
+}
+
+/* taglia piccola per l'elenco */
+.btnSm.btnSm {
+  padding: 8px 18px;
+  font-size: 13px;
+}
+
+/* dentro la fascia nera del bando aperto i token NON si invertono
+   (bandoHot è solo sfondo): la pastiglia si inverte a mano */
+.hot .btnBn.btnBn {
+  background: var(--bg);
+  color: var(--fg);
+  border-color: var(--bg);
+}
+
+.hot .btnBn.btnBn:hover {
+  background: color-mix(in srgb, var(--bg) 86%, var(--fg));
+}
+
+/* pillole non attive: hover sobrio, solo toni (l'attiva resta com'è) */
+.pill {
+  transition: color var(--dur), border-color var(--dur);
+}
+
+.pill:hover {
+  color: var(--fg);
+  border-color: var(--fg);
+}

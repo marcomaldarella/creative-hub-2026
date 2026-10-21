@@ -1,0 +1,37 @@
+/* cte-cobo: pagina istituzionale del progetto CTE COBO. La grammatica è
+   tutta in DetailPage.module.css (det) e TopicScreen.module.css (tp):
+   qui solo ciò che manca, in bianco e nero puro — soltanto i token
+   --fg / --bg / --line, nessun accento. */
+
+/* tasto nei soli token tema: pastiglia --fg su --bg, si inverte da sola
+   dentro scheme-dark (bianca su nero). Si appoggia alla variante ghost;
+   la classe è doppiata per vincerla senza dipendere dall'ordine in cui
+   i moduli CSS vengono emessi. */
+.btnInk.btnInk {
+  background: var(--fg);
+  color: var(--bg);
+  border-color: var(--fg);
+}
+
+.btnInk.btnInk:hover {
+  background: color-mix(in srgb, var(--fg) 84%, var(--bg));
+  border-color: var(--fg);
+}
+
+/* numero del work package: riga mono sopra il titolo della cella */
+.wpNum {
+  display: block;
+  margin-bottom: 2px;
+}
+
+/* le tre card del progetto sotto il duo intro */
+.cellsGrid {
+  margin-top: clamp(24px, 3vw, 40px);
+}
+
+/* titolo piccolo della nota di finanziamento */
+.finTitle {
+  font-size: clamp(22px, 2.4vw, 28px);
+  letter-spacing: -0.03em;
+  margin-bottom: 14px;
+}

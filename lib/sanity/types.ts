@@ -81,6 +81,11 @@ export interface CourseEntry {
   text?: LocaleText
 }
 
+/** Voce pesata della selezione (corsi finanziati): il peso è l'etichetta grossa */
+export interface CourseSelectionEntry extends CourseEntry {
+  weight?: string
+}
+
 export interface Course {
   _id: string
   _type: 'course'
@@ -106,6 +111,10 @@ export interface Course {
   structure?: CourseEntry[]
   admissionsKeys?: LocaleString[]
   admissions?: CourseEntry[]
+  selectionLede?: LocaleText
+  selection?: CourseSelectionEntry[]
+  networkLede?: LocaleText
+  network?: CourseEntry[]
   faq?: CourseEntry[]
 }
 

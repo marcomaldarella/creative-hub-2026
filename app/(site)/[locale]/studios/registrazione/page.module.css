@@ -1,0 +1,14 @@
+/* solo le poche classi locali che la grammatica condivisa (DetailPage,
+   TopicScreen) non copre */
+
+/* etichetta mono sopra i titoli delle fasce nere */
+.bandKicker {
+  display: block;
+  margin-bottom: 16px;
+}
+
+/* i punti della presa diretta: la checklist condivisa, ma a UNA colonna
+   (ul.classe vince sulla singola classe del modulo condiviso) */
+ul.checkOne {
+  grid-template-columns: 1fr;
+}

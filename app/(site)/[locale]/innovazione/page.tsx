@@ -1,16 +1,24 @@
 import type { Metadata } from 'next'
-import { Fragment } from 'react'
+import Image from 'next/image'
 import { notFound } from 'next/navigation'
-import { Counter, CounterRow, Reveal, Rule, SectionHeader } from '@/components/ui'
-import { HeroOrb } from '@/components/sections/HeroOrb'
-import { HeroWords } from '@/components/sections/HeroWords'
-import { PortableBlocks } from '@/components/sections/PortableBlocks'
+import {
+  ArrowLink,
+  Button,
+  Card,
+  Reveal,
+  RevealGroup,
+  Rule,
+  SectionHeader,
+} from '@/components/ui'
 import { SiteChrome } from '@/components/sections/SiteChrome'
 import { isLocale, localeHref } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
 import { pageAlternates } from '@/lib/seo'
-import { getPageById } from '@/lib/sanity/queries'
-import { l } from '@/lib/sanity/l'
+import { getSiteSettings } from '@/lib/sanity/queries'
+import banano1Img from '@/public/img/foto/banano-1.jpg'
+/* grammatica condivisa delle pagine di dettaglio (mockup ott 2026):
+   qui lavora in bianco/nero puro, nessun accento */
+import det from '@/components/sections/DetailPage.module.css'
 import styles from './page.module.css'
 
 export const dynamic = 'force-dynamic'
@@ -24,8 +32,8 @@ export async function generateMetadata({
   if (!isLocale(locale)) return {}
   const t = getDictionary(locale)
   return {
-    title: t.nav.innovation,
-    description: t.innovation.fallbackLede,
+    title: t.innovation.metaTitle,
+    description: t.innovation.metaDesc,
     alternates: pageAlternates(locale, '/innovazione'),
   }
 }
@@ -38,90 +46,209 @@ export default async function InnovazionePage({
   const { locale } = await params
   if (!isLocale(locale)) notFound()
   const t = getDictionary(locale)
+  const settings = await getSiteSettings()
 
-  const page = await getPageById('innovazione')
-  const sections = page?.sections ?? []
-  const stats = [t.innovation.stats.startups, t.innovation.stats.partners]
+  /* l'indirizzo dell'incubatore è fisso (CreaTech), non viene da Sanity */
+  const mailto = `mailto:info@createch.it?subject=${encodeURIComponent(
+    t.innovation.ctaTitle
+  )}`
 
   return (
     <SiteChrome locale={locale} path="/innovazione">
-      <main className={styles.main}>
-        {/* ————— hero: la sfera ex-home CON le tre voci e la loro logica
-            (hover = parola colorata + sfera tinta, evento hero-tint) ————— */}
-        <header className={`${styles.orbHero} scheme-dark`}>
-          {/* stessa intestazione della home: college a sinistra,
-              est./coordinate a destra */}
-          <div className={styles.annot}>
-            <span className="mono">{t.hero.since}</span>
-            <span className="mono">{t.hero.coords}</span>
-          </div>
-          <HeroOrb className={styles.orb} pins={false} />
-          <div className={styles.words}>
-            <HeroWords
-              as="h2"
-              words={[
-                { label: 'Academy', href: localeHref(locale, '/academy') },
-                { label: 'Rec. Studio', href: localeHref(locale, '/studios') },
-                { label: 'Co-Working', href: localeHref(locale, '/coworking') },
-              ]}
-            />
+      <main className={det.main}>
+        {/* ————— testata: testo a sinistra, banano room a destra ————— */}
+        <header className={`wrap ${det.head}`}>
+          <div className={det.headGrid}>
+            <div>
+              <Reveal as="span" className={`mono ${det.kicker}`}>
+                {t.innovation.kicker}
+              </Reveal>
+              <Reveal as="h1" className={`display-thin ${det.title}`} delay={60}>
+                {t.innovation.title}
+              </Reveal>
+              <Reveal as="p" className={det.lede} delay={120}>
+                {t.innovation.lede}
+              </Reveal>
+              <Reveal className={det.heroRow} delay={180}>
+                <Button variant="ghost" className={styles.btnSolid} href="#percorsi">
+                  {t.innovation.heroCta}
+                </Button>
+              </Reveal>
+            </div>
+            <Reveal className={det.headPh} delay={120}>
+              <Image
+                src={banano1Img}
+                alt="La banano room: tavolo rotondo e sedute attorno al grande banano"
+                priority
+                sizes="(max-width: 860px) 100vw, 50vw"
+                className={det.headImg}
+              />
+            </Reveal>
           </div>
         </header>
 
-        {/* ————— intro: kicker/titolo/lede su bianco, sotto l'hero ————— */}
-        <header className={`wrap ${styles.head}`}>
-          <Reveal as="span" className={`mono ${styles.kicker}`}>
-            {t.nav.innovation}
-          </Reveal>
-          <Reveal as="h1" className={`display-thin ${styles.title}`} delay={80}>
-            {l(page?.hero?.title, locale) ?? t.innovation.fallbackTitle}
-          </Reveal>
-          <Reveal as="p" className={styles.lede} delay={160}>
-            {l(page?.hero?.lede, locale) ?? t.innovation.fallbackLede}
-          </Reveal>
-        </header>
-
-
-        {/* ————— sezioni editoriali ————— */}
-        {sections.map((section, i) => (
-          <Fragment key={section._key}>
-            <Rule
-              left={String(i + 1).padStart(2, '0')}
-              right={l(section.kicker, locale)?.toLowerCase()}
-            />
-            <section className={styles.sez}>
-              <div className={`wrap ${styles.editorial}`}>
-                <SectionHeader
-                  kicker={l(section.kicker, locale)?.toLowerCase()}
-                  title={l(section.title, locale)}
-                  className={styles.sectionHead}
-                />
-                <Reveal delay={120}>
-                  <PortableBlocks value={l(section.body, locale)} />
-                </Reveal>
-              </div>
-            </section>
-          </Fragment>
-        ))}
-
-        <Rule left={t.innovation.statsRuleLeft} right={t.innovation.statsRuleRight} />
-
-        {/* ————— numeri ————— */}
-        <section className={styles.sez}>
-          <div className="wrap">
-            <CounterRow>
-              {stats.map((stat) => (
-                <Counter
-                  key={stat.label}
-                  value={stat.value}
-                  suffix={stat.suffix}
-                  label={stat.label}
-                  formatLocale={locale === 'it' ? 'it-IT' : 'en-GB'}
-                />
-              ))}
-            </CounterRow>
+        {/* ————— da dove parti: i quattro percorsi ————— */}
+        <Rule left="01" right={t.innovation.startKicker} />
+        <section id="percorsi" className={`wrap ${det.sez}`}>
+          <SectionHeader
+            kicker={t.innovation.startKicker}
+            title={t.innovation.startTitle}
+            lede={t.innovation.startLede}
+          />
+          <div className={det.grid2}>
+            {t.innovation.paths.map((p, i) => (
+              <Reveal key={p.n} delay={(i % 2) * 80}>
+                {/* la prima card (in.01) è il percorso in evidenza: nera */}
+                <article
+                  className={
+                    i === 0
+                      ? `scheme-dark ${styles.path} ${styles.pathDark}`
+                      : styles.path
+                  }
+                >
+                  <div className={`mono ${styles.pathMeta}`}>
+                    <span>{p.n}</span>
+                    <span>{p.tag}</span>
+                  </div>
+                  <h3 className={styles.pathTitle}>{p.title}</h3>
+                  <p className={styles.pathText}>{p.text}</p>
+                  {p.badge && (
+                    <span className={`mono ${styles.badge}`}>{p.badge}</span>
+                  )}
+                  <div className={styles.pathCta}>
+                    <ArrowLink href={localeHref(locale, p.href)}>
+                      {p.cta}
+                    </ArrowLink>
+                  </div>
+                </article>
+              </Reveal>
+            ))}
           </div>
         </section>
+
+        {/* ————— manifesto: statement grande su bianco ————— */}
+        <section className={`wrap ${styles.manifesto}`}>
+          <Reveal as="p" className={`display-thin ${styles.manifestoText}`}>
+            {t.innovation.manifesto}
+          </Reveal>
+        </section>
+
+        {/* ————— i tre campi di lavoro ————— */}
+        <Rule left="02" right={t.innovation.fieldsKicker} />
+        <section className={`wrap ${det.sez}`}>
+          <SectionHeader
+            kicker={t.innovation.fieldsKicker}
+            title={t.innovation.fieldsTitle}
+          />
+          <div className={det.grid3}>
+            {t.innovation.fields.map((f, i) => (
+              <Reveal key={f.kicker} delay={i * 60}>
+                <Card kicker={f.kicker} title={f.title}>
+                  {f.text}
+                </Card>
+              </Reveal>
+            ))}
+          </div>
+        </section>
+
+        {/* ————— i numeri: fascia nera ————— */}
+        <section className={`scheme-dark ${det.sez}`}>
+          <div className="wrap">
+            <Reveal as="span" className={`mono ${styles.numbersKicker}`}>
+              {t.innovation.numbersKicker}
+            </Reveal>
+            <div className={styles.numbers}>
+              {t.innovation.numbers.map((num, i) => (
+                <Reveal key={num.n} className={styles.number} delay={i * 80}>
+                  <span className={`display-thin ${styles.numberN}`}>
+                    {num.n}
+                  </span>
+                  <span className={styles.numberLabel}>{num.label}</span>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ————— l'ecosistema: le altre anime dell'hub ————— */}
+        <Rule left="03" right={t.innovation.ecoKicker} />
+        <section className={`wrap ${det.sez}`}>
+          <SectionHeader
+            kicker={t.innovation.ecoKicker}
+            title={t.innovation.ecoTitle}
+            lede={t.innovation.ecoLede}
+          />
+          <div className={det.grid3}>
+            {t.innovation.eco.map((e, i) => (
+              <Reveal key={e.kicker} delay={i * 60}>
+                <Card kicker={e.kicker} title={e.title}>
+                  <p>{e.text}</p>
+                  <div className={styles.cardCta}>
+                    <ArrowLink href={localeHref(locale, e.href)}>
+                      {e.cta}
+                    </ArrowLink>
+                  </div>
+                </Card>
+              </Reveal>
+            ))}
+          </div>
+        </section>
+
+        {/* ————— partner ————— */}
+        <Rule left="04" right={t.innovation.partnersKicker} />
+        <section className={`wrap ${det.sez}`}>
+          <Reveal as="h2" className={`display-thin ${det.h2}`}>
+            {t.innovation.partnersTitle}
+          </Reveal>
+          <RevealGroup className={det.partners}>
+            {t.innovation.partners.map((p) => (
+              <span key={p} className={`rv ${det.partner}`}>
+                {p}
+              </span>
+            ))}
+          </RevealGroup>
+        </section>
+
+        {/* ————— chiusura: parliamo del tuo progetto ————— */}
+        <div className={`scheme-dark ${det.dark}`}>
+          <section className={`wrap ${det.sez}`}>
+            <Reveal as="span" className={`mono ${det.kicker}`}>
+              {t.innovation.ctaKicker}
+            </Reveal>
+            <Reveal as="h2" className={`display-thin ${det.ctaTitle}`} delay={60}>
+              {t.innovation.ctaTitle}
+            </Reveal>
+            <Reveal as="p" className={det.ctaText} delay={120}>
+              {t.innovation.ctaText}
+            </Reveal>
+            <Reveal className={det.ctaRow} delay={180}>
+              <Button
+                variant="ghost"
+                className={styles.btnSolid}
+                href={mailto}
+                external
+              >
+                {t.innovation.ctaWrite}
+              </Button>
+              {settings?.phone && (
+                <ArrowLink
+                  href={`tel:${settings.phone.replace(/\s/g, '')}`}
+                  external
+                >
+                  {settings.phone}
+                </ArrowLink>
+              )}
+            </Reveal>
+            <div className={det.mailRows}>
+              {t.innovation.mailNotes.map((m) => (
+                <a key={m.mail} href={`mailto:${m.mail}`} className={det.mailRow}>
+                  <span className={det.mailAddr}>{m.mail}</span>
+                  <span className={det.mailNote}>{m.note}</span>
+                </a>
+              ))}
+            </div>
+          </section>
+        </div>
       </main>
     </SiteChrome>
   )

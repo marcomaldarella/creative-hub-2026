@@ -170,6 +170,56 @@ export const course = defineType({
       fieldset: 'scheda',
     }),
     defineField({
+      name: 'selectionLede',
+      title: 'Selezione — introduzione',
+      description:
+        'Il paragrafo sotto "Come funziona la selezione." — la sezione compare solo se le voci pesate sono compilate.',
+      type: 'localeText',
+      fieldset: 'scheda',
+    }),
+    defineField({
+      name: 'selection',
+      title: 'Selezione — voci pesate',
+      description:
+        'Le voci della sezione "Come funziona la selezione." (corsi finanziati): il peso è l’etichetta grossa, es. "55%".',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'weight',
+              title: 'Peso',
+              description: 'Es. "55%".',
+              type: 'string',
+            }),
+            defineField({ name: 'title', title: 'Titolo', type: 'localeString' }),
+            defineField({ name: 'text', title: 'Testo', type: 'localeText' }),
+          ],
+          preview: {
+            select: { title: 'weight', subtitle: 'title.it' },
+          },
+        },
+      ],
+      fieldset: 'scheda',
+    }),
+    defineField({
+      name: 'networkLede',
+      title: 'Rete — introduzione',
+      description: 'Il paragrafo sotto "Con chi lavori."',
+      type: 'localeText',
+      fieldset: 'scheda',
+    }),
+    defineField({
+      name: 'network',
+      title: 'Rete del corso',
+      description:
+        'Le colonne della sezione "Con chi lavori." (es. soggetti attuatori / soggetti promotori): nomi separati da " · " nel testo.',
+      type: 'array',
+      of: [schedaEntry],
+      fieldset: 'scheda',
+    }),
+    defineField({
       name: 'faq',
       title: 'Domande frequenti',
       description: 'Domanda nel titolo, risposta nel testo.',

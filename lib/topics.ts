@@ -59,20 +59,32 @@ export const TOPICS: Topic[] = [
   { slug: 'servizi-studenti', base: '/academy', key: 'serviziStudenti' },
 
   /* ————— studio ————— */
+  /* registrazione, mix-mastering e affitto-studio hanno route statiche
+     dedicate (mockup ott 2026): stanno qui per nav e sitemap, la route
+     [slug] non li serve mai */
+  { slug: 'registrazione', base: '/studios', key: 'registrazione' },
+  { slug: 'mix-mastering', base: '/studios', key: 'mixMastering' },
   { slug: 'dolby-atmos', base: '/studios', key: 'dolbyAtmos' },
   { slug: 'sound-design', base: '/studios', key: 'soundDesign' },
   { slug: 'podcast', base: '/studios', key: 'podcast' },
+  { slug: 'affitto-studio', base: '/studios', key: 'affittoStudio' },
 
   /* ————— coworking ————— */
   { slug: 'sale-eventi', base: '/coworking', key: 'saleEventi' },
   { slug: 'metaverso', base: '/coworking', key: 'metaverso' },
 
   /* ————— innovazione ————— */
+  /* mockup ott 2026: incubazione e accelerazione sono lo stesso programma
+     (CreaTech Venture Club) → una pagina sola; i vecchi slug vanno in 301
+     (next.config.ts). Tutte e quattro hanno route statiche dedicate */
+  {
+    slug: 'incubazione-accelerazione',
+    base: '/innovazione',
+    key: 'incubazioneAccelerazione',
+  },
   { slug: 'aziende', base: '/innovazione', key: 'aziende' },
-  { slug: 'incubazione', base: '/innovazione', key: 'incubazione' },
-  { slug: 'accelerazione', base: '/innovazione', key: 'accelerazione' },
-  { slug: 'cte-cobo', base: '/innovazione', key: 'cteCobo' },
   { slug: 'bandi', base: '/innovazione', key: 'bandi' },
+  { slug: 'cte-cobo', base: '/innovazione', key: 'cteCobo' },
 
   /* ————— chi siamo ————— */
   { slug: 'ecosistema', base: '/chi-siamo', key: 'ecosistema' },

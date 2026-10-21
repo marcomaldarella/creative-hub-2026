@@ -266,3 +266,54 @@
   font-size: var(--fs-lede);
   line-height: 1.5;
 }
+
+/* ————— card servizio → pagina: riga "esplora" in fondo (mockup ott 2026) ————— */
+
+.cardGo {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 14px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+/* la freccia ha un transform inline (rotazione): si trasla tutta la
+   riga, non l'svg */
+.cardGo {
+  transition: transform 0.2s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.spaceCard:hover .cardGo {
+  transform: translateX(3px);
+}
+
+/* ————— tecnologia e partner: nomi in griglia hairline ————— */
+
+.tech {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0 clamp(20px, 2.5vw, 36px);
+  border-top: 1px solid var(--line);
+}
+
+.techName {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+@media (max-width: 1000px) {
+  .tech {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .tech {
+    grid-template-columns: 1fr;
+  }
+}

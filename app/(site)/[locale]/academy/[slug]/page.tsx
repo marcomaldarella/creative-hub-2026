@@ -175,6 +175,18 @@ export default async function CoursePage({
       .filter(Boolean),
     structure: entries(course.structure),
     admissions: entries(course.admissions),
+    /* selezione pesata e rete del corso (mockup finanziati): le sezioni
+       compaiono solo se compilate in Sanity */
+    selectionLede: l(course.selectionLede, locale) ?? undefined,
+    selection: (course.selection ?? [])
+      .map((it) => ({
+        weight: it.weight ?? '',
+        title: l(it.title, locale) ?? '',
+        text: l(it.text, locale) ?? '',
+      }))
+      .filter((it) => it.title || it.text),
+    networkLede: l(course.networkLede, locale) ?? undefined,
+    network: entries(course.network),
     faq: entries(course.faq),
     /* griglia docenti: il primo collegato in Sanity è il course leader;
        la griglia si completa a 4 con i segnaposto del brief */
