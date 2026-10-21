@@ -88,13 +88,16 @@ a.card {
     filter 0.35s ease;
 }
 
+/* il mouse "illumina" la card: colore pieno e un filo oltre il
+   naturale, come un occhio di bue sul corso puntato */
 a.card:hover .cardImg {
   transform: scale(1.08);
-  filter: saturate(1) brightness(1);
+  filter: saturate(1.06) brightness(1.08);
 }
 
-/* mentre una card è accesa, il resto del campo si spegne: bianco e
-   nero + opacità ridotta, l'occhio sta solo sul corso illuminato.
+/* mentre una card è accesa, il resto del campo si spegne: quasi
+   bianco e nero, più scuro del riposo e SENZA caption — restano
+   solo le foto spente attorno a quella illuminata.
    :has() sul campo e non :hover sulla riga: sfiorare i gap non deve
    spegnere tutto senza accendere niente */
 a.card {
@@ -102,11 +105,16 @@ a.card {
 }
 
 .field:has(a.card:hover) a.card:not(:hover) {
-  opacity: 0.45;
+  opacity: 0.6;
 }
 
 .field:has(a.card:hover) a.card:not(:hover) .cardImg {
-  filter: grayscale(1) brightness(0.5);
+  filter: grayscale(0.92) brightness(0.36);
+}
+
+.field:has(a.card:hover) a.card:not(:hover) .cardBody,
+.field:has(a.card:hover) a.card:not(:hover) .cardMeta {
+  opacity: 0;
 }
 
 /* solo lo scrim di lettura al piede: più alto e con più stop — il
