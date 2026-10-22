@@ -2090,7 +2090,41 @@
         "title": "Lezioni di produzione musicale e Ableton a Bologna | Creative Hub Academy",
         "description": "Lezioni di produzione musicale a Bologna e online: produci il tuo primo brano completo, anche partendo da zero, in un’aula dedicata ad Ableton. Lezioni anche serali. Prima lezione gratuita."
       }
-    }
+    },
+    "facesLine": "{n} insegnanti in attività. Quando prenoti puoi dirci con chi vorresti iniziare.",
+    "facesBySlug": {
+      "corso-custom-chitarra": "{n} chitarristi in attività. Quando prenoti puoi dirci con chi vorresti iniziare.",
+      "corso-custom-produzione-musicale": "{n} produttori in attività. Quando prenoti puoi dirci con chi vorresti iniziare.",
+      "corso-custom-canto": "{n} insegnanti, tutti in attività come cantanti. Quando prenoti puoi dirci con chi vorresti iniziare."
+    },
+    "creditsLabel": "I nostri insegnanti hanno suonato con",
+    "creditsBySlug": {
+      "corso-custom-chitarra": [
+        "Ian Paice (Deep Purple)",
+        "Frank Gambale",
+        "Gregg Bissonette",
+        "Gianna Nannini",
+        "Mietta",
+        "Francesco Baccini",
+        "Ladri di Biciclette",
+        "Tony Esposito"
+      ]
+    },
+    "numbers": [
+      "",
+      "Un",
+      "Due",
+      "Tre",
+      "Quattro",
+      "Cinque",
+      "Sei",
+      "Sette",
+      "Otto",
+      "Nove",
+      "Dieci"
+    ],
+    "navPrev": "sezione precedente",
+    "navNext": "sezione successiva"
   },
   "saleEventiPage": {
     "kicker": "coworking · sale & eventi",

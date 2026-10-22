@@ -35,12 +35,16 @@ export function UniSubnav({
   items,
   prevLabel,
   nextLabel,
+  tone = 'accent',
 }: {
   course: string
   year: string
   items: UniSubnavItem[]
   prevLabel: string
   nextLabel: string
+  /* 'accent' = barra nel colore di sezione (landing universitari),
+     'dark' = barra nera come nei mockup delle lezioni */
+  tone?: 'accent' | 'dark'
 }) {
   const [active, setActive] = useState(0)
   const barRef = useRef<HTMLDivElement>(null)
@@ -100,7 +104,14 @@ export function UniSubnav({
   }
 
   return (
-    <div className={styles.subnav} ref={barRef}>
+    <div
+      className={
+        tone === 'dark'
+          ? `scheme-dark ${styles.subnav} ${styles.subnavDark}`
+          : styles.subnav
+      }
+      ref={barRef}
+    >
       <div className={`wrap ${styles.subnavIn}`}>
         <div className={styles.subnavCourse}>{course}</div>
         <nav className={styles.jump} aria-label={course} ref={jumpRef}>

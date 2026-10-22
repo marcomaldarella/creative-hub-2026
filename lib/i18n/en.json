@@ -2090,7 +2090,41 @@
         "title": "Music production and Ableton lessons in Bologna | Creative Hub Academy",
         "description": "Music production lessons in Bologna and online: finish your first complete track, even starting from scratch, in a room dedicated to Ableton. Evening slots too. First lesson free."
       }
-    }
+    },
+    "facesLine": "{n} teachers still performing. When you book you can tell us who you would like to start with.",
+    "facesBySlug": {
+      "corso-custom-chitarra": "{n} guitarists still performing. When you book you can tell us who you would like to start with.",
+      "corso-custom-produzione-musicale": "{n} producers at work. When you book you can tell us who you would like to start with.",
+      "corso-custom-canto": "{n} teachers, all of them working singers. When you book you can tell us who you would like to start with."
+    },
+    "creditsLabel": "Our teachers have played with",
+    "creditsBySlug": {
+      "corso-custom-chitarra": [
+        "Ian Paice (Deep Purple)",
+        "Frank Gambale",
+        "Gregg Bissonette",
+        "Gianna Nannini",
+        "Mietta",
+        "Francesco Baccini",
+        "Ladri di Biciclette",
+        "Tony Esposito"
+      ]
+    },
+    "numbers": [
+      "",
+      "One",
+      "Two",
+      "Three",
+      "Four",
+      "Five",
+      "Six",
+      "Seven",
+      "Eight",
+      "Nine",
+      "Ten"
+    ],
+    "navPrev": "previous section",
+    "navNext": "next section"
   },
   "saleEventiPage": {
     "kicker": "coworking · rooms & events",

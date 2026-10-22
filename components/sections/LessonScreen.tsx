@@ -2,6 +2,7 @@ import Link from 'next/link'
 import {
   Arrow,
   ArrowLink,
+  Marquee,
   Reveal,
   RevealGroup,
   Rule,
@@ -15,6 +16,7 @@ import {
 } from '@/components/sections/LessonForm'
 import { PointsAccordion } from '@/components/sections/PointsAccordion'
 import { SiteChrome } from '@/components/sections/SiteChrome'
+import { UniSubnav } from '@/components/sections/UniSubnav'
 import { Thumb } from '@/components/sections/Thumb'
 import { localeHref, type Locale } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
@@ -98,6 +100,27 @@ export function LessonScreen({
     .map((k) => l(k, locale))
     .filter(Boolean) as string[]
   const modiIntro = l(course.structureIntro, locale)
+  /* iniziali per il ritratto mancante: "Alberto Bergonzoni" → AB */
+  const initials = (name?: string | null) =>
+    (name ?? '')
+      .trim()
+      .split(/\s+/)
+      .slice(0, 2)
+      .map((w) => w[0]?.toUpperCase() ?? '')
+      .join('')
+  const slugNow = course.slug?.current ?? ''
+  const facesTpl =
+    (t.lesson.facesBySlug as Record<string, string>)[slugNow] ??
+    t.lesson.facesLine
+  const facesLine = facesTpl.replace(
+    '{n}',
+    t.lesson.numbers[teachers.length] ?? String(teachers.length),
+  )
+  /* "i nostri insegnanti hanno suonato con": solo dove il cliente ha
+     dato i crediti (nel mockup ce l'ha la chitarra) */
+  const credits =
+    (t.lesson.creditsBySlug as Record<string, string[]>)[slugNow] ?? []
+
   const academyPath = localeHref(locale, '/academy')
   const kick = (n: number, label: string) =>
     `${String(n).padStart(2, '0')} — ${label}`
@@ -126,6 +149,19 @@ export function LessonScreen({
   const packTerms = (course.packagesTerms ?? [])
     .map((k) => l(k, locale))
     .filter(Boolean) as string[]
+
+  /* voci dell'indice sticky: solo le sezioni che la pagina rende
+     davvero (un corso senza docenti o senza prezzi non le elenca) */
+  const navItems = [
+    metodo.length > 0 && { id: 'metodo', label: t.lesson.metodoKicker },
+    teachers.length > 0 && { id: 'docenti', label: t.lesson.teachersKicker },
+    skills.length > 0 && { id: 'impari', label: t.lesson.skillsKicker },
+    modi.length > 0 && { id: 'modi', label: t.lesson.modiKicker },
+    come.length > 0 && { id: 'come', label: t.lesson.comeKicker },
+    packs.length > 0 && { id: 'prezzi', label: t.lesson.packages.kicker },
+    faq.length > 0 && { id: 'faq', label: t.lesson.faqKicker },
+    { id: LESSON_FORM_ANCHOR, label: t.lesson.bookKicker },
+  ].filter(Boolean) as { id: string; label: string }[]
 
   /* uscita SEO verso il corso universitario omologo (note sviluppatore:
      non cannibalizzare la pagina universitaria) — mappa slug → corso.
@@ -210,6 +246,34 @@ export function LessonScreen({
                 ))}
               </RevealGroup>
             )}
+            {/* la fila degli insegnanti del mockup: ritratto dove c'è,
+                altrimenti le iniziali come nel layout del cliente */}
+            {teachers.length > 0 && (
+              <Reveal className={styles.faces} delay={220}>
+                <div className={styles.facesRow}>
+                  {teachers.map((tc) => {
+                    const photo = tc.photo?.asset
+                      ? urlFor(tc.photo).width(120).height(120).fit('crop').url()
+                      : null
+                    return (
+                      <span
+                        key={tc._id ?? tc.name}
+                        className={styles.face}
+                        title={tc.name ?? ''}
+                      >
+                        {photo ? (
+                          /* eslint-disable-next-line @next/next/no-img-element */
+                          <img src={photo} alt="" className={styles.faceImg} />
+                        ) : (
+                          initials(tc.name)
+                        )}
+                      </span>
+                    )
+                  })}
+                </div>
+                <p className={styles.facesLine}>{facesLine}</p>
+              </Reveal>
+            )}
           </div>
           {/* l'ancora resta su questa istanza: i bottoni "Prova con…"
               e le card pacchetto prefillano e scrollano qui */}
@@ -217,6 +281,36 @@ export function LessonScreen({
             {form}
           </Reveal>
         </header>
+
+        {/* "i nostri insegnanti hanno suonato con": la fascia di prova
+            del mockup, con i crediti veri dove il cliente li ha dati */}
+        {credits.length > 0 && (
+          <div className={`scheme-dark ${styles.credits}`}>
+            <span className={`mono ${styles.creditsLabel}`}>
+              {t.lesson.creditsLabel}
+            </span>
+            <Marquee
+              speed={34}
+              items={credits.map((c) => (
+                <span key={c} className={styles.credit}>
+                  {c}
+                </span>
+              ))}
+            />
+          </div>
+        )}
+
+        {/* indice sticky delle sezioni, come sulla landing universitari */}
+        {navItems.length > 2 && (
+          <UniSubnav
+            course={title}
+            year={badges[0] ?? ''}
+            items={navItems}
+            prevLabel={t.lesson.navPrev}
+            nextLabel={t.lesson.navNext}
+            tone="dark"
+          />
+        )}
 
         {/* cover a tutto campo */}
         <Reveal className={styles.cover}>
@@ -227,7 +321,7 @@ export function LessonScreen({
         {metodo.length > 0 && (
           <>
             <Rule left={String(++n).padStart(2, '0')} right={t.lesson.metodoKicker} />
-            <section className={`wrap ${styles.sez} ${styles.duo}`}>
+            <section id="metodo" className={`wrap ${styles.sez} ${styles.duo}`}>
               <SectionHeader
                 kicker={kick(n, t.lesson.metodoKicker)}
                 title={t.lesson.metodoTitle}
@@ -247,7 +341,7 @@ export function LessonScreen({
         {teachers.length > 0 && (
           <div className={`scheme-dark ${styles.dark}`}>
             <Rule left={String(++n).padStart(2, '0')} right={t.lesson.teachersKicker} />
-            <section className={`wrap ${styles.sez}`}>
+            <section id="docenti" className={`wrap ${styles.sez}`}>
               <SectionHeader
                 kicker={kick(n, t.lesson.teachersKicker)}
                 title={t.lesson.teachersTitle}
@@ -356,7 +450,7 @@ export function LessonScreen({
         {skills.length > 0 && (
           <>
             <Rule left={String(++n).padStart(2, '0')} right={t.lesson.skillsKicker} />
-            <section className={`wrap ${styles.sez}`}>
+            <section id="impari" className={`wrap ${styles.sez}`}>
               <SectionHeader
                 kicker={kick(n, t.lesson.skillsKicker)}
                 title={l(course.skillsLede, locale) ?? ''}
@@ -380,15 +474,19 @@ export function LessonScreen({
         {modi.length > 0 && (
           <>
             <Rule left={String(++n).padStart(2, '0')} right={t.lesson.modiKicker} />
-            <section className={`wrap ${styles.sez} ${styles.duo}`}>
+            <section id="modi" className={`wrap ${styles.sez} ${styles.duo}`}>
               <SectionHeader
                 kicker={kick(n, t.lesson.modiKicker)}
                 title={t.lesson.modiTitle}
                 lede={modiIntro ?? undefined}
               />
+              {/* i tre modi sono card nere, come nel mockup (.fmt) */}
               <div className={styles.modi}>
                 {modi.map((m) => (
-                  <Reveal key={m.title} className={styles.modo}>
+                  <Reveal
+                    key={m.title}
+                    className={`scheme-dark ${styles.modo}`}
+                  >
                     <h3 className={styles.cellTitle}>{m.title}</h3>
                     <p className={styles.cellText}>{m.text}</p>
                   </Reveal>
@@ -402,7 +500,7 @@ export function LessonScreen({
         {come.length > 0 && (
           <>
             <Rule left={String(++n).padStart(2, '0')} right={t.lesson.comeKicker} />
-            <section className={`wrap ${styles.sez} ${styles.duo}`}>
+            <section id="come" className={`wrap ${styles.sez} ${styles.duo}`}>
               <SectionHeader
                 kicker={kick(n, t.lesson.comeKicker)}
                 title={t.lesson.comeTitle}
@@ -429,17 +527,28 @@ export function LessonScreen({
               left={String(++n).padStart(2, '0')}
               right={t.lesson.packages.kicker}
             />
-            <section className={`wrap ${styles.sez}`}>
+            <section id="prezzi" className={`wrap ${styles.sez}`}>
               <SectionHeader
                 kicker={kick(n, t.lesson.packages.kicker)}
                 title={t.lesson.packages.title}
                 lede={t.lesson.packages.lede}
               />
               <RevealGroup className={styles.packs}>
-                {packs.map((p) => (
+                {packs.map((p, pi) => (
                   <div
                     key={p._key ?? l(p.name, locale)}
-                    className={`rv ${styles.pack} ${!p.plan ? styles.packFree : ''}`}
+                    /* come nel mockup: la prova si stacca col bordo pieno,
+                       la formula più completa è la card nera */
+                    className={[
+                      'rv',
+                      styles.pack,
+                      !p.plan ? styles.packFree : '',
+                      p.plan && pi === packs.length - 1
+                        ? `scheme-dark ${styles.packHi}`
+                        : '',
+                    ]
+                      .filter(Boolean)
+                      .join(' ')}
                   >
                     {l(p.badge, locale) && (
                       <span className={`mono ${styles.packBadge}`}>
@@ -490,7 +599,7 @@ export function LessonScreen({
         {faq.length > 0 && (
           <>
             <Rule left={String(++n).padStart(2, '0')} right={t.lesson.faqKicker} />
-            <section className={`wrap ${styles.sez} ${styles.duo}`}>
+            <section id="faq" className={`wrap ${styles.sez} ${styles.duo}`}>
               <SectionHeader
                 kicker={kick(n, t.lesson.faqKicker)}
                 title={t.lesson.faqTitle}

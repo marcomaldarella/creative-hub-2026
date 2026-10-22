@@ -1162,3 +1162,13 @@
     gap: 4px;
   }
 }
+
+/* variante scura della barra sticky (mockup lezioni su misura) */
+.subnavDark {
+  background: var(--bg);
+  border-color: var(--line);
+}
+
+.subnavDark .subnavCourse {
+  color: var(--fg);
+}

@@ -94,10 +94,24 @@
   background: color-mix(in srgb, #ffffff 16%, transparent);
 }
 
-/* la card in evidenza porta i token scuri (classe globale scheme-dark):
-   fondo nero, testo osso, e la pill di stato si inverte da sola */
+/* la card in evidenza: nera a colori ESPLICITI. Non basta appoggiarsi a
+   scheme-dark — dentro una pagina a colore pieno il testo secondario
+   restava del colore della pagina e spariva sul nero. */
 .cardHot {
-  border-color: var(--bg);
+  background: #000000;
+  border-color: #000000;
+  color: #fafafa;
+}
+
+.cardHot .cardCat,
+.cardHot .cardText,
+.cardHot .cardMeta {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.cardHot .cardTitle,
+.cardHot .cardCta {
+  color: #ffffff;
 }
 
 /* solo le card che linkano una scheda vera reagiscono al puntatore */
