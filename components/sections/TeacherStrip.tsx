@@ -1,7 +1,11 @@
 'use client'
 
-import { useCallback, useEffect, useRef, useState } from 'react'
-import { Arrow } from '@/components/ui'
+import { useCallback } from 'react'
+import {
+  ScrollerControls,
+  useScrollRail,
+  type ScrollerLabels,
+} from '@/components/ui'
 import { l } from '@/lib/sanity/l'
 import type { Locale } from '@/lib/i18n/config'
 import type { Teacher } from '@/lib/sanity/types'
@@ -21,17 +25,19 @@ export type TeacherStripProps = {
   locale: Locale
   /** ultima cella: cerchio vuoto col + che invita a candidarsi */
   join: { label: string; role: string; href: string }
-  labels: { prev: string; next: string; hint: string }
+  labels: ScrollerLabels
 }
 
 /**
  * Fila di docenti che scorre in orizzontale.
  *
- * Tre regole, tutte volute:
- *  · `overscroll-behavior: contain` (nel CSS) — lo scroll orizzontale non
- *    si propaga MAI alla pagina: senza, arrivati in fondo alla fila il
- *    gesto continuava sul documento e la pagina saltava in alto;
- *  · niente scrollbar di sistema: al suo posto una barretta di avanzamento
+ * Stessa grammatica di tutti gli scroller del sito: utility globali
+ * `.scroller .scroller-snap` sulla superficie e `ScrollerControls` sotto.
+ * In particolare, tre regole che restano volute:
+ *  · `overscroll-behavior-x: contain` (in `.scroller`) — lo scroll
+ *    orizzontale non si propaga MAI alla pagina: senza, arrivati in fondo
+ *    alla fila il gesto continuava sul documento e la pagina saltava in alto;
+ *  · niente scrollbar di sistema: al suo posto la barretta di avanzamento
  *    che dice quanta fila resta;
  *  · le frecce muovono il nastro con scrollBy — mai scrollIntoView, che
  *    porterebbe con sé anche lo scroll verticale del documento.
@@ -42,48 +48,20 @@ export function TeacherStrip({
   join,
   labels,
 }: TeacherStripProps) {
-  const ref = useRef<HTMLUListElement | null>(null)
-  const [progress, setProgress] = useState(0) // 0..1, posizione del pollice
-  const [thumb, setThumb] = useState(1) // 0..1, quota di fila visibile
-  const [atStart, setAtStart] = useState(true)
-  const [atEnd, setAtEnd] = useState(false)
-
-  const measure = useCallback(() => {
-    const el = ref.current
-    if (!el) return
-    const max = el.scrollWidth - el.clientWidth
-    setThumb(el.scrollWidth > 0 ? el.clientWidth / el.scrollWidth : 1)
-    setProgress(max > 0 ? el.scrollLeft / max : 0)
-    setAtStart(el.scrollLeft <= 1)
-    setAtEnd(max <= 1 || el.scrollLeft >= max - 1)
-  }, [])
-
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
-    measure()
-    const ro = new ResizeObserver(measure)
-    ro.observe(el)
-    return () => ro.disconnect()
-  }, [measure])
-
-  const nudge = (dir: 1 | -1) => {
-    const el = ref.current
-    if (!el) return
-    /* un passo ≈ due ritratti, mai più di uno schermo di fila */
-    const step = Math.min(el.clientWidth * 0.8, 340)
-    el.scrollBy({ left: dir * step, behavior: 'smooth' })
-  }
-
-  const hasOverflow = thumb < 0.999
+  /* un passo ≈ due ritratti, mai più di uno schermo di fila */
+  const step = useCallback(
+    (el: HTMLUListElement) => Math.min(el.clientWidth * 0.8, 340),
+    []
+  )
+  const rail = useScrollRail<HTMLUListElement>(step)
 
   return (
     <div className={styles.wrap}>
       <ul
-        ref={ref}
-        className={styles.strip}
-        onScroll={measure}
-        tabIndex={-1}
+        ref={rail.ref}
+        className={`scroller scroller-snap ${styles.strip}`}
+        onScroll={rail.measure}
+        tabIndex={0}
         aria-label={labels.hint}
       >
         {teachers.map((teacher, i) => (
@@ -133,44 +111,7 @@ export function TeacherStrip({
         </li>
       </ul>
 
-      {hasOverflow && (
-        <div className={styles.controls}>
-          {/* indicatore: la barretta dice quanta fila manca alla fine */}
-          <div
-            className={styles.track}
-            role="presentation"
-            title={labels.hint}
-          >
-            <span
-              className={styles.thumb}
-              style={{
-                width: `${Math.max(thumb, 0.12) * 100}%`,
-                left: `${progress * (100 - Math.max(thumb, 0.12) * 100)}%`,
-              }}
-            />
-          </div>
-          <div className={styles.arrows}>
-            <button
-              type="button"
-              className={styles.nav}
-              aria-label={labels.prev}
-              disabled={atStart}
-              onClick={() => nudge(-1)}
-            >
-              <Arrow dir="w" size={16} />
-            </button>
-            <button
-              type="button"
-              className={styles.nav}
-              aria-label={labels.next}
-              disabled={atEnd}
-              onClick={() => nudge(1)}
-            >
-              <Arrow dir="e" size={16} />
-            </button>
-          </div>
-        </div>
-      )}
+      <ScrollerControls rail={rail} labels={labels} />
     </div>
   )
 }

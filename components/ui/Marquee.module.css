@@ -5,6 +5,11 @@
   overflow: hidden;
 }
 
+/* involucro fermo: porta la sfumatura condivisa (.scroller-fade) */
+.mask {
+  overflow: hidden;
+}
+
 .track {
   display: flex;
   width: max-content;
@@ -30,7 +35,7 @@
   font-size: 24px;
   color: var(--fg-2);
   white-space: nowrap;
-  transition: color 0.2s;
+  transition: color var(--scroller-dur) var(--ease-out);
 }
 
 .item:hover {
@@ -58,10 +63,21 @@
   color: var(--osso);
 }
 
-/* degrado: lista statica scrollabile */
+/* degrado: lista statica scrollabile — con la stessa grammatica degli
+   altri scroller (barra di sistema nascosta, nessun chaining sulla
+   pagina): .scroller vale anche qui */
 @media (prefers-reduced-motion: reduce) {
-  .marquee {
+  .mask {
     overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .mask::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    display: none;
   }
 
   .track {

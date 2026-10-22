@@ -180,13 +180,13 @@ export function ExploreField({ rows }: { rows: ExploreCard[][] }) {
         vels[i] = step / Math.max(1, now - lastT)
         lastX = e.clientX
         lastT = now
-        el.classList.add(styles.dragging)
+        el.classList.add('scroller-dragging')
       }
       const up = (e: PointerEvent) => {
         if (dragRow !== i || e.pointerId !== pointerId) return
         dragRow = -1
         axis = null
-        el.classList.remove(styles.dragging)
+        el.classList.remove('scroller-dragging')
         /* il flag moved cade al giro dopo: il click post-drag è
            soppresso, quello successivo no */
         setTimeout(() => {
@@ -258,11 +258,15 @@ export function ExploreField({ rows }: { rows: ExploreCard[][] }) {
   )
 
   return (
-    <div className={styles.field} ref={fieldRef} onDragStart={(e) => e.preventDefault()}>
+    <div
+      className={`scroller-fade ${styles.field}`}
+      ref={fieldRef}
+      onDragStart={(e) => e.preventDefault()}
+    >
       {rows.map((items, r) => (
         <div
           key={r}
-          className={styles.row}
+          className={`scroller-drag ${styles.row}`}
           ref={(el) => {
             rowRefs.current[r] = el
           }}

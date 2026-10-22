@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation'
 import { ArrowLink, Reveal } from '@/components/ui'
 import { SiteChrome } from '@/components/sections/SiteChrome'
 import { BookingFlow } from '@/components/sections/BookingFlow'
+import { SectionPagesNav } from '@/components/sections/SectionPagesNav'
 import { isLocale, localeHref } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
 import { pageAlternates } from '@/lib/seo'
@@ -90,6 +91,13 @@ export default async function PrenotaPage({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+        {/* ————— barra delle tre pagine della sezione (mockup) ————— */}
+        <SectionPagesNav
+          locale={locale}
+          base="/coworking"
+          current="/coworking/prenota"
+        />
+
         <header className={`wrap ${styles.head}`}>
           <Reveal className={styles.back}>
             <ArrowLink href={localeHref(locale, '/coworking')} reverse>

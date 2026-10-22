@@ -790,7 +790,31 @@
       "error": "Non siamo riusciti a inviare la richiesta: riprova, o scrivici.",
       "more": "scegli la formula con calma",
       "hp": "Lascia vuoto questo campo"
-    }
+    },
+    "subnavLabel": "Coworking · zona Roveri",
+    "subnavPages": [
+      "Coworking",
+      "Sale & eventi",
+      "Prenota il tuo spazio"
+    ],
+    "mobileBarCta": "Prenota",
+    "corridoiCaptions": [
+      "Il murale \"future together\"",
+      "La scala \"small steps big change\"",
+      "I corridoi delle aule",
+      "L'ingresso dell'area CW300",
+      "La library",
+      "La segreteria",
+      "Il corridoio degli uffici"
+    ],
+    "tableWas": [
+      "",
+      "95€",
+      "",
+      "",
+      "",
+      ""
+    ]
   },
   "prenota": {
     "kicker": "prenota il tuo spazio",
@@ -2131,7 +2155,8 @@
     "facts": [
       "Da 10 persone all'aula magna",
       "Dirette streaming dall'aula magna",
-      "Catering su richiesta"
+      "Catering su richiesta",
+      "Zona Roveri, Bologna"
     ],
     "roomsKicker": "le sale",
     "roomsTitle": "Scegli la sala.",
@@ -2169,7 +2194,80 @@
         "n": "ev.06",
         "price": "su preventivo"
       }
-    ]
+    ],
+    "builderKicker": "componi il tuo evento",
+    "builderTitle": "Componi il tuo evento.",
+    "builderLede": "Quattro scelte e ti mandiamo una proposta con sala, servizi e preventivo.",
+    "builder": {
+      "subject": "Proposta per un evento",
+      "q1": "1. Che evento è?",
+      "types": [
+        {
+          "id": "riunione",
+          "label": "Riunione o colloquio",
+          "room": "Sala riunioni"
+        },
+        {
+          "id": "corso",
+          "label": "Corso o workshop",
+          "room": "Sala didattica"
+        },
+        {
+          "id": "talk",
+          "label": "Talk o conferenza",
+          "room": "Aula magna"
+        },
+        {
+          "id": "aziendale",
+          "label": "Evento aziendale",
+          "room": "Aula magna"
+        },
+        {
+          "id": "networking",
+          "label": "Networking o aperitivo",
+          "room": "Banano room"
+        },
+        {
+          "id": "mostra",
+          "label": "Mostra o lancio",
+          "room": "Showroom"
+        }
+      ],
+      "q2": "2. Quante persone?",
+      "sizes": [
+        "fino a 10",
+        "10–30",
+        "30–80",
+        "più di 80"
+      ],
+      "q3": "3. Quando?",
+      "q4": "4. Cosa ti serve in più?",
+      "extras": [
+        "Diretta streaming",
+        "Catering",
+        "Tecnico audio e video",
+        "Foto e video dell'evento"
+      ],
+      "roomBig": "Area Culture o sala didattica",
+      "summaryTitle": "Il tuo evento",
+      "sType": "tipo",
+      "sSize": "persone",
+      "sDate": "data",
+      "sRoom": "sala",
+      "sExtra": "extra",
+      "noDate": "da scegliere",
+      "noExtra": "nessuno",
+      "name": "Nome e cognome",
+      "contact": "Cellulare o email",
+      "send": "Chiedi la proposta",
+      "sending": "Invio…",
+      "missing": "Compila nome e contatto.",
+      "sendError": "L'invio non è andato a buon fine: riprova tra poco, o chiama lo 051 631 3706.",
+      "doneTitle": "Richiesta inviata.",
+      "doneText": "Ti mandiamo la proposta dal lunedì al venerdì.",
+      "privacyBefore": "Inviando accetti l'",
+      "privacyLink": "informativa privacy"
+    }
   },
   "innovationSub": {
     "back": "torna a innovazione",

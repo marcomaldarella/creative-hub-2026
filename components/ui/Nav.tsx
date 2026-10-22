@@ -262,7 +262,10 @@ export function Nav({
         <div className={styles.topbar}>
           <span className={styles.topLeft}>{topbar.left}</span>
           {/* marquee infinito al centro: due gruppi identici, loop -50% */}
-          <span className={styles.topMid} aria-label={topbar.middle}>
+          <span
+            className={`scroller-fade ${styles.topMid}`}
+            aria-label={topbar.middle}
+          >
             <span className={styles.topTrack}>
               {[0, 1].map((copy) => (
                 <span

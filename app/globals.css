@@ -117,6 +117,12 @@
   --dur: 0.3s;
   --dur-slow: 0.7s;
 
+  /* scroller: una grammatica per tutto ciò che scorre in orizzontale
+     (vedi il blocco .scroller più sotto) */
+  --scroller-fade: 48px;  /* lunghezza UNICA della sfumatura ai tagli */
+  --scroller-dur: 0.18s;  /* stati dei controlli: veloci, ease-out */
+  --scroller-slide: 0.55s; /* una slide intera che trasla */
+
   /* type scale */
   --fs-hero: clamp(88px, 19.5vw, 300px);
   --fs-h2: clamp(36px, 5.5vw, 72px);
@@ -235,6 +241,106 @@ img { max-width: 100%; height: auto; display: block; }
   font-size: var(--fs-mono);
   letter-spacing: 0.02em;
   color: var(--fg-2);
+}
+
+/* ————— SCROLLER: una sola grammatica per tutto ciò che scorre in
+   orizzontale (nastri di card, file di voci nelle barre sticky, marquee
+   infiniti, tabelle larghe). Utility globali come .wrap/.mono: si
+   AGGIUNGONO alla classe di modulo del componente, così le regole
+   comuni stanno scritte una volta sola.
+
+   · .scroller        — superficie che scorre nativamente: barra di
+                        sistema nascosta (swipe, rotella e tastiera
+                        restano), il gesto non passa mai al documento
+   · .scroller-snap   — nastri di card: agganciano, ma `proximity`:
+                        `mandatory` litiga con drag e trackpad
+   · .scroller-fade   — sfumatura ai DUE tagli (contenuto full-bleed)
+   · .scroller-fade-end — solo a destra, per le file ancorate a sinistra
+                        (barre sticky: il fade a sinistra mangerebbe la
+                        prima voce quando si è a inizio corsa)
+   · .scroller-drag   — nastri trascinati dal JS via transform: 1:1 col
+                        puntatore, il gesto verticale resta della pagina
+   La lunghezza della sfumatura è UNA: var(--scroller-fade). ————— */
+
+.scroller {
+  overflow-x: auto;
+  /* il gesto orizzontale muore qui: niente scroll chaining sul documento */
+  overscroll-behavior-x: contain;
+  overscroll-behavior-y: auto;
+  scrollbar-width: none;      /* firefox */
+  -ms-overflow-style: none;   /* edge legacy */
+}
+
+.scroller::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
+/* la fila resta raggiungibile da tastiera (tabIndex 0 sui nastri):
+   con il focus addosso le frecce della tastiera scorrono il nastro */
+.scroller:focus-visible {
+  outline: 2px solid var(--azzurro-ink);
+  outline-offset: 6px;
+}
+
+.scroller-snap {
+  scroll-snap-type: x proximity;
+}
+
+.scroller-snap > * {
+  scroll-snap-align: start;
+}
+
+.scroller-fade {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 var(--scroller-fade),
+    #000 calc(100% - var(--scroller-fade)),
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 var(--scroller-fade),
+    #000 calc(100% - var(--scroller-fade)),
+    transparent
+  );
+}
+
+.scroller-fade-end {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    #000 calc(100% - var(--scroller-fade)),
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    #000 calc(100% - var(--scroller-fade)),
+    transparent
+  );
+  /* coda vuota quanto la sfumatura: arrivati in fondo alla corsa
+     l'ultima voce resta leggibile invece di sbiadire. Sta QUI e non sul
+     componente: va e viene insieme alla mask, che si accende solo
+     quando la fila sborda davvero */
+  padding-right: var(--scroller-fade);
+}
+
+/* ⚠️ mai su un elemento con transform: la mask viaggerebbe col nastro.
+   Va sempre sul contenitore fermo che ha l'overflow. */
+
+.scroller-drag {
+  cursor: grab;
+  /* il gesto verticale resta scroll di pagina (axis lock lato JS) */
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.scroller-drag:active,
+.scroller-dragging {
+  cursor: grabbing;
 }
 
 /* display: il sans del sito, semibold, tracking stretto — titoli giganti

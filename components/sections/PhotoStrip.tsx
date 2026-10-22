@@ -1,25 +1,31 @@
 'use client'
 
 import Image, { type StaticImageData } from 'next/image'
-import { useCallback, useEffect, useRef, useState } from 'react'
-import { Arrow } from '@/components/ui'
+import { useCallback } from 'react'
+import {
+  ScrollerControls,
+  useScrollRail,
+  type ScrollerLabels,
+} from '@/components/ui'
 import styles from './PhotoStrip.module.css'
 
 export type PhotoStripProps = {
-  photos: { src: StaticImageData; alt: string }[]
+  /** caption: il nome dello spazio sotto la foto, se c'è */
+  photos: { src: StaticImageData; alt: string; caption?: string }[]
   kicker?: string
   title?: string
   text?: string
-  labels: { prev: string; next: string; hint: string }
+  labels: ScrollerLabels
 }
 
 /**
  * Nastro di foto a filo di pagina.
  *
- * Stesse regole della fila docenti: `overscroll-behavior-x: contain` (il
- * gesto orizzontale non passa al documento), scrollbar di sistema
- * nascosta con una barretta di avanzamento al suo posto, frecce che
- * spostano con scrollBy.
+ * Stessa grammatica di tutti gli scroller: utility globali
+ * `.scroller .scroller-snap` (barra di sistema nascosta, snap proximity,
+ * `overscroll-behavior-x: contain` — il gesto orizzontale non passa al
+ * documento) e la riga di controlli condivisa sotto, con le frecce che
+ * spostano via scrollBy.
  */
 export function PhotoStrip({
   photos,
@@ -28,38 +34,11 @@ export function PhotoStrip({
   text,
   labels,
 }: PhotoStripProps) {
-  const ref = useRef<HTMLUListElement | null>(null)
-  const [progress, setProgress] = useState(0)
-  const [thumb, setThumb] = useState(1)
-  const [atStart, setAtStart] = useState(true)
-  const [atEnd, setAtEnd] = useState(false)
-
-  const measure = useCallback(() => {
-    const el = ref.current
-    if (!el) return
-    const max = el.scrollWidth - el.clientWidth
-    setThumb(el.scrollWidth > 0 ? el.clientWidth / el.scrollWidth : 1)
-    setProgress(max > 0 ? el.scrollLeft / max : 0)
-    setAtStart(el.scrollLeft <= 1)
-    setAtEnd(max <= 1 || el.scrollLeft >= max - 1)
-  }, [])
-
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
-    measure()
-    const ro = new ResizeObserver(measure)
-    ro.observe(el)
-    return () => ro.disconnect()
-  }, [measure])
-
-  const nudge = (dir: 1 | -1) => {
-    const el = ref.current
-    if (!el) return
-    el.scrollBy({ left: dir * el.clientWidth * 0.62, behavior: 'smooth' })
-  }
-
-  const hasOverflow = thumb < 0.999
+  const step = useCallback(
+    (el: HTMLUListElement) => el.clientWidth * 0.62,
+    []
+  )
+  const rail = useScrollRail<HTMLUListElement>(step)
 
   return (
     <div className={styles.block}>
@@ -74,9 +53,10 @@ export function PhotoStrip({
       )}
 
       <ul
-        ref={ref}
-        className={styles.strip}
-        onScroll={measure}
+        ref={rail.ref}
+        className={`scroller scroller-snap ${styles.strip}`}
+        onScroll={rail.measure}
+        tabIndex={0}
         aria-label={labels.hint}
       >
         {photos.map((photo, i) => (
@@ -88,43 +68,18 @@ export function PhotoStrip({
               className={styles.img}
               placeholder="blur"
             />
+            {photo.caption && (
+              <span className={styles.caption}>{photo.caption}</span>
+            )}
           </li>
         ))}
       </ul>
 
-      {hasOverflow && (
-        <div className={`wrap ${styles.controls}`}>
-          <div className={styles.track} role="presentation" title={labels.hint}>
-            <span
-              className={styles.thumb}
-              style={{
-                width: `${Math.max(thumb, 0.12) * 100}%`,
-                left: `${progress * (100 - Math.max(thumb, 0.12) * 100)}%`,
-              }}
-            />
-          </div>
-          <div className={styles.arrows}>
-            <button
-              type="button"
-              className={styles.nav}
-              aria-label={labels.prev}
-              disabled={atStart}
-              onClick={() => nudge(-1)}
-            >
-              <Arrow dir="w" size={16} />
-            </button>
-            <button
-              type="button"
-              className={styles.nav}
-              aria-label={labels.next}
-              disabled={atEnd}
-              onClick={() => nudge(1)}
-            >
-              <Arrow dir="e" size={16} />
-            </button>
-          </div>
-        </div>
-      )}
+      <ScrollerControls
+        rail={rail}
+        labels={labels}
+        className={`wrap ${styles.controls}`}
+      />
     </div>
   )
 }

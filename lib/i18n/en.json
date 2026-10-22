@@ -790,7 +790,31 @@
       "error": "We could not send your request: try again, or write to us.",
       "more": "choose your plan step by step",
       "hp": "Leave this field empty"
-    }
+    },
+    "subnavLabel": "Coworking · Roveri district",
+    "subnavPages": [
+      "Coworking",
+      "Rooms & events",
+      "Book your space"
+    ],
+    "mobileBarCta": "Book",
+    "corridoiCaptions": [
+      "The \"future together\" mural",
+      "The \"small steps big change\" stairs",
+      "The classroom corridors",
+      "The entrance to the CW300 area",
+      "The library",
+      "The front office",
+      "The corridor to the offices"
+    ],
+    "tableWas": [
+      "",
+      "€95",
+      "",
+      "",
+      "",
+      ""
+    ]
   },
   "prenota": {
     "kicker": "book your space",
@@ -2131,7 +2155,8 @@
     "facts": [
       "From 10 people to the main hall",
       "Live streaming from the main hall",
-      "Catering on request"
+      "Catering on request",
+      "Roveri district, Bologna"
     ],
     "roomsKicker": "the rooms",
     "roomsTitle": "Pick your room.",
@@ -2169,7 +2194,80 @@
         "n": "ev.06",
         "price": "on request"
       }
-    ]
+    ],
+    "builderKicker": "plan your event",
+    "builderTitle": "Plan your event.",
+    "builderLede": "Four choices and we send you a proposal with room, services and quote.",
+    "builder": {
+      "subject": "Event proposal",
+      "q1": "1. What kind of event?",
+      "types": [
+        {
+          "id": "riunione",
+          "label": "Meeting or interview",
+          "room": "Meeting room"
+        },
+        {
+          "id": "corso",
+          "label": "Course or workshop",
+          "room": "Teaching room"
+        },
+        {
+          "id": "talk",
+          "label": "Talk or conference",
+          "room": "Main hall"
+        },
+        {
+          "id": "aziendale",
+          "label": "Company event",
+          "room": "Main hall"
+        },
+        {
+          "id": "networking",
+          "label": "Networking or drinks",
+          "room": "Banano room"
+        },
+        {
+          "id": "mostra",
+          "label": "Exhibition or launch",
+          "room": "Showroom"
+        }
+      ],
+      "q2": "2. How many people?",
+      "sizes": [
+        "up to 10",
+        "10–30",
+        "30–80",
+        "more than 80"
+      ],
+      "q3": "3. When?",
+      "q4": "4. Anything else you need?",
+      "extras": [
+        "Live streaming",
+        "Catering",
+        "Audio and video technician",
+        "Event photo and video"
+      ],
+      "roomBig": "Area Culture or teaching room",
+      "summaryTitle": "Your event",
+      "sType": "type",
+      "sSize": "people",
+      "sDate": "date",
+      "sRoom": "room",
+      "sExtra": "extras",
+      "noDate": "to be chosen",
+      "noExtra": "none",
+      "name": "Full name",
+      "contact": "Phone or email",
+      "send": "Ask for a proposal",
+      "sending": "Sending…",
+      "missing": "Please fill in name and contact.",
+      "sendError": "Sending failed: please try again shortly, or call +39 051 631 3706.",
+      "doneTitle": "Request sent.",
+      "doneText": "We send the proposal Monday to Friday.",
+      "privacyBefore": "By sending this you accept the ",
+      "privacyLink": "privacy policy"
+    }
   },
   "innovationSub": {
     "back": "back to innovation",

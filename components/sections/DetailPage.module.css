@@ -402,12 +402,14 @@
 }
 
 /* il bando aperto in evidenza: fascia nera dentro l'elenco */
+/* la fascia esce dal testo fino al bordo della gabbia: il rientro è
+   ESATTAMENTE il gutter (--pad), altrimenti sfora e la pagina scrolla */
 .bandoHot {
   background: var(--fg);
   color: var(--bg);
-  padding-left: clamp(16px, 2vw, 28px);
-  padding-right: clamp(16px, 2vw, 28px);
-  margin: 0 calc(clamp(16px, 2vw, 28px) * -1);
+  padding-left: var(--pad);
+  padding-right: var(--pad);
+  margin: 0 calc(var(--pad) * -1);
 }
 
 .bandoHot .bandoText,

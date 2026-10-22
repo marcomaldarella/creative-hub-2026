@@ -1,9 +1,12 @@
 import type { Metadata } from 'next'
 import Image, { type StaticImageData } from 'next/image'
 import { notFound } from 'next/navigation'
-import { ArrowLink, Button, Reveal, RevealGroup, Rule } from '@/components/ui'
+import { ArrowLink, Reveal, RevealGroup, Rule } from '@/components/ui'
 import { SiteChrome } from '@/components/sections/SiteChrome'
 import { PointsAccordion } from '@/components/sections/PointsAccordion'
+import { SectionPagesNav } from '@/components/sections/SectionPagesNav'
+import { MobileBookBar } from '@/components/sections/MobileBookBar'
+import { EventBuilder } from '@/components/sections/EventBuilder'
 import { isLocale, localeHref } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
 import { pageAlternates } from '@/lib/seo'
@@ -31,8 +34,9 @@ export const dynamic = 'force-dynamic'
 /* foto di sede abbinate alle sale, nell'ordine del documento Sanity:
    riunioni, didattica, area culture, aula magna, showroom, banano */
 const ROOM_PHOTOS: { src: StaticImageData; alt: string }[] = [
-  { src: corridoio2Img, alt: "Ingresso dell'area CW300: pareti bianche e parquet" },
-  { src: corridoio1Img, alt: 'Corridoio delle aule CW301 con segnaletica gialla' },
+  /* i testi alternativi seguono la foto vera, non il nome del file */
+  { src: corridoio2Img, alt: 'Scala interna con il murale "small steps big change"' },
+  { src: corridoio1Img, alt: 'Murale "future together" lungo il corridoio' },
   { src: loungeImg, alt: 'La lounge: sedute e grafiche geometriche alle pareti' },
   { src: sedeImg, alt: 'La sede di via del Tappezziere 4' },
   { src: designingImg, alt: 'La parete gialla "designing the future" lungo il corridoio' },
@@ -110,6 +114,36 @@ export default async function SaleEventiPage({
   return (
     <SiteChrome locale={locale} path="/coworking">
       <main className={styles.main}>
+        {/* ————— barra delle tre pagine della sezione (mockup) ————— */}
+        <SectionPagesNav
+          locale={locale}
+          base="/coworking"
+          current="/coworking/sale-eventi"
+        />
+
+        {/* ————— apertura a foto: una grande e due impilate, come nel
+            mockup (le sale non sono ancora fotografate: qui gli spazi
+            comuni dove gli eventi si fanno davvero) ————— */}
+        <Reveal className={`wrap ${styles.venue}`}>
+          <Image
+            src={banano2Img}
+            alt="La banano room: soffitto industriale e grande banano al centro"
+            className={styles.venueImg}
+          />
+          <div className={styles.venueStack}>
+            <Image
+              src={banano1Img}
+              alt="La banano room: tavolo rotondo, sedute in velluto e luci calde"
+              className={styles.venueImg}
+            />
+            <Image
+              src={loungeImg}
+              alt="La lounge del coworking: sedute e grafiche geometriche alle pareti"
+              className={styles.venueImg}
+            />
+          </div>
+        </Reveal>
+
         {/* ————— testata ————— */}
         <header className={`wrap ${styles.head}`}>
           <Reveal className={styles.back}>
@@ -174,10 +208,25 @@ export default async function SaleEventiPage({
           </RevealGroup>
         </section>
 
+        {/* ————— componi il tuo evento: quattro domande e il riepilogo
+            che propone la sala, come nel mockup ————— */}
+        <Rule left="02" right={t.saleEventiPage.builderKicker} />
+        <section className={`wrap ${styles.sez}`} id="componi">
+          <Reveal as="h2" className={`display-thin ${styles.h2}`}>
+            {t.saleEventiPage.builderTitle}
+          </Reveal>
+          <EventBuilder
+            locale={locale}
+            labels={t.saleEventiPage.builder}
+            lede={t.saleEventiPage.builderLede}
+            privacyHref={localeHref(locale, '/privacy')}
+          />
+        </section>
+
         {/* ————— già successo qui ————— */}
         {past.length > 0 && (
           <>
-            <Rule left="02" right={t.saleEventiPage.pastKicker} />
+            <Rule left="03" right={t.saleEventiPage.pastKicker} />
             <section className={`wrap ${styles.sez} ${styles.duo}`}>
               <Reveal as="h2" className={`display-thin ${styles.h2}`}>
                 {t.saleEventiPage.pastTitle}
@@ -207,7 +256,7 @@ export default async function SaleEventiPage({
         {/* ————— prima di prenotare ————— */}
         {faq.length > 0 && (
           <>
-            <Rule left="03" right={t.saleEventiPage.faqKicker} />
+            <Rule left="04" right={t.saleEventiPage.faqKicker} />
             <section className={`wrap ${styles.sez} ${styles.duo}`}>
               <Reveal as="h2" className={`display-thin ${styles.h2}`}>
                 {t.saleEventiPage.faqTitle}
@@ -217,30 +266,54 @@ export default async function SaleEventiPage({
           </>
         )}
 
-        {/* ————— chiusura: chiedi una proposta ————— */}
+        {/* ————— chiusura: dove siamo, come nel mockup — la richiesta
+            passa dal configuratore qui sopra, non da un'altra CTA ————— */}
         <div className={`scheme-dark ${styles.dark}`}>
-          <section className={`wrap ${styles.sez}`}>
-            <Reveal as="h2" className={`display-thin ${styles.ctaTitle}`}>
-              {t.saleEventiPage.ctaTitle}
+          <section className={`wrap ${styles.sez} ${styles.duo}`}>
+            <Reveal as="h2" className={`display-thin ${styles.h2}`}>
+              {t.coworking.whereTitle}
             </Reveal>
-            <Reveal as="p" className={styles.ctaText} delay={80}>
-              {t.saleEventiPage.ctaText}
-            </Reveal>
-            <Reveal className={styles.ctaRow} delay={160}>
-              <Button variant="azzurro" href={mailto} external>
-                {t.saleEventiPage.ctaBook}
-              </Button>
-              {settings?.phone && (
-                <ArrowLink
-                  href={`tel:${settings.phone.replace(/\s/g, '')}`}
-                  external
-                >
-                  {settings.phone}
+            <div>
+              <Reveal>
+                <ul className={styles.whereList}>
+                  {t.coworking.where.map((w) => (
+                    <li key={w}>{w}</li>
+                  ))}
+                </ul>
+              </Reveal>
+              {/* recapiti, non una seconda CTA: la richiesta la fa il
+                  configuratore qui sopra */}
+              <Reveal className={styles.whereRow} delay={80}>
+                {settings?.phone && (
+                  <ArrowLink
+                    href={`tel:${settings.phone.replace(/\s/g, '')}`}
+                    external
+                  >
+                    {settings.phone}
+                  </ArrowLink>
+                )}
+                <ArrowLink href={mailto} external>
+                  {settings?.email ?? t.saleEventiPage.ctaBook}
                 </ArrowLink>
-              )}
-            </Reveal>
+              </Reveal>
+              <Reveal delay={140}>
+                <Image
+                  src={sedeImg}
+                  alt="La sede di via del Tappezziere 4, Bologna"
+                  className={styles.whereImg}
+                />
+              </Reveal>
+            </div>
           </section>
         </div>
+
+        {/* ————— barra prenota fissa in basso, solo su mobile ————— */}
+        <MobileBookBar
+          from={t.coworking.bookFrom}
+          price={t.saleEventiPage.roomMeta[0].price}
+          cta={t.coworking.mobileBarCta}
+          href="#componi"
+        />
       </main>
     </SiteChrome>
   )

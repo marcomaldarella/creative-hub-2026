@@ -62,7 +62,8 @@
   margin: 0 auto;
   padding: 0 var(--pad);
   font-size: 11px;
-  letter-spacing: 0.06em;
+  /* regola del progetto: il tracking non va mai in positivo */
+  letter-spacing: -0.01em;
   color: var(--fg-2);
   border-bottom: 1px solid color-mix(in srgb, var(--line) 60%, transparent);
   overflow: hidden;
@@ -73,15 +74,14 @@
   border-bottom-color: var(--osso-16);
 }
 
-/* centro: marquee infinito con sfumatura ai bordi — area stretta,
-   non tutta la barra */
+/* centro: marquee infinito con la sfumatura condivisa ai due tagli
+   (.scroller-fade, var(--scroller-fade)) — area stretta, non tutta
+   la barra */
 .topMid {
   flex: 0 1 auto;
   width: min(620px, 42vw);
   margin: 0 auto;
   overflow: hidden;
-  -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
-  mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
 }
 
 .topTrack {

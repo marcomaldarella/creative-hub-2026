@@ -1,0 +1,38 @@
+/* barra prenota fissa in basso, solo su mobile (istruzione dei mockup
+   coworking: "su mobile: barra in basso"). Sopra i 900px è
+   display:none — non visibility, così non resta un livello fisso a
+   disturbare lo scroll su iOS. */
+
+.bar {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .bar {
+    position: fixed;
+    left: 10px;
+    right: 10px;
+    bottom: calc(10px + env(safe-area-inset-bottom));
+    z-index: 60;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 8px 8px 8px 16px;
+    background: #0a0a0a;
+    color: #ffffff;
+    border-radius: var(--radius-pill);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  }
+
+  .price {
+    font-size: 13.5px;
+    letter-spacing: -0.01em;
+    min-width: 0;
+  }
+
+  .price b {
+    font-weight: 600;
+    color: var(--accent);
+  }
+}

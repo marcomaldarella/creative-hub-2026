@@ -1,0 +1,74 @@
+/* Controlli dei nastri orizzontali: UNA forma sola — barretta di
+   avanzamento a sinistra (al posto della scrollbar di sistema, che è
+   sempre nascosta) e le due frecce a destra, nella riga SOTTO il
+   contenuto. Le regole della superficie che scorre stanno nelle utility
+   globali .scroller* di app/globals.css. */
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+}
+
+/* la barretta dice quanto nastro resta: 2px, hairline, mai tonda */
+.track {
+  position: relative;
+  flex: 1;
+  height: 2px;
+  background: color-mix(in srgb, var(--fg) 12%, transparent);
+  border-radius: 0;
+  overflow: hidden;
+}
+
+.thumb {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background: var(--fg);
+  border-radius: 0;
+  transition:
+    left var(--scroller-dur) var(--ease-out),
+    width var(--scroller-dur) var(--ease-out);
+}
+
+.arrows {
+  display: flex;
+  gap: 8px;
+}
+
+/* il bottone: stessa misura e stessi stati in tutto il sito. La freccia
+   dentro è SEMPRE <Arrow> (svg, mai unicode); l'svg porta già un
+   transform inline per la rotazione, quindi in hover si muove il
+   contenitore, non la freccia */
+.nav {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border: 1px solid color-mix(in srgb, var(--fg) 22%, transparent);
+  /* eccezione voluta: il disco con la freccia resta tondo */
+  border-radius: 50%;
+  color: var(--fg);
+  transition:
+    border-color var(--scroller-dur) var(--ease-out),
+    color var(--scroller-dur) var(--ease-out),
+    opacity var(--scroller-dur) var(--ease-out);
+}
+
+.nav:hover:not(:disabled) {
+  border-color: var(--fg);
+}
+
+.nav:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .thumb,
+  .nav {
+    transition: none;
+  }
+}

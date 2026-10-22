@@ -212,3 +212,83 @@
   font-weight: 600;
   letter-spacing: -0.02em;
 }
+
+/* ————————————————————————————————————————————————————————————————
+   apertura a foto (mockup v3): una grande a sinistra e due impilate
+   a destra, a filo con la colonna di testo. */
+
+.venue {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 10px;
+  /* margine, non padding: la classe globale wrap dichiara padding con
+     la scorciatoia e azzererebbe il lato alto */
+  margin-top: clamp(16px, 2vw, 28px);
+  height: clamp(320px, 48vh, 520px);
+}
+
+.venueStack {
+  display: grid;
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  min-height: 0;
+}
+
+/* min-height:0 su ogni cella: senza, le foto allargano la griglia */
+.venue > *,
+.venueStack > * {
+  min-width: 0;
+  min-height: 0;
+}
+
+.venueImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+@media (max-width: 700px) {
+  .venue {
+    grid-template-columns: 1fr;
+    grid-template-rows: 220px 220px;
+    height: auto;
+  }
+
+  /* su mobile basta la foto grande più la fila di due */
+  .venueStack {
+    grid-template-rows: minmax(0, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* ————— dove siamo, in chiusura ————— */
+
+.whereList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-width: 60ch;
+}
+
+.whereList li {
+  padding: 10px 0;
+  border-top: 1px solid var(--line);
+  font-size: var(--fs-small);
+}
+
+.whereRow {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 22px;
+  margin: clamp(20px, 2.4vw, 28px) 0;
+}
+
+.whereImg {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  display: block;
+}

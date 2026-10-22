@@ -27,18 +27,15 @@
   padding: 15px 0;
 }
 
-/* la fila scorre quando non ci sta: niente scrollbar a vista */
+/* la fila scorre quando non ci sta: overflow, scrollbar nascosta e
+   sfumatura al taglio destro arrivano dalla grammatica condivisa
+   (.scroller .scroller-fade-end in app/globals.css) */
 .row {
   display: flex;
   align-items: stretch;
   gap: clamp(14px, 1.8vw, 26px);
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-}
-
-.row::-webkit-scrollbar {
-  display: none;
+  /* niente padding di coda qui: la sfumatura si accende solo quando la
+     fila sborda (ScrollerRow) e si porta dietro il proprio spazio */
 }
 
 .row a {
@@ -51,7 +48,7 @@
   letter-spacing: -0.01em;
   white-space: nowrap;
   color: rgba(255, 255, 255, 0.55);
-  transition: color 0.15s ease;
+  transition: color var(--scroller-dur) var(--ease-out);
 }
 
 .row a:hover {

@@ -8,6 +8,8 @@ import { BgVideo } from '@/components/sections/BgVideo'
 import { PhotoDuo } from '@/components/sections/Photo'
 import { PointsAccordion } from '@/components/sections/PointsAccordion'
 import { PhotoStrip } from '@/components/sections/PhotoStrip'
+import { SectionPagesNav } from '@/components/sections/SectionPagesNav'
+import { MobileBookBar } from '@/components/sections/MobileBookBar'
 import { isLocale, localeHref } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
 import { pageAlternates } from '@/lib/seo'
@@ -83,10 +85,16 @@ export default async function CoworkingPage({
   const settings = await getSiteSettings()
   const prenota = localeHref(locale, '/coworking/prenota')
   const sale = localeHref(locale, '/coworking/sale-eventi')
+  /* prezzi pieni barrati, allineati alle righe della tabella: nel
+     mockup solo il carnet da dieci ingressi ne ha uno */
+  const tableWas = t.coworking.tableWas
 
   return (
     <SiteChrome locale={locale} path="/coworking">
       <main className={styles.main}>
+        {/* ————— barra delle tre pagine della sezione (mockup) ————— */}
+        <SectionPagesNav locale={locale} base="/coworking" current="/coworking" />
+
         {/* ————— mosaico media: video + due foto, come le piattaforme
             di prenotazione — "vedi tutte le foto" scende al palazzo ————— */}
         <section className={`wrap ${styles.mosaic}`}>
@@ -101,7 +109,7 @@ export default async function CoworkingPage({
             <Image src={banano1Img} alt="La banano room: tavolo rotondo, sedute in velluto e luci calde" className={styles.mosaicImg} />
           </Reveal>
           <Reveal className={styles.mosaicSide} delay={140}>
-            <Image src={corridoio4Img} alt='Scala interna con il murale "small steps big change"' className={styles.mosaicImg} />
+            <Image src={corridoio2Img} alt='Scala interna con il murale "small steps big change"' className={styles.mosaicImg} />
           </Reveal>
           <a href="#palazzo" className={`mono ${styles.galleryCta}`}>
             {t.coworking.galleryCta}
@@ -156,7 +164,7 @@ export default async function CoworkingPage({
             {/* le formule, in tabella */}
             <section className={styles.block}>
               <h2 className={styles.h2}>{t.coworking.spacesTitle}</h2>
-              <div className={styles.tableWrap}>
+              <div className="scroller">
                 <table className={styles.cmp}>
                   <thead>
                     <tr>
@@ -168,10 +176,15 @@ export default async function CoworkingPage({
                     </tr>
                   </thead>
                   <tbody>
-                    {t.coworking.tableRows.map((row) => (
+                    {t.coworking.tableRows.map((row, i) => (
                       <tr key={row[0]}>
                         <th scope="row">{row[0]}</th>
-                        <td className={styles.price}>{row[1]}</td>
+                        <td className={styles.price}>
+                          {row[1]}
+                          {tableWas[i] && (
+                            <s className={styles.was}>{tableWas[i]}</s>
+                          )}
+                        </td>
                         <td>{row[2]}</td>
                         <td>{row[3]}</td>
                       </tr>
@@ -248,14 +261,17 @@ export default async function CoworkingPage({
               next: t.coworking.corridoiNext,
               hint: t.coworking.corridoiHint,
             }}
+            /* come nel mockup ogni foto porta il nome dello spazio.
+               ⚠️ i testi alternativi erano assegnati ai file sbagliati:
+               qui sono rimessi sulla foto giusta, didascalie comprese */
             photos={[
-              { src: corridoio1Img, alt: 'Corridoio delle aule CW301 con segnaletica gialla a pavimento e pareti' },
-              { src: corridoio2Img, alt: "Ingresso dell'area CW300: pareti bianche, segnaletica gialla e parquet" },
-              { src: corridoio3Img, alt: 'Murale "future together" lungo il corridoio, con una pianta in primo piano' },
-              { src: corridoio4Img, alt: 'Scala interna con il murale "small steps big change" su parete arancio' },
-              { src: corridoio5Img, alt: "Porta dell'ufficio segreteria vista dal corridoio" },
-              { src: corridoio6Img, alt: 'Corridoio lungo verso gli uffici, con la targa della segreteria' },
-              { src: corridoio7Img, alt: 'Corridoio della library, con la scritta arancio sulla parete scura' },
+              { src: corridoio1Img, alt: 'Murale "future together" lungo il corridoio, con una pianta in primo piano', caption: t.coworking.corridoiCaptions[0] },
+              { src: corridoio2Img, alt: 'Scala interna con il murale "small steps big change" su parete arancio', caption: t.coworking.corridoiCaptions[1] },
+              { src: corridoio6Img, alt: 'Corridoio delle aule CW301 con segnaletica gialla a pavimento e pareti', caption: t.coworking.corridoiCaptions[2] },
+              { src: corridoio7Img, alt: "Ingresso dell'area CW300: pareti bianche, segnaletica gialla e parquet", caption: t.coworking.corridoiCaptions[3] },
+              { src: corridoio5Img, alt: 'Corridoio della library, con la scritta arancio sulla parete scura', caption: t.coworking.corridoiCaptions[4] },
+              { src: corridoio3Img, alt: "Porta dell'ufficio segreteria vista dal corridoio", caption: t.coworking.corridoiCaptions[5] },
+              { src: corridoio4Img, alt: 'Corridoio lungo verso gli uffici, con la targa della segreteria', caption: t.coworking.corridoiCaptions[6] },
             ]}
           />
         </section>
@@ -298,6 +314,16 @@ export default async function CoworkingPage({
             </Button>
           </div>
         </section>
+
+        {/* ————— barra prenota fissa in basso, solo su mobile: il
+            riquadro a destra sparisce e resta il prezzo col tasto ————— */}
+        <MobileBookBar
+          from={t.coworking.bookFrom}
+          price={t.coworking.bookPrice}
+          unit={t.coworking.bookUnit}
+          cta={t.coworking.mobileBarCta}
+          href={prenota}
+        />
       </main>
     </SiteChrome>
   )

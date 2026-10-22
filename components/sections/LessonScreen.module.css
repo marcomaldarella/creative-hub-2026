@@ -705,3 +705,22 @@ a.defText {
     grid-template-columns: 1fr;
   }
 }
+
+/* ————— accenti di colore dentro i blocchi scuri (nei mockup sono blu:
+   da noi è il colore della sezione, così vale anche su studio e
+   coworking) ————— */
+
+/* il cerchio degli insegnanti ha il filo colorato, non neutro */
+.face {
+  border: 2px solid var(--accent, var(--line));
+}
+
+.creditsLabel {
+  color: var(--accent, var(--fg-2));
+  font-weight: 600;
+}
+
+/* nella card prezzo nera la riga "circa 20€ a lezione" è l'accento */
+.packHi .packUnit {
+  color: var(--accent, var(--fg-2));
+}

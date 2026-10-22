@@ -32,10 +32,15 @@ export function Marquee({ items, speed = 38, dark = false, className }: MarqueeP
 
   return (
     <div className={cls}>
-      <div className={styles.track} style={{ animationDuration: `${speed}s` }}>
-        <div className={styles.group}>{row}</div>
-        <div className={`${styles.group} ${styles.copy}`} aria-hidden="true">
-          {row}
+      {/* la sfumatura ai due tagli sta su un involucro FERMO: messa sul
+          track (che trasla) la mask viaggerebbe col nastro. I filetti
+          sopra e sotto restano pieni perché vivono sulla radice */}
+      <div className={`scroller-fade ${styles.mask}`}>
+        <div className={styles.track} style={{ animationDuration: `${speed}s` }}>
+          <div className={styles.group}>{row}</div>
+          <div className={`${styles.group} ${styles.copy}`} aria-hidden="true">
+            {row}
+          </div>
         </div>
       </div>
     </div>

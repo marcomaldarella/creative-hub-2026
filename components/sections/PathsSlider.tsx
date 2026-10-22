@@ -166,7 +166,7 @@ export function PathsSlider({
   return (
     <div
       ref={outerRef}
-      className={styles.outer}
+      className={`scroller-drag scroller-fade ${styles.outer}`}
       onDragStart={(e) => e.preventDefault()}
       onClickCapture={(e) => {
         if (movedRef.current) e.preventDefault()

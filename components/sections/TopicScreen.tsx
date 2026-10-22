@@ -519,7 +519,7 @@ export async function TopicScreen({
                                   {it.caption}
                                 </span>
                               )}
-                              <div className={styles.tableWrap}>
+                              <div className={`scroller ${styles.tableWrap}`}>
                                 <table className={styles.table}>
                                   <thead>
                                     <tr>

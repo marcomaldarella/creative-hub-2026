@@ -25,6 +25,15 @@ export type { ArrowProps, ArrowDir } from './Arrow';
 export { Marquee } from './Marquee';
 export type { MarqueeProps } from './Marquee';
 
+export {
+  useScrollRail,
+  useScrollerOverflow,
+  ScrollerControls,
+  ScrollerNav,
+  ScrollerRow,
+} from './Scroller';
+export type { ScrollRail, ScrollerLabels } from './Scroller';
+
 export { SearchBox } from './SearchBox';
 export type { SearchBoxProps } from './SearchBox';
 

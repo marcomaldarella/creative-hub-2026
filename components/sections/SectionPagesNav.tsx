@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { localeHref, type Locale } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
+import { ScrollerRow } from '@/components/ui'
 import styles from './SectionPagesNav.module.css'
 
 /**
@@ -10,7 +11,7 @@ import styles from './SectionPagesNav.module.css'
  * dizionario nav.sub (stesso ordine delle ancore in SiteChrome).
  */
 
-type Base = '/innovazione' | '/studios'
+type Base = '/innovazione' | '/studios' | '/coworking'
 
 /* percorsi per voce, nello stesso ordine di nav.sub[key].items */
 const PATHS: Record<Base, string[]> = {
@@ -28,6 +29,9 @@ const PATHS: Record<Base, string[]> = {
     '/studios/podcast',
     '/studios/affitto-studio',
   ],
+  /* coworking: le tre pagine dei mockup, la indice compresa — il menu
+     di sezione del sito nuovo non elenca più studio e metaverso */
+  '/coworking': ['/coworking', '/coworking/sale-eventi', '/coworking/prenota'],
 }
 
 export function SectionPagesNav({
@@ -41,28 +45,49 @@ export function SectionPagesNav({
 }) {
   const t = getDictionary(locale)
   const isStudio = base === '/studios'
+  const isCoworking = base === '/coworking'
   const label = isStudio
     ? 'Creative Hub SSL Recording Studio'
-    : `Creative Hub · ${t.nav.innovation}`
-  const rootLabel = isStudio ? t.nav.studio : t.nav.innovation
-  const subItems = isStudio ? t.nav.sub.studio.items : t.nav.sub.innovation.items
+    : isCoworking
+      ? t.coworking.subnavLabel
+      : `Creative Hub · ${t.nav.innovation}`
 
-  const items: { label: string; path: string }[] = [
-    { label: rootLabel, path: base },
-    ...subItems.map((lbl, i) => ({ label: lbl, path: PATHS[base][i] })),
-  ]
+  /* il coworking elenca le sue tre pagine (indice compresa); studio e
+     innovazione mettono la indice davanti alle pagine figlie */
+  const items: { label: string; path: string }[] = isCoworking
+    ? t.coworking.subnavPages.map((lbl, i) => ({
+        label: lbl,
+        path: PATHS[base][i],
+      }))
+    : [
+        { label: isStudio ? t.nav.studio : t.nav.innovation, path: base },
+        ...(isStudio
+          ? t.nav.sub.studio.items
+          : t.nav.sub.innovation.items
+        ).map((lbl, i) => ({ label: lbl, path: PATHS[base][i] })),
+      ]
 
   return (
     <div
       className={styles.bar}
       style={
-        /* accento della voce attiva: arancio su studio, bianco altrove */
-        { '--pn-accent': isStudio ? 'var(--arancio)' : '#ffffff' } as React.CSSProperties
+        /* accento della voce attiva: il colore della sezione dove c'è,
+           bianco sulle altre */
+        {
+          '--pn-accent': isStudio
+            ? 'var(--arancio)'
+            : isCoworking
+              ? 'var(--giallo-fluo)'
+              : '#ffffff',
+        } as React.CSSProperties
       }
     >
       <div className={`wrap ${styles.in}`}>
         <span className={styles.label}>{label}</span>
-        <nav className={styles.row} aria-label={label}>
+        {/* fila di voci: stessa grammatica dello subnav delle schede
+            corso — scorre senza barra di sistema e sfuma al taglio di
+            destra (solo quando sborda davvero) */}
+        <ScrollerRow className={styles.row} aria-label={label}>
           {items.map((it) => (
             <Link
               key={it.path}
@@ -74,7 +99,7 @@ export function SectionPagesNav({
               <span>{it.label}</span>
             </Link>
           ))}
-        </nav>
+        </ScrollerRow>
       </div>
     </div>
   )

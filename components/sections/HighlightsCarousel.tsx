@@ -3,7 +3,7 @@
 import { useCallback, useRef, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Arrow } from '@/components/ui'
+import { Arrow, ScrollerNav } from '@/components/ui'
 import academyImg from '@/public/img/sections/node-academy.jpg'
 import { BgVideo } from './BgVideo'
 import studioImg from '@/public/img/sections/node-studio.jpg'
@@ -48,26 +48,6 @@ const LOOK: {
 
 const AUTOPLAY_MS = 6500
 const SWIPE_RATIO = 0.16
-
-function ArrowIcon({ dir }: { dir: 1 | -1 }) {
-  return (
-    <svg
-      width="18"
-      height="18"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.6"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-      style={dir === -1 ? { transform: 'scaleX(-1)' } : undefined}
-    >
-      <path d="M4 12h15" />
-      <path d="M13 5.5 19.5 12 13 18.5" />
-    </svg>
-  )
-}
 
 /**
  * Carosello hi-lights: slide principale al centro, le altre che sbucano
@@ -217,28 +197,28 @@ export function HighlightsCarousel({
           <span className={`mono ${styles.counter}`}>
             0{real + 1} <em>/ 0{n}</em>
           </span>
-          <button
-            type="button"
-            className={styles.arrow}
-            aria-label="precedente"
+          {/* stesso disco-freccia dei nastri (ScrollerNav → Arrow svg):
+              una forma sola in tutto il sito, mai una freccia unicode */}
+          <ScrollerNav
+            dir="w"
+            label="precedente"
             onClick={() => step(-1)}
-          >
-            <ArrowIcon dir={-1} />
-          </button>
-          <button
-            type="button"
             className={styles.arrow}
-            aria-label="successiva"
+          />
+          <ScrollerNav
+            dir="e"
+            label="successiva"
             onClick={() => step(1)}
-          >
-            <ArrowIcon dir={1} />
-          </button>
+            className={styles.arrow}
+          />
         </div>
       </div>
 
       <div
         ref={viewportRef}
-        className={dragging.current ? `${styles.viewport} ${styles.grabbing}` : styles.viewport}
+        className={
+          dragging.current ? 'scroller-drag scroller-dragging' : 'scroller-drag'
+        }
         onPointerDown={onDown}
         onPointerMove={onMove}
         onPointerUp={onUp}

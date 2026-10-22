@@ -91,7 +91,7 @@ function renderBlock(block: Block, key: string): ReactNode {
     return (
       <div key={key}>
         {block.caption && <span className={styles.tableCaption}>{block.caption}</span>}
-        <div className={styles.tableWrap}>
+        <div className={`scroller ${styles.tableWrap}`}>
           <table className={styles.table}>
             <thead>
               <tr>

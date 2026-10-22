@@ -364,9 +364,9 @@
 }
 
 /* formule: tabella vera, hairline, prezzi in mono */
-.tableWrap {
-  overflow-x: auto;
-}
+/* la tabella larga scorre con la grammatica condivisa: la classe
+   globale `.scroller` sul wrapper (niente barra di sistema, il gesto
+   non passa alla pagina) — nessuno stile locale da aggiungere */
 
 .cmp {
   width: 100%;
@@ -402,6 +402,13 @@
   font-weight: 600;
   color: var(--fg);
   white-space: nowrap;
+}
+
+/* prezzo pieno barrato accanto allo scontato (il carnet) */
+.was {
+  margin-left: 7px;
+  font-weight: 400;
+  color: var(--fg-2);
 }
 
 .salaCta {

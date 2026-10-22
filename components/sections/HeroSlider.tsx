@@ -238,6 +238,8 @@ export function HeroSlider({
       left: el.scrollLeft,
       moved: false,
     }
+    /* stessa classe di stato di tutti gli scroller trascinabili */
+    el.classList.add('scroller-dragging')
   }
 
   const onPointerMove = (e: React.PointerEvent) => {
@@ -255,6 +257,7 @@ export function HeroSlider({
 
   const onPointerUp = () => {
     const d = drag.current
+    trackRef.current?.classList.remove('scroller-dragging')
     if (!d?.moved) {
       drag.current = null
       return
@@ -391,7 +394,11 @@ export function HeroSlider({
       )}
 
       <div
-        className={styles.track}
+        /* `scroller`: barra di sistema nascosta e nessun chaining sul
+           documento, come ogni nastro del sito. Qui NON va
+           `scroller-drag`: il gesto orizzontale su touch è scroll
+           nativo (scroll-snap), e un touch-action pan-y lo spegnerebbe */
+        className={`scroller ${styles.track}`}
         ref={trackRef}
         onScroll={onScroll}
         onPointerDown={onPointerDown}

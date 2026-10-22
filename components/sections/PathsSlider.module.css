@@ -1,19 +1,15 @@
 /* nastro infinito a ogni misura: full-bleed (il wrap è 100% con
    soli gutter, basta il margine negativo), contenuto duplicato —
-   il wrap al 50% lo fa il JS. touch-action: pan-y lascia al nastro
-   il gesto orizzontale e alla pagina quello verticale */
+   il wrap al 50% lo fa il JS.
+   Grammatica condivisa: `.scroller-drag` (cursore grab/grabbing,
+   touch-action pan-y così il gesto verticale resta della pagina) e
+   `.scroller-fade` (la stessa sfumatura di ogni nastro infinito, ai
+   due tagli e a ogni misura: prima c'era solo su mobile). La mask sta
+   qui, sul contenitore fermo, non sul track che trasla. */
 .outer {
   display: block;
   overflow: hidden;
   margin-inline: calc(var(--pad) * -1);
-  touch-action: pan-y;
-  user-select: none;
-  -webkit-user-select: none;
-  cursor: grab;
-}
-
-.outer:active {
-  cursor: grabbing;
 }
 
 .track {
@@ -26,25 +22,4 @@
    che vive in un altro module e può arrivare dopo nel bundle */
 .clone.clone {
   display: flex;
-}
-
-/* la sfumatura ai bordi resta solo su mobile: su web le card
-   arrivano vive al taglio del viewport */
-@media (max-width: 800px) {
-  .outer {
-    mask-image: linear-gradient(
-      to right,
-      transparent,
-      #000 4%,
-      #000 96%,
-      transparent
-    );
-    -webkit-mask-image: linear-gradient(
-      to right,
-      transparent,
-      #000 4%,
-      #000 96%,
-      transparent
-    );
-  }
 }

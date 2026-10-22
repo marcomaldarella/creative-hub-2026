@@ -45,51 +45,18 @@
   color: rgba(255, 255, 255, 0.4);
 }
 
-.arrow {
-  width: 44px;
-  height: 44px;
-  display: grid;
-  place-items: center;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  /* eccezione voluta: il disco con la freccia resta tondo */
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.06);
-  color: rgba(255, 255, 255, 0.92);
-  cursor: pointer;
-  transition:
-    background var(--dur),
-    border-color var(--dur),
-    color var(--dur),
-    transform var(--dur);
-}
-
+/* il disco-freccia è il componente condiviso ScrollerNav (38px, bordo
+   hairline, hover che accende il bordo): qui non si ridefinisce niente,
+   solo lo sparire su mobile più sotto. Dentro la fascia nera i token
+   --fg/--fg-2 sono già quelli della variante scura */
 .arrow svg {
   display: block;
 }
 
-.arrow:hover {
-  background: #fff;
-  border-color: #fff;
-  color: #0a0a0a;
-}
-
-.arrow:active {
-  transform: scale(0.94);
-}
-
 /* ————— viewport + track ————— */
 
-.viewport {
-  cursor: grab;
-  touch-action: pan-y;
-  /* niente selezione testo mentre si trascina */
-  user-select: none;
-  -webkit-user-select: none;
-}
-
-.grabbing {
-  cursor: grabbing;
-}
+/* drag 1:1 col puntatore: cursore grab/grabbing, touch-action pan-y e
+   niente selezione testo arrivano da `.scroller-drag` (globals) */
 
 .track {
   display: flex;
@@ -103,7 +70,7 @@
 }
 
 .animate {
-  transition: transform 0.7s var(--ease-out);
+  transition: transform var(--scroller-slide) var(--ease-out);
 }
 
 /* ————— slide ————— */
@@ -117,7 +84,7 @@
   transform: scale(0.94);
   opacity: 0.45;
   transition:
-    transform 0.7s var(--ease-out),
+    transform var(--scroller-slide) var(--ease-out),
     opacity 0.5s ease,
     box-shadow 0.5s ease;
 }
@@ -140,7 +107,7 @@ video.img {
 .img {
   object-fit: cover;
   transform: translateX(var(--par, 0%)) scale(1.12);
-  transition: transform 0.7s var(--ease-out);
+  transition: transform var(--scroller-slide) var(--ease-out);
 }
 
 /* velo per la leggibilità del testo */
@@ -226,6 +193,9 @@ video.img {
   margin-top: clamp(24px, 3.5vw, 40px);
 }
 
+/* stessa barretta di avanzamento dei nastri (2px, hairline sul token di
+   sezione, mai tonda): qui è spezzata in una tacca per slide perché è
+   lei a dettare il tempo dell'autoplay */
 .bar {
   position: relative;
   flex: 0 0 clamp(36px, 4vw, 56px);
@@ -233,13 +203,13 @@ video.img {
   padding: 0;
   border: none;
   border-radius: 0;
-  background: rgba(255, 255, 255, 0.16);
+  background: color-mix(in srgb, var(--fg) 12%, transparent);
   cursor: pointer;
-  transition: background var(--dur);
+  transition: background var(--scroller-dur) var(--ease-out);
 }
 
 .bar:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: color-mix(in srgb, var(--fg) 30%, transparent);
 }
 
 /* area tocco generosa senza ingrossare la barra */
@@ -298,8 +268,9 @@ video.img {
     height: clamp(340px, 52vh, 470px);
   }
 
-  /* swipe + barre bastano: via le frecce */
-  .arrow {
+  /* swipe + barre bastano: via le frecce. Doppia classe per vincere sul
+     display del bottone condiviso, che vive in un altro module */
+  .arrow.arrow {
     display: none;
   }
 

@@ -99,14 +99,10 @@
   align-items: center;
   padding-inline: var(--pad);
   gap: clamp(36px, 5.5vw, 110px);
-  overflow-x: auto;
-  overscroll-behavior-x: contain;
-  scrollbar-width: none;
+  /* overflow, scrollbar nascosta e no-chaining: `.scroller` (globals).
+     Qui resta solo il cursore: lo stato grabbing lo mette il JS con la
+     classe condivisa `.scroller-dragging` */
   cursor: grab;
-}
-
-.track::-webkit-scrollbar {
-  display: none;
 }
 
 .slide {

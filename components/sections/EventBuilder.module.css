@@ -1,0 +1,60 @@
+/* configuratore evento: tutto il resto arriva da BookingFlow.module.css
+   (voci, campi, riepilogo nero). Qui solo la griglia degli extra e la
+   spaziatura fra le quattro domande. */
+
+.lede {
+  font-size: var(--fs-lede);
+  color: var(--fg-2);
+  max-width: 52ch;
+  margin-bottom: clamp(18px, 2.2vw, 28px);
+}
+
+/* le quattro domande: il titolo porta già il suo margine, qui basta
+   un po' d'aria in più fra un gruppo e l'altro */
+.group + .group {
+  margin-top: clamp(12px, 1.4vw, 18px);
+}
+
+.extras {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+/* dentro la griglia le righe extra non portano il loro margine */
+.extras > label {
+  margin-top: 0;
+}
+
+/* le due domande a campo singolo stanno su una riga: il margine in
+   testa è quello che i titoli delle altre domande si portano dietro */
+.when {
+  margin-top: clamp(20px, 2.4vw, 30px);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px clamp(12px, 1.5vw, 20px);
+  max-width: 460px;
+}
+
+/* domanda usata come etichetta di campo: stesso peso delle altre, ma
+   il margine in testa lo porta già il contenitore .when */
+.qField.qField {
+  margin-top: 0;
+}
+
+/* nome e contatto dentro il riepilogo nero */
+.ask {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+
+@media (max-width: 900px) {
+  .extras,
+  .when {
+    grid-template-columns: 1fr;
+  }
+}

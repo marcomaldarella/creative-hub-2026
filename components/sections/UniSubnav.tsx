@@ -1,26 +1,10 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import { Arrow, useScrollerOverflow } from '@/components/ui'
 import styles from './UniScreen.module.css'
 
 export type UniSubnavItem = { id: string; label: string }
-
-/* freccia sempre SVG, mai unicode: la prev è la stessa flippata via CSS */
-function StepArrow() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      width="13"
-      height="13"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.8"
-      aria-hidden="true"
-    >
-      <path d="M4 12h15M13 5l7 7-7 7" />
-    </svg>
-  )
-}
 
 /**
  * Indice sticky della landing: UI portata pari pari dalla scheda corso
@@ -48,7 +32,8 @@ export function UniSubnav({
 }) {
   const [active, setActive] = useState(0)
   const barRef = useRef<HTMLDivElement>(null)
-  const jumpRef = useRef<HTMLElement>(null)
+  /* la sfumatura al taglio destro compare solo se la fila sborda */
+  const { ref: jumpRef, overflow } = useScrollerOverflow<HTMLElement>()
   const activeRef = useRef(0)
   activeRef.current = active
 
@@ -114,7 +99,13 @@ export function UniSubnav({
     >
       <div className={`wrap ${styles.subnavIn}`}>
         <div className={styles.subnavCourse}>{course}</div>
-        <nav className={styles.jump} aria-label={course} ref={jumpRef}>
+        {/* fila di voci: grammatica condivisa degli scroller — scorre
+            senza barra di sistema e sfuma al taglio destro */}
+        <nav
+          className={`scroller ${overflow ? 'scroller-fade-end' : ''} ${styles.jump}`}
+          aria-label={course}
+          ref={jumpRef}
+        >
           {items.map((it, k) => (
             <a
               key={it.id}
@@ -131,14 +122,17 @@ export function UniSubnav({
         <span className={styles.tail}>
           <span className={styles.year}>{year}</span>
           <span className={styles.steps}>
+            {/* stessa freccia di ogni controllo del sito: il componente
+                Arrow (svg, mai unicode). Il verso lo dà `dir`, mai un
+                flip in CSS: l'svg porta già un transform inline */}
             <button
               type="button"
-              className={`${styles.step} ${styles.stepPrev}`}
+              className={styles.step}
               onClick={() => jump(-1)}
               disabled={active === 0}
               aria-label={prevLabel}
             >
-              <StepArrow />
+              <Arrow dir="w" />
             </button>
             <button
               type="button"
@@ -147,7 +141,7 @@ export function UniSubnav({
               disabled={active === items.length - 1}
               aria-label={nextLabel}
             >
-              <StepArrow />
+              <Arrow dir="e" />
             </button>
           </span>
         </span>

@@ -12,36 +12,12 @@
   overflow: hidden;
 }
 
-/* vignetta laterale a ogni misura: sul fondo nero della fascia le
-   card sfumano nel buio ai due tagli del viewport */
-.field {
-  mask-image: linear-gradient(
-    to right,
-    transparent,
-    #000 7%,
-    #000 93%,
-    transparent
-  );
-  -webkit-mask-image: linear-gradient(
-    to right,
-    transparent,
-    #000 7%,
-    #000 93%,
-    transparent
-  );
-}
+/* la vignetta laterale a ogni misura (le card sfumano nel buio ai due
+   tagli del viewport) è la sfumatura condivisa `.scroller-fade`, sul
+   contenitore fermo; il drag per riga è `.scroller-drag` */
 
 .row {
   white-space: nowrap;
-  /* drag orizzontale per riga; il gesto verticale resta della pagina */
-  cursor: grab;
-  touch-action: pan-y;
-  user-select: none;
-  -webkit-user-select: none;
-}
-
-.row.dragging {
-  cursor: grabbing;
 }
 
 .track {
