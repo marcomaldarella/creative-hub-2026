@@ -1,0 +1,233 @@
+/* slider insegnanti delle lezioni su misura: pillole coi nomi e frecce
+   tonde in alto, poi il ritratto (o il video) a sinistra e la scheda a
+   destra. Vive dentro la fascia scura, quindi tutti i colori sono token
+   di schema — nessun valore fisso. */
+
+.slider {
+  margin-top: clamp(28px, 3.5vw, 48px);
+}
+
+/* riga di comando: nastro di pillole a sinistra, frecce a destra */
+.bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(16px, 3vw, 40px);
+  margin-bottom: clamp(18px, 2.4vw, 28px);
+}
+
+.pills {
+  display: flex;
+  gap: 8px;
+  /* il nastro può scorrere: serve spazio al filo di focus */
+  padding: 2px;
+  margin: -2px;
+  min-width: 0;
+}
+
+.pill {
+  flex: 0 0 auto;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  padding: 8px 16px;
+  color: inherit;
+  border: 1px solid color-mix(in srgb, currentColor 30%, transparent);
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition:
+    border-color var(--scroller-dur) var(--ease-out),
+    background var(--scroller-dur) var(--ease-out),
+    color var(--scroller-dur) var(--ease-out);
+}
+
+.pill:hover {
+  border-color: currentColor;
+}
+
+/* la pillola attiva è piena: inchiostro di sezione su fondo pieno */
+.pillOn {
+  background: var(--fg);
+  color: var(--su-inchiostro);
+  border-color: var(--fg);
+}
+
+.arrows {
+  display: flex;
+  flex: 0 0 auto;
+  gap: 8px;
+}
+
+/* ————— la scheda: media a sinistra, testo a destra ————— */
+
+.panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  gap: clamp(20px, 3vw, 48px);
+  align-items: start;
+  animation: teacherIn 0.22s var(--ease-out) both;
+}
+
+@keyframes teacherIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .panel {
+    animation: none;
+  }
+}
+
+/* il riquadro del media: 4:3, scuro, spigolo vivo come le altre card */
+.media {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: color-mix(in srgb, currentColor 10%, transparent);
+  border: 1px solid var(--line);
+  color: inherit;
+}
+
+.mediaBtn {
+  padding: 0;
+  cursor: pointer;
+}
+
+.photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.player {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  object-fit: cover;
+}
+
+/* senza foto né video: solo le iniziali, nessuna scritta segnaposto */
+.initials {
+  font-size: clamp(32px, 4vw, 56px);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  opacity: 0.45;
+}
+
+/* col video addosso la foto si scurisce appena: il disco del play
+   resta leggibile anche sui ritratti chiari */
+.mediaBtn .photo {
+  filter: brightness(0.74);
+  transition: filter 0.2s var(--ease-out);
+}
+
+.mediaBtn:hover .photo {
+  filter: brightness(0.66);
+}
+
+/* il disco del play: come le frecce tonde, filo sottile e nessun
+   rimbalzo — cresce appena al passaggio */
+.play {
+  position: absolute;
+  display: inline-flex;
+  color: var(--osso);
+  transition: transform 0.2s var(--ease-out);
+}
+
+.mediaBtn:hover .play {
+  transform: scale(1.06);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .play,
+  .mediaBtn .photo {
+    transition: none;
+  }
+}
+
+/* ————— la scheda ————— */
+
+.info {
+  min-width: 0;
+}
+
+.count {
+  display: block;
+  font-size: 12px;
+  color: var(--accent, var(--fg-2));
+  margin-bottom: 12px;
+}
+
+.name {
+  font-size: clamp(22px, 2.6vw, 34px);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+.role {
+  font-size: 14px;
+  color: var(--fg-2);
+  margin-top: 6px;
+  padding-bottom: clamp(14px, 1.8vw, 20px);
+  border-bottom: 1px solid var(--line);
+}
+
+.bio {
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--fg-2);
+  max-width: 54ch;
+  margin-top: clamp(14px, 1.8vw, 20px);
+}
+
+.try {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: clamp(16px, 2vw, 24px);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: inherit;
+  cursor: pointer;
+}
+
+.try svg {
+  transition: transform 150ms var(--ease-out);
+}
+
+.try:hover svg {
+  transform: translateX(3px);
+}
+
+/* ————— mobile ————— */
+
+@media (max-width: 860px) {
+  .panel {
+    grid-template-columns: 1fr;
+  }
+
+  .media {
+    aspect-ratio: 3 / 2;
+  }
+}
+
+@media (max-width: 560px) {
+  .bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+  }
+
+  .arrows {
+    justify-content: flex-end;
+  }
+}

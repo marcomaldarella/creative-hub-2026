@@ -46,6 +46,20 @@
   background: color-mix(in srgb, var(--accent) 86%, var(--fg));
 }
 
+/* WhatsApp: il verde del marchio, l'unico colore funzionale che non è
+   nostro (nei mockup è il token --wa). Testo NERO, non bianco come nel
+   mockup: il bianco sul verde sta a 2:1, il nero a 10:1 — ed è anche la
+   regola di sezione, sopra un colore pieno il testo è sempre nero. */
+.whatsapp {
+  background: var(--whatsapp);
+  color: #000000;
+  border: 1px solid color-mix(in srgb, #000000 55%, transparent);
+}
+
+.whatsapp:hover {
+  background: color-mix(in srgb, var(--whatsapp) 88%, #000000);
+}
+
 /* pastiglia chiara: sopra le sezioni in blu brand (open day) */
 .osso {
   background: var(--osso);

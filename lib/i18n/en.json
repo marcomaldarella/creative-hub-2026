@@ -99,6 +99,7 @@
     "articles": "articles",
     "duration": "duration",
     "start": "start",
+    "deadline": "application deadline",
     "level": "level",
     "language": "language",
     "mode": "mode",
@@ -659,7 +660,8 @@
       "Ableton",
       "IK Multimedia",
       "Emilia-Romagna Film Commission"
-    ]
+    ],
+    "heroCta": "Tell us about your project"
   },
   "coworking": {
     "kicker": "coworking · roveri district, bologna",
@@ -1166,7 +1168,17 @@
       ],
       "eyebrow": "internships & placement",
       "metaTitle": "Internships and placement in music | Creative Hub Academy Bologna",
-      "metaDesc": "Internships in studios, clubs and productions, the in-house Label Lab with Orchard Italia, auditions with management agencies. From year one."
+      "metaDesc": "Internships in studios, clubs and productions, the in-house Label Lab with Orchard Italia, auditions with management agencies. From year one.",
+      "heroCtas": [
+        {
+          "label": "Book the open day",
+          "href": "/academy/open-day"
+        },
+        {
+          "label": "Read the stories",
+          "href": "#storie"
+        }
+      ]
     },
     "corsiCustom": {
       "title": "Your instrument. Your schedule. The first lesson is free.",
@@ -1380,7 +1392,7 @@
         },
         {
           "q": "Will there be work afterwards?",
-          "a": "The work placement is part of the course, and 83% of students work in the industry — a figure certified by the Emilia-Romagna Region.",
+          "a": "The work placement is part of the course, and for many it turns into their first contract.",
           "link": "Internships and placement"
         },
         {
@@ -2081,7 +2093,87 @@
           "title": "Evening slots too",
           "text": "Plenty of students start at 30, 40 or 50: evening lessons and packs you can pause."
         }
-      ]
+      ],
+      "itemsBySlug": {
+        "corso-custom-canto": [
+          {
+            "title": "Rooms and vocal booths",
+            "text": "You study in spaces built for the voice, with a proper PA, microphones and professional acoustics."
+          },
+          {
+            "title": "Working teachers",
+            "text": "Singers who still work today between stage, studio and television."
+          },
+          {
+            "title": "A programme built for you",
+            "text": "Shaped on your level and your goal, not the same for everyone."
+          },
+          {
+            "title": "A band to sing with",
+            "text": "Ensemble work takes your voice out of the booth, alongside other musicians."
+          },
+          {
+            "title": "Practice rooms",
+            "text": "You can come and rehearse outside lesson hours too."
+          },
+          {
+            "title": "A community of musicians",
+            "text": "The degree students share the same building: people to meet, collaborate and start bands with."
+          }
+        ],
+        "corso-custom-chitarra": [
+          {
+            "title": "Professional rooms and gear",
+            "text": "Amps, effects and the rooms of the building, bookable outside lesson hours too."
+          },
+          {
+            "title": "Working guitarists",
+            "text": "Teachers who still play today on tour, in the studio and for film."
+          },
+          {
+            "title": "A clear roadmap",
+            "text": "From the first note to your first complete song, with concrete goals lesson after lesson. No more random tutorials."
+          },
+          {
+            "title": "Jam sessions and events",
+            "text": "Chances to play with other musicians and take what you learn outside the room."
+          },
+          {
+            "title": "Evening slots too",
+            "text": "Made for people who work: evening lessons and packages you can pause."
+          },
+          {
+            "title": "A community of musicians",
+            "text": "Teenagers and adults together, in the same building as the degree courses."
+          }
+        ],
+        "corso-custom-pianoforte-tastiere": [
+          {
+            "title": "Rooms with pianos and keyboards",
+            "text": "Pianos, modern keyboards, controllers, pads and computers, in fully equipped rooms."
+          },
+          {
+            "title": "Acoustic and electronic together",
+            "text": "You don’t have to pick one instrument: piano, synths and DAW in the same lessons."
+          },
+          {
+            "title": "A clear roadmap",
+            "text": "From the first chord to your first complete song, with concrete goals lesson after lesson."
+          },
+          {
+            "title": "Jam sessions, events and shows",
+            "text": "Chances to play with other musicians and take what you learn outside the room."
+          },
+          {
+            "title": "Evening slots too",
+            "text": "Evening lessons, packages you can pause and practice rooms with a piano, bookable outside lesson hours."
+          },
+          {
+            "title": "For children too",
+            "text": "From the age of 6, playing music they like from day one: pop, rock, soundtracks. No need to read music."
+          }
+        ]
+      }
     },
     "ctaSteps": {
       "lede": "It takes 30 seconds. Here’s what happens next:",
@@ -2132,6 +2224,46 @@
         "Francesco Baccini",
         "Ladri di Biciclette",
         "Tony Esposito"
+      ],
+      "corso-custom-basso": [
+        "Pop",
+        "Rock",
+        "Funk",
+        "Soul",
+        "Jazz",
+        "Reggae",
+        "Blues",
+        "R&B"
+      ],
+      "corso-custom-canto": [
+        "Mina",
+        "Gianni Morandi",
+        "Renato Zero",
+        "Laura Pausini",
+        "Ivana Spagna",
+        "Mietta",
+        "Nomadi",
+        "Benassi Bros"
+      ],
+      "corso-custom-pianoforte-tastiere": [
+        "Pop",
+        "Rock",
+        "Funk",
+        "Soul",
+        "Blues",
+        "R&B",
+        "Electronica",
+        "Jazz",
+        "Soundtracks"
+      ],
+      "corso-custom-produzione-musicale": [
+        "Franco Battiato",
+        "CSI",
+        "Disciplinatha",
+        "Festival di Sanremo",
+        "RAI",
+        "The Blackbird Academy Nashville",
+        "Morphing Studio"
       ]
     },
     "numbers": [
@@ -2148,7 +2280,72 @@
       "Ten"
     ],
     "navPrev": "previous section",
-    "navNext": "next section"
+    "navNext": "next section",
+    "teachersNav": {
+      "prev": "previous teacher",
+      "next": "next teacher",
+      "group": "choose a teacher",
+      "play": "play the video of {name}"
+    },
+    "creditsLabelBySlug": {
+      "corso-custom-basso": "Styles you can play",
+      "corso-custom-canto": "Our teachers have sung with",
+      "corso-custom-pianoforte-tastiere": "Styles you can play",
+      "corso-custom-produzione-musicale": "What our teachers have worked on"
+    },
+    "styles": {
+      "bySlug": {
+        "corso-custom-basso": {
+          "label": "Styles",
+          "items": [
+            "Pop",
+            "Rock",
+            "Funk",
+            "Soul",
+            "Jazz",
+            "Reggae",
+            "Blues",
+            "R&B"
+          ]
+        },
+        "corso-custom-chitarra": {
+          "label": "Styles",
+          "items": [
+            "Rock",
+            "Blues",
+            "Funk",
+            "Indie",
+            "Alternative",
+            "Neo-soul",
+            "Jazz fusion",
+            "Fingerstyle"
+          ]
+        },
+        "corso-custom-pianoforte-tastiere": {
+          "label": "Styles",
+          "items": [
+            "Pop",
+            "Rock",
+            "Funk",
+            "Soul",
+            "Blues",
+            "R&B",
+            "Electronica",
+            "Jazz",
+            "Soundtracks"
+          ]
+        },
+        "corso-custom-produzione-musicale": {
+          "label": "Software",
+          "items": [
+            "Ableton Live",
+            "Logic Pro",
+            "Reaper",
+            "Pro Tools"
+          ]
+        }
+      }
+    }
   },
   "saleEventiPage": {
     "kicker": "coworking · rooms & events",
@@ -2807,7 +3004,8 @@
         }
       ],
       "ctaText": "Write to us about what you want to record, mix or produce. We get back to you Monday to Friday for a consultation and to book the session.",
-      "marquee": "Real musicians, in the same room"
+      "marquee": "Real musicians, in the same room",
+      "whereCta": "The whole studio"
     },
     "mix": {
       "metaTitle": "Mix and mastering in Bologna, stereo and Dolby Atmos | Creative Hub Studio",
@@ -3127,7 +3325,14 @@
         "shopTitle": "All set: the space is waiting.",
         "shopText": "Booking is completed on the space page, with rates, availability and payment. The choices you made here are your reminder.",
         "shopCta": "Go to the space and book"
-      }
+      },
+      "findExtra": [
+        {
+          "_key": "findExtra-1",
+          "title": "Software and instruments",
+          "text": "Pro Tools, Ableton, Universal Audio."
+        }
+      ]
     },
     "atmos": {
       "metaTitle": "Dolby Atmos 7.1.4 studio in Bologna | Creative Hub Studio",
@@ -3536,6 +3741,21 @@
     "seo": {
       "title": "Free courses funded by the Emilia-Romagna Region | Creative Hub Academy",
       "description": "Free professional courses in Bologna in sound, music, data and 3D, funded by the Emilia-Romagna Region and ESF+."
+    },
+    "scheda": {
+      "heroCta": "Tell me about the next edition",
+      "costLabel": "cost",
+      "costValue": "Free — funded by the Emilia-Romagna Region and ESF+",
+      "admissionsTitle": "Who can take part.",
+      "enrollmentTitle": "Enrolment.",
+      "nav": {
+        "overview": "Overview",
+        "skills": "What you learn",
+        "requirements": "Requirements",
+        "selection": "Selection",
+        "enrollment": "Enrolment"
+      },
+      "skillsTitle": "What you learn."
     }
   }
 }

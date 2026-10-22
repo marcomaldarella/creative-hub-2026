@@ -18,13 +18,14 @@ import type {
 
 const courseFields = groq`
   _id, _type, title, slug, summary, body, coverImage, gallery,
-  duration, durationShort, startDate, level, mode, language, shopUrl, featured, types,
+  duration, durationShort, startDate, applicationDeadline,
+  level, mode, language, shopUrl, featured, types,
   editionStatus, order,
   skillsLede, skills, structureIntro, structure, admissionsKeys, admissions,
-  selectionLede, selection, networkLede, network, faq,
+  enrollment, selectionLede, selection, networkLede, network, faq,
   packages, packagesTerms,
   category->{ _id, _type, title, slug },
-  teachers[]->{ _id, _type, name, slug, role, bio, photo, links }
+  teachers[]->{ _id, _type, name, slug, role, bio, photo, videoUrl, links }
 `
 
 const articleFields = groq`
@@ -59,7 +60,7 @@ export function getCourseBySlug(slug: string): Promise<Course | null> {
 
 export const allTeachersQuery = groq`
   *[_type == "teacher"] | order(name asc) {
-    _id, _type, name, slug, role, bio, photo, links
+    _id, _type, name, slug, role, bio, photo, videoUrl, links
   }
 `
 

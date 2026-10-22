@@ -159,18 +159,18 @@
 
 .errLine,
 .errLine:hover {
-  border-color: #b3261e;
+  border-color: var(--errore);
 }
 
 /* .field .errIn: due classi per vincere su `.field input` */
 .field .errIn,
 .field .errIn:hover {
-  border-color: #b3261e;
+  border-color: var(--errore);
 }
 
 .errMsg {
   font-size: 13px;
-  color: #b3261e;
+  color: var(--errore);
   margin-bottom: 12px;
 }
 

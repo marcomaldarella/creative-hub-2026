@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import {
-  Arrow,
   ArrowLink,
   Marquee,
   Reveal,
@@ -15,6 +14,10 @@ import {
   type LessonVariant,
 } from '@/components/sections/LessonForm'
 import { PointsAccordion } from '@/components/sections/PointsAccordion'
+import {
+  LessonTeachers,
+  type LessonTeacher,
+} from '@/components/sections/LessonTeachers'
 import { SiteChrome } from '@/components/sections/SiteChrome'
 import { UniSubnav } from '@/components/sections/UniSubnav'
 import { localeHref, type Locale } from '@/lib/i18n/config'
@@ -51,8 +54,9 @@ export function lessonSeo(locale: Locale, slug: string) {
 
 /**
  * Landing delle lezioni su misura (dai mockup v2, nella grammatica del
- * sito): hero con badge e cover, metodo, insegnanti veri, cosa impari,
- * tre modi di studiare, come funziona, FAQ, altre lezioni e chiusura.
+ * sito): testata con badge e form, metodo, slider insegnanti, cosa
+ * impari, tre modi di studiare, come funziona, FAQ, altre lezioni e
+ * chiusura.
  * Tutto dai dati Sanity del corso: le sezioni vuote non compaiono.
  */
 export function LessonScreen({
@@ -107,6 +111,21 @@ export function LessonScreen({
       .slice(0, 2)
       .map((w) => w[0]?.toUpperCase() ?? '')
       .join('')
+  /* gli insegnanti già risolti per lo slider (client): niente oggetti
+     Sanity oltre il confine, solo stringhe e URL */
+  const teacherItems: LessonTeacher[] = teachers.map((tc) => ({
+    id: tc._id,
+    name: tc.name ?? '',
+    short: tryName(tc.name),
+    role: l(tc.role, locale) ?? '',
+    bio: l(tc.bio, locale) ?? '',
+    initials: initials(tc.name),
+    photo: tc.photo?.asset
+      ? urlFor(tc.photo).width(1200).height(900).fit('crop').auto('format').url()
+      : '',
+    video: tc.videoUrl ?? '',
+  }))
+
   const slugNow = course.slug?.current ?? ''
   const facesTpl =
     (t.lesson.facesBySlug as Record<string, string>)[slugNow] ??
@@ -119,6 +138,11 @@ export function LessonScreen({
      dato i crediti (nel mockup ce l'ha la chitarra) */
   const credits =
     (t.lesson.creditsBySlug as Record<string, string[]>)[slugNow] ?? []
+  /* su basso e pianoforte il nastro non porta collaborazioni ma gli
+     stili suonabili: cambia anche la testa della fascia */
+  const creditsLabel =
+    (t.lesson.creditsLabelBySlug as Record<string, string>)[slugNow] ??
+    t.lesson.creditsLabel
 
   const academyPath = localeHref(locale, '/academy')
   const kick = (n: number, label: string) =>
@@ -143,6 +167,32 @@ export function LessonScreen({
     />
   )
 
+  /* "Per chi sono le lezioni": le quattro card del mockup. Sulla
+     produzione il mockup ne mostra tre (niente card genitore) e sul
+     canto la sezione non c'è proprio. */
+  const audience =
+    variant === 'canto'
+      ? []
+      : t.lesson.audience.items.filter(
+          (a) => !(variant === 'produzione' && a.v === 'genitore')
+        )
+  /* "Cosa trovi alla nostra scuola": sei card scritte per strumento dove
+     il mockup le differenzia (canto, chitarra, pianoforte), l'aula
+     Ableton sulla produzione, il testo generico altrove */
+  const schoolBySlug = t.lesson.school.itemsBySlug as Record<
+    string,
+    { title: string; text: string }[]
+  >
+  const school =
+    schoolBySlug[slugCur] ??
+    (variant === 'produzione'
+      ? t.lesson.school.itemsProduzione
+      : t.lesson.school.items)
+  const schoolTitle =
+    variant === 'produzione'
+      ? t.lesson.school.titleProduzione
+      : t.lesson.school.title
+
   /* pacchetti prezzo (solo i corsi che li hanno in Sanity) */
   const packs = (course.packages ?? []).filter((p) => l(p.name, locale))
   const packTerms = (course.packagesTerms ?? [])
@@ -154,6 +204,7 @@ export function LessonScreen({
   const navItems = [
     metodo.length > 0 && { id: 'metodo', label: t.lesson.metodoKicker },
     teachers.length > 0 && { id: 'docenti', label: t.lesson.teachersKicker },
+    audience.length > 0 && { id: 'per-chi', label: t.lesson.audience.kicker },
     skills.length > 0 && { id: 'impari', label: t.lesson.skillsKicker },
     modi.length > 0 && { id: 'modi', label: t.lesson.modiKicker },
     come.length > 0 && { id: 'come', label: t.lesson.comeKicker },
@@ -180,21 +231,14 @@ export function LessonScreen({
       ? { href: localeHref(locale, uniExitHrefs[slugCur]), ...uniExitCopy }
       : null
 
-  /* "Per chi sono le lezioni": le quattro card del mockup. Sulla
-     produzione il mockup ne mostra tre (niente card genitore). */
-  const audience = t.lesson.audience.items.filter(
-    (a) => !(variant === 'produzione' && a.v === 'genitore')
-  )
-  /* "Cosa trovi alla nostra scuola": sei card, con la variante dell'aula
-     dedicata ad Ableton per la produzione */
-  const school =
-    variant === 'produzione'
-      ? t.lesson.school.itemsProduzione
-      : t.lesson.school.items
-  const schoolTitle =
-    variant === 'produzione'
-      ? t.lesson.school.titleProduzione
-      : t.lesson.school.title
+  /* la riga di chip sotto "cosa impari": stili per gli strumenti,
+     software per la produzione — il canto non ne ha */
+  const chips = (
+    t.lesson.styles.bySlug as Record<
+      string,
+      { label: string; items: string[] }
+    >
+  )[slugCur]
 
   /* sede: indirizzo da Sanity, mappa aperta su Google (nessun embed) */
   const address = settings?.address ?? 'Via del Tappezziere 4, 40138 Bologna'
@@ -286,7 +330,7 @@ export function LessonScreen({
         {credits.length > 0 && (
           <div className={`scheme-dark ${styles.credits}`}>
             <span className={`mono ${styles.creditsLabel}`}>
-              {t.lesson.creditsLabel}
+              {creditsLabel}
             </span>
             <Marquee
               speed={34}
@@ -343,48 +387,21 @@ export function LessonScreen({
                 kicker={kick(n, t.lesson.teachersKicker)}
                 title={t.lesson.teachersTitle}
               />
-              {/* i ritratti prefillano l'insegnante nel form e ci scrollano */}
-              <RevealGroup className={styles.teacherGrid}>
-                {teachers.map((tc) => (
-                  <LessonPrefill
-                    key={tc._id}
-                    teacher={tc.name ?? ''}
-                    className={`rv ${styles.teacher}`}
-                    ariaLabel={`${t.lesson.teacherTry} ${tc.name}`}
-                  >
-                    <div className={styles.teacherPh}>
-                      {tc.photo && (
-                        /* eslint-disable-next-line @next/next/no-img-element */
-                        <img
-                          src={urlFor(tc.photo)
-                            .width(400)
-                            .height(500)
-                            .fit('crop')
-                            .auto('format')
-                            .url()}
-                          alt={tc.name ?? ''}
-                          loading="lazy"
-                        />
-                      )}
-                    </div>
-                    <span className={styles.teacherName}>{tc.name}</span>
-                    {l(tc.role, locale) && (
-                      <span className={styles.teacherRole}>
-                        {l(tc.role, locale)}
-                      </span>
-                    )}
-                    {l(tc.bio, locale) && (
-                      <span className={styles.teacherCred}>
-                        {l(tc.bio, locale)}
-                      </span>
-                    )}
-                    <span className={styles.teacherTry}>
-                      {t.lesson.teacherTry} {tryName(tc.name)}{' '}
-                      <Arrow size={11} />
-                    </span>
-                  </LessonPrefill>
-                ))}
-              </RevealGroup>
+              {/* uno alla volta: pillole coi nomi, contatore sul numero
+                  vero di insegnanti e ritratto che, se c'è un video in
+                  Sanity, parte al clic */}
+              <Reveal>
+                <LessonTeachers
+                  items={teacherItems}
+                  labels={{
+                    prev: t.lesson.teachersNav.prev,
+                    next: t.lesson.teachersNav.next,
+                    group: t.lesson.teachersNav.group,
+                    play: t.lesson.teachersNav.play,
+                    try: t.lesson.teacherTry,
+                  }}
+                />
+              </Reveal>
             </section>
           </div>
         )}
@@ -396,7 +413,7 @@ export function LessonScreen({
               left={String(++n).padStart(2, '0')}
               right={t.lesson.audience.kicker}
             />
-            <section className={`wrap ${styles.sez}`}>
+            <section id="per-chi" className={`wrap ${styles.sez}`}>
               <SectionHeader
                 kicker={kick(n, t.lesson.audience.kicker)}
                 title={t.lesson.audience.title}
@@ -422,7 +439,7 @@ export function LessonScreen({
               left={String(++n).padStart(2, '0')}
               right={t.lesson.school.kicker}
             />
-            <section className={`wrap ${styles.sez}`}>
+            <section id="scuola" className={`wrap ${styles.sez}`}>
               <SectionHeader
                 kicker={kick(n, t.lesson.school.kicker)}
                 title={schoolTitle}
@@ -463,6 +480,18 @@ export function LessonScreen({
                   </div>
                 ))}
               </RevealGroup>
+              {chips && (
+                <Reveal className={styles.chips}>
+                  <span className={`mono ${styles.chipsLabel}`}>
+                    {chips.label}
+                  </span>
+                  {chips.items.map((c) => (
+                    <span key={c} className={styles.chip}>
+                      {c}
+                    </span>
+                  ))}
+                </Reveal>
+              )}
             </section>
           </>
         )}
@@ -593,6 +622,44 @@ export function LessonScreen({
           </>
         )}
 
+        {/* ————— la scuola a Bologna: SEO locale. Solo dati confermati:
+            gli orari di segreteria del mockup sono un giallo da validare
+            e restano fuori ————— */}
+        <Rule left={String(++n).padStart(2, '0')} right={t.lesson.sede.kicker} />
+        <section className={`wrap ${styles.sez} ${styles.duo}`}>
+          <SectionHeader
+            kicker={kick(n, t.lesson.sede.kicker)}
+            title={t.lesson.sede.title}
+            lede={t.lesson.sede.lede}
+          />
+          <Reveal className={styles.defs}>
+            <div className={styles.def}>
+              <span className={styles.defLabel}>
+                {t.lesson.sede.addressLabel}
+              </span>
+              <span className={styles.defText}>{address}</span>
+            </div>
+            {settings?.phone && (
+              <div className={styles.def}>
+                <span className={styles.defLabel}>
+                  {t.lesson.sede.phoneLabel}
+                </span>
+                <a
+                  className={styles.defText}
+                  href={`tel:${settings.phone.replace(/\s/g, '')}`}
+                >
+                  {settings.phone}
+                </a>
+              </div>
+            )}
+            <div className={styles.mapLink}>
+              <ArrowLink href={mapHref} external>
+                {t.lesson.sede.mapLabel}
+              </ArrowLink>
+            </div>
+          </Reveal>
+        </section>
+
         {/* ————— faq ————— */}
         {faq.length > 0 && (
           <>
@@ -632,44 +699,6 @@ export function LessonScreen({
             </section>
           </>
         )}
-
-        {/* ————— la scuola a Bologna: SEO locale. Solo dati confermati:
-            gli orari di segreteria del mockup sono un giallo da validare
-            e restano fuori ————— */}
-        <Rule left={String(++n).padStart(2, '0')} right={t.lesson.sede.kicker} />
-        <section className={`wrap ${styles.sez} ${styles.duo}`}>
-          <SectionHeader
-            kicker={kick(n, t.lesson.sede.kicker)}
-            title={t.lesson.sede.title}
-            lede={t.lesson.sede.lede}
-          />
-          <Reveal className={styles.defs}>
-            <div className={styles.def}>
-              <span className={styles.defLabel}>
-                {t.lesson.sede.addressLabel}
-              </span>
-              <span className={styles.defText}>{address}</span>
-            </div>
-            {settings?.phone && (
-              <div className={styles.def}>
-                <span className={styles.defLabel}>
-                  {t.lesson.sede.phoneLabel}
-                </span>
-                <a
-                  className={styles.defText}
-                  href={`tel:${settings.phone.replace(/\s/g, '')}`}
-                >
-                  {settings.phone}
-                </a>
-              </div>
-            )}
-            <div className={styles.mapLink}>
-              <ArrowLink href={mapHref} external>
-                {t.lesson.sede.mapLabel}
-              </ArrowLink>
-            </div>
-          </Reveal>
-        </section>
 
         {/* ————— ponte al corso universitario omologo ————— */}
         {uniExit && (

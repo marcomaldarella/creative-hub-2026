@@ -238,6 +238,13 @@ export default async function RegistrazionePage({
             title={d.whereTitle}
             lede={d.whereLede}
           />
+          {/* il rimando del mockup accanto al lede: dalla sala alla
+              pagina di tutto lo studio */}
+          <Reveal className={styles.whereCta} delay={60}>
+            <ArrowLink href={localeHref(locale, '/studios')} dir="e">
+              {d.whereCta}
+            </ArrowLink>
+          </Reveal>
           <RevealGroup className={det.grid3}>
             {d.where.map((w, i) => (
               <Card

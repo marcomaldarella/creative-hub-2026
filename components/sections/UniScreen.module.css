@@ -114,6 +114,12 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  /* col titolo lungo ("Pianoforte e tastiere") il nastro delle ancore
+     gli finiva sotto e i testi si sovrapponevano: il nome si accorcia
+     con l'ellissi e lascia il posto alle voci */
+  flex: 0 1 auto;
+  min-width: 0;
+  max-width: 38%;
 }
 
 /* overflow, scrollbar nascosta e la sfumatura al taglio destro (la voce
@@ -123,6 +129,9 @@
   display: flex;
   align-items: stretch;
   gap: 34px;
+  /* il nastro vive nel suo spazio, non sotto il nome del corso */
+  flex: 1 1 auto;
+  min-width: 0;
   /* respiro a sinistra per gli angoli del mirino della prima voce
      (il ::before sborda di 9px e l'overflow lo taglierebbe) */
   padding-left: 10px;
@@ -1068,6 +1077,21 @@
 
 .visit .optBtn:hover {
   background: #fff;
+  color: #000;
+}
+
+/* La terza opzione è la chat WhatsApp: nei mockup del cliente WhatsApp
+   ha sempre il verde del marchio (--wa), mai il nero di servizio. Serve
+   la stessa specificità di `.visit .optBtn`, che altrimenti rimette il
+   nero. Testo nero: sul verde il bianco sta a 2:1, il nero a 10:1. */
+.visit .optBtnWa {
+  background: var(--whatsapp);
+  color: #000;
+  border-color: var(--whatsapp);
+}
+
+.visit .optBtnWa:hover {
+  background: color-mix(in srgb, var(--whatsapp) 88%, #000);
   color: #000;
 }
 

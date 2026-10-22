@@ -6,7 +6,9 @@
   height: 90svh;
   margin: 0;
   overflow: hidden;
-  background: var(--surface, #0f2029);
+  /* il fallback era #0f2029, un blu-petrolio della palette vecchia:
+     --surface è sempre definito, il colore fuori palette non serve */
+  background: var(--surface);
 }
 
 /* fascia: non deve rubare uno schermo intero (usata prima del footer) */
@@ -33,10 +35,12 @@ video.img {
   content: '';
   position: absolute;
   inset: 0;
+  /* il velo era tinto blu-petrolio (rgba(7,17,20)): su una foto a colori
+     si vedeva come una dominante, non come un'ombra. Nero neutro. */
   background: linear-gradient(
     to top,
-    rgba(7, 17, 20, 0.62) 0%,
-    rgba(7, 17, 20, 0.18) 34%,
+    rgba(0, 0, 0, 0.62) 0%,
+    rgba(0, 0, 0, 0.18) 34%,
     transparent 62%
   );
   pointer-events: none;
@@ -52,7 +56,7 @@ video.img {
   padding: var(--pad) var(--pad) clamp(20px, 4vh, 44px);
   /* fisso chiaro (la foto ha sempre un velo scuro sotto), TRANNE nelle
      pagine a colore pieno: SiteChrome ridefinisce --photo-caption a nero */
-  color: var(--photo-caption, #f2f7f8);
+  color: var(--photo-caption, #FAFAFA);
 }
 
 .fullCap .kicker,
@@ -67,7 +71,7 @@ video.img {
 }
 
 .fullCap .kicker {
-  color: color-mix(in srgb, var(--photo-caption, #f2f7f8) 72%, transparent);
+  color: color-mix(in srgb, var(--photo-caption, #FAFAFA) 72%, transparent);
 }
 
 .caption {

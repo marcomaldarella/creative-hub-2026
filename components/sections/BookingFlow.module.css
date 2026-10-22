@@ -172,7 +172,7 @@
 .itemOn {
   background: var(--fg);
   border-color: var(--fg);
-  color: var(--bg);
+  color: var(--su-inchiostro);
 }
 
 .item:has(input:focus-visible) {
@@ -225,7 +225,7 @@
   background: var(--fg);
   border-color: var(--fg);
   border-style: solid;
-  color: var(--bg);
+  color: var(--su-inchiostro);
 }
 
 .xtra:has(input:focus-visible) {
@@ -324,7 +324,7 @@
 
 /* campo obbligatorio mancante (dopo il primo tentativo di invio) */
 .inputErr {
-  border-color: #e5484d;
+  border-color: var(--errore);
 }
 
 /* select nativa senza freccia di sistema: il chevron è nostro, SVG */
@@ -367,7 +367,7 @@
 .err {
   font-size: 13px;
   font-weight: 600;
-  color: #e5484d;
+  color: var(--errore);
   margin-top: 10px;
 }
 

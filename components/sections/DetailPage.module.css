@@ -306,7 +306,7 @@
 .filterOn {
   background: var(--fg);
   border-color: var(--fg);
-  color: var(--bg);
+  color: var(--su-inchiostro);
 }
 
 .bandi {
@@ -357,7 +357,7 @@
 
 .bandoOpen {
   background: var(--fg);
-  color: var(--bg);
+  color: var(--su-inchiostro);
 }
 
 .bandoOpen::before {
@@ -369,6 +369,18 @@
 .bandoHot .bandoOpen {
   background: var(--bg);
   color: var(--fg);
+}
+
+/* "iscrizioni aperte" è l'unico stato che nei mockup del cliente ha un
+   colore proprio (.st-open: pastiglia verde chiara con inchiostro verde
+   scuro). Da noi finiva nella stessa pastiglia nera di "corso in
+   svolgimento" — due stati diversi, un solo colore. La pastiglia nera
+   chiesta il 21/10 resta a "in svolgimento"; qui torna il verde, che si
+   legge sia sulla card nera in evidenza sia sull'azzurro di pagina. */
+.bandoAperto,
+.bandoHot .bandoAperto {
+  background: var(--stato-aperto);
+  color: var(--stato-aperto-ink);
 }
 
 .bandoDate {
@@ -406,7 +418,7 @@
    ESATTAMENTE il gutter (--pad), altrimenti sfora e la pagina scrolla */
 .bandoHot {
   background: var(--fg);
-  color: var(--bg);
+  color: var(--su-inchiostro);
   padding-left: var(--pad);
   padding-right: var(--pad);
   margin: 0 calc(var(--pad) * -1);
@@ -416,7 +428,7 @@
 .bandoHot .bandoDate,
 .bandoHot .bandoType,
 .bandoHot .bandoPer {
-  color: color-mix(in srgb, var(--bg) 72%, transparent);
+  color: color-mix(in srgb, var(--su-inchiostro) 72%, transparent);
 }
 
 @media (max-width: 760px) {

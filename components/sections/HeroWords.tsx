@@ -11,9 +11,12 @@ export type HeroWord = {
 
 /* colori di sezione: token CSS per il glow, rgb normalizzato per lo shader */
 const ACCENTS = [
-  { token: 'var(--azzurro-ink)', rgb: [0.443, 0.722, 1.0] }, // academy — blu brand #71B8FF
-  { token: 'var(--arancio)', rgb: [1.0, 0.43, 0.07] }, // studio #FF6E12
-  { token: 'var(--giallo-fluo)', rgb: [0.87, 1.0, 0.23] }, // coworking #DFFF3A
+  /* le terne sono i token brand convertiti, non "aranci vivaci" a occhio:
+     l'arancio era #FF6E12 invece di --arancio #FC732D e la scia usciva
+     di un'altra tinta rispetto alla pagina studios */
+  { token: 'var(--azzurro-ink)', rgb: [0.443, 0.722, 1.0] }, // academy — --azzurro #71B8FF
+  { token: 'var(--arancio)', rgb: [0.988, 0.451, 0.176] }, // studio — --arancio #FC732D
+  { token: 'var(--giallo-fluo)', rgb: [0.871, 1.0, 0.231] }, // coworking — --giallo-fluo #DEFF3B
 ] as const
 
 /* autoplay su touch: una parola accesa per ON_MS, poi pausa OFF_MS */

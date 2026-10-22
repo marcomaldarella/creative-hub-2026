@@ -100,6 +100,44 @@
      stacco fra due "neri" diversi */
   --panel: var(--petrolio);
 
+  /* Testo SOPRA una superficie d'inchiostro (pastiglia selezionata, chip
+     attivo, tasto nero, fascia nera): l'idioma era `background: var(--fg);
+     color: var(--bg)`, giusto sulle pagine neutre (bianco su nero) ma
+     sbagliato su quelle a colore pieno, dove --bg È il colore di pagina —
+     il box nero finiva per scrivere in azzurro/arancio/giallo invece che
+     in bianco, com'è nei mockup (.tile:has(input:checked) → color:#fff).
+     Qui vale --bg (nessun cambio sulle pagine neutre e nelle fasce
+     scure). Valore LETTERALE, non `var(--bg)`: una custom property che
+     ne referenzia un'altra si risolve dove è dichiarata (qui), non dove
+     la si usa, quindi scriverlo come var(--bg) darebbe comunque sempre
+     il bianco di :root e nasconderebbe il trabocchetto. Gli override
+     veri stanno in .scheme-dark e nel flood di SiteChrome. */
+  --su-inchiostro: #FFFFFF;
+
+  /* ————— token funzionali (audit cromatico mockup, ott 2026) —————
+     Colori che NON sono brand ma portano un significato: finora erano
+     hardcodati a mano in ogni form (tre rossi diversi per lo stesso
+     errore) o mancavano del tutto. Vivono qui così invertono nelle
+     fasce scure insieme al resto.
+
+     --errore: rosso d'inchiostro, non il rosso acceso. Le pagine di
+     sezione sono a colore PIENO e un rosso brillante lì sparisce:
+     sull'arancio #FC732D il nostro vecchio #e5484d stava a 1.4:1,
+     illeggibile. Questo sta sopra 4.5:1 su bianco, azzurro, arancio
+     e giallo fluo — l'unico rosso che regge tutti e quattro i fondi. */
+  --errore: #5C1109;
+  /* verde WhatsApp: valore del marchio, non negoziabile (dai mockup
+     delle lezioni su misura, --wa) */
+  --whatsapp: #25D366;
+  /* stato "iscrizioni aperte" dei corsi finanziati: pastiglia verde
+     chiara con inchiostro verde scuro (dai mockup, .st-open). Gli
+     altri stati restano la pastiglia nera/grigia chiesta il 21/10. */
+  --stato-aperto: #E7FFD6;
+  --stato-aperto-ink: #1C6B00;
+  /* pulsante play sulle card video (dai mockup, .video-card .play):
+     il rosso è l'affordance universale del play, non un accento */
+  --play: #E23B3B;
+
   /* layout */
   --max: 100%;                      /* full-bleed alla studio dumbar */
   --pad: clamp(16px, 1.4vw, 26px);  /* gutter stretti e costanti */
@@ -164,6 +202,16 @@
   --azzurro-hover: #9AC9FF;
   --azzurro-fill: var(--azzurro);
   --arancio-ink: var(--arancio);
+  /* il rosso d'inchiostro su nero sta a 1.3:1: nelle fasce scure
+     l'errore si schiarisce (8.5:1), stessa tinta dall'altro lato */
+  --errore: #FF9A94;
+  /* ATTENZIONE: --su-inchiostro NON può restare `var(--bg)` qui dentro.
+     Una custom property che ne referenzia un'altra si risolve DOVE È
+     DICHIARATA, non dove la si usa: ereditata da :root varrebbe sempre
+     il bianco della pagina, e dentro la fascia scura la pastiglia
+     attiva (fondo --fg, cioè chiaro) finiva bianca su bianca. Qui la
+     superficie d'inchiostro è CHIARA, quindi ci si scrive in nero. */
+  --su-inchiostro: #000000;
   color-scheme: dark;
 }
 

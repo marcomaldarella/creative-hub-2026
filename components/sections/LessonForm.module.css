@@ -104,7 +104,7 @@
 .opt.on:hover {
   background: var(--fg);
   border-color: var(--fg);
-  color: var(--bg);
+  color: var(--su-inchiostro);
 }
 
 .optNote {
@@ -113,16 +113,22 @@
 }
 
 .opt.on .optNote {
-  color: color-mix(in srgb, var(--bg) 70%, transparent);
+  color: color-mix(in srgb, var(--su-inchiostro) 70%, transparent);
 }
 
 /* ————— riga contesto (passo 2) ————— */
 
+/* Nei mockup questa riga è un velo nel colore d'accento (azzurro al 15%
+   con testo azzurro chiaro): là la pagina è SCURA, quindi il velo si
+   stacca. Da noi la pagina academy è azzurro PIENO e --surface vale
+   quanto --bg, quindi il box spariva del tutto nel fondo. Il velo
+   d'inchiostro è l'unico che tiene su tutti i fondi: bianco, colore
+   pieno e fascia scura (stessa grammatica di .bandoStatus). */
 .ctx {
   font-size: 13px;
   line-height: 1.45;
   color: var(--fg-2);
-  background: var(--surface);
+  background: color-mix(in srgb, var(--fg) 7%, transparent);
   padding: 10px 12px;
   margin-bottom: clamp(14px, 1.8vw, 18px);
 }
@@ -194,12 +200,12 @@
 /* bordo rosso sobrio: solo dopo il primo tentativo di invio */
 .field .errIn,
 .field .errIn:hover {
-  border-color: #b3261e;
+  border-color: var(--errore);
 }
 
 .errMsg {
   font-size: 13px;
-  color: #b3261e;
+  color: var(--errore);
   margin-bottom: 12px;
 }
 
@@ -215,7 +221,7 @@
   border: 1px solid var(--fg);
   border-radius: var(--radius-pill);
   background: var(--fg);
-  color: var(--bg);
+  color: var(--su-inchiostro);
   font: inherit;
   font-size: 15px;
   font-weight: 600;

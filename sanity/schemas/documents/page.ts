@@ -67,6 +67,33 @@ export const page = defineType({
             }),
             defineField({ name: 'body', title: 'Contenuto', type: 'localeBlock' }),
             defineField({
+              name: 'ctas',
+              title: 'Azioni',
+              description:
+                'I rimandi in coda alla sezione: il primo è un bottone, gli altri link con freccia. Percorso interno (es. /academy/open-day, anche con ancora) o indirizzo completo.',
+              type: 'array',
+              of: [
+                {
+                  type: 'object',
+                  name: 'pageSectionCta',
+                  title: 'Azione',
+                  fields: [
+                    defineField({
+                      name: 'label',
+                      title: 'Etichetta',
+                      type: 'localeString',
+                    }),
+                    defineField({
+                      name: 'href',
+                      title: 'Destinazione',
+                      type: 'string',
+                    }),
+                  ],
+                  preview: { select: { title: 'label.it', subtitle: 'href' } },
+                },
+              ],
+            }),
+            defineField({
               name: 'images',
               title: 'Immagini',
               type: 'array',

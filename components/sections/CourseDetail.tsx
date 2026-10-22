@@ -121,6 +121,9 @@ export async function CourseDetail({
       'Operazione Rif. PA 2025-25412/RER/2, approvata con DGR n. 2030/2025 del 09/12/2025 e cofinanziata dal Fondo sociale europeo Plus (FSE+). Ente attuatore: MPDA Aps.',
   }
   const fundingTopic = t.topics.formazioneFinanziata.funding
+  /* etichette della scheda finanziata (sottomenu, titoli delle due
+     fisarmoniche, fatto "gratuito" della testata) */
+  const scheda = t.finanziata.scheda
 
   /* voci titolo+testo delle sezioni editabili (fieldset "Scheda corso"):
      una voce senza né titolo né testo non arriva al template */
@@ -142,8 +145,18 @@ export async function CourseDetail({
     sub: l(course.summary, locale) ?? '',
     courseLine: [title, l(course.level, locale)].filter(Boolean).join(' — '),
     meta: [
+      /* il dato che apre la testata del mockup finanziati: il corso è
+         gratuito perché lo paga il programma regionale FSE+ */
+      ...(finanziato
+        ? [{ label: scheda.costLabel, value: scheda.costValue }]
+        : []),
       { label: t.common.duration, value: l(course.duration, locale) },
       { label: t.common.start, value: l(course.startDate, locale) },
+      /* scadenza candidature (hero del mockup): solo se compilata */
+      {
+        label: t.common.deadline,
+        value: l(course.applicationDeadline, locale),
+      },
       { label: t.common.level, value: l(course.level, locale) },
       { label: t.common.language, value: l(course.language, locale) },
       { label: t.common.mode, value: l(course.mode, locale) },
@@ -177,6 +190,24 @@ export async function CourseDetail({
       .filter(Boolean),
     structure: entries(course.structure),
     admissions: entries(course.admissions),
+    /* mockup finanziati: "Chi può partecipare." tiene solo i requisiti,
+       l'iscrizione vive in una sezione sua con la pillola di stato */
+    admissionsTitle: finanziato ? scheda.admissionsTitle : undefined,
+    skillsTitle: finanziato ? scheda.skillsTitle : undefined,
+    primaryCta: finanziato
+      ? { label: scheda.heroCta, href: '#avvisami' }
+      : undefined,
+    fundedNav: finanziato ? scheda.nav : undefined,
+    enrollment:
+      finanziato && entries(course.enrollment)
+        ? {
+            title: scheda.enrollmentTitle,
+            items: entries(course.enrollment)!,
+            status: course.editionStatus
+              ? t.finanziata.status[course.editionStatus]
+              : undefined,
+          }
+        : undefined,
     /* selezione pesata e rete del corso (mockup finanziati): le sezioni
        compaiono solo se compilate in Sanity */
     selectionLede: l(course.selectionLede, locale) ?? undefined,

@@ -80,14 +80,16 @@ export default async function AffittoStudioPage({
     })
   )
 
-  /* la dotazione: gli spazi studio veri da Sanity — senza documenti la
-     sezione non compare */
-  const dotazione = spaces
-    .map((s) => ({
+  /* la dotazione: gli spazi studio veri da Sanity, più le voci che non
+     sono stanze (software e strumenti del mockup, dal dizionario) —
+     senza documenti la sezione non compare */
+  const dotazione = [
+    ...spaces.map((s) => ({
       title: l(s.title, locale) ?? '',
       text: l(s.summary, locale) ?? '',
-    }))
-    .filter((i) => i.title && i.text)
+    })),
+    ...d.findExtra.map((e) => ({ title: e.title, text: e.text })),
+  ].filter((i) => i.title && i.text)
 
   return (
     <SiteChrome locale={locale} path="/studios/affitto-studio">

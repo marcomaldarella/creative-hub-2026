@@ -92,6 +92,12 @@
   color: var(--fg-2);
 }
 
+/* la CTA dell'hero (mockup): staccata dal lede, a filo del testo */
+.headCta {
+  display: block;
+  margin-top: clamp(24px, 3vw, 36px);
+}
+
 /* ————— spazi ————— */
 
 .spaces {
@@ -123,10 +129,24 @@
 
 /* ————— servizi ————— */
 
+/* tre per riga come nel mockup: i sei servizi fanno due righe piene
+   (con auto-fit restava una card orfana), i tre "perché" una riga sola */
 .services {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 16px;
+}
+
+@media (max-width: 1000px) {
+  .services {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .services {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ————— cta ————— */

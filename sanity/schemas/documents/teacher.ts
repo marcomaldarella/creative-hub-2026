@@ -35,6 +35,14 @@ export const teacher = defineType({
       options: { hotspot: true },
     }),
     defineField({
+      name: 'videoUrl',
+      title: 'Video',
+      description:
+        'Facoltativo: link a un file .mp4 o a YouTube. Nelle lezioni su misura la foto diventa il poster e il video parte al clic.',
+      type: 'url',
+      validation: (rule) => rule.uri({ scheme: ['http', 'https'] }),
+    }),
+    defineField({
       name: 'links',
       title: 'Link',
       type: 'array',

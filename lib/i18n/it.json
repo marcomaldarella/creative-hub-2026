@@ -99,6 +99,7 @@
     "articles": "articoli",
     "duration": "durata",
     "start": "inizio",
+    "deadline": "scadenza candidature",
     "level": "livello",
     "language": "lingua",
     "mode": "modalità",
@@ -659,7 +660,8 @@
       "Ableton",
       "IK Multimedia",
       "Emilia-Romagna Film Commission"
-    ]
+    ],
+    "heroCta": "Parlaci del tuo progetto"
   },
   "coworking": {
     "kicker": "coworking · zona roveri, bologna",
@@ -1166,7 +1168,17 @@
       ],
       "eyebrow": "stage & placement",
       "metaTitle": "Stage e placement nella musica | Creative Hub Academy Bologna",
-      "metaDesc": "Stage in studi, club e produzioni, l'etichetta Label Lab con Orchard Italia, audizioni con agenzie di management. Dal primo anno."
+      "metaDesc": "Stage in studi, club e produzioni, l'etichetta Label Lab con Orchard Italia, audizioni con agenzie di management. Dal primo anno.",
+      "heroCtas": [
+        {
+          "label": "Prenota l'open day",
+          "href": "/academy/open-day"
+        },
+        {
+          "label": "Leggi le storie",
+          "href": "#storie"
+        }
+      ]
     },
     "corsiCustom": {
       "title": "Il tuo strumento. I tuoi orari. La prima lezione è gratis.",
@@ -1380,7 +1392,7 @@
         },
         {
           "q": "Dopo, si lavora?",
-          "a": "Lo stage in azienda fa parte del corso e l'83% degli studenti lavora nel settore, dato certificato dalla Regione Emilia-Romagna.",
+          "a": "Lo stage in azienda fa parte del corso e per molti diventa il primo contratto.",
           "link": "Stage e placement"
         },
         {
@@ -2081,7 +2093,87 @@
           "title": "Orari anche serali",
           "text": "Molti allievi iniziano a 30, 40 o 50 anni: lezioni la sera e pacchetti che puoi mettere in pausa."
         }
-      ]
+      ],
+      "itemsBySlug": {
+        "corso-custom-canto": [
+          {
+            "title": "Sale attrezzate e cabine voce",
+            "text": "Fai lezione in ambienti pensati per la voce, con impianto, microfoni e acustica professionale."
+          },
+          {
+            "title": "Insegnanti in attività",
+            "text": "Cantanti che lavorano ancora oggi tra palco, studio e televisione."
+          },
+          {
+            "title": "Un programma su misura",
+            "text": "Costruito sul tuo livello e sul tuo obiettivo, non uguale per tutti."
+          },
+          {
+            "title": "Una band con cui cantare",
+            "text": "Con la musica d’insieme porti la voce fuori dalla cabina, insieme ad altri musicisti."
+          },
+          {
+            "title": "Sale studio per esercitarti",
+            "text": "Puoi venire a provare anche fuori dall’orario di lezione."
+          },
+          {
+            "title": "Una community di musicisti",
+            "text": "Nella stessa sede studiano gli allievi dei corsi universitari di musica: incontri, collaborazioni, nuove band."
+          }
+        ],
+        "corso-custom-chitarra": [
+          {
+            "title": "Sale e strumentazione professionale",
+            "text": "Amplificatori, effetti e sale della sede, prenotabili anche fuori dall’orario di lezione."
+          },
+          {
+            "title": "Chitarristi in attività",
+            "text": "Insegnanti che suonano ancora oggi in tour, in studio e per il cinema."
+          },
+          {
+            "title": "Una roadmap chiara",
+            "text": "Dalla prima nota al primo brano completo, con obiettivi concreti lezione dopo lezione. Niente più tutorial a caso."
+          },
+          {
+            "title": "Jam session ed eventi",
+            "text": "Occasioni per suonare con altri musicisti e portare quello che impari fuori dalla sala."
+          },
+          {
+            "title": "Orari anche serali",
+            "text": "Pensati per chi lavora: lezioni la sera e pacchetti che puoi mettere in pausa."
+          },
+          {
+            "title": "Una community di musicisti",
+            "text": "Ragazzi e adulti insieme, nella stessa sede dei corsi universitari."
+          }
+        ],
+        "corso-custom-pianoforte-tastiere": [
+          {
+            "title": "Aule con pianoforti e tastiere",
+            "text": "Pianoforti, tastiere moderne, controller, pad e computer, in aule attrezzate."
+          },
+          {
+            "title": "Acustico ed elettronico insieme",
+            "text": "Non devi scegliere un solo strumento: pianoforte, synth e DAW nelle stesse lezioni."
+          },
+          {
+            "title": "Una roadmap chiara",
+            "text": "Dal primo accordo al primo brano completo, con obiettivi concreti lezione dopo lezione."
+          },
+          {
+            "title": "Jam session, eventi e saggi",
+            "text": "Occasioni per suonare con altri musicisti e portare quello che impari fuori dall’aula."
+          },
+          {
+            "title": "Orari anche serali",
+            "text": "Lezioni la sera, pacchetti che puoi mettere in pausa e sale prova con pianoforte prenotabili fuori orario."
+          },
+          {
+            "title": "Anche per bambini",
+            "text": "Dai 6 anni, suonando fin da subito musica che piace: pop, rock, colonne sonore. Non serve saper leggere la musica."
+          }
+        ]
+      }
     },
     "ctaSteps": {
       "lede": "Ci vogliono 30 secondi. Ecco cosa succede dopo:",
@@ -2132,6 +2224,46 @@
         "Francesco Baccini",
         "Ladri di Biciclette",
         "Tony Esposito"
+      ],
+      "corso-custom-basso": [
+        "Pop",
+        "Rock",
+        "Funk",
+        "Soul",
+        "Jazz",
+        "Reggae",
+        "Blues",
+        "R&B"
+      ],
+      "corso-custom-canto": [
+        "Mina",
+        "Gianni Morandi",
+        "Renato Zero",
+        "Laura Pausini",
+        "Ivana Spagna",
+        "Mietta",
+        "Nomadi",
+        "Benassi Bros"
+      ],
+      "corso-custom-pianoforte-tastiere": [
+        "Pop",
+        "Rock",
+        "Funk",
+        "Soul",
+        "Blues",
+        "R&B",
+        "Elettronica",
+        "Jazz",
+        "Colonne sonore"
+      ],
+      "corso-custom-produzione-musicale": [
+        "Franco Battiato",
+        "CSI",
+        "Disciplinatha",
+        "Festival di Sanremo",
+        "RAI",
+        "The Blackbird Academy Nashville",
+        "Morphing Studio"
       ]
     },
     "numbers": [
@@ -2148,7 +2280,72 @@
       "Dieci"
     ],
     "navPrev": "sezione precedente",
-    "navNext": "sezione successiva"
+    "navNext": "sezione successiva",
+    "teachersNav": {
+      "prev": "insegnante precedente",
+      "next": "insegnante successivo",
+      "group": "scegli un insegnante",
+      "play": "guarda il video di {name}"
+    },
+    "creditsLabelBySlug": {
+      "corso-custom-basso": "Stili che puoi suonare",
+      "corso-custom-canto": "I nostri insegnanti hanno cantato con",
+      "corso-custom-pianoforte-tastiere": "Stili che puoi suonare",
+      "corso-custom-produzione-musicale": "Esperienze dei nostri insegnanti"
+    },
+    "styles": {
+      "bySlug": {
+        "corso-custom-basso": {
+          "label": "Stili",
+          "items": [
+            "Pop",
+            "Rock",
+            "Funk",
+            "Soul",
+            "Jazz",
+            "Reggae",
+            "Blues",
+            "R&B"
+          ]
+        },
+        "corso-custom-chitarra": {
+          "label": "Stili",
+          "items": [
+            "Rock",
+            "Blues",
+            "Funk",
+            "Indie",
+            "Alternative",
+            "Neo-soul",
+            "Jazz fusion",
+            "Fingerstyle"
+          ]
+        },
+        "corso-custom-pianoforte-tastiere": {
+          "label": "Stili",
+          "items": [
+            "Pop",
+            "Rock",
+            "Funk",
+            "Soul",
+            "Blues",
+            "R&B",
+            "Elettronica",
+            "Jazz",
+            "Colonne sonore"
+          ]
+        },
+        "corso-custom-produzione-musicale": {
+          "label": "Software",
+          "items": [
+            "Ableton Live",
+            "Logic Pro",
+            "Reaper",
+            "Pro Tools"
+          ]
+        }
+      }
+    }
   },
   "saleEventiPage": {
     "kicker": "coworking · sale & eventi",
@@ -2807,7 +3004,8 @@
       ],
       "ctaTitle": "Raccontaci il tuo progetto.",
       "ctaText": "Scrivici cosa vuoi registrare, mixare o produrre. Ti ricontattiamo dal lunedì al venerdì per una consulenza e per fissare la sessione.",
-      "marquee": "Musicisti veri, nella stessa stanza"
+      "marquee": "Musicisti veri, nella stessa stanza",
+      "whereCta": "Tutto lo studio"
     },
     "mix": {
       "metaTitle": "Mix e mastering a Bologna, stereo e Dolby Atmos | Creative Hub Studio",
@@ -3127,7 +3325,14 @@
         "shopTitle": "Ci siamo: lo spazio ti aspetta.",
         "shopText": "La prenotazione si chiude sulla scheda dello spazio, dove trovi tariffe, disponibilità e pagamento. Le scelte che hai fatto qui ti servono da promemoria.",
         "shopCta": "Vai allo spazio e prenota"
-      }
+      },
+      "findExtra": [
+        {
+          "_key": "findExtra-1",
+          "title": "Software e strumenti",
+          "text": "Pro Tools, Ableton, Universal Audio."
+        }
+      ]
     },
     "atmos": {
       "metaTitle": "Studio Dolby Atmos 7.1.4 a Bologna | Creative Hub Studio",
@@ -3536,6 +3741,21 @@
     "seo": {
       "title": "Corsi gratuiti finanziati Regione Emilia-Romagna | Creative Hub Academy",
       "description": "Corsi professionali gratuiti a Bologna in suono, musica, dati e 3D, finanziati da Regione Emilia-Romagna e FSE+."
+    },
+    "scheda": {
+      "heroCta": "Avvisami alla prossima edizione",
+      "costLabel": "costo",
+      "costValue": "Gratuito — finanziato da Regione Emilia-Romagna e FSE+",
+      "admissionsTitle": "Chi può partecipare.",
+      "enrollmentTitle": "Iscrizione.",
+      "nav": {
+        "overview": "Panoramica",
+        "skills": "Cosa impari",
+        "requirements": "Requisiti",
+        "selection": "Selezione",
+        "enrollment": "Iscrizione"
+      },
+      "skillsTitle": "Cosa impari."
     }
   }
 }

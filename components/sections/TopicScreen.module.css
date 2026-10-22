@@ -622,3 +622,14 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* azioni in coda a una sezione del corpo lungo (campo "Azioni" in
+   Sanity): bottone + link con freccia sulla stessa riga, staccati dal
+   testo quanto un paragrafo */
+.sezCta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 20px;
+  margin-top: clamp(24px, 3vw, 40px);
+}

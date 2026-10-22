@@ -31,3 +31,9 @@ ul.checkOne {
 .mqBtn {
   font-size: 13px;
 }
+
+/* rimando "tutto lo studio" sotto il lede di "dove registri" */
+.whereCta {
+  display: block;
+  margin: -8px 0 clamp(28px, 3vw, 40px);
+}

@@ -32,7 +32,7 @@
 }
 
 .input[aria-invalid='true'] {
-  border-color: #e5484d;
+  border-color: var(--errore);
 }
 
 .submit {
@@ -62,7 +62,7 @@
 }
 
 .error {
-  color: #e5484d;
+  color: var(--errore);
 }
 
 .done {

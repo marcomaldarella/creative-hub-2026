@@ -27,7 +27,9 @@
   --fg: var(--osso);
   --fg-2: var(--osso-60);
   color: var(--fg);
-  --hero-glow: 0 12px 60px rgba(4, 16, 20, 0.65);
+  /* l'alone era rimasto blu-verde come la vecchia vignettatura: nero
+     neutro anche qui, come dice il commento qui sotto */
+  --hero-glow: 0 12px 60px rgba(0, 0, 0, 0.65);
   /* nero pieno, non un gradiente: il blu/verde della vignettatura
      precedente leggeva come un colore a sé, non come "nero" */
   background: #000000;

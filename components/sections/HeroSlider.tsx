@@ -8,9 +8,9 @@ import styles from './HeroSlider.module.css'
 /* rgb (0-1) dei colori di sezione per l'inchiostro della scia fluida —
    stesse terne vivide di HeroWords, chiave = token passato in accent */
 const ACCENT_RGB: Record<string, [number, number, number]> = {
-  'var(--azzurro-ink)': [0.443, 0.722, 1.0], // academy #71B8FF
-  'var(--arancio)': [1.0, 0.43, 0.07], // studio #FF6E12
-  'var(--giallo-fluo)': [0.87, 1.0, 0.23], // coworking #DFFF3A
+  'var(--azzurro-ink)': [0.443, 0.722, 1.0], // academy — --azzurro #71B8FF
+  'var(--arancio)': [0.988, 0.451, 0.176], // studio — --arancio #FC732D
+  'var(--giallo-fluo)': [0.871, 1.0, 0.231], // coworking — --giallo-fluo #DEFF3B
 }
 
 export type HeroSlide = {

@@ -363,7 +363,8 @@ export async function UniScreen({ locale }: { locale: Locale }) {
                     <Button
                       href="https://wa.me/390516313706"
                       external
-                      className={styles.optBtn}
+                      variant="whatsapp"
+                      className={`${styles.optBtn} ${styles.optBtnWa}`}
                     >
                       {o.cta}
                     </Button>

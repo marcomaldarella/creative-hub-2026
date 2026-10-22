@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation'
 import {
   Arrow,
   ArrowLink,
+  Button,
   Card,
   Reveal,
   Rule,
@@ -105,70 +106,22 @@ export default async function StudiosPage({
             <Reveal as="p" className={styles.lede} delay={160}>
               {t.studios.lede}
             </Reveal>
+            {/* la CTA dell'hero del mockup: porta al form in fondo */}
+            <Reveal className={styles.headCta} delay={220}>
+              <Button variant="azzurro" href="#contatti">
+                {t.studios.heroCta}
+              </Button>
+            </Reveal>
           </div>
         </header>
 
         {/* ————— barra delle pagine di sezione (mockup) ————— */}
         <SectionPagesNav locale={locale} base="/studios" current="/studios" />
 
-        <Rule left={t.studios.kicker} right={t.studios.spacesKicker} />
+        <Rule left={t.studios.kicker} right={t.studios.servicesKicker} />
 
-        {/* ————— gli spazi ————— */}
-        <section className={styles.sez} id="registrazione">
-          <div className="wrap">
-            <SectionHeader
-              kicker={t.studios.spacesKicker}
-              title={t.studios.spacesTitle}
-              lede={t.studios.spacesLede}
-            />
-            <div className={styles.spaces}>
-              {spaces.map((space, i) => (
-                <Reveal key={space._id} delay={(i % 3) * 60}>
-                  <Card
-                    kicker={`s.0${i + 1}`}
-                    title={l(space.title, locale)}
-                    className={styles.spaceCard}
-                  >
-                    <p className={styles.spaceSummary}>
-                      {l(space.summary, locale)}
-                    </p>
-                    {/* la grafia delle dotazioni è contenuto: minuscolandole
-                        si perdevano SSL, Neumann U87, Genelec */}
-                    {space.features && space.features.length > 0 && (
-                      <ul className={`mono ${styles.features}`}>
-                        {space.features.map((f) => (
-                          <li key={f._key}>{l(f, locale)}</li>
-                        ))}
-                      </ul>
-                    )}
-                  </Card>
-                </Reveal>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <Rule left={t.studios.spacesKicker} right={t.studios.servicesKicker} />
-
-        {/* ————— le regie, dal vivo: banda fotografica a due colonne ————— */}
-        <section className={styles.photoDuo} aria-label="Le regie dello studio">
-          <Image
-            src="/img/sections/studio-desk.jpg"
-            alt="La regia vista dal centro della sala: console, rack e tastiere"
-            width={1800}
-            height={1800}
-            className={styles.duoImg}
-          />
-          <Image
-            src="/img/sections/studio-regia-b.jpg"
-            alt="La postazione di lavoro con console SSL e modulari"
-            width={1200}
-            height={1600}
-            className={styles.duoImg}
-          />
-        </section>
-
-        {/* ————— i servizi ch.01–04 ————— */}
+        {/* ————— i servizi st.01–06: nel mockup vengono subito dopo
+            l'hero, prima del manifesto e della galleria degli spazi ————— */}
         <section className={styles.sez} id="mix-mastering">
           <div className="wrap">
             <SectionHeader
@@ -218,6 +171,61 @@ export default async function StudiosPage({
                 <Reveal key={num.n} className={styles.number} delay={i * 60}>
                   <span className={`display-thin ${styles.numberN}`}>{num.n}</span>
                   <span className={styles.numberLabel}>{num.label}</span>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <Rule left={t.studios.servicesKicker} right={t.studios.spacesKicker} />
+
+        {/* ————— le regie, dal vivo: banda fotografica a due colonne ————— */}
+        <section className={styles.photoDuo} aria-label="Le regie dello studio">
+          <Image
+            src="/img/sections/studio-desk.jpg"
+            alt="La regia vista dal centro della sala: console, rack e tastiere"
+            width={1800}
+            height={1800}
+            className={styles.duoImg}
+          />
+          <Image
+            src="/img/sections/studio-regia-b.jpg"
+            alt="La postazione di lavoro con console SSL e modulari"
+            width={1200}
+            height={1600}
+            className={styles.duoImg}
+          />
+        </section>
+
+        {/* ————— gli spazi: la galleria "dentro" del mockup ————— */}
+        <section className={styles.sez} id="registrazione">
+          <div className="wrap">
+            <SectionHeader
+              kicker={t.studios.spacesKicker}
+              title={t.studios.spacesTitle}
+              lede={t.studios.spacesLede}
+            />
+            <div className={styles.spaces}>
+              {spaces.map((space, i) => (
+                <Reveal key={space._id} delay={(i % 3) * 60}>
+                  <Card
+                    kicker={`s.0${i + 1}`}
+                    title={l(space.title, locale)}
+                    className={styles.spaceCard}
+                  >
+                    <p className={styles.spaceSummary}>
+                      {l(space.summary, locale)}
+                    </p>
+                    {/* la grafia delle dotazioni è contenuto: minuscolandole
+                        si perdevano SSL, Neumann U87, Genelec */}
+                    {space.features && space.features.length > 0 && (
+                      <ul className={`mono ${styles.features}`}>
+                        {space.features.map((f) => (
+                          <li key={f._key}>{l(f, locale)}</li>
+                        ))}
+                      </ul>
+                    )}
+                  </Card>
                 </Reveal>
               ))}
             </div>
@@ -326,8 +334,10 @@ export default async function StudiosPage({
 
         {/* ————— chiusura: raccontaci il progetto (mockup ott 2026) —
             stesso modulo delle pagine di dettaglio, con il form vero ————— */}
+        {/* l'id storico #affitto-studio resta per i vecchi link; #contatti è
+            l'ancora del mockup, su cui puntano le CTA della pagina */}
         <div className={`scheme-dark ${det.dark}`} id="affitto-studio">
-          <section className={`wrap ${det.sez} ${det.duo}`}>
+          <section className={`wrap ${det.sez} ${det.duo}`} id="contatti">
             <div>
               <Reveal as="h2" className={`display-thin ${det.ctaTitle}`}>
                 {t.studios.ctaTitle}

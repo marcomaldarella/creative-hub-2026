@@ -1,5 +1,6 @@
-/* landing lezioni su misura: testata azzurra di sezione, cover piena,
-   sezioni numerate con Rule, insegnanti e chiusura in fascia nera */
+/* landing lezioni su misura: testata azzurra di sezione col form,
+   sezioni numerate con Rule, insegnanti e chiusura in fascia nera
+   (niente banda media sotto la barra sticky: richiesta cliente) */
 
 .main {
   padding-top: var(--nav-h);
@@ -102,93 +103,10 @@
   margin-bottom: clamp(16px, 2vw, 24px);
 }
 
-/* ————— insegnanti: fascia nera, ritratti 4:5 ————— */
+/* ————— fascia scura delle sezioni (insegnanti, chiusura) ————— */
 
 .dark {
   background: var(--bg);
-}
-
-.teacherGrid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: clamp(16px, 2vw, 28px);
-  margin-top: clamp(28px, 3.5vw, 48px);
-}
-
-/* la card insegnante è un bottone: prefilla il form e ci scrolla */
-.teacher {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  padding: 0;
-  border: 0;
-  background: none;
-  color: inherit;
-  font: inherit;
-  text-align: left;
-  cursor: pointer;
-}
-
-.teacherTry {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  margin-top: 10px;
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-}
-
-.teacherTry svg {
-  transition: transform 150ms ease-out;
-}
-
-.teacher:hover .teacherTry svg {
-  transform: translateX(3px);
-}
-
-.teacherPh {
-  aspect-ratio: 4 / 5;
-  background: var(--surface);
-  overflow: hidden;
-  margin-bottom: 12px;
-}
-
-.teacherPh img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: grayscale(1);
-  transition: filter 0.3s ease;
-}
-
-.teacher:hover .teacherPh img {
-  filter: none;
-}
-
-.teacherName {
-  font-weight: 600;
-  font-size: 16px;
-  letter-spacing: -0.01em;
-}
-
-.teacherRole {
-  font-size: 13px;
-  color: var(--fg-2);
-  margin-top: 2px;
-}
-
-.teacherCred {
-  font-size: 12px;
-  color: var(--fg-2);
-  margin-top: 8px;
-  line-height: 1.4;
-}
-
-@media (max-width: 860px) {
-  .teacherGrid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
 }
 
 /* ————— per chi sono le lezioni: quattro card hairline ————— */
@@ -263,6 +181,31 @@
   .cells {
     grid-template-columns: 1fr;
   }
+}
+
+/* riga di chip sotto "cosa impari": stili o software, pill hairline
+   come nelle pagine di sezione */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: clamp(20px, 2.4vw, 30px);
+}
+
+.chipsLabel {
+  font-size: 12px;
+  color: var(--fg-2);
+  margin-right: 4px;
+}
+
+.chip {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  padding: 7px 13px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
 }
 
 /* ————— tre modi: tre card piene sotto al titolo, stessa grammatica
@@ -424,7 +367,9 @@
   border: 1px solid var(--fg);
   border-radius: var(--radius-pill);
   background: var(--fg);
-  color: var(--bg);
+  /* dentro una pagina a colore pieno --bg È il colore della pagina:
+     il testo sul nero va preso da --su-inchiostro */
+  color: var(--su-inchiostro);
   font: inherit;
   font-size: 14px;
   font-weight: 600;
@@ -509,7 +454,7 @@ a.defText {
 
 .other:hover {
   background: var(--fg);
-  color: var(--bg);
+  color: var(--su-inchiostro);
   border-color: var(--fg);
 }
 
@@ -679,11 +624,13 @@ a.defText {
   border: 0;
 }
 
-/* la formula più completa: card nera (.price-card.hi del mockup) */
+/* la formula più completa: card nera (.price-card.hi del mockup).
+   Colori espliciti: sulle pagine a colore pieno --bg è il colore della
+   pagina e la card non sarebbe affatto nera */
 .packHi {
-  background: var(--bg);
-  color: var(--fg);
-  border-color: var(--bg);
+  background: #000000;
+  color: #fafafa;
+  border-color: #000000;
 }
 
 /* ————— accenti di colore dentro i blocchi scuri (nei mockup sono blu:

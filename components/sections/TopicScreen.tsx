@@ -1,6 +1,5 @@
 import { Fragment, type CSSProperties } from 'react'
 import {
-  Arrow,
   ArrowLink,
   Button,
   Reveal,
@@ -298,6 +297,8 @@ export async function TopicScreen({
     funding?: { logos: string[]; text: string }
     /* seconda voce dell'occhiello: "academy · servizi studenti" */
     eyebrow?: string
+    /* azioni in testata, quando il mockup del topic le prevede */
+    heroCtas?: { label: string; href: string }[]
   }
   /* alcuni topic (es. servizi-studenti) hanno punti "ricchi" con testo
      esteso + foto: diventano un accordion invece della riga numerata */
@@ -327,6 +328,15 @@ export async function TopicScreen({
   const bandVars: CSSProperties = FLOOD_BASES.includes(topic.base)
     ? ({ '--accent-ink': 'var(--accent)' } as CSSProperties)
     : ({ '--accent': 'var(--osso)' } as CSSProperties)
+
+  /* l'ultima sezione del corpo lungo può portarsi la chiusura da sé
+     (campo "Azioni" in Sanity): in quel caso la CTA generica di coda
+     non si stampa, altrimenti sotto a "Prenota l'open day" tornerebbe
+     un secondo "prenota" che dice un'altra cosa */
+  const ownClosing =
+    ((page?.sections ?? []).at(-1)?.ctas ?? []).some(
+      (c) => l(c.label, locale) && c.href
+    )
 
   /* apertura a solo titolo (corsi custom): video e punti scendono in
      fondo, i punti come card numerate — vedi `pointsLast` in topics.ts */
@@ -376,6 +386,27 @@ export async function TopicScreen({
           {copy.lede && (
             <Reveal as="p" className={styles.lede} delay={180}>
               {copy.lede}
+            </Reveal>
+          )}
+          {/* azioni della testata: il primo è un bottone, gli altri link
+              con freccia — un'ancora resta tale, un percorso prende la
+              lingua davanti */}
+          {(copy.heroCtas?.length ?? 0) > 0 && (
+            <Reveal className={styles.sezCta} delay={220}>
+              {copy.heroCtas!.map((c, i) => {
+                const href = c.href.startsWith('/')
+                  ? localeHref(locale, c.href)
+                  : c.href
+                return i === 0 ? (
+                  <Button key={c.href} href={href}>
+                    {c.label}
+                  </Button>
+                ) : (
+                  <ArrowLink key={c.href} href={href} dir="e">
+                    {c.label}
+                  </ArrowLink>
+                )
+              })}
             </Reveal>
           )}
         </header>
@@ -446,6 +477,13 @@ export async function TopicScreen({
           const body = l(section.body, locale)
           const brief = l(section.brief, locale)
           const shaped = shapeBody(body)
+          /* rimandi in coda alla sezione (campo "Azioni" in Sanity):
+             una voce senza etichetta o senza destinazione non si pubblica */
+          const ctas = (section.ctas ?? [])
+            .map((c) => ({ label: l(c.label, locale), href: c.href }))
+            .filter((c): c is { label: string; href: string } =>
+              Boolean(c.label && c.href)
+            )
           const pp = shaped ? plainPairs(shaped) : null
           const isFaq =
             (pp?.pairs.every((p) => p.title.trim().endsWith('?')) ?? false)
@@ -661,6 +699,38 @@ export async function TopicScreen({
                   ) : (
                     <PortableBlocks value={body} />
                   )}
+                  {/* azioni della sezione: il primo rimando è un bottone,
+                      gli altri link con la freccia del brand */}
+                  {ctas.length > 0 && (
+                    <Reveal className={styles.sezCta}>
+                      {ctas.map((c, k) => {
+                        /* percorso interno = prefisso di lingua; il resto
+                           è un indirizzo esterno e si apre a parte */
+                        const internal = c.href.startsWith('/')
+                        const href = internal
+                          ? localeHref(locale, c.href)
+                          : c.href
+                        return k === 0 ? (
+                          <Button
+                            key={c.href}
+                            href={href}
+                            external={!internal}
+                          >
+                            {c.label}
+                          </Button>
+                        ) : (
+                          <ArrowLink
+                            key={c.href}
+                            href={href}
+                            external={!internal}
+                            dir="e"
+                          >
+                            {c.label}
+                          </ArrowLink>
+                        )
+                      })}
+                    </Reveal>
+                  )}
                   </div>
                 </div>
               </section>
@@ -715,7 +785,7 @@ export async function TopicScreen({
               />
             </div>
           </section>
-        ) : (
+        ) : ownClosing ? null : (
           <section className={`wrap ${styles.cta}`}>
             <Reveal>
               <Button href={shopHref(settings)} external variant="azzurro">

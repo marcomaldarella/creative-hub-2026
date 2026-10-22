@@ -207,7 +207,11 @@ export default async function FormazioneFinanziataPage({
                     {stato && (
                       <span
                         className={`${det.bandoStatus}${
-                          inCorso ? ` ${det.bandoOpen}` : ''
+                          stato === 'iscrizioni-aperte'
+                            ? ` ${det.bandoAperto}`
+                            : inCorso
+                              ? ` ${det.bandoOpen}`
+                              : ''
                         }`}
                       >
                         {d.status[stato]}

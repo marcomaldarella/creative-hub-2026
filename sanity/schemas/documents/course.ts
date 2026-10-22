@@ -135,6 +135,13 @@ export const course = defineType({
       type: 'localeString',
     }),
     defineField({
+      name: 'applicationDeadline',
+      title: 'Scadenza candidature',
+      description:
+        'Testo libero, es. "30 giugno 2026". Compilata, compare fra i dati della hero.',
+      type: 'localeString',
+    }),
+    defineField({
       name: 'level',
       title: 'Livello',
       type: 'localeString',
@@ -194,6 +201,15 @@ export const course = defineType({
       name: 'admissions',
       title: 'Ammissioni',
       description: 'Le voci dell’accordion ammissioni.',
+      type: 'array',
+      of: [schedaEntry],
+      fieldset: 'scheda',
+    }),
+    defineField({
+      name: 'enrollment',
+      title: 'Iscrizione',
+      description:
+        'Le voci dell’accordion "Iscrizione." dei corsi finanziati (scadenza, come iscriversi, costo). La sezione compare solo se compilata.',
       type: 'array',
       of: [schedaEntry],
       fieldset: 'scheda',

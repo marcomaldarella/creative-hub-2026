@@ -15,6 +15,10 @@ export const css = `
     --blue-hover:color-mix(in srgb,var(--blue) 80%,var(--white));
     --blue-ink:color-mix(in srgb,var(--ink) 78%,var(--blue));
     --txt-2:rgba(255,255,255,.62);
+    /* questo pannello è scuro di suo: i token funzionali vanno presi
+       nella variante da fondo scuro, non quella di :root (il rosso
+       d'inchiostro su nero starebbe a 1.3:1). */
+    --errore:#FF9A94;
     --hair:.5px;
   }
   :host,:host *{box-sizing:border-box;margin:0;padding:0;}
@@ -172,9 +176,13 @@ export const css = `
   .video-card{background:var(--ink);overflow:hidden;height:100%;min-height:340px;
     display:flex;align-items:center;justify-content:center;position:relative;}
   .video-card img{position:absolute;inset:0;opacity:.45;}
-  .video-card .play{width:64px;height:64px;border-radius:50%;background:var(--blue);
+  /* il play torna ROSSO come nei mockup del cliente (.video-card .play
+     #E23B3B): era diventato azzurro brand con la regola "un solo
+     azzurro", ma il rosso qui non è un accento, è l'affordance del play
+     — il triangolo torna bianco di conseguenza. */
+  .video-card .play{width:64px;height:64px;border-radius:50%;background:var(--play,#E23B3B);
     display:flex;align-items:center;justify-content:center;position:relative;}
-  .video-card .play::after{content:"";border-left:16px solid var(--ink);border-top:10px solid transparent;
+  .video-card .play::after{content:"";border-left:16px solid var(--white);border-top:10px solid transparent;
     border-bottom:10px solid transparent;margin-left:4px;}
   .video-cap{position:absolute;top:16px;left:16px;color:#fff;font-size:14px;font-weight:600;z-index:1;}
   .video-cap small{display:block;font-weight:400;font-size:11px;opacity:.7;margin-top:2px;color:#fff;}
@@ -838,6 +846,11 @@ export const css = `
     border:1px dashed color-mix(in srgb,var(--white) 28%,transparent);
     border-radius:8px;color:var(--txt-2);}
   .fund-text{font-size:13.5px;line-height:1.5;color:var(--txt-2);max-width:76ch;margin:0;}
+  /* pillola di stato accanto al titolo "Iscrizione." (corsi a bando) */
+  .st-pill{display:inline-flex;align-items:center;gap:8px;flex-shrink:0;
+    border:1px solid color-mix(in srgb,var(--blue) 40%,transparent);border-radius:999px;
+    padding:7px 15px;font-size:13px;font-weight:600;letter-spacing:-.01em;}
+  .st-pill::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--blue);}
 
   /* ————— avvisami (corsi finanziati, iscrizioni a bando): recapiti a
      sinistra, form a destra — campi hairline come la modale contatti ————— */
@@ -870,9 +883,17 @@ export const css = `
     border-bottom:1px solid color-mix(in srgb,var(--white) 25%,transparent);
     background:transparent;padding:7px 0 10px;border-radius:0;}
   .avv-form input:focus{outline:none;border-bottom-color:var(--blue);}
+  /* residenza: stessa colonna etichetta-sopra-campo degli altri, su una
+     riga sola — senza regole la select restava quella di sistema */
+  .avv-form label.avv-wide{max-width:420px;}
+  .avv-form select{font-family:inherit;font-size:15.5px;color:var(--white);border:none;
+    border-bottom:1px solid color-mix(in srgb,var(--white) 25%,transparent);
+    background:transparent;padding:7px 0 10px;border-radius:0;appearance:none;width:100%;}
+  .avv-form select:focus{outline:none;border-bottom-color:var(--blue);}
+  .avv-form select option{color:var(--ink);background:var(--white);}
   .avv-check{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;line-height:1.4;cursor:pointer;}
   .avv-check input{width:auto;margin-top:2px;accent-color:var(--blue);}
-  .avv-err{color:#ff8a8a;font-size:13px;margin:0;}
+  .avv-err{color:var(--errore);font-size:13px;margin:0;}
   .avv-ok{font-size:16px;font-weight:600;margin:0;}
   .avv-note{font-size:12.5px;line-height:1.45;color:var(--txt-2);margin:0;}
   .avv-note a{color:var(--blue);}
@@ -991,7 +1012,7 @@ export const html = `
 
 <div class="sezRule"><span></span><i></i></div>
 
-<section class="block">
+<section class="block" id="competenze">
   <div class="head-center">
     <h2 class="sec" contenteditable="true">Competenze che svilupperai</h2>
     <p class="lede" contenteditable="true">Durante il corso costruisci le competenze creative e tecniche per portare un'idea dal loop iniziale al brano pubblicato, dallo studio al palco.</p>
@@ -1461,6 +1482,27 @@ export type CourseHtmlData = {
   funded?: boolean;
   /* fascia sotto la hero al posto del marquee delle candidature */
   statusBand?: { text: string; cta?: string; href?: string };
+  /* bottone sinistro della hero: sulle schede a bando porta al form
+     "Avvisami", non apre la modale contatti */
+  primaryCta?: { label: string; href: string };
+  /* titolo della sezione ammissioni: sui corsi finanziati il mockup la
+     chiama "Chi può partecipare." e ci tiene SOLO i requisiti, senza
+     numerarli — non sono una sequenza di passaggi */
+  admissionsTitle?: string;
+  /* titolo della griglia competenze: sui corsi finanziati il mockup la
+     chiama "Cosa impari.", come la voce del sottomenu */
+  skillsTitle?: string;
+  /* "Iscrizione." (corsi finanziati): fisarmonica con scadenza, come
+     iscriversi e costo, con la pillola di stato accanto al titolo */
+  enrollment?: { title: string; items: CourseEntryData[]; status?: string };
+  /* sottomenu sticky riscritto sulle cinque voci del mockup finanziati */
+  fundedNav?: {
+    overview: string;
+    skills: string;
+    requirements: string;
+    selection: string;
+    enrollment: string;
+  };
   /* riga sotto il titolo "Ammissioni" (il default parla di audizioni) */
   admissionsIntro?: string;
   /* riga finale delle ammissioni: requisito + eventuale bottone */
@@ -1571,6 +1613,15 @@ export function buildCourseHtml(d: CourseHtmlData): string {
     `<div class="meta-grid">\n      ${metaHtml}\n    </div>\n\n    <div class="hero-cta">`,
   );
 
+  /* sulle schede a bando il bottone della hero non apre la modale
+     contatti: porta al form "Avvisami", l'unica azione possibile */
+  if (d.primaryCta) {
+    h = h.replace(
+      /<button class="pill pill-ink" data-contact[^>]*>[\s\S]*?<\/button>/,
+      `<a class="pill pill-ink" href="${e(d.primaryCta.href)}"><span>${e(d.primaryCta.label)}</span></a>`,
+    );
+  }
+
   if (d.secondaryCta) {
     h = h.replace(
       /<button class="pill pill-outline pill-reveal">[\s\S]*?<\/button>/,
@@ -1609,6 +1660,13 @@ export function buildCourseHtml(d: CourseHtmlData): string {
   /* ————— sezioni editabili da Sanity: ogni blocco compilato sostituisce
      la copy demo; i regex si fermano al primo </section> perché dentro
      le griglie/accordion non ce ne sono ————— */
+
+  if (d.skillsTitle) {
+    h = h.replace(
+      '<h2 class="sec" contenteditable="true">Competenze che svilupperai</h2>',
+      `<h2 class="sec">${e(d.skillsTitle)}</h2>`,
+    );
+  }
 
   if (d.skillsLede) {
     h = h.replace(
@@ -1674,16 +1732,28 @@ export function buildCourseHtml(d: CourseHtmlData): string {
      sezione e i tre passaggi demo restano — una sequenza da un solo
      step non si legge. Rette/agevolazioni/fascia restano la copy fissa
      del template finché non arrivano campi dedicati */
+  /* sui corsi finanziati la sezione cambia nome: nel mockup è "Chi può
+     partecipare." e contiene i requisiti, non i passaggi della
+     candidatura — quindi niente numerazione e niente <ol> */
+  if (d.admissionsTitle) {
+    h = h.replace(
+      '<h2 class="sec" contenteditable="true">Ammissioni</h2>',
+      `<h2 class="sec">${e(d.admissionsTitle)}</h2>`,
+    );
+  }
+
   if (d.admissions && d.admissions.length >= 3) {
+    const requisiti = Boolean(d.admissionsTitle);
+    const tag = requisiti ? 'ul' : 'ol';
     const steps = d.admissions
       .map(
         (it, i) =>
-          `    <li><span class="n">0${i + 1}</span><h3>${e(it.title)}</h3>${parasHtml(it.text)}</li>`,
+          `    <li>${requisiti ? '' : `<span class="n">0${i + 1}</span>`}<h3>${e(it.title)}</h3>${parasHtml(it.text)}</li>`,
       )
       .join('\n');
     h = h.replace(
       /<ol class="steps"[^>]*>[\s\S]*?<\/ol>/,
-      `<ol class="steps" aria-label="come si entra">\n${steps}\n  </ol>`,
+      `<${tag} class="steps" aria-label="${requisiti ? 'requisiti' : 'come si entra'}">\n${steps}\n  </${tag}>`,
     );
   } else if (d.admissions && d.admissions.length) {
     const paras = d.admissions
@@ -1763,6 +1833,22 @@ ${colonne}
      form "Avvisami alla prossima edizione", prima della CTA finale ————— */
   const coda: string[] = [];
 
+  /* "Iscrizione.": fisarmonica con scadenza, come iscriversi e costo.
+     Accanto al titolo la pillola di stato dell'edizione, come nel mockup */
+  if (d.enrollment && d.enrollment.items.length) {
+    coda.push(`<div class="sezRule"><span></span><i></i></div>
+
+<section class="block tight" id="iscrizione">
+  <div class="sec-flex-head">
+    <h2 class="sec" style="margin-bottom:0;">${e(d.enrollment.title)}</h2>
+    ${d.enrollment.status ? `<span class="st-pill">${e(d.enrollment.status)}</span>` : ''}
+  </div>
+  <div class="accordion">
+${accordionHtml(d.enrollment.items)}
+  </div>
+</section>`);
+  }
+
   if (d.funding) {
     const pills = d.funding.logos
       .map((l) => `<span class="fund-logo">${e(l)}</span>`)
@@ -1820,7 +1906,7 @@ ${interessi}
         <label class="avv-field">${e(a.email)}<input type="email" name="email" required></label>
         <label class="avv-field">${e(a.phone)}<input type="tel" name="cellulare"></label>
       </div>
-      <label class="avv-f"><span>${e(a.residence)}</span><select name="residenzaER" required>${(a.residenceOptions ?? [a.residenceYes]).map((o) => `<option value="${e(o)}">${e(o)}</option>`).join('')}</select></label>
+      <label class="avv-field avv-wide">${e(a.residence)}<select name="residenzaER" required>${(a.residenceOptions ?? [a.residenceYes]).map((o) => `<option value="${e(o)}">${e(o)}</option>`).join('')}</select></label>
       <p class="avv-err" role="alert" hidden></p>
       <button class="pill pill-dark" type="submit">${e(a.submit)}</button>
       <p class="avv-ok" role="status" hidden>${e(a.done)}</p>
@@ -1892,16 +1978,51 @@ ${interessi}
       'La vita in Academy',
       'Nessun genere.',
       'class="quotes"',
-      'Partecipa a un workshop di prova',
     ]) {
       h = dropSection(h, marker);
     }
+    /* workshop di prova + "Come conoscerci": il blocco promo è un <div>,
+       non un <section>, quindi dropSection morderebbe anche la sezione
+       precedente — si tagliano insieme, dal promo alla fine di #connetti */
+    h = h.replace(
+      /<div class="sezRule"><span>04<\/span><i><\/i><\/div>\s*<div class="promo-two"[\s\S]*?<section class="block" id="connetti"[\s\S]*?<\/section>/,
+      '',
+    );
     /* le FAQ del triennio restano solo se il corso ne porta di proprie */
     if (!d.faq?.length) h = dropSection(h, 'Domande frequenti');
+
+    /* la panoramica non ha un video da far partire: il play rosso
+       prometterebbe un filmato che non esiste */
+    h = h.replace(/\s*<div class="play"><\/div>/, '');
 
     /* ammissioni: via agevolazioni e rette mensili */
     h = h.replace(/\s*<aside class="perks">[\s\S]*?<\/aside>/, '');
     h = h.replace(/\s*<div class="fees-row">[\s\S]*?<\/div>\s*<\/div>/, '');
+  }
+
+  /* sottomenu sticky: le cinque voci del mockup finanziati al posto di
+     quelle del triennio (una delle quali, "Connettiti", punterebbe a una
+     sezione che sui corsi a bando non viene pubblicata) */
+  if (d.fundedNav) {
+    const voci: [string, string][] = [
+      ['#panoramica', d.fundedNav.overview],
+      ['#competenze', d.fundedNav.skills],
+      ['#ammissioni', d.fundedNav.requirements],
+      ['#selezione', d.fundedNav.selection],
+      ['#iscrizione', d.fundedNav.enrollment],
+    ];
+    const links = voci
+      /* niente voci morte: si pubblicano solo le sezioni davvero presenti */
+      .filter(([href]) => h.includes(`id="${href.slice(1)}"`))
+      .map(
+        ([href, label], i) =>
+          `    <a href="${href}"><span class="idx">0${i + 1}.</span><span>${e(label)}</span></a>`,
+      )
+      .join('\n');
+    h = h.replace(
+      /<nav class="jump" aria-label="sezioni del corso">[\s\S]*?<\/nav>/,
+      `<nav class="jump" aria-label="sezioni del corso">\n${links}\n  </nav>`,
+    );
   }
 
   if (d.admissionsIntro !== undefined) {

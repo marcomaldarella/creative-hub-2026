@@ -341,6 +341,12 @@ export async function SiteChrome({
             /* didascalie delle foto piena pagina (Photo.tsx): normalmente
                chiare fisse su overlay scuro, qui devono restare nere */
             '--photo-caption': '#000000',
+            /* testo sopra le superfici d'inchiostro (pastiglie attive,
+               chip selezionati, fasce nere): qui NON può essere --bg,
+               che è il colore pieno della pagina — un box nero con i
+               testi in azzurro/arancio/giallo. Chiaro neutro, come il
+               #fff dei mockup sugli stessi stati selezionati. */
+            '--su-inchiostro': '#FAFAFA',
           } as React.CSSProperties
         }
       >

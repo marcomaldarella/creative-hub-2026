@@ -64,6 +64,8 @@ export interface Teacher {
   role?: LocaleString
   bio?: LocaleText
   photo?: SanityImage
+  /** video di presentazione: file .mp4 o link YouTube (facoltativo) */
+  videoUrl?: string
   links?: LabeledLink[]
 }
 
@@ -122,6 +124,8 @@ export interface Course {
   /** ordine crescente nelle griglie; assente = in fondo */
   order?: number
   startDate?: LocaleString
+  /** scadenza per candidarsi, es. "30 giugno 2026" */
+  applicationDeadline?: LocaleString
   level?: LocaleString
   mode?: LocaleString
   language?: LocaleString
@@ -134,6 +138,8 @@ export interface Course {
   structure?: CourseEntry[]
   admissionsKeys?: LocaleString[]
   admissions?: CourseEntry[]
+  /** voci dell'accordion "Iscrizione." (corsi finanziati) */
+  enrollment?: CourseEntry[]
   selectionLede?: LocaleText
   selection?: CourseSelectionEntry[]
   networkLede?: LocaleText
@@ -248,6 +254,8 @@ export interface PageSection {
   /** riassunto in due righe: box scuro "in breve" in testa alla sezione */
   brief?: LocaleText
   body?: LocaleBlock
+  /** rimandi in coda alla sezione: il primo bottone, gli altri ArrowLink */
+  ctas?: { _key: string; label?: LocaleString; href?: string }[]
   images?: SanityImage[]
 }
 
