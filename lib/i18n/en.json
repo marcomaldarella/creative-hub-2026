@@ -77,7 +77,8 @@
       "left": "est.1999 · bologna",
       "middle": "enrolment open · a.y. 2026/27",
       "cta": "book the open day"
-    }
+    },
+    "home": "Home"
   },
   "hero": {
     "since": "International college of music,\nsound, multimedia & visual",
@@ -358,7 +359,7 @@
     "aroundKicker": "everything around your studies",
     "aroundItems": [
       {
-        "title": "Career opportunities",
+        "title": "Internships & placement",
         "text": "Placements with industry companies, productions with established professionals, distribution with Orchard Italia."
       },
       {
@@ -1175,6 +1176,7 @@
       "title": "Internships and work in music.\nDuring the course, not after.",
       "lede": "Internships in studios, clubs and productions. An in-house label distributed by Orchard Italia. Auditions with management agencies. From year one.",
       "points": [
+        "83% of students work in the industry. Data certified by the Emilia-Romagna Region",
         "20 students at most per university course: each one follows a guided path",
         "27 years of relationships with studios, clubs and labels, since 1999"
       ],

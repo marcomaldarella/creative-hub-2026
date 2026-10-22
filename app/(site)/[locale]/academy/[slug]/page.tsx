@@ -5,7 +5,7 @@ import { TopicScreen } from '@/components/sections/TopicScreen'
 import { UniScreen } from '@/components/sections/UniScreen'
 import { isLocale } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
-import { pageAlternates } from '@/lib/seo'
+import { pageAlternates, topicBreadcrumbJsonLd } from '@/lib/seo'
 import { findTopic } from '@/lib/topics'
 
 export const dynamic = 'force-dynamic'
@@ -68,9 +68,26 @@ export default async function CoursePage({
   /* /academy/corsi-universitari e simili non sono corsi: sono le pagine
      delle voci di menu, hanno la precedenza sullo slug del corso.
      corsi-universitari ha la landing dedicata (layout B del cliente). */
-  if (slug === 'corsi-universitari') return <UniScreen locale={locale} />
   const topic = findTopic('/academy', slug)
-  if (topic) return <TopicScreen locale={locale} topic={topic} />
+  if (topic) {
+    /* BreadcrumbList: home → academy → pagina (nota sviluppatore) */
+    const breadcrumb = topicBreadcrumbJsonLd(locale, topic)
+    return (
+      <>
+        {breadcrumb && (
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
+          />
+        )}
+        {slug === 'corsi-universitari' ? (
+          <UniScreen locale={locale} />
+        ) : (
+          <TopicScreen locale={locale} topic={topic} />
+        )}
+      </>
+    )
+  }
 
   return <CourseDetail locale={locale} slug={slug} basePath="/academy" />
 }

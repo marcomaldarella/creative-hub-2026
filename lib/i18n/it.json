@@ -77,7 +77,8 @@
       "left": "est.1999 · bologna",
       "middle": "iscrizioni aperte · a.a. 2026/27",
       "cta": "prenota l'open day"
-    }
+    },
+    "home": "Home"
   },
   "hero": {
     "since": "International college of music,\nsound, multimedia & visual",
@@ -358,7 +359,7 @@
     "aroundKicker": "tutto intorno allo studio",
     "aroundItems": [
       {
-        "title": "Opportunità lavorative",
+        "title": "Stage & placement",
         "text": "Stage nelle aziende del settore, produzioni con professionisti affermati, distribuzione con Orchard Italia."
       },
       {
@@ -1175,6 +1176,7 @@
       "title": "Stage e lavoro nella musica.\nDurante il corso, non dopo.",
       "lede": "Stage in studi, club e produzioni. Un'etichetta interna distribuita da Orchard Italia. Audizioni con agenzie di management. Dal primo anno.",
       "points": [
+        "83% degli studenti lavora nel settore. Dato certificato dalla Regione Emilia-Romagna",
         "20 studenti al massimo per corso universitario: ognuno ha un percorso seguito",
         "27 anni di rapporti con studi, club ed etichette, dal 1999"
       ],

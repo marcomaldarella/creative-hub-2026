@@ -258,11 +258,16 @@ export function LessonScreen({
   return (
     <SiteChrome locale={locale} path={`/academy/${course.slug?.current ?? ''}`}>
       <main className={styles.main}>
-        {/* ————— hero: testata azzurra, col form di prenotazione a
-            fianco (è la CTA primaria della pagina, non un bottone che
-            porta allo shop) ————— */}
-        <header className={`wrap ${styles.head} ${styles.headDuo}`}>
-          <div>
+        {/* ————— hero: banda a tutta larghezza nel blu brand portato in
+            profondità, con la barra di contesto in testa e il form di
+            prenotazione nel monolite nero a destra (è la CTA primaria
+            della pagina, non un bottone che porta allo shop) ————— */}
+        <header className={styles.headBand}>
+          {/* barra di contesto: ritorno all'indice a sinistra, dove ci
+              trovi a destra. Prende tutta la larghezza e chiude con un
+              filo: è la cornice della testata, non un eyebrow impilato
+              sopra il titolo */}
+          <div className={`wrap ${styles.headMeta}`}>
             <Reveal className={styles.back}>
               <ArrowLink href={indicePath} reverse>
                 {t.lesson.back}
@@ -271,61 +276,73 @@ export function LessonScreen({
             <Reveal as="span" className={`mono ${styles.kicker}`} delay={60}>
               {t.lesson.kicker}
             </Reveal>
-            <Reveal
-              as="h1"
-              className={`display-thin ${styles.title}`}
-              delay={120}
-            >
-              {heroTitle}
-            </Reveal>
-            {lede && (
-              <Reveal as="p" className={styles.lede} delay={180}>
-                {lede}
-              </Reveal>
-            )}
-            {badges.length > 0 && (
-              <RevealGroup className={styles.badges}>
-                {badges.map((b) => (
-                  <span key={b} className={`rv ${styles.badge}`}>
-                    {b}
-                  </span>
-                ))}
-              </RevealGroup>
-            )}
-            {/* la fila degli insegnanti del mockup: ritratto dove c'è,
-                altrimenti le iniziali come nel layout del cliente */}
-            {teachers.length > 0 && (
-              <Reveal className={styles.faces} delay={220}>
-                <div className={styles.facesRow}>
-                  {teachers.map((tc) => {
-                    const photo = tc.photo?.asset
-                      ? urlFor(tc.photo).width(120).height(120).fit('crop').url()
-                      : null
-                    return (
-                      <span
-                        key={tc._id ?? tc.name}
-                        className={styles.face}
-                        title={tc.name ?? ''}
-                      >
-                        {photo ? (
-                          /* eslint-disable-next-line @next/next/no-img-element */
-                          <img src={photo} alt="" className={styles.faceImg} />
-                        ) : (
-                          initials(tc.name)
-                        )}
-                      </span>
-                    )
-                  })}
-                </div>
-                <p className={styles.facesLine}>{facesLine}</p>
-              </Reveal>
-            )}
           </div>
-          {/* l'ancora resta su questa istanza: i bottoni "Prova con…"
-              e le card pacchetto prefillano e scrollano qui */}
-          <Reveal id={LESSON_FORM_ANCHOR} className={styles.formSlot} delay={120}>
-            {form}
-          </Reveal>
+          <div className={`wrap ${styles.head} ${styles.headDuo}`}>
+            <div className={styles.headText}>
+              <Reveal
+                as="h1"
+                className={`display-thin ${styles.title}`}
+                delay={120}
+              >
+                {heroTitle}
+              </Reveal>
+              {lede && (
+                <Reveal as="p" className={styles.lede} delay={180}>
+                  {lede}
+                </Reveal>
+              )}
+              {badges.length > 0 && (
+                <RevealGroup className={styles.badges}>
+                  {badges.map((b) => (
+                    <span key={b} className={`rv ${styles.badge}`}>
+                      {b}
+                    </span>
+                  ))}
+                </RevealGroup>
+              )}
+              {/* la fila degli insegnanti del mockup: ritratto dove c'è,
+                  altrimenti le iniziali come nel layout del cliente */}
+              {teachers.length > 0 && (
+                <Reveal className={styles.faces} delay={220}>
+                  <div className={styles.facesRow}>
+                    {teachers.map((tc) => {
+                      const photo = tc.photo?.asset
+                        ? urlFor(tc.photo)
+                            .width(120)
+                            .height(120)
+                            .fit('crop')
+                            .url()
+                        : null
+                      return (
+                        <span
+                          key={tc._id ?? tc.name}
+                          className={styles.face}
+                          title={tc.name ?? ''}
+                        >
+                          {photo ? (
+                            /* eslint-disable-next-line @next/next/no-img-element */
+                            <img src={photo} alt="" className={styles.faceImg} />
+                          ) : (
+                            initials(tc.name)
+                          )}
+                        </span>
+                      )
+                    })}
+                  </div>
+                  <p className={styles.facesLine}>{facesLine}</p>
+                </Reveal>
+              )}
+            </div>
+            {/* l'ancora resta su questa istanza: i bottoni "Prova con…"
+                e le card pacchetto prefillano e scrollano qui.
+                .formInk è l'evidenza nera richiesta dal cliente: qui
+                dentro i token di zona diventano nero/bianco, così il
+                form si stacca dal blu della banda senza una riga di CSS
+                dentro LessonForm */}
+            <Reveal id={LESSON_FORM_ANCHOR} className={styles.formSlot} delay={120}>
+              <div className={styles.formInk}>{form}</div>
+            </Reveal>
+          </div>
         </header>
 
         {/* "i nostri insegnanti hanno suonato con": la fascia di prova

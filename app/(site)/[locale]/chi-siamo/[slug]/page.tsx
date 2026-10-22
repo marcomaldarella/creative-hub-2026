@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation'
 import { TopicScreen } from '@/components/sections/TopicScreen'
 import { isLocale } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
-import { pageAlternates } from '@/lib/seo'
+import { pageAlternates, topicBreadcrumbJsonLd } from '@/lib/seo'
 import { findTopic, topicsOf } from '@/lib/topics'
 
 export const dynamic = 'force-dynamic'
@@ -44,5 +44,17 @@ export default async function TopicRoute({
   if (!isLocale(locale)) notFound()
   const topic = findTopic(BASE, slug)
   if (!topic) notFound()
-  return <TopicScreen locale={locale} topic={topic} />
+  /* BreadcrumbList: home → sezione → pagina (stesso helper di academy) */
+  const breadcrumb = topicBreadcrumbJsonLd(locale, topic)
+  return (
+    <>
+      {breadcrumb && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
+        />
+      )}
+      <TopicScreen locale={locale} topic={topic} />
+    </>
+  )
 }
