@@ -17,7 +17,6 @@ import {
 import { PointsAccordion } from '@/components/sections/PointsAccordion'
 import { SiteChrome } from '@/components/sections/SiteChrome'
 import { UniSubnav } from '@/components/sections/UniSubnav'
-import { Thumb } from '@/components/sections/Thumb'
 import { localeHref, type Locale } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
 import { urlFor } from '@/lib/sanity/image'
@@ -312,10 +311,8 @@ export function LessonScreen({
           />
         )}
 
-        {/* cover a tutto campo */}
-        <Reveal className={styles.cover}>
-          <Thumb image={course.coverImage} index={0} fill alt={title} />
-        </Reveal>
+        {/* niente banda media sotto la barra sticky: dalla testata col
+            form si entra dritti nel contenuto (richiesta cliente) */}
 
         {/* ————— il metodo ————— */}
         {metodo.length > 0 && (
@@ -474,24 +471,25 @@ export function LessonScreen({
         {modi.length > 0 && (
           <>
             <Rule left={String(++n).padStart(2, '0')} right={t.lesson.modiKicker} />
-            <section id="modi" className={`wrap ${styles.sez} ${styles.duo}`}>
+            {/* titolo in alto a tutta larghezza e tre card piene sotto:
+                le voci respirano come nelle altre sezioni a griglia */}
+            <section id="modi" className={`wrap ${styles.sez}`}>
               <SectionHeader
                 kicker={kick(n, t.lesson.modiKicker)}
                 title={t.lesson.modiTitle}
                 lede={modiIntro ?? undefined}
               />
-              {/* i tre modi sono card nere, come nel mockup (.fmt) */}
-              <div className={styles.modi}>
-                {modi.map((m) => (
-                  <Reveal
-                    key={m.title}
-                    className={`scheme-dark ${styles.modo}`}
-                  >
-                    <h3 className={styles.cellTitle}>{m.title}</h3>
-                    <p className={styles.cellText}>{m.text}</p>
-                  </Reveal>
+              <RevealGroup className={styles.modi}>
+                {modi.map((m, i) => (
+                  <div key={m.title} className={`rv ${styles.modo}`}>
+                    <span className={`mono ${styles.cellNum}`}>
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+                    <h3 className={styles.modoTitle}>{m.title}</h3>
+                    {m.text && <p className={styles.cellText}>{m.text}</p>}
+                  </div>
                 ))}
-              </div>
+              </RevealGroup>
             </section>
           </>
         )}
@@ -604,7 +602,9 @@ export function LessonScreen({
                 kicker={kick(n, t.lesson.faqKicker)}
                 title={t.lesson.faqTitle}
               />
-              <PointsAccordion items={faq} />
+              {/* sulle lezioni su misura le risposte sono brevi: solo
+                  testo, niente foto nel pannello (richiesta cliente) */}
+              <PointsAccordion items={faq} plain />
             </section>
           </>
         )}

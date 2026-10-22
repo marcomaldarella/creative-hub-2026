@@ -32,6 +32,13 @@ export type Topic = {
   key: string
   /** se presente, la pagina elenca i corsi di queste tipologie */
   courseTypes?: string[]
+  /**
+   * Apertura a solo titolo: i punti e la banda video scendono in fondo
+   * alla pagina (i punti diventano card), così sotto al titolo arrivano
+   * subito le card dei corsi. Senza il flag resta l'ordine di sempre —
+   * punti, video, corsi.
+   */
+  pointsLast?: boolean
 }
 
 export const TOPICS: Topic[] = [
@@ -54,6 +61,7 @@ export const TOPICS: Topic[] = [
     base: '/academy',
     key: 'corsiCustom',
     courseTypes: ['custom'],
+    pointsLast: true,
   },
   { slug: 'open-day', base: '/academy', key: 'openDay' },
   { slug: 'servizi-studenti', base: '/academy', key: 'serviziStudenti' },

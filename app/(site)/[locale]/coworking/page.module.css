@@ -208,7 +208,9 @@
   grid-template-columns: 2fr 1fr;
   grid-template-rows: repeat(2, minmax(0, 1fr));
   gap: 10px;
-  padding-top: clamp(16px, 2vw, 28px);
+  /* aria sotto la barra delle pagine di sezione: il mosaico non deve
+     attaccarsi allo scroller (richiesta cliente) */
+  padding-top: clamp(28px, 3.4vw, 52px);
   position: relative;
   height: clamp(360px, 56vh, 640px);
 }
@@ -424,12 +426,21 @@
 
 /* ————— riquadro prenota: fisso accanto al contenuto ————— */
 
+/* riquadro prenota: NERO (richiesta cliente), coi token scuri così
+   righe, campi e testi secondari si invertono da soli. Si ferma sotto
+   la barra delle pagine di sezione, non attaccato ad essa */
 .book {
   position: sticky;
-  top: calc(var(--header-h, 64px) + 16px);
-  border: 1px solid var(--fg);
+  top: calc(var(--header-h, 64px) + 58px + 16px);
+  border: 1px solid #000000;
   padding: clamp(18px, 2.2vw, 26px);
-  background: var(--bg);
+  background: #000000;
+  color: #fafafa;
+  --bg: #000000;
+  --surface: #111111;
+  --fg: #fafafa;
+  --fg-2: #b3b3b3;
+  --line: #2a2a2a;
 }
 
 .bookFrom {

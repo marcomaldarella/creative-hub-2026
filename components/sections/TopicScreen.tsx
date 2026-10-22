@@ -328,6 +328,10 @@ export async function TopicScreen({
     ? ({ '--accent-ink': 'var(--accent)' } as CSSProperties)
     : ({ '--accent': 'var(--osso)' } as CSSProperties)
 
+  /* apertura a solo titolo (corsi custom): video e punti scendono in
+     fondo, i punti come card numerate — vedi `pointsLast` in topics.ts */
+  const pointsTail = topic.pointsLast === true
+
   /* i punti semplici: sui topic CON corsi restano nel colore di pagina
      (la fascia nera subito dopo è quella dei corsi), altrimenti sono
      loro la fascia nera — mai due fasce nere di fila */
@@ -378,19 +382,21 @@ export async function TopicScreen({
 
         {/* punti dei topic con corsi: nel colore di pagina, prima del
             blocco scuro video + fascia corsi */}
-        {copy.points.length > 0 && !pointsInBand && (
+        {copy.points.length > 0 && !pointsInBand && !pointsTail && (
           <section className={`wrap ${styles.points}`}>{pointsList}</section>
         )}
 
         {/* ————— banda video full-bleed di sezione ————— */}
-        <Reveal className={styles.heroMedia} delay={120}>
-          <BgVideo
-            src={media.src}
-            portrait={media.portrait}
-            poster={media.poster}
-            className={styles.heroVideo}
-          />
-        </Reveal>
+        {!pointsTail && (
+          <Reveal className={styles.heroMedia} delay={120}>
+            <BgVideo
+              src={media.src}
+              portrait={media.portrait}
+              poster={media.poster}
+              className={styles.heroVideo}
+            />
+          </Reveal>
+        )}
 
         {/* ————— punti in fascia nera (topic senza corsi) ————— */}
         {pointsInBand && (
@@ -661,6 +667,37 @@ export async function TopicScreen({
             </Fragment>
           )
         })}
+
+        {/* ————— coda delle pagine ad apertura secca: prima la banda
+            video, poi i punti come card numerate ————— */}
+        {pointsTail && (
+          <>
+            <Reveal className={styles.heroMedia}>
+              <BgVideo
+                src={media.src}
+                portrait={media.portrait}
+                poster={media.poster}
+                className={styles.heroVideo}
+              />
+            </Reveal>
+            {/* la coda vuole punti semplici: i topic a punti ricchi
+                (accordion) non usano questo ordine */}
+            {copy.points.length > 0 && !richPoints && (
+              <section className={`wrap ${styles.points}`}>
+                <RevealGroup className={styles.pointCards}>
+                  {(copy.points as string[]).map((p, i) => (
+                    <div key={p} className={`rv ${styles.pointCard}`}>
+                      <span className={`mono ${styles.pointCardNum}`}>
+                        {String(i + 1).padStart(2, '0')}
+                      </span>
+                      <p className={styles.pointCardText}>{p}</p>
+                    </div>
+                  ))}
+                </RevealGroup>
+              </section>
+            )}
+          </>
+        )}
 
         {/* ————— fascia FSE+ (obbligo normativo), se il topic la porta ————— */}
         {copy.funding && (

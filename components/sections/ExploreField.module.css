@@ -55,9 +55,10 @@ a.card {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  /* a riposo le foto stanno sotto un velo scuro: il campo è calmo,
-     è l'hover ad accendere una card per volta (richiesta cliente) */
-  filter: saturate(0.92) brightness(0.55);
+  /* a riposo il campo è SPENTO di suo: foto quasi in bianco e nero e
+     scure, senza bisogno che il mouse entri. L'hover accende una card
+     per volta (richiesta cliente) */
+  filter: grayscale(0.7) saturate(0.85) brightness(0.4);
   transform: scale(1.03);
   transition:
     transform 0.6s var(--ease-out),
@@ -68,7 +69,7 @@ a.card {
    naturale, come un occhio di bue sul corso puntato */
 a.card:hover .cardImg {
   transform: scale(1.08);
-  filter: saturate(1.06) brightness(1.08);
+  filter: grayscale(0) saturate(1.06) brightness(1.08);
 }
 
 /* mentre una card è accesa, il resto del campo si spegne: quasi
@@ -169,18 +170,35 @@ a.card:hover .glass {
   overflow: hidden;
 }
 
-/* descrizione SEMPRE visibile per intero: niente ellissi */
+/* la descrizione si legge SOLO col mouse sopra: a riposo la card
+   mostra i micro-testi in alto e il titolo, niente altro (richiesta
+   cliente). Niente ellissi: quando compare, compare per intero */
 .cardSub {
   font-size: 10.5px;
   line-height: 1.35;
   color: rgba(255, 255, 255, 0.82);
+  opacity: 0;
+  transform: translateY(4px);
+  transition:
+    opacity 0.2s var(--ease-out),
+    transform 0.2s var(--ease-out);
 }
 
-/* su touch l'hover non esiste: niente velo di base che nessuno
-   potrebbe togliere, le foto restano come prima */
+a.card:hover .cardSub {
+  opacity: 1;
+  transform: none;
+}
+
+/* su touch l'hover non esiste: niente foto spente che nessuno potrebbe
+   accendere e descrizione sempre leggibile */
 @media (hover: none) {
   .cardImg {
-    filter: saturate(0.92);
+    filter: saturate(0.92) brightness(0.72);
+  }
+
+  .cardSub {
+    opacity: 1;
+    transform: none;
   }
 }
 
