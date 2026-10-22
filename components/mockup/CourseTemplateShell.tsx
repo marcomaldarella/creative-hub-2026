@@ -319,7 +319,7 @@ export function CourseTemplateShell({ css, html }: CourseTemplateShellProps) {
               nome,
               email,
               cellulare: String(fd.get('cellulare') ?? '').trim(),
-              residenzaER: fd.get('residenzaER') ? 'Sì' : 'No',
+              residenzaER: String(fd.get('residenzaER') ?? ''),
             },
           }),
         });

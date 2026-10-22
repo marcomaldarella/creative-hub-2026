@@ -3264,11 +3264,16 @@
     "notePrefix": "By sending you accept the ",
     "noteLink": "privacy policy",
     "noteSuffix": ". We only write about funded courses.",
-    "missing": "Fill in at least name and email.",
+    "missing": "Pick at least one course and fill in name, email and mobile.",
     "done": "Done. We will write to you as soon as the call for your course opens.",
     "error": "We could not send your request: try again, or write to corsirer@mpda.bo.it.",
     "courseEyebrow": "Funded training · Free course",
-    "closedBand": "Applications closed: the course has been running since September 2026. Leave your contact for the next edition."
+    "closedBand": "Applications closed: the course has been running since September 2026. Leave your contact for the next edition.",
+    "residenceOptions": [
+      "Yes",
+      "No, but I could move",
+      "No"
+    ]
   },
   "form": {
     "name": "Full name",

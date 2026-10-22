@@ -27,8 +27,10 @@ export function OpenDayForm({
   privacyHref: string
 }) {
   const [pick, setPick] = useState<OpenDayPick | null>(null)
-  const [mode, setMode] = useState<'sede' | 'online'>('sede')
-  const [people, setPeople] = useState(labels.people[0] ?? '1')
+  /* nel mockup nessun gruppo parte scelto: modalità e numero di
+     persone sono domande, non valori di default da far passare */
+  const [mode, setMode] = useState<'sede' | 'online' | null>(null)
+  const [people, setPeople] = useState<string | null>(null)
   const [name, setName] = useState('')
   const [phone, setPhone] = useState('')
   const [email, setEmail] = useState('')
@@ -51,6 +53,8 @@ export function OpenDayForm({
   }, [])
 
   const errPick = tried && !pick
+  const errMode = tried && !mode
+  const errPeople = tried && !people
   const errName = tried && !name.trim()
   const errPhone = tried && !phone.trim()
 
@@ -58,7 +62,7 @@ export function OpenDayForm({
     e.preventDefault()
     setTried(true)
     if (status === 'pending') return
-    if (!pick || !name.trim() || !phone.trim()) return
+    if (!pick || !mode || !people || !name.trim() || !phone.trim()) return
 
     const pickLabel = pick === 'uni' ? labels.optionUni : labels.optionCustom
     setStatus('pending')
@@ -73,7 +77,7 @@ export function OpenDayForm({
           fields: {
             'open day': pickLabel,
             modalità: mode === 'sede' ? labels.inPerson : labels.online,
-            persone: people,
+            persone: people ?? '',
             nome: name.trim(),
             cellulare: phone.trim(),
             email: email.trim(),
@@ -134,8 +138,8 @@ export function OpenDayForm({
       <fieldset className={styles.set}>
         <legend className={styles.legend}>{labels.howLegend}</legend>
         <div className={styles.row2}>
-          {radio('od-mode', 'sede', mode === 'sede', () => setMode('sede'), labels.inPerson)}
-          {radio('od-mode', 'online', mode === 'online', () => setMode('online'), labels.online)}
+          {radio('od-mode', 'sede', mode === 'sede', () => setMode('sede'), labels.inPerson, errMode)}
+          {radio('od-mode', 'online', mode === 'online', () => setMode('online'), labels.online, errMode)}
         </div>
       </fieldset>
 
@@ -143,7 +147,7 @@ export function OpenDayForm({
         <legend className={styles.legend}>{labels.peopleLegend}</legend>
         <div className={styles.row3}>
           {labels.people.map((p) =>
-            radio('od-people', p, people === p, () => setPeople(p), p)
+            radio('od-people', p, people === p, () => setPeople(p), p, errPeople)
           )}
         </div>
       </fieldset>
@@ -196,7 +200,7 @@ export function OpenDayForm({
         />
       </label>
 
-      {(errPick || errName || errPhone) && (
+      {(errPick || errMode || errPeople || errName || errPhone) && (
         <p className={styles.errMsg} role="alert">
           {labels.error}
         </p>

@@ -1481,6 +1481,8 @@ export type CourseHtmlData = {
     phone: string;
     residence: string;
     residenceYes: string;
+    /* "Sì" / "No, ma potrei trasferirmi" / "No" (mockup) */
+    residenceOptions?: string[];
     submit: string;
     sending: string;
     notePrefix: string;
@@ -1818,7 +1820,7 @@ ${interessi}
         <label class="avv-field">${e(a.email)}<input type="email" name="email" required></label>
         <label class="avv-field">${e(a.phone)}<input type="tel" name="cellulare"></label>
       </div>
-      <label class="avv-check"><input type="checkbox" name="residenzaER"><span>${e(a.residence)} <b>${e(a.residenceYes)}</b></span></label>
+      <label class="avv-f"><span>${e(a.residence)}</span><select name="residenzaER" required>${(a.residenceOptions ?? [a.residenceYes]).map((o) => `<option value="${e(o)}">${e(o)}</option>`).join('')}</select></label>
       <p class="avv-err" role="alert" hidden></p>
       <button class="pill pill-dark" type="submit">${e(a.submit)}</button>
       <p class="avv-ok" role="status" hidden>${e(a.done)}</p>

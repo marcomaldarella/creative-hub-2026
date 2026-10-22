@@ -45,7 +45,8 @@ export function AvvisamiForm({
     const nome = String(f.get('nome') ?? '').trim()
     const email = String(f.get('email') ?? '').trim()
     const cellulare = String(f.get('cellulare') ?? '').trim()
-    if (!nome || !email) {
+    const emailOk = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)
+    if (!nome || !emailOk || !cellulare || interests.length === 0) {
       setMissing(true)
       return
     }
@@ -63,7 +64,7 @@ export function AvvisamiForm({
             nome,
             email,
             cellulare,
-            residenzaER: f.get('residenzaER') ? 'Sì' : 'No',
+            residenzaER: String(f.get('residenzaER') ?? ''),
           },
         }),
       })
@@ -131,15 +132,19 @@ export function AvvisamiForm({
             </label>
             <label className={styles.field}>
               <span className={styles.label}>{labels.phone}</span>
-              <input className={styles.input} type="tel" name="cellulare" />
+              <input className={styles.input} type="tel" name="cellulare" required />
             </label>
           </div>
 
-          <label className={styles.residence}>
-            <input type="checkbox" name="residenzaER" className={styles.check} />
-            <span>
-              {labels.residence} <strong>{labels.residenceYes}</strong>
-            </span>
+          <label className={styles.field}>
+            <span className={styles.label}>{labels.residence}</span>
+            <select className={styles.input} name="residenzaER" required>
+              {labels.residenceOptions.map((o) => (
+                <option key={o} value={o}>
+                  {o}
+                </option>
+              ))}
+            </select>
           </label>
 
           {missing && <p className={styles.error}>{labels.missing}</p>}

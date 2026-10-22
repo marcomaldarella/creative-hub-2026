@@ -226,6 +226,7 @@ export async function CourseDetail({
           phone: t.avvisami.phone,
           residence: t.avvisami.residence,
           residenceYes: t.avvisami.residenceYes,
+          residenceOptions: t.avvisami.residenceOptions,
           submit: t.avvisami.submit,
           sending: t.avvisami.sending,
           notePrefix: t.avvisami.notePrefix,

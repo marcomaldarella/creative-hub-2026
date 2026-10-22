@@ -3264,11 +3264,16 @@
     "notePrefix": "Inviando accetti l'",
     "noteLink": "informativa privacy",
     "noteSuffix": ". Ti scriviamo solo per i corsi finanziati.",
-    "missing": "Compila almeno nome ed email.",
+    "missing": "Scegli almeno un corso e compila nome, email e cellulare.",
     "done": "Fatto. Ti scriviamo appena apre il bando del corso che ti interessa.",
     "error": "Non siamo riusciti a inviare la richiesta: riprova, o scrivici a corsirer@mpda.bo.it.",
     "courseEyebrow": "Formazione finanziata · Corso gratuito",
-    "closedBand": "Iscrizioni chiuse: il corso è in svolgimento da settembre 2026. Lascia il contatto per la prossima edizione."
+    "closedBand": "Iscrizioni chiuse: il corso è in svolgimento da settembre 2026. Lascia il contatto per la prossima edizione.",
+    "residenceOptions": [
+      "Sì",
+      "No, ma potrei trasferirmi",
+      "No"
+    ]
   },
   "form": {
     "name": "Nome e cognome",
