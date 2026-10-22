@@ -150,9 +150,20 @@
   outline-offset: -2px;
 }
 
-/* la formula scelta si accende */
-.optOn {
-  background: color-mix(in srgb, var(--fg) 14%, transparent);
+/* la formula scelta si accende in BIANCO, con il suo contorno: sul
+   riquadro nero è l'unica cosa illuminata (richiesta cliente) */
+.optOn,
+.optOn:hover {
+  background: #ffffff;
+  color: #0a0a0a;
+  border-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 0 0 1px #ffffff;
+}
+
+.optOn .optHint,
+.optOn .optPrice {
+  color: #4a4a4a;
 }
 
 .optName {
