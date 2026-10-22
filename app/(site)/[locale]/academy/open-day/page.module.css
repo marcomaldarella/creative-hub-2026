@@ -413,3 +413,40 @@
     grid-template-columns: 1fr;
   }
 }
+
+
+/* ————— ritmo dei colori del mockup: la pagina non è tutta azzurra ————
+   01 corsi universitari su BIANCO, la prenotazione su NERO, il resto
+   nel colore di sezione. I token si riscrivono sul blocco, così card,
+   righe e testi secondari si adattano da soli. */
+
+.white {
+  background: #ffffff;
+  color: #0a0a0a;
+  --bg: #ffffff;
+  --surface: #f5f5f5;
+  --fg: #0a0a0a;
+  --fg-2: #5a5a5a;
+  --line: #e3e3e3;
+  --su-inchiostro: #ffffff;
+}
+
+/* la scheda dei dati dentro il blocco bianco: riquadro con angoli come
+   nel mockup (.simple), non più un bordo appena visibile */
+.white .infoCard {
+  background: #ffffff;
+  border-color: #e3e3e3;
+  border-radius: 16px;
+  padding: 30px;
+}
+
+.prenotaDark {
+  background: #000000;
+  color: #fafafa;
+  --bg: #000000;
+  --surface: #111111;
+  --fg: #fafafa;
+  --fg-2: #b3b3b3;
+  --line: #2a2a2a;
+  --su-inchiostro: #000000;
+}

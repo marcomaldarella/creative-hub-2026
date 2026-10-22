@@ -175,7 +175,7 @@ export default async function OpenDayPage({
         />
 
         {/* ————— od.01 · corsi universitari ————— */}
-        <section id="universitari" className={styles.blockSez}>
+        <section id="universitari" className={`${styles.blockSez} ${styles.white}`}>
           <div className={`wrap ${det.duo} ${styles.duoWide} ${styles.duoPad}`}>
             <div>
               <Reveal as="span" className={`mono ${det.kicker}`}>
@@ -301,7 +301,7 @@ export default async function OpenDayPage({
         </section>
 
         {/* ————— prenota ————— */}
-        <section id="prenota" className={`wrap ${det.sez}`}>
+        <section id="prenota" className={`wrap ${det.sez} ${styles.prenotaDark}`}>
           {/* ancore extra per le CTA con preselezione: il browser scrolla
               solo su id esistenti, l'hash lo legge poi il form */}
           <span id="prenota-uni" className={styles.anchor} aria-hidden="true" />
