@@ -40,12 +40,20 @@
   padding: 12px 18px;
   border: 0;
   border-radius: var(--radius-pill, 999px);
-  background: var(--azzurro);
+  /* dentro un modulo su fondo nero il tasto è BIANCO, non nel colore di
+     sezione (richiesta cliente): --su-inchiostro è bianco sul chiaro e
+     resta bianco nelle fasce scure */
+  background: var(--su-inchiostro, #ffffff);
   color: #0a0a0a;
+  transition: background 0.15s var(--ease-out);
   font: inherit;
   font-weight: 600;
   letter-spacing: -0.01em;
   cursor: pointer;
+}
+
+.submit:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--su-inchiostro, #ffffff) 86%, #000000);
 }
 
 .submit:disabled {

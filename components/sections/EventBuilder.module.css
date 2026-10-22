@@ -37,9 +37,20 @@
 }
 
 /* domanda usata come etichetta di campo: stesso peso delle altre, ma
-   il margine in testa lo porta già il contenitore .when */
+   il margine in testa lo porta già il contenitore .when.
+   Le due domande stanno su una riga e una va a capo ("Quante
+   persone?"): il titolo occupa SEMPRE due righe, così i due campi
+   partono alla stessa altezza invece di sfalsarsi */
 .qField.qField {
   margin-top: 0;
+  min-height: 2.2em;
+}
+
+@media (max-width: 900px) {
+  /* in colonna il problema non esiste: il titolo torna alto quanto serve */
+  .qField.qField {
+    min-height: 0;
+  }
 }
 
 /* nome e contatto dentro il riepilogo nero */

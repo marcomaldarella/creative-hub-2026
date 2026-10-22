@@ -403,7 +403,8 @@
 
 .summary {
   position: sticky;
-  top: calc(var(--header-h) + 16px);
+  /* sotto la barra delle pagine di sezione (58px), non attaccato ad essa */
+  top: calc(var(--header-h) + 58px + 16px);
   border: 1px solid var(--line);
   padding: clamp(20px, 2.2vw, 26px);
 }
@@ -519,4 +520,14 @@
   color: var(--fg-2);
   max-width: 52ch;
   margin-bottom: clamp(18px, 2.2vw, 26px);
+}
+
+/* passo finale quando lo spazio ha una scheda sullo shop: niente form,
+   solo la spiegazione e il tasto che porta alla scheda */
+.shopText {
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--fg-2);
+  max-width: 52ch;
+  margin-top: 10px;
 }

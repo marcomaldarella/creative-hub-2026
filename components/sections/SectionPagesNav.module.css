@@ -74,3 +74,10 @@
     display: none;
   }
 }
+
+/* le ancore della pagina devono atterrare SOTTO la barra, non dietro:
+   tutto ciò che viene dopo di lei si tiene il suo ingombro */
+.bar ~ :global([id]),
+.bar ~ * :global([id]) {
+  scroll-margin-top: calc(var(--header-h) + 58px + 18px);
+}

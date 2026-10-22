@@ -953,7 +953,10 @@
       "questions": "Questions?",
       "phoneLabel": "051 631 3706",
       "phoneHref": "+390516313706",
-      "phoneNote": "extension 1 · Mon–Fri 11am–1pm and 2pm–6pm"
+      "phoneNote": "extension 1 · Mon–Fri 11am–1pm and 2pm–6pm",
+      "shopTitle": "All set: the space is waiting.",
+      "shopText": "Booking is completed on the space page, with availability and payment. The choices you made here are your reminder.",
+      "shopCta": "Go to the space and book"
     }
   },
   "innovation": {

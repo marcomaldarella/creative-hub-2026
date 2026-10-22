@@ -46,6 +46,19 @@
   background: color-mix(in srgb, var(--accent) 86%, var(--fg));
 }
 
+/* dentro una fascia o un modulo su fondo nero il tasto pieno è BIANCO,
+   non nel colore di sezione (richiesta cliente): sul nero l'accento
+   pesa troppo e non legge come azione primaria */
+:global(.scheme-dark) .azzurro {
+  background: #ffffff;
+  color: #0a0a0a;
+  border-color: #ffffff;
+}
+
+:global(.scheme-dark) .azzurro:hover {
+  background: var(--osso);
+}
+
 /* WhatsApp: il verde del marchio, l'unico colore funzionale che non è
    nostro (nei mockup è il token --wa). Testo NERO, non bianco come nel
    mockup: il bianco sul verde sta a 2:1, il nero a 10:1 — ed è anche la

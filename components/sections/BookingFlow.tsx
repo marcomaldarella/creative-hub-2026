@@ -245,7 +245,27 @@ export function BookingFlow({
           </div>
         )}
 
-        {step === 3 && (
+        {/* passo 3 — lo spazio ha una scheda sullo shop: si prenota lì,
+            dove stanno disponibilità e pagamento (niente form doppio) */}
+        {step === 3 && shopUrl && (
+          <div className={styles.panel}>
+            <h2 className={styles.q}>{labels.shopTitle}</h2>
+            <p className={styles.shopText}>{labels.shopText}</p>
+            <div className={styles.navrow}>
+              <Button variant="ghost" type="button" onClick={() => go(2)}>
+                <span className={styles.btnIn}>
+                  <Arrow dir="w" size={13} />
+                  {labels.back}
+                </span>
+              </Button>
+              <Button href={shopUrl} external>
+                {labels.shopCta}
+              </Button>
+            </div>
+          </div>
+        )}
+
+        {step === 3 && !shopUrl && (
           <div className={styles.panel}>
             <h2 className={styles.q}>{labels.step3Title}</h2>
             <div className={styles.fields}>
@@ -383,7 +403,9 @@ export function BookingFlow({
           <dt>{labels.summaryWhen}</dt>
           <dd>{when}</dd>
         </dl>
-        {shopUrl && (
+        {/* al passo finale il tasto grande porta già allo shop: qui
+            sarebbe un doppione */}
+        {shopUrl && step < 3 && (
           <a
             className={`mono ${styles.payLink}`}
             href={shopUrl}

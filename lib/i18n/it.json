@@ -953,7 +953,10 @@
       "questions": "Domande?",
       "phoneLabel": "051 631 3706",
       "phoneHref": "+390516313706",
-      "phoneNote": "interno 1 · lun–ven 11–13 e 14–18"
+      "phoneNote": "interno 1 · lun–ven 11–13 e 14–18",
+      "shopTitle": "Ci siamo: lo spazio ti aspetta.",
+      "shopText": "La prenotazione si chiude sulla scheda dello spazio, dove trovi disponibilità e pagamento. Le scelte che hai fatto qui ti servono da promemoria.",
+      "shopCta": "Vai allo spazio e prenota"
     }
   },
   "innovation": {
