@@ -456,6 +456,9 @@ export async function TopicScreen({
                       course={course}
                       locale={locale}
                       index={i}
+                      /* cover orizzontale come nelle altre pagine
+                         academy, non il ritratto 3:4 */
+                      ratio="4 / 3"
                       href={localeHref(
                         locale,
                         `/academy/${course.slug?.current ?? ''}`
@@ -742,7 +745,7 @@ export async function TopicScreen({
             video, poi i punti come card numerate ————— */}
         {pointsTail && (
           <>
-            <Reveal className={styles.heroMedia}>
+            <Reveal className={`${styles.heroMedia} ${styles.heroMediaTight}`}>
               <BgVideo
                 src={media.src}
                 portrait={media.portrait}

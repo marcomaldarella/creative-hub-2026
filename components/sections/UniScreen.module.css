@@ -172,7 +172,7 @@
   position: absolute;
   inset: 15px -9px;
   pointer-events: none;
-  --c: color-mix(in srgb, var(--ink) 55%, transparent);
+  --c: color-mix(in srgb, var(--ink, currentColor) 55%, transparent);
   --t: 1.5px;
   --l: 7px;
   background:
@@ -1174,9 +1174,14 @@
 }
 
 /* variante scura della barra sticky (mockup lezioni su misura) */
+/* ⚠️ la barra scura vive fuori da .main, dove --ink non esiste: senza
+   questa riga la color-mix del mirino è invalida e i quattro angoli
+   della voce attiva spariscono (stesso inciampo delle frecce) */
 .subnavDark {
   background: var(--bg);
   border-color: var(--line);
+  --ink: var(--fg);
+  --hairline: color-mix(in srgb, var(--fg) 24%, transparent);
 }
 
 .subnavDark .subnavCourse {

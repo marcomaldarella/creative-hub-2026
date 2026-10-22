@@ -12,10 +12,14 @@
   width: 100%;
 }
 
+/* le due colonne ripetono il telaio della pagina coworking
+   (page.module.css .lay): stesse frazioni, stesso gutter — così il
+   testo di questa sezione parte sulla STESSA verticale del riquadro
+   prenota e chiude sul gutter destro, invece di fermarsi 36px prima */
 .head {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 42%);
-  gap: clamp(20px, 4vw, 60px);
+  grid-template-columns: minmax(0, 1.55fr) minmax(280px, 1fr);
+  gap: clamp(28px, 4vw, 72px);
   align-items: end;
 }
 
@@ -31,8 +35,10 @@
   line-height: 1;
 }
 
+/* la misura la dà la colonna del telaio, non un max-width suo: con
+   52ch il paragrafo si fermava prima del gutter destro e il lato destro
+   della pagina perdeva la sua linea */
 .text {
-  max-width: 52ch;
   color: var(--fg-2);
 }
 
@@ -90,15 +96,17 @@
   }
 }
 
+/* sotto i 900px la colonna tocca il suo minimo (300px) e col solo 4/3
+   la foto scendeva a 225px: francobollo. Il minimo d'altezza la tiene
+   leggibile e `cover` assorbe il rapporto che ne risulta */
+@media (max-width: 900px) {
+  .img {
+    min-height: 270px;
+  }
+}
+
 @media (max-width: 760px) {
   .strip {
     grid-auto-columns: 80vw;
-  }
-
-  /* a 390px la colonna è ~312px: col solo 4/3 la foto scendeva a 234px
-     e tornava francobollo. Il minimo d'altezza la tiene leggibile e
-     `cover` assorbe il rapporto che ne risulta */
-  .img {
-    min-height: 270px;
   }
 }

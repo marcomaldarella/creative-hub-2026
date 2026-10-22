@@ -49,6 +49,12 @@
 .heroMedia {
   position: relative;
   margin-top: clamp(32px, 5vw, 56px);
+  /* niente stacco quando la banda arriva SUBITO dopo una fascia nera:
+     la striscia di colore in mezzo era solo un buco */
+}
+
+.heroMediaTight {
+  margin-top: 0;
   height: clamp(300px, 42vw, 560px);
   background: #000;
   overflow: hidden;

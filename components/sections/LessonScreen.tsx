@@ -145,6 +145,9 @@ export function LessonScreen({
     t.lesson.creditsLabel
 
   const academyPath = localeHref(locale, '/academy')
+  /* il tasto indietro riporta all'indice delle lezioni su misura, non
+     all'academy intera (richiesta cliente) */
+  const indicePath = localeHref(locale, '/academy/corsi-custom')
   const kick = (n: number, label: string) =>
     `${String(n).padStart(2, '0')} — ${label}`
   let n = 0
@@ -261,7 +264,7 @@ export function LessonScreen({
         <header className={`wrap ${styles.head} ${styles.headDuo}`}>
           <div>
             <Reveal className={styles.back}>
-              <ArrowLink href={academyPath} reverse>
+              <ArrowLink href={indicePath} reverse>
                 {t.lesson.back}
               </ArrowLink>
             </Reveal>

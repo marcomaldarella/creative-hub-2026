@@ -186,11 +186,14 @@
   margin-bottom: 12px;
 }
 
+/* il max-width di 60ch stava qui e accorciava anche i FILI: la lista
+   chiudeva a 657px mentre tabella, dotazione e foto della sede chiudono
+   a 836, e il blocco "dove siamo" era l'unico col lato destro fuori
+   squadra. Le voci sono righe corte, la misura di lettura non serve */
 .whereList {
   list-style: none;
   padding: 0;
   margin: 0;
-  max-width: 60ch;
 }
 
 .whereList li {
@@ -313,12 +316,19 @@
 
 /* ————— due colonne: contenuto + riquadro prenota ————— */
 
+/* ⚠️ questa misura è il TELAIO della pagina: le colonne del nastro
+   "il palazzo" (PhotoStrip.module.css .head) ripetono le stesse due
+   frazioni, così il testo di quella sezione parte esattamente dove
+   inizia il riquadro prenota e tutto il lato destro sta su una linea */
 .lay {
   display: grid;
   grid-template-columns: minmax(0, 1.55fr) minmax(280px, 1fr);
   gap: clamp(28px, 4vw, 72px);
   align-items: start;
-  padding-bottom: clamp(44px, 6vw, 84px);
+  /* l'aria sotto la colonna di prodotto era 84px contro i 140 di ogni
+     sezione a filo: il salto fra "dove siamo" e "il palazzo" leggeva
+     più stretto di tutti gli altri. Stesso passo delle sezioni */
+  padding-bottom: var(--sez);
 }
 
 .colL {
@@ -348,6 +358,34 @@
   line-height: 1.5;
   max-width: 58ch;
   margin-bottom: 12px;
+}
+
+/* ————— la fisarmonica delle domande, alla misura della colonna —————
+   PointsAccordion è tarato per le sezioni a filo di pagina (titoli fino
+   a 42px): dentro la colonna di prodotto, dove i titoli di sezione
+   stanno a 30px e il corpo a 15px, le domande gridavano più forte del
+   titolo "Prima di prenotare." che le introduce. Qui scendono sotto al
+   titolo e le righe si stringono di conseguenza.
+   Selettori per attributo e non per classe: le classi del componente
+   sono generate da CSS Modules, `button[aria-expanded]` è la sua testa
+   e non esiste altrove in questa colonna. */
+.colL button[aria-expanded] {
+  padding-top: clamp(14px, 1.6vw, 18px);
+  padding-bottom: clamp(14px, 1.6vw, 18px);
+  gap: 16px;
+}
+
+.colL button[aria-expanded] span:first-child {
+  font-size: clamp(18px, 1.5vw, 21px);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+/* la fisarmonica chiudeva con un filo suo e il blocco successivo ne
+   apriva un altro: due righine parallele a 30px di distanza, l'unico
+   punto della pagina con un doppio divisorio. Qui chiude il blocco */
+.colL div:has(> button[aria-expanded]):last-child {
+  border-bottom: 0;
 }
 
 /* dotazione: due colonne compatte dentro la colonna sinistra */
@@ -382,6 +420,9 @@
   width: 100%;
   border-collapse: collapse;
   font-size: 14px;
+  /* cifre a larghezza fissa: in colonna 9,50€ / 85€ / 95€ / 155€ / 950€
+     ballavano di qualche pixel l'una sull'altra */
+  font-variant-numeric: tabular-nums;
 }
 
 .cmp thead th {
@@ -527,6 +568,7 @@
   font-size: 12px;
   color: var(--fg-2);
   white-space: nowrap;
+  font-variant-numeric: tabular-nums;
 }
 
 .bookBtn {
