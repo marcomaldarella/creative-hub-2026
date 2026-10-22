@@ -24,7 +24,22 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
     ]);
-    return merged;
+    // la prenotazione spazi ora vive sotto coworking (wizard, mockup
+    // "prenota" ott 2026): il vecchio /prenota — e la versione /en —
+    // vanno in 301; le schede prodotto /prenota/[slug] restano dove sono
+    const prenota = [
+      {
+        source: "/prenota",
+        destination: "/coworking/prenota",
+        permanent: true,
+      },
+      {
+        source: "/en/prenota",
+        destination: "/en/coworking/prenota",
+        permanent: true,
+      },
+    ];
+    return [...merged, ...prenota];
   },
 };
 

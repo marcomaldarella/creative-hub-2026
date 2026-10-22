@@ -12,7 +12,7 @@ const SECTIONS = [
   '/coworking',
   '/innovazione',
   '/magazine',
-  '/prenota',
+  '/coworking/prenota',
   '/chi-siamo',
   '/privacy',
   '/cookie',

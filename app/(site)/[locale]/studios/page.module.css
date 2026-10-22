@@ -267,6 +267,30 @@
   line-height: 1.5;
 }
 
+/* crediti del fonico: etichetta mono + chips hairline (mockup ott 2026) */
+.creditsLabel {
+  display: block;
+  margin-top: 22px;
+  font-size: 12px;
+  color: var(--fg-2);
+}
+
+.credits {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.credit {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 6px 13px;
+  font-size: 13px;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
 /* ————— card servizio → pagina: riga "esplora" in fondo (mockup ott 2026) ————— */
 
 .cardGo {

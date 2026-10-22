@@ -6,7 +6,7 @@ import { LessonScreen } from '@/components/sections/LessonScreen'
 import { SiteChrome, shopHref } from '@/components/sections/SiteChrome'
 import { TopicScreen } from '@/components/sections/TopicScreen'
 import { UniScreen } from '@/components/sections/UniScreen'
-import { isLocale } from '@/lib/i18n/config'
+import { isLocale, localeHref } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
 import { pageAlternates } from '@/lib/seo'
 import { urlFor } from '@/lib/sanity/image'
@@ -40,10 +40,16 @@ export async function generateMetadata({
     const copy = t.topics[topic.key as keyof typeof t.topics] as {
       title: string
       lede: string
+      /* titolo e descrizione scritti per la ricerca, quando il topic li
+         ha: altrimenti valgono h1 e lede come prima */
+      metaTitle?: string
+      metaDesc?: string
     }
     return {
-      title: copy.title,
-      description: copy.lede,
+      /* l'h1 può andare a capo (il \n spezza il titolo in pagina): nel
+         <title> il ritorno a capo non ci va mai */
+      title: copy.metaTitle ?? copy.title.replace(/\s*\n\s*/g, ' '),
+      description: copy.metaDesc ?? copy.lede,
       alternates: pageAlternates(locale, `/academy/${slug}`),
     }
   }
@@ -128,6 +134,17 @@ export default async function CoursePage({
   const gallery = course.gallery ?? []
   const title = l(course.title, locale) ?? slug
 
+  /* corsi finanziati: fascia FSE+ (obbligo normativo) e form "Avvisami
+     alla prossima edizione" al posto della candidatura — le iscrizioni
+     aprono a bando. La dicitura dell'operazione è quella specifica del
+     corso quando c'è, altrimenti quella generica del programma */
+  const finanziato = course.types?.includes('finanziato') ?? false
+  const DICITURE: Record<string, string> = {
+    'music-data-analyst-and-strategist':
+      'Operazione Rif. PA 2025-25412/RER/2, approvata con DGR n. 2030/2025 del 09/12/2025 e cofinanziata dal Fondo sociale europeo Plus (FSE+). Ente attuatore: MPDA Aps.',
+  }
+  const fundingTopic = t.topics.formazioneFinanziata.funding
+
   /* voci titolo+testo delle sezioni editabili (fieldset "Scheda corso"):
      una voce senza né titolo né testo non arriva al template */
   const entries = (arr?: CourseEntry[]) => {
@@ -141,9 +158,9 @@ export default async function CoursePage({
   }
 
   const html = buildCourseHtml({
-    eyebrow: `Academy · ${
-      l(course.category?.title, locale) ?? t.academy.kicker
-    }`,
+    eyebrow: finanziato
+      ? t.avvisami.courseEyebrow
+      : `Academy · ${l(course.category?.title, locale) ?? t.academy.kicker}`,
     title,
     sub: l(course.summary, locale) ?? '',
     courseLine: [title, l(course.level, locale)].filter(Boolean).join(' — '),
@@ -155,10 +172,18 @@ export default async function CoursePage({
       { label: t.common.mode, value: l(course.mode, locale) },
     ].filter((m): m is { label: string; value: string } => Boolean(m.value)),
     heroImage: imgUrl(course.coverImage, 1600, 1200),
-    secondaryCta: {
-      label: t.common.bookOn,
-      href: course.shopUrl ?? shopHref(settings),
-    },
+    /* a bando non si vende: niente carrello, la hero porta al form */
+    secondaryCta: finanziato
+      ? undefined
+      : {
+          label: t.common.bookOn,
+          href: course.shopUrl ?? shopHref(settings),
+        },
+    funded: finanziato,
+    year: finanziato ? '' : undefined,
+    admissionsIntro: finanziato ? '' : undefined,
+    admissionsNote: finanziato ? '' : undefined,
+    statusBand: finanziato ? { text: t.avvisami.closedBand } : undefined,
     panoramica: paragraphs(l(course.body, locale)),
     panImage: imgUrl(gallery[0] ?? course.coverImage, 1200, 800),
     skillImages: gallery.length
@@ -189,7 +214,8 @@ export default async function CoursePage({
     network: entries(course.network),
     faq: entries(course.faq),
     /* griglia docenti: il primo collegato in Sanity è il course leader;
-       la griglia si completa a 4 con i segnaposto del brief */
+       il template pubblica solo docenti con ruolo o bio reali e, se non
+       ne resta nessuno, non renderizza la sezione */
     teachers: (course.teachers ?? [])
       .filter((tch) => tch?.name)
       .slice(0, 4)
@@ -199,6 +225,41 @@ export default async function CoursePage({
         cred: l(tch.bio, locale) ?? '',
         img: imgUrl(tch.photo, 800, 1000),
       })),
+    funding: finanziato
+      ? {
+          logos: DICITURE[slug]
+            ? [
+                'Unione Europea',
+                'Repubblica Italiana',
+                'Regione Emilia-Romagna',
+              ]
+            : (fundingTopic?.logos ?? []),
+          text: DICITURE[slug] ?? fundingTopic?.text ?? '',
+        }
+      : undefined,
+    avvisami: finanziato
+      ? {
+          title: t.avvisami.titleCourse,
+          lede: t.avvisami.ledeCourse,
+          contacts: t.avvisami.contacts,
+          interestsLegend: t.avvisami.interestsLegend,
+          interests: t.avvisami.interests,
+          name: t.avvisami.name,
+          email: t.avvisami.email,
+          phone: t.avvisami.phone,
+          residence: t.avvisami.residence,
+          residenceYes: t.avvisami.residenceYes,
+          submit: t.avvisami.submit,
+          sending: t.avvisami.sending,
+          notePrefix: t.avvisami.notePrefix,
+          noteLink: t.avvisami.noteLink,
+          noteSuffix: t.avvisami.noteSuffix,
+          privacyHref: localeHref(locale, '/privacy'),
+          missing: t.avvisami.missing,
+          done: t.avvisami.done,
+          error: t.avvisami.error,
+        }
+      : undefined,
   })
 
   return (

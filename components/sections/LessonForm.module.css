@@ -1,0 +1,338 @@
+/* form lezione gratuita in due passi: card hairline a angoli netti,
+   opzioni a tap (selezionata = pieno), tasto pillola. Tutto via token
+   (fg/bg/line): nelle fasce scheme-dark si inverte da solo.
+   Transizioni solo colore/bordo/trasform a 150–250ms, ease-out
+   (skill taste: stato frequente, quasi niente animazione). */
+
+.card {
+  border: 1px solid var(--line);
+  padding: clamp(20px, 2.4vw, 30px);
+  background: var(--bg);
+  scroll-margin-top: calc(var(--nav-h, 72px) + 16px);
+}
+
+.top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+.title {
+  font-size: clamp(18px, 1.8vw, 22px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.progress {
+  font-size: 11px;
+  color: var(--fg-2);
+  white-space: nowrap;
+}
+
+/* barra di avanzamento: 2px, riempita via scaleX (mai width) */
+.bar {
+  height: 2px;
+  background: var(--line);
+  margin-bottom: clamp(16px, 2vw, 22px);
+  overflow: hidden;
+}
+
+.barFill {
+  display: block;
+  height: 100%;
+  background: var(--fg);
+  transform-origin: left;
+  transition: transform 250ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .barFill {
+    transition: none;
+  }
+}
+
+.q {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin-bottom: 10px;
+}
+
+/* ————— opzioni a tap ————— */
+
+.opts {
+  display: grid;
+  gap: 8px;
+  margin-bottom: clamp(16px, 2vw, 22px);
+}
+
+.optsTwo {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: clamp(16px, 2vw, 22px);
+}
+
+.opt {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: 14px;
+  letter-spacing: -0.01em;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    background 150ms ease-out,
+    color 150ms ease-out,
+    border-color 150ms ease-out;
+}
+
+.opt:hover {
+  border-color: color-mix(in srgb, var(--fg) 45%, transparent);
+}
+
+.opt.on,
+.opt.on:hover {
+  background: var(--fg);
+  border-color: var(--fg);
+  color: var(--bg);
+}
+
+.optNote {
+  font-size: 12px;
+  color: var(--fg-2);
+}
+
+.opt.on .optNote {
+  color: color-mix(in srgb, var(--bg) 70%, transparent);
+}
+
+/* ————— riga contesto (passo 2) ————— */
+
+.ctx {
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--fg-2);
+  background: var(--surface);
+  padding: 10px 12px;
+  margin-bottom: clamp(14px, 1.8vw, 18px);
+}
+
+.ctxEdit {
+  display: inline;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+}
+
+.ctxEdit:hover {
+  color: var(--fg);
+}
+
+/* ————— campi ————— */
+
+.fields {
+  display: grid;
+  gap: 12px;
+  margin-bottom: clamp(16px, 2vw, 22px);
+}
+
+.field {
+  display: block;
+  min-width: 0;
+}
+
+.fieldLabel {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin-bottom: 6px;
+}
+
+.fieldNote {
+  font-weight: 400;
+  color: var(--fg-2);
+}
+
+.field input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: 15px;
+  transition: border-color 150ms ease-out;
+}
+
+.field input:hover {
+  border-color: color-mix(in srgb, var(--fg) 45%, transparent);
+}
+
+.field input:focus {
+  border-color: var(--fg);
+  outline: none;
+}
+
+/* bordo rosso sobrio: solo dopo il primo tentativo di invio */
+.field .errIn,
+.field .errIn:hover {
+  border-color: #b3261e;
+}
+
+.errMsg {
+  font-size: 13px;
+  color: #b3261e;
+  margin-bottom: 12px;
+}
+
+/* ————— tasto avanti / invio ————— */
+
+.go {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 14px 18px;
+  border: 1px solid var(--fg);
+  border-radius: var(--radius-pill);
+  background: var(--fg);
+  color: var(--bg);
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  transition: opacity 150ms ease-out;
+}
+
+.go:hover {
+  opacity: 0.88;
+}
+
+.go:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.privacy {
+  margin-top: 10px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--fg-2);
+}
+
+.privacy a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* ————— conferma (passo 3) ————— */
+
+.done {
+  padding: clamp(8px, 1vw, 14px) 0 4px;
+}
+
+.doneMark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--fg);
+  border-radius: 50%;
+  margin-bottom: 14px;
+}
+
+.doneTitle {
+  font-size: clamp(18px, 1.8vw, 22px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+}
+
+.doneText {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--fg-2);
+  margin-bottom: 14px;
+}
+
+.doneSteps {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--fg-2);
+}
+
+/* ————— rassicurazioni + whatsapp ————— */
+
+.reassure {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+  margin-top: 14px;
+  font-size: 12.5px;
+  color: var(--fg-2);
+}
+
+.reassure span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.waLine {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  border-top: 1px solid var(--line);
+  margin-top: 16px;
+  padding-top: 14px;
+  font-size: 13px;
+  color: var(--fg-2);
+}
+
+.waLine a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--fg);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+}
+
+.waLine a:hover {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* honeypot: fuori dal flusso visivo ma presente nel DOM per i bot */
+.hp {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}

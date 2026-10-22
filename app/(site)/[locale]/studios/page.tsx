@@ -4,16 +4,18 @@ import { notFound } from 'next/navigation'
 import {
   Arrow,
   ArrowLink,
-  Button,
   Card,
   Reveal,
   Rule,
   SectionHeader,
 } from '@/components/ui'
-import { SiteChrome, shopHref } from '@/components/sections/SiteChrome'
+import { SiteChrome } from '@/components/sections/SiteChrome'
 import { SectionPagesNav } from '@/components/sections/SectionPagesNav'
 import { PointsAccordion } from '@/components/sections/PointsAccordion'
 import { ArticleCard } from '@/components/magazine/ArticleCard'
+import { ContactForm } from '@/components/sections/ContactForm'
+import det from '@/components/sections/DetailPage.module.css'
+import { StudioContacts } from '@/components/sections/StudioContacts'
 import { isLocale, localeHref } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
 import { pageAlternates } from '@/lib/seo'
@@ -130,10 +132,12 @@ export default async function StudiosPage({
                     <p className={styles.spaceSummary}>
                       {l(space.summary, locale)}
                     </p>
+                    {/* la grafia delle dotazioni è contenuto: minuscolandole
+                        si perdevano SSL, Neumann U87, Genelec */}
                     {space.features && space.features.length > 0 && (
                       <ul className={`mono ${styles.features}`}>
                         {space.features.map((f) => (
-                          <li key={f._key}>{l(f, locale)?.toLowerCase()}</li>
+                          <li key={f._key}>{l(f, locale)}</li>
                         ))}
                       </ul>
                     )}
@@ -182,6 +186,12 @@ export default async function StudiosPage({
                     className={styles.spaceCard}
                   >
                     {service.text}
+                    {/* le tre righe-specifica del mockup, sotto il testo */}
+                    <ul className={det.cardRows}>
+                      {service.rows.map((row) => (
+                        <li key={row}>{row}</li>
+                      ))}
+                    </ul>
                     <span className={styles.cardGo}>
                       {t.studios.cardCta}
                       <Arrow dir="e" size={13} />
@@ -248,6 +258,17 @@ export default async function StudiosPage({
               <Reveal as="p" className={styles.engineerBio} delay={80}>
                 {t.studios.engineerBio}
               </Reveal>
+              {/* i crediti del fonico: chips hairline (mockup ott 2026) */}
+              <Reveal as="p" className={`mono ${styles.creditsLabel}`} delay={120}>
+                {t.studios.engineerCreditsLabel}
+              </Reveal>
+              <Reveal className={styles.credits} delay={160}>
+                {t.studios.engineerCredits.map((name) => (
+                  <span key={name} className={styles.credit}>
+                    {name}
+                  </span>
+                ))}
+              </Reveal>
             </div>
           </div>
         </section>
@@ -277,31 +298,6 @@ export default async function StudiosPage({
           </div>
         </section>
 
-        {/* ————— cta ————— */}
-        <section className={`${styles.sez} ${styles.cta}`} id="affitto-studio">
-          <div className="wrap">
-            <SectionHeader
-              kicker={t.studios.ctaKicker}
-              title={t.studios.ctaTitle}
-              lede={t.studios.ctaText}
-            />
-            <Reveal className={styles.ctaRow} delay={160}>
-              <Button variant="azzurro" href={shopHref(settings)} external>
-                {t.studios.ctaBook}
-              </Button>
-              {settings?.email && (
-                <ArrowLink
-                  href={`mailto:${settings.email}`}
-                  external
-                  className={styles.ctaMail}
-                >
-                  {t.studios.ctaContact}
-                </ArrowLink>
-              )}
-            </Reveal>
-          </div>
-        </section>
-
         {/* ————— dal magazine: due articoli a tema studio, fascia nera ————— */}
         {editorial.length > 0 && (
           <section className={`${styles.sez} scheme-dark`}>
@@ -327,6 +323,43 @@ export default async function StudiosPage({
             </div>
           </section>
         )}
+
+        {/* ————— chiusura: raccontaci il progetto (mockup ott 2026) —
+            stesso modulo delle pagine di dettaglio, con il form vero ————— */}
+        <div className={`scheme-dark ${det.dark}`} id="affitto-studio">
+          <section className={`wrap ${det.sez} ${det.duo}`}>
+            <div>
+              <Reveal as="h2" className={`display-thin ${det.ctaTitle}`}>
+                {t.studios.ctaTitle}
+              </Reveal>
+              <Reveal as="p" className={det.ctaText} delay={80}>
+                {t.studios.ctaText}
+              </Reveal>
+              <StudioContacts
+                email={t.studioSub.email}
+                phone={settings?.phone}
+                notes={t.studioSub.notes}
+              />
+            </div>
+            {/* il form del mockup: tema preselezionato su "Non lo so ancora" */}
+            <Reveal delay={140}>
+              <ContactForm
+                to={t.studioSub.email}
+                subject={t.studios.ctaTitle}
+                topics={t.form.studioTopics}
+                defaultTopic={t.form.studioTopics[6]}
+                labels={{
+                  ...t.form,
+                  topic: t.form.topicNeed,
+                  messagePlaceholder: t.form.messagePlaceholderStudio,
+                }}
+                privacyHref={localeHref(locale, '/privacy')}
+                sendLabel={t.form.sendRequest}
+                company={false}
+              />
+            </Reveal>
+          </section>
+        </div>
       </main>
     </SiteChrome>
   )

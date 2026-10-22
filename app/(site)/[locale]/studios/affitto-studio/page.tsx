@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { Suspense } from 'react'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import {
@@ -13,16 +14,29 @@ import {
 import { SiteChrome } from '@/components/sections/SiteChrome'
 import { SectionPagesNav } from '@/components/sections/SectionPagesNav'
 import { PointsAccordion } from '@/components/sections/PointsAccordion'
+import { StudioBookingFlow } from '@/components/sections/StudioBookingFlow'
 import { isLocale, localeHref } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
 import { pageAlternates } from '@/lib/seo'
-import { getSiteSettings, getSpacesByKind } from '@/lib/sanity/queries'
+import { getSpacesByKind } from '@/lib/sanity/queries'
+import { getBookableProducts } from '@/lib/woocommerce'
 import { l } from '@/lib/sanity/l'
 import studioDeskImg from '@/public/img/sections/studio-desk.jpg'
+import studioSslImg from '@/public/img/foto/studio-ssl.jpg'
+import liveBandImg from '@/public/img/foto/live-band.jpg'
+import studioRegiaBImg from '@/public/img/sections/studio-regia-b.jpg'
 import det from '@/components/sections/DetailPage.module.css'
 import styles from './page.module.css'
 
 export const dynamic = 'force-dynamic'
+
+/* la formula del flusso → slug del prodotto sullo shop WooCommerce:
+   produzione si prenota come studio di registrazione, prove come
+   sala prove; l'allestimento tour resta su preventivo */
+const FORMULA_SHOP_SLUGS: Record<string, string> = {
+  produzione: 'studio-di-registrazione',
+  prove: 'sala-prove-con-batteria',
+}
 
 export async function generateMetadata({
   params,
@@ -48,14 +62,23 @@ export default async function AffittoStudioPage({
   if (!isLocale(locale)) notFound()
   const t = getDictionary(locale)
   const d = t.studioSub.affitto
-  const [settings, spaces] = await Promise.all([
-    getSiteSettings(),
-    getSpacesByKind('studio'),
-  ])
+  const spaces = await getSpacesByKind('studio')
 
   const email = t.studioSub.email
-  const mailBook = `mailto:${email}?subject=${encodeURIComponent(d.book)}`
-  const mailCta = `mailto:${email}?subject=${encodeURIComponent(d.ctaTitle)}`
+  const base = localeHref(locale, '/studios/affitto-studio')
+
+  /* formula → prodotto WooCommerce: la prenotazione si chiude sulla
+     scheda dello spazio sullo shop (lo shop resta su WP, vincolo di
+     progetto). Senza catalogo raggiungibile il flusso torna da solo
+     alla richiesta via form. */
+  const products = await getBookableProducts()
+  const bySlug = new Map(products.map((p) => [p.slug, p.permalink] as const))
+  const shopLinks: Partial<Record<string, string>> = Object.fromEntries(
+    Object.entries(FORMULA_SHOP_SLUGS).flatMap(([id, slug]) => {
+      const url = bySlug.get(slug)
+      return url ? [[id, url] as const] : []
+    })
+  )
 
   /* la dotazione: gli spazi studio veri da Sanity — senza documenti la
      sezione non compare */
@@ -96,7 +119,8 @@ export default async function AffittoStudioPage({
                 ))}
               </RevealGroup>
               <Reveal className={det.heroRow} delay={120}>
-                <Button variant="azzurro" href={mailBook} external>
+                {/* la CTA apre il flusso di prenotazione in fondo */}
+                <Button variant="azzurro" href="#prenota">
                   {d.book}
                 </Button>
               </Reveal>
@@ -116,7 +140,8 @@ export default async function AffittoStudioPage({
         {/* ————— barra delle pagine di sezione (mockup) ————— */}
         <SectionPagesNav locale={locale} base="/studios" current="/studios/affitto-studio" />
 
-        {/* ————— le tre formule ————— */}
+        {/* ————— le tre formule: ogni card apre il flusso con la
+            formula già scelta (?formula=…#prenota) ————— */}
         <Rule left="01" right={d.formKicker} />
         <section className={`wrap ${det.sez}`}>
           <Reveal as="h2" className={`display-thin ${det.h2}`}>
@@ -133,6 +158,13 @@ export default async function AffittoStudioPage({
                     <li key={r}>{r}</li>
                   ))}
                 </ul>
+                <ArrowLink
+                  href={`${base}?formula=${f.id}#prenota`}
+                  dir="e"
+                  className={styles.formulaGo}
+                >
+                  {d.formCta}
+                </ArrowLink>
               </div>
             ))}
           </RevealGroup>
@@ -151,8 +183,43 @@ export default async function AffittoStudioPage({
           </>
         )}
 
+        {/* ————— tariffe: formule e durate; i prezzi del mockup sono
+            tutti da confermare → "su preventivo" ————— */}
+        <Rule left="03" right={d.ratesKicker} />
+        <section className={`wrap ${det.sez}`}>
+          <Reveal as="h2" className={`display-thin ${det.h2}`}>
+            {d.ratesTitle}
+          </Reveal>
+          <Reveal as="p" className={det.sezLede} delay={80}>
+            {d.ratesLede}
+          </Reveal>
+          <Reveal delay={140}>
+            <table className={styles.rates}>
+              <thead>
+                <tr>
+                  {d.ratesHead.map((h) => (
+                    <th key={h} scope="col" className="mono">
+                      {h}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {d.ratesRows.map((r) => (
+                  <tr key={r.formula}>
+                    <td className={styles.ratesName}>{r.formula}</td>
+                    <td>{r.durata}</td>
+                    <td>{r.include}</td>
+                    <td className={styles.ratesPrice}>{r.prezzo}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </Reveal>
+        </section>
+
         {/* ————— come si prenota ————— */}
-        <Rule left="03" right={d.howKicker} />
+        <Rule left="04" right={d.howKicker} />
         <section className={`wrap ${det.sez}`}>
           <SectionHeader kicker={d.howKicker} title={d.howTitle} />
           <RevealGroup className={det.grid3}>
@@ -164,36 +231,61 @@ export default async function AffittoStudioPage({
           </RevealGroup>
         </section>
 
-        {/* ————— chiusura: scegli le date ————— */}
-        <div className={`scheme-dark ${det.dark}`}>
+        {/* ————— domande frequenti ————— */}
+        <Rule left="05" right={d.faqKicker} />
+        <section className={`wrap ${det.sez} ${det.duo}`}>
+          <Reveal as="h2" className={`display-thin ${det.h2}`}>
+            {d.faqTitle}
+          </Reveal>
+          <PointsAccordion items={d.faq} plain />
+        </section>
+
+        {/* ————— chiusura: la prenotazione guidata (3 passi) al posto
+            del form generico — ancora #prenota per le CTA ————— */}
+        <div id="prenota" className={`scheme-dark ${det.dark}`}>
           <section className={`wrap ${det.sez}`}>
-            <Reveal as="h2" className={`display-thin ${det.ctaTitle}`}>
+            <Reveal as="span" className={`mono ${det.kicker}`}>
+              {d.ctaKicker}
+            </Reveal>
+            <Reveal as="h2" className={`display-thin ${det.ctaTitle}`} delay={60}>
               {d.ctaTitle}
             </Reveal>
-            <Reveal as="p" className={det.ctaText} delay={80}>
+            <Reveal as="p" className={det.ctaText} delay={120}>
               {d.ctaText}
             </Reveal>
-            <Reveal className={det.ctaRow} delay={160}>
-              <Button variant="azzurro" href={mailCta} external>
-                {d.book}
-              </Button>
-              {settings?.phone && (
-                <ArrowLink
-                  href={`tel:${settings.phone.replace(/\s/g, '')}`}
-                  external
-                >
-                  {settings.phone}
-                </ArrowLink>
-              )}
+            {/* la strip di garanzie del mockup (le voci confermate) */}
+            <Reveal delay={180}>
+              <ul className={styles.garanzie}>
+                {d.garanzie.map((g) => (
+                  <li key={g}>{g}</li>
+                ))}
+              </ul>
             </Reveal>
-            <Reveal className={det.mailRows} delay={220}>
-              <a className={det.mailRow} href={`mailto:${email}`}>
-                <span className={det.mailAddr}>{email}</span>
-                <span className={det.mailNote}>
-                  Via del Tappezziere 4, Bologna
-                </span>
-              </a>
-            </Reveal>
+            {/* il flusso legge ?formula=…: Suspense per useSearchParams */}
+            <Suspense fallback={null}>
+              <StudioBookingFlow
+                locale={locale}
+                labels={d.flow}
+                formule={d.formule}
+                privacyHref={localeHref(locale, '/privacy')}
+                email={email}
+                catImages={{
+                  produzione: {
+                    src: studioSslImg,
+                    alt: 'La console SSL della regia, vista di lato',
+                  },
+                  prove: {
+                    src: liveBandImg,
+                    alt: 'Una band al lavoro nella live room',
+                  },
+                  tour: {
+                    src: studioRegiaBImg,
+                    alt: 'La regia dello studio con outboard e monitor',
+                  },
+                }}
+                shopLinks={shopLinks}
+              />
+            </Suspense>
           </section>
         </div>
       </main>

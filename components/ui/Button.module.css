@@ -15,6 +15,14 @@
   transform: translateY(-1px);
 }
 
+/* "continua" dei flussi guidati finché manca una scelta: tono abbassato,
+   nessun movimento — il tasto non invita finché non è attivo */
+.btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+}
+
 .primary {
   background: var(--petrolio);
   color: var(--osso);

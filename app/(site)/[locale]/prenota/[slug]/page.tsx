@@ -170,7 +170,7 @@ export default async function ProdottoPage({
                 ))}
               </div>
               <Link
-                href={localeHref(locale, '/prenota')}
+                href={localeHref(locale, '/coworking/prenota')}
                 className={`mono ${styles.backAll}`}
               >
                 {t.prenota.backAll}

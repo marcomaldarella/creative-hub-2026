@@ -829,6 +829,62 @@ export const css = `
     .subnav .jump{gap:10px;}
     .subnav .jump a{font-size:11px;}
   }
+
+  /* ————— finanziamento FSE+ (obbligo normativo sui corsi finanziati):
+     pill dei loghi tratteggiate in attesa degli SVG ufficiali, stessa
+     grammatica dei finLogos di innovazione ————— */
+  .fund-logos{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px;}
+  .fund-logo{font-size:12px;font-weight:600;letter-spacing:-.01em;padding:8px 14px;
+    border:1px dashed color-mix(in srgb,var(--white) 28%,transparent);
+    border-radius:8px;color:var(--txt-2);}
+  .fund-text{font-size:13.5px;line-height:1.5;color:var(--txt-2);max-width:76ch;margin:0;}
+
+  /* ————— avvisami (corsi finanziati, iscrizioni a bando): recapiti a
+     sinistra, form a destra — campi hairline come la modale contatti ————— */
+  .avv-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.08fr);
+    gap:clamp(30px,4.5vw,84px);align-items:start;}
+  .avv-lede{font-size:16px;line-height:1.42;color:var(--txt-2);margin:0;max-width:44ch;}
+  .avv-contacts{margin-top:26px;display:flex;flex-direction:column;}
+  .avv-contact{border-top:var(--hair) solid color-mix(in srgb,var(--blue) 30%,transparent);
+    padding:13px 0 15px;}
+  .avv-contacts .avv-contact:last-child{border-bottom:var(--hair) solid color-mix(in srgb,var(--blue) 30%,transparent);}
+  .avv-contact b{display:block;font-size:15px;font-weight:700;letter-spacing:-.01em;margin-bottom:3px;}
+  .avv-contact span{font-size:13px;line-height:1.4;color:var(--txt-2);}
+  .avv-form{display:flex;flex-direction:column;gap:16px;}
+  .avv-form fieldset{border:0;padding:0;margin:0;}
+  .avv-form legend{padding:0;margin-bottom:10px;font-size:14px;font-weight:600;letter-spacing:-.01em;}
+  .avv-opts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;}
+  .avv-opt{display:flex;align-items:center;gap:10px;padding:12px 14px;
+    border:1px solid color-mix(in srgb,var(--white) 22%,transparent);border-radius:10px;
+    font-size:14px;letter-spacing:-.01em;cursor:pointer;user-select:none;
+    transition:background .15s ease,color .15s ease,border-color .15s ease;}
+  .avv-opt:hover{border-color:color-mix(in srgb,var(--white) 45%,transparent);}
+  .avv-opt input{accent-color:var(--blue);margin:0;flex-shrink:0;}
+  .avv-opt:has(input:checked){background:var(--blue);border-color:var(--blue);color:var(--ink);}
+  .avv-opt:has(input:checked) input{accent-color:var(--ink);}
+  .avv-fields{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px 30px;}
+  .avv-form label.avv-field{display:flex;flex-direction:column;gap:8px;font-size:12px;
+    font-weight:600;letter-spacing:0;color:color-mix(in srgb,var(--white) 60%,transparent);}
+  .avv-form input[type="text"],.avv-form input[type="email"],.avv-form input[type="tel"]{
+    font-family:inherit;font-size:15.5px;color:var(--white);border:none;
+    border-bottom:1px solid color-mix(in srgb,var(--white) 25%,transparent);
+    background:transparent;padding:7px 0 10px;border-radius:0;}
+  .avv-form input:focus{outline:none;border-bottom-color:var(--blue);}
+  .avv-check{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;line-height:1.4;cursor:pointer;}
+  .avv-check input{width:auto;margin-top:2px;accent-color:var(--blue);}
+  .avv-err{color:#ff8a8a;font-size:13px;margin:0;}
+  .avv-ok{font-size:16px;font-weight:600;margin:0;}
+  .avv-note{font-size:12.5px;line-height:1.45;color:var(--txt-2);margin:0;}
+  .avv-note a{color:var(--blue);}
+  .avv-form .pill{align-self:flex-start;}
+  .avv-form .pill[disabled]{opacity:.6;cursor:default;}
+  .avv-form.sent .pill{display:none;}
+  @media(max-width:1000px){
+    .avv-grid{grid-template-columns:1fr;gap:34px;}
+  }
+  @media(max-width:700px){
+    .avv-opts,.avv-fields{grid-template-columns:1fr;}
+  }
 `;
 
 export const html = `
@@ -998,7 +1054,6 @@ export const html = `
   <div class="sec-flex-head">
     <h2 class="sec" style="margin-bottom:0;" contenteditable="true">Struttura del corso</h2>
     <div class="btns">
-      <button class="pill pill-outline-ink"><span contenteditable="true">Scarica il piano di studi</span><svg class="dl" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M12 4v13M6 11l6 6 6-6"/></svg></button>
       <button class="pill pill-outline-ink" data-contact data-origine="struttura" data-intento="info" contenteditable="true">Richiedi informazioni</button>
     </div>
   </div>
@@ -1153,7 +1208,7 @@ export const html = `
       <div class="perk"><b contenteditable="true">Tasso zero</b><span contenteditable="true">Nessun interesse sulle rate.</span></div>
       <div class="perk"><b contenteditable="true">Borse di studio</b><span><button class="linkbtn" data-contact data-origine="ammissioni_borse" data-intento="info" contenteditable="true">Chiedi quali sono disponibili</button></span></div>
       <div class="perk"><b contenteditable="true">Sconto del 5%</b><span contenteditable="true">Se paghi l'anno in un'unica soluzione.</span></div>
-      <div class="perk"><b contenteditable="true">Certificazione</b><span contenteditable="true">Tassa separata, <span class="todo">importo da confermare</span>.</span></div>
+      <div class="perk"><b contenteditable="true">Certificazione</b><span contenteditable="true">Tassa separata.</span></div>
     </aside>
   </div>
   <ol class="steps" aria-label="come si entra">
@@ -1170,7 +1225,7 @@ export const html = `
     <div class="plan"><span class="n" contenteditable="true">part-time · fino a 6 anni</span><p class="price" contenteditable="true">294€<small>al mese</small></p><p contenteditable="true">Anticipo di 366€, poi 11 rate da 294€ ogni anno.</p></div>
   </div>
   <div class="adm-band">
-    <p contenteditable="true">Venti posti all'anno.<span>Requisito: diploma di scuola superiore o titolo estero equivalente · scadenza <span class="todo">da confermare</span></span></p>
+    <p contenteditable="true">Venti posti all'anno.<span>Requisito: diploma di scuola superiore o titolo estero equivalente</span></p>
     <button class="pill" data-contact data-origine="ammissioni" data-intento="candidatura" contenteditable="true">Candidati ora</button>
   </div>
 </section>
@@ -1395,6 +1450,47 @@ export type CourseHtmlData = {
   networkLede?: string;
   network?: CourseEntryData[];
   faq?: CourseEntryData[];
+  /* fascia del cofinanziamento FSE+ (obbligo normativo sui corsi
+     finanziati): pill dei loghi + dicitura per esteso */
+  funding?: { logos: string[]; text: string };
+  /* corsi finanziati: il template nasce dalla scheda Urban (triennio a
+     pagamento). Con questo flag le sezioni che valgono solo per quel
+     corso — studio di registrazione, vita in Academy, manifesto, rette,
+     agevolazioni, citazione, workshop — non vengono pubblicate: su un
+     corso gratuito di pochi mesi sarebbero informazioni false */
+  funded?: boolean;
+  /* fascia sotto la hero al posto del marquee delle candidature */
+  statusBand?: { text: string; cta?: string; href?: string };
+  /* riga sotto il titolo "Ammissioni" (il default parla di audizioni) */
+  admissionsIntro?: string;
+  /* riga finale delle ammissioni: requisito + eventuale bottone */
+  admissionsNote?: string;
+  /* etichetta anno accademico nella hero; stringa vuota = non si stampa */
+  year?: string;
+  /* "Avvisami alla prossima edizione": le iscrizioni ai corsi finanziati
+     aprono a bando — al posto della candidatura si lascia un contatto.
+     Il submit lo gestisce la shell (POST /api/contact) */
+  avvisami?: {
+    title: string;
+    lede: string;
+    contacts: { value: string; note?: string }[];
+    interestsLegend: string;
+    interests: string[];
+    name: string;
+    email: string;
+    phone: string;
+    residence: string;
+    residenceYes: string;
+    submit: string;
+    sending: string;
+    notePrefix: string;
+    noteLink: string;
+    noteSuffix: string;
+    privacyHref: string;
+    missing: string;
+    done: string;
+    error: string;
+  };
 };
 
 /* voce titolo+testo di competenze e accordion; nel testo un a-capo
@@ -1477,6 +1573,13 @@ export function buildCourseHtml(d: CourseHtmlData): string {
     h = h.replace(
       /<button class="pill pill-outline pill-reveal">[\s\S]*?<\/button>/,
       `<a class="pill pill-outline pill-reveal" href="${e(d.secondaryCta.href)}" target="_blank" rel="noreferrer"><span>${e(d.secondaryCta.label)}</span>${DL_SVG}</a>`,
+    );
+  } else {
+    /* senza CTA secondaria il tasto demo "Scarica il piano di studi"
+       resterebbe un <button> morto: sulle pagine vere non si pubblica */
+    h = h.replace(
+      /\s*<button class="pill pill-outline pill-reveal">[\s\S]*?<\/button>/,
+      '',
     );
   }
 
@@ -1654,6 +1757,84 @@ ${colonne}
     );
   }
 
+  /* ————— coda dei corsi finanziati: fascia FSE+ (obbligo normativo) e
+     form "Avvisami alla prossima edizione", prima della CTA finale ————— */
+  const coda: string[] = [];
+
+  if (d.funding) {
+    const pills = d.funding.logos
+      .map((l) => `<span class="fund-logo">${e(l)}</span>`)
+      .join('');
+    coda.push(`<div class="sezRule"><span></span><i></i></div>
+
+<section class="block tight" id="finanziamento">
+  <h2 class="sec">Finanziamento.</h2>
+  <div class="fund-logos">${pills}</div>
+  <p class="fund-text">${e(d.funding.text)}</p>
+</section>`);
+  }
+
+  if (d.avvisami) {
+    const a = d.avvisami;
+    const contatti = a.contacts
+      .map(
+        (c) =>
+          `      <div class="avv-contact"><b>${e(c.value)}</b>${
+            c.note ? `<span>${e(c.note)}</span>` : ''
+          }</div>`,
+      )
+      .join('\n');
+    const interessi = a.interests
+      .map(
+        (o) =>
+          `        <label class="avv-opt"><input type="checkbox" name="interesse" value="${e(o)}"><span>${e(o)}</span></label>`,
+      )
+      .join('\n');
+    coda.push(`<div class="sezRule"><span></span><i></i></div>
+
+<section class="block tight" id="avvisami">
+  <div class="avv-grid">
+    <div>
+      <h2 class="sec">${e(a.title)}</h2>
+      <p class="avv-lede">${e(a.lede)}</p>
+      <div class="avv-contacts">
+${contatti}
+      </div>
+    </div>
+    <form class="avv-form" data-avvisami
+      data-subject="Avvisami corsi finanziati"
+      data-missing="${e(a.missing)}"
+      data-error="${e(a.error)}"
+      data-sending="${e(a.sending)}"
+      data-submit="${e(a.submit)}" novalidate>
+      <fieldset>
+        <legend>${e(a.interestsLegend)}</legend>
+        <div class="avv-opts">
+${interessi}
+        </div>
+      </fieldset>
+      <div class="avv-fields">
+        <label class="avv-field">${e(a.name)}<input type="text" name="nome" required></label>
+        <label class="avv-field">${e(a.email)}<input type="email" name="email" required></label>
+        <label class="avv-field">${e(a.phone)}<input type="tel" name="cellulare"></label>
+      </div>
+      <label class="avv-check"><input type="checkbox" name="residenzaER"><span>${e(a.residence)} <b>${e(a.residenceYes)}</b></span></label>
+      <p class="avv-err" role="alert" hidden></p>
+      <button class="pill pill-dark" type="submit">${e(a.submit)}</button>
+      <p class="avv-ok" role="status" hidden>${e(a.done)}</p>
+      <p class="avv-note">${e(a.notePrefix)}<a href="${e(a.privacyHref)}" target="_blank" rel="noreferrer">${e(a.noteLink)}</a>${e(a.noteSuffix)}</p>
+    </form>
+  </div>
+</section>`);
+  }
+
+  if (coda.length) {
+    h = h.replace(
+      '<section class="block tight" style="padding-bottom:0;">',
+      `${coda.join('\n\n')}\n\n<section class="block tight" style="padding-bottom:0;">`,
+    );
+  }
+
   if (d.skillImages && d.skillImages.length) {
     let i = 0;
     h = h.replace(
@@ -1663,30 +1844,94 @@ ${colonne}
     );
   }
 
-  /* anche con lista VUOTA la griglia si rigenera: sui corsi senza
-     docenti collegati restano i segnaposto neutri, non lo Zilocchi
-     demo del template (che è il course leader di UMP) */
+  /* griglia docenti SOLO con dati veri: niente segnaposto pubblicati.
+     Un docente senza ruolo né credits non esce (il nome da solo non
+     basta a presentarlo); se dopo il filtro non resta nessuno, l'intera
+     sezione — hairline compreso — non viene renderizzata. Lo Zilocchi
+     demo resta solo nel mockup, dove d.teachers non arriva */
   if (d.teachers) {
-    const cards = d.teachers.slice(0, 4).map(
-      (t, i) => `    <article class="teach${i === 0 ? ' lead' : ''}">
+    const reali = d.teachers.filter((t) => t.role || t.cred).slice(0, 4);
+    if (reali.length) {
+      const cards = reali.map(
+        (t, i) => `    <article class="teach${i === 0 ? ' lead' : ''}">
       <div class="ph">${t.img ? `<img src="${e(t.img)}" alt="${e(t.name)}">` : ''}</div>
-      <h3>${e(t.name)}</h3>
-      <div class="trole">${t.role ? e(t.role) : '<span class="todo">[ruolo da definire]</span>'}</div>
-      <p class="tcred">${t.cred ? e(t.cred) : '<span class="todo">[artisti, etichette o studi con cui ha lavorato]</span>'}</p>
+      <h3>${e(t.name)}</h3>${t.role ? `\n      <div class="trole">${e(t.role)}</div>` : ''}${t.cred ? `\n      <p class="tcred">${e(t.cred)}</p>` : ''}
     </article>`,
-    );
-    /* la griglia si completa a 4 con i segnaposto del brief */
-    while (cards.length < 4) {
-      cards.push(`    <article class="teach">
-      <div class="ph"></div>
-      <h3><span class="todo">Nome Cognome</span></h3>
-      <div class="trole"><span class="todo">[ruolo da definire]</span></div>
-      <p class="tcred"><span class="todo">[artisti, etichette o studi con cui ha lavorato]</span></p>
-    </article>`);
+      );
+      h = h.replace(
+        /<div class="teachgrid">[\s\S]*?(?=<div class="team-cta">)/,
+        `<div class="teachgrid">\n${cards.join('\n')}\n  </div>\n  `,
+      );
+    } else {
+      h = h.replace(
+        /<div class="sezRule"><span><\/span><i><\/i><\/div>\s*<section class="block tight" id="docenti">[\s\S]*?<\/section>/,
+        '',
+      );
     }
+  }
+
+  /* ————— corsi finanziati: via tutto ciò che descrive il triennio a
+     pagamento. Le sezioni non si annidano, quindi si taglia dal
+     <section> che precede il testo guida al </section> che lo segue ————— */
+  if (d.funded) {
+    const dropSection = (src: string, marker: string) => {
+      const at = src.indexOf(marker);
+      if (at < 0) return src;
+      const open = src.lastIndexOf('<section', at);
+      const close = src.indexOf('</section>', at);
+      if (open < 0 || close < 0) return src;
+      /* porta via anche il filetto numerato che apre la sezione */
+      const rule = src.lastIndexOf('<div class="sezRule">', open);
+      const from = rule >= 0 && open - rule < 160 ? rule : open;
+      return src.slice(0, from) + src.slice(close + '</section>'.length);
+    };
+    for (const marker of [
+      'Il tuo studio di lavoro',
+      'La vita in Academy',
+      'Nessun genere.',
+      'class="quotes"',
+      'Partecipa a un workshop di prova',
+    ]) {
+      h = dropSection(h, marker);
+    }
+    /* le FAQ del triennio restano solo se il corso ne porta di proprie */
+    if (!d.faq?.length) h = dropSection(h, 'Domande frequenti');
+
+    /* ammissioni: via agevolazioni e rette mensili */
+    h = h.replace(/\s*<aside class="perks">[\s\S]*?<\/aside>/, '');
+    h = h.replace(/\s*<div class="fees-row">[\s\S]*?<\/div>\s*<\/div>/, '');
+  }
+
+  if (d.admissionsIntro !== undefined) {
     h = h.replace(
-      /<div class="teachgrid">[\s\S]*?(?=<div class="team-cta">)/,
-      `<div class="teachgrid">\n${cards.join('\n')}\n  </div>\n  `,
+      /<p class="adm-intro"[^>]*>[\s\S]*?<\/p>/,
+      d.admissionsIntro
+        ? `<p class="adm-intro">${e(d.admissionsIntro)}</p>`
+        : '',
+    );
+  }
+  if (d.admissionsNote !== undefined) {
+    h = h.replace(
+      /<div class="adm-band">[\s\S]*?<\/div>/,
+      d.admissionsNote
+        ? `<div class="adm-band">\n    <p>${e(d.admissionsNote)}</p>\n  </div>`
+        : '',
+    );
+  }
+  if (d.year !== undefined) {
+    h = h.replace(
+      /<span class="year">[^<]*<\/span>/,
+      d.year ? `<span class="year">${e(d.year)}</span>` : '',
+    );
+  }
+  /* marquee: sulle schede a bando annuncia lo stato, non la candidatura */
+  if (d.statusBand) {
+    const pill = d.statusBand.cta
+      ? `<span class="pill">${e(d.statusBand.cta)}</span>`
+      : '';
+    h = h.replace(
+      /<div class="mq-unit">[\s\S]*?<\/div>/g,
+      `<div class="mq-unit"><span>${e(d.statusBand.text)}</span>${pill}</div>`,
     );
   }
 

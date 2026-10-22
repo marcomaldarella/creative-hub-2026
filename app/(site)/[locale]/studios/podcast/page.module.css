@@ -1,0 +1,45 @@
+/* solo le poche classi locali che la grammatica condivisa (DetailPage,
+   TopicScreen) non copre */
+
+/* sigla mono della scheda (vo.01 / vo.02 / vo.03) */
+.typeN {
+  display: block;
+  font-size: 12px;
+  color: var(--fg-2);
+  margin-bottom: 10px;
+}
+
+/* il titolo della cella, portato alla scala delle schede
+   (h3.classe vince sulla singola classe del modulo condiviso) */
+h3.typeTitle {
+  font-size: clamp(22px, 2.2vw, 28px);
+}
+
+.typeText {
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--fg-2);
+  max-width: 44ch;
+}
+
+/* ————— la cabina: foto a sinistra del testo (mockup) ————— */
+
+.boothPh {
+  position: relative;
+  overflow: hidden;
+  background: #000;
+  aspect-ratio: 4 / 5;
+}
+
+.boothImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+@media (max-width: 860px) {
+  .boothPh {
+    aspect-ratio: 3 / 2;
+  }
+}

@@ -51,6 +51,20 @@ export const page = defineType({
           fields: [
             defineField({ name: 'kicker', title: 'Kicker', type: 'localeString' }),
             defineField({ name: 'title', title: 'Titolo', type: 'localeString' }),
+            defineField({
+              name: 'anchor',
+              title: 'Ancora',
+              description:
+                "Senza #: dà alla sezione un id a cui puntare da una griglia indice (es. soldi)",
+              type: 'string',
+            }),
+            defineField({
+              name: 'brief',
+              title: 'In breve',
+              description:
+                'Riassunto in due righe: compare come box scuro in testa alla sezione',
+              type: 'localeText',
+            }),
             defineField({ name: 'body', title: 'Contenuto', type: 'localeBlock' }),
             defineField({
               name: 'images',

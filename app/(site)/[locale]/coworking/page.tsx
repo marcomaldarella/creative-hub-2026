@@ -80,7 +80,7 @@ export default async function CoworkingPage({
   if (!isLocale(locale)) notFound()
   const t = getDictionary(locale)
   const settings = await getSiteSettings()
-  const prenota = localeHref(locale, '/prenota')
+  const prenota = localeHref(locale, '/coworking/prenota')
   const sale = localeHref(locale, '/coworking/sale-eventi')
 
   return (

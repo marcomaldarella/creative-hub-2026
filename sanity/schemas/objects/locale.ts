@@ -52,13 +52,25 @@ export const localeBlock = defineType({
       name: 'it',
       title: 'Italiano',
       type: 'array',
-      of: [{ type: 'block' }, { type: 'image', options: { hotspot: true } }],
+      of: [
+        { type: 'block' },
+        { type: 'image', options: { hotspot: true } },
+        { type: 'contentTable' },
+        { type: 'chipList' },
+        { type: 'indexGrid' },
+      ],
     }),
     defineField({
       name: 'en',
       title: 'Inglese',
       type: 'array',
-      of: [{ type: 'block' }, { type: 'image', options: { hotspot: true } }],
+      of: [
+        { type: 'block' },
+        { type: 'image', options: { hotspot: true } },
+        { type: 'contentTable' },
+        { type: 'chipList' },
+        { type: 'indexGrid' },
+      ],
     }),
   ],
 })

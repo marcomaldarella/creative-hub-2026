@@ -186,3 +186,29 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* codice/capienza/prezzo sulle card sala (mockup v3) */
+.roomTop {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.roomNum {
+  font-size: 12px;
+  color: var(--fg-2);
+}
+
+.roomCap {
+  font-size: 13px;
+  color: var(--fg-2);
+}
+
+.roomPrice {
+  margin-top: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}

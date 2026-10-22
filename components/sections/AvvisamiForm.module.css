@@ -1,0 +1,266 @@
+/* form "Avvisami" dei corsi finanziati: vive nella fascia nera di chiusura
+   (scheme-dark), tutto via token come ContactForm — recapiti a sinistra,
+   form a destra. Transizioni solo colore/bordo a 150ms (skill taste). */
+
+.kicker {
+  display: block;
+  margin-bottom: 14px;
+  color: var(--accent-ink);
+}
+
+.title {
+  font-size: var(--fs-h2);
+  letter-spacing: -0.03em;
+  margin-bottom: 12px;
+  max-width: 24ch;
+}
+
+.lede {
+  font-size: var(--fs-lede);
+  color: var(--fg-2);
+  max-width: 52ch;
+  margin-bottom: clamp(24px, 3vw, 40px);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+  gap: clamp(24px, 4vw, 72px);
+  align-items: start;
+}
+
+/* ————— recapiti: righe hairline etichetta+nota ————— */
+
+.contacts {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact {
+  border-top: 1px solid var(--line);
+  padding: 13px 0 15px;
+}
+
+.contacts .contact:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
+.contactValue {
+  display: block;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin-bottom: 3px;
+}
+
+.contactNote {
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--fg-2);
+}
+
+/* ————— form ————— */
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.set {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+}
+
+.legend {
+  padding: 0;
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+/* checkbox custom: riga bordata, selezionata = inversione via token
+   (stessa grammatica delle radio dell'OpenDayForm) */
+.opt {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  font-size: 14px;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  user-select: none;
+  transition:
+    background 150ms ease-out,
+    color 150ms ease-out,
+    border-color 150ms ease-out;
+}
+
+.opt:hover {
+  border-color: color-mix(in srgb, var(--fg) 45%, transparent);
+}
+
+.on,
+.on:hover {
+  background: var(--fg);
+  border-color: var(--fg);
+  color: var(--bg);
+}
+
+/* quadratino disegnato: vuoto, pieno quando selezionata */
+.mark {
+  position: relative;
+  flex-shrink: 0;
+  width: 15px;
+  height: 15px;
+  border: 1.5px solid currentColor;
+  border-radius: 4px;
+}
+
+.on .mark::after {
+  content: '';
+  position: absolute;
+  inset: 2.5px;
+  border-radius: 1.5px;
+  background: currentColor;
+}
+
+/* input vero ma invisibile: resta navigabile da tastiera */
+.srIn {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.opt:has(.srIn:focus-visible) {
+  outline: 2px solid var(--accent-ink);
+  outline-offset: 2px;
+}
+
+.fields {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px clamp(12px, 1.5vw, 20px);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.input {
+  font: inherit;
+  font-size: 14px;
+  letter-spacing: -0.01em;
+  color: var(--fg);
+  background: color-mix(in srgb, var(--fg) 5%, transparent);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 10px 12px;
+  width: 100%;
+  transition: border-color 150ms ease-out;
+}
+
+.input:focus-visible {
+  outline: none;
+  border-color: var(--fg);
+}
+
+.residence {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13.5px;
+  line-height: 1.4;
+  cursor: pointer;
+}
+
+.check {
+  width: auto;
+  margin-top: 2px;
+  accent-color: var(--fg);
+}
+
+.error {
+  font-size: 12.5px;
+  color: #e5484d;
+}
+
+.send {
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--bg);
+  background: var(--fg);
+  border: 0;
+  border-radius: 999px;
+  padding: 13px 18px;
+  width: 100%;
+  cursor: pointer;
+  transition: background 150ms ease-out;
+}
+
+.send:hover {
+  background: color-mix(in srgb, var(--fg) 86%, var(--bg));
+}
+
+.send:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.done {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.note {
+  font-size: 11.5px;
+  color: var(--fg-2);
+}
+
+.note a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+@media (max-width: 860px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contacts {
+    order: 1;
+  }
+
+  .options,
+  .fields {
+    grid-template-columns: 1fr;
+  }
+}

@@ -12,6 +12,7 @@ import {
 } from '@/components/ui'
 import { SiteChrome } from '@/components/sections/SiteChrome'
 import { SectionPagesNav } from '@/components/sections/SectionPagesNav'
+import { ContactForm } from '@/components/sections/ContactForm'
 import { isLocale, localeHref } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
 import { pageAlternates } from '@/lib/seo'
@@ -49,10 +50,6 @@ export default async function InnovazionePage({
   const t = getDictionary(locale)
   const settings = await getSiteSettings()
 
-  /* l'indirizzo dell'incubatore è fisso (CreaTech), non viene da Sanity */
-  const mailto = `mailto:info@createch.it?subject=${encodeURIComponent(
-    t.innovation.ctaTitle
-  )}`
 
   return (
     <SiteChrome locale={locale} path="/innovazione">
@@ -215,42 +212,45 @@ export default async function InnovazionePage({
 
         {/* ————— chiusura: parliamo del tuo progetto ————— */}
         <div className={`scheme-dark ${det.dark}`}>
-          <section className={`wrap ${det.sez}`}>
-            <Reveal as="span" className={`mono ${det.kicker}`}>
-              {t.innovation.ctaKicker}
-            </Reveal>
-            <Reveal as="h2" className={`display-thin ${det.ctaTitle}`} delay={60}>
-              {t.innovation.ctaTitle}
-            </Reveal>
-            <Reveal as="p" className={det.ctaText} delay={120}>
-              {t.innovation.ctaText}
-            </Reveal>
-            <Reveal className={det.ctaRow} delay={180}>
-              <Button
-                variant="ghost"
-                className={styles.btnSolid}
-                href={mailto}
-                external
-              >
-                {t.innovation.ctaWrite}
-              </Button>
-              {settings?.phone && (
-                <ArrowLink
-                  href={`tel:${settings.phone.replace(/\s/g, '')}`}
-                  external
-                >
-                  {settings.phone}
-                </ArrowLink>
-              )}
-            </Reveal>
-            <div className={det.mailRows}>
-              {t.innovation.mailNotes.map((m) => (
-                <a key={m.mail} href={`mailto:${m.mail}`} className={det.mailRow}>
-                  <span className={det.mailAddr}>{m.mail}</span>
-                  <span className={det.mailNote}>{m.note}</span>
-                </a>
-              ))}
+          <section className={`wrap ${det.sez} ${det.duo}`}>
+            <div>
+              <Reveal as="span" className={`mono ${det.kicker}`}>
+                {t.innovation.ctaKicker}
+              </Reveal>
+              <Reveal as="h2" className={`display-thin ${det.ctaTitle}`} delay={60}>
+                {t.innovation.ctaTitle}
+              </Reveal>
+              <Reveal as="p" className={det.ctaText} delay={120}>
+                {t.innovation.ctaText}
+              </Reveal>
+              <div className={det.mailRows}>
+                {t.innovation.mailNotes.map((m) => (
+                  <a key={m.mail} href={`mailto:${m.mail}`} className={det.mailRow}>
+                    <span className={det.mailAddr}>{m.mail}</span>
+                    <span className={det.mailNote}>{m.note}</span>
+                  </a>
+                ))}
+                {settings?.phone && (
+                  <a
+                    className={det.mailRow}
+                    href={`tel:${settings.phone.replace(/\s/g, '')}`}
+                  >
+                    <span className={det.mailAddr}>{settings.phone}</span>
+                  </a>
+                )}
+              </div>
             </div>
+            {/* il form del mockup: mailto composto, tema preselezionato */}
+            <Reveal delay={140}>
+              <ContactForm
+                to="hello@bologna-creativehub.it"
+                subject={t.innovation.ctaTitle}
+                topics={t.form.innovationTopics}
+                defaultTopic={t.form.innovationTopics[0]}
+                labels={{ ...t.form, topic: t.form.topicTalk }}
+                privacyHref={localeHref(locale, '/privacy')}
+              />
+            </Reveal>
           </section>
         </div>
       </main>

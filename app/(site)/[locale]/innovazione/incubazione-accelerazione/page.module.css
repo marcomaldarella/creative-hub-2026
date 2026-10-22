@@ -30,9 +30,47 @@
   margin-bottom: 6px;
 }
 
+/* ————— con il sostegno di: una pill hairline per nome (mockup) ————— */
+
+.supportPills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  max-width: 70ch;
+}
+
+.supportPill {
+  font-size: 13px;
+  letter-spacing: -0.01em;
+  padding: 7px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  color: var(--fg-2);
+}
+
 /* titolo piccolo della nota di finanziamento */
 .finTitle {
   font-size: clamp(22px, 2.4vw, 28px);
   letter-spacing: -0.03em;
   margin-bottom: 14px;
+}
+
+/* ————— loghi finanziamento: segnaposto tratteggiati in attesa degli SVG
+   ufficiali, stesso pattern di cte-cobo ————— */
+
+.finLogos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.finLogo {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  padding: 8px 14px;
+  border: 1px dashed var(--line);
+  border-radius: 8px;
+  color: var(--fg-2);
 }

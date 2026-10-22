@@ -497,32 +497,62 @@
       "recording": {
         "n": "st.01",
         "title": "Recording",
-        "text": "Full-band live tracking, overdubs, remote recording with professional musicians."
+        "text": "Full-band live tracking, overdubs, remote recording with professional musicians.",
+        "rows": [
+          "60 m² live room",
+          "live tracking or multitrack",
+          "remote recording"
+        ]
       },
       "mix": {
         "n": "st.02",
         "title": "Mix & mastering",
-        "text": "Stereo and Dolby Atmos mixing, mastering for every platform, also as a standalone service."
+        "text": "Stereo and Dolby Atmos mixing, mastering for every platform, also as a standalone service.",
+        "rows": [
+          "SSL XL-Desk console",
+          "stereo and Atmos",
+          "also on files you send"
+        ]
       },
       "atmos": {
         "n": "st.03",
         "title": "Dolby Atmos",
-        "text": "A Dolby-certified 7.1.4 room for music, cinema, media and education."
+        "text": "A Dolby-certified 7.1.4 room for music, cinema, media and education.",
+        "rows": [
+          "7.1.4 configuration",
+          "Genelec monitors",
+          "Dolby certification"
+        ]
       },
       "cinema": {
         "n": "st.04",
         "title": "Sound design",
-        "text": "Audio for video and cinema: post-production, scores, foley, Atmos mixing."
+        "text": "Audio for video and cinema: post-production, scores, foley, Atmos mixing.",
+        "rows": [
+          "post-production",
+          "scores and foley",
+          "Atmos delivery"
+        ]
       },
       "podcast": {
         "n": "st.05",
         "title": "Podcast & voice over",
-        "text": "Isolated booth with a Neumann U87 for vocals, podcasts and voice work."
+        "text": "Isolated booth with a Neumann U87 for vocals, podcasts and voice work.",
+        "rows": [
+          "isolated vocal booth",
+          "Neumann U87",
+          "analogue chain"
+        ]
       },
       "rental": {
         "n": "st.06",
         "title": "Studio rental",
-        "text": "The full studio for productions with your own engineer, live rehearsals and tour prep."
+        "text": "The full studio for productions with your own engineer, live rehearsals and tour prep.",
+        "rows": [
+          "the full studio",
+          "with your own engineer",
+          "rehearsals and tours"
+        ]
       }
     },
     "ctaKicker": "quote",
@@ -567,7 +597,7 @@
         "n": "02",
         "kicker": "technology",
         "title": "Dolby Atmos 7.1.4",
-        "text": "Genelec and SSL, with Dolby certification: for records, home entertainment and gaming."
+        "text": "Genelec and SSL, Dolby certified: for records, home entertainment and gaming. One of the few studios in the region equipped for immersive audio."
       },
       {
         "n": "03",
@@ -580,6 +610,19 @@
     "engineerName": "Alessandro Cosentino",
     "engineerRole": "Studio manager and sound engineer",
     "engineerBio": "Violinist and multi-instrumentalist, graduated with honours from the G.B. Martini Conservatory in Bologna. Ten years with the Luigi Cherubini Orchestra conducted by Riccardo Muti. In the studio and live he has worked with Italian pop and rock artists. He specialises in live recording.",
+    "engineerCreditsLabel": "He has worked with",
+    "engineerCredits": [
+      "Riccardo Muti",
+      "Claudio Abbado",
+      "Krzysztof Penderecki",
+      "Nicola Piovani",
+      "Cesare Cremonini",
+      "Ligabue",
+      "Ermal Meta",
+      "Zucchero",
+      "Salmo",
+      "J-Ax"
+    ],
     "faqKicker": "faq",
     "faqTitle": "Frequently asked questions.",
     "faq": [
@@ -737,15 +780,18 @@
     "bookNote": "We confirm within one working day."
   },
   "prenota": {
-    "kicker": "book",
-    "title": "Book a space.",
-    "lede": "Desks, meeting rooms, rehearsal rooms and the recording studio: pick a space, check the price and book online. Payment is completed on the Creative Hub shop.",
+    "kicker": "book your space",
+    "title": "Book your space at Creative Hub.",
+    "lede": "Choose what you need to do, the right space with its price, and leave us your contacts: we take it from there.",
+    "metaDesc": "Day passes, desks, offices, meeting rooms and event spaces, with prices. Book in three steps at Creative Hub, Roveri district, Bologna.",
+    "back": "back to coworking",
+    "facts": [
+      "clear prices",
+      "confirmation within one working day",
+      "open to everyone"
+    ],
     "coworkingKicker": "co-working",
-    "coworkingTitle": "Desks and rooms.",
-    "coworkingText": "Day passes, dedicated desks, meeting rooms and classrooms.",
     "coplayingKicker": "co-playing",
-    "coplayingTitle": "Rehearsal rooms, boxes and studio.",
-    "coplayingText": "Drum-ready rehearsal rooms, production boxes, main stage and the recording studio.",
     "book": "Book now",
     "bookNote": "Booking is completed on the secure Creative Hub shop.",
     "contact": "Contact us",
@@ -754,7 +800,122 @@
     "othersKicker": "more spaces",
     "othersTitle": "You might also need.",
     "onRequest": "on request",
-    "backAll": "All spaces"
+    "backAll": "All spaces",
+    "flow": {
+      "subject": "Prenotazione spazio coworking",
+      "step1Title": "What do you want to do?",
+      "cats": [
+        {
+          "id": "lavoro",
+          "label": "Work",
+          "sub": "day passes, desks, offices"
+        },
+        {
+          "id": "sale",
+          "label": "Meet",
+          "sub": "meeting rooms, courses, events"
+        }
+      ],
+      "step2Title": "Choose your space.",
+      "items": {
+        "lavoro": [
+          {
+            "id": "day-pass",
+            "label": "Day pass",
+            "sub": "one day",
+            "price": "9.50€"
+          },
+          {
+            "id": "dieci-ingressi",
+            "label": "10 entries",
+            "sub": "bundle",
+            "price": "85€"
+          },
+          {
+            "id": "quick-desk",
+            "label": "Quick desk",
+            "sub": "open seating",
+            "price": "95€"
+          },
+          {
+            "id": "full-desk",
+            "label": "Full desk",
+            "sub": "fixed desk",
+            "price": "155€"
+          },
+          {
+            "id": "vip-quick-pass",
+            "label": "VIP Quick Pass",
+            "sub": "one year",
+            "price": "950€"
+          },
+          {
+            "id": "ufficio",
+            "label": "Office",
+            "sub": "for your team",
+            "price": "on request"
+          }
+        ],
+        "sale": [
+          {
+            "id": "sala-riunioni",
+            "label": "Meeting room",
+            "sub": "10 people",
+            "price": "90€"
+          },
+          {
+            "id": "sala-didattica",
+            "label": "Classroom",
+            "sub": "with smartboard",
+            "price": "159.50€"
+          },
+          {
+            "id": "area-culture",
+            "label": "Area Culture",
+            "sub": "small events",
+            "price": "175€"
+          },
+          {
+            "id": "aula-magna",
+            "label": "Main hall",
+            "sub": "events and streaming",
+            "price": "on quote"
+          }
+        ]
+      },
+      "step3Title": "When, and who you are.",
+      "day": "Day",
+      "time": "Time",
+      "times": [
+        "morning",
+        "afternoon",
+        "evening",
+        "full day"
+      ],
+      "name": "Full name",
+      "phone": "Mobile phone",
+      "email": "Email",
+      "back": "Back",
+      "next": "Continue",
+      "send": "Send your booking",
+      "sending": "Sending…",
+      "missing": "Fill in your name and mobile phone.",
+      "sendError": "Something went wrong: try again in a moment, or call 051 631 3706.",
+      "privacyBefore": "By sending you accept the ",
+      "privacyLink": "privacy policy",
+      "doneTitle": "Done.",
+      "doneText": "We confirm availability and price Monday to Friday. For anything else: 051 631 3706, extension 1.",
+      "summaryTitle": "Summary",
+      "summaryWhat": "what",
+      "summarySpace": "space",
+      "summaryPrice": "price",
+      "summaryWhen": "when",
+      "payOnline": "pay online on the shop",
+      "questions": "Questions?",
+      "phoneLabel": "051 631 3706",
+      "phoneHref": "+390516313706",
+      "phoneNote": "extension 1 · Mon–Fri 11am–1pm and 2pm–6pm"
+    }
   },
   "innovation": {
     "metaTitle": "Incubator and accelerator for creative startups in Bologna | Creative Hub",
@@ -929,6 +1090,7 @@
     "backTo": "back to",
     "related": "in this section",
     "empty": "content coming soon.",
+    "inBrief": "in brief",
     "corsiUniversitari": {
       "title": "Bachelor of Arts. Bachelor of Science. In music, sound and visual.",
       "lede": "International undergraduate degrees and Master of Music. Twenty places per course, one hour of one-to-one tuition a week.",
@@ -936,17 +1098,37 @@
         "Performance & songwriting · urban music production · music technology",
         "Film production · music business · creative musicianship",
         "Twenty places per course, one hour of one-to-one tuition a week"
-      ]
+      ],
+      "eyebrow": "university courses"
     },
     "formazioneFinanziata": {
       "title": "Training funded by the Region.",
       "lede": "Courses co-funded by the Emilia-Romagna Region: requirements, timing and how to apply.",
-      "points": []
+      "points": [
+        "Free: funded by the Emilia-Romagna Region and ESF+",
+        "From 2.5 months to 2 years: short specialisations and IFTS courses",
+        "Small classes: limited places, with selection"
+      ],
+      "funding": {
+        "logos": [
+          "Unione Europea",
+          "Repubblica Italiana",
+          "Regione Emilia-Romagna",
+          "PR FSE+ 2021-2027"
+        ],
+        "text": "Courses co-financed by the European Social Fund Plus (ESF+) under the ESF+ 2021-2027 Regional Programme of the Emilia-Romagna Region. Implementing body: MPDA Aps, via del Tappezziere 4, Bologna."
+      },
+      "eyebrow": "funded training"
     },
     "stagePlacement": {
       "title": "Real internships. 83% work in the industry.",
       "lede": "Placements inside the studios, labels and productions of the network — during the course, not after it.",
-      "points": []
+      "points": [
+        "83% of students work in the industry. A figure certified by the Emilia-Romagna Region",
+        "20 students at most per university course: each one follows a guided path",
+        "27 years of relationships with studios, clubs and labels, since 1999"
+      ],
+      "eyebrow": "internships & placement"
     },
     "corsiCustom": {
       "title": "Your instrument. Your schedule. The first lesson is free.",
@@ -956,67 +1138,80 @@
         "Packages of 4, 20 or 40 lessons",
         "Rooms and gear included",
         "Free trial, on site or online"
-      ]
+      ],
+      "eyebrow": "custom courses"
     },
     "openDay": {
       "title": "Come and see.\nBring your parents too.",
       "lede": "An afternoon inside the hub: classrooms, studios, teachers and students. Book online.",
-      "points": []
+      "points": [],
+      "eyebrow": "open day"
     },
     "serviziStudenti": {
       "title": "Everything around your studies.",
       "lede": "What comes beyond the lessons, from scholarships to housing.",
-      "points": []
+      "points": [],
+      "eyebrow": "student services"
     },
     "dolbyAtmos": {
       "title": "Immersive audio. Music, film, gaming.",
       "lede": "Certified Dolby Atmos suite for immersive mixing, from records to soundtracks.",
-      "points": []
+      "points": [],
+      "eyebrow": "dolby atmos"
     },
     "soundDesign": {
       "title": "Sound for image.",
       "lede": "Sound design and audio post for film, series, advertising and branded content.",
-      "points": []
+      "points": [],
+      "eyebrow": "sound design"
     },
     "podcast": {
       "title": "Three booths. Voice, podcast, dubbing.",
       "lede": "Three B-Ear booths for voice recording, podcast production and dubbing.",
-      "points": []
+      "points": [],
+      "eyebrow": "podcast & voice over"
     },
     "saleEventi": {
       "title": "Meetings, showcases, shoots.",
       "lede": "Spaces for work meetings, presentations, live sets and photo shoots in the Roveri district.",
-      "points": []
+      "points": [],
+      "eyebrow": "rooms & events"
     },
     "metaverso": {
       "title": "Even where there is no address.",
       "lede": "Virtual environments for events, training and presentations: the hub outside the building.",
-      "points": []
+      "points": [],
+      "eyebrow": "metaverse"
     },
     "aziende": {
       "title": "Production, training, technology.",
       "lede": "Services for companies: content production, tailored training and access to the hub’s technology.",
-      "points": []
+      "points": [],
+      "eyebrow": "services for companies"
     },
     "incubazione": {
       "title": "From idea to company.",
       "lede": "Incubation paths for creative projects that need to become businesses.",
-      "points": []
+      "points": [],
+      "eyebrow": "incubation"
     },
     "accelerazione": {
       "title": "Createch. The programme for creative startups.",
       "lede": "The acceleration programme for startups combining creativity and technology.",
-      "points": []
+      "points": [],
+      "eyebrow": "acceleration"
     },
     "cteCobo": {
       "title": "Emerging technology. In the field.",
       "lede": "Bologna’s Emerging Technologies House: applied experimentation with companies and institutions.",
-      "points": []
+      "points": [],
+      "eyebrow": "cte cobo"
     },
     "bandi": {
       "title": "Open funding.",
       "lede": "Grants and funding opportunities for creative companies and projects.",
-      "points": []
+      "points": [],
+      "eyebrow": "calls & opportunities"
     },
     "ecosistema": {
       "title": "Three areas. One address.",
@@ -1025,12 +1220,251 @@
         "Academy — international qualifications in music, sound and visual",
         "Studio — SSL control room, live room, Dolby Atmos",
         "Coworking — desks, offices and rooms in the Roveri district"
-      ]
+      ],
+      "eyebrow": "ecosystem"
     },
     "governance": {
       "title": "Who answers for what.",
       "lede": "Creative Hub’s corporate structure, bodies and responsibilities.",
-      "points": []
+      "points": [],
+      "eyebrow": "governance"
+    }
+  },
+  "openDay": {
+    "meta": {
+      "title": "Open day in Bologna | Creative Hub Academy",
+      "description": "Open day for Creative Hub Academy's university courses and tailor-made lessons: studios, teachers, workshops and live sessions. On site in Bologna or online. Free."
+    },
+    "kicker": "open day · via del tappezziere 4, bologna",
+    "title": "Open day in Bologna.\nCome and see, bring your family too.",
+    "lede": "Two open days, for two different paths: the university courses, for those who want to turn music into a job, and the tailor-made lessons, for those who want to play or sing for passion. Free, on site or live online.",
+    "cards": {
+      "cta": "go to the open day",
+      "uni": {
+        "num": "od.01",
+        "title": "University courses",
+        "sub": "Bachelor's and Master's in music, sound and visual",
+        "alt": "Singing session in class during a university course"
+      },
+      "custom": {
+        "num": "od.02",
+        "title": "Tailor-made lessons",
+        "sub": "Voice, instrument and production, from age 6",
+        "alt": "Hands on the pads during a production lesson"
+      }
+    },
+    "subnav": {
+      "course": "Open day",
+      "universitari": "University courses",
+      "lezioni": "Tailor-made lessons",
+      "prenota": "Book",
+      "comeArrivare": "How to get here",
+      "prev": "previous section",
+      "next": "next section"
+    },
+    "uni": {
+      "kicker": "od.01 · university courses",
+      "title": "The university courses open day.",
+      "lede": "Three hours inside Creative Hub Academy, to find out whether a university course in music, sound or visual is the right path.",
+      "text": "It is designed for students finishing high school, for those who want to change direction and for families who want to understand before choosing. You meet the teachers, who work in the industry, and the students taking the courses. You visit the spaces where classes are held. You leave with answers on admission, costs, scholarships and internships.",
+      "info": [
+        {
+          "label": "Hours",
+          "value": "17:00–20:00"
+        },
+        {
+          "label": "Where",
+          "value": "On site in Bologna or live online"
+        },
+        {
+          "label": "Who for",
+          "value": "Prospective students and families"
+        },
+        {
+          "label": "Cost",
+          "value": "Free, with booking"
+        }
+      ],
+      "cells": [
+        {
+          "kicker": "01 the courses",
+          "title": "The courses, presented",
+          "text": "Bachelor's and Master's explained by the people who teach them: what you study, how classes work, which course is right for you."
+        },
+        {
+          "kicker": "02 the spaces",
+          "title": "A tour of the studios",
+          "text": "The Dolby Atmos recording studio, the rehearsal rooms and the production labs where classes take place."
+        },
+        {
+          "kicker": "03 live",
+          "title": "Live and workshops",
+          "text": "Performances by students and teachers, workshops and hands-on demos: you see how the work is done, not just hear about it."
+        },
+        {
+          "kicker": "04 afterwards",
+          "title": "Internships and work",
+          "text": "How internships in the creative industries work, the network of partner companies and the Erasmus+ programmes."
+        },
+        {
+          "kicker": "05 the costs",
+          "title": "Scholarships and support",
+          "text": "Scholarships, zero-interest instalments and all the other support options, explained one by one."
+        },
+        {
+          "kicker": "06 the stories",
+          "title": "People who've been here",
+          "text": "Former students now working with artists, in TV or in international studios tell you how it went."
+        }
+      ],
+      "band": {
+        "text": "17:00–20:00 — On site or online. Bring whoever you like.",
+        "cta": "Book your place",
+        "link": "The university courses"
+      }
+    },
+    "parents": {
+      "kicker": "for those who come along",
+      "title": "Parents' questions.",
+      "lede": "A university course in music is often a family decision. These are the questions we hear most often: at the open day you discuss them with the tutors.",
+      "items": [
+        {
+          "q": "Is the degree recognised?",
+          "a": "The university courses award international degrees: Bachelor of Arts, Bachelor of Science and Master's, the latter with Coventry University.",
+          "link": "The university courses"
+        },
+        {
+          "q": "How much does it cost, and can it be paid in instalments?",
+          "a": "Tuition is paid in zero-interest instalments. There are merit scholarships and a discount for those who pre-enrol by 31 March.",
+          "link": "Scholarships and instalments"
+        },
+        {
+          "q": "Will there be work afterwards?",
+          "a": "The work placement is part of the course, and 83% of students work in the industry — a figure certified by the Emilia-Romagna Region.",
+          "link": "Internships and placement"
+        },
+        {
+          "q": "What is the campus like?",
+          "a": "Two thousand square metres in the Roveri district, ten minutes from the centre: classrooms, recording studios, rehearsal rooms. Coming to see it is the best way to find out.",
+          "link": "How to get here"
+        }
+      ]
+    },
+    "custom": {
+      "kicker": "od.02 · tailor-made lessons",
+      "title": "The tailor-made lessons open day.",
+      "lede": "An afternoon to meet the teachers, try playing together and understand how the lessons work.",
+      "text": "It is for anyone who wants to learn an instrument, singing or production for passion, at any age: adults, teenagers and children from age 6, with their parents. You don't need to know how to play. The atmosphere is relaxed: you can make mistakes without pressure.",
+      "chips": [
+        "Voice",
+        "Guitar",
+        "Bass",
+        "Piano and keyboards",
+        "Drums",
+        "Music production"
+      ],
+      "info": [
+        {
+          "label": "Where",
+          "value": "On site in Bologna or live online"
+        },
+        {
+          "label": "Who for",
+          "value": "From age 6 up, no experience needed"
+        },
+        {
+          "label": "Cost",
+          "value": "Free, with booking"
+        }
+      ],
+      "cells": [
+        {
+          "kicker": "01 play",
+          "title": "Workshops with the teachers",
+          "text": "Hands-on workshops: you pick up the instrument or the microphone, even if it's your first time."
+        },
+        {
+          "kicker": "02 understand",
+          "title": "How the lessons work",
+          "text": "One-to-one lessons, optional ensemble playing, monthly jam sessions and concerts. Packs of 4, 20 or 40 lessons."
+        },
+        {
+          "kicker": "03 ask",
+          "title": "Questions and answers",
+          "text": "Times, levels, ages, which teacher: ask everything you need to decide."
+        },
+        {
+          "kicker": "04 look around",
+          "title": "Tour of the building",
+          "text": "The classrooms, the rehearsal rooms you can also book to practise on your own, and the equipment."
+        }
+      ],
+      "band": {
+        "text": "Can't wait? The first lesson is free, even without the open day.",
+        "cta": "Book your place",
+        "link": "The tailor-made lessons"
+      }
+    },
+    "book": {
+      "kicker": "book",
+      "title": "Book your place.",
+      "text": "Choose the open day and how you take part. We'll send you a confirmation with the address or, if you follow online, the link to the stream. A tutor will call you back Monday to Friday for any questions.",
+      "phoneLead": "Prefer to call?",
+      "phone": "051 631 3706",
+      "phoneNote": "Monday to Friday",
+      "form": {
+        "whichLegend": "Which open day?",
+        "optionUni": "University courses",
+        "optionCustom": "Tailor-made lessons",
+        "howLegend": "How will you take part?",
+        "inPerson": "On site",
+        "online": "Online",
+        "peopleLegend": "How many of you are coming?",
+        "people": [
+          "1",
+          "2",
+          "3+"
+        ],
+        "nameLabel": "Full name",
+        "phoneLabel": "Mobile",
+        "emailLabel": "Email",
+        "emailNote": "(optional)",
+        "submit": "Book",
+        "legalPrefix": "Free. By sending you accept the ",
+        "legalLink": "privacy policy",
+        "legalSuffix": ".",
+        "error": "Choose the open day and fill in your name and mobile.",
+        "done": "We have sent you the confirmation. If you have questions before the open day, a tutor will reply Monday to Friday.",
+        "sendError": "Something went wrong while sending. Please try again shortly.",
+        "subject": "Open day booking",
+        "bodyOpenDay": "Open day",
+        "bodyMode": "Attendance",
+        "bodyPeople": "People",
+        "bodyName": "Name",
+        "bodyPhone": "Mobile",
+        "bodyEmail": "Email",
+        "doneTitle": "Place booked."
+      }
+    },
+    "alt": {
+      "kicker": "can't make it?",
+      "title": "There are other ways.",
+      "live": {
+        "title": "Follow the live stream",
+        "text": "Both open days are also online: you book the same way and receive the link.",
+        "cta": "Book online"
+      },
+      "tutor": {
+        "title": "Talk to a tutor",
+        "text": "A phone call to work out which path is right for you, Monday to Friday."
+      }
+    },
+    "reach": {
+      "kicker": "how to get here",
+      "title": "The Roveri district, ten minutes from the centre.",
+      "addressLabel": "Address",
+      "address": "Via del Tappezziere 4, 40138 Bologna",
+      "maps": "Open in Google Maps"
     }
   },
   "uni": {
@@ -1078,6 +1512,7 @@
         "desc": "University programme in music production. Beatmaking, sound design and mixing across hip-hop, trap and electronic music.",
         "meta": [
           "3 years",
+          "twenty places",
           "October 2026",
           "Bologna and online"
         ]
@@ -1090,6 +1525,7 @@
         "desc": "University programme for sound engineers. Recording, mixing and production at a professional level.",
         "meta": [
           "3 years",
+          "twenty places",
           "October 2026",
           "Bologna and online"
         ]
@@ -1102,6 +1538,7 @@
         "desc": "Performance and songwriting: from the stage to the finished song, with real productions and teachers working in the industry.",
         "meta": [
           "3 years",
+          "twenty places",
           "October 2026",
           "Bologna and online"
         ]
@@ -1123,6 +1560,7 @@
         ],
         "meta": [
           "3 years",
+          "twenty places",
           "October 2026",
           "Bologna and online"
         ]
@@ -1135,6 +1573,7 @@
         "desc": "University programme in film production and videomaking. Directing, shooting, editing and post-production.",
         "meta": [
           "3 years",
+          "twenty places",
           "October 2026",
           "Bologna and online"
         ]
@@ -1147,6 +1586,7 @@
         "desc": "The craft behind the music: management, publishing, distribution, live and rights.",
         "meta": [
           "3 years",
+          "twenty places",
           "October 2026",
           "Bologna and online"
         ]
@@ -1265,12 +1705,12 @@
         {
           "k": "early enrolment",
           "v": "−€500",
-          "text": "By 31 March 2027: a discount on the fee, a guaranteed time slot with your tutor, access to merit scholarships."
+          "text": "By 31 March 2026: a discount on the fee, a guaranteed time slot with your tutor, access to merit scholarships."
         },
         {
           "k": "early bird",
           "v": "−€300",
-          "text": "By 30 June 2027, with the same benefits on scheduling and scholarships."
+          "text": "By 30 June 2026, with the same benefits on scheduling and scholarships."
         },
         {
           "k": "instalments and scholarships",
@@ -1312,7 +1752,7 @@
     },
     "faq": {
       "n": "07 / questions",
-      "title": "The questions you ask us before choosing.",
+      "title": "The most common questions.",
       "items": [
         {
           "q": "What's the difference between a Bachelor and an Italian degree?",
@@ -1389,7 +1829,273 @@
     "othersKicker": "more custom lessons",
     "othersTitle": "Not just this instrument.",
     "ctaTitle": "The first lesson is free.",
-    "ctaText": "A full lesson, not a consultation: you try, meet the teacher and then decide. We get back to you within 24 hours on working days."
+    "ctaText": "A full lesson, not a consultation: you try, meet the teacher and then decide. We get back to you within 24 hours on working days.",
+    "teacherTry": "Try with",
+    "bookKicker": "book your trial",
+    "bookTitle": "Book your free lesson.",
+    "bookLede": "Two steps, thirty seconds. We get back to you within 24 hours on working days.",
+    "packages": {
+      "kicker": "prices",
+      "title": "What lessons cost.",
+      "lede": "Monthly packages, everything included. Before choosing, you try for free.",
+      "ctaFree": "Book the trial",
+      "ctaPlanPrefix": "Try for free, then"
+    },
+    "sede": {
+      "kicker": "the school",
+      "title": "The school in Bologna.",
+      "addressLabel": "Address",
+      "hoursLabel": "Front desk",
+      "hours": "Mon–Fri 9:15–13:00 · Sat 10:00–17:45",
+      "phoneLabel": "Phone",
+      "lede": "Creative Hub Academy has been teaching music in Bologna since 1999. Lessons take place in the same venue as the degree programmes, with equipped rooms and rehearsal spaces.",
+      "mapLabel": "open the map"
+    },
+    "uniExit": {
+      "corso-custom-produzione-musicale": {
+        "question": "Looking for a university programme in music production?",
+        "label": "Urban Music Production"
+      },
+      "corso-custom-basso": {
+        "question": "There is a degree programme too: a three-year Bachelor of Arts in Creative Musicianship, instrument pathway.",
+        "label": "Discover the instrument degree programme"
+      },
+      "corso-custom-chitarra": {
+        "question": "There is a degree programme too: a three-year Bachelor of Arts in Creative Musicianship, instrument pathway.",
+        "label": "Discover the instrument degree programme"
+      },
+      "corso-custom-pianoforte-tastiere": {
+        "question": "There is a degree programme too: a three-year Bachelor of Arts in Creative Musicianship, instrument pathway.",
+        "label": "Discover the instrument degree programme"
+      }
+    },
+    "form": {
+      "title": "Book your free lesson",
+      "stepLabel": "Step",
+      "stepOf": "of 2",
+      "whereLegend": "Where do you want to take lessons?",
+      "inPerson": "On site",
+      "inPersonNote": "Bologna",
+      "online": "Online",
+      "onlineNote": "from home",
+      "levelLegend": "Where are you starting from?",
+      "levels": {
+        "strumento": [
+          {
+            "v": "zero",
+            "label": "I've never played",
+            "short": "From zero"
+          },
+          {
+            "v": "migliorare",
+            "label": "I already play, I want to improve",
+            "short": "I want to improve"
+          },
+          {
+            "v": "musicista",
+            "label": "I'm a musician, I want to grow",
+            "short": "Musician"
+          },
+          {
+            "v": "figlio",
+            "label": "It's for my son or daughter",
+            "short": "For my son or daughter"
+          }
+        ],
+        "canto": [
+          {
+            "v": "zero",
+            "label": "I've never studied singing",
+            "short": "From zero"
+          },
+          {
+            "v": "riprendo",
+            "label": "I studied before, I want to get back to it",
+            "short": "Getting back"
+          },
+          {
+            "v": "palco",
+            "label": "I want to perform live",
+            "short": "I want to perform"
+          }
+        ],
+        "produzione": [
+          {
+            "v": "zero",
+            "label": "I'm starting from zero",
+            "short": "From zero"
+          },
+          {
+            "v": "daw",
+            "label": "I have a DAW but never finish tracks",
+            "short": "I have a DAW"
+          },
+          {
+            "v": "musicista",
+            "label": "I'm a musician going digital",
+            "short": "Musician"
+          },
+          {
+            "v": "figlio",
+            "label": "It's for my son or daughter",
+            "short": "For my son or daughter"
+          }
+        ]
+      },
+      "continue": "Continue",
+      "withTeacher": "with",
+      "withPlan": "package",
+      "edit": "edit",
+      "nameLabel": "Name",
+      "phoneLabel": "Mobile",
+      "emailLabel": "Email",
+      "emailNote": "optional",
+      "channelLegend": "How do you prefer to be contacted?",
+      "whatsapp": "WhatsApp",
+      "phoneCall": "Phone call",
+      "submit": "Book your free lesson",
+      "privacyPrefix": "By sending you accept the ",
+      "privacyLink": "privacy policy",
+      "privacySuffix": ". We only contact you about the lesson.",
+      "error": "Fill in your name and mobile number.",
+      "sendError": "We couldn't send your request. Try again shortly or write to us on WhatsApp.",
+      "doneTitle": "Request received",
+      "doneText": "A tutor contacts you within 24 hours on working days.",
+      "doneSteps": [
+        "Together you pick day, time and teacher",
+        "You take the lesson, on site or online",
+        "Then you decide whether to continue"
+      ],
+      "reassure": [
+        "Free",
+        "No payment",
+        "Reply within 24h"
+      ],
+      "waPrompt": "Prefer writing to us?",
+      "waLabel": "WhatsApp",
+      "subject": "Trial lesson"
+    },
+    "audience": {
+      "kicker": "who it’s for",
+      "title": "Who the lessons are for.",
+      "lede": "Students, working adults, children from the age of 6 and musicians who want to grow: every lesson is built around the person.",
+      "items": [
+        {
+          "v": "studente",
+          "kicker": "if you’re a student",
+          "title": "Start without spending much.",
+          "text": "You try with just a few lessons and find a young environment, with jam sessions and events. And if it clicks, the path to making it your job is already here: after the lessons you can move on to the Academy degree programmes."
+        },
+        {
+          "v": "lavoro",
+          "kicker": "if you work",
+          "title": "Evening lessons too.",
+          "text": "Made for people with a job: evening slots and lesson packs you can pause when work takes over. You can start from scratch, at any age."
+        },
+        {
+          "v": "genitore",
+          "kicker": "if you’re a parent",
+          "title": "From the age of 6.",
+          "text": "Children play the music they love from day one, with a pop, rock and soundtrack repertoire. No need to buy an instrument: the room is fully equipped."
+        },
+        {
+          "v": "musicista",
+          "kicker": "if you’re a musician",
+          "title": "To get unstuck and grow.",
+          "text": "You work on your own tracks and your own goals, with teachers who still work in music today, on stage and in the studio."
+        }
+      ]
+    },
+    "school": {
+      "kicker": "the school",
+      "title": "What you find at our school.",
+      "titleProduzione": "What you find in our production room.",
+      "lede": "Lessons take place at Creative Hub Academy, a venue dedicated to music: musicians, singers and producers study here every day.",
+      "items": [
+        {
+          "title": "Equipped rooms",
+          "text": "Professional instruments and amps, plus rehearsal rooms you can book to practise on your own, also outside lesson hours."
+        },
+        {
+          "title": "Working teachers",
+          "text": "Teachers who still work in music today, from the stage to the studio."
+        },
+        {
+          "title": "A clear roadmap",
+          "text": "From the first note to your first complete song, with concrete goals lesson after lesson. No more random tutorials."
+        },
+        {
+          "title": "Jam sessions and events",
+          "text": "Chances to play with other musicians and take what you learn outside the room."
+        },
+        {
+          "title": "Evening slots too",
+          "text": "Made for people with a job: evening lessons and packs you can pause."
+        },
+        {
+          "title": "Children welcome",
+          "text": "From the age of 6, with a pop, rock and soundtrack repertoire: no need to buy an instrument, the room is equipped. Teenagers and adults study in the same venue as the degree programmes."
+        }
+      ],
+      "itemsProduzione": [
+        {
+          "title": "A room dedicated to Ableton",
+          "text": "The full Ableton Live Suite, with every plugin and instrument, and calibrated studio monitors."
+        },
+        {
+          "title": "Professional gear",
+          "text": "MIDI controllers and launchpads, high-end audio interfaces, 49 and 61-key MIDI keyboards, professional microphones."
+        },
+        {
+          "title": "Working producers",
+          "text": "Teachers who work on records, soundtracks and live shows."
+        },
+        {
+          "title": "A clear roadmap",
+          "text": "From your first beat to your first complete track. No more random plugins and tutorials."
+        },
+        {
+          "title": "A bookable studio",
+          "text": "You can book the room and work on your own tracks outside lesson hours."
+        },
+        {
+          "title": "Evening slots too",
+          "text": "Plenty of students start at 30, 40 or 50: evening lessons and packs you can pause."
+        }
+      ]
+    },
+    "ctaSteps": {
+      "lede": "It takes 30 seconds. Here’s what happens next:",
+      "items": [
+        "A tutor gets back to you within 24 hours on working days for a short introductory call.",
+        "Together you pick the day, the time and the teacher.",
+        "You take the lesson, in person or online. Then you decide whether to carry on."
+      ]
+    },
+    "uniSectionKicker": "after the lessons",
+    "uniSectionTitle": "Want to make it your profession?",
+    "seo": {
+      "corso-custom-basso": {
+        "h1": "Electric bass lessons in Bologna.",
+        "title": "Electric bass lessons in Bologna | Creative Hub Academy",
+        "description": "Electric bass lessons in Bologna and online, one to one and in groups, from scratch to your first complete song. For adults, teenagers and children from the age of 6. Evening slots too. First lesson free."
+      },
+      "corso-custom-chitarra": {
+        "h1": "",
+        "title": "Guitar lessons in Bologna, one to one and in groups | Creative Hub Academy",
+        "description": "Guitar lessons in Bologna, one to one and in groups, from scratch to your first complete song. Teachers who play with Italian and international artists. Evening slots too. First lesson free."
+      },
+      "corso-custom-pianoforte-tastiere": {
+        "h1": "",
+        "title": "Piano and keyboard lessons in Bologna | Creative Hub Academy",
+        "description": "Piano and keyboard lessons in Bologna and online, one to one and in groups: piano, synths and DAW. For adults, teenagers and children from the age of 6. Evening slots too. First lesson free."
+      },
+      "corso-custom-produzione-musicale": {
+        "h1": "Music production and Ableton lessons in Bologna.",
+        "title": "Music production and Ableton lessons in Bologna | Creative Hub Academy",
+        "description": "Music production lessons in Bologna and online: finish your first complete track, even starting from scratch, in a room dedicated to Ableton. Evening slots too. First lesson free."
+      }
+    }
   },
   "saleEventiPage": {
     "kicker": "coworking · rooms & events",
@@ -1407,7 +2113,34 @@
     "ctaTitle": "Build your event.",
     "ctaText": "Tell us what kind of event it is, for how many people and what you need: we send you a proposal with room, services and quote within one working day.",
     "ctaBook": "request a proposal",
-    "back": "back to coworking"
+    "back": "back to coworking",
+    "roomMeta": [
+      {
+        "n": "ev.01",
+        "cap": "10 people",
+        "price": "€90"
+      },
+      {
+        "n": "ev.02",
+        "price": "€159.50"
+      },
+      {
+        "n": "ev.03",
+        "price": "€175"
+      },
+      {
+        "n": "ev.04",
+        "price": "on request"
+      },
+      {
+        "n": "ev.05",
+        "price": "on request"
+      },
+      {
+        "n": "ev.06",
+        "price": "on request"
+      }
+    ]
   },
   "innovationSub": {
     "back": "back to innovation",
@@ -1525,6 +2258,11 @@
         "Tecnoscienza"
       ],
       "finTitle": "Funding.",
+      "finLogos": [
+        "Unione Europea",
+        "Regione Emilia-Romagna",
+        "PR FESR"
+      ],
       "finText": "Project approved under the Regional Programme FESR Emilia-Romagna 2021-2027, Priority 1, Specific objective 1.1, Action 1.1.6, 2026 call for incubators and accelerators (DGR n. 2228 of 22/12/2025). CUP E38D25000400007.",
       "ctaTitle": "Apply to CreaTech Venture Club.",
       "ctaText": "Leave us your details and a couple of lines about the project: a tutor gets back to you to explain the selection.",
@@ -1561,7 +2299,13 @@
         },
         {
           "title": "Consulting desks",
-          "text": "Professionals available on: legal and tax; commercial and business development (business plan, marketing plan, business model, intellectual property, growth hacking, digital marketing); strategy."
+          "text": "Professionals available on:",
+          "items": [
+            "legal and tax",
+            "commercial and business development",
+            "business plan, marketing plan, business model, intellectual property, growth hacking, digital marketing",
+            "strategy"
+          ]
         },
         {
           "title": "Mentorship and managerial support",
@@ -1805,7 +2549,12 @@
       "finText": "Project funded under the PSC MISE 2014-2020, approved by ministerial decree of 7 January 2020. CUP F39I22001840004.",
       "ctaTitle": "Want to know more?",
       "ctaText": "For information on Creative Hub’s activities in the CTE COBO project, write to us.",
-      "ctaWrite": "Write to us"
+      "ctaWrite": "Write to us",
+      "finLogos": [
+        "MISE / MIMIT",
+        "Comune di Bologna",
+        "CTE COBO"
+      ]
     }
   },
   "studioSub": {
@@ -1871,10 +2620,22 @@
       ],
       "remoteTitle": "Remote recording, in four steps.",
       "remoteSteps": [
-        "You send us the project",
-        "We pick the musician",
-        "We record",
-        "We deliver the tracks"
+        {
+          "title": "You send us the project",
+          "text": "The track, notes on what you need, any references. Even just guitar and vocals."
+        },
+        {
+          "title": "We choose the musician",
+          "text": "Based on the genre: guitars, bass, drums, vocals, string quartet, orchestral sections, horns, big band."
+        },
+        {
+          "title": "We record",
+          "text": "A multitrack session in the studio. You can join by audio and video and give directions in real time."
+        },
+        {
+          "title": "We send the tracks back",
+          "text": "Edited and ready for the mix, together with the project."
+        }
       ],
       "arrKicker": "arrangement",
       "arrTitle": "Only have guitar and vocals?",
@@ -1898,6 +2659,25 @@
         }
       ],
       "ctaTitle": "Tell us about your project.",
+      "faqTitle": "Before you book.",
+      "faq": [
+        {
+          "title": "How much does it cost to record a song?",
+          "text": "It depends on the number of musicians, the method and the length. We send you a quote after the consultation."
+        },
+        {
+          "title": "Can I record a full band together?",
+          "text": "Yes, live in the room: each instrument stays on a separate track."
+        },
+        {
+          "title": "Do I need an engineer?",
+          "text": "The studio engineer is included in the session. If you have your own, there's the full studio rental."
+        },
+        {
+          "title": "What should I bring?",
+          "text": "Your instruments, your lyrics and your references. Drums, amps and backline are available in the studio."
+        }
+      ],
       "ctaText": "Write to us about what you want to record, mix or produce. We get back to you Monday to Friday for a consultation and to book the session.",
       "marquee": "Real musicians, in the same room"
     },
@@ -1982,6 +2762,25 @@
       "atmosTitle": "Your song, also in Dolby Atmos.",
       "atmosText": "Besides the stereo mix, we can deliver an immersive audio version, mixed in our Dolby-certified 7.1.4 room. Also as a remix of already released songs.",
       "atmosCta": "Discover Dolby Atmos",
+      "faqTitle": "Frequently asked questions.",
+      "faq": [
+        {
+          "title": "Can I get mastering only?",
+          "text": "Yes, also on a mix made in another studio."
+        },
+        {
+          "title": "Do I have to come to the studio?",
+          "text": "No. You can send us the tracks and follow the work remotely. If you want to attend the mix, you're welcome."
+        },
+        {
+          "title": "How much does it cost to mix a song?",
+          "text": "It depends on the number of tracks, the format (stereo or Atmos) and the revisions. We send you a quote."
+        },
+        {
+          "title": "Which platforms is the master ready for?",
+          "text": "All digital distribution platforms, and on request CD and vinyl."
+        }
+      ],
       "ctaTitle": "Send us the song.",
       "ctaText": "Tell us about the project and, if you want, add a link to the tracks or the rough mix. We reply with a proposal and a quote."
     },
@@ -2011,31 +2810,39 @@
       "formule": [
         {
           "n": "af.01",
+          "id": "produzione",
           "title": "Production",
           "text": "Bring your team and your engineer, use the studio as if it were yours.",
           "rows": [
             "SSL XL-Desk control room",
-            "live room and booth"
+            "live room and booth",
+            "technical assistance"
           ]
         },
         {
           "n": "af.02",
+          "id": "prove",
           "title": "Live rehearsals",
           "text": "A 60 m² room to rehearse the show with the full band, before the dates.",
           "rows": [
-            "live room with variable acoustics"
+            "live room with variable acoustics",
+            "rehearsal recording",
+            "backline"
           ]
         },
         {
           "n": "af.03",
+          "id": "tour",
           "title": "Tour pre-production",
           "text": "Several days in the studio to build the set, the sounds and the setlists before leaving.",
           "rows": [
             "multi-day packages",
-            "space for backline and control room"
+            "space for backline and control room",
+            "access"
           ]
         }
       ],
+      "formCta": "book this formula",
       "findKicker": "the gear",
       "findTitle": "What you find in the studio.",
       "howKicker": "how to book",
@@ -2044,7 +2851,7 @@
         {
           "kicker": "01 dates",
           "title": "Pick the dates",
-          "text": "Write to us with day and duration: we check availability."
+          "text": "Tell us the day and duration in the form: we check availability."
         },
         {
           "kicker": "02 visit",
@@ -2057,8 +2864,545 @@
           "text": "We send you the confirmation with times, access and what you find in the room."
         }
       ],
+      "ctaKicker": "book",
       "ctaTitle": "Pick the dates. Lock the studio.",
-      "ctaText": "Write to us about what you need to do in the studio and when: we reply with availability and a quote."
+      "ctaText": "Write to us about what you need to do in the studio and when: we reply with availability and a quote.",
+      "garanzie": [
+        "clear prices before you confirm",
+        "with your engineer or with ours",
+        "reply within 24 working hours"
+      ],
+      "ratesKicker": "the rates",
+      "ratesTitle": "Rates.",
+      "ratesLede": "Clear prices before you book: send us the dates and we reply with a quote.",
+      "ratesHead": [
+        "formula",
+        "duration",
+        "what's included",
+        "price"
+      ],
+      "ratesRows": [
+        {
+          "formula": "Half day",
+          "durata": "4 hours",
+          "include": "full studio, assistance at setup",
+          "prezzo": "on quote"
+        },
+        {
+          "formula": "Full day",
+          "durata": "8 hours",
+          "include": "full studio, assistance at setup",
+          "prezzo": "on quote"
+        },
+        {
+          "formula": "Several days",
+          "durata": "from 2 days",
+          "include": "for productions and tour pre-production",
+          "prezzo": "on quote"
+        },
+        {
+          "formula": "Studio engineer",
+          "durata": "by the hour or by the day",
+          "include": "if you don't have yours",
+          "prezzo": "on quote"
+        }
+      ],
+      "faqKicker": "frequently asked questions",
+      "faqTitle": "Frequently asked questions.",
+      "faq": [
+        {
+          "title": "Can I rent the live room just for rehearsals?",
+          "text": "Yes, it's one of the formulas: live rehearsals and tour pre-production."
+        },
+        {
+          "title": "Is the studio engineer mandatory?",
+          "text": "No. You can come with yours; if you need it, the studio engineer is available separately."
+        },
+        {
+          "title": "Is there parking to load the gear?",
+          "text": "Write to us before the session: we arrange loading and unloading of the gear together."
+        },
+        {
+          "title": "Can I rent the studio in the evening or at the weekend?",
+          "text": "Times are agreed with the studio: ask us when you book."
+        }
+      ],
+      "flow": {
+        "subject": "Affitto studio di registrazione",
+        "stepOf": "step {n} of 3",
+        "stepDone": "done",
+        "step1Title": "What do you need to do in the studio?",
+        "step2Title": "For how long?",
+        "items": [
+          {
+            "id": "mezza-giornata",
+            "label": "Half day",
+            "sub": "4 hours",
+            "price": "on quote"
+          },
+          {
+            "id": "giornata",
+            "label": "Full day",
+            "sub": "8 hours",
+            "price": "on quote"
+          },
+          {
+            "id": "piu-giorni",
+            "label": "Several days",
+            "sub": "from 2 days",
+            "price": "on quote"
+          }
+        ],
+        "engineer": "I need the studio engineer",
+        "engineerNote": "by the hour or by the day",
+        "engineerYours": "yours",
+        "engineerOurs": "the studio's",
+        "step3Title": "When, and who you are.",
+        "fromDay": "From",
+        "days": "Days",
+        "dayOptions": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "more than 5"
+        ],
+        "dayWord": "day",
+        "daysWord": "days",
+        "noDate": "date to be chosen",
+        "name": "Full name",
+        "phone": "Mobile phone",
+        "email": "Email",
+        "project": "Your project",
+        "projectNote": "(optional)",
+        "projectPlaceholder": "Artist, musicians, backline, deadlines…",
+        "back": "Back",
+        "next": "Continue",
+        "send": "Send your request",
+        "sending": "Sending…",
+        "missing": "Fill in your name and email.",
+        "sendError": "Something went wrong: try again in a moment, or call 051 631 3706.",
+        "privacyBefore": "By sending you accept the ",
+        "privacyLink": "privacy policy",
+        "doneTitle": "Request sent.",
+        "doneText": "We confirm availability and price Monday to Friday. If you want, we also set up a visit with your engineer.",
+        "summaryTitle": "Summary",
+        "summaryFormula": "formula",
+        "summaryDuration": "duration",
+        "summaryEngineer": "engineer",
+        "summaryPrice": "price",
+        "summaryWhen": "when",
+        "questions": "Questions?",
+        "phoneLabel": "051 631 3706",
+        "phoneHref": "+390516313706",
+        "shopTitle": "All set: the space is waiting.",
+        "shopText": "Booking is completed on the space page, with rates, availability and payment. The choices you made here are your reminder.",
+        "shopCta": "Go to the space and book"
+      }
+    },
+    "atmos": {
+      "metaTitle": "Dolby Atmos 7.1.4 studio in Bologna | Creative Hub Studio",
+      "metaDesc": "Immersive-audio mixing, remixing and post-production in a Dolby-certified control room with Genelec monitoring.",
+      "kicker": "Studio · Dolby Atmos",
+      "title": "A Dolby Atmos 7.1.4 studio in Bologna.",
+      "lede": "A Dolby-certified control room for mixing music, film scores and immersive content: sounds no longer sit just left and right, but all around and above the listener.",
+      "facts": [
+        {
+          "t": "7.1.4",
+          "s": "seven speakers, one subwoofer, four overhead"
+        },
+        {
+          "t": "Genelec",
+          "s": "monitoring across the whole room"
+        },
+        {
+          "t": "Dolby certification",
+          "s": "for deliveries to labels and platforms"
+        }
+      ],
+      "book": "Book an Atmos session",
+      "talk": "Let's talk",
+      "marquee": "Music, film, media: in immersive audio",
+      "manifestoKicker": "immersive audio",
+      "manifestoA": "In immersive audio, sound is placed and moves through space.",
+      "manifestoB": "Listeners don't just hear a track: they're inside it.",
+      "roomKicker": "the atmos room",
+      "room": [
+        {
+          "t": "7.1.4",
+          "s": "speaker configuration"
+        },
+        {
+          "t": "Genelec",
+          "s": "monitoring across the room"
+        },
+        {
+          "t": "Avid MTRX",
+          "s": "interface and routing"
+        },
+        {
+          "t": "Dolby",
+          "s": "official certification"
+        }
+      ],
+      "usesTitle": "What it's for.",
+      "usesLede": "From records to installations.",
+      "uses": [
+        {
+          "title": "Music",
+          "text": "Atmos mixes and remixes of new or released tracks"
+        },
+        {
+          "title": "Film and series",
+          "text": "Final delivery of scores in immersive audio"
+        },
+        {
+          "title": "Media and installations",
+          "text": "Post-production and sound design for museums, exhibitions, experiences"
+        },
+        {
+          "title": "Gaming",
+          "text": "Immersive audio for games and interactive content"
+        },
+        {
+          "title": "Education",
+          "text": "Sessions for conservatories and training institutions"
+        }
+      ],
+      "remixKicker": "atmos remix",
+      "remixTitle": "Is your track already out?",
+      "remixText": "We can remix it in Dolby Atmos from the original stems, for the platforms that support immersive audio.",
+      "remixCta": "Ask for a remix",
+      "labKicker": "research",
+      "labTitle": "A permanent lab for Atmos.",
+      "labText": "The room is also the centre of Creative Hub's research on immersive audio, with pilot projects alongside companies and institutions.",
+      "labCta": "Go to Innovation",
+      "faqTitle": "Questions about Atmos.",
+      "ctaTitle": "Tell us about your project.",
+      "ctaText": "Write to us about what you want to mix or deliver in Atmos. We get back to you Monday to Friday to talk it through and book the session."
+    },
+    "soundDesign": {
+      "metaTitle": "Sound design and audio post-production in Bologna | Creative Hub Studio",
+      "metaDesc": "Sound design, foley, original scores and Dolby Atmos mixing for film, series, advertising, games and installations.",
+      "kicker": "Studio · Sound design",
+      "title": "Sound design and audio post-production for video and film.",
+      "lede": "From edit to master: sounds, foley, original scores and the final mix, in Dolby Atmos too. For film, series, advertising, games and installations.",
+      "facts": [
+        {
+          "t": "Post-production",
+          "s": "dialogue, effects, ambiences"
+        },
+        {
+          "t": "Foley and scores",
+          "s": "recorded sounds and original music"
+        },
+        {
+          "t": "Atmos delivery",
+          "s": "or stereo, in the formats you need"
+        }
+      ],
+      "book": "Tell us about your video",
+      "talk": "Let's talk",
+      "forTitle": "Who we work for.",
+      "forLede": "Every format has its own delivery rules. We know them.",
+      "clients": [
+        {
+          "title": "Film and series",
+          "text": "Audio post-production and mixing for delivery"
+        },
+        {
+          "title": "Advertising and video",
+          "text": "Sound design and mixing for ads, brands and social"
+        },
+        {
+          "title": "Games",
+          "text": "Effects, ambiences and immersive audio"
+        },
+        {
+          "title": "Installations",
+          "text": "Museums, exhibitions and experiences in immersive audio"
+        }
+      ],
+      "whatTitle": "What we do.",
+      "what": [
+        "Sound design: custom-made sounds and effects",
+        "Foley: noises recorded in the studio in sync with the images",
+        "Dialogue editing and clean-up",
+        "Original scores, recorded with real musicians",
+        "Final mix in stereo or Dolby Atmos",
+        "Mastering and delivery in the required formats"
+      ],
+      "stepsTitle": "From edit to master.",
+      "steps": [
+        {
+          "title": "Spotting",
+          "text": "We watch the edit together and decide where sounds, music and silences belong."
+        },
+        {
+          "title": "Sound design and foley",
+          "text": "We create and record effects, ambiences and noises in sync."
+        },
+        {
+          "title": "Music",
+          "text": "An original score, recorded in the studio, or an adaptation of the music you chose."
+        },
+        {
+          "title": "Mix",
+          "text": "Dialogue, effects and music in balance, in stereo or in Dolby Atmos."
+        },
+        {
+          "title": "Delivery",
+          "text": "Master and stems in the formats the platform or distributor requires."
+        }
+      ],
+      "scoreKicker": "scores",
+      "scoreTitle": "Music written for your images.",
+      "scoreText": "The live room hosts strings and small orchestras: the score is recorded with real musicians, in the same studio where it gets mixed.",
+      "scoreCta": "See recording",
+      "faqTitle": "Frequently asked questions.",
+      "masterKicker": "academy",
+      "masterTitle": "Want to learn sound design?",
+      "masterText": "This page is the studio service. To study it, there's the Academy's Master in Professional Production & Sound Design.",
+      "masterCta": "Go to the Master",
+      "ctaTitle": "Tell us about your video.",
+      "ctaText": "Format, length, deadline and where it will air. Add a link to the edit, if you can."
+    },
+    "podcast": {
+      "metaTitle": "Podcast and voice-over recording in Bologna | Creative Hub Studio",
+      "metaDesc": "Isolated booth with a Neumann U87, an engineer in the control room, edit and master ready to publish.",
+      "kicker": "Studio · Podcast & voice over",
+      "title": "Recording podcasts and voice overs in Bologna.",
+      "lede": "An isolated booth with a Neumann U87 and an analogue chain, an engineer in the control room, and a file ready to publish.",
+      "facts": [
+        {
+          "t": "Isolated booth",
+          "s": "no noise, no reverb"
+        },
+        {
+          "t": "Neumann U87",
+          "s": "the reference vocal microphone"
+        },
+        {
+          "t": "Ready file",
+          "s": "edited, cleaned and mastered"
+        }
+      ],
+      "book": "Book the booth",
+      "typesKicker": "what you record",
+      "typesTitle": "Podcasts. Voice overs. Audiobooks.",
+      "types": [
+        {
+          "n": "vo.01",
+          "title": "Podcasts",
+          "text": "One or more voices, in the studio or with remote guests. We record, edit and deliver the episode."
+        },
+        {
+          "n": "vo.02",
+          "title": "Voice over",
+          "text": "Voicing for ads, corporate videos, documentaries and social, in sync with the images."
+        },
+        {
+          "n": "vo.03",
+          "title": "Audiobooks and dubbing",
+          "text": "Long reading sessions and voice sync to picture."
+        }
+      ],
+      "boothTitle": "The booth.",
+      "boothText1": "Isolated from the rest of the studio, with a Neumann U87 and a vintage analogue chain: the voice comes through clean and full, with no fixing needed.",
+      "boothText2": "The engineer follows you in your headphones and sees you through the glass: if a line doesn't convince you, you redo it right away.",
+      "prepTitle": "Before you come.",
+      "prepLede": "A session goes faster if you arrive with this.",
+      "prep": [
+        "Script or outline, printed or on a tablet",
+        "A reference video, if it's a voice over",
+        "The length and format you need",
+        "A bottle of water, no milk beforehand",
+        "Remote guests briefed in time",
+        "Music and jingle, if you already have them"
+      ],
+      "faqTitle": "Frequently asked questions.",
+      "ctaTitle": "Book the booth.",
+      "ctaText": "Tell us what you're recording, how many voices and when you need it."
+    },
+    "notes": {
+      "phone": "Monday to Friday",
+      "email": "reply within 24 working hours",
+      "address": "Via del Tappezziere 4, Bologna",
+      "addressNote": "Roveri area, ten minutes from the centre"
+    }
+  },
+  "avvisami": {
+    "kicker": "keep me posted",
+    "title": "Tell me when the next course opens.",
+    "titleCourse": "Tell me about the next edition.",
+    "lede": "Enrolment for funded courses stays open for just a few weeks. Leave a contact: we will write to you as soon as the call opens, before the deadline.",
+    "ledeCourse": "We will write to you as soon as the new call is published, with dates and requirements.",
+    "contacts": [
+      {
+        "value": "corsirer@mpda.bo.it",
+        "note": "for information on funded courses"
+      },
+      {
+        "value": "051 631 3706, ext. 3",
+        "note": "funded courses · Mon–Fri 9–13"
+      },
+      {
+        "value": "WhatsApp +39 351 843 1456",
+        "note": "also for international students"
+      }
+    ],
+    "interestsLegend": "What are you interested in?",
+    "interests": [
+      "Music Data Analyst & Strategist",
+      "Sound design and immersive audio",
+      "Music: production and songwriting",
+      "3D and virtual reality"
+    ],
+    "name": "Full name",
+    "email": "Email",
+    "phone": "Mobile",
+    "residence": "Do you live or reside in Emilia-Romagna?",
+    "residenceYes": "Yes",
+    "submit": "Notify me",
+    "sending": "Sending…",
+    "notePrefix": "By sending you accept the ",
+    "noteLink": "privacy policy",
+    "noteSuffix": ". We only write about funded courses.",
+    "missing": "Fill in at least name and email.",
+    "done": "Done. We will write to you as soon as the call for your course opens.",
+    "error": "We could not send your request: try again, or write to corsirer@mpda.bo.it.",
+    "courseEyebrow": "Funded training · Free course",
+    "closedBand": "Applications closed: the course has been running since September 2026. Leave your contact for the next edition."
+  },
+  "form": {
+    "name": "Full name",
+    "phone": "Phone",
+    "email": "Email",
+    "company": "Startup or company",
+    "companyNote": "(if any)",
+    "topicTalk": "What do you want to talk about?",
+    "topicNeed": "What do you need?",
+    "message": "Your project",
+    "messagePlaceholder": "What you do, where you are, what you need…",
+    "messagePlaceholderStudio": "Genre, number of songs, musicians, deadlines, links to demos…",
+    "send": "Send",
+    "privacyBefore": "By sending you accept the ",
+    "privacyLink": "privacy policy",
+    "missing": "Fill in your name and email.",
+    "sent": "Request sent. We will get back to you Monday to Friday to talk about the project and book the session.",
+    "sendError": "Something went wrong while sending. Please try again shortly.",
+    "innovationTopics": [
+      "I have an idea or a startup",
+      "I am a company",
+      "I want to apply to CreaTech",
+      "A call or a project",
+      "CTE COBO"
+    ],
+    "studioTopics": [
+      "Recording",
+      "Mix & mastering",
+      "Dolby Atmos",
+      "Sound design",
+      "Podcast & voice over",
+      "Studio rental",
+      "I don’t know yet"
+    ],
+    "sendRequest": "Send the request"
+  },
+  "finanziata": {
+    "title": "Free courses funded by the Emilia-Romagna Region.",
+    "lede": "Professional training for the cultural and creative industries: sound, music, data and 3D. Industry teachers, a few weeks or a few months, zero cost for you.",
+    "heroCta": "Tell me about the next call",
+    "band": {
+      "text": "There are no open enrolments today. Music Data Analyst & Strategist is running: leave your contact details for the next edition.",
+      "cta": "Tell me"
+    },
+    "howTitle": "Free, but not for everyone.",
+    "howLede": "The courses are paid for by the Emilia-Romagna Region and the European Social Fund. That is why they have limited places, precise requirements and a selection. Here is how they work.",
+    "howItems": [
+      {
+        "title": "Who can take part",
+        "text": "Anyone resident or domiciled in Emilia-Romagna, with a diploma or a vocational qualification. Each course has its own specific requirements."
+      },
+      {
+        "title": "How you get in",
+        "text": "A written test, an individual interview and preferential criteria. The ranking is published on the site."
+      },
+      {
+        "title": "What you get",
+        "text": "A certificate of attendance or a higher technical specialisation certificate (IFTS), depending on the course."
+      },
+      {
+        "title": "When",
+        "text": "Enrolment stays open for a few weeks, when the call is published. To avoid missing it, leave your contact details."
+      }
+    ],
+    "coursesTitle": "The free courses.",
+    "filters": [
+      {
+        "key": "tutti",
+        "label": "All"
+      },
+      {
+        "key": "suono",
+        "label": "Sound"
+      },
+      {
+        "key": "musica",
+        "label": "Music"
+      },
+      {
+        "key": "dati",
+        "label": "Data"
+      },
+      {
+        "key": "3d-e-vr",
+        "label": "3D and VR"
+      }
+    ],
+    "status": {
+      "in-corso": "Course running",
+      "prossima-edizione": "Next edition to be announced",
+      "iscrizioni-aperte": "Enrolment open"
+    },
+    "cardCta": "discover the course",
+    "city": "Bologna",
+    "free": "free",
+    "empty": "No courses in this category.",
+    "uniTitle": "Looking for a university degree?",
+    "uniLede": "The funded courses are short and vocational. If you want a three-year path with an international degree, have a look at the university courses: Bachelor and Master in music, sound and visual.",
+    "uniCta": "Go to the university courses",
+    "faqTitle": "Frequently asked questions about the free courses.",
+    "faq": [
+      {
+        "title": "Are they really free?",
+        "text": "Yes. The courses are paid for by the Emilia-Romagna Region and the European Social Fund Plus: for those taking part the cost is zero."
+      },
+      {
+        "title": "Do I have to live in Emilia-Romagna?",
+        "text": "You need residence or domicile in Emilia-Romagna. Each course then has its own specific requirements, written in the call."
+      },
+      {
+        "title": "What qualification do I need?",
+        "text": "A secondary school diploma or a vocational qualification. The exact requirements change from course to course and are stated in the call."
+      },
+      {
+        "title": "How does the selection work?",
+        "text": "A written test, an individual interview and preferential criteria. The ranking is published on the site."
+      },
+      {
+        "title": "Can I take part if I work?",
+        "text": "Timetable, calendar and required attendance change from course to course and are stated in the call. Leave us your contact details: we will write as soon as it is out, so you can plan ahead."
+      },
+      {
+        "title": "When does the next course open?",
+        "text": "There are no open enrolments today: Music Data Analyst & Strategist is running. Enrolment stays open for a few weeks, when the call is published: to avoid missing it, leave your contact details."
+      }
+    ],
+    "seo": {
+      "title": "Free courses funded by the Emilia-Romagna Region | Creative Hub Academy",
+      "description": "Free professional courses in Bologna in sound, music, data and 3D, funded by the Emilia-Romagna Region and ESF+."
     }
   }
 }

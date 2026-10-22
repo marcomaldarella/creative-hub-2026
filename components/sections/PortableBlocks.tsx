@@ -28,6 +28,13 @@ type Block = {
   // per i blocchi image inline
   asset?: { _ref?: string }
   alt?: string
+  // per contentTable
+  caption?: string
+  columns?: string[]
+  rows?: { _key?: string; cells?: string[] }[]
+  // per chipList
+  label?: string
+  items?: string[]
 }
 
 /* ---------- span con marks ---------- */
@@ -75,6 +82,60 @@ function renderBlock(block: Block, key: string): ReactNode {
         loading="lazy"
         className={styles.image}
       />
+    )
+  }
+
+  /* tabella di contenuto: header con filo, righe hairline; su mobile
+     scorre dentro il suo contenitore */
+  if (block._type === 'contentTable') {
+    return (
+      <div key={key}>
+        {block.caption && <span className={styles.tableCaption}>{block.caption}</span>}
+        <div className={styles.tableWrap}>
+          <table className={styles.table}>
+            <thead>
+              <tr>
+                {(block.columns ?? []).map((c) => (
+                  <th key={c} scope="col">
+                    {c}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {(block.rows ?? []).map((r, i) => (
+                <tr key={r._key ?? i}>
+                  {(r.cells ?? []).map((c, x) =>
+                    x === 0 ? (
+                      <th key={x} scope="row">
+                        {c}
+                      </th>
+                    ) : (
+                      <td key={x}>{c}</td>
+                    )
+                  )}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    )
+  }
+
+  /* fila di chip con etichetta opzionale */
+  if (block._type === 'chipList') {
+    return (
+      <div key={key}>
+        {block.label && <span className={styles.chipLabel}>{block.label}</span>}
+        <div className={styles.chips}>
+          {(block.items ?? []).map((c) => (
+            <span key={c} className={styles.chip}>
+              {c}
+            </span>
+          ))}
+        </div>
+      </div>
     )
   }
 

@@ -1,0 +1,109 @@
+/* solo le poche classi locali che la grammatica condivisa (DetailPage,
+   TopicScreen, UniScreen) non copre */
+
+/* etichetta mono sopra i titoli delle fasce nere */
+.bandKicker {
+  display: block;
+  margin-bottom: 16px;
+}
+
+/* ————— fascia marquee sotto l'hero (mockup) ————— */
+
+.mq {
+  background: #000;
+  padding: 14px 0;
+}
+
+.mqText {
+  font-size: clamp(20px, 2vw, 28px);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+}
+
+/* il bottone dentro il marquee resta compatto */
+.mqBtn {
+  font-size: 13px;
+}
+
+/* ————— manifesto bicolore (mockup): frase piena + coda attenuata ————— */
+
+.manifesto {
+  font-size: clamp(30px, 4.6vw, 72px);
+  letter-spacing: -0.045em;
+  line-height: 1.04;
+  max-width: 26ch;
+  margin-bottom: 0;
+}
+
+.manifestoDim {
+  color: var(--fg-2);
+}
+
+/* ————— la regia atmos: quattro voci grandi in fascia nera ————— */
+
+.specs {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(20px, 2.5vw, 36px);
+}
+
+.specT {
+  display: block;
+  font-size: clamp(30px, 3.6vw, 56px);
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.specS {
+  display: block;
+  font-size: 13px;
+  color: var(--fg-2);
+  margin-top: 8px;
+}
+
+@media (max-width: 860px) {
+  .specs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* ————— per cosa si usa: card a foto piena (modulo uni) ————— */
+
+.apps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+@media (max-width: 1100px) {
+  .apps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .apps {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* a quattro colonne la card dei corsi è troppo alta: si accorcia
+   (div.classe vince sulla singola classe del modulo condiviso) */
+div.appCard {
+  min-height: clamp(300px, 32vw, 420px);
+}
+
+/* riga di testo sempre visibile sotto il titolo (il cardDesc dei corsi
+   appare solo in hover: qui il testo è contenuto, non premio) */
+.appText {
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 14px;
+  line-height: 1.4;
+  max-width: 30ch;
+  margin-top: 10px;
+}
+
+.appLink {
+  margin-top: 12px;
+}

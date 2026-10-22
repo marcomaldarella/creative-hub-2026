@@ -1,4 +1,11 @@
 import { localeString, localeText, localeBlock } from './objects/locale'
+import {
+  chipList,
+  contentTable,
+  indexCard,
+  indexGrid,
+  tableRow,
+} from './objects/content'
 import { siteSettings } from './documents/siteSettings'
 import { teacher } from './documents/teacher'
 import { courseCategory } from './documents/courseCategory'
@@ -15,6 +22,11 @@ export const schemaTypes = [
   localeString,
   localeText,
   localeBlock,
+  tableRow,
+  contentTable,
+  chipList,
+  indexCard,
+  indexGrid,
   // documenti
   siteSettings,
   teacher,

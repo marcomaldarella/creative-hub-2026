@@ -106,6 +106,17 @@
   padding-bottom: clamp(28px, 4vw, 48px);
 }
 
+/* variante plain (FAQ): solo la colonna testo, altezza del contenuto —
+   senza foto il pannello "full screen" lascerebbe un vuoto enorme */
+.plainInner {
+  grid-template-columns: 1fr;
+}
+
+.panelOpen .plainInner {
+  height: auto;
+  padding-bottom: clamp(20px, 2.6vw, 32px);
+}
+
 .text {
   align-self: center;
   font-size: var(--fs-lede);

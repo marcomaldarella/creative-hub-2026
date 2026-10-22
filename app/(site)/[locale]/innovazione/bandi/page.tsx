@@ -10,6 +10,7 @@ import { pageAlternates } from '@/lib/seo'
 import { getSiteSettings } from '@/lib/sanity/queries'
 /* grammatica condivisa delle pagine di dettaglio: testata, pillole
    filtro, elenco bandi, chiusura nera */
+import { ContactForm } from '@/components/sections/ContactForm'
 import det from '@/components/sections/DetailPage.module.css'
 import styles from './page.module.css'
 
@@ -181,34 +182,43 @@ export default async function BandiPage({
 
         {/* ————— chiusura nera: avvisami quando esce un bando ————— */}
         <div className={`scheme-dark ${det.dark}`}>
-          <section className={`wrap ${det.sez}`}>
+          <section className={`wrap ${det.sez} ${det.duo}`}>
+          <div>
             <Reveal as="h2" className={`display-thin ${det.ctaTitle}`}>
               {d.ctaTitle}
             </Reveal>
             <Reveal as="p" className={det.ctaText} delay={80}>
               {d.ctaText}
             </Reveal>
-            <Reveal className={det.ctaRow} delay={160}>
-              <Button href={mailto} external className={styles.btnBn}>
-                {d.ctaWrite}
-              </Button>
-              {settings?.phone && (
-                <ArrowLink
-                  href={`tel:${settings.phone.replace(/\s/g, '')}`}
-                  external
-                >
-                  {settings.phone}
-                </ArrowLink>
-              )}
-            </Reveal>
-            <Reveal className={det.mailRows} delay={220}>
+            <div className={det.mailRows}>
               {t.innovation.mailNotes.map((m) => (
                 <a key={m.mail} className={det.mailRow} href={`mailto:${m.mail}`}>
                   <span className={det.mailAddr}>{m.mail}</span>
                   <span className={det.mailNote}>{m.note}</span>
                 </a>
               ))}
-            </Reveal>
+              {settings?.phone && (
+                <a
+                  className={det.mailRow}
+                  href={`tel:${settings.phone.replace(/\s/g, '')}`}
+                >
+                  <span className={det.mailAddr}>{settings.phone}</span>
+                </a>
+              )}
+            </div>
+          </div>
+          {/* il form del mockup: mailto composto, tema preselezionato */}
+          <Reveal delay={140}>
+            <ContactForm
+              to="hello@bologna-creativehub.it"
+              subject={d.ctaTitle}
+              topics={t.form.innovationTopics}
+              defaultTopic={t.form.innovationTopics[3]}
+              labels={{ ...t.form, topic: t.form.topicTalk }}
+              privacyHref={localeHref(locale, '/privacy')}
+                sendLabel={d.ctaWrite}
+            />
+          </Reveal>
           </section>
         </div>
       </main>

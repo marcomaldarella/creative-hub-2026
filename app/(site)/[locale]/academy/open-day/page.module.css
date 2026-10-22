@@ -1,0 +1,332 @@
+/* open day (mockup v3, ott 2026): testata, due card-ancora con foto,
+   indice sticky della scheda corso, due open day a duo + celle, form di
+   prenotazione, altri modi, come arrivare. Vive sul flood azzurro di
+   /academy; le grammatiche condivise arrivano da det e tp */
+
+.main {
+  padding-top: var(--nav-h);
+}
+
+/* titolo su due righe volute (\n nel dizionario) */
+.titleLine {
+  display: block;
+}
+
+/* le sezioni ancorate atterrano sotto nav + indice sticky */
+.main section[id] {
+  scroll-margin-top: calc(var(--header-h) + 76px);
+}
+
+/* ancore invisibili per la preselezione del form (#prenota-uni /
+   #prenota-lezioni): il browser scrolla qui, il form legge l'hash */
+.anchor {
+  display: block;
+  height: 0;
+  scroll-margin-top: calc(var(--header-h) + 76px);
+}
+
+/* ————— card-ancora con foto (come le card corso) ————— */
+
+.cardsSez {
+  padding-top: clamp(28px, 3.5vw, 48px);
+  padding-bottom: clamp(36px, 4.5vw, 64px);
+}
+
+.cardA {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: clamp(300px, 34vw, 440px);
+  padding: 20px;
+  color: #fff;
+  overflow: hidden;
+  isolation: isolate;
+  background: #111;
+  text-decoration: none;
+}
+
+.cardPh {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  margin: 0;
+}
+
+.cardPh img {
+  object-fit: cover;
+  /* hover sobrio: solo la foto scala, 500ms ease-out */
+  transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.cardA:hover .cardPh img {
+  transform: scale(1.04);
+}
+
+/* scrim scuro al piede: il testo resta leggibile su qualsiasi foto */
+.cardA::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 10, 10, 0.45) 0%,
+    rgba(10, 10, 10, 0) 32%,
+    rgba(10, 10, 10, 0.3) 55%,
+    rgba(10, 10, 10, 0.9) 100%
+  );
+}
+
+.cardNum {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.cardTitle {
+  margin-top: auto;
+  font-size: clamp(26px, 2.8vw, 40px);
+  font-weight: 600;
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+}
+
+.cardSub {
+  margin-top: 8px;
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.82);
+  max-width: 36ch;
+}
+
+.cardGo {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  font-size: 13.5px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.cardGo::first-letter {
+  text-transform: uppercase;
+}
+
+/* freccia del brand ruotata in giù (mai glifi unicode) */
+.cardGoArrow {
+  display: inline-flex;
+  transform: rotate(90deg);
+}
+
+/* ————— sezioni degli open day ————— */
+
+/* sezione full-bleed che chiude con la fascia nera: il wrap sta sui
+   blocchi interni, il padding inferiore lo porta la fascia */
+.blockSez {
+  padding-top: clamp(36px, 4.5vw, 64px);
+}
+
+.sezLine {
+  border-top: 1px solid var(--line);
+}
+
+.duoPad {
+  padding-bottom: clamp(28px, 3.5vw, 48px);
+}
+
+/* scheda info: card bordata con le righe hairline di tp.defs */
+.infoCard {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 6px 20px;
+}
+
+.infoDefs {
+  border-top: 0;
+  margin-bottom: 0;
+}
+
+.infoDefs > :last-child {
+  border-bottom: 0;
+}
+
+/* ————— celle con kicker mono numerato ————— */
+
+.cells3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0 clamp(20px, 2.5vw, 36px);
+  border-top: 1px solid var(--line);
+}
+
+.cells2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 clamp(20px, 2.5vw, 36px);
+  border-top: 1px solid var(--line);
+}
+
+.cell {
+  padding: clamp(14px, 1.8vw, 22px) 0 clamp(16px, 2vw, 26px);
+  border-bottom: 1px solid var(--line);
+}
+
+.cellKicker {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--fg-2);
+}
+
+.cellTitle {
+  font-size: clamp(17px, 1.6vw, 21px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin-bottom: 8px;
+}
+
+.cellText {
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--fg-2);
+  max-width: 52ch;
+}
+
+/* ————— fascia nera compatta di chiusura sezione ————— */
+
+.band {
+  background: #000;
+  margin-top: clamp(36px, 4.5vw, 64px);
+  padding: clamp(28px, 3.5vw, 44px) 0;
+}
+
+.bandIn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px 32px;
+}
+
+.bandText {
+  font-size: clamp(16px, 1.6vw, 19px);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  max-width: 44ch;
+}
+
+.bandRow {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 22px;
+}
+
+/* ————— domande dei genitori: blocchi hairline ————— */
+
+.qa {
+  border-top: 1px solid var(--line);
+  padding-top: 16px;
+  padding-bottom: 8px;
+}
+
+.qaA {
+  font-size: 14.5px;
+  line-height: 1.45;
+  color: var(--fg-2);
+  max-width: 52ch;
+  margin-bottom: 14px;
+}
+
+/* ————— chip strumenti (lezioni su misura) ————— */
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: clamp(16px, 2vw, 24px);
+}
+
+.chip {
+  font-size: 13px;
+  padding: 7px 14px;
+  border: 1px solid color-mix(in srgb, currentColor 35%, transparent);
+  border-radius: var(--radius-pill);
+}
+
+/* ————— prenota: riga telefono sotto il testo ————— */
+
+.phoneRow {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  margin-top: clamp(16px, 2vw, 24px);
+}
+
+.phoneLead {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.phoneNote {
+  font-size: 13px;
+  color: var(--fg-2);
+}
+
+/* ————— non puoi venire: righe numerate ————— */
+
+.altRows {
+  border-top: 1px solid var(--line);
+}
+
+.altRow {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) auto;
+  gap: 10px clamp(14px, 2vw, 28px);
+  align-items: center;
+  padding: clamp(16px, 2vw, 24px) 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.altNum {
+  color: var(--fg-2);
+  align-self: start;
+  padding-top: 3px;
+}
+
+.altAction {
+  justify-self: end;
+}
+
+/* ————— come arrivare ————— */
+
+.reachBox {
+  max-width: 560px;
+}
+
+.reachBox > a {
+  margin-top: 4px;
+}
+
+/* ————— mobile ————— */
+
+@media (max-width: 860px) {
+  .cells3 {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .cells2 {
+    grid-template-columns: 1fr;
+  }
+
+  .altRow {
+    grid-template-columns: 36px minmax(0, 1fr);
+  }
+
+  .altAction {
+    grid-column: 2;
+    justify-self: start;
+  }
+}

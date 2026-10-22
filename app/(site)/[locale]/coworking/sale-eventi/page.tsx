@@ -150,8 +150,25 @@ export default async function SaleEventiPage({
                     />
                   )}
                 </div>
+                {/* codice, capienza e prezzo come nel mockup: le celle
+                    capienza lasciate in giallo dal cliente non si stampano */}
+                <div className={styles.roomTop}>
+                  <span className={`mono ${styles.roomNum}`}>
+                    {t.saleEventiPage.roomMeta[i]?.n}
+                  </span>
+                  {t.saleEventiPage.roomMeta[i]?.cap && (
+                    <span className={styles.roomCap}>
+                      {t.saleEventiPage.roomMeta[i].cap}
+                    </span>
+                  )}
+                </div>
                 <h3 className={styles.roomTitle}>{room.title}</h3>
                 <p className={styles.roomText}>{room.text}</p>
+                {t.saleEventiPage.roomMeta[i]?.price && (
+                  <p className={styles.roomPrice}>
+                    {t.saleEventiPage.roomMeta[i].price}
+                  </p>
+                )}
               </div>
             ))}
           </RevealGroup>

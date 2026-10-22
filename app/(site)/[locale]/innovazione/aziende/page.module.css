@@ -20,6 +20,31 @@
   margin-bottom: 0;
 }
 
+/* lista puntata sobria dentro la cella: trattino hairline per voce */
+.cellList {
+  list-style: none;
+  margin: 10px 0 0;
+  padding: 0;
+}
+
+.cellList li {
+  position: relative;
+  padding: 3px 0 3px 18px;
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--fg-2);
+}
+
+.cellList li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.72em;
+  width: 10px;
+  height: 1px;
+  background: var(--line);
+}
+
 /* mini-tabella dello scouting dentro la cella: un filo di respiro sopra */
 .stepsMini {
   margin-top: 16px;

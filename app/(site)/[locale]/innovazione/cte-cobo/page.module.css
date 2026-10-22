@@ -35,3 +35,22 @@
   letter-spacing: -0.03em;
   margin-bottom: 14px;
 }
+
+/* ————— loghi finanziamento: segnaposto tratteggiati in attesa degli SVG ————— */
+
+.finLogos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.finLogo {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  padding: 8px 14px;
+  border: 1px dashed var(--line);
+  border-radius: 8px;
+  color: var(--fg-2);
+}

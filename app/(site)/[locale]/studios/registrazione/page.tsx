@@ -13,12 +13,15 @@ import {
 } from '@/components/ui'
 import { SiteChrome } from '@/components/sections/SiteChrome'
 import { SectionPagesNav } from '@/components/sections/SectionPagesNav'
+import { PointsAccordion } from '@/components/sections/PointsAccordion'
 import { isLocale, localeHref } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
 import { pageAlternates } from '@/lib/seo'
 import { getSiteSettings } from '@/lib/sanity/queries'
 import liveBandImg from '@/public/img/foto/live-band.jpg'
+import { ContactForm } from '@/components/sections/ContactForm'
 import det from '@/components/sections/DetailPage.module.css'
+import { StudioContacts } from '@/components/sections/StudioContacts'
 import tp from '@/components/sections/TopicScreen.module.css'
 import styles from './page.module.css'
 
@@ -188,8 +191,7 @@ export default async function RegistrazionePage({
           </Reveal>
         </section>
 
-        {/* ————— remote recording in quattro passi (solo i titoli:
-            i testi dei passi arriveranno) ————— */}
+        {/* ————— remote recording in quattro passi ————— */}
         <Rule left="03" right="remote recording" />
         <section className={`wrap ${det.sez}`}>
           <Reveal as="h2" className={`display-thin ${det.h2}`}>
@@ -197,11 +199,12 @@ export default async function RegistrazionePage({
           </Reveal>
           <RevealGroup className={tp.steps}>
             {d.remoteSteps.map((s, i) => (
-              <div key={s} className={`rv ${tp.step}`}>
+              <div key={s.title} className={`rv ${tp.step}`}>
                 <span className={`mono ${tp.stepNum}`}>
                   {String(i + 1).padStart(2, '0')}
                 </span>
-                <h3 className={tp.stepTitle}>{s}</h3>
+                <h3 className={tp.stepTitle}>{s.title}</h3>
+                <p className={tp.stepText}>{s.text}</p>
               </div>
             ))}
           </RevealGroup>
@@ -249,35 +252,47 @@ export default async function RegistrazionePage({
           </RevealGroup>
         </section>
 
+        {/* ————— prima di prenotare: le domande dei mockup ————— */}
+        <Rule left="05" right={kickerOf(d.faqTitle)} />
+        <section className={`wrap ${det.sez} ${det.duo}`}>
+          <Reveal as="h2" className={`display-thin ${det.h2}`}>
+            {d.faqTitle}
+          </Reveal>
+          <PointsAccordion items={d.faq} />
+        </section>
+
         {/* ————— chiusura: raccontaci il progetto ————— */}
         <div className={`scheme-dark ${det.dark}`}>
-          <section className={`wrap ${det.sez}`}>
-            <Reveal as="h2" className={`display-thin ${det.ctaTitle}`}>
-              {d.ctaTitle}
-            </Reveal>
-            <Reveal as="p" className={det.ctaText} delay={80}>
-              {d.ctaText}
-            </Reveal>
-            <Reveal className={det.ctaRow} delay={160}>
-              <Button variant="azzurro" href={mailBook} external>
-                {d.book}
-              </Button>
-              {settings?.phone && (
-                <ArrowLink
-                  href={`tel:${settings.phone.replace(/\s/g, '')}`}
-                  external
-                >
-                  {settings.phone}
-                </ArrowLink>
-              )}
-            </Reveal>
-            <Reveal className={det.mailRows} delay={220}>
-              <a className={det.mailRow} href={`mailto:${email}`}>
-                <span className={det.mailAddr}>{email}</span>
-                <span className={det.mailNote}>
-                  Via del Tappezziere 4, Bologna
-                </span>
-              </a>
+          <section className={`wrap ${det.sez} ${det.duo}`}>
+            <div>
+              <Reveal as="h2" className={`display-thin ${det.ctaTitle}`}>
+                {d.ctaTitle}
+              </Reveal>
+              <Reveal as="p" className={det.ctaText} delay={80}>
+                {d.ctaText}
+              </Reveal>
+              <StudioContacts
+                email={email}
+                phone={settings?.phone}
+                notes={t.studioSub.notes}
+              />
+            </div>
+            {/* il form del mockup: mailto composto, servizio preselezionato */}
+            <Reveal delay={140}>
+              <ContactForm
+                to={email}
+                subject={d.ctaTitle}
+                topics={t.form.studioTopics}
+                defaultTopic={t.form.studioTopics[0]}
+                labels={{
+                  ...t.form,
+                  topic: t.form.topicNeed,
+                  messagePlaceholder: t.form.messagePlaceholderStudio,
+                }}
+                privacyHref={localeHref(locale, '/privacy')}
+                sendLabel={t.form.sendRequest}
+                company={false}
+              />
             </Reveal>
           </section>
         </div>

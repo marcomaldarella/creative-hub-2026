@@ -13,6 +13,8 @@ export type ButtonProps = {
   external?: boolean;
   onClick?: MouseEventHandler<HTMLElement>;
   type?: 'button' | 'submit' | 'reset';
+  /** solo per la variante <button>: stati "continua" dei flussi guidati */
+  disabled?: boolean;
   className?: string;
   ariaLabel?: string;
 };
@@ -24,6 +26,7 @@ export function Button({
   external = false,
   onClick,
   type = 'button',
+  disabled = false,
   className,
   ariaLabel,
 }: ButtonProps) {
@@ -54,7 +57,13 @@ export function Button({
   }
 
   return (
-    <button type={type} className={cls} onClick={onClick} aria-label={ariaLabel}>
+    <button
+      type={type}
+      className={cls}
+      onClick={onClick}
+      disabled={disabled}
+      aria-label={ariaLabel}
+    >
       {children}
     </button>
   );

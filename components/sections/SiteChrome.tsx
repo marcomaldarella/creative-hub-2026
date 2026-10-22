@@ -139,7 +139,7 @@ export async function SiteChrome({
       key: 'coworking',
       label: t.nav.coworking,
       base: '/coworking',
-      anchors: ['coworking', null, '/prenota', 'sale-eventi', 'metaverso'],
+      anchors: ['coworking', null, '/coworking/prenota', 'sale-eventi', 'metaverso'],
       cross: { 1: 'studio' },
     },
     {

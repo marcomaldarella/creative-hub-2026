@@ -85,10 +85,22 @@ export async function UniScreen({ locale }: { locale: Locale }) {
     return tch ? [tch] : []
   })
 
-  const subnavItems = Object.entries(u.subnav).map(([id, label]) => ({
-    id,
-    label,
-  }))
+  /* le storie degli ex studenti: online solo quelle vere. Finché il
+     cliente non manda frasi e nomi l'elenco è vuoto e i segnaposto
+     ("Nome Cognome" / "Name Surname") non si pubblicano */
+  const stories = (
+    u.stories.items as { quote: string; who: string; detail: string }[]
+  ).filter((s) => s.quote && !/in arrivo|coming soon/i.test(s.quote))
+
+  /* i numeri della fascia: la fonte è facoltativa, un dato può restare
+     senza citazione (o sparire) finché non è verificato */
+  const stats = u.numbers.stats as { n: string; l: string; src?: string }[]
+
+  const subnavItems = Object.entries(u.subnav)
+    /* una voce dell'indice senza sezione a cui portare è un vicolo
+       cieco: fuori dall'indice finché le storie non ci sono */
+    .filter(([id]) => id !== 'storie' || stories.length > 0)
+    .map(([id, label]) => ({ id, label }))
 
   const contactHref = localeHref(locale, '/chi-siamo#contatti')
   const openDayHref = localeHref(locale, '/academy/open-day')
@@ -157,11 +169,11 @@ export async function UniScreen({ locale }: { locale: Locale }) {
         <section className={`wrap ${styles.sez}`} id="numeri">
           <SectionHeader kicker={u.numbers.n} title={u.numbers.title} />
           <RevealGroup className={styles.stats}>
-            {u.numbers.stats.map((s, i) => (
+            {stats.map((s, i) => (
               <Reveal key={s.n} className={styles.stat} delay={i * 60}>
                 <div className={`display-thin ${styles.statN}`}>{s.n}</div>
                 <div className={styles.statL}>{s.l}</div>
-                {'src' in s && (
+                {s.src && (
                   <span className={`mono ${styles.statSrc}`}>{s.src}</span>
                 )}
               </Reveal>
@@ -276,25 +288,30 @@ export async function UniScreen({ locale }: { locale: Locale }) {
           </div>
         </section>
 
-        {/* ————— 06 storie ————— */}
-        <section className={`wrap ${styles.sez}`} id="storie">
-          <SectionHeader
-            kicker={u.stories.n}
-            title={u.stories.title}
-            lede={u.stories.lead}
-          />
-          <RevealGroup className={styles.testi}>
-            {u.stories.items.map((s, i) => (
-              <Reveal key={s.detail} className={styles.tcard} delay={i * 60}>
-                <q className={styles.tquote}>{s.quote}</q>
-                <div className={styles.twho}>
-                  {s.who}
-                  <span>{s.detail}</span>
-                </div>
-              </Reveal>
-            ))}
-          </RevealGroup>
-        </section>
+        {/* ————— 06 storie —————
+            finché le testimonianze vere non arrivano dal cliente la
+            sezione non si pubblica: i segnaposto ("Nome Cognome",
+            "Testimonianza in arrivo") non vanno online */}
+        {stories.length > 0 && (
+          <section className={`wrap ${styles.sez}`} id="storie">
+            <SectionHeader
+              kicker={u.stories.n}
+              title={u.stories.title}
+              lede={u.stories.lead}
+            />
+            <RevealGroup className={styles.testi}>
+              {stories.map((s, i) => (
+                <Reveal key={s.detail} className={styles.tcard} delay={i * 60}>
+                  <q className={styles.tquote}>{s.quote}</q>
+                  <div className={styles.twho}>
+                    {s.who}
+                    <span>{s.detail}</span>
+                  </div>
+                </Reveal>
+              ))}
+            </RevealGroup>
+          </section>
+        )}
 
         {/* ————— 07 domande ————— */}
         <section className={`wrap ${styles.sez}`} id="faq">

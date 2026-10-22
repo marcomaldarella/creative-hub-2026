@@ -1,0 +1,241 @@
+/* form di prenotazione open day: card bordata, radio custom a riga
+   (selezionata = nero pieno), campi hairline, bottone nero full-width.
+   Transizioni solo colore/bordo a 150ms (skill taste: stato frequente,
+   quasi niente animazione) */
+
+.card {
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: clamp(20px, 2.6vw, 32px);
+}
+
+.set {
+  border: 0;
+  padding: 0;
+  margin: 0 0 clamp(18px, 2vw, 26px);
+  min-width: 0;
+}
+
+.legend {
+  padding: 0;
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.col {
+  display: grid;
+  gap: 8px;
+}
+
+.row2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.row3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+/* ————— radio custom: riga bordata con pallino ————— */
+
+.opt {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 16px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  font-size: 15px;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  user-select: none;
+  transition:
+    background 150ms ease-out,
+    color 150ms ease-out,
+    border-color 150ms ease-out;
+}
+
+.opt:hover {
+  border-color: color-mix(in srgb, var(--fg) 45%, transparent);
+}
+
+/* selezionata: nero pieno, testo bianco */
+.on,
+.on:hover {
+  background: #0a0a0a;
+  border-color: #0a0a0a;
+  color: #fff;
+}
+
+/* pallino disegnato: cerchio vuoto, punto interno quando selezionata */
+.dot {
+  position: relative;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  border: 1.5px solid currentColor;
+  border-radius: 50%;
+}
+
+.on .dot::after {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+/* input vero ma invisibile: resta navigabile da tastiera */
+.srIn {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.opt:has(.srIn:focus-visible) {
+  outline: 2px solid var(--azzurro-ink);
+  outline-offset: 2px;
+}
+
+/* ————— campi ————— */
+
+.fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px 10px;
+  margin-bottom: clamp(18px, 2vw, 26px);
+}
+
+.field {
+  display: block;
+  min-width: 0;
+}
+
+.fieldWide {
+  grid-column: 1 / -1;
+}
+
+.fieldLabel {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin-bottom: 6px;
+}
+
+.fieldNote {
+  font-weight: 400;
+  color: var(--fg-2);
+}
+
+.field input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: 15px;
+  transition: border-color 150ms ease-out;
+}
+
+.field input:hover {
+  border-color: color-mix(in srgb, var(--fg) 45%, transparent);
+}
+
+/* ————— errori: bordo rosso sobrio + messaggio inline, mai alert ————— */
+
+.errLine,
+.errLine:hover {
+  border-color: #b3261e;
+}
+
+/* .field .errIn: due classi per vincere su `.field input` */
+.field .errIn,
+.field .errIn:hover {
+  border-color: #b3261e;
+}
+
+.errMsg {
+  font-size: 13px;
+  color: #b3261e;
+  margin-bottom: 12px;
+}
+
+/* ————— invio ————— */
+
+.submit {
+  display: block;
+  width: 100%;
+  padding: 15px 18px;
+  border: 1px solid #0a0a0a;
+  border-radius: 10px;
+  background: #0a0a0a;
+  color: #fff;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  transition: background 150ms ease-out;
+}
+
+.submit:hover {
+  background: #262626;
+}
+
+.legal {
+  margin-top: 10px;
+  font-size: 12.5px;
+  color: var(--fg-2);
+}
+
+.legal a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* honeypot: fuori dal flusso visivo ma presente nel DOM per i bot */
+.hp {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* invio in corso: il bottone resta fermo, solo tono abbassato */
+.submit:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+/* conferma sobria dopo l'invio */
+.done {
+  margin-top: 14px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+@media (max-width: 480px) {
+  .fields,
+  .row2 {
+    grid-template-columns: 1fr;
+  }
+}

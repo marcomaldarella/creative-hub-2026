@@ -20,7 +20,14 @@ export type PointsAccordionItem = {
  * di `Thumb` (stesso placeholder delle cover corso): si sostituisce da
  * solo appena arriva un'immagine vera.
  */
-export function PointsAccordion({ items }: { items: PointsAccordionItem[] }) {
+export function PointsAccordion({
+  items,
+  plain = false,
+}: {
+  items: PointsAccordionItem[]
+  /** solo testo, niente foto/placeholder: per le FAQ (risposte brevi) */
+  plain?: boolean
+}) {
   const [open, setOpen] = useState<number | null>(null)
 
   return (
@@ -55,9 +62,15 @@ export function PointsAccordion({ items }: { items: PointsAccordionItem[] }) {
             </button>
 
             <div className={isOpen ? `${styles.panel} ${styles.panelOpen}` : styles.panel}>
-              <div className={styles.panelInner}>
+              <div
+                className={
+                  plain
+                    ? `${styles.panelInner} ${styles.plainInner}`
+                    : styles.panelInner
+                }
+              >
                 <p className={styles.text}>{item.text}</p>
-                <Thumb index={i} fill className={styles.photo} />
+                {!plain && <Thumb index={i} fill className={styles.photo} />}
               </div>
             </div>
           </div>

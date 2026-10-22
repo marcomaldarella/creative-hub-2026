@@ -283,6 +283,62 @@ export function CourseTemplateShell({ css, html }: CourseTemplateShellProps) {
       window.addEventListener('hashchange', fromHash);
     }
 
+    // form "Avvisami" dei corsi finanziati: POST a /api/contact, stati
+    // pending/ok/errore gestiti qui — i testi arrivano dal template nei
+    // data-attribute del form (sono già localizzati)
+    const avv = root.querySelector<HTMLFormElement>('form[data-avvisami]');
+    avv?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const err = avv.querySelector<HTMLElement>('.avv-err');
+      const ok = avv.querySelector<HTMLElement>('.avv-ok');
+      const btn = avv.querySelector<HTMLButtonElement>('button[type="submit"]');
+      const fd = new FormData(avv);
+      const nome = String(fd.get('nome') ?? '').trim();
+      const email = String(fd.get('email') ?? '').trim();
+      if (!nome || !email) {
+        if (err) {
+          err.textContent = avv.dataset.missing ?? '';
+          err.hidden = false;
+        }
+        return;
+      }
+      if (err) err.hidden = true;
+      if (btn) {
+        btn.disabled = true;
+        btn.textContent = avv.dataset.sending ?? btn.textContent;
+      }
+      try {
+        const res = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            form: 'avvisami',
+            subject: avv.dataset.subject ?? 'Avvisami corsi finanziati',
+            fields: {
+              interessi: fd.getAll('interesse').map(String).join(', '),
+              nome,
+              email,
+              cellulare: String(fd.get('cellulare') ?? '').trim(),
+              residenzaER: fd.get('residenzaER') ? 'Sì' : 'No',
+            },
+          }),
+        });
+        if (!res.ok) throw new Error(String(res.status));
+        avv.classList.add('sent');
+        if (ok) ok.hidden = false;
+        track('invio_form', { origine: 'avvisami', intento: 'avvisami' });
+      } catch {
+        if (err) {
+          err.textContent = avv.dataset.error ?? '';
+          err.hidden = false;
+        }
+        if (btn) {
+          btn.disabled = false;
+          btn.textContent = avv.dataset.submit ?? btn.textContent;
+        }
+      }
+    });
+
     // scia fluida della home sui caroselli marcati data-fluid (studio e
     // "come conoscerci"): stessa simulazione (classe Fluid), inchiostro
     // azzurro, in difference sopra la sezione — solo mouse, mai con

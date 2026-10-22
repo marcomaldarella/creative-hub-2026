@@ -9,6 +9,7 @@ import { getDictionary } from '@/lib/i18n/dictionaries'
 import { pageAlternates } from '@/lib/seo'
 import { getSiteSettings } from '@/lib/sanity/queries'
 import corridoio1Img from '@/public/img/foto/corridoio-1.jpg'
+import { ContactForm } from '@/components/sections/ContactForm'
 import det from '@/components/sections/DetailPage.module.css'
 import tp from '@/components/sections/TopicScreen.module.css'
 import styles from './page.module.css'
@@ -204,7 +205,14 @@ export default async function IncubazioneAccelerazionePage({
           </RevealGroup>
           <Reveal>
             <span className={det.supportLabel}>{c.supportLabel}</span>
-            <p className={det.support}>{c.support.join(' · ')}</p>
+            {/* una pill hairline per voce, come da mockup */}
+            <div className={styles.supportPills}>
+              {c.support.map((s) => (
+                <span key={s} className={styles.supportPill}>
+                  {s}
+                </span>
+              ))}
+            </div>
           </Reveal>
         </section>
 
@@ -213,48 +221,61 @@ export default async function IncubazioneAccelerazionePage({
           <Reveal as="h2" className={`display-thin ${styles.finTitle}`}>
             {c.finTitle}
           </Reveal>
-          <Reveal as="p" className={det.fin} delay={80}>
+          {/* loghi istituzionali: pill tratteggiate finché non arrivano
+              gli SVG ufficiali (stesso pattern di cte-cobo) */}
+          <Reveal className={styles.finLogos} delay={60}>
+            {c.finLogos.map((l) => (
+              <span key={l} className={styles.finLogo}>
+                {l}
+              </span>
+            ))}
+          </Reveal>
+          <Reveal as="p" className={det.fin} delay={100}>
             {c.finText}
           </Reveal>
         </section>
 
         {/* ————— chiusura: candidati ————— */}
         <div className={`scheme-dark ${det.dark}`}>
-          <section className={`wrap ${det.sez}`}>
-            <Reveal as="h2" className={`display-thin ${det.ctaTitle}`}>
-              {c.ctaTitle}
-            </Reveal>
-            <Reveal as="p" className={det.ctaText} delay={80}>
-              {c.ctaText}
-            </Reveal>
-            <Reveal className={det.ctaRow} delay={160}>
-              <Button
-                variant="ghost"
-                className={styles.btnInk}
-                href={ctaMailto}
-                external
-              >
-                {c.ctaWrite}
-              </Button>
-              {settings?.phone && (
-                <ArrowLink
-                  href={`tel:${settings.phone.replace(/\s/g, '')}`}
-                  external
-                >
-                  {settings.phone}
-                </ArrowLink>
-              )}
-            </Reveal>
-            <RevealGroup className={det.mailRows}>
-              {t.innovation.mailNotes.map((m) => (
-                <div key={m.mail} className={`rv ${det.mailRow}`}>
-                  <a className={det.mailAddr} href={`mailto:${m.mail}`}>
-                    {m.mail}
+          <section className={`wrap ${det.sez} ${det.duo}`}>
+            <div>
+              <Reveal as="h2" className={`display-thin ${det.ctaTitle}`}>
+                {c.ctaTitle}
+              </Reveal>
+              <Reveal as="p" className={det.ctaText} delay={80}>
+                {c.ctaText}
+              </Reveal>
+              <RevealGroup className={det.mailRows}>
+                {t.innovation.mailNotes.map((m) => (
+                  <div key={m.mail} className={`rv ${det.mailRow}`}>
+                    <a className={det.mailAddr} href={`mailto:${m.mail}`}>
+                      {m.mail}
+                    </a>
+                    <span className={det.mailNote}>{m.note}</span>
+                  </div>
+                ))}
+                {settings?.phone && (
+                  <a
+                    className={`rv ${det.mailRow}`}
+                    href={`tel:${settings.phone.replace(/\s/g, '')}`}
+                  >
+                    <span className={det.mailAddr}>{settings.phone}</span>
                   </a>
-                  <span className={det.mailNote}>{m.note}</span>
-                </div>
-              ))}
-            </RevealGroup>
+                )}
+              </RevealGroup>
+            </div>
+            {/* il form del mockup: mailto composto, tema preselezionato */}
+            <Reveal delay={140}>
+              <ContactForm
+                to="info@createch.it"
+                subject={c.ctaTitle}
+                topics={t.form.innovationTopics}
+                defaultTopic={t.form.innovationTopics[2]}
+                labels={{ ...t.form, topic: t.form.topicTalk }}
+                privacyHref={localeHref(locale, '/privacy')}
+                sendLabel={c.ctaWrite}
+              />
+            </Reveal>
           </section>
         </div>
       </main>

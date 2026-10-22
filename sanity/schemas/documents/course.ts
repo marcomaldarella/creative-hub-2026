@@ -95,9 +95,38 @@ export const course = defineType({
       options: { layout: 'grid' },
     }),
     defineField({
+      name: 'editionStatus',
+      title: 'Stato dell’edizione',
+      description:
+        'La pillola di stato nelle griglie (formazione finanziata). Vuoto = nessuna pillola.',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Corso in svolgimento', value: 'in-corso' },
+          { title: 'Prossima edizione da annunciare', value: 'prossima-edizione' },
+          { title: 'Iscrizioni aperte', value: 'iscrizioni-aperte' },
+        ],
+        layout: 'radio',
+      },
+    }),
+    defineField({
       name: 'duration',
       title: 'Durata',
       type: 'localeString',
+    }),
+    defineField({
+      name: 'durationShort',
+      title: 'Durata — versione breve',
+      description:
+        'La riga meta della card nelle griglie, es. "3 mesi · 380 ore". Vuoto = si usa la durata estesa.',
+      type: 'localeString',
+    }),
+    defineField({
+      name: 'order',
+      title: 'Ordine in griglia',
+      description:
+        'Numero crescente: decide la sequenza delle card. Vuoto = in fondo, in ordine alfabetico.',
+      type: 'number',
     }),
     defineField({
       name: 'startDate',
@@ -225,6 +254,72 @@ export const course = defineType({
       description: 'Domanda nel titolo, risposta nel testo.',
       type: 'array',
       of: [schedaEntry],
+      fieldset: 'scheda',
+    }),
+    defineField({
+      name: 'packages',
+      title: 'Pacchetti e prezzi',
+      description:
+        'Le card prezzo delle lezioni su misura (es. prova 0€ / Smart / Standard). La sezione compare solo se ci sono pacchetti.',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            defineField({ name: 'name', title: 'Nome', type: 'localeString' }),
+            defineField({
+              name: 'price',
+              title: 'Prezzo',
+              description: 'Testo libero, es. "96€".',
+              type: 'string',
+            }),
+            defineField({
+              name: 'per',
+              title: 'Periodo',
+              description: 'Es. "/ mese".',
+              type: 'localeString',
+            }),
+            defineField({
+              name: 'unitNote',
+              title: 'Nota unitaria',
+              description: 'Es. "circa 24€ a lezione".',
+              type: 'localeString',
+            }),
+            defineField({ name: 'note', title: 'Nota', type: 'localeString' }),
+            defineField({
+              name: 'badge',
+              title: 'Badge',
+              description: 'Etichetta discreta sulla card, es. "Si parte da qui".',
+              type: 'localeString',
+            }),
+            defineField({
+              name: 'features',
+              title: 'Cosa include',
+              type: 'array',
+              of: [{ type: 'localeString' }],
+            }),
+            defineField({
+              name: 'plan',
+              title: 'Piano (valore per il form)',
+              description:
+                'Preselezionato nel form di prenotazione, es. "Smart". Vuoto per la lezione di prova.',
+              type: 'string',
+            }),
+          ],
+          preview: {
+            select: { title: 'name.it', subtitle: 'price' },
+          },
+        },
+      ],
+      fieldset: 'scheda',
+    }),
+    defineField({
+      name: 'packagesTerms',
+      title: 'Pacchetti — condizioni',
+      description:
+        'Righe sotto le card prezzo (es. "Puoi cambiare pacchetto in qualsiasi momento").',
+      type: 'array',
+      of: [{ type: 'localeString' }],
       fieldset: 'scheda',
     }),
     defineField({

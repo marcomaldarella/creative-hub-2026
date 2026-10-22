@@ -375,3 +375,159 @@
     gap: 2px;
   }
 }
+
+/* ————— tabella di contenuto: header con filo, righe hairline (stessa
+   grammatica della tabella formule del coworking e delle .steps) ————— */
+
+/* su mobile la tabella scorre dentro il suo contenitore, mai la pagina */
+.tableWrap {
+  overflow-x: auto;
+  margin-bottom: clamp(18px, 2.2vw, 28px);
+}
+
+.table {
+  width: 100%;
+  min-width: 420px;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.table thead th {
+  text-align: left;
+  font-weight: 400;
+  font-size: 12px;
+  color: var(--fg-2);
+  padding: 0 14px 10px 0;
+  border-bottom: 1px solid var(--fg);
+}
+
+.table tbody th {
+  text-align: left;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  font-size: 14px;
+  padding: 12px 14px 12px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.table tbody td {
+  padding: 12px 14px 12px 0;
+  border-bottom: 1px solid var(--line);
+  color: var(--fg-2);
+  white-space: nowrap;
+}
+
+/* ————— chip: pill hairline in riga (sedi, nomi) ————— */
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: clamp(18px, 2.2vw, 28px);
+}
+
+.chip {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  padding: 7px 13px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+}
+
+/* ————— griglia indice: le card d'apertura di una pagina organizzata
+   per bisogni, ognuna ancorata alla sua sezione. Stessa grammatica
+   hairline delle celle, con la freccia SVG che scende ————— */
+
+.index {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(10px, 1.2vw, 16px);
+  margin-bottom: clamp(18px, 2.2vw, 28px);
+}
+
+.idxCard {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-height: 100%;
+  padding: clamp(14px, 1.6vw, 20px);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  color: inherit;
+  text-decoration: none;
+  transition:
+    border-color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.idxCard:hover {
+  border-color: currentColor;
+  transform: translateY(-2px);
+}
+
+.idxN {
+  font-size: 12px;
+  color: var(--fg-2);
+}
+
+.idxTitle {
+  font-size: clamp(16px, 1.5vw, 20px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.idxText {
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--fg-2);
+}
+
+/* la freccia resta in fondo alla card, allineata a sinistra come nel
+   layout: su hover scivola di un soffio */
+.idxArrow {
+  display: inline-flex;
+  margin-top: auto;
+  padding-top: 14px;
+  transition: transform 0.3s ease;
+}
+
+.idxCard:hover .idxArrow {
+  transform: translateX(4px);
+}
+
+@media (max-width: 900px) {
+  .index {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .index {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ————— "in breve": riassunto in due righe, box scuro compatto ————— */
+
+.brief {
+  background: #0a0a0a;
+  border-radius: 12px;
+  padding: 16px 18px 18px;
+  margin-bottom: clamp(20px, 2.5vw, 32px);
+}
+
+.briefLabel {
+  display: block;
+  font-size: 11px;
+  color: #b3b3b3;
+  margin-bottom: 8px;
+}
+
+.briefText {
+  color: var(--osso);
+  font-size: 15px;
+  line-height: 1.45;
+  max-width: 58ch;
+}

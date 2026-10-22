@@ -1,5 +1,6 @@
 import { Fragment, type CSSProperties } from 'react'
 import {
+  Arrow,
   ArrowLink,
   Button,
   Reveal,
@@ -7,6 +8,8 @@ import {
   Rule,
   SectionHeader,
 } from '@/components/ui'
+import { AvvisamiForm } from '@/components/sections/AvvisamiForm'
+import { FundingBand } from '@/components/sections/FundingBand'
 import { PortableBlocks } from '@/components/sections/PortableBlocks'
 import { PointsAccordion, type PointsAccordionItem } from '@/components/sections/PointsAccordion'
 import { BgVideo } from '@/components/sections/BgVideo'
@@ -62,11 +65,15 @@ const SECTION_MEDIA: Record<
    Le sezioni con immagini inline restano al renderer libero. */
 type Def = { label?: string; text: string }
 type Cell = { title: string; text: string; defs: Def[] }
+type IdxCard = { label?: string; title: string; text?: string; anchor: string }
 type ShapeItem =
   | { kind: 'p'; text: string }
   | { kind: 'label'; text: string }
   | { kind: 'defs'; defs: Def[] }
   | { kind: 'cells'; cells: Cell[] }
+  | { kind: 'table'; caption?: string; columns: string[]; rows: string[][] }
+  | { kind: 'chips'; label?: string; items: string[] }
+  | { kind: 'index'; cards: IdxCard[] }
 
 function shapeBody(blocks?: unknown[] | null): ShapeItem[] | null {
   if (!blocks || blocks.length === 0) return null
@@ -82,6 +89,13 @@ function shapeBody(blocks?: unknown[] | null): ShapeItem[] | null {
     return defs
   }
 
+  const closeLabel = () => {
+    if (pendingLabel) {
+      items.push({ kind: 'label', text: pendingLabel })
+      pendingLabel = null
+    }
+  }
+
   for (const raw of blocks) {
     const b = raw as {
       _type?: string
@@ -89,6 +103,56 @@ function shapeBody(blocks?: unknown[] | null): ShapeItem[] | null {
       listItem?: string
       children?: { text?: string; marks?: string[] }[]
     }
+
+    /* tabella di contenuto: header con filo, righe hairline */
+    if (b._type === 'contentTable') {
+      const tb = raw as {
+        caption?: string
+        columns?: string[]
+        rows?: { cells?: string[] }[]
+      }
+      cell = null
+      closeLabel()
+      items.push({
+        kind: 'table',
+        caption: tb.caption,
+        columns: tb.columns ?? [],
+        rows: (tb.rows ?? []).map((r) => r.cells ?? []),
+      })
+      continue
+    }
+
+    /* fila di chip (sedi, nomi): pill hairline in riga */
+    if (b._type === 'chipList') {
+      const cl = raw as { label?: string; items?: string[] }
+      cell = null
+      closeLabel()
+      items.push({ kind: 'chips', label: cl.label, items: cl.items ?? [] })
+      continue
+    }
+
+    /* griglia indice: card ancorate alle sezioni della pagina (le
+       pagine organizzate per bisogni aprono così) */
+    if (b._type === 'indexGrid') {
+      const ig = raw as {
+        items?: { label?: string; title?: string; text?: string; anchor?: string }[]
+      }
+      const cards = (ig.items ?? [])
+        .filter((c) => c.title && c.anchor)
+        .map((c) => ({
+          label: c.label,
+          title: c.title as string,
+          text: c.text,
+          anchor: c.anchor as string,
+        }))
+      if (cards.length > 0) {
+        cell = null
+        closeLabel()
+        items.push({ kind: 'index', cards })
+      }
+      continue
+    }
+
     if (b._type !== 'block') return null
     const spans = b.children ?? []
     const text = spans.map((c) => c.text ?? '').join('').trim()
@@ -199,6 +263,10 @@ export async function TopicScreen({
     title: string
     lede: string
     points: (string | PointsAccordionItem)[]
+    /* obbligo normativo FSE+ (formazione finanziata): loghi + dicitura */
+    funding?: { logos: string[]; text: string }
+    /* seconda voce dell'occhiello: "academy · servizi studenti" */
+    eyebrow?: string
   }
   /* alcuni topic (es. servizi-studenti) hanno punti "ricchi" con testo
      esteso + foto: diventano un accordion invece della riga numerata */
@@ -260,7 +328,7 @@ export async function TopicScreen({
             </ArrowLink>
           </Reveal>
           <Reveal as="span" className={`mono ${styles.kicker}`} delay={60}>
-            {sezione.toLowerCase()}
+            {[sezione.toLowerCase(), copy.eyebrow].filter(Boolean).join(' · ')}
           </Reveal>
           <Reveal as="h1" className={`display-thin ${styles.title}`} delay={120}>
             {/* un \n nel dizionario spezza il titolo su più righe */}
@@ -339,6 +407,7 @@ export async function TopicScreen({
             pagine corso, il resto resta portable text ————— */}
         {sections.map((section, i) => {
           const body = l(section.body, locale)
+          const brief = l(section.brief, locale)
           const shaped = shapeBody(body)
           const pp = shaped ? plainPairs(shaped) : null
           const isFaq =
@@ -347,16 +416,27 @@ export async function TopicScreen({
             (pp?.pairs.every((p) => /^\d+[.)]\s/.test(p.title)) ?? false)
           return (
             <Fragment key={section._key}>
+              {/* l'occhiello della sezione sta SOLO sul filetto numerato:
+                  ripeterlo anche in testata lo stampava due volte di fila */}
               <Rule
                 left={String(i + 1).padStart(2, '0')}
-                right={l(section.kicker, locale)?.toLowerCase()}
+                right={l(section.kicker, locale)}
               />
-              <section className={styles.sez}>
+              {/* l'ancora della sezione, quando c'è, è il bersaglio
+                  delle card della griglia indice */}
+              <section className={styles.sez} id={section.anchor || undefined}>
                 <div className={`wrap ${styles.editorial}`}>
-                  <SectionHeader
-                    kicker={l(section.kicker, locale)?.toLowerCase()}
-                    title={l(section.title, locale)}
-                  />
+                  <SectionHeader title={l(section.title, locale)} />
+                  <div>
+                  {/* "in breve": riassunto in due righe, box scuro compatto */}
+                  {brief && (
+                    <div className={styles.brief}>
+                      <span className={`mono ${styles.briefLabel}`}>
+                        {t.topics.inBrief}
+                      </span>
+                      <p className={styles.briefText}>{brief}</p>
+                    </div>
+                  )}
                   {pp && (isFaq || isSteps) ? (
                     <div>
                       {pp.lead.map((p) => (
@@ -397,8 +477,91 @@ export async function TopicScreen({
                         if (it.kind === 'label')
                           return (
                             <span key={j} className={`mono ${styles.groupLabel}`}>
-                              {it.text.toLowerCase()}
+                              {it.text}
                             </span>
+                          )
+                        if (it.kind === 'table')
+                          return (
+                            <div key={j}>
+                              {it.caption && (
+                                <span className={`mono ${styles.groupLabel}`}>
+                                  {it.caption}
+                                </span>
+                              )}
+                              <div className={styles.tableWrap}>
+                                <table className={styles.table}>
+                                  <thead>
+                                    <tr>
+                                      {it.columns.map((c) => (
+                                        <th key={c} scope="col">
+                                          {c}
+                                        </th>
+                                      ))}
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    {it.rows.map((r, k) => (
+                                      <tr key={k}>
+                                        {r.map((c, x) =>
+                                          x === 0 ? (
+                                            <th key={x} scope="row">
+                                              {c}
+                                            </th>
+                                          ) : (
+                                            <td key={x}>{c}</td>
+                                          )
+                                        )}
+                                      </tr>
+                                    ))}
+                                  </tbody>
+                                </table>
+                              </div>
+                            </div>
+                          )
+                        if (it.kind === 'chips')
+                          return (
+                            <div key={j}>
+                              {it.label && (
+                                <span className={`mono ${styles.groupLabel}`}>
+                                  {it.label}
+                                </span>
+                              )}
+                              <div className={styles.chips}>
+                                {it.items.map((c) => (
+                                  <span key={c} className={styles.chip}>
+                                    {c}
+                                  </span>
+                                ))}
+                              </div>
+                            </div>
+                          )
+                        /* griglia indice: una card per bisogno, ognuna
+                           scende alla sua sezione (freccia SVG, mai
+                           carattere unicode) */
+                        if (it.kind === 'index')
+                          return (
+                            <div key={j} className={styles.index}>
+                              {it.cards.map((c) => (
+                                <a
+                                  key={c.anchor}
+                                  href={`#${c.anchor}`}
+                                  className={styles.idxCard}
+                                >
+                                  {c.label && (
+                                    <span className={`mono ${styles.idxN}`}>
+                                      {c.label}
+                                    </span>
+                                  )}
+                                  <h3 className={styles.idxTitle}>{c.title}</h3>
+                                  {c.text && (
+                                    <p className={styles.idxText}>{c.text}</p>
+                                  )}
+                                  <span className={styles.idxArrow}>
+                                    <Arrow dir="e" size={16} />
+                                  </span>
+                                </a>
+                              ))}
+                            </div>
                           )
                         if (it.kind === 'defs')
                           return (
@@ -460,25 +623,43 @@ export async function TopicScreen({
                   ) : (
                     <PortableBlocks value={body} />
                   )}
+                  </div>
                 </div>
               </section>
             </Fragment>
           )
         })}
 
-        {/* ————— cta ————— */}
-        <section className={`wrap ${styles.cta}`}>
-          <Reveal>
-            <Button href={shopHref(settings)} external variant="azzurro">
-              {t.nav.book}
-            </Button>
-          </Reveal>
-          <Reveal delay={80}>
-            <ArrowLink href={localeHref(locale, topic.base)} dir="e">
-              {t.nav.explore}
-            </ArrowLink>
-          </Reveal>
-        </section>
+        {/* ————— fascia FSE+ (obbligo normativo), se il topic la porta ————— */}
+        {copy.funding && (
+          <FundingBand logos={copy.funding.logos} text={copy.funding.text} />
+        )}
+
+        {/* ————— chiusura: sui corsi finanziati il form "Avvisami" (le
+            iscrizioni aprono a bando), altrove la CTA generica ————— */}
+        {topic.slug === 'formazione-finanziata' ? (
+          <section className={`scheme-dark ${styles.band}`} style={bandVars}>
+            <div className="wrap">
+              <AvvisamiForm
+                labels={t.avvisami}
+                privacyHref={localeHref(locale, '/privacy')}
+              />
+            </div>
+          </section>
+        ) : (
+          <section className={`wrap ${styles.cta}`}>
+            <Reveal>
+              <Button href={shopHref(settings)} external variant="azzurro">
+                {t.nav.book}
+              </Button>
+            </Reveal>
+            <Reveal delay={80}>
+              <ArrowLink href={localeHref(locale, topic.base)} dir="e">
+                {t.nav.explore}
+              </ArrowLink>
+            </Reveal>
+          </section>
+        )}
       </main>
     </SiteChrome>
   )
