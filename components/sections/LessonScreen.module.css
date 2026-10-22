@@ -8,36 +8,46 @@
 
 /* ————— testata ————— */
 
-/* La testata NON è più un pezzo della fascia azzurra come il resto
-   della pagina: è una banda a sé, nel blu brand portato in profondità
-   (--azzurro-profondo), coi testi chiari sopra. È la gerarchia del
-   mockup v4, dove l'hero sta su una foto scurita (testi bianchi, chip
-   traslucide, card del form in inchiostro) — da noi al posto della
-   foto c'è la tinta più scura della stessa famiglia.
-   Qui dentro si RISCRIVONO i token di zona, come fa .scheme-dark: il
-   form a destra legge solo bg/fg/fg-2/line/su-inchiostro e si adatta
-   da solo, senza una riga di CSS dedicata al form. */
-.head {
-  padding-top: clamp(32px, 4.5vw, 56px);
-  padding-bottom: clamp(40px, 5vw, 76px);
-  background: var(--azzurro-profondo);
+/* La testata NON è un pezzo della fascia azzurra come il resto della
+   pagina: è una BANDA a tutta larghezza nel blu brand portato in
+   profondità e poi spinto ancora più giù nell'antracite. È la
+   gerarchia del mockup v4, dove l'hero sta su una foto scurita (testi
+   bianchi, chip traslucide, card del form in inchiostro) — da noi al
+   posto della foto c'è la tinta più scura della stessa famiglia e
+   un'unica sorgente di luce in alto a destra, dietro al form.
+   Qui dentro si RISCRIVONO i token di zona, come fa .scheme-dark: i
+   figli leggono solo bg/fg/fg-2/line/su-inchiostro e si adattano da
+   soli, senza CSS dedicato. */
+.headBand {
+  position: relative;
+  /* la banda è l'unico fondo della testata: niente scroll orizzontale
+     anche con l'alone che sborda */
+  overflow: clip;
+  /* il glow sta in un livello proprio: `isolation` lo tiene dentro la
+     banda e non sotto il fondo della pagina */
+  isolation: isolate;
+  /* Blu più scuro (richiesta cliente): --azzurro-profondo è già il blu
+     brand mescolato all'antracite, qui lo si porta in abisso con la
+     STESSA ricetta — mai un hex inventato. Risultato ~#1B3D67: con i
+     testi a #FAFAFA sta a ~10:1. */
+  background: color-mix(in srgb, var(--azzurro-profondo) 60%, var(--petrolio));
   /* il `color` va dichiarato anche come proprietà vera: i testi senza
      un color: var(--fg) esplicito ereditano quello già calcolato sul
      wrapper di sezione (nero sul colore pieno) */
   color: #fafafa;
   --fg: #fafafa;
-  /* --bg qui è la superficie delle CARD dentro la banda (il form): un
-     gradino più profondo del fondo, così la card si legge come un
-     pannello senza bisogno di ombre */
-  --bg: color-mix(in srgb, #000000 40%, var(--azzurro-profondo));
-  --surface: color-mix(in srgb, #000000 24%, var(--azzurro-profondo));
+  /* --bg qui è la superficie delle CARD dentro la banda: un gradino
+     più profondo del fondo, così una card si legge come un pannello
+     senza bisogno di ombre */
+  --bg: color-mix(in srgb, #000000 46%, var(--azzurro-profondo));
+  --surface: color-mix(in srgb, #000000 28%, var(--azzurro-profondo));
   /* secondario SOLIDO (stessa regola del flood di sezione): un bianco
      trasparente sul blu profondo si impastava col fondo. Mix all'80%
      per restare sopra 4.5:1 sul fondo della banda. */
   --fg-2: color-mix(in srgb, #fafafa 80%, var(--azzurro-profondo));
-  --line: color-mix(in srgb, #fafafa 34%, transparent);
+  --line: color-mix(in srgb, #fafafa 30%, transparent);
   /* dentro la banda la superficie d'inchiostro è CHIARA (--fg vale
-     #fafafa): il tasto del form è chiaro e ci si scrive nel blu
+     #fafafa): un tasto pieno è chiaro e ci si scrive nel blu
      profondo, non in azzurro di sezione */
   --su-inchiostro: var(--azzurro-profondo);
   /* il rosso d'inchiostro sul blu profondo sta a 1.5:1: come nelle
@@ -45,32 +55,93 @@
   --errore: #ff9a94;
 }
 
+/* unica sorgente di luce della testata: un alone azzurro largo in alto
+   a destra, proprio dove sta il monolite nero del form — è quello che
+   fa leggere il nero come un blocco ritagliato e non come una macchia.
+   Decorazione sola non sarebbe ammessa: qui serve a far staccare la
+   CTA primaria. */
+.headBand::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(
+    48% 62% at 84% 12%,
+    color-mix(in srgb, var(--azzurro) 17%, transparent) 0%,
+    transparent 72%
+  );
+  pointer-events: none;
+}
+
+/* barra di contesto in testa alla banda: indietro a sinistra, dove ti
+   trovi a destra, e un filo a tutta larghezza che chiude la riga.
+   Il kicker NON è più un'etichetta impilata sopra l'H1: è
+   l'informazione di posizione, e sta dove si legge la posizione. */
+.headMeta {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px 24px;
+  flex-wrap: wrap;
+  padding-top: clamp(16px, 2vw, 24px);
+  padding-bottom: clamp(12px, 1.6vw, 18px);
+  border-bottom: 1px solid color-mix(in srgb, #fafafa 22%, transparent);
+}
+
 /* l'eyebrow della testata nel blu brand pieno: sul fondo profondo è
    l'unico accento di colore, come nel mockup dove la riga di contesto
    si stacca dal bianco dei titoli */
-.head .kicker {
+.headBand .kicker {
   color: var(--azzurro);
 }
 
 .back {
   display: block;
-  margin-bottom: clamp(20px, 2.5vw, 32px);
 }
 
 .kicker {
   display: block;
-  margin-bottom: 16px;
+}
+
+@media (max-width: 720px) {
+  /* in colonna la posizione viene prima del ritorno: è contesto, non
+     navigazione */
+  .headMeta {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    gap: 10px;
+  }
+}
+
+.head {
+  padding-top: clamp(34px, 4.6vw, 64px);
+  padding-bottom: clamp(40px, 5vw, 76px);
+}
+
+/* colonna di testo: il titolo apre la banda, la fila insegnanti la
+   chiude in basso appoggiata a un filo */
+.headText {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
 }
 
 .title {
   font-size: var(--fs-h2);
-  max-width: 18ch;
+  max-width: 17ch;
+  /* righe bilanciate: con due o tre parole per riga un H1 di questa
+     misura altrimenti lascia una riga orfana */
+  text-wrap: balance;
   margin-bottom: 18px;
 }
 
 .lede {
   font-size: var(--fs-lede);
-  max-width: 54ch;
+  /* misura corta: nella banda il testo convive col form, oltre le
+     ~46 battute la riga sbanda */
+  max-width: 46ch;
+  color: var(--fg-2);
   margin-bottom: clamp(18px, 2.2vw, 26px);
 }
 
@@ -78,7 +149,6 @@
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-bottom: clamp(22px, 2.6vw, 32px);
 }
 
 .badge {
@@ -96,12 +166,12 @@
    chip dell'hero su foto del mockup; la prima è l'informazione che
    vende (là è la chip "piena", qui nel blu brand con testo nero —
    sopra un colore pieno il testo è sempre nero) */
-.head .badge {
+.headBand .badge {
   background: color-mix(in srgb, #fafafa 13%, transparent);
   border-color: color-mix(in srgb, #fafafa 30%, transparent);
 }
 
-.head .badge:first-child {
+.headBand .badge:first-child {
   background: var(--azzurro);
   border-color: var(--azzurro);
   color: #000000;
@@ -109,15 +179,27 @@
 }
 
 /* testata a due colonne: a sinistra il testo, a destra il form di
-   prenotazione — la CTA primaria della pagina sta nell'hero (mockup) */
+   prenotazione — la CTA primaria della pagina sta nell'hero (mockup).
+   La colonna del form ha una larghezza di lavoro fissa (il form è
+   denso: sotto i 360px i campi si strozzano), il testo prende il
+   resto. */
 .headDuo {
   display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  grid-template-columns: minmax(0, 1fr) minmax(340px, 420px);
   gap: clamp(28px, 4vw, 72px);
-  align-items: start;
+  /* il form è sempre più alto della colonna di testo: allineati in
+     cima lascerebbero un pozzo vuoto sotto il titolo. Centrati, le due
+     masse si bilanciano e la banda legge come una composizione */
+  align-items: center;
 }
 
-@media (max-width: 960px) {
+@media (max-width: 1040px) {
+  .headDuo {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
+  }
+}
+
+@media (max-width: 880px) {
   .headDuo {
     grid-template-columns: 1fr;
   }
@@ -127,6 +209,35 @@
    con…" e le card pacchetto scrollano qui) */
 .formSlot {
   scroll-margin-top: calc(var(--nav-h, 72px) + 16px);
+  min-width: 0;
+}
+
+/* ————— l'evidenza nera del form nell'hero (richiesta cliente) —————
+   Nella banda blu il form è la cosa da fare: diventa un monolite NERO
+   con testo bianco. Si riscrivono i token di zona sullo slot, non il
+   CSS del form: dentro, LessonForm legge bg/fg/fg-2/line e si adatta.
+   Vale SOLO qui: l'istanza in chiusura resta nella fascia .scheme-dark
+   dov'è già leggibile. */
+.formInk {
+  --bg: #000000;
+  --surface: #0f0f0f;
+  --fg: #ffffff;
+  --fg-2: color-mix(in srgb, #ffffff 66%, #000000);
+  --line: color-mix(in srgb, #ffffff 24%, transparent);
+  /* sul nero la superficie d'inchiostro è bianca: il tasto pieno è
+     bianco e ci si scrive nero */
+  --su-inchiostro: #000000;
+  --errore: #ff9a94;
+  color: #ffffff;
+}
+
+/* il distacco dal blu: il nero da solo su un blu profondo vale 1.9:1,
+   quindi il blocco si stacca con tre cose insieme — il filo chiaro, il
+   peso dell'ombra (il blu non è nero, l'ombra si legge) e il filo
+   d'accento in testa che dice "questa è l'azione". */
+.formInk > form {
+  border-top: 2px solid var(--azzurro);
+  box-shadow: 0 30px 70px -24px rgba(0, 0, 0, 0.8);
 }
 
 /* ————— sezioni ————— */
@@ -596,7 +707,12 @@ a.defText {
   align-items: center;
   gap: 14px;
   flex-wrap: wrap;
-  margin-top: clamp(16px, 2vw, 24px);
+  /* chiude la colonna di testo appoggiandosi a un filo: la prova
+     sociale è l'ultima cosa che si legge prima del form */
+  align-self: stretch;
+  margin-top: clamp(26px, 3.2vw, 40px);
+  padding-top: clamp(16px, 2vw, 22px);
+  border-top: 1px solid color-mix(in srgb, #fafafa 16%, transparent);
 }
 
 .facesRow {

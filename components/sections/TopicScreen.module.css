@@ -604,31 +604,36 @@
    alle ancore delle sezioni sotto (mockup servizi studenti) */
 .indexGrid {
   display: grid;
+  /* tre per riga, come nel mockup (.needs) */
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1px;
-  margin: 8px 0 4px;
-  background: var(--line);
-  border: 1px solid var(--line);
+  gap: 14px;
+  margin: 34px 0 4px;
 }
 
+/* card bianca piena con angoli, come nel mockup (.need): il numero in
+   alto, il titolo nero, la riga di spiegazione e la freccia in basso */
 .indexCard {
-  display: grid;
-  align-content: start;
-  gap: 6px;
-  padding: clamp(14px, 1.6vw, 20px);
-  background: var(--bg);
-  color: inherit;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+  min-height: 170px;
+  padding: 22px 22px 20px;
+  background: #ffffff;
+  color: #0a0a0a;
+  border: 2px solid transparent;
+  border-radius: 16px;
   text-decoration: none;
-  transition: background 0.2s ease;
+  transition: border-color 0.15s var(--ease-out);
 }
 
 .indexCard:hover {
-  background: var(--surface);
+  border-color: #0a0a0a;
 }
 
 .indexNum {
   font-size: 12px;
-  color: var(--fg-2);
+  color: #6b6b6b;
 }
 
 .indexTitle {
@@ -641,7 +646,7 @@
 .indexText {
   font-size: 14px;
   line-height: 1.4;
-  color: var(--fg-2);
+  color: #4a4a4a;
 }
 
 @media (max-width: 860px) {

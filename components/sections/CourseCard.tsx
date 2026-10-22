@@ -1,9 +1,11 @@
 import type { CSSProperties } from 'react'
 import Link from 'next/link'
+import { Arrow } from '@/components/ui'
 import { Thumb } from './Thumb'
 import type { Locale } from '@/lib/i18n/config'
 import type { Course } from '@/lib/sanity/types'
 import { l } from '@/lib/sanity/l'
+import { getDictionary } from '@/lib/i18n/dictionaries'
 import styles from './CourseCard.module.css'
 
 export type CourseCardProps = {
@@ -36,6 +38,7 @@ export function CourseCard({
   className,
   style,
 }: CourseCardProps) {
+  const t = getDictionary(locale)
   const meta = [
     l(course.duration, locale),
     l(course.startDate, locale),
@@ -63,6 +66,12 @@ export function CourseCard({
         <h3 className={styles.courseTitle}>{l(course.title, locale)}</h3>
         <p className={styles.courseSummary}>{l(course.summary, locale)}</p>
         {meta && <span className={`mono ${styles.courseMeta}`}>{meta}</span>}
+        {/* il tasto di sempre, con la freccia disegnata: chiude la card
+            e sta in basso anche quando i testi sono più corti */}
+        <span className={styles.courseGo}>
+          {t.academy.cardCta}
+          <Arrow dir="e" size={13} />
+        </span>
       </div>
     </Link>
   )

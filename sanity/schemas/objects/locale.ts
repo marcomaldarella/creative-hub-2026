@@ -58,6 +58,8 @@ export const localeBlock = defineType({
         { type: 'contentTable' },
         { type: 'chipList' },
         { type: 'indexGrid' },
+        { type: 'noteBox' },
+        { type: 'contactList' },
       ],
     }),
     defineField({
@@ -70,6 +72,8 @@ export const localeBlock = defineType({
         { type: 'contentTable' },
         { type: 'chipList' },
         { type: 'indexGrid' },
+        { type: 'noteBox' },
+        { type: 'contactList' },
       ],
     }),
   ],

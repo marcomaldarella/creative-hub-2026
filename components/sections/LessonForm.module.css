@@ -245,7 +245,9 @@
   margin-bottom: 12px;
 }
 
-/* ————— tasto avanti / invio ————— */
+/* ————— tasto avanti / invio —————
+   Sul fondo nero il colore di sezione pesa troppo: il tasto resta
+   l'inchiostro pieno, che qui vale bianco con testo nero. */
 
 .go {
   display: inline-flex;

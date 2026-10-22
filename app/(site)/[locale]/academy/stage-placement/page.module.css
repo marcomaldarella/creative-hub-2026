@@ -1,0 +1,423 @@
+/* ————————————————————————————————————————————————————————————————
+   /academy/stage-placement — forme e misure proprie di questa pagina.
+
+   La pagina vive dentro la colata azzurra di SiteChrome (path
+   /academy/*): fondo --azzurro, inchiostro nero, --line a nero 28%.
+   Nel mockup è lo stesso impianto — testo nero sul blu, con le carte
+   bianche a staccare — quindi le superfici usano --bianco e le regole
+   --fg/--line, nessun colore scritto a mano.
+
+   GEOMETRIA — i valori qui sotto vengono dal CSS dentro
+   Downloads/pagine-html/academy/stage-placement.html, riportati nei
+   token del sito (stessi rapporti e stessa scala, non gli hex e i px
+   grezzi del mockup). Corrispondenze tenute alla lettera:
+
+     .nums     3 colonne, regola 2px in alto, cifra clamp(48px,7vw,96px)
+     .journey  3 colonne, gap 20px, carte BIANCHE raggio 16px, pad 26/24
+     .people   regola 2px sopra, righe separate da 2px, nome 24px
+     .ll       2 colonne uguali, gap 60px, passi impilati con il numero
+               a sinistra (46px) e la cifra nel blu brand
+     .where    4 colonne, regola 2px in alto, nome 19px + nota 13.5px
+     .abroad   carta BIANCA raggio 16px, pad 24/26, azione a destra
+
+   Le regole «strutturali» (quelle che aprono un blocco) sono a 2px
+   come nel mockup; quelle interne alle carte restano hairline a 1px.
+   Il raggio delle carte è quello del mockup: --card-r, non --radius
+   (che nel sito è 0) — è la forma che il cliente ha approvato qui.
+
+   Tutto il resto (testata, sezioni, fasce nere, titoli) arriva da
+   DetailPage.module.css e TopicScreen.module.css.
+   ———————————————————————————————————————————————————————————————— */
+
+.main {
+  /* raggio delle carte bianche, dal mockup (.stage e .abroad: 16px) */
+  --card-r: 16px;
+  /* regola strutturale: nel mockup i blocchi si aprono con 2px pieni */
+  --rule: 2px;
+  padding-top: var(--nav-h);
+}
+
+/* l'indice sticky copre il filo alto: le ancore si fermano più sotto,
+   come su open-day (il +18px globale non basta) */
+.main section[id],
+.main div[id] {
+  scroll-margin-top: calc(var(--header-h) + 76px);
+}
+
+/* ————— testata: i tre numeri come contatori —————
+   Nel mockup è la fascia `.nums`: regola 2px in alto, tre cifre display
+   enormi (clamp(48px,7vw,96px)), sotto la riga di testo in 15px/600 e
+   — per l'83% — la fonte del dato. La cifra la conta <Counter>; qui si
+   riporta la scala del mockup e si aggiunge la riga della fonte, che
+   <Counter> non prevede. */
+
+/* classe raddoppiata: deve battere .row di Counter.module.css, che ha
+   la stessa specificità e un ordine di bundle non garantito */
+.stats.stats {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(26px, 3vw, 40px) clamp(20px, 2.4vw, 40px);
+  margin-top: clamp(28px, 3.4vw, 40px);
+  padding-top: clamp(16px, 2vw, 22px);
+  border-top: var(--rule) solid var(--fg);
+}
+
+.stat {
+  min-width: 0;
+  /* nel mockup ogni cella respira a destra (padding 22px 24px 0 0) */
+  padding-right: clamp(0px, 1.6vw, 24px);
+}
+
+/* la cifra è il PRIMO figlio della radice di Counter (num, poi il
+   meter, poi la riga): <Counter> la tiene a clamp(44px,5.5vw,72px),
+   nel mockup è clamp(48px,7vw,96px) — il numero più grande della pagina */
+.counter > div:first-child {
+  font-size: clamp(50px, 7vw, 104px);
+  letter-spacing: -0.05em;
+  line-height: 0.95;
+}
+
+/* la riga sotto la cifra: nel mockup è inchiostro pieno, 15px/600,
+   larga al massimo 280px — non un testo secondario sbiadito */
+.counter > div:last-child {
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--fg);
+  max-width: 24ch;
+}
+
+/* la fonte del dato, sotto l'83%: più piccola della riga, è la nota
+   che certifica il numero. Il promemoria giallo del mockup
+   «verificare base del dato» NON si pubblica. */
+.source {
+  display: block;
+  margin-top: 8px;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--fg-2);
+  max-width: 28ch;
+}
+
+/* ————— 01 il percorso: tre carte bianche, anno per anno ————— */
+
+.journey {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(14px, 1.5vw, 20px);
+  margin-top: clamp(22px, 2.6vw, 30px);
+}
+
+.stage {
+  background: var(--bianco);
+  border-radius: var(--card-r);
+  padding: clamp(20px, 2.2vw, 26px) clamp(18px, 2vw, 24px);
+  /* il ritardo a scaletta dentro RevealGroup passa da --rvd inline:
+     la .rv globale non lo legge, va ridichiarato qui */
+  transition:
+    opacity var(--dur-slow) ease var(--rvd, 0s),
+    transform var(--dur-slow) var(--ease-out) var(--rvd, 0s);
+}
+
+/* la pastiglia del momento: «dal primo anno», «durante il corso» */
+.when {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 16px;
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+  background: var(--petrolio);
+  color: var(--osso);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.stageList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* dentro la carta le righe restano hairline, come nel mockup
+   (border-top 1px su rgba(ink,.15)) */
+.stageRow {
+  padding: 14px 0;
+  border-top: 1px solid var(--linea);
+}
+
+.stageLabel {
+  display: block;
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  color: var(--petrolio);
+}
+
+.stageText {
+  display: block;
+  margin-top: 3px;
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--grigio);
+}
+
+/* ————— 02 le storie: a tutta larghezza —————
+   Richiesta di Marco sul mockup: la sezione non sta in colonna. Il
+   titolo resta a sinistra e le storie corrono in due colonne fino al
+   gutter — il `wrap` del sito è già a tutta pagina (--max: 100%), qui
+   serve solo che il blocco non si stringa.
+   Dal mockup restano la regola 2px sopra l'elenco, i 2px fra una
+   storia e l'altra e il nome a 24px. */
+
+.storie {
+  display: grid;
+  grid-template-columns: minmax(0, 0.72fr) minmax(0, 2.28fr);
+  gap: clamp(24px, 3.5vw, 60px);
+  align-items: start;
+}
+
+/* nella colonna del titolo l'h2 non ha misura propria: la misura è la
+   colonna */
+.storieTitle {
+  max-width: none;
+  margin-bottom: 14px;
+}
+
+.storieLede {
+  max-width: 32ch;
+}
+
+.people {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 clamp(24px, 3vw, 52px);
+  border-top: var(--rule) solid var(--fg);
+}
+
+.person {
+  padding: clamp(20px, 2.4vw, 26px) 0;
+  border-bottom: var(--rule) solid var(--fg);
+  transition:
+    opacity var(--dur-slow) ease var(--rvd, 0s),
+    transform var(--dur-slow) var(--ease-out) var(--rvd, 0s);
+}
+
+/* dove sono adesso: la pastiglia del mockup */
+.now {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 12px;
+  padding: 4px 11px;
+  border-radius: var(--radius-pill);
+  background: var(--petrolio);
+  color: var(--osso);
+  font-size: 12.5px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.personName {
+  font-size: clamp(20px, 1.9vw, 24px);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  margin-bottom: 7px;
+}
+
+.personText {
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--fg-2);
+  max-width: 46ch;
+}
+
+/* ————— 03 label lab: la fascia nera —————
+   Due colonne uguali con 60px di gap (mockup .ll). A destra i tre
+   passi IMPILATI: numero a sinistra in 46px, titolo e testo uno sotto
+   l'altro — nel mockup è una <ol> con il contatore a cifra guida, non
+   una tabella a due colonne. */
+
+.ll {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(28px, 4vw, 60px);
+  align-items: start;
+}
+
+.llSteps {
+  margin-top: clamp(16px, 2vw, 20px);
+}
+
+.llStep {
+  display: grid;
+  grid-template-columns: 46px minmax(0, 1fr);
+  padding: 18px 0;
+  border-top: 1px solid var(--line);
+  transition:
+    opacity var(--dur-slow) ease var(--rvd, 0s),
+    transform var(--dur-slow) var(--ease-out) var(--rvd, 0s);
+}
+
+/* nel mockup la cifra guida dei passi è nel blu brand, non grigia */
+.llNum {
+  color: var(--accent-ink);
+}
+
+.llTitle {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-bottom: 3px;
+}
+
+.llText {
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--fg-2);
+}
+
+/* le pastiglie dei nomi: nel mockup sono più grandi delle chip di
+   sito (15px, bordo 1.5px) */
+.llChip.llChip {
+  font-size: 14.5px;
+  padding: 8px 14px;
+}
+
+/* ————— 04 la rete: dove fanno stage, per mestiere ————— */
+
+.where {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0 clamp(20px, 2.4vw, 36px);
+  margin-top: clamp(16px, 2vw, 20px);
+  border-top: var(--rule) solid var(--fg);
+}
+
+.whereCol {
+  padding: clamp(18px, 2.2vw, 24px) 0;
+  transition:
+    opacity var(--dur-slow) ease var(--rvd, 0s),
+    transform var(--dur-slow) var(--ease-out) var(--rvd, 0s);
+}
+
+.whereLabel {
+  display: block;
+  margin-bottom: 12px;
+  font-size: 13px;
+}
+
+.whereList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.whereItem {
+  padding: 5px 0;
+}
+
+.whereName {
+  display: block;
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.whereNote {
+  display: block;
+  margin-top: 2px;
+  font-size: 13.5px;
+  line-height: 1.4;
+  color: var(--fg-2);
+}
+
+/* la nota Erasmus+ in coda: carta bianca con la sua azione a destra */
+.abroad {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 18px clamp(20px, 2.4vw, 40px);
+  margin-top: clamp(24px, 3vw, 30px);
+  padding: clamp(20px, 2.3vw, 24px) clamp(20px, 2.4vw, 26px);
+  background: var(--bianco);
+  border-radius: var(--card-r);
+}
+
+.abroadText {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--petrolio);
+  max-width: 64ch;
+}
+
+.abroadText + .abroadText {
+  margin-top: 10px;
+}
+
+/* ————— 05 domande ————— */
+
+.faq {
+  margin-top: clamp(16px, 2vw, 20px);
+}
+
+/* ————— chiusura open day ————— */
+
+.endKicker {
+  display: block;
+  margin-bottom: 14px;
+  color: var(--accent-ink);
+}
+
+/* ————— schermi stretti —————
+   Il mockup collassa a 900px: .nums e .journey e .ll a una colonna,
+   .where a due. Qui le soglie seguono quelle del sito. */
+
+@media (max-width: 1100px) {
+  .where {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .storie {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .storieLede {
+    max-width: 52ch;
+  }
+}
+
+@media (max-width: 900px) {
+  .journey,
+  .ll {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .people {
+    gap: 0 clamp(20px, 3vw, 32px);
+  }
+}
+
+@media (max-width: 700px) {
+  .stats.stats {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .stat {
+    padding-right: 0;
+  }
+  .counter > div:first-child {
+    font-size: clamp(52px, 16vw, 80px);
+  }
+  .counter > div:last-child,
+  .source {
+    max-width: 42ch;
+  }
+  .people,
+  .where {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .abroad {
+    align-items: flex-start;
+  }
+}

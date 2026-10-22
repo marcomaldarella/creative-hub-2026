@@ -485,7 +485,8 @@
         "text": "Sì, tutti i corsi universitari prevedono una modalità part-time: stesso programma, distribuito su più tempo."
       }
     ],
-    "pathsCourse": "corso"
+    "pathsCourse": "corso",
+    "cardCta": "scopri il corso"
   },
   "studios": {
     "kicker": "studio · zona roveri, bologna",
@@ -1191,6 +1192,37 @@
         {
           "label": "Leggi le storie",
           "href": "#storie"
+        }
+      ],
+      "subnav": {
+        "prev": "sezione precedente",
+        "next": "sezione successiva",
+        "items": {
+          "percorso": "il percorso",
+          "storie": "le storie",
+          "label-lab": "label lab",
+          "rete": "la rete",
+          "domande": "domande"
+        }
+      },
+      "stats": [
+        {
+          "value": 83,
+          "suffix": "%",
+          "label": "degli studenti lavora nel settore",
+          "source": "Dato certificato dalla Regione Emilia-Romagna"
+        },
+        {
+          "value": 20,
+          "suffix": "",
+          "label": "studenti al massimo per corso universitario: ognuno ha un percorso seguito",
+          "source": ""
+        },
+        {
+          "value": 27,
+          "suffix": "",
+          "label": "anni di rapporti con studi, club ed etichette, dal 1999",
+          "source": ""
         }
       ]
     },

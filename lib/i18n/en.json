@@ -485,7 +485,8 @@
         "text": "Yes, every university programme has a part-time option: same programme, spread over more time."
       }
     ],
-    "pathsCourse": "course"
+    "pathsCourse": "course",
+    "cardCta": "discover the course"
   },
   "studios": {
     "kicker": "studio · roveri district, bologna",
@@ -1191,6 +1192,37 @@
         {
           "label": "Read the stories",
           "href": "#storie"
+        }
+      ],
+      "subnav": {
+        "prev": "previous section",
+        "next": "next section",
+        "items": {
+          "percorso": "the path",
+          "storie": "the stories",
+          "label-lab": "label lab",
+          "rete": "the network",
+          "domande": "questions"
+        }
+      },
+      "stats": [
+        {
+          "value": 83,
+          "suffix": "%",
+          "label": "of students work in the industry",
+          "source": "Data certified by the Emilia-Romagna Region"
+        },
+        {
+          "value": 20,
+          "suffix": "",
+          "label": "students at most per university course: each one follows a guided path",
+          "source": ""
+        },
+        {
+          "value": 27,
+          "suffix": "",
+          "label": "years of relationships with studios, clubs and labels, since 1999",
+          "source": ""
         }
       ]
     },

@@ -12,18 +12,21 @@ a.course {
   color: var(--card-ink);
   display: flex;
   flex-direction: column;
-  border: 1px solid #0A0A0A;
+  /* nero su nero: la card non è un riquadro sullo sfondo, è lo sfondo
+     stesso — a dividerle bastano la foto e lo spazio (richiesta cliente) */
+  border: 0;
   border-radius: 0;
   overflow: hidden;
-  background: #0A0A0A;
+  background: transparent;
   transition:
-    border-color var(--dur) ease,
     opacity var(--dur-slow) ease var(--rvd, 0s),
     transform var(--dur-slow) var(--ease-out) var(--rvd, 0s);
 }
 
-a.course:hover {
-  border-color: var(--card-ink);
+/* niente reazione al puntatore: la card è nera su nero e resta ferma
+   (richiesta cliente) — l'invito è il tasto in fondo */
+a.course {
+  height: 100%;
 }
 
 /* variante libera ("in evidenza"): niente riquadro né inversione — la
@@ -89,6 +92,19 @@ a.courseFlat .courseSummary {
   font-size: var(--fs-small);
   color: var(--fg-2);
   margin-bottom: 18px;
+}
+
+/* il tasto di sempre: sta in fondo, con la freccia disegnata */
+.courseGo {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: auto;
+  padding-top: clamp(14px, 1.6vw, 20px);
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: #fafafa;
 }
 
 .courseMeta {

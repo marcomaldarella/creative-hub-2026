@@ -39,6 +39,11 @@ export type Topic = {
    * punti, video, corsi.
    */
   pointsLast?: boolean
+  /**
+   * false = niente banda video sotto la testata: la pagina apre con il
+   * solo testo, come nel mockup (servizi studenti).
+   */
+  heroMedia?: boolean
 }
 
 export const TOPICS: Topic[] = [
@@ -64,7 +69,12 @@ export const TOPICS: Topic[] = [
     pointsLast: true,
   },
   { slug: 'open-day', base: '/academy', key: 'openDay' },
-  { slug: 'servizi-studenti', base: '/academy', key: 'serviziStudenti' },
+  {
+    slug: 'servizi-studenti',
+    base: '/academy',
+    key: 'serviziStudenti',
+    heroMedia: false,
+  },
 
   /* ————— studio ————— */
   /* registrazione, mix-mastering e affitto-studio hanno route statiche

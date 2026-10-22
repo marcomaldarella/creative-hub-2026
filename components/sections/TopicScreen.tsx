@@ -418,7 +418,7 @@ export async function TopicScreen({
         )}
 
         {/* ————— banda video full-bleed di sezione ————— */}
-        {!pointsTail && (
+        {!pointsTail && topic.heroMedia !== false && (
           <Reveal className={styles.heroMedia} delay={120}>
             <BgVideo
               src={media.src}

@@ -158,3 +158,110 @@ export const indexGrid = defineType({
     }),
   },
 })
+
+/**
+ * Riquadro nota: un'etichetta breve e un testo dentro una scheda chiara.
+ * Serve ai blocchi che nel mockup stanno in una card bianca a sé — il
+ * caso vero è il paragrafo "in English" dei servizi studenti, che va
+ * marcato anche con la lingua (`lang`) per i lettori di schermo.
+ */
+export const noteBox = defineType({
+  name: 'noteBox',
+  title: 'Riquadro nota',
+  type: 'object',
+  fields: [
+    defineField({
+      name: 'label',
+      title: 'Etichetta',
+      description: 'Riga breve in testa al riquadro, es. in English',
+      type: 'string',
+    }),
+    defineField({
+      name: 'text',
+      title: 'Testo',
+      type: 'text',
+      rows: 4,
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: 'lang',
+      title: 'Lingua del testo',
+      description:
+        "Codice lingua se il testo NON è nella lingua della pagina, es. en. Serve ai lettori di schermo.",
+      type: 'string',
+    }),
+  ],
+  preview: {
+    select: { label: 'label', text: 'text' },
+    prepare: ({ label, text }: { label?: string; text?: string }) => ({
+      title: label || 'Riquadro nota',
+      subtitle: text,
+    }),
+  },
+})
+
+/**
+ * Una voce dei contatti: etichetta minuscola, recapito in evidenza e
+ * nota di servizio sotto. L'indirizzo (`href`) rende il recapito
+ * cliccabile — tel:, mailto:, https://wa.me/…
+ */
+export const contactRow = defineType({
+  name: 'contactRow',
+  title: 'Recapito',
+  type: 'object',
+  fields: [
+    defineField({
+      name: 'label',
+      title: 'Etichetta',
+      description: 'es. telefono, whatsapp, email',
+      type: 'string',
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: 'value',
+      title: 'Recapito',
+      type: 'string',
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: 'href',
+      title: 'Indirizzo',
+      description: 'tel:+39…, mailto:…, https://wa.me/… — lascia vuoto per un recapito non cliccabile',
+      type: 'string',
+    }),
+    defineField({ name: 'note', title: 'Nota', type: 'string' }),
+  ],
+  preview: {
+    select: { label: 'label', value: 'value' },
+    prepare: ({ label, value }: { label?: string; value?: string }) => ({
+      title: value || 'Recapito',
+      subtitle: label,
+    }),
+  },
+})
+
+/**
+ * I recapiti in fila: la fascia di chiusura delle pagine organizzate per
+ * bisogni (mockup servizi studenti) — tre colonne su fondo scuro.
+ */
+export const contactList = defineType({
+  name: 'contactList',
+  title: 'Recapiti',
+  type: 'object',
+  fields: [
+    defineField({
+      name: 'items',
+      title: 'Voci',
+      type: 'array',
+      of: [{ type: 'contactRow' }],
+      validation: (rule) => rule.min(1),
+    }),
+  ],
+  preview: {
+    select: { items: 'items' },
+    prepare: ({ items }: { items?: { label?: string }[] }) => ({
+      title: 'Recapiti',
+      subtitle: (items ?? []).map((it) => it.label).filter(Boolean).join(' · '),
+    }),
+  },
+})

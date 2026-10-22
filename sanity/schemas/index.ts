@@ -1,9 +1,12 @@
 import { localeString, localeText, localeBlock } from './objects/locale'
 import {
   chipList,
+  contactList,
+  contactRow,
   contentTable,
   indexCard,
   indexGrid,
+  noteBox,
   tableRow,
 } from './objects/content'
 import { siteSettings } from './documents/siteSettings'
@@ -27,6 +30,9 @@ export const schemaTypes = [
   chipList,
   indexCard,
   indexGrid,
+  noteBox,
+  contactRow,
+  contactList,
   // documenti
   siteSettings,
   teacher,
