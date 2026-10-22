@@ -187,3 +187,18 @@
   color: var(--fg-2);
   white-space: nowrap;
 }
+
+
+/* otto formule allungano il riquadro: nome e cellulare si affiancano
+   a metà e metà, così il modulo resta compatto (richiesta cliente) */
+.pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+@media (max-width: 560px) {
+  .pair {
+    grid-template-columns: 1fr;
+  }
+}

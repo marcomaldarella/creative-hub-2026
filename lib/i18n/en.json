@@ -774,6 +774,18 @@
         "on request",
         "private room",
         "teams and startups"
+      ],
+      [
+        "Teaching room",
+        "159,50€",
+        "room",
+        "courses and workshops"
+      ],
+      [
+        "Culture area",
+        "175€",
+        "space",
+        "events and meetings"
       ]
     ],
     "salaCta": "Need a meeting room? From €90",
@@ -788,7 +800,9 @@
       "flexible desk",
       "fixed desk, with drawers",
       "a year of quick desk",
-      "tailored, for your team"
+      "tailored, for your team",
+      "for courses and workshops",
+      "for events and meetings"
     ],
     "bookNote": "We confirm within one working day.",
     "quickBook": {

@@ -774,6 +774,18 @@
         "su richiesta",
         "stanza chiusa",
         "team e startup"
+      ],
+      [
+        "Sala didattica",
+        "159,50€",
+        "sala",
+        "corsi e workshop"
+      ],
+      [
+        "Area culture",
+        "175€",
+        "spazio",
+        "eventi e incontri"
       ]
     ],
     "salaCta": "Ti serve una sala riunioni? Da 90€",
@@ -788,7 +800,9 @@
       "postazione libera",
       "scrivania fissa, con cassettiera",
       "un anno di quick desk",
-      "su misura, per il team"
+      "su misura, per il team",
+      "per corsi e workshop",
+      "per eventi e incontri"
     ],
     "bookNote": "Ti confermiamo entro un giorno lavorativo.",
     "quickBook": {

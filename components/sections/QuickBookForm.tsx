@@ -124,6 +124,9 @@ export function QuickBookForm({
         <span className={styles.label}>{labels.from}</span>
         <input className={styles.input} type="date" name="da" />
       </label>
+      {/* nome e cellulare affiancati: il riquadro resta compatto anche
+          con otto formule in elenco */}
+      <div className={styles.pair}>
       <label className={styles.field}>
         <span className={styles.label}>{labels.name}</span>
         <input
@@ -149,6 +152,7 @@ export function QuickBookForm({
           aria-invalid={missing || undefined}
         />
       </label>
+      </div>
       <label className={styles.hp} aria-hidden="true">
         {labels.hp}
         <input type="text" name="_hp" tabIndex={-1} autoComplete="off" />
