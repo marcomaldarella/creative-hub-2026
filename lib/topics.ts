@@ -44,6 +44,11 @@ export type Topic = {
    * solo testo, come nel mockup (servizi studenti).
    */
   heroMedia?: boolean
+  /**
+   * true = sezioni a tutta larghezza, col titolo SOPRA il contenuto
+   * invece che di fianco (servizi studenti, come nel mockup).
+   */
+  stacked?: boolean
 }
 
 export const TOPICS: Topic[] = [
@@ -74,6 +79,7 @@ export const TOPICS: Topic[] = [
     base: '/academy',
     key: 'serviziStudenti',
     heroMedia: false,
+    stacked: true,
   },
 
   /* ————— studio ————— */

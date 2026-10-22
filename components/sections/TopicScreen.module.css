@@ -173,46 +173,48 @@
    (nere, testi nel colore di sezione: ri-asseriscono i token da sole).
    12 colonne sotto, span 3 per card: così l'ultima riga incompleta si
    espande a riempire la larghezza (3 orfane → span 4, 2 → 6, 1 → 12) */
+/* tre per riga, mai quattro (richiesta cliente): le card respirano e
+   la foto resta leggibile. L'ultima riga incompleta si allarga per non
+   lasciare buchi. */
 .grid {
   display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: 20px;
 }
 
 .grid > * {
-  grid-column: span 3;
+  grid-column: span 2;
 }
 
 @media (min-width: 1101px) {
-  .grid > *:nth-child(4n + 1):nth-last-child(3),
-  .grid > *:nth-child(4n + 1):nth-last-child(3) ~ * {
-    grid-column: span 4;
+  /* ultima riga con due card: metà e metà */
+  .grid > *:nth-child(3n + 1):nth-last-child(2),
+  .grid > *:nth-child(3n + 1):nth-last-child(2) ~ * {
+    grid-column: span 3;
   }
 
-  .grid > *:nth-child(4n + 1):nth-last-child(2),
-  .grid > *:nth-child(4n + 1):nth-last-child(2) ~ * {
+  /* ultima riga con una sola card: tutta la riga */
+  .grid > *:nth-child(3n + 1):nth-last-child(1) {
     grid-column: span 6;
-  }
-
-  .grid > *:nth-child(4n + 1):nth-last-child(1) {
-    grid-column: span 12;
   }
 }
 
 @media (max-width: 1100px) {
-  .grid > * {
-    grid-column: span 6;
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .grid > *:nth-child(2n + 1):last-child {
-    grid-column: span 12;
+  .grid > *,
+  .grid > *:nth-child(3n + 1):nth-last-child(2),
+  .grid > *:nth-child(3n + 1):nth-last-child(2) ~ *,
+  .grid > *:nth-child(3n + 1):nth-last-child(1) {
+    grid-column: auto;
   }
 }
 
 @media (max-width: 560px) {
-  .grid > *,
-  .grid > *:nth-child(2n + 1):last-child {
-    grid-column: span 12;
+  .grid {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -670,4 +672,21 @@
   align-items: center;
   gap: 20px;
   margin-top: clamp(24px, 3vw, 40px);
+}
+
+
+/* ————— pagine che vogliono i blocchi a tutta larghezza —————
+   il titolo sta sopra al contenuto, non di fianco: serve alla griglia
+   indice e, più in generale, alle sezioni di servizi studenti. */
+.editorial:has(.indexGrid) {
+  grid-template-columns: 1fr;
+  gap: clamp(20px, 2.4vw, 32px);
+}
+
+
+/* sezioni impilate: il titolo sta sopra e il contenuto prende tutta la
+   larghezza (richiesta cliente su servizi studenti) */
+.stacked .editorial {
+  grid-template-columns: 1fr;
+  gap: clamp(18px, 2.2vw, 28px);
 }

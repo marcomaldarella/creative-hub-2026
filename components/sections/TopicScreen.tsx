@@ -364,7 +364,11 @@ export async function TopicScreen({
 
   return (
     <SiteChrome locale={locale} path={topic.base}>
-      <main className={styles.main}>
+      <main
+        className={`${styles.main}${
+          topic.stacked ? ` ${styles.stacked}` : ''
+        }`}
+      >
         {/* ————— testata compatta ————— */}
         <header className={`wrap ${styles.head}`}>
           <Reveal className={styles.back}>
