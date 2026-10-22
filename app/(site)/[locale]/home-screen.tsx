@@ -20,6 +20,7 @@ import { EcosystemBento } from '@/components/sections/EcosystemBento'
 import { MethodCards } from '@/components/sections/MethodCards'
 import { NodeCards } from '@/components/sections/NodeCards'
 import { ArticleCard } from '@/components/magazine/ArticleCard'
+import { EDITORIAL_ATTIVO } from '@/lib/flags'
 import { localeHref, type Locale } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
 import { getHomeData } from '@/lib/sanity/queries'
@@ -324,7 +325,8 @@ export async function HomeScreen({ locale }: { locale: Locale }) {
         )}
         </div>
 
-        {/* ————— magazine ————— */}
+        {/* ————— magazine: nascosto finché editorial non riapre ————— */}
+        {EDITORIAL_ATTIVO && (
         <section className={styles.sez}>
           <div className="wrap">
             <SectionHeader
@@ -358,6 +360,7 @@ export async function HomeScreen({ locale }: { locale: Locale }) {
             </Reveal>
           </div>
         </section>
+        )}
 
         {/* ————— open day (azzurro) ————— */}
         <section className={`${styles.sez} ${styles.openday}`}>

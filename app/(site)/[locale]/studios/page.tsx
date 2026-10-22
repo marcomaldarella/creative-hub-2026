@@ -14,6 +14,7 @@ import { SiteChrome } from '@/components/sections/SiteChrome'
 import { SectionPagesNav } from '@/components/sections/SectionPagesNav'
 import { PointsAccordion } from '@/components/sections/PointsAccordion'
 import { ArticleCard } from '@/components/magazine/ArticleCard'
+import { EDITORIAL_ATTIVO } from '@/lib/flags'
 import { ContactForm } from '@/components/sections/ContactForm'
 import det from '@/components/sections/DetailPage.module.css'
 import { StudioContacts } from '@/components/sections/StudioContacts'
@@ -307,7 +308,7 @@ export default async function StudiosPage({
         </section>
 
         {/* ————— dal magazine: due articoli a tema studio, fascia nera ————— */}
-        {editorial.length > 0 && (
+        {EDITORIAL_ATTIVO && editorial.length > 0 && (
           <section className={`${styles.sez} scheme-dark`}>
             <div className="wrap">
               <SectionHeader

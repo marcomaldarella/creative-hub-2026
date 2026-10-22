@@ -4,6 +4,7 @@ import { getDictionary } from '@/lib/i18n/dictionaries'
 import { localeHref, type Locale } from '@/lib/i18n/config'
 import { getSiteSettings } from '@/lib/sanity/queries'
 import { findTopic, type TopicBase } from '@/lib/topics'
+import { EDITORIAL_ATTIVO } from '@/lib/flags'
 import type { SiteSettings } from '@/lib/sanity/types'
 
 export type SiteChromeProps = {
@@ -169,13 +170,19 @@ export async function SiteChrome({
     },
   ]
 
+  /* editorial spento: sparisce da menu e footer, e dal cross-link delle
+     altre voci che ci puntavano */
+  const sezioniVisibili = EDITORIAL_ATTIVO
+    ? sections
+    : sections.filter((s) => s.key !== 'magazine')
+
   const baseOf = Object.fromEntries(sections.map((s) => [s.key, s.base]))
   const labelOf = Object.fromEntries(sections.map((s) => [s.key, s.label]))
 
   const clean = path.startsWith('/') ? path : `/${path}`
   const flood = floodOf(clean)
 
-  const items = sections.map((s) => {
+  const items = sezioniVisibili.map((s) => {
     const sub = t.nav.sub[s.key]
     const cross: Partial<Record<number, SectionKey>> = s.cross ?? {}
     /* da una pagina a colore pieno, solo il pannello della SEZIONE

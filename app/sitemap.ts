@@ -2,6 +2,7 @@ import type { MetadataRoute } from 'next'
 import { client } from '@/lib/sanity/client'
 import { TOPIC_PATHS } from '@/lib/topics'
 import { getBookableProducts } from '@/lib/woocommerce'
+import { EDITORIAL_ATTIVO } from '@/lib/flags'
 
 const BASE = 'https://bologna-creativehub.it'
 
@@ -11,7 +12,6 @@ const SECTIONS = [
   '/studios',
   '/coworking',
   '/innovazione',
-  '/magazine',
   '/coworking/prenota',
   '/chi-siamo',
   '/privacy',
@@ -52,11 +52,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.6,
       })),
     ...products.map((p) => ({ path: `/prenota/${p.slug}`, lastModified: now, priority: 0.6 })),
-    ...articles.map((a) => ({
-      path: `/magazine/${a.slug}`,
-      lastModified: new Date(a._updatedAt),
-      priority: 0.6,
-    })),
+    /* editorial spento: le schede restano raggiungibili ma fuori dalla
+       sitemap finché la sezione non si riaccende (lib/flags) */
+    ...(EDITORIAL_ATTIVO
+      ? articles.map((a) => ({
+          path: `/magazine/${a.slug}`,
+          lastModified: new Date(a._updatedAt),
+          priority: 0.6,
+        }))
+      : []),
   ]
 
   return paths.flatMap(({ path, lastModified, priority }) => [
