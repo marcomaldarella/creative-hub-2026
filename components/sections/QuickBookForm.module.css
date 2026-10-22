@@ -131,11 +131,13 @@
 
 .opt {
   display: flex;
-  align-items: baseline;
+  /* nome e prezzo centrati sull'altezza della riga: dentro la pillola
+     accesa il testo non deve stare appeso in alto */
+  align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding: 11px 10px;
-  margin: 0 -10px;
+  padding: 13px 12px;
+  margin: 0 -12px;
   border-bottom: 1px solid var(--line);
   cursor: pointer;
   transition: background 0.15s var(--ease-out);
