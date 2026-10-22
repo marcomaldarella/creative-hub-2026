@@ -134,8 +134,18 @@
   padding-bottom: clamp(28px, 3.5vw, 48px);
 }
 
+/* le due colonne pesano uguale e la scheda dei dati si allunga fino a
+   chiudere alla stessa altezza del testo (richiesta cliente) */
 .duoWide.duoWide {
-  grid-template-columns: minmax(0, 2.6fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: stretch;
+}
+
+.duoWide .infoCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
 }
 
 @media (max-width: 860px) {

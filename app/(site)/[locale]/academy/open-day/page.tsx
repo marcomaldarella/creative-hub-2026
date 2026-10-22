@@ -247,7 +247,7 @@ export default async function OpenDayPage({
         </section>
 
         {/* ————— od.02 · lezioni su misura ————— */}
-        <section id="lezioni" className={`${styles.blockSez} ${styles.sezLine}`}>
+        <section id="lezioni" className={`${styles.blockSez} ${styles.white}`}>
           <div className={`wrap ${det.duo} ${styles.duoWide} ${styles.duoPad}`}>
             <div>
               <Reveal as="span" className={`mono ${det.kicker}`}>
