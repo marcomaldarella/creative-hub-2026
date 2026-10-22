@@ -23,10 +23,17 @@
   align-items: end;
 }
 
+/* sempre l'iniziale maiuscola, mai tutto maiuscolo */
+.kicker::first-letter {
+  text-transform: uppercase;
+}
+
 .kicker {
   display: block;
   letter-spacing: 0;
-  color: var(--azzurro-ink);
+  /* nero sul colore di sezione, come gli altri occhielli delle fasce
+     fotografiche (richiesta cliente: i corridoi come la banano room) */
+  color: var(--fg);
   margin-bottom: 10px;
 }
 

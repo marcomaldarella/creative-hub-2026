@@ -247,9 +247,12 @@ export default async function CoworkingPage({
 
           {/* riquadro prenota: fisso accanto al contenuto */}
           <aside className={styles.book} aria-label={t.coworking.bookCta}>
-            <div className={styles.bookFrom}>
-              {t.coworking.bookFrom}{' '}
-              <b>{t.coworking.bookPrice}</b> {t.coworking.bookUnit}
+            <div className={styles.bookHead}>
+              <div className={styles.bookFrom}>
+                {t.coworking.bookFrom}{' '}
+                <b>{t.coworking.bookPrice}</b> {t.coworking.bookUnit}
+              </div>
+              <span className={styles.bookChoose}>{t.coworking.bookChoose}</span>
             </div>
             {/* legenda e sottodidascalie del mockup: ogni formula dice
                 in una riga a cosa serve. ⚠️ l'unità di tempo di quick e
@@ -261,7 +264,6 @@ export default async function CoworkingPage({
               labels={t.coworking.quickBook}
               subject={t.coworking.bookCta}
               moreHref={prenota}
-              optionsLabel={t.coworking.bookChoose}
               options={t.coworking.tableRows.map((row, i) => ({
                 name: row[0],
                 hint: t.coworking.bookHints[i],

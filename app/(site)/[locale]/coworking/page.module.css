@@ -616,3 +616,44 @@
     white-space: normal;
   }
 }
+
+
+/* testata del riquadro: prezzo a sinistra, "scegli la formula" allineata
+   a destra sulla stessa riga */
+.bookHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.bookHead .bookFrom {
+  margin-bottom: 0;
+}
+
+/* tabella delle formule su mobile: scorre invece di accavallarsi, e
+   ogni cella sta sulla sua riga senza spezzarsi */
+@media (max-width: 760px) {
+  .cmp {
+    min-width: 560px;
+  }
+
+  .cmp tbody th {
+    white-space: nowrap;
+  }
+}
+
+
+/* occhielli delle fasce fotografiche sempre in nero sul colore di
+   sezione: i corridoi come la banano room (richiesta cliente) */
+.corridoiKicker,
+.photoKicker {
+  color: var(--fg);
+}
+
+.corridoiKicker::first-letter,
+.photoKicker::first-letter {
+  text-transform: uppercase;
+}
