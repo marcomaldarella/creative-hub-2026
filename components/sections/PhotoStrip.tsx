@@ -38,7 +38,8 @@ export function PhotoStrip({
     (el: HTMLUListElement) => el.clientWidth * 0.62,
     []
   )
-  const rail = useScrollRail<HTMLUListElement>(step)
+  const { attach, measure, nudge, progress, thumb, atStart, atEnd, hasOverflow } =
+    useScrollRail<HTMLUListElement>(step)
 
   return (
     <div className={styles.block}>
@@ -53,9 +54,9 @@ export function PhotoStrip({
       )}
 
       <ul
-        ref={rail.ref}
+        ref={attach}
         className={`scroller scroller-snap ${styles.strip}`}
-        onScroll={rail.measure}
+        onScroll={measure}
         tabIndex={0}
         aria-label={labels.hint}
       >
@@ -76,7 +77,12 @@ export function PhotoStrip({
       </ul>
 
       <ScrollerControls
-        rail={rail}
+        progress={progress}
+        thumb={thumb}
+        atStart={atStart}
+        atEnd={atEnd}
+        hasOverflow={hasOverflow}
+        nudge={nudge}
         labels={labels}
         className={`wrap ${styles.controls}`}
       />

@@ -33,14 +33,15 @@ export function UniSubnav({
   const [active, setActive] = useState(0)
   const barRef = useRef<HTMLDivElement>(null)
   /* la sfumatura al taglio destro compare solo se la fila sborda */
-  const { ref: jumpRef, overflow } = useScrollerOverflow<HTMLElement>()
+  const { attach: attachJump, el: jumpEl, overflow } =
+    useScrollerOverflow<HTMLElement>()
   const activeRef = useRef(0)
   activeRef.current = active
 
   /* su mobile la fila delle voci scorre: la voce attiva si porta da
      sola al centro, altrimenti la spia vive fuori dallo schermo */
   useEffect(() => {
-    const nav = jumpRef.current
+    const nav = jumpEl
     if (!nav || nav.scrollWidth <= nav.clientWidth) return
     const a = nav.children[active] as HTMLElement | undefined
     if (!a) return
@@ -48,7 +49,7 @@ export function UniSubnav({
       left: a.offsetLeft - (nav.clientWidth - a.offsetWidth) / 2,
       behavior: 'smooth',
     })
-  }, [active])
+  }, [active, jumpEl])
 
   useEffect(() => {
     let raf = 0
@@ -104,7 +105,7 @@ export function UniSubnav({
         <nav
           className={`scroller ${overflow ? 'scroller-fade-end' : ''} ${styles.jump}`}
           aria-label={course}
-          ref={jumpRef}
+          ref={attachJump}
         >
           {items.map((it, k) => (
             <a

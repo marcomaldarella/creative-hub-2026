@@ -2266,7 +2266,8 @@
       "doneTitle": "Request sent.",
       "doneText": "We send the proposal Monday to Friday.",
       "privacyBefore": "By sending this you accept the ",
-      "privacyLink": "privacy policy"
+      "privacyLink": "privacy policy",
+      "roomCta": "see the room and book"
     }
   },
   "innovationSub": {

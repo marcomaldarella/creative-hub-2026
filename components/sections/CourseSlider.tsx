@@ -25,21 +25,31 @@ export function CourseSlider({ children, labels, className }: CourseSliderProps)
     const first = el.firstElementChild as HTMLElement | null
     return first ? first.offsetWidth + 20 : el.clientWidth * 0.4
   }, [])
-  const rail = useScrollRail<HTMLDivElement>(step)
+  const { attach, measure, nudge, progress, thumb, atStart, atEnd, hasOverflow } =
+    useScrollRail<HTMLDivElement>(step)
 
   return (
     <div className={className}>
       <div
-        ref={rail.ref}
+        ref={attach}
         className={`scroller scroller-snap ${styles.strip}`}
-        onScroll={rail.measure}
+        onScroll={measure}
         tabIndex={0}
         aria-label={labels.hint}
       >
         {children}
       </div>
 
-      <ScrollerControls rail={rail} labels={labels} className={styles.controls} />
+      <ScrollerControls
+        progress={progress}
+        thumb={thumb}
+        atStart={atStart}
+        atEnd={atEnd}
+        hasOverflow={hasOverflow}
+        nudge={nudge}
+        labels={labels}
+        className={styles.controls}
+      />
     </div>
   )
 }

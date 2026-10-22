@@ -2266,7 +2266,8 @@
       "doneTitle": "Richiesta inviata.",
       "doneText": "Ti mandiamo la proposta dal lunedì al venerdì.",
       "privacyBefore": "Inviando accetti l'",
-      "privacyLink": "informativa privacy"
+      "privacyLink": "informativa privacy",
+      "roomCta": "vedi la sala e prenota"
     }
   },
   "innovationSub": {

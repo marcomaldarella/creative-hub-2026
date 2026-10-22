@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, type FormEvent } from 'react'
-import { Button } from '@/components/ui'
+import { Arrow, Button } from '@/components/ui'
 import type { Locale } from '@/lib/i18n/config'
 import type { Dictionary } from '@/lib/i18n/dictionaries'
 import flow from './BookingFlow.module.css'
@@ -23,11 +23,15 @@ export function EventBuilder({
   labels,
   lede,
   privacyHref,
+  shopLinks,
 }: {
   locale: Locale
   labels: Labels
   lede: string
   privacyHref: string
+  /* sala proposta → scheda prodotto sullo shop: dove si prenota davvero
+     (lo shop resta su WooCommerce). Chiave = id del tipo di evento. */
+  shopLinks?: Partial<Record<string, string>>
 }) {
   const [typeId, setTypeId] = useState(labels.types[0].id)
   const [size, setSize] = useState(labels.sizes[0])
@@ -43,8 +47,11 @@ export function EventBuilder({
   const type = labels.types.find((t) => t.id === typeId) ?? labels.types[0]
   /* la sala proposta viene dal tipo di evento; una riunione che non sta
      nella sala riunioni passa a uno spazio più grande (come nel mockup) */
-  const room =
-    type.id === 'riunione' && size !== labels.sizes[0] ? labels.roomBig : type.room
+  const bigRoom = type.id === 'riunione' && size !== labels.sizes[0]
+  const room = bigRoom ? labels.roomBig : type.room
+  /* la riunione che cresce passa a uno spazio più grande: cambia anche
+     la scheda prodotto da aprire */
+  const roomUrl = shopLinks?.[bigRoom ? 'grande' : type.id]
 
   const toggleExtra = (x: string) =>
     setExtras((prev) =>
@@ -210,7 +217,20 @@ export function EventBuilder({
           <dt>{labels.sDate}</dt>
           <dd>{shownDate}</dd>
           <dt>{labels.sRoom}</dt>
-          <dd>{room}</dd>
+          <dd>
+            {room}
+            {roomUrl && (
+              <a
+                className={styles.roomLink}
+                href={roomUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {labels.roomCta}
+                <Arrow dir="ne" size={12} />
+              </a>
+            )}
+          </dd>
           <dt>{labels.sExtra}</dt>
           <dd>{extras.length ? extras.join(', ') : labels.noExtra}</dd>
         </dl>

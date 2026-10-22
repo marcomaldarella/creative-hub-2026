@@ -53,14 +53,15 @@ export function TeacherStrip({
     (el: HTMLUListElement) => Math.min(el.clientWidth * 0.8, 340),
     []
   )
-  const rail = useScrollRail<HTMLUListElement>(step)
+  const { attach, measure, nudge, progress, thumb, atStart, atEnd, hasOverflow } =
+    useScrollRail<HTMLUListElement>(step)
 
   return (
     <div className={styles.wrap}>
       <ul
-        ref={rail.ref}
+        ref={attach}
         className={`scroller scroller-snap ${styles.strip}`}
-        onScroll={rail.measure}
+        onScroll={measure}
         tabIndex={0}
         aria-label={labels.hint}
       >
@@ -111,7 +112,15 @@ export function TeacherStrip({
         </li>
       </ul>
 
-      <ScrollerControls rail={rail} labels={labels} />
+      <ScrollerControls
+        progress={progress}
+        thumb={thumb}
+        atStart={atStart}
+        atEnd={atEnd}
+        hasOverflow={hasOverflow}
+        nudge={nudge}
+        labels={labels}
+      />
     </div>
   )
 }

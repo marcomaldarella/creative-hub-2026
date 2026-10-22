@@ -1,13 +1,16 @@
 'use client'
 
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { Arrow } from './Arrow'
 import styles from './Scroller.module.css'
 
 export type ScrollerLabels = { prev: string; next: string; hint: string }
 
 export type ScrollRail<T extends HTMLElement> = {
-  ref: React.RefObject<T | null>
+  /** callback ref da mettere sull'elemento che scorre */
+  attach: (el: T | null) => void
+  /** l'elemento, quando è montato */
+  el: T | null
   /** da passare a onScroll dell'elemento che scorre */
   measure: () => void
   nudge: (dir: 1 | -1) => void
@@ -28,46 +31,50 @@ export type ScrollRail<T extends HTMLElement> = {
  *
  * `step` dice quanto vale un passo di freccia (lo decide il nastro:
  * una card, due ritratti, mezzo schermo…).
+ *
+ * L'elemento sta in uno state, non in una ref: così niente ref
+ * attraversa il render (regola react-hooks/refs) e l'osservatore parte
+ * appena il nodo è montato.
  */
 export function useScrollRail<T extends HTMLElement>(
   step: (el: T) => number
 ): ScrollRail<T> {
-  const ref = useRef<T | null>(null)
+  const [el, setEl] = useState<T | null>(null)
   const [progress, setProgress] = useState(0)
   const [thumb, setThumb] = useState(1)
   const [atStart, setAtStart] = useState(true)
   const [atEnd, setAtEnd] = useState(false)
 
   const measure = useCallback(() => {
-    const el = ref.current
     if (!el) return
     const max = el.scrollWidth - el.clientWidth
     setThumb(el.scrollWidth > 0 ? el.clientWidth / el.scrollWidth : 1)
     setProgress(max > 0 ? el.scrollLeft / max : 0)
     setAtStart(el.scrollLeft <= 1)
     setAtEnd(max <= 1 || el.scrollLeft >= max - 1)
-  }, [])
+  }, [el])
 
+  /* la prima misura la fa l'osservatore stesso: ResizeObserver chiama
+     la callback appena si mette in ascolto (niente setState nel corpo
+     dell'effetto, niente render a cascata) */
   useEffect(() => {
-    const el = ref.current
     if (!el) return
-    measure()
     const ro = new ResizeObserver(measure)
     ro.observe(el)
     return () => ro.disconnect()
-  }, [measure])
+  }, [el, measure])
 
   const nudge = useCallback(
     (dir: 1 | -1) => {
-      const el = ref.current
       if (!el) return
       el.scrollBy({ left: dir * step(el), behavior: 'smooth' })
     },
-    [step]
+    [el, step]
   )
 
   return {
-    ref,
+    attach: setEl,
+    el,
     measure,
     nudge,
     progress,
@@ -83,18 +90,28 @@ export function useScrollRail<T extends HTMLElement>(
  * sinistra, le due frecce a destra, sotto al contenuto. Una forma sola,
  * una misura sola, lo stesso stato disabilitato agli estremi.
  */
-export function ScrollerControls<T extends HTMLElement>({
-  rail,
+export function ScrollerControls({
+  progress,
+  thumb,
+  atStart,
+  atEnd,
+  hasOverflow,
+  nudge,
   labels,
   className,
 }: {
-  rail: ScrollRail<T>
+  progress: number
+  thumb: number
+  atStart: boolean
+  atEnd: boolean
+  hasOverflow: boolean
+  nudge: (dir: 1 | -1) => void
   labels: ScrollerLabels
   className?: string
 }) {
-  if (!rail.hasOverflow) return null
+  if (!hasOverflow) return null
   /* il pollice non scende sotto il 12%: più sottile non si vede */
-  const w = Math.max(rail.thumb, 0.12)
+  const w = Math.max(thumb, 0.12)
 
   return (
     <div className={[styles.controls, className].filter(Boolean).join(' ')}>
@@ -103,7 +120,7 @@ export function ScrollerControls<T extends HTMLElement>({
           className={styles.thumb}
           style={{
             width: `${w * 100}%`,
-            left: `${rail.progress * (100 - w * 100)}%`,
+            left: `${progress * (100 - w * 100)}%`,
           }}
         />
       </div>
@@ -112,8 +129,8 @@ export function ScrollerControls<T extends HTMLElement>({
           type="button"
           className={styles.nav}
           aria-label={labels.prev}
-          disabled={rail.atStart}
-          onClick={() => rail.nudge(-1)}
+          disabled={atStart}
+          onClick={() => nudge(-1)}
         >
           <Arrow dir="w" size={16} />
         </button>
@@ -121,8 +138,8 @@ export function ScrollerControls<T extends HTMLElement>({
           type="button"
           className={styles.nav}
           aria-label={labels.next}
-          disabled={rail.atEnd}
-          onClick={() => rail.nudge(1)}
+          disabled={atEnd}
+          onClick={() => nudge(1)}
         >
           <Arrow dir="e" size={16} />
         </button>
@@ -138,21 +155,20 @@ export function ScrollerControls<T extends HTMLElement>({
  * sta tutta.
  */
 export function useScrollerOverflow<T extends HTMLElement>() {
-  const ref = useRef<T | null>(null)
+  const [el, setEl] = useState<T | null>(null)
   const [overflow, setOverflow] = useState(false)
 
   useEffect(() => {
-    const el = ref.current
     if (!el) return
+    /* come sopra: la prima misura arriva dall'osservatore */
     const check = () => setOverflow(el.scrollWidth - el.clientWidth > 1)
-    check()
     const ro = new ResizeObserver(check)
     ro.observe(el)
     Array.from(el.children).forEach((c) => ro.observe(c))
     return () => ro.disconnect()
-  }, [])
+  }, [el])
 
-  return { ref, overflow }
+  return { attach: setEl, el, overflow }
 }
 
 /**
@@ -165,16 +181,12 @@ export function ScrollerRow({
   children,
   ...rest
 }: React.ComponentPropsWithoutRef<'nav'>) {
-  const { ref, overflow } = useScrollerOverflow<HTMLElement>()
+  const { attach, overflow } = useScrollerOverflow<HTMLElement>()
 
   return (
     <nav
-      ref={ref as React.RefObject<HTMLElement>}
-      className={[
-        'scroller',
-        overflow ? 'scroller-fade-end' : '',
-        className,
-      ]
+      ref={attach}
+      className={['scroller', overflow ? 'scroller-fade-end' : '', className]
         .filter(Boolean)
         .join(' ')}
       {...rest}

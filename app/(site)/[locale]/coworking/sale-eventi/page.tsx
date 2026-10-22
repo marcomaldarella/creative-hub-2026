@@ -11,6 +11,7 @@ import { isLocale, localeHref } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
 import { pageAlternates } from '@/lib/seo'
 import { getPageById, getSiteSettings } from '@/lib/sanity/queries'
+import { getBookableProducts } from '@/lib/woocommerce'
 import { l } from '@/lib/sanity/l'
 import banano1Img from '@/public/img/foto/banano-1.jpg'
 import banano2Img from '@/public/img/foto/banano-2.jpg'
@@ -30,6 +31,13 @@ const PAST_PHOTOS = [
 ]
 
 export const dynamic = 'force-dynamic'
+
+/* la sala proposta dal configuratore → slug del prodotto sullo shop */
+const ROOM_SHOP_SLUGS: Record<string, string> = {
+  riunione: 'sala-riunioni',
+  corso: 'sala-didattica',
+  grande: 'area-culture',
+}
 
 /* foto di sede abbinate alle sale, nell'ordine del documento Sanity:
    riunioni, didattica, area culture, aula magna, showroom, banano */
@@ -79,6 +87,18 @@ export default async function SaleEventiPage({
     getPageById('sale-eventi'),
     getSiteSettings(),
   ])
+
+  /* tipo di evento → scheda prodotto della sala sullo shop: la
+     prenotazione si chiude lì, il configuratore resta per la richiesta
+     su misura (le sale senza prodotto non mostrano il rimando) */
+  const products = await getBookableProducts()
+  const bySlug = new Map(products.map((p) => [p.slug, p.permalink]))
+  const roomShopLinks = Object.fromEntries(
+    Object.entries(ROOM_SHOP_SLUGS).flatMap(([id, slug]) => {
+      const url = bySlug.get(slug)
+      return url ? [[id, url] as const] : []
+    })
+  )
 
   /* dal documento Sanity: sale (h3+testo), già successo (• etichetta),
      faq (domanda+risposta) — restano editabili dallo Studio */
@@ -220,6 +240,7 @@ export default async function SaleEventiPage({
             labels={t.saleEventiPage.builder}
             lede={t.saleEventiPage.builderLede}
             privacyHref={localeHref(locale, '/privacy')}
+            shopLinks={roomShopLinks}
           />
         </section>
 
