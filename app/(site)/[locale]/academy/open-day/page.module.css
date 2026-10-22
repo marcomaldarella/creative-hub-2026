@@ -450,6 +450,14 @@
   padding: 30px;
 }
 
+/* la fascia nera delle domande dei genitori: il wrap sta dentro, così
+   il nero arriva ai due bordi */
+.parentsDark {
+  background: #000000;
+}
+
+
+
 .prenotaDark {
   background: #000000;
   color: #fafafa;

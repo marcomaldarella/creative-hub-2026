@@ -224,8 +224,10 @@ export default async function OpenDayPage({
           </div>
         </section>
 
-        {/* ————— per chi accompagna: le domande dei genitori ————— */}
-        <section className={`wrap ${det.sez}`}>
+        {/* ————— per chi accompagna: le domande dei genitori —————
+            nel mockup è una fascia nera */}
+        <section className={`scheme-dark ${det.sez} ${styles.parentsDark}`}>
+          <div className="wrap">
           <Reveal as="span" className={`mono ${det.kicker}`}>
             {od.parents.kicker}
           </Reveal>
@@ -244,10 +246,11 @@ export default async function OpenDayPage({
               </div>
             ))}
           </RevealGroup>
+        </div>
         </section>
 
         {/* ————— od.02 · lezioni su misura ————— */}
-        <section id="lezioni" className={`${styles.blockSez} ${styles.white}`}>
+        <section id="lezioni" className={`${styles.blockSez} ${styles.sezLine}`}>
           <div className={`wrap ${det.duo} ${styles.duoWide} ${styles.duoPad}`}>
             <div>
               <Reveal as="span" className={`mono ${det.kicker}`}>
@@ -301,7 +304,7 @@ export default async function OpenDayPage({
         </section>
 
         {/* ————— prenota ————— */}
-        <section id="prenota" className={`wrap ${det.sez} ${styles.prenotaDark}`}>
+        <section id="prenota" className={`wrap ${det.sez} ${styles.white}`}>
           {/* ancore extra per le CTA con preselezione: il browser scrolla
               solo su id esistenti, l'hash lo legge poi il form */}
           <span id="prenota-uni" className={styles.anchor} aria-hidden="true" />
