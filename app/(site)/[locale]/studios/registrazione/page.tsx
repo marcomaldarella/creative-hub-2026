@@ -265,7 +265,7 @@ export default async function RegistrazionePage({
           <Reveal as="h2" className={`display-thin ${det.h2}`}>
             {d.faqTitle}
           </Reveal>
-          <PointsAccordion items={d.faq} />
+          <PointsAccordion items={d.faq} plain />
         </section>
 
         {/* ————— chiusura: raccontaci il progetto ————— */}

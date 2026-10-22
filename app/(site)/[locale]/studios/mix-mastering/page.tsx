@@ -192,7 +192,7 @@ export default async function MixMasteringPage({
           <Reveal as="h2" className={`display-thin ${det.h2}`}>
             {d.faqTitle}
           </Reveal>
-          <PointsAccordion items={d.faq} />
+          <PointsAccordion items={d.faq} plain />
         </section>
 
         {/* ————— chiusura: mandaci il brano ————— */}

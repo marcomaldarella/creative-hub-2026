@@ -253,7 +253,7 @@ export default async function SoundDesignPage({
               <Reveal as="h2" className={`display-thin ${det.h2}`}>
                 {d.faqTitle}
               </Reveal>
-              <PointsAccordion items={faq} />
+              <PointsAccordion items={faq} plain />
             </section>
           </>
         )}

@@ -100,9 +100,11 @@
 
 /* ————— spazi ————— */
 
+/* i cinque spazi stanno su una riga sola al desktop, come la fascia
+   "dentro" del mockup: con minmax 280px l'outboard restava orfano */
 .spaces {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
   gap: 16px;
 }
 

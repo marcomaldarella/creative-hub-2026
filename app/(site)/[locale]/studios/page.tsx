@@ -302,7 +302,7 @@ export default async function StudiosPage({
         <section className={styles.sez}>
           <div className="wrap">
             <SectionHeader kicker={t.studios.faqKicker} title={t.studios.faqTitle} />
-            <PointsAccordion items={t.studios.faq} />
+            <PointsAccordion items={t.studios.faq} plain />
           </div>
         </section>
 

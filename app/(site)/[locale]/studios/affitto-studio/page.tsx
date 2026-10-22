@@ -180,7 +180,7 @@ export default async function AffittoStudioPage({
               <Reveal as="h2" className={`display-thin ${det.h2}`}>
                 {d.findTitle}
               </Reveal>
-              <PointsAccordion items={dotazione} />
+              <PointsAccordion items={dotazione} plain />
             </section>
           </>
         )}
