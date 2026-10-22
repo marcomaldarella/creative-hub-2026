@@ -23,6 +23,7 @@ import corridoio6Img from '@/public/img/foto/corridoio-6.jpg'
 import corridoio7Img from '@/public/img/foto/corridoio-7.jpg'
 import banano1Img from '@/public/img/foto/banano-1.jpg'
 import banano2Img from '@/public/img/foto/banano-2.jpg'
+import futureImg from '@/public/img/sections/future-together.jpg'
 import sedeImg from '@/public/img/foto/sede.jpg'
 import styles from './page.module.css'
 
@@ -88,6 +89,21 @@ export default async function CoworkingPage({
   /* prezzi pieni barrati, allineati alle righe della tabella: nel
      mockup solo il carnet da dieci ingressi ne ha uno */
   const tableWas = t.coworking.tableWas
+  /* le foto del palazzo stanno qui e non inline nel JSX perché il tasto
+     "vedi tutte le foto" del mosaico ne porta il CONTEGGIO (come nel
+     mockup, "Vedi tutte le foto (10)"): il numero si legge dall'elenco
+     vero, non si scrive a mano.
+     ⚠️ i testi alternativi erano assegnati ai file sbagliati: qui sono
+     rimessi sulla foto giusta, didascalie comprese */
+  const corridoi = [
+    { src: corridoio1Img, alt: 'Murale "future together" lungo il corridoio, con una pianta in primo piano', caption: t.coworking.corridoiCaptions[0] },
+    { src: corridoio2Img, alt: 'Scala interna con il murale "small steps big change" su parete arancio', caption: t.coworking.corridoiCaptions[1] },
+    { src: corridoio6Img, alt: 'Corridoio delle aule CW301 con segnaletica gialla a pavimento e pareti', caption: t.coworking.corridoiCaptions[2] },
+    { src: corridoio7Img, alt: "Ingresso dell'area CW300: pareti bianche, segnaletica gialla e parquet", caption: t.coworking.corridoiCaptions[3] },
+    { src: corridoio5Img, alt: 'Corridoio della library, con la scritta arancio sulla parete scura', caption: t.coworking.corridoiCaptions[4] },
+    { src: corridoio3Img, alt: "Porta dell'ufficio segreteria vista dal corridoio", caption: t.coworking.corridoiCaptions[5] },
+    { src: corridoio4Img, alt: 'Corridoio lungo verso gli uffici, con la targa della segreteria', caption: t.coworking.corridoiCaptions[6] },
+  ]
 
   return (
     <SiteChrome locale={locale} path="/coworking">
@@ -111,8 +127,16 @@ export default async function CoworkingPage({
           <Reveal className={styles.mosaicSide} delay={140}>
             <Image src={corridoio2Img} alt='Scala interna con il murale "small steps big change"' className={styles.mosaicImg} />
           </Reveal>
+          {/* le altre due del mosaico del mockup: il corridoio "future
+              together" e la banano room d'insieme */}
+          <Reveal className={styles.mosaicSide} delay={200}>
+            <Image src={futureImg} alt='Il corridoio con il murale "future together" e le sedute blu' className={styles.mosaicImg} />
+          </Reveal>
+          <Reveal className={styles.mosaicSide} delay={260}>
+            <Image src={banano2Img} alt="La banano room: soffitto industriale e il grande banano al centro" className={styles.mosaicImg} />
+          </Reveal>
           <a href="#palazzo" className={`mono ${styles.galleryCta}`}>
-            {t.coworking.galleryCta}
+            {t.coworking.galleryCta} ({corridoi.length})
           </a>
         </section>
 
@@ -227,10 +251,22 @@ export default async function CoworkingPage({
               {t.coworking.bookFrom}{' '}
               <b>{t.coworking.bookPrice}</b> {t.coworking.bookUnit}
             </div>
+            {/* legenda e sottodidascalie del mockup: ogni formula dice
+                in una riga a cosa serve. ⚠️ l'unità di tempo di quick e
+                full desk ("al mese?") nel mockup è tratteggiata, cioè da
+                confermare: qui resta fuori */}
+            <span className={styles.bookChoose}>{t.coworking.bookChoose}</span>
             <ul className={styles.bookList}>
-              {t.coworking.tableRows.map((row) => (
+              {t.coworking.tableRows.map((row, i) => (
                 <li key={row[0]} className={styles.bookRow}>
-                  <span>{row[0]}</span>
+                  <span className={styles.bookName}>
+                    {row[0]}
+                    {t.coworking.bookHints[i] && (
+                      <em className={styles.bookHint}>
+                        {t.coworking.bookHints[i]}
+                      </em>
+                    )}
+                  </span>
                   <span className={`mono ${styles.bookPrice}`}>{row[1]}</span>
                 </li>
               ))}
@@ -261,23 +297,13 @@ export default async function CoworkingPage({
               next: t.coworking.corridoiNext,
               hint: t.coworking.corridoiHint,
             }}
-            /* come nel mockup ogni foto porta il nome dello spazio.
-               ⚠️ i testi alternativi erano assegnati ai file sbagliati:
-               qui sono rimessi sulla foto giusta, didascalie comprese */
-            photos={[
-              { src: corridoio1Img, alt: 'Murale "future together" lungo il corridoio, con una pianta in primo piano', caption: t.coworking.corridoiCaptions[0] },
-              { src: corridoio2Img, alt: 'Scala interna con il murale "small steps big change" su parete arancio', caption: t.coworking.corridoiCaptions[1] },
-              { src: corridoio6Img, alt: 'Corridoio delle aule CW301 con segnaletica gialla a pavimento e pareti', caption: t.coworking.corridoiCaptions[2] },
-              { src: corridoio7Img, alt: "Ingresso dell'area CW300: pareti bianche, segnaletica gialla e parquet", caption: t.coworking.corridoiCaptions[3] },
-              { src: corridoio5Img, alt: 'Corridoio della library, con la scritta arancio sulla parete scura', caption: t.coworking.corridoiCaptions[4] },
-              { src: corridoio3Img, alt: "Porta dell'ufficio segreteria vista dal corridoio", caption: t.coworking.corridoiCaptions[5] },
-              { src: corridoio4Img, alt: 'Corridoio lungo verso gli uffici, con la targa della segreteria', caption: t.coworking.corridoiCaptions[6] },
-            ]}
+            /* come nel mockup ogni foto porta il nome dello spazio */
+            photos={corridoi}
           />
         </section>
 
         {/* ————— la banano room ————— */}
-        <section className={styles.sez}>
+        <section className={`${styles.sez} ${styles.banano}`}>
           <div className="wrap">
             <PhotoDuo
               kicker={t.coworking.bananoKicker}

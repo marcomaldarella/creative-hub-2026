@@ -2,11 +2,11 @@
    tutti i testi nel colore di sezione. Vive solo dentro le pagine flood
    (academy/corsi): lì --accent è il colore pieno di sezione. */
 a.course {
+  /* SOLO la categoria resta nel colore di sezione: titolo e testo sono
+     bianchi, così la card si legge e il colore fa da etichetta */
   --card-ink: var(--accent, var(--osso));
-  --fg: var(--card-ink);
-  /* secondario: la stessa tinta spinta verso il chiaro, resta leggibile
-     sul nero senza introdurre un grigio estraneo */
-  --fg-2: color-mix(in srgb, var(--card-ink) 72%, #FAFAFA);
+  --fg: #FAFAFA;
+  --fg-2: rgba(250, 250, 250, 0.74);
   --accent-ink: var(--card-ink);
   --line: rgba(255, 255, 255, 0.14);
   color: var(--card-ink);
@@ -65,7 +65,8 @@ a.courseFlat .courseSummary {
   display: flex;
   flex-direction: column;
   flex: 1;
-  padding: 22px 22px 26px;
+  padding: clamp(22px, 2.2vw, 30px) clamp(22px, 2.2vw, 30px)
+    clamp(24px, 2.4vw, 32px);
 }
 
 .courseKicker {
@@ -75,6 +76,7 @@ a.courseFlat .courseSummary {
 }
 
 .courseTitle {
+  color: #FAFAFA;
   font-size: 19px;
   font-weight: 600;
   letter-spacing: -0.01em;

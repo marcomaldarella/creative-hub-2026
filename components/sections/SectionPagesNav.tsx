@@ -95,7 +95,6 @@ export function SectionPagesNav({
               className={it.path === current ? styles.on : undefined}
               aria-current={it.path === current ? 'page' : undefined}
             >
-              <span className={styles.slash}>/</span>
               <span>{it.label}</span>
             </Link>
           ))}

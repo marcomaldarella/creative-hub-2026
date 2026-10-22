@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { CourseDetail, courseDetailMetadata } from '@/components/sections/CourseDetail'
+import { hasScheda } from '@/lib/courses'
 import { isLocale } from '@/lib/i18n/config'
 import { getCourseBySlug } from '@/lib/sanity/queries'
 
@@ -35,6 +36,15 @@ export default async function CorsoFinanziatoPage({
      catalogo qui sarebbe un doppione dell'URL /academy/[slug] */
   const course = await getCourseBySlug(slug)
   if (!course?.types?.includes('finanziato')) notFound()
+  /* e solo i corsi che hanno davvero una scheda scritta: l'unica
+     edizione attiva è Music Data Analyst & Strategist, gli altri sei
+     sono "prossima edizione da annunciare" e in Sanity hanno il corpo
+     vuoto. Senza questo controllo l'URL rispondeva 200 con un guscio:
+     nessun contenuto ma fascia di stato e form di candidatura, cioè
+     una promessa d'iscrizione su un corso che non esiste ancora.
+     Stessa regola con cui la griglia non li linka e la sitemap non li
+     elenca (lib/courses.ts). */
+  if (!hasScheda(course, locale)) notFound()
 
   return <CourseDetail locale={locale} slug={slug} basePath={BASE} />
 }

@@ -128,8 +128,20 @@
   border-top: 1px solid var(--line);
 }
 
+/* intro larga, scheda dei dati stretta: la colonna sinistra prende
+   tre quarti della riga (il det.duo di base fa il contrario) */
 .duoPad {
   padding-bottom: clamp(28px, 3.5vw, 48px);
+}
+
+.duoWide.duoWide {
+  grid-template-columns: minmax(0, 2.6fr) minmax(0, 1fr);
+}
+
+@media (max-width: 860px) {
+  .duoWide.duoWide {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* scheda info: card bordata con le righe hairline di tp.defs */
@@ -164,9 +176,42 @@
   border-top: 1px solid var(--line);
 }
 
+/* ogni voce ha i quattro angoli a mirino: compaiono col puntatore,
+   stessa forma dell'indice delle schede corso (un solo pseudo-elemento,
+   quattro gradienti agli angoli) */
 .cell {
+  position: relative;
   padding: clamp(14px, 1.8vw, 22px) 0 clamp(16px, 2vw, 26px);
   border-bottom: 1px solid var(--line);
+}
+
+.cell::before {
+  content: '';
+  position: absolute;
+  inset: 6px -10px;
+  pointer-events: none;
+  --c: color-mix(in srgb, currentColor 55%, transparent);
+  --t: 1.5px;
+  --l: 8px;
+  background:
+    linear-gradient(var(--c), var(--c)) 0 0 / var(--l) var(--t) no-repeat,
+    linear-gradient(var(--c), var(--c)) 0 0 / var(--t) var(--l) no-repeat,
+    linear-gradient(var(--c), var(--c)) 100% 0 / var(--l) var(--t) no-repeat,
+    linear-gradient(var(--c), var(--c)) 100% 0 / var(--t) var(--l) no-repeat,
+    linear-gradient(var(--c), var(--c)) 0 100% / var(--l) var(--t) no-repeat,
+    linear-gradient(var(--c), var(--c)) 0 100% / var(--t) var(--l) no-repeat,
+    linear-gradient(var(--c), var(--c)) 100% 100% / var(--l) var(--t) no-repeat,
+    linear-gradient(var(--c), var(--c)) 100% 100% / var(--t) var(--l) no-repeat;
+  opacity: 0;
+  transform: scale(1.04);
+  transition:
+    opacity 0.2s ease,
+    transform 0.28s var(--ease-out);
+}
+
+.cell:hover::before {
+  opacity: 1;
+  transform: none;
 }
 
 .cellKicker {
@@ -206,11 +251,17 @@
   gap: 16px 32px;
 }
 
+/* l'orario pesa, la frase che segue resta normale: la riga si legge
+   in due tempi invece che tutta uguale */
 .bandText {
   font-size: clamp(16px, 1.6vw, 19px);
-  font-weight: 500;
+  font-weight: 400;
   letter-spacing: -0.01em;
-  max-width: 44ch;
+  max-width: 48ch;
+}
+
+.bandStrong {
+  font-weight: 600;
 }
 
 .bandRow {
@@ -328,5 +379,37 @@
   .altAction {
     grid-column: 2;
     justify-self: start;
+  }
+}
+
+/* ————— come arrivare: dati a sinistra, mappa a destra ————— */
+
+.reachGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+  gap: clamp(24px, 3vw, 48px);
+  align-items: start;
+}
+
+.mapBox {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.map {
+  display: block;
+  width: 100%;
+  height: clamp(260px, 32vw, 380px);
+  border: 0;
+  /* la mappa è un riquadro informativo, non un elemento di marca:
+     resta neutra sul colore di sezione */
+  filter: saturate(0.92);
+}
+
+@media (max-width: 860px) {
+  .reachGrid {
+    grid-template-columns: 1fr;
   }
 }

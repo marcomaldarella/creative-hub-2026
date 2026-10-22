@@ -6,6 +6,18 @@
    universitari. Tutto in token, così la pagina regge l'azzurro academy
    senza colori scritti a mano. */
 
+/* ————— fatti della testata: hairline a tutta colonna ————— */
+
+/* il .facts condiviso si ferma a 440px: qui, accanto a un titolo e a
+   un lede lunghi, le tre righe (gratuiti / durata / classi piccole)
+   restavano mozze a metà colonna. Le hairline arrivano a fine colonna
+   di testo, in riga col lede.
+   Classe raddoppiata di proposito: ha la stessa specificità di
+   det.facts e l'ordine fra due CSS Module diversi non è garantito. */
+.factsFull.factsFull {
+  max-width: none;
+}
+
 /* ————— fascia avviso: testo a sinistra, tasto a destra ————— */
 
 .bandRow {

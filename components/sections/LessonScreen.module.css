@@ -8,9 +8,48 @@
 
 /* ————— testata ————— */
 
+/* La testata NON è più un pezzo della fascia azzurra come il resto
+   della pagina: è una banda a sé, nel blu brand portato in profondità
+   (--azzurro-profondo), coi testi chiari sopra. È la gerarchia del
+   mockup v4, dove l'hero sta su una foto scurita (testi bianchi, chip
+   traslucide, card del form in inchiostro) — da noi al posto della
+   foto c'è la tinta più scura della stessa famiglia.
+   Qui dentro si RISCRIVONO i token di zona, come fa .scheme-dark: il
+   form a destra legge solo bg/fg/fg-2/line/su-inchiostro e si adatta
+   da solo, senza una riga di CSS dedicata al form. */
 .head {
   padding-top: clamp(32px, 4.5vw, 56px);
-  padding-bottom: clamp(32px, 4.5vw, 56px);
+  padding-bottom: clamp(40px, 5vw, 76px);
+  background: var(--azzurro-profondo);
+  /* il `color` va dichiarato anche come proprietà vera: i testi senza
+     un color: var(--fg) esplicito ereditano quello già calcolato sul
+     wrapper di sezione (nero sul colore pieno) */
+  color: #fafafa;
+  --fg: #fafafa;
+  /* --bg qui è la superficie delle CARD dentro la banda (il form): un
+     gradino più profondo del fondo, così la card si legge come un
+     pannello senza bisogno di ombre */
+  --bg: color-mix(in srgb, #000000 40%, var(--azzurro-profondo));
+  --surface: color-mix(in srgb, #000000 24%, var(--azzurro-profondo));
+  /* secondario SOLIDO (stessa regola del flood di sezione): un bianco
+     trasparente sul blu profondo si impastava col fondo. Mix all'80%
+     per restare sopra 4.5:1 sul fondo della banda. */
+  --fg-2: color-mix(in srgb, #fafafa 80%, var(--azzurro-profondo));
+  --line: color-mix(in srgb, #fafafa 34%, transparent);
+  /* dentro la banda la superficie d'inchiostro è CHIARA (--fg vale
+     #fafafa): il tasto del form è chiaro e ci si scrive nel blu
+     profondo, non in azzurro di sezione */
+  --su-inchiostro: var(--azzurro-profondo);
+  /* il rosso d'inchiostro sul blu profondo sta a 1.5:1: come nelle
+     fasce scure l'errore si schiarisce, stessa tinta dall'altro lato */
+  --errore: #ff9a94;
+}
+
+/* l'eyebrow della testata nel blu brand pieno: sul fondo profondo è
+   l'unico accento di colore, come nel mockup dove la riga di contesto
+   si stacca dal bianco dei titoli */
+.head .kicker {
+  color: var(--azzurro);
 }
 
 .back {
@@ -51,6 +90,22 @@
 
 .badge::first-letter {
   text-transform: uppercase;
+}
+
+/* le pastiglie della testata: veli chiari col filo hairline, come le
+   chip dell'hero su foto del mockup; la prima è l'informazione che
+   vende (là è la chip "piena", qui nel blu brand con testo nero —
+   sopra un colore pieno il testo è sempre nero) */
+.head .badge {
+  background: color-mix(in srgb, #fafafa 13%, transparent);
+  border-color: color-mix(in srgb, #fafafa 30%, transparent);
+}
+
+.head .badge:first-child {
+  background: var(--azzurro);
+  border-color: var(--azzurro);
+  color: #000000;
+  font-weight: 600;
 }
 
 /* testata a due colonne: a sinistra il testo, a destra il form di

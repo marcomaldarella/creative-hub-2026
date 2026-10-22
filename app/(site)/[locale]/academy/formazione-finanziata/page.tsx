@@ -1,18 +1,20 @@
 import type { Metadata } from 'next'
 import type { CSSProperties } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import finanziataImg from '@/public/img/sections/academy-finanziata.jpg'
 import { Arrow, ArrowLink, Button, Reveal, RevealGroup, Rule } from '@/components/ui'
 import { AvvisamiForm } from '@/components/sections/AvvisamiForm'
 import { FundingBand } from '@/components/sections/FundingBand'
 import { PointsAccordion } from '@/components/sections/PointsAccordion'
 import { SiteChrome } from '@/components/sections/SiteChrome'
+import { hasScheda } from '@/lib/courses'
 import { isLocale, localeHref } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
 import { pageAlternates } from '@/lib/seo'
 import { l } from '@/lib/sanity/l'
 import { getAllCourses } from '@/lib/sanity/queries'
-import type { Course } from '@/lib/sanity/types'
 /* grammatica condivisa delle pagine di dettaglio: testata, fatti,
    fascia di stato, pillole filtro, chiusura scura */
 import det from '@/components/sections/DetailPage.module.css'
@@ -38,13 +40,6 @@ export async function generateMetadata({
     description: t.finanziata.seo.description,
     alternates: pageAlternates(locale, PATH),
   }
-}
-
-/* una scheda esiste solo se qualcuno l'ha scritta: senza corpo la card
-   non linka nulla — mai un link finto su un corso ancora da annunciare */
-function hasScheda(course: Course, locale: 'it' | 'en'): boolean {
-  const body = l(course.body, locale)
-  return Array.isArray(body) && body.length > 0
 }
 
 export default async function FormazioneFinanziataPage({
@@ -106,7 +101,7 @@ export default async function FormazioneFinanziataPage({
               <Reveal as="p" className={det.lede} delay={180}>
                 {d.lede}
               </Reveal>
-              <Reveal className={det.facts} delay={240}>
+              <Reveal className={`${det.facts} ${styles.factsFull}`} delay={240}>
                 {facts.map((f) => (
                   <div key={f.title} className={det.fact}>
                     <span className={det.factT}>{f.title}</span>
@@ -118,7 +113,18 @@ export default async function FormazioneFinanziataPage({
                 <Button href="#avvisami">{d.heroCta}</Button>
               </Reveal>
             </div>
-            <div className={det.headPh} aria-hidden="true" />
+            {/* la foto della testata: è la stessa che apre la card
+                "formazione finanziata" nell'indice academy — prima qui
+                c'era solo il placeholder nero, cioè un buco in pagina */}
+            <Reveal className={det.headPh} delay={120}>
+              <Image
+                src={finanziataImg}
+                alt="Uno studente al banco di regia, davanti allo schermo touch della DAW e al rack di effetti"
+                priority
+                sizes="(max-width: 860px) 100vw, 50vw"
+                className={det.headImg}
+              />
+            </Reveal>
           </div>
         </header>
 

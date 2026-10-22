@@ -779,6 +779,15 @@
     "bookPrice": "9,50€",
     "bookUnit": "al giorno",
     "bookCta": "prenota il tuo spazio",
+    "bookChoose": "Scegli la formula",
+    "bookHints": [
+      "un giorno, senza vincoli",
+      "da usare quando vuoi",
+      "postazione libera",
+      "scrivania fissa, con cassettiera",
+      "un anno di quick desk",
+      "su misura, per il team"
+    ],
     "bookNote": "Ti confermiamo entro un giorno lavorativo.",
     "quickBook": {
       "from": "Da quando",

@@ -3,10 +3,20 @@
    Transizioni solo colore/bordo a 150ms (skill taste: stato frequente,
    quasi niente animazione) */
 
+/* il modulo è NERO anche dentro una pagina a colore pieno (richiesta
+   cliente): porta con sé i token scuri, così campi, etichette e righe
+   si invertono da soli */
 .card {
-  border: 1px solid var(--line);
+  border: 1px solid #000000;
   border-radius: 16px;
   padding: clamp(20px, 2.6vw, 32px);
+  background: #000000;
+  color: #fafafa;
+  --bg: #000000;
+  --surface: #111111;
+  --fg: #fafafa;
+  --fg-2: #b3b3b3;
+  --line: #2a2a2a;
 }
 
 .set {

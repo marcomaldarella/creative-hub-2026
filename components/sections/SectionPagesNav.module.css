@@ -38,34 +38,36 @@
      fila sborda (ScrollerRow) e si porta dietro il proprio spazio */
 }
 
+/* le voci sono PILLOLE nel colore di sezione (richiesta cliente):
+   a riposo solo il profilo e il testo nel colore, quella attiva è
+   piena dello stesso colore con l'inchiostro nero sopra */
 .row a {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-  padding: 15px 0;
-  font-size: 12px;
+  padding: 7px 15px;
+  margin: 9px 0;
+  border: 1px solid color-mix(in srgb, var(--pn-accent, #ffffff) 55%, transparent);
+  border-radius: var(--radius-pill, 999px);
+  font-size: 12.5px;
   font-weight: 600;
   letter-spacing: -0.01em;
   white-space: nowrap;
-  color: rgba(255, 255, 255, 0.55);
-  transition: color var(--scroller-dur) var(--ease-out);
+  color: var(--pn-accent, #ffffff);
+  transition:
+    background var(--scroller-dur) var(--ease-out),
+    border-color var(--scroller-dur) var(--ease-out),
+    color var(--scroller-dur) var(--ease-out);
 }
 
 .row a:hover {
-  color: rgba(255, 255, 255, 0.85);
-}
-
-/* la barretta prima di ogni voce, come nel mockup */
-.slash {
-  opacity: 0.35;
+  border-color: var(--pn-accent, #ffffff);
 }
 
 .row a.on {
-  color: var(--pn-accent, #ffffff);
-}
-
-.row a.on .slash {
-  opacity: 0.6;
+  background: var(--pn-accent, #ffffff);
+  border-color: var(--pn-accent, #ffffff);
+  /* sopra un colore pieno il testo è SEMPRE nero, regola del brand */
+  color: #000000;
 }
 
 @media (max-width: 760px) {

@@ -68,11 +68,15 @@
   color: var(--fg-2);
 }
 
+/* 16/10 ritagliava i corridoi in una striscia bassa e larga: delle foto
+   verticali del palazzo restava solo il pavimento. 4/3 è il rapporto
+   leggibile da desktop (a 1440 la colonna sta sui 560px → ~420px di
+   altezza) e tiene insieme pavimento, murale e soffitto. */
 .img {
   display: block;
   width: 100%;
   height: auto;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 4 / 3;
   object-fit: cover;
 }
 
@@ -88,6 +92,13 @@
 
 @media (max-width: 760px) {
   .strip {
-    grid-auto-columns: 78vw;
+    grid-auto-columns: 80vw;
+  }
+
+  /* a 390px la colonna è ~312px: col solo 4/3 la foto scendeva a 234px
+     e tornava francobollo. Il minimo d'altezza la tiene leggibile e
+     `cover` assorbe il rapporto che ne risulta */
+  .img {
+    min-height: 270px;
   }
 }

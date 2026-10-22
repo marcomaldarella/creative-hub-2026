@@ -203,9 +203,11 @@
    pagina di prodotto (mockup v3): mosaico, fatti, colonna + riquadro
    prenota. Le regole qui sotto rimpiazzano la vecchia testata. */
 
+/* mosaico come le piattaforme di prenotazione: un media grande a
+   sinistra e quattro tessere in griglia 2×2 a destra (mockup v3) */
 .mosaic {
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 2fr 1fr 1fr;
   grid-template-rows: repeat(2, minmax(0, 1fr));
   gap: 10px;
   /* aria sotto la barra delle pagine di sezione: il mosaico non deve
@@ -269,6 +271,12 @@
   .mosaicMain {
     grid-column: 1 / -1;
     grid-row: 1;
+  }
+
+  /* su mobile le tessere restano due: a quattro diventavano francobolli
+     in una striscia. Le altre due foto si rivedono nel nastro sotto */
+  .mosaicSide:nth-child(n + 4) {
+    display: none;
   }
 }
 
@@ -424,6 +432,23 @@
   margin-top: clamp(14px, 1.8vw, 20px);
 }
 
+/* ————— la banano room: occhiello nero, iniziale maiuscola —————
+   PhotoDuo tinge il suo kicker in --azzurro-ink (Photo.module.css): su
+   questa pagina, che è a colore PIENO, l'azzurro è fuori posto — qui
+   l'occhiello torna all'inchiostro (--fg, che il flood di SiteChrome
+   porta a nero) e prende l'iniziale maiuscola via ::first-letter.
+   ⚠️ MAI `text-transform: uppercase` sull'intera stringa: è sentence
+   case, come già fa .galleryCta qui sopra.
+   Il kicker è l'unico `span.mono` dentro PhotoDuo: `:global(.mono)`
+   perché la classe arriva da globals.css, non da questo modulo. */
+.banano span:global(.mono) {
+  color: var(--fg);
+}
+
+.banano span:global(.mono)::first-letter {
+  text-transform: uppercase;
+}
+
 /* ————— riquadro prenota: fisso accanto al contenuto ————— */
 
 /* riquadro prenota: NERO (richiesta cliente), coi token scuri così
@@ -453,6 +478,15 @@
   letter-spacing: -0.02em;
 }
 
+/* legenda delle formule (mockup: <legend>Scegli la formula) */
+.bookChoose {
+  display: block;
+  font-size: 12px;
+  letter-spacing: -0.01em;
+  color: var(--fg-2);
+  padding-bottom: 8px;
+}
+
 .bookList {
   list-style: none;
   padding: 0;
@@ -460,13 +494,33 @@
   border-top: 1px solid var(--line);
 }
 
+/* la riga ha due righe di testo a sinistra e il prezzo a destra:
+   `baseline` e non `space-between` da solo, così il prezzo si allinea
+   alla PRIMA riga del nome, non al centro del blocco */
 .bookRow {
   display: flex;
   justify-content: space-between;
+  align-items: baseline;
   gap: 12px;
-  padding: 9px 0;
+  padding: 10px 0;
   border-bottom: 1px solid var(--line);
   font-size: 14px;
+}
+
+.bookName {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+/* a cosa serve la formula, sotto al nome */
+.bookHint {
+  font-style: normal;
+  font-size: 12px;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--fg-2);
 }
 
 .bookPrice {

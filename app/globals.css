@@ -70,6 +70,20 @@
   /* il blu brand usato come SUPERFICIE (pastiglie, sezione open day) */
   --azzurro-fill: var(--azzurro);
 
+  /* Il blu brand portato in PROFONDITÀ: l'inchiostro dell'azzurro
+     mescolato all'antracite — la stessa ricetta con cui le pagine a
+     colore pieno si ricavano --panel (color-mix del colore di sezione
+     con l'inchiostro). Serve dove una testata deve staccarsi dalla
+     fascia di sezione restando nella stessa tinta (la testata delle
+     lezioni su misura): è una tonalità più scura dell'azzurro, non un
+     colore nuovo. Sopra ci si scrive CHIARO, non nero: con #FAFAFA sta
+     a ~7:1, col nero starebbe a 2.9:1.
+     Dichiarato QUI e solo qui: --azzurro-ink in .scheme-dark torna al
+     blu pieno, ma una custom property che ne referenzia un'altra si
+     risolve dove è dichiarata — quindi questo valore è lo stesso su
+     tutto il sito, fasce scure comprese. */
+  --azzurro-profondo: color-mix(in srgb, var(--azzurro-ink) 70%, var(--petrolio));
+
   /* accento DI DEFAULT (pagine senza una sezione, es. magazine): era
      l'azzurro brand — restava "un altro blu" proprio nelle parti più
      neutre del sito. SiteChrome lo cambia dentro academy (azzurro) /

@@ -19,10 +19,27 @@ import styles from './page.module.css'
 
 export const dynamic = 'force-dynamic'
 
+/* la riga della fascia si legge in due tempi: quello che sta prima del
+   trattino (l'orario, o la domanda) pesa, il resto resta normale */
+function bandRich(text: string) {
+  const i = text.indexOf('—')
+  if (i < 0) return text
+  return (
+    <>
+      <strong className={styles.bandStrong}>{text.slice(0, i).trim()}</strong>{' '}
+      {text.slice(i)}
+    </>
+  )
+}
+
 /* destinazione del mailto di prenotazione */
 const BOOKING_EMAIL = 'hello@bologna-creativehub.it'
 const MAPS_URL =
   'https://maps.google.com/?q=Via+del+Tappezziere+4,+40138+Bologna'
+/* riquadro mappa OpenStreetMap centrato sulla sede (via del
+   Tappezziere 4): coordinate reali, marcatore incluso */
+const MAP_EMBED =
+  'https://www.openstreetmap.org/export/embed.html?bbox=11.4053%2C44.4993%2C11.4213%2C44.5064&layer=mapnik&marker=44.5028453%2C11.4132952'
 
 export async function generateMetadata({
   params,
@@ -159,7 +176,7 @@ export default async function OpenDayPage({
 
         {/* ————— od.01 · corsi universitari ————— */}
         <section id="universitari" className={styles.blockSez}>
-          <div className={`wrap ${det.duo} ${styles.duoPad}`}>
+          <div className={`wrap ${det.duo} ${styles.duoWide} ${styles.duoPad}`}>
             <div>
               <Reveal as="span" className={`mono ${det.kicker}`}>
                 {od.uni.kicker}
@@ -192,7 +209,7 @@ export default async function OpenDayPage({
           {/* fascia nera compatta di chiusura */}
           <div className={`scheme-dark ${styles.band}`}>
             <div className={`wrap ${styles.bandIn}`}>
-              <p className={styles.bandText}>{od.uni.band.text}</p>
+              <p className={styles.bandText}>{bandRich(od.uni.band.text)}</p>
               <div className={styles.bandRow}>
                 <Button variant="azzurro" href="#prenota-uni">
                   {od.uni.band.cta}
@@ -231,7 +248,7 @@ export default async function OpenDayPage({
 
         {/* ————— od.02 · lezioni su misura ————— */}
         <section id="lezioni" className={`${styles.blockSez} ${styles.sezLine}`}>
-          <div className={`wrap ${det.duo} ${styles.duoPad}`}>
+          <div className={`wrap ${det.duo} ${styles.duoWide} ${styles.duoPad}`}>
             <div>
               <Reveal as="span" className={`mono ${det.kicker}`}>
                 {od.custom.kicker}
@@ -270,7 +287,7 @@ export default async function OpenDayPage({
           </div>
           <div className={`scheme-dark ${styles.band}`}>
             <div className={`wrap ${styles.bandIn}`}>
-              <p className={styles.bandText}>{od.custom.band.text}</p>
+              <p className={styles.bandText}>{bandRich(od.custom.band.text)}</p>
               <div className={styles.bandRow}>
                 <Button variant="azzurro" href="#prenota-lezioni">
                   {od.custom.band.cta}
@@ -367,17 +384,30 @@ export default async function OpenDayPage({
           <Reveal as="h2" className={`display-thin ${det.h2}`} delay={60}>
             {od.reach.title}
           </Reveal>
-          <Reveal className={styles.reachBox} delay={120}>
-            <div className={tp.defs}>
-              <div className={tp.def}>
-                <span className={tp.defLabel}>{od.reach.addressLabel}</span>
-                <span className={tp.defText}>{od.reach.address}</span>
+          <div className={styles.reachGrid}>
+            <Reveal className={styles.reachBox} delay={120}>
+              <div className={tp.defs}>
+                <div className={tp.def}>
+                  <span className={tp.defLabel}>{od.reach.addressLabel}</span>
+                  <span className={tp.defText}>{od.reach.address}</span>
+                </div>
               </div>
-            </div>
-            <ArrowLink href={MAPS_URL} external>
-              {od.reach.maps}
-            </ArrowLink>
-          </Reveal>
+              <ArrowLink href={MAPS_URL} external>
+                {od.reach.maps}
+              </ArrowLink>
+            </Reveal>
+            {/* mappa vera, da OpenStreetMap: nessuna chiave e nessun
+                cookie di profilazione, si carica solo quando serve */}
+            <Reveal className={styles.mapBox} delay={180}>
+              <iframe
+                className={styles.map}
+                title={od.reach.title}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                src={MAP_EMBED}
+              />
+            </Reveal>
+          </div>
         </section>
       </main>
     </SiteChrome>

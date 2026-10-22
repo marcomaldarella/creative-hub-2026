@@ -56,7 +56,9 @@ export function CourseCard({
       <Thumb image={course.coverImage} index={index} ratio={ratio} />
       <div className={styles.courseBody}>
         <span className={`mono ${styles.courseKicker}`}>
-          {l(course.category?.title, locale)?.toLowerCase()}
+          {/* la categoria si legge com'è scritta in Sanity: iniziale
+              maiuscola, non più schiacciata in minuscolo */}
+          {l(course.category?.title, locale)}
         </span>
         <h3 className={styles.courseTitle}>{l(course.title, locale)}</h3>
         <p className={styles.courseSummary}>{l(course.summary, locale)}</p>

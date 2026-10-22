@@ -779,6 +779,15 @@
     "bookPrice": "€9.50",
     "bookUnit": "a day",
     "bookCta": "book your space",
+    "bookChoose": "Choose your plan",
+    "bookHints": [
+      "one day, no strings",
+      "use them whenever",
+      "flexible desk",
+      "fixed desk, with drawers",
+      "a year of quick desk",
+      "tailored, for your team"
+    ],
     "bookNote": "We confirm within one working day.",
     "quickBook": {
       "from": "From when",
