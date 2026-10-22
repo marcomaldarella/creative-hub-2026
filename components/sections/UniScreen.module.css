@@ -611,9 +611,12 @@
 
 /* ————— 02 in numeri ————— */
 
+/* le colonne sono tante quante le voci (--n, dal componente): se un
+   dato esce perché è da verificare la fascia si richiude, niente
+   colonna vuota in fondo */
 .stats {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(var(--n, 4), minmax(0, 1fr));
   border-top: 1px solid var(--ink);
   margin-top: clamp(28px, 4vw, 48px);
 }

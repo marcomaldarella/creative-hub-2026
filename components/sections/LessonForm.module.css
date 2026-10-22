@@ -128,7 +128,9 @@
 }
 
 .ctxEdit {
-  display: inline;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
   padding: 0;
   border: 0;
   background: none;
@@ -298,33 +300,6 @@
   display: inline-flex;
   align-items: center;
   gap: 5px;
-}
-
-.waLine {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-  border-top: 1px solid var(--line);
-  margin-top: 16px;
-  padding-top: 14px;
-  font-size: 13px;
-  color: var(--fg-2);
-}
-
-.waLine a {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  color: var(--fg);
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  text-decoration: none;
-}
-
-.waLine a:hover {
-  text-decoration: underline;
-  text-underline-offset: 2px;
 }
 
 /* honeypot: fuori dal flusso visivo ma presente nel DOM per i bot */

@@ -17,7 +17,6 @@ export type LessonFormLabels = Dictionary['lesson']['form']
 export type LessonVariant = 'strumento' | 'canto' | 'produzione'
 
 export const LESSON_FORM_ANCHOR = 'prenota'
-const WA_HREF = 'https://wa.me/393518431456'
 
 /* ————— store condiviso —————
  * Il form è montato due volte (zona alta + chiusura) e viene prefillato
@@ -294,12 +293,13 @@ export function LessonForm({
           <p className={styles.ctx}>
             {ctxBits.join(' · ')}
             {' — '}
+            {/* ritorno al passo 1: freccia disegnata, mai un glifo */}
             <button
               type="button"
               className={styles.ctxEdit}
               onClick={() => setStep(1)}
             >
-              {labels.edit}
+              <Arrow dir="w" size={11} /> {labels.edit}
             </button>
           </p>
           <div className={styles.fields}>
@@ -413,22 +413,17 @@ export function LessonForm({
         </div>
       )}
 
+      {/* niente riga di contatto WhatsApp diretto: il numero è ancora
+          un dato da confermare. WhatsApp resta come canale preferito
+          dentro il passo 2. */}
       {step < 3 && (
-        <>
-          <div className={styles.reassure}>
-            {labels.reassure.map((r) => (
-              <span key={r}>
-                <Check size={11} /> {r}
-              </span>
-            ))}
-          </div>
-          <div className={styles.waLine}>
-            <span>{labels.waPrompt}</span>
-            <a href={WA_HREF} target="_blank" rel="noopener noreferrer">
-              {labels.waLabel} <Arrow size={11} />
-            </a>
-          </div>
-        </>
+        <div className={styles.reassure}>
+          {labels.reassure.map((r) => (
+            <span key={r}>
+              <Check size={11} /> {r}
+            </span>
+          ))}
+        </div>
       )}
     </form>
   )

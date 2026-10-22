@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { ArrowLink, Button, Reveal, RevealGroup } from '@/components/ui'
+import { QuickBookForm } from '@/components/sections/QuickBookForm'
 import { SiteChrome } from '@/components/sections/SiteChrome'
 import { BgVideo } from '@/components/sections/BgVideo'
 import { PhotoDuo } from '@/components/sections/Photo'
@@ -221,10 +222,13 @@ export default async function CoworkingPage({
                 </li>
               ))}
             </ul>
-            <Button variant="azzurro" href={prenota} className={styles.bookBtn}>
-              {t.coworking.bookCta}
-            </Button>
-            <p className={styles.bookNote}>{t.coworking.bookNote}</p>
+            {/* il mockup chiede qui la richiesta rapida, non un rimando:
+                tre campi e via. Il percorso guidato resta in fondo */}
+            <QuickBookForm
+              labels={t.coworking.quickBook}
+              subject={t.coworking.bookCta}
+              moreHref={prenota}
+            />
             {settings?.phone && (
               <ArrowLink href={`tel:${settings.phone.replace(/\s/g, '')}`} external>
                 {settings.phone}

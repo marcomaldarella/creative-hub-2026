@@ -140,3 +140,8 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* campo che occupa l'intera riga della griglia a due colonne */
+.full {
+  grid-column: 1 / -1;
+}

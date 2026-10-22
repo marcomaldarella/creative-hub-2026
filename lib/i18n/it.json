@@ -777,7 +777,20 @@
     "bookPrice": "9,50€",
     "bookUnit": "al giorno",
     "bookCta": "prenota il tuo spazio",
-    "bookNote": "Ti confermiamo entro un giorno lavorativo."
+    "bookNote": "Ti confermiamo entro un giorno lavorativo.",
+    "quickBook": {
+      "from": "Da quando",
+      "name": "Nome e cognome",
+      "phone": "Cellulare",
+      "submit": "Prenota",
+      "sending": "Invio…",
+      "note": "Ti confermiamo entro un giorno lavorativo.",
+      "done": "Richiesta inviata. Ti confermiamo disponibilità e accesso dal lunedì al venerdì.",
+      "missing": "Compila nome e cellulare.",
+      "error": "Non siamo riusciti a inviare la richiesta: riprova, o scrivici.",
+      "more": "scegli la formula con calma",
+      "hp": "Lascia vuoto questo campo"
+    }
   },
   "prenota": {
     "kicker": "prenota il tuo spazio",
@@ -1124,11 +1137,12 @@
       "title": "Stage e lavoro nella musica.\nDurante il corso, non dopo.",
       "lede": "Stage in studi, club e produzioni. Un'etichetta interna distribuita da Orchard Italia. Audizioni con agenzie di management. Dal primo anno.",
       "points": [
-        "L'83% degli studenti lavora nel settore. Dato certificato dalla Regione Emilia-Romagna",
         "20 studenti al massimo per corso universitario: ognuno ha un percorso seguito",
         "27 anni di rapporti con studi, club ed etichette, dal 1999"
       ],
-      "eyebrow": "stage & placement"
+      "eyebrow": "stage & placement",
+      "metaTitle": "Stage e placement nella musica | Creative Hub Academy Bologna",
+      "metaDesc": "Stage in studi, club e produzioni, l'etichetta Label Lab con Orchard Italia, audizioni con agenzie di management. Dal primo anno."
     },
     "corsiCustom": {
       "title": "Il tuo strumento. I tuoi orari. La prima lezione è gratis.",
@@ -1151,7 +1165,9 @@
       "title": "Servizi studenti.\nTutto intorno allo studio.",
       "lede": "Borse di studio e rate, casa a Bologna, esperienze all'estero, un tutor che ti segue. Parti da quello che ti serve.",
       "points": [],
-      "eyebrow": "servizi studenti"
+      "eyebrow": "servizi studenti",
+      "metaTitle": "Servizi studenti: borse di studio, Erasmus+, alloggio | Creative Hub Academy",
+      "metaDesc": "Borse di studio di merito, rate a tasso zero, tirocini Erasmus+, alloggio a Bologna, tutor e supporto DSA."
     },
     "dolbyAtmos": {
       "title": "Studio Dolby Atmos 7.1.4 a Bologna.",
@@ -1633,11 +1649,6 @@
       "title": "Classi piccole, lezioni individuali, lavoro vero.",
       "stats": [
         {
-          "n": "83%",
-          "l": "dei nostri allievi lavora nelle industrie creative.",
-          "src": "fonte: dati Regione Emilia-Romagna"
-        },
-        {
           "n": "20",
           "l": "posti per corso. Ti conoscono per nome, non per matricola."
         },
@@ -1732,23 +1743,7 @@
       "n": "06 / storie",
       "title": "Dove sono arrivati.",
       "lead": "Tre ex studenti, tre corsi diversi, quello che fanno oggi.",
-      "items": [
-        {
-          "quote": "Testimonianza in arrivo: una frase concreta su cosa fa oggi e cosa gli è servito del corso.",
-          "who": "Nome Cognome",
-          "detail": "Urban Music Production · 2023 · producer"
-        },
-        {
-          "quote": "Testimonianza in arrivo: una frase concreta su cosa fa oggi e cosa gli è servito del corso.",
-          "who": "Nome Cognome",
-          "detail": "Music Technology · 2022 · fonico live"
-        },
-        {
-          "quote": "Testimonianza in arrivo: una frase concreta su cosa fa oggi e cosa gli è servito del corso.",
-          "who": "Nome Cognome",
-          "detail": "Creative Musicianship canto · 2024 · artista"
-        }
-      ]
+      "items": []
     },
     "faq": {
       "n": "07 / domande",

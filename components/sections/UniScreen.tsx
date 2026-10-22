@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react'
 import {
   ArrowLink,
   Button,
@@ -168,7 +169,10 @@ export async function UniScreen({ locale }: { locale: Locale }) {
         {/* ————— 02 in numeri ————— */}
         <section className={`wrap ${styles.sez}`} id="numeri">
           <SectionHeader kicker={u.numbers.n} title={u.numbers.title} />
-          <RevealGroup className={styles.stats}>
+          <RevealGroup
+            className={styles.stats}
+            style={{ '--n': stats.length } as CSSProperties}
+          >
             {stats.map((s, i) => (
               <Reveal key={s.n} className={styles.stat} delay={i * 60}>
                 <div className={`display-thin ${styles.statN}`}>{s.n}</div>

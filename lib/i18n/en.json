@@ -777,7 +777,20 @@
     "bookPrice": "€9.50",
     "bookUnit": "a day",
     "bookCta": "book your space",
-    "bookNote": "We confirm within one working day."
+    "bookNote": "We confirm within one working day.",
+    "quickBook": {
+      "from": "From when",
+      "name": "Full name",
+      "phone": "Mobile",
+      "submit": "Book",
+      "sending": "Sending…",
+      "note": "We confirm within one working day.",
+      "done": "Request sent. We will confirm availability and access Monday to Friday.",
+      "missing": "Fill in your name and mobile.",
+      "error": "We could not send your request: try again, or write to us.",
+      "more": "choose your plan step by step",
+      "hp": "Leave this field empty"
+    }
   },
   "prenota": {
     "kicker": "book your space",
@@ -1121,14 +1134,15 @@
       "eyebrow": "funded training"
     },
     "stagePlacement": {
-      "title": "Real internships. 83% work in the industry.",
-      "lede": "Placements inside the studios, labels and productions of the network — during the course, not after it.",
+      "title": "Internships and work in music.\nDuring the course, not after.",
+      "lede": "Internships in studios, clubs and productions. An in-house label distributed by Orchard Italia. Auditions with management agencies. From year one.",
       "points": [
-        "83% of students work in the industry. A figure certified by the Emilia-Romagna Region",
         "20 students at most per university course: each one follows a guided path",
         "27 years of relationships with studios, clubs and labels, since 1999"
       ],
-      "eyebrow": "internships & placement"
+      "eyebrow": "internships & placement",
+      "metaTitle": "Internships and placement in music | Creative Hub Academy Bologna",
+      "metaDesc": "Internships in studios, clubs and productions, the in-house Label Lab with Orchard Italia, auditions with management agencies. From year one."
     },
     "corsiCustom": {
       "title": "Your instrument. Your schedule. The first lesson is free.",
@@ -1151,7 +1165,9 @@
       "title": "Everything around your studies.",
       "lede": "What comes beyond the lessons, from scholarships to housing.",
       "points": [],
-      "eyebrow": "student services"
+      "eyebrow": "student services",
+      "metaTitle": "Student services: scholarships, Erasmus+, housing | Creative Hub Academy",
+      "metaDesc": "Merit scholarships, interest-free instalments, Erasmus+ traineeships, housing in Bologna, tutoring and support for specific learning differences."
     },
     "dolbyAtmos": {
       "title": "Immersive audio. Music, film, gaming.",
@@ -1633,11 +1649,6 @@
       "title": "Small classes, one-to-one lessons, real work.",
       "stats": [
         {
-          "n": "83%",
-          "l": "of our alumni work in the creative industries.",
-          "src": "source: Emilia-Romagna Region data"
-        },
-        {
           "n": "20",
           "l": "places per course. They know you by name, not by student number."
         },
@@ -1732,23 +1743,7 @@
       "n": "06 / stories",
       "title": "Where they ended up.",
       "lead": "Three alumni, three different courses, what they do today.",
-      "items": [
-        {
-          "quote": "Testimonial coming soon: a concrete line on what they do today and what the course gave them.",
-          "who": "Name Surname",
-          "detail": "Urban Music Production · 2023 · producer"
-        },
-        {
-          "quote": "Testimonial coming soon: a concrete line on what they do today and what the course gave them.",
-          "who": "Name Surname",
-          "detail": "Music Technology · 2022 · live sound engineer"
-        },
-        {
-          "quote": "Testimonial coming soon: a concrete line on what they do today and what the course gave them.",
-          "who": "Name Surname",
-          "detail": "Creative Musicianship voice · 2024 · artist"
-        }
-      ]
+      "items": []
     },
     "faq": {
       "n": "07 / questions",
@@ -2081,12 +2076,12 @@
         "description": "Electric bass lessons in Bologna and online, one to one and in groups, from scratch to your first complete song. For adults, teenagers and children from the age of 6. Evening slots too. First lesson free."
       },
       "corso-custom-chitarra": {
-        "h1": "",
+        "h1": "Guitar lessons in Bologna.",
         "title": "Guitar lessons in Bologna, one to one and in groups | Creative Hub Academy",
         "description": "Guitar lessons in Bologna, one to one and in groups, from scratch to your first complete song. Teachers who play with Italian and international artists. Evening slots too. First lesson free."
       },
       "corso-custom-pianoforte-tastiere": {
-        "h1": "",
+        "h1": "Piano and keyboard lessons in Bologna.",
         "title": "Piano and keyboard lessons in Bologna | Creative Hub Academy",
         "description": "Piano and keyboard lessons in Bologna and online, one to one and in groups: piano, synths and DAW. For adults, teenagers and children from the age of 6. Evening slots too. First lesson free."
       },

@@ -81,8 +81,12 @@ const BRIEFS = {
     "Costruiamo il percorso insieme a te: strumenti, tempi e modalità d'esame adatti, spazi accessibili. Scrivici prima di iscriverti.",
 }
 
-/* tabella delle borse di merito ("a.a. 2026/27 da confermare" è il badge
-   giallo accanto ai dati veri: i dati entrano, il badge no) */
+/* ⚠️ SUPERATO dall'audit mockup-vs-live di ott 2026: il badge giallo
+   "a.a. 2026/27 da confermare" riguarda proprio quote e importi, quindi
+   la tabella NON si pubblica finché l'Academy non conferma l'anno
+   accademico. Resta qui pronta, ma non entra più nel documento — chi
+   la rimette in pagina lo fa solo dopo l'ok del cliente.
+   Lo stato buono lo scrive scripts/patch-academy-audit-ott.mjs. */
 const BORSE_TABLE = {
   _key: 'tab-borse',
   _type: 'contentTable',
@@ -128,7 +132,11 @@ if (!page?._id) {
 
 const titleOf = (s) => s?.title?.it ?? ''
 
-/* via l'eventuale intro già presente, poi in testa quella aggiornata */
+/* l'intro già in pagina vince su quella di questo script: dall'audit di
+   ott 2026 è una griglia indice ancorata, scritta da
+   scripts/patch-academy-audit-ott.mjs, e non va sostituita con le
+   vecchie card di solo testo */
+const introInPagina = (page.sections ?? []).find((s) => s._key === 'ss-intro')
 let sections = (page.sections ?? []).filter((s) => s._key !== 'ss-intro')
 
 sections = sections.map((s) => {
@@ -138,10 +146,12 @@ sections = sections.map((s) => {
   if (BRIEFS[title]) out.brief = { it: BRIEFS[title] }
 
   if (title === 'Pagare meno.') {
-    /* tabella subito dopo il primo paragrafo (il cappello sul merito) */
-    const blocks = (out.body?.it ?? []).filter((b) => b._key !== 'tab-borse')
-    blocks.splice(1, 0, BORSE_TABLE)
-    out.body = { ...out.body, it: blocks }
+    /* la tabella delle borse resta fuori (vedi nota su BORSE_TABLE):
+       qui ci si limita a toglierla se un vecchio giro l'aveva messa */
+    out.body = {
+      ...out.body,
+      it: (out.body?.it ?? []).filter((b) => b._key !== 'tab-borse'),
+    }
   }
 
   if (title === 'Partire con Erasmus+.') {
@@ -164,7 +174,7 @@ sections = sections.map((s) => {
   return out
 })
 
-sections = [introSection, ...sections]
+sections = [introInPagina ?? introSection, ...sections]
 
 await client.patch(page._id).set({ sections }).commit()
 

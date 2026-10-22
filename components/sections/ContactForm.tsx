@@ -116,7 +116,9 @@ export function ContactForm({
           <span className={styles.label}>{labels.phone}</span>
           <input className={styles.input} type="tel" name="phone" />
         </label>
-        <label className={styles.field}>
+        {/* senza il campo azienda l'email resta sola sulla riga: va a
+            tutta larghezza invece di lasciare mezza riga vuota */}
+        <label className={`${styles.field} ${company ? '' : styles.full}`}>
           <span className={styles.label}>{labels.email}</span>
           <input className={styles.input} type="email" name="email" required />
         </label>

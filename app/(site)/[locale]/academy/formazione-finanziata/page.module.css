@@ -1,0 +1,188 @@
+/* /academy/formazione-finanziata — pagina dei corsi gratuiti finanziati
+   (mockup cliente). La grammatica è quella condivisa di
+   DetailPage.module.css (det): testata, fascia di stato, pillole filtro,
+   chiusura scura. Qui vive solo ciò che manca: le quattro colonne
+   "come funzionano", la griglia a card dei corsi e il rimando ai corsi
+   universitari. Tutto in token, così la pagina regge l'azzurro academy
+   senza colori scritti a mano. */
+
+/* ————— fascia avviso: testo a sinistra, tasto a destra ————— */
+
+.bandRow {
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+/* ————— "Gratuiti, ma non per tutti.": quattro colonne hairline ————— */
+
+.how {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(20px, 2.5vw, 40px);
+}
+
+.howCell {
+  border-top: 1px solid var(--line);
+  padding-top: 14px;
+}
+
+.howTitle {
+  font-size: clamp(16px, 1.5vw, 19px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin-bottom: 8px;
+}
+
+.howText {
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--fg-2);
+}
+
+@media (max-width: 1000px) {
+  .how {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .how {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ————— pillole filtro: hover sobrio, l'attiva la dipinge det.filterOn ————— */
+
+.pill {
+  transition: color var(--dur), border-color var(--dur);
+}
+
+.pill:hover {
+  color: var(--fg);
+  border-color: var(--fg);
+}
+
+/* ————— griglia dei corsi ————— */
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(14px, 1.8vw, 24px);
+}
+
+@media (max-width: 1000px) {
+  .cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* superficie schiarita sul colore di pagina: la card si stacca
+   dall'azzurro senza introdurre una tinta nuova */
+.card {
+  display: flex;
+  flex-direction: column;
+  padding: clamp(18px, 2vw, 26px);
+  border: 1px solid color-mix(in srgb, var(--fg) 26%, transparent);
+  border-radius: 14px;
+  background: color-mix(in srgb, #ffffff 16%, transparent);
+}
+
+/* la card in evidenza porta i token scuri (classe globale scheme-dark):
+   fondo nero, testo osso, e la pill di stato si inverte da sola */
+.cardHot {
+  border-color: var(--bg);
+}
+
+/* solo le card che linkano una scheda vera reagiscono al puntatore */
+a.card:hover {
+  border-color: var(--fg);
+}
+
+.cardCat {
+  display: block;
+  font-size: 12.5px;
+  color: var(--fg-2);
+  margin: 14px 0 6px;
+}
+
+.cardTitle {
+  font-size: clamp(19px, 1.9vw, 25px);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin-bottom: 10px;
+}
+
+.cardText {
+  font-size: 14.5px;
+  line-height: 1.45;
+  color: var(--fg-2);
+}
+
+/* piede della card: ancorato in basso, così i fili si allineano fra
+   card di testo diverso */
+.cardFoot {
+  margin-top: auto;
+  padding-top: clamp(16px, 2vw, 22px);
+}
+
+.cardMeta {
+  display: block;
+  border-top: 1px solid color-mix(in srgb, var(--fg) 20%, transparent);
+  padding-top: 12px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--fg-2);
+}
+
+.cardCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+/* ————— rimando ai corsi universitari ————— */
+
+.uni {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.8fr);
+  gap: clamp(24px, 4vw, 64px);
+  align-items: center;
+}
+
+.uniPh {
+  position: relative;
+  overflow: hidden;
+  background: #000;
+  border-radius: 14px;
+  aspect-ratio: 4 / 3;
+}
+
+@media (max-width: 860px) {
+  .uni {
+    grid-template-columns: 1fr;
+  }
+
+  .uniPh {
+    order: -1;
+  }
+}
+
+/* ————— chiusura scura: il form avvisami a tutta fascia ————— */
+
+.avvisami {
+  background: #000;
+  padding: clamp(44px, 6vw, 84px) 0;
+}

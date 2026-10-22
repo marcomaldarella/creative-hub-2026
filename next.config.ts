@@ -39,7 +39,30 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
     ];
-    return [...merged, ...prenota];
+    // i corsi finanziati sono passati sotto la loro pagina di categoria
+    // (/academy/formazione-finanziata/[corso]): i vecchi URL appesi ad
+    // /academy — e le versioni /en — vanno in 301
+    const finanziati = [
+      "music-data-analyst-and-strategist",
+      "sound-design-immersivo",
+      "produzione-audio-spaziale-e-suoni-immersivi",
+      "multimedia-sound-designer",
+      "digital-composer-and-producer",
+      "songwriter-and-vocal-artist",
+      "tecnico-modellatore-3d",
+    ].flatMap((slug) => [
+      {
+        source: `/academy/${slug}`,
+        destination: `/academy/formazione-finanziata/${slug}`,
+        permanent: true,
+      },
+      {
+        source: `/en/academy/${slug}`,
+        destination: `/en/academy/formazione-finanziata/${slug}`,
+        permanent: true,
+      },
+    ]);
+    return [...merged, ...prenota, ...finanziati];
   },
 };
 

@@ -73,6 +73,10 @@ type ShapeItem =
   | { kind: 'cells'; cells: Cell[] }
   | { kind: 'table'; caption?: string; columns: string[]; rows: string[][] }
   | { kind: 'chips'; label?: string; items: string[] }
+  | {
+      kind: 'index'
+      cards: { label?: string; title: string; text?: string; anchor: string }[]
+    }
   | { kind: 'index'; cards: IdxCard[] }
 
 function shapeBody(blocks?: unknown[] | null): ShapeItem[] | null {
@@ -118,6 +122,33 @@ function shapeBody(blocks?: unknown[] | null): ShapeItem[] | null {
         caption: tb.caption,
         columns: tb.columns ?? [],
         rows: (tb.rows ?? []).map((r) => r.cells ?? []),
+      })
+      continue
+    }
+
+    /* griglia indice: le card "di cosa hai bisogno?" che portano
+       alle ancore delle sezioni sotto */
+    if (b._type === 'indexGrid') {
+      const ig = raw as {
+        items?: {
+          label?: string
+          title?: string
+          text?: string
+          anchor?: string
+        }[]
+      }
+      cell = null
+      closeLabel()
+      items.push({
+        kind: 'index',
+        cards: (ig.items ?? [])
+          .filter((c) => c.title && c.anchor)
+          .map((c) => ({
+            label: c.label,
+            title: c.title as string,
+            text: c.text,
+            anchor: c.anchor as string,
+          })),
       })
       continue
     }
@@ -518,6 +549,32 @@ export async function TopicScreen({
                               </div>
                             </div>
                           )
+                        if (it.kind === 'index')
+                          return (
+                            <div key={j} className={styles.indexGrid}>
+                              {it.cards.map((c) => (
+                                <a
+                                  key={c.anchor}
+                                  className={styles.indexCard}
+                                  href={`#${c.anchor}`}
+                                >
+                                  {c.label && (
+                                    <span className={`mono ${styles.indexNum}`}>
+                                      {c.label}
+                                    </span>
+                                  )}
+                                  <span className={styles.indexTitle}>
+                                    {c.title}
+                                  </span>
+                                  {c.text && (
+                                    <span className={styles.indexText}>
+                                      {c.text}
+                                    </span>
+                                  )}
+                                </a>
+                              ))}
+                            </div>
+                          )
                         if (it.kind === 'chips')
                           return (
                             <div key={j}>
@@ -538,31 +595,6 @@ export async function TopicScreen({
                         /* griglia indice: una card per bisogno, ognuna
                            scende alla sua sezione (freccia SVG, mai
                            carattere unicode) */
-                        if (it.kind === 'index')
-                          return (
-                            <div key={j} className={styles.index}>
-                              {it.cards.map((c) => (
-                                <a
-                                  key={c.anchor}
-                                  href={`#${c.anchor}`}
-                                  className={styles.idxCard}
-                                >
-                                  {c.label && (
-                                    <span className={`mono ${styles.idxN}`}>
-                                      {c.label}
-                                    </span>
-                                  )}
-                                  <h3 className={styles.idxTitle}>{c.title}</h3>
-                                  {c.text && (
-                                    <p className={styles.idxText}>{c.text}</p>
-                                  )}
-                                  <span className={styles.idxArrow}>
-                                    <Arrow dir="e" size={16} />
-                                  </span>
-                                </a>
-                              ))}
-                            </div>
-                          )
                         if (it.kind === 'defs')
                           return (
                             <div key={j} className={styles.defs}>

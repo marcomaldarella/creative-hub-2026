@@ -311,14 +311,16 @@ const EN = {
           'Electric bass lessons in Bologna and online, one to one and in groups, from scratch to your first complete song. For adults, teenagers and children from the age of 6. Evening slots too. First lesson free.',
       },
       'corso-custom-chitarra': {
-        h1: '',
+        /* in inglese il pattern generico non regge ("Lessons: guitar in
+           Bologna"), quindi l'H1 è scritto anche dove in italiano basta */
+        h1: 'Guitar lessons in Bologna.',
         title:
           'Guitar lessons in Bologna, one to one and in groups | Creative Hub Academy',
         description:
           'Guitar lessons in Bologna, one to one and in groups, from scratch to your first complete song. Teachers who play with Italian and international artists. Evening slots too. First lesson free.',
       },
       'corso-custom-pianoforte-tastiere': {
-        h1: '',
+        h1: 'Piano and keyboard lessons in Bologna.',
         title: 'Piano and keyboard lessons in Bologna | Creative Hub Academy',
         description:
           'Piano and keyboard lessons in Bologna and online, one to one and in groups: piano, synths and DAW. For adults, teenagers and children from the age of 6. Evening slots too. First lesson free.',
@@ -337,11 +339,13 @@ const EN = {
 const isPlain = (v) =>
   typeof v === 'object' && v !== null && !Array.isArray(v)
 
-/* scrive solo le chiavi assenti: mai una sovrascrittura */
+/* scrive solo le chiavi assenti (o rimaste stringa vuota, cioè mai
+   compilate): nessun testo già tradotto viene mai sovrascritto */
 function addMissing(target, patch, path, added) {
   for (const [key, value] of Object.entries(patch)) {
     const here = path ? `${path}.${key}` : key
-    if (!(key in target)) {
+    const absent = !(key in target) || target[key] === ''
+    if (absent && target[key] !== value) {
       target[key] = value
       added.push(here)
       continue

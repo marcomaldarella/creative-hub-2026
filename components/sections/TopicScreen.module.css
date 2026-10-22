@@ -441,7 +441,9 @@
 
 .index {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  /* la colonna editoriale è stretta: le card si dispongono da sole,
+     tre per riga quando c'è spazio, una sola sul telefono */
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
   gap: clamp(10px, 1.2vw, 16px);
   margin-bottom: clamp(18px, 2.2vw, 28px);
 }
@@ -497,18 +499,6 @@
   transform: translateX(4px);
 }
 
-@media (max-width: 900px) {
-  .index {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (max-width: 560px) {
-  .index {
-    grid-template-columns: 1fr;
-  }
-}
-
 /* ————— "in breve": riassunto in due righe, box scuro compatto ————— */
 
 .brief {
@@ -530,4 +520,60 @@
   font-size: 15px;
   line-height: 1.45;
   max-width: 58ch;
+}
+
+/* griglia indice "di cosa hai bisogno?": card hairline che portano
+   alle ancore delle sezioni sotto (mockup servizi studenti) */
+.indexGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  margin: 8px 0 4px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+
+.indexCard {
+  display: grid;
+  align-content: start;
+  gap: 6px;
+  padding: clamp(14px, 1.6vw, 20px);
+  background: var(--bg);
+  color: inherit;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.indexCard:hover {
+  background: var(--surface);
+}
+
+.indexNum {
+  font-size: 12px;
+  color: var(--fg-2);
+}
+
+.indexTitle {
+  font-size: clamp(16px, 1.5vw, 19px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.indexText {
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--fg-2);
+}
+
+@media (max-width: 860px) {
+  .indexGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .indexGrid {
+    grid-template-columns: 1fr;
+  }
 }
