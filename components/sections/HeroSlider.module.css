@@ -79,7 +79,7 @@
 }
 
 .annot span {
-  letter-spacing: 0.06em;
+  letter-spacing: 0;
   white-space: pre-line;
   line-height: 1.1; /* interlinea al minimo, richiesta cliente */
   color: var(--fg); /* vince sul grigio di .mono: sul girato deve essere pieno */
@@ -260,7 +260,7 @@
   align-items: center;
   gap: 14px;
   font-size: 12px;
-  letter-spacing: 0.06em;
+  letter-spacing: 0;
   color: var(--fg);
 }
 

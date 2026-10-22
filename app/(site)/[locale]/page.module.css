@@ -49,7 +49,7 @@
 }
 
 .heroAnnot span {
-  letter-spacing: 0.06em;
+  letter-spacing: 0;
   white-space: pre-line; /* international college of music ↵ sound ↵ multimedia ↵ & visual */
   line-height: 1.6;
   color: var(--fg); /* vince sul grigio di .mono: sul blob deve essere pieno */
@@ -124,7 +124,7 @@
 .ring text {
   font-family: var(--font-body), sans-serif;
   font-size: 2.3px;
-  letter-spacing: 0.28em;
+  letter-spacing: 0;
   fill: var(--fg); /* opaco: le sovrapposizioni dei trattini non si vedono */
 }
 
@@ -171,7 +171,7 @@
 
 .tagline {
   color: color-mix(in srgb, var(--fg) 55%, transparent);
-  letter-spacing: 0.08em;
+  letter-spacing: 0;
 }
 
 /* CTA con contorno: pill outline che si accende in hover */
@@ -398,7 +398,7 @@
 /* titolo centrale della sezione */
 .manifestoKicker {
   display: block;
-  letter-spacing: 0.08em;
+  letter-spacing: 0;
   /* etichetta neutra: sulla fascia bianca del manifesto l'azzurro era
      l'unico colore in pagina e tirava l'occhio più dello statement */
   color: var(--fg);
@@ -520,7 +520,7 @@
 .countersYear {
   display: block;
   margin-top: 10px;
-  letter-spacing: 0.08em;
+  letter-spacing: 0;
   color: var(--fg-2);
 }
 
@@ -537,7 +537,7 @@
   display: block;
   margin-bottom: 34px;
   color: var(--azzurro-ink);
-  letter-spacing: 0.08em;
+  letter-spacing: 0;
 }
 
 /* ————— network (§ 06) ————— */
@@ -555,7 +555,7 @@
   display: block;
   margin-bottom: 18px;
   color: var(--azzurro-ink);
-  letter-spacing: 0.08em;
+  letter-spacing: 0;
 }
 
 .networkTitle {
@@ -583,7 +583,7 @@
   justify-content: space-between;
   gap: 16px;
   padding-top: 14px;
-  letter-spacing: 0.06em;
+  letter-spacing: 0;
 }
 
 /* ————— magazine ————— */
@@ -643,7 +643,7 @@
   top: 50%;
   z-index: 2;
   writing-mode: vertical-rl;
-  letter-spacing: 0.12em;
+  letter-spacing: 0;
   color: var(--osso-60);
   white-space: nowrap;
 }

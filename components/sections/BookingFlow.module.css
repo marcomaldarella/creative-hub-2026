@@ -426,7 +426,7 @@
 .summaryList dt {
   font-family: var(--font-body), sans-serif;
   font-size: var(--fs-mono);
-  letter-spacing: 0.02em;
+  letter-spacing: 0;
   color: var(--fg-2);
   padding-top: 2px;
 }

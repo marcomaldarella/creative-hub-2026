@@ -24,7 +24,7 @@
 }
 
 .eyebrow {
-  letter-spacing: 0.08em;
+  letter-spacing: 0;
   color: var(--azzurro-ink);
 }
 
@@ -37,7 +37,7 @@
 .counter {
   margin-right: 8px;
   color: rgba(255, 255, 255, 0.9);
-  letter-spacing: 0.08em;
+  letter-spacing: 0;
 }
 
 .counter em {
@@ -130,7 +130,7 @@ video.img {
 }
 
 .kicker {
-  letter-spacing: 0.08em;
+  letter-spacing: 0;
   color: color-mix(in srgb, var(--accent) 85%, #fff);
 }
 
