@@ -592,3 +592,27 @@
     order: -1;
   }
 }
+
+
+/* ————— tabelle su schermo piccolo: testo compatto per non mandare
+   le righe a capo (richiesta cliente) ————— */
+@media (max-width: 760px) {
+  .cmp {
+    font-size: 12.5px;
+  }
+
+  .cmp thead th {
+    font-size: 11px;
+    padding-right: 8px;
+  }
+
+  .cmp tbody th,
+  .cmp tbody td {
+    padding-right: 8px;
+    white-space: nowrap;
+  }
+
+  .cmp tbody th {
+    white-space: normal;
+  }
+}

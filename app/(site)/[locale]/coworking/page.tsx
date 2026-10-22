@@ -255,28 +255,18 @@ export default async function CoworkingPage({
                 in una riga a cosa serve. ⚠️ l'unità di tempo di quick e
                 full desk ("al mese?") nel mockup è tratteggiata, cioè da
                 confermare: qui resta fuori */}
-            <span className={styles.bookChoose}>{t.coworking.bookChoose}</span>
-            <ul className={styles.bookList}>
-              {t.coworking.tableRows.map((row, i) => (
-                <li key={row[0]} className={styles.bookRow}>
-                  <span className={styles.bookName}>
-                    {row[0]}
-                    {t.coworking.bookHints[i] && (
-                      <em className={styles.bookHint}>
-                        {t.coworking.bookHints[i]}
-                      </em>
-                    )}
-                  </span>
-                  <span className={`mono ${styles.bookPrice}`}>{row[1]}</span>
-                </li>
-              ))}
-            </ul>
             {/* il mockup chiede qui la richiesta rapida, non un rimando:
                 tre campi e via. Il percorso guidato resta in fondo */}
             <QuickBookForm
               labels={t.coworking.quickBook}
               subject={t.coworking.bookCta}
               moreHref={prenota}
+              optionsLabel={t.coworking.bookChoose}
+              options={t.coworking.tableRows.map((row, i) => ({
+                name: row[0],
+                hint: t.coworking.bookHints[i],
+                price: row[1],
+              }))}
             />
             {settings?.phone && (
               <ArrowLink href={`tel:${settings.phone.replace(/\s/g, '')}`} external>

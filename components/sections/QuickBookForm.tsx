@@ -26,12 +26,18 @@ export function QuickBookForm({
   subject,
   moreHref,
   privacyHref,
+  options,
+  optionsLabel,
 }: {
   labels: QuickBookLabels
   subject: string
   moreHref: string
   privacyHref?: string
+  /** formule scegliibili: nome, riga piccola e prezzo */
+  options?: { name: string; hint?: string; price: string }[]
+  optionsLabel?: string
 }) {
+  const [formula, setFormula] = useState(options?.[0]?.name ?? '')
   const [status, setStatus] = useState<'idle' | 'pending' | 'sent' | 'error'>(
     'idle',
   )
@@ -57,6 +63,7 @@ export function QuickBookForm({
           form: 'booking',
           subject,
           fields: {
+            ...(formula ? { formula } : {}),
             'da quando': String(f.get('da') ?? ''),
             nome,
             cellulare,
@@ -81,6 +88,38 @@ export function QuickBookForm({
 
   return (
     <form className={styles.form} onSubmit={onSubmit} noValidate>
+      {/* le formule si scelgono: riga cliccabile, quella attiva si
+          accende (richiesta cliente) */}
+      {options && options.length > 0 && (
+        <fieldset className={styles.set}>
+          {optionsLabel && (
+            <legend className={styles.legend}>{optionsLabel}</legend>
+          )}
+          <div className={styles.opts}>
+            {options.map((o) => (
+              <label
+                key={o.name}
+                className={`${styles.opt} ${
+                  formula === o.name ? styles.optOn : ''
+                }`}
+              >
+                <input
+                  type="radio"
+                  name="formula"
+                  className={styles.sr}
+                  checked={formula === o.name}
+                  onChange={() => setFormula(o.name)}
+                />
+                <span className={styles.optName}>
+                  {o.name}
+                  {o.hint && <em className={styles.optHint}>{o.hint}</em>}
+                </span>
+                <span className={`mono ${styles.optPrice}`}>{o.price}</span>
+              </label>
+            ))}
+          </div>
+        </fieldset>
+      )}
       <label className={styles.field}>
         <span className={styles.label}>{labels.from}</span>
         <input className={styles.input} type="date" name="da" />
