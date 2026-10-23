@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import Image, { type StaticImageData } from 'next/image'
 import { notFound } from 'next/navigation'
-import { ArrowLink, Reveal, RevealGroup, Rule } from '@/components/ui'
+import { Arrow, ArrowLink, Reveal, RevealGroup, Rule } from '@/components/ui'
 import { SiteChrome } from '@/components/sections/SiteChrome'
 import { PointsAccordion } from '@/components/sections/PointsAccordion'
 import { SectionPagesNav } from '@/components/sections/SectionPagesNav'
@@ -37,6 +37,14 @@ const ROOM_SHOP_SLUGS: Record<string, string> = {
   riunione: 'sala-riunioni',
   corso: 'sala-didattica',
   grande: 'area-culture',
+}
+
+/* ogni sala della vetrina porta alla sua scheda sullo shop, dove si
+   prenota davvero: la chiave è il titolo scritto in Sanity */
+const ROOM_PRODUCT: Record<string, string> = {
+  'sala riunioni': 'sala-riunioni',
+  'sala didattica': 'sala-didattica',
+  'area culture': 'area-culture',
 }
 
 /* foto di sede abbinate alle sale, nell'ordine del documento Sanity:
@@ -93,6 +101,13 @@ export default async function SaleEventiPage({
      su misura (le sale senza prodotto non mostrano il rimando) */
   const products = await getBookableProducts()
   const bySlug = new Map(products.map((p) => [p.slug, p.permalink]))
+  /* le sale della vetrina che hanno un prodotto a catalogo */
+  const roomLinks = Object.fromEntries(
+    Object.entries(ROOM_PRODUCT).flatMap(([nome, slug]) => {
+      const url = bySlug.get(slug)
+      return url ? [[nome, url] as const] : []
+    })
+  )
   const roomShopLinks = Object.fromEntries(
     Object.entries(ROOM_SHOP_SLUGS).flatMap(([id, slug]) => {
       const url = bySlug.get(slug)
@@ -193,8 +208,17 @@ export default async function SaleEventiPage({
             {t.saleEventiPage.roomsTitle}
           </Reveal>
           <RevealGroup className={styles.rooms}>
-            {rooms.map((room, i) => (
-              <div key={room.title} className={`rv ${styles.room}`}>
+            {rooms.map((room, i) => {
+              const shop = roomLinks[room.title.trim().toLowerCase()]
+              const Card = shop ? 'a' : 'div'
+              return (
+              <Card
+                key={room.title}
+                className={`rv ${styles.room}`}
+                {...(shop
+                  ? { href: shop, target: '_blank', rel: 'noopener noreferrer' }
+                  : {})}
+              >
                 <div className={styles.roomPh}>
                   {ROOM_PHOTOS[i] && (
                     <Image
@@ -223,8 +247,16 @@ export default async function SaleEventiPage({
                     {t.saleEventiPage.roomMeta[i].price}
                   </p>
                 )}
-              </div>
-            ))}
+                {/* la sala che si può prenotare lo dice */}
+                {shop && (
+                  <span className={styles.roomGo}>
+                    {t.saleEventiPage.ctaBook}
+                    <Arrow dir="ne" size={13} />
+                  </span>
+                )}
+              </Card>
+              )
+            })}
           </RevealGroup>
         </section>
 

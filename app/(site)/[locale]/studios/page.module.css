@@ -225,7 +225,7 @@
   font-size: clamp(26px, 3.6vw, 52px);
   line-height: 1.08;
   max-width: 26ch;
-  margin-bottom: clamp(40px, 6vw, 80px);
+  margin-bottom: clamp(28px, 4vw, 56px);
 }
 
 .numbersKicker {
@@ -275,8 +275,10 @@
 
 /* ————— in regia ————— */
 
+/* senza una foto del fonico il testo prende la sua larghezza di lettura
+   e non lascia mezza pagina vuota a destra */
 .engineerBody {
-  max-width: 62ch;
+  max-width: 72ch;
 }
 
 .engineerRole {
