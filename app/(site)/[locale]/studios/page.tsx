@@ -300,40 +300,6 @@ export default async function StudiosPage({
           </div>
         </section>
 
-        {/* ————— faq ————— */}
-        <section className={styles.sez}>
-          <div className="wrap">
-            <SectionHeader kicker={t.studios.faqKicker} title={t.studios.faqTitle} />
-            <PointsAccordion items={t.studios.faq} plain />
-          </div>
-        </section>
-
-        {/* ————— dal magazine: due articoli a tema studio, fascia nera ————— */}
-        {EDITORIAL_ATTIVO && editorial.length > 0 && (
-          <section className={`${styles.sez} scheme-dark`}>
-            <div className="wrap">
-              <SectionHeader
-                kicker={t.studios.editorialKicker}
-                title={t.studios.editorialTitle}
-              />
-              <div className={styles.editorialGrid}>
-                {editorial.map((article) => (
-                  <ArticleCard
-                    key={article._id}
-                    article={article}
-                    locale={locale}
-                  />
-                ))}
-              </div>
-              <div className={styles.editorialAll}>
-                <ArrowLink href={localeHref(locale, '/magazine')}>
-                  {t.home.magazineAll}
-                </ArrowLink>
-              </div>
-            </div>
-          </section>
-        )}
-
         {/* ————— chiusura: raccontaci il progetto (mockup ott 2026) —
             stesso modulo delle pagine di dettaglio, con il form vero ————— */}
         {/* l'id storico #affitto-studio resta per i vecchi link; #contatti è
@@ -372,6 +338,41 @@ export default async function StudiosPage({
             </Reveal>
           </section>
         </div>
+
+        {/* ————— faq ————— */}
+        <section className={styles.sez}>
+          <div className="wrap">
+            <SectionHeader kicker={t.studios.faqKicker} title={t.studios.faqTitle} />
+            <PointsAccordion items={t.studios.faq} plain />
+          </div>
+        </section>
+
+        {/* ————— dal magazine: due articoli a tema studio, fascia nera ————— */}
+        {EDITORIAL_ATTIVO && editorial.length > 0 && (
+          <section className={`${styles.sez} scheme-dark`}>
+            <div className="wrap">
+              <SectionHeader
+                kicker={t.studios.editorialKicker}
+                title={t.studios.editorialTitle}
+              />
+              <div className={styles.editorialGrid}>
+                {editorial.map((article) => (
+                  <ArticleCard
+                    key={article._id}
+                    article={article}
+                    locale={locale}
+                  />
+                ))}
+              </div>
+              <div className={styles.editorialAll}>
+                <ArrowLink href={localeHref(locale, '/magazine')}>
+                  {t.home.magazineAll}
+                </ArrowLink>
+              </div>
+            </div>
+          </section>
+        )}
+
       </main>
     </SiteChrome>
   )

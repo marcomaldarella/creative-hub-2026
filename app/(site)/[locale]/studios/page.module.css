@@ -2,7 +2,8 @@
 .main {
   background: var(--bg);
   color: var(--fg);
-  padding-top: var(--nav-h);
+  /* sotto barra e topbar: il kicker finiva dietro al menu */
+  padding-top: var(--header-h);
   min-height: 100svh;
   position: relative;
   overflow: hidden;
@@ -244,7 +245,8 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-  padding: clamp(18px, 2.4vw, 30px) 18px clamp(20px, 2.6vw, 34px) 0;
+  /* aria giusta fra la hairline sopra e la cifra */
+  padding: clamp(24px, 3vw, 38px) 18px clamp(20px, 2.6vw, 34px) 0;
   border-right: 1px solid var(--line);
 }
 
