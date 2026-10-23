@@ -21,6 +21,10 @@ import studioRegiaImg from '@/public/img/sections/studio-regia.jpg'
 import studioRegiaBImg from '@/public/img/sections/studio-regia-b.jpg'
 import studioDeskImg from '@/public/img/sections/studio-desk.jpg'
 import studioSslImg from '@/public/img/foto/studio-ssl.jpg'
+import sdCinemaImg from '@/public/img/foto/sd-cinema.jpg'
+import sdPubblicitaImg from '@/public/img/foto/sd-pubblicita.jpg'
+import sdVideogiochiImg from '@/public/img/foto/sd-videogiochi.jpg'
+import sdInstallazioniImg from '@/public/img/foto/sd-installazioni.jpg'
 /* le card a foto piena dei corsi (layout B): modulo condiviso */
 import uni from '@/components/sections/UniScreen.module.css'
 import { ContactForm } from '@/components/sections/ContactForm'
@@ -37,11 +41,25 @@ const kickerOf = (s: string) => s.replace(/\.+$/, '').toLowerCase()
 
 /* foto dei quattro committenti, nell'ordine del dizionario:
    cinema e serie, pubblicità e video, videogiochi, installazioni */
+/* una foto per ogni mondo a cui lavoriamo, nell'ordine delle voci:
+   cinema e serie, pubblicità e video, videogiochi, installazioni */
 const CLIENT_PHOTOS = [
-  { src: studioRegiaBImg, alt: 'La regia dello studio, vista laterale' },
-  { src: studioSslImg, alt: 'Mani sulla console SSL' },
-  { src: studioRegiaImg, alt: 'La regia dello studio' },
-  { src: studioDeskImg, alt: 'La postazione di lavoro in regia' },
+  {
+    src: sdCinemaImg,
+    alt: 'Troupe sul set: operatore alla macchina e microfonista con l’asta durante una ripresa in esterni',
+  },
+  {
+    src: sdPubblicitaImg,
+    alt: 'Timeline di montaggio video su monitor, con la forma d’onda dell’audio in alto',
+  },
+  {
+    src: sdVideogiochiImg,
+    alt: 'Parete di televisori a tubo catodico con videogiochi accesi e un’insegna al neon',
+  },
+  {
+    src: sdInstallazioniImg,
+    alt: 'Parete di diffusori acustici di epoche diverse in uno spazio espositivo',
+  },
 ]
 
 type Block = {
