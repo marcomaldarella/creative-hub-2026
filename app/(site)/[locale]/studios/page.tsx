@@ -32,6 +32,21 @@ import styles from './page.module.css'
 
 export const dynamic = 'force-dynamic'
 
+/* i loghi dei partner, nello stesso ordine dei nomi in t.studios.tech */
+/* file + altezza: le viewBox hanno proporzioni molto diverse (c'è chi
+   riempie il quadro e chi ci sta dentro piccolo), quindi la misura la
+   decide il logo, non la griglia */
+const TECH_LOGHI: [string, number][] = [
+  ['solid-state-logic-bianco.svg', 34],
+  ['dolby-bianco.svg', 74],
+  ['genelec-bianco.svg', 26],
+  ['universal-audio-bianco.svg', 60],
+  ['avid-bianco.svg', 70],
+  ['ableton-bianco.svg', 66],
+  ['ik-multimedia-bianco.svg', 30],
+  ['emilia-romagna-film-commission-bianco.svg', 76],
+]
+
 export async function generateMetadata({
   params,
 }: {
@@ -292,8 +307,19 @@ export default async function StudiosPage({
             />
             <div className={styles.tech}>
               {t.studios.tech.map((name, i) => (
-                <Reveal key={name} className={styles.techName} delay={(i % 4) * 50}>
-                  {name}
+                <Reveal key={name} className={styles.techItem} delay={(i % 4) * 50}>
+                  {/* il logo è una maschera riempita di colore: resta
+                      bianco sul nero e non ha bisogno di due versioni */}
+                  <span
+                    className={styles.techLogo}
+                    role="img"
+                    aria-label={name}
+                    style={{
+                      maskImage: `url(/img/partners-studio/${TECH_LOGHI[i][0]})`,
+                      WebkitMaskImage: `url(/img/partners-studio/${TECH_LOGHI[i][0]})`,
+                      height: `${TECH_LOGHI[i][1]}px`,
+                    }}
+                  />
                 </Reveal>
               ))}
             </div>

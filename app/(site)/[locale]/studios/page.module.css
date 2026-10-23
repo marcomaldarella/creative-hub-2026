@@ -386,3 +386,33 @@
 .manifesto .number {
   padding-bottom: clamp(14px, 1.8vw, 22px);
 }
+
+
+/* ————— loghi dei partner: maschere in currentColor ————— */
+
+.techItem {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: clamp(18px, 2.2vw, 28px) 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.techLogo {
+  display: block;
+  width: clamp(130px, 14vw, 180px);
+  /* l'altezza arriva dal singolo logo (vedi TECH_LOGHI) */
+  background: currentColor;
+  mask-repeat: no-repeat;
+  mask-position: left center;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: left center;
+  -webkit-mask-size: contain;
+  opacity: 0.85;
+  transition: opacity 0.2s var(--ease-out);
+}
+
+.techItem:hover .techLogo {
+  opacity: 1;
+}
