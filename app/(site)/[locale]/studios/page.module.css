@@ -372,3 +372,15 @@
 .brands {
   background: #000000;
 }
+
+
+/* ————— fascia manifesto + numeri: il vuoto sotto era doppio —————
+   la sezione metteva il suo padding pieno e le celle ne aggiungevano
+   altro, lasciando due dita di nero vuoto sotto l'ultima riga. */
+.manifesto {
+  padding-bottom: clamp(36px, 4.5vw, 64px);
+}
+
+.manifesto .number {
+  padding-bottom: clamp(14px, 1.8vw, 22px);
+}
