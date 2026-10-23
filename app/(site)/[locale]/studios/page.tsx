@@ -28,6 +28,7 @@ import {
   getSpacesByKind,
 } from '@/lib/sanity/queries'
 import { l } from '@/lib/sanity/l'
+import studioRegiaBImg from '@/public/img/sections/studio-regia-b.jpg'
 import styles from './page.module.css'
 
 export const dynamic = 'force-dynamic'
@@ -275,6 +276,7 @@ export default async function StudiosPage({
               kicker={t.studios.engineerKicker}
               title={t.studios.engineerName}
             />
+            <div className={styles.engineerDuo}>
             <div className={styles.engineerBody}>
               <Reveal as="p" className={`mono ${styles.engineerRole}`}>
                 {t.studios.engineerRole}
@@ -295,6 +297,17 @@ export default async function StudiosPage({
               </Reveal>
             </div>
           </div>
+            {/* la regia accanto al racconto: finché non arriva un
+                ritratto del fonico, la stanza in cui lavora */}
+            <Reveal className={styles.engineerPh} delay={120}>
+              <Image
+                src={studioRegiaBImg}
+                alt="La regia dello studio: console, outboard e monitor"
+                className={styles.engineerImg}
+                sizes="(max-width: 860px) 100vw, 42vw"
+              />
+            </Reveal>
+            </div>
         </section>
 
         {/* ————— tecnologia e partner: fascia nera, come .brands nel

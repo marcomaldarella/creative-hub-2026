@@ -245,13 +245,19 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-  /* aria giusta fra la hairline sopra e la cifra */
-  padding: clamp(24px, 3vw, 38px) 18px clamp(20px, 2.6vw, 34px) 0;
+  /* aria sopra, e distacco dal filo verticale alla sinistra */
+  padding: clamp(24px, 3vw, 38px) 24px clamp(20px, 2.6vw, 34px)
+    clamp(20px, 2.2vw, 30px);
   border-right: 1px solid var(--line);
 }
 
 .number:last-child {
   border-right: 0;
+}
+
+/* la prima colonna resta allineata al margine della pagina */
+.number:first-child {
+  padding-left: 0;
 }
 
 .numberN {
@@ -415,4 +421,31 @@
 
 .techItem:hover .techLogo {
   opacity: 1;
+}
+
+/* ————— in regia: racconto a sinistra, la stanza a destra ————— */
+
+.engineerDuo {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.8fr);
+  gap: clamp(24px, 4vw, 64px);
+  align-items: start;
+}
+
+.engineerPh {
+  overflow: hidden;
+  background: #000;
+  aspect-ratio: 4 / 3;
+}
+
+.engineerImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 860px) {
+  .engineerDuo {
+    grid-template-columns: 1fr;
+  }
 }
