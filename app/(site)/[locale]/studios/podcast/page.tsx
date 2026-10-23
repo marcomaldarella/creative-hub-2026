@@ -17,6 +17,7 @@ import { pageAlternates } from '@/lib/seo'
 import { getPageById, getSiteSettings } from '@/lib/sanity/queries'
 import { l } from '@/lib/sanity/l'
 import studioRegiaBImg from '@/public/img/sections/studio-regia-b.jpg'
+import podcastImg from '@/public/img/foto/podcast-cabina.avif'
 import studioSslImg from '@/public/img/foto/studio-ssl.jpg'
 import { ContactForm } from '@/components/sections/ContactForm'
 import det from '@/components/sections/DetailPage.module.css'
@@ -142,8 +143,8 @@ export default async function PodcastPage({
             </div>
             <Reveal className={det.headPh} delay={120}>
               <Image
-                src={studioRegiaBImg}
-                alt="La regia dello studio"
+                src={podcastImg}
+                alt="Microfono da studio con filtro anti-pop davanti alla cuffia, pronto per la registrazione di una voce"
                 className={det.headImg}
                 sizes="(max-width: 860px) 100vw, 50vw"
                 priority
