@@ -107,3 +107,16 @@
   border-bottom: 1.5px solid currentColor;
   transform: rotate(-45deg);
 }
+
+/* tabella delle tariffe su schermo piccolo: testo compatto come le
+   altre tabelle del sito, così le righe non vanno a capo */
+@media (max-width: 760px) {
+  .rates {
+    font-size: 12.5px;
+  }
+
+  .rates th,
+  .rates td {
+    padding-right: 8px;
+  }
+}
