@@ -88,14 +88,16 @@
   font-weight: 600;
   font-size: 15px;
   letter-spacing: -0.01em;
+  line-height: 1.25;
 }
 
 .factS {
   display: block;
   font-size: 13px;
-  line-height: 1.4;
+  line-height: 1.3;
   color: var(--fg-2);
-  margin-top: 4px;
+  /* la riga piccola sta attaccata al suo titoletto: è la sua didascalia */
+  margin-top: 1px;
 }
 
 .heroRow {

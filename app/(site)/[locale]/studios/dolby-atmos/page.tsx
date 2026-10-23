@@ -22,6 +22,10 @@ import studioRegiaImg from '@/public/img/sections/studio-regia.jpg'
 import studioRegiaBImg from '@/public/img/sections/studio-regia-b.jpg'
 import studioDeskImg from '@/public/img/sections/studio-desk.jpg'
 import studioSslImg from '@/public/img/foto/studio-ssl.jpg'
+import sdCinemaImg from '@/public/img/foto/sd-cinema.jpg'
+import sdPubblicitaImg from '@/public/img/foto/sd-pubblicita.jpg'
+import sdVideogiochiImg from '@/public/img/foto/sd-videogiochi.jpg'
+import sdInstallazioniImg from '@/public/img/foto/sd-installazioni.jpg'
 /* le card a foto piena dei corsi (layout B): modulo condiviso */
 import uni from '@/components/sections/UniScreen.module.css'
 import { ContactForm } from '@/components/sections/ContactForm'
@@ -32,17 +36,41 @@ import styles from './page.module.css'
 
 export const dynamic = 'force-dynamic'
 
+/* i marchi della regia hanno il loro logo: file e altezza, perché le
+   proporzioni degli SVG sono diverse fra loro */
+const ROOM_LOGHI: Record<string, [string, number]> = {
+  Genelec: ['genelec-bianco.svg', 30],
+  'Avid MTRX': ['avid-bianco.svg', 74],
+  Avid: ['avid-bianco.svg', 74],
+  Dolby: ['dolby-bianco.svg', 80],
+}
+
 /* etichetta della Rule dal titolo di sezione: via il punto, tutto minuscolo
    (così resta giusta anche in inglese, senza chiavi dedicate) */
 const kickerOf = (s: string) => s.replace(/\.+$/, '').toLowerCase()
 
 /* foto delle quattro applicazioni, nell'ordine del dizionario:
    musica, cinema e serie, media e installazioni, gaming */
+/* una foto per ogni uso: musica in regia, cinema sul set, media e
+   installazioni, gaming, didattica */
 const USE_PHOTOS = [
-  { src: studioSslImg, alt: 'Mani sulla console SSL' },
-  { src: studioDeskImg, alt: 'La postazione di lavoro in regia' },
-  { src: studioRegiaBImg, alt: 'La regia dello studio, vista laterale' },
-  { src: studioRegiaImg, alt: 'La regia dello studio' },
+  { src: studioSslImg, alt: 'La console SSL durante una sessione di mix' },
+  {
+    src: sdCinemaImg,
+    alt: 'Troupe sul set: operatore e microfonista durante una ripresa',
+  },
+  {
+    src: sdInstallazioniImg,
+    alt: 'Parete di diffusori acustici in uno spazio espositivo',
+  },
+  {
+    src: sdVideogiochiImg,
+    alt: 'Televisori a tubo catodico con videogiochi accesi',
+  },
+  {
+    src: sdPubblicitaImg,
+    alt: 'Timeline di montaggio con la forma d’onda dell’audio',
+  },
 ]
 
 type Block = {
@@ -197,12 +225,29 @@ export default async function DolbyAtmosPage({
               {d.roomKicker}
             </Reveal>
             <RevealGroup className={styles.specs}>
-              {d.room.map((r) => (
-                <span key={r.t} className="rv">
-                  <span className={`display-thin ${styles.specT}`}>{r.t}</span>
-                  <span className={styles.specS}>{r.s}</span>
-                </span>
-              ))}
+              {d.room.map((r) => {
+                /* dove il nome è un marchio, si vede il logo vero */
+                const logo = ROOM_LOGHI[r.t]
+                return (
+                  <span key={r.t} className="rv">
+                    {logo ? (
+                      <span
+                        className={styles.specLogo}
+                        role="img"
+                        aria-label={r.t}
+                        style={{
+                          maskImage: `url(/img/partners-studio/${logo[0]})`,
+                          WebkitMaskImage: `url(/img/partners-studio/${logo[0]})`,
+                          height: `${logo[1]}px`,
+                        }}
+                      />
+                    ) : (
+                      <span className={`display-thin ${styles.specT}`}>{r.t}</span>
+                    )}
+                    <span className={styles.specS}>{r.s}</span>
+                  </span>
+                )
+              })}
             </RevealGroup>
           </div>
         </div>
