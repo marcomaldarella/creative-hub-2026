@@ -282,8 +282,9 @@ export default async function StudiosPage({
           </div>
         </section>
 
-        {/* ————— tecnologia e partner (mockup ott 2026) ————— */}
-        <section className={styles.sez}>
+        {/* ————— tecnologia e partner: fascia nera, come .brands nel
+            mockup html ————— */}
+        <section className={`scheme-dark ${styles.sez} ${styles.brands}`}>
           <div className="wrap">
             <SectionHeader
               kicker={t.studios.techKicker}

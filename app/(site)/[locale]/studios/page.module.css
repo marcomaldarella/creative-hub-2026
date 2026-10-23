@@ -365,3 +365,10 @@
     grid-template-columns: 1fr;
   }
 }
+
+
+/* fascia dei partner tecnologici: nera come nel mockup (.brands), così
+   la pagina alterna arancio e nero invece di restare monocroma */
+.brands {
+  background: #000000;
+}
