@@ -128,7 +128,12 @@ export default async function SoundDesignPage({
               <Reveal as="span" className={`mono ${det.kicker}`} delay={60}>
                 {d.kicker}
               </Reveal>
-              <Reveal as="h1" className={`display-thin ${det.title}`} delay={120}>
+              <Reveal
+                as="h1"
+                className={`display-thin ${det.title}`}
+                style={{ whiteSpace: 'pre-line' }}
+                delay={120}
+              >
                 {d.title}
               </Reveal>
               <Reveal as="p" className={det.lede} delay={180}>
