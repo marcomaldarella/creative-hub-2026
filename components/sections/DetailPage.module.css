@@ -10,10 +10,10 @@
 
 /* ————— testata: testo a sinistra, foto a destra ————— */
 
+/* il respiro in alto e in basso ce l'ha solo la colonna testo: la foto
+   parte attaccata alla barra e scende a filo (richiesta cliente) */
 .head {
-  padding-top: clamp(32px, 4.5vw, 56px);
-  /* la foto arriva a filo della barra di sezione che segue:
-     il respiro inferiore ce l'ha solo la colonna testo */
+  padding-top: 0;
   padding-bottom: 0;
 }
 
@@ -26,6 +26,7 @@
 }
 
 .headGrid > :first-child {
+  padding-top: clamp(32px, 4.5vw, 56px);
   padding-bottom: clamp(32px, 4.5vw, 56px);
 }
 
