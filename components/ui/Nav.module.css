@@ -53,10 +53,16 @@
 /* ————— topbar utility (solo desktop) ————— */
 
 .topbar {
-  display: flex;
+  /* griglia incolonnata sulla nav sotto: la prima colonna finisce dove
+     parte la lista voci (--nav-links-x, misurata dall'header), così il
+     marquee attacca sotto "Academy" e resta largo fino ai contatti.
+     La fascia resta full-bleed: cambia solo dove vive il nastro. */
+  display: grid;
+  grid-template-columns:
+    calc(var(--nav-links-x, 440px) - var(--pad) - 24px)
+    minmax(0, 1fr) auto auto;
   align-items: center;
-  justify-content: space-between;
-  gap: 24px;
+  column-gap: 24px;
   height: var(--topbar-h);
   max-width: var(--max);
   margin: 0 auto;
@@ -78,9 +84,7 @@
    (.scroller-fade, var(--scroller-fade)) — area stretta, non tutta
    la barra */
 .topMid {
-  flex: 0 1 auto;
-  width: min(620px, 42vw);
-  margin: 0 auto;
+  width: 100%;
   overflow: hidden;
 }
 

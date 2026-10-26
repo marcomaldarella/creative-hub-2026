@@ -138,17 +138,20 @@ export function Nav({
     const inner = innerRef.current;
     const links = linksRef.current;
     if (!inner || !links) return;
+    /* la var vive sull'header, non su .inner: così la legge anche la
+       topbar (il marquee si incolonna sotto la prima voce del menu) */
+    const host = inner.parentElement ?? inner;
     const measure = () => {
       /* su mobile la lista è display:none e il mega-menu non esiste:
          si lascia il fallback del CSS */
       if (links.offsetParent === null) {
-        inner.style.removeProperty('--nav-links-x');
+        host.style.removeProperty('--nav-links-x');
         return;
       }
       const x =
         links.getBoundingClientRect().left -
         inner.getBoundingClientRect().left;
-      inner.style.setProperty('--nav-links-x', `${x}px`);
+      host.style.setProperty('--nav-links-x', `${x}px`);
     };
     measure();
     const ro = new ResizeObserver(measure);
