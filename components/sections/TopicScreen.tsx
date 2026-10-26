@@ -303,6 +303,9 @@ export async function TopicScreen({
     eyebrow?: string
     /* azioni in testata, quando il mockup del topic le prevede */
     heroCtas?: { label: string; href: string }[]
+    /* cella di recap in coda alla griglia corsi: riempie le colonne
+       che avanzano nell'ultima riga (vedi .fillCta) */
+    coursesCta?: { text: string; label: string; href: string }
   }
   /* alcuni topic (es. servizi-studenti) hanno punti "ricchi" con testo
      esteso + foto: diventano un accordion invece della riga numerata */
@@ -541,6 +544,28 @@ export async function TopicScreen({
                       </Link>
                     )
                   })}
+                  {/* griglia modulare: se l'ultima riga resta incompleta
+                      lo spazio avanzato ospita il recap con il rimando a
+                      tutti i corsi — larga quante colonne mancano */}
+                  {copy.coursesCta && elenco.length % 3 !== 0 && (
+                    <div
+                      className={`rv ${uni.fillCta}`}
+                      style={
+                        {
+                          '--fill-span': 3 - (elenco.length % 3),
+                          '--rvd': `${(elenco.length % 3) * 60}ms`,
+                        } as CSSProperties
+                      }
+                    >
+                      <p className={uni.fillCtaText}>{copy.coursesCta.text}</p>
+                      <Button
+                        variant="azzurro"
+                        href={localeHref(locale, copy.coursesCta.href)}
+                      >
+                        {copy.coursesCta.label}
+                      </Button>
+                    </div>
+                  )}
                 </RevealGroup>
               )}
             </div>

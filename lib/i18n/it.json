@@ -1246,6 +1246,11 @@
     "corsiCustom": {
       "title": "Il tuo strumento. I tuoi orari. La prima lezione è gratis.",
       "lede": "Percorsi individuali su strumento, software o obiettivo, costruiti sui tuoi tempi.",
+      "coursesCta": {
+        "text": "Questi sono i nostri corsi custom: scopri anche i corsi universitari e tutta l'offerta della academy.",
+        "label": "Tutti i corsi",
+        "href": "/academy/corsi"
+      },
       "points": [
         "Una lezione individuale a settimana, anche di sera",
         "Pacchetti da 4, 20 o 40 lezioni",

@@ -1246,6 +1246,11 @@
     "corsiCustom": {
       "title": "Your instrument. Your schedule. The first lesson is free.",
       "lede": "One-to-one paths built around an instrument, a tool or a goal, on your own timetable.",
+      "coursesCta": {
+        "text": "These are our custom courses — check out the university programmes and the full academy offer.",
+        "label": "All courses",
+        "href": "/academy/corsi"
+      },
       "points": [
         "One one-to-one lesson a week, evenings included",
         "Packages of 4, 20 or 40 lessons",

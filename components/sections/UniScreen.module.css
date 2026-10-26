@@ -1177,3 +1177,32 @@
 .subnavDark .subnavCourse {
   color: var(--fg);
 }
+
+/* ————— cella di recap in coda alla griglia corsi: riempie le colonne
+   avanzate dell'ultima riga (--fill-span la calcola chi rende la
+   griglia dal numero di card); sotto i 960 prende la riga intera ————— */
+.fillCta {
+  grid-column: span var(--fill-span, 1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+  padding: clamp(20px, 2.2vw, 28px);
+  border: 1px solid color-mix(in srgb, var(--fg) 30%, transparent);
+}
+
+.fillCtaText {
+  font-size: clamp(20px, 1.9vw, 28px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  max-width: 24ch;
+}
+
+@media (max-width: 960px) {
+  .fillCta {
+    grid-column: 1 / -1;
+    min-height: 200px;
+  }
+}
