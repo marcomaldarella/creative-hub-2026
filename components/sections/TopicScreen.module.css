@@ -844,3 +844,9 @@
 .darkBody .head {
   padding-bottom: clamp(36px, 5vw, 72px);
 }
+
+/* apertura secca: la testata respira prima della fascia nera dei corsi
+   (altrove lo stacco lo portano .points o la banda video col margine) */
+.tailOpen .head {
+  padding-bottom: clamp(32px, 4.5vw, 64px);
+}

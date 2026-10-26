@@ -371,6 +371,9 @@ export async function TopicScreen({
           /* corpo in fascia nera (servizi studenti): la classe scopa
              gli override in fondo al modulo a QUESTA pagina */
           topic.darkBody ? styles.darkBody : '',
+          /* apertura secca (corsi custom): la fascia nera arriva subito
+             dopo la lede, serve il respiro in fondo alla testata */
+          topic.pointsLast ? styles.tailOpen : '',
         ]
           .filter(Boolean)
           .join(' ')}
