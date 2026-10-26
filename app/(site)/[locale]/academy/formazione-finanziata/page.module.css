@@ -140,7 +140,8 @@ a.card:hover {
 }
 
 .cardText {
-  font-size: 14.5px;
+  /* richiesta ott 2026: descrizioni un filo più grandi */
+  font-size: 15.5px;
   line-height: 1.45;
   color: var(--fg-2);
 }
@@ -245,4 +246,6 @@ a.card:hover {
   line-height: 1.45;
   color: var(--fg-2);
   max-width: 48ch;
+  /* richiesta ott 2026: la nota staccata dalla CTA, non solo il gap */
+  padding-left: clamp(16px, 2vw, 32px);
 }

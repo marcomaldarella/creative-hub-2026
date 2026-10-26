@@ -1007,7 +1007,7 @@ export const html = `
     <a href="#workshop"><span class="idx">04.</span><span>Connettiti</span></a>
   </nav>
   <span class="tail">
-    <span class="year">A.A. 2026/2027</span>
+    <span class="year">A.A. 2027/2028</span>
     <span class="steps">
       <button class="step" data-step="-1" aria-label="sezione precedente"><span class="arr w"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></button>
       <button class="step" data-step="1" aria-label="sezione successiva"><span class="arr"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span></button>

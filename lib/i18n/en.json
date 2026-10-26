@@ -1248,6 +1248,16 @@
     "corsiCustom": {
       "title": "Your instrument. Your schedule. The first lesson is free.",
       "lede": "One-to-one paths built around an instrument, a tool or a goal, on your own timetable.",
+      "heroCtas": [
+        {
+          "label": "Request information",
+          "href": "/chi-siamo#contatti"
+        },
+        {
+          "label": "Book the open day",
+          "href": "/academy/open-day"
+        }
+      ],
       "coursesCta": {
         "text": "These are our custom courses — check out the university programmes and the full academy offer.",
         "label": "All courses",

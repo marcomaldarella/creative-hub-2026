@@ -237,6 +237,21 @@ export default async function CorsiPage({
                           )}
                         </div>
                       )}
+                      {/* freccia della card come nelle altre liste: SVG, mai unicode */}
+                      <span className={uni.go}>
+                        <span className={uni.goLabel}>{t.uni.goCta}</span>
+                        <svg
+                          viewBox="0 0 24 24"
+                          width="15"
+                          height="15"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.8"
+                          aria-hidden="true"
+                        >
+                          <path d="M7 17 17 7M9 7h8v8" />
+                        </svg>
+                      </span>
                     </Link>
                   )
                 })}

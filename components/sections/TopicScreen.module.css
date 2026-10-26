@@ -19,6 +19,12 @@
   margin-bottom: clamp(20px, 2.5vw, 32px);
 }
 
+/* index custom (richiesta ott 2026): breadcrumb un filo più grande e bold */
+.tailOpen .back a {
+  font-size: 17px;
+  font-weight: 700;
+}
+
 .kicker {
   display: block;
   margin-bottom: 16px;
