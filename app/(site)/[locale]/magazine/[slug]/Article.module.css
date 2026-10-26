@@ -12,6 +12,12 @@
   margin-bottom: 22px;
 }
 
+/* le categorie arrivano minuscole a runtime: maiuscola solo
+   all'iniziale del kicker, via CSS */
+.kicker::first-letter {
+  text-transform: uppercase;
+}
+
 .kicker a {
   transition: color var(--dur);
 }

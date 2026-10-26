@@ -1,15 +1,24 @@
+/* una riga sola che scorre: a schermo stretto le categorie andavano a
+   capo su tre righe e spingevano il campo di ricerca lontano dai
+   filtri a cui appartiene */
 .bar {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  align-items: center;
   gap: 10px;
+  min-width: 0;
+}
+
+.bar > * {
+  flex: none;
 }
 
 .pill {
   display: inline-block;
   border: 1px solid var(--line);
   border-radius: var(--radius-pill);
-  padding: 7px 18px;
-  font-size: 14px;
+  padding: var(--pill-pad);
+  font-size: var(--pill-fs);
   color: var(--fg-2);
   background: transparent;
   transition:

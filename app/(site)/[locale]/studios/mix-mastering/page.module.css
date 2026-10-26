@@ -21,3 +21,11 @@ h3.svcTitle {
   color: var(--fg-2);
   max-width: 44ch;
 }
+
+/* ————— il marchio al posto del nome, nei fatti della testata ————— */
+
+/* il logo prende il posto di .factT: un filo d'aria sopra e sotto così
+   la didascalia resta attaccata al marchio come alle altre voci */
+.factLogo {
+  margin: 3px 0 5px;
+}

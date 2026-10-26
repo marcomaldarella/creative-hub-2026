@@ -8,6 +8,7 @@ import {
   RevealGroup,
   Rule,
 } from '@/components/ui'
+import { BrandMark } from '@/components/sections/BrandMark'
 import { SiteChrome } from '@/components/sections/SiteChrome'
 import { SectionPagesNav } from '@/components/sections/SectionPagesNav'
 import { PointsAccordion } from '@/components/sections/PointsAccordion'
@@ -81,7 +82,12 @@ export default async function MixMasteringPage({
               <RevealGroup className={det.facts}>
                 {d.facts.map((f) => (
                   <span key={f.t} className={`rv ${det.fact}`}>
-                    <span className={det.factT}>{f.t}</span>
+                    {/* dove il fatto è un marchio, si vede il logo vero */}
+                    {f.t.startsWith('SSL') ? (
+                      <BrandMark brand="ssl" height={24} className={styles.factLogo} />
+                    ) : (
+                      <span className={det.factT}>{f.t}</span>
+                    )}
                     <span className={det.factS}>{f.s}</span>
                   </span>
                 ))}

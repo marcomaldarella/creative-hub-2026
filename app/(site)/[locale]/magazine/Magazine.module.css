@@ -8,9 +8,11 @@
 
 .toolbar {
   display: flex;
-  flex-wrap: wrap;
+  /* filtri e ricerca sempre affiancati: la corsia delle categorie
+     prende lo spazio che avanza e scorre, il campo chiude la riga */
+  flex-wrap: nowrap;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 12px;
   margin-top: clamp(24px, 3vw, 40px);
   padding-bottom: clamp(40px, 5vw, 64px);
@@ -19,6 +21,12 @@
 .toolbar .categories {
   margin-top: 0;
   padding-bottom: 0;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.toolbar .search {
+  flex: none;
 }
 
 .categories {
@@ -40,4 +48,24 @@
 .empty {
   display: block;
   padding: clamp(40px, 6vw, 80px) 0;
+}
+
+/* sotto i 640px il campo scende sotto le categorie, a tutta larghezza:
+   affiancato lasciava visibile una categoria sola */
+@media (max-width: 640px) {
+  .toolbar {
+    flex-wrap: wrap;
+  }
+
+  .toolbar .categories {
+    flex: 1 0 100%;
+  }
+
+  .toolbar .search {
+    flex: 1 0 100%;
+  }
+
+  .toolbar .search :global(input) {
+    width: 100%;
+  }
 }

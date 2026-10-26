@@ -109,8 +109,44 @@
   gap: 16px;
 }
 
-.spaceCard {
+/* le sei card servizio: nere con testo bianco, così si staccano dal
+   colore pieno della pagina.
+   Colori ESPLICITI, non token: dentro una pagina a colore pieno
+   var(--bg) vale il colore della pagina, e il testo sparirebbe sul nero.
+   Classe raddoppiata per vincere sugli stili base di Card. */
+.spaceCard.spaceCard {
   height: 100%;
+  background: var(--petrolio);
+  border-color: var(--petrolio);
+  color: var(--osso);
+  transition: transform var(--dur) var(--ease-out), background var(--dur);
+}
+
+/* kicker, righe-specifica e sommario: osso smorzato, come il testo
+   secondario su tutte le altre fasce scure del sito */
+.spaceCard.spaceCard :global(.mono),
+.spaceCard.spaceCard p,
+.spaceCard.spaceCard li,
+.spaceCard.spaceCard > div {
+  color: color-mix(in srgb, var(--osso) 68%, transparent);
+}
+
+.spaceCard.spaceCard h3,
+.spaceCard.spaceCard .cardGo {
+  color: var(--osso);
+}
+
+/* le hairline fra le righe: osso a bassa opacità. La --line della
+   pagina è pensata per il colore pieno e sul nero sparirebbe. */
+.spaceCard.spaceCard ul,
+.spaceCard.spaceCard li {
+  border-color: color-mix(in srgb, var(--osso) 22%, transparent);
+}
+
+/* il puntatore schiarisce appena la card: sul nero un bordo che cambia
+   non si leggerebbe */
+.spaceCard.spaceCard:hover {
+  background: var(--petrolio-hover);
 }
 
 .spaceSummary {

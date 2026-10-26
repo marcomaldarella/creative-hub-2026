@@ -130,3 +130,9 @@
 .cardCta {
   margin-top: 14px;
 }
+
+/* prima sezione senza più la striscia numerata sopra: il padding che
+   la accompagnava non serve, il titolo attacca subito sotto il subnav */
+.sezTight.sezTight {
+  padding-top: clamp(20px, 2.5vw, 36px);
+}

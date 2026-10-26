@@ -13,6 +13,7 @@ import {
 } from '@/components/ui'
 import { SiteChrome } from '@/components/sections/SiteChrome'
 import { SectionPagesNav } from '@/components/sections/SectionPagesNav'
+import { BrandRow } from '@/components/sections/BrandMark'
 import { PointsAccordion } from '@/components/sections/PointsAccordion'
 import { StudioBookingFlow } from '@/components/sections/StudioBookingFlow'
 import { isLocale, localeHref } from '@/lib/i18n/config'
@@ -180,7 +181,14 @@ export default async function AffittoStudioPage({
               <Reveal as="h2" className={`display-thin ${det.h2}`}>
                 {d.findTitle}
               </Reveal>
-              <PointsAccordion items={dotazione} plain />
+              <div>
+                <PointsAccordion items={dotazione} plain />
+                {/* i marchi citati nella dotazione del mockup: console,
+                    monitor, interfacce e software */}
+                <BrandRow
+                  brands={['ssl', 'genelec', 'dolby', 'avid', 'universalAudio', 'ableton']}
+                />
+              </div>
             </section>
           </>
         )}
@@ -196,7 +204,7 @@ export default async function AffittoStudioPage({
             {d.ratesLede}
           </Reveal>
           <Reveal delay={140}>
-            <table className={styles.rates}>
+            <table className={`listino ${styles.rates}`}>
               <thead>
                 <tr>
                   {d.ratesHead.map((h) => (
@@ -209,10 +217,17 @@ export default async function AffittoStudioPage({
               <tbody>
                 {d.ratesRows.map((r) => (
                   <tr key={r.formula}>
-                    <td className={styles.ratesName}>{r.formula}</td>
-                    <td>{r.durata}</td>
-                    <td>{r.include}</td>
-                    <td className={styles.ratesPrice}>{r.prezzo}</td>
+                    {/* la formula è l'intestazione della riga: sul
+                        telefono diventa il titolo della voce, e i tre
+                        valori si portano l'etichetta della colonna */}
+                    <th scope="row" className={styles.ratesName}>
+                      {r.formula}
+                    </th>
+                    <td data-label={d.ratesHead[1]}>{r.durata}</td>
+                    <td data-label={d.ratesHead[2]}>{r.include}</td>
+                    <td className={styles.ratesPrice} data-label={d.ratesHead[3]}>
+                      {r.prezzo}
+                    </td>
                   </tr>
                 ))}
               </tbody>

@@ -7,7 +7,6 @@ import {
   Card,
   Reveal,
   RevealGroup,
-  Rule,
   SectionHeader,
 } from '@/components/ui'
 import { SiteChrome } from '@/components/sections/SiteChrome'
@@ -89,8 +88,7 @@ export default async function InnovazionePage({
         <SectionPagesNav locale={locale} base="/innovazione" current="/innovazione" />
 
         {/* ————— da dove parti: i quattro percorsi ————— */}
-        <Rule left="01" right={t.innovation.startKicker} />
-        <section id="percorsi" className={`wrap ${det.sez}`}>
+        <section id="percorsi" className={`wrap ${det.sez} ${styles.sezTight}`}>
           <SectionHeader
             kicker={t.innovation.startKicker}
             title={t.innovation.startTitle}
@@ -135,7 +133,6 @@ export default async function InnovazionePage({
         </section>
 
         {/* ————— i tre campi di lavoro ————— */}
-        <Rule left="02" right={t.innovation.fieldsKicker} />
         <section className={`wrap ${det.sez}`}>
           <SectionHeader
             kicker={t.innovation.fieldsKicker}
@@ -172,7 +169,6 @@ export default async function InnovazionePage({
         </section>
 
         {/* ————— l'ecosistema: le altre anime dell'hub ————— */}
-        <Rule left="03" right={t.innovation.ecoKicker} />
         <section className={`wrap ${det.sez}`}>
           <SectionHeader
             kicker={t.innovation.ecoKicker}
@@ -196,7 +192,6 @@ export default async function InnovazionePage({
         </section>
 
         {/* ————— partner ————— */}
-        <Rule left="04" right={t.innovation.partnersKicker} />
         <section className={`wrap ${det.sez}`}>
           <Reveal as="h2" className={`display-thin ${det.h2}`}>
             {t.innovation.partnersTitle}

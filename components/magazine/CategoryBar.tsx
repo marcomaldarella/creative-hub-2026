@@ -17,7 +17,7 @@ export type CategoryBarProps = {
   className?: string
 }
 
-/** Barra categorie a pill lowercase, con "tutti" per il listing completo. */
+/** Barra categorie a pill, con "Tutti" per il listing completo. */
 export function CategoryBar({
   categories,
   locale,
@@ -31,7 +31,10 @@ export function CategoryBar({
   return (
     <nav
       aria-label={ariaLabel}
-      className={[styles.bar, className].filter(Boolean).join(' ')}
+      tabIndex={0}
+      className={['scroller', 'scroller-fade-end', styles.bar, className]
+        .filter(Boolean)
+        .join(' ')}
     >
       <Link
         href={localeHref(locale, '/magazine')}
@@ -52,7 +55,9 @@ export function CategoryBar({
             className={`${styles.pill} ${active ? styles.active : ''}`}
             aria-current={active ? 'page' : undefined}
           >
-            {title.toLowerCase()}
+            {/* il titolo resta com'è in Sanity: le pill del sito hanno
+                tutte l'iniziale maiuscola */}
+            {title}
           </Link>
         )
       })}

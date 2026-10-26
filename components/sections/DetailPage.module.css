@@ -302,8 +302,8 @@
 }
 
 .filter {
-  font-size: 13px;
-  padding: 7px 14px;
+  font-size: var(--pill-fs);
+  padding: var(--pill-pad);
   border: 1px solid var(--line);
   border-radius: var(--radius-pill);
   color: var(--fg-2);
@@ -550,4 +550,11 @@
   .headGrid > :first-child {
     padding-bottom: 36px;
   }
+}
+
+/* il pallino dello stato aperto è VERDE (semaforo), su entrambe le
+   varianti della pill (nera e bianca in evidenza) */
+.bandoOpen::before {
+  background: #22c55e;
+  opacity: 1;
 }

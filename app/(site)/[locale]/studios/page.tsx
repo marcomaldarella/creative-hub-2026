@@ -296,18 +296,18 @@ export default async function StudiosPage({
                 ))}
               </Reveal>
             </div>
-          </div>
-            {/* la regia accanto al racconto: finché non arriva un
-                ritratto del fonico, la stanza in cui lavora */}
-            <Reveal className={styles.engineerPh} delay={120}>
-              <Image
-                src={studioRegiaBImg}
-                alt="La regia dello studio: console, outboard e monitor"
-                className={styles.engineerImg}
-                sizes="(max-width: 860px) 100vw, 42vw"
-              />
-            </Reveal>
+              {/* la regia accanto al racconto: finché non arriva un
+                  ritratto del fonico, la stanza in cui lavora */}
+              <Reveal className={styles.engineerPh} delay={120}>
+                <Image
+                  src={studioRegiaBImg}
+                  alt="La regia dello studio: console, outboard e monitor"
+                  className={styles.engineerImg}
+                  sizes="(max-width: 860px) 100vw, 42vw"
+                />
+              </Reveal>
             </div>
+          </div>
         </section>
 
         {/* ————— tecnologia e partner: fascia nera, come .brands nel

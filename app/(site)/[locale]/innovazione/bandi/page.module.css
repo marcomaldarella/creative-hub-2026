@@ -14,10 +14,12 @@
   background: color-mix(in srgb, var(--fg) 86%, var(--bg));
 }
 
-/* taglia piccola per l'elenco */
+/* taglia piccola per l'elenco: due punti in più e centrato sulla riga
+   del bando (align-items: start della griglia lo incollava in alto) */
 .btnSm.btnSm {
-  padding: 8px 18px;
-  font-size: 13px;
+  padding: 9px 20px;
+  font-size: 15px;
+  align-self: center;
 }
 
 /* dentro la fascia nera del bando aperto i token NON si invertono

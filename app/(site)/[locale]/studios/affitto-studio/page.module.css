@@ -42,13 +42,16 @@
   border-collapse: collapse;
 }
 
-.rates th {
+/* solo l'intestazione porta il filo spesso: la formula, pur essendo un
+   th di riga, si comporta come una cella normale */
+.rates thead th {
   text-align: left;
   font-weight: 600;
   padding: 0 14px 10px 0;
   border-bottom: 1px solid var(--fg);
 }
 
+.rates tbody th,
 .rates td {
   text-align: left;
   vertical-align: top;
@@ -69,13 +72,9 @@
   color: var(--fg);
 }
 
-@media (max-width: 700px) {
-  .rates td,
-  .rates th {
-    font-size: 13.5px;
-    padding-right: 10px;
-  }
-}
+/* sotto i 700px la tabella non è più una griglia: diventa l'elenco
+   etichetta/valore definito da .listino in globals.css, quindi qui non
+   serve più comprimere il corpo del testo per far stare le colonne */
 
 /* ————— garanzie sopra il flusso: spunte disegnate coi bordi ————— */
 

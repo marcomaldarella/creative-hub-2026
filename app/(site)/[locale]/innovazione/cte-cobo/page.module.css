@@ -51,6 +51,6 @@
   letter-spacing: -0.01em;
   padding: 8px 14px;
   border: 1px dashed var(--line);
-  border-radius: 8px;
+  border-radius: 0;
   color: var(--fg-2);
 }
