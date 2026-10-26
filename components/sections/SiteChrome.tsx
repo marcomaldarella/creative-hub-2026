@@ -114,12 +114,15 @@ export async function SiteChrome({
       key: 'academy',
       label: t.nav.academy,
       base: '/academy',
+      /* ordine a colonne del pannello (flow column, 3 righe): le prime 3
+         sono l'offerta formativa (colonna sinistra, in evidenza), le
+         altre 3 i servizi (colonna destra) */
       anchors: [
         'corsi-universitari',
-        'formazione-finanziata',
-        'stage-placement',
         'corsi-custom',
+        'formazione-finanziata',
         'open-day',
+        'stage-placement',
         'servizi-studenti',
       ],
     },
@@ -225,6 +228,9 @@ export async function SiteChrome({
                altrimenti resta l'ancora, che punta a una sezione vera
                della pagina indice */
             href: localeHref(locale, hrefSub(s.base, anchor)),
+            /* Academy: l'offerta formativa (le prime 3) pesa di più,
+               nel pannello e nell'overlay mobile */
+            strong: s.key === 'academy' && i < 3 ? true : undefined,
             cross: crossKey
               ? {
                   label: `/${labelOf[crossKey]}`,

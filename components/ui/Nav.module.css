@@ -347,6 +347,12 @@
   color: var(--accent-ink);
 }
 
+/* voci in evidenza (offerta formativa Academy): bold e 2px in più */
+.panelEntryStrong {
+  font-size: 17px;
+  font-weight: 700;
+}
+
 .panelCross {
   font-size: 12.5px;
   font-weight: 400;
@@ -649,6 +655,13 @@
 }
 
 .overlaySubLink:hover {
+  color: var(--ov-fg);
+}
+
+/* stessa gerarchia del pannello desktop, in scala overlay */
+.overlaySubStrong {
+  font-size: clamp(19px, calc(4.4vw + 2px), 24px);
+  font-weight: 700;
   color: var(--ov-fg);
 }
 

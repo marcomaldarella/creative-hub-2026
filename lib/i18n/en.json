@@ -22,10 +22,10 @@
         "desc": "Degree courses, masters and higher education in music, sound, multimedia and visual. Plus custom courses — by instrument, by code, by skill — on your own schedule.",
         "items": [
           "University courses",
-          "Funded training",
-          "Internships & placement",
           "Custom courses",
+          "Funded training",
           "Open day",
+          "Internships & placement",
           "Student services"
         ]
       },
@@ -1184,7 +1184,9 @@
         "Small classes: limited places, with selection"
       ],
       "funding": {
-        "logos": ["/img/funding/loghi-fse-plus-en.svg"],
+        "logos": [
+          "/img/funding/loghi-fse-plus-en.svg"
+        ],
         "logosAlt": "Cohesion Italy 21-27 Emilia-Romagna · Co-funded by the European Union · Italian Republic · Emilia-Romagna Region",
         "text": "Courses co-financed by the European Social Fund Plus (ESF+) under the ESF+ 2021-2027 Regional Programme of the Emilia-Romagna Region. Implementing body: MPDA Aps, via del Tappezziere 4, Bologna."
       },

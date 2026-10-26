@@ -9,6 +9,8 @@ import styles from './Nav.module.css';
 export type NavSubEntry = {
   label: string;
   href: string;
+  /** voce in evidenza (es. offerta formativa Academy): bold, +2px */
+  strong?: boolean;
   /** rimando a un'altra sezione (es. "/studio"), stile mono */
   cross?: { label: string; href: string };
 };
@@ -453,7 +455,11 @@ export function Nav({
                           <Link
                             href={entry.href}
                             onClick={closePanelNow}
-                            className={styles.panelEntry}
+                            className={
+                              entry.strong
+                                ? `${styles.panelEntry} ${styles.panelEntryStrong}`
+                                : styles.panelEntry
+                            }
                           >
                             {entry.label}
                             {entry.cross && (
@@ -578,7 +584,11 @@ export function Nav({
                           key={entry.href + entry.label}
                           href={entry.href}
                           onClick={close}
-                          className={styles.overlaySubLink}
+                          className={
+                            entry.strong
+                              ? `${styles.overlaySubLink} ${styles.overlaySubStrong}`
+                              : styles.overlaySubLink
+                          }
                         >
                           {entry.label}
                         </Link>
