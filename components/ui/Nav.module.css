@@ -128,7 +128,9 @@
 }
 
 .topCta {
-  color: var(--azzurro-ink);
+  /* sulle pagine flood il wrapper di SiteChrome passa --topbar-cta nero:
+     l'azzurro sul colore pieno di sezione non leggeva */
+  color: var(--topbar-cta, var(--azzurro-ink));
   transition: color 0.2s;
 }
 
@@ -858,4 +860,71 @@
   .overlay {
     display: none !important;
   }
+}
+
+/* ————— override: pannello incolonnato sulla prima voce della nav ————— */
+
+/* la griglia-voci del pannello parte alla stessa x della PRIMA voce della
+   barra ("Academy"): la colonna identità (eyebrow+titolo+descrizione)
+   chiude esattamente dove inizia la lista voci della nav, così il
+   puntatore scende in verticale dalla voce alle colonne senza attraversare
+   vuoto. --nav-links-x (distanza della lista voci dal bordo di .inner) la
+   misura il JS in Nav.tsx: barra e pannello condividono lo stesso wrap
+   (--max/--pad identici), quindi la misura vale per tutti i pannelli e
+   regge a resize e topbar aperta/chiusa (che sposta solo la y). Il gap
+   passa in variabile perché entra nel calcolo della colonna; il minimo
+   di minmax tiene in piedi i desktop stretti, il fallback 440px copre il
+   pre-idratazione (pari al massimo della colonna fluida di prima). */
+.panelIn {
+  --panel-gap: clamp(40px, 6vw, 110px);
+  gap: var(--panel-gap);
+  grid-template-columns:
+    minmax(
+      240px,
+      calc(var(--nav-links-x, 440px) - var(--pad) - var(--panel-gap))
+    )
+    1fr;
+}
+
+/* ————— hover sulle voci del pannello: la voce si accende nel colore
+   della SUA sezione (--accent-ink arriva dal pannello) con uno
+   slittamento minimo. Interazione frequente: 150–180ms, solo
+   color/transform, reversibile a metà (transition, non animation).
+   La regola sta in fondo per battere `.dark .panelEntry`, che a pari
+   specificità spegneva l'hover sulla barra nera. ————— */
+.panelEntry {
+  transition:
+    color 0.15s ease,
+    transform 0.18s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.panelEntry:hover,
+.dark .panelEntry:hover {
+  color: var(--accent-ink);
+  transform: translateX(2px);
+}
+
+/* il cross-link ("↗ /studio") segue il tono senza prendere l'accento:
+   resta una nota a margine */
+.panelEntry:hover .panelCross {
+  color: inherit;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .panelEntry,
+  .panelEntry:hover,
+  .dark .panelEntry:hover {
+    transition: none;
+    transform: none;
+  }
+}
+
+/* "esplora la sezione": a riposo legge col testo (bianco sul pannello
+   nero), l'accento di sezione arriva SOLO in hover — come le voci */
+.panelExplore {
+  color: var(--fg);
+}
+
+.panelExplore:hover {
+  color: var(--accent-ink);
 }

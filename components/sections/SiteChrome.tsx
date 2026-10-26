@@ -140,8 +140,10 @@ export async function SiteChrome({
       key: 'coworking',
       label: t.nav.coworking,
       base: '/coworking',
-      anchors: ['coworking', null, '/coworking/prenota', 'sale-eventi', 'metaverso'],
-      cross: { 1: 'studio' },
+      /* la voce "Studio di registrazione" è uscita dal pannello: lo
+         studio ha la sua macrovoce, qui era un rimando che riportava
+         alla stessa pagina */
+      anchors: ['coworking', '/coworking/prenota', 'sale-eventi', 'metaverso'],
     },
     {
       key: 'innovation',
@@ -345,6 +347,10 @@ export async function SiteChrome({
             '--accent': flood,
             '--accent-ink': '#000000',
             '--accent-on': '#000000',
+            /* la parola-link del marquee in topbar ("prenota l'open day"):
+               fuori dal flood è azzurra, ma sull'azzurro/arancio/giallo
+               pieni delle pagine interne deve leggere in nero */
+            '--topbar-cta': '#000000',
             /* didascalie delle foto piena pagina (Photo.tsx): normalmente
                chiare fisse su overlay scuro, qui devono restare nere */
             '--photo-caption': '#000000',

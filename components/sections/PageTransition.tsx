@@ -6,9 +6,11 @@ import gsap from 'gsap'
 import styles from './PageTransition.module.css'
 
 /**
- * Transizione a tendina: al cambio pagina salgono dal basso le tre
- * strisce dei colori brand (azzurro, arancio, giallo) e per ultima la
- * nera col logotipo; sulla pagina nuova la pila si sfila verso l'alto.
+ * Transizione a due andature. Cambiando SEZIONE (primo segmento del
+ * path: academy → studios…) salgono dal basso le tre strisce dei colori
+ * brand (azzurro, arancio, giallo) e per ultima la nera col logotipo;
+ * sulla pagina nuova la pila si sfila verso l'alto. Restando nella
+ * stessa sezione, niente tendina: solo un fade+slittamento del main.
  * Regola iOS: il velo fixed è display:none quando inattivo (un overlay
  * fixed lasciato nel layer tree ammazza lo scroll in Safari mobile).
  */
@@ -36,9 +38,32 @@ const reduced = () => {
   }
 }
 
+/* sezione = primo segmento del path, locale escluso: /academy/corsi e
+   /en/academy sono entrambi "academy", la home è '' */
+const sectionOf = (url?: string | null) => {
+  if (!url) return null
+  let path = url
+  try {
+    path = new URL(url, window.location.origin).pathname
+  } catch {
+    /* già un path relativo */
+  }
+  const segs = path.split('/').filter(Boolean)
+  if (segs[0] === 'en') segs.shift()
+  return segs[0] ?? ''
+}
+
 export function PageTransition({ children }: { children: React.ReactNode }) {
   const veilRef = useRef<HTMLDivElement | null>(null)
+  const pageRef = useRef<HTMLDivElement | null>(null)
+  /* deciso in leave, letto in enter: la tendina col logo parte solo
+     cambiando sezione; dentro la stessa sezione basta il fade della
+     pagina, senza rifare tutta la solfa del logo */
+  const fullRef = useRef(true)
   const [active, setActive] = useState(false)
+
+  const pageMain = () =>
+    pageRef.current?.querySelector<HTMLElement>('main') ?? pageRef.current
 
   const parts = () => {
     const veil = veilRef.current
@@ -61,10 +86,25 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
   return (
     <TransitionRouter
       auto
-      leave={(next) => {
+      leave={(next, from, to) => {
         if (reduced()) {
           next()
           return
+        }
+        const a = sectionOf(from)
+        const b = sectionOf(to)
+        fullRef.current = a === null || b === null || a !== b
+        if (!fullRef.current) {
+          /* stessa sezione: si sfuma solo il main della pagina, il
+             chrome (nav, topbar) resta fermo */
+          const el = pageMain()
+          if (!el) {
+            next()
+            return
+          }
+          const tl = gsap.timeline({ onComplete: next })
+          tl.to(el, { autoAlpha: 0, y: 14, duration: 0.22, ease: 'power2.in' })
+          return () => tl.kill()
         }
         setActive(true)
         const { stripes, logo, creative, hub } = parts()
@@ -108,6 +148,20 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
           next()
           return
         }
+        if (!fullRef.current) {
+          const el = pageMain()
+          if (!el) {
+            next()
+            return
+          }
+          const tl = gsap.timeline({ onComplete: next })
+          tl.fromTo(
+            el,
+            { autoAlpha: 0, y: 14 },
+            { autoAlpha: 1, y: 0, duration: 0.38, ease: 'power2.out' }
+          )
+          return () => tl.kill()
+        }
         const { stripes, logo } = parts()
         const tl = gsap.timeline({
           onComplete: () => {
@@ -150,7 +204,7 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
           </span>
         </div>
       </div>
-      {children}
+      <div ref={pageRef}>{children}</div>
     </TransitionRouter>
   )
 }

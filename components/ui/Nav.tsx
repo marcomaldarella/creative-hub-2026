@@ -124,6 +124,39 @@ export function Nav({
 
   useEffect(() => clearPanelTimer, []);
 
+  /* allineamento pannelli ⇄ barra: la griglia-voci di ogni pannello parte
+     alla stessa x della PRIMA voce della nav ("Academy"), così il puntatore
+     scende in verticale dalla voce alle colonne senza attraversare vuoto.
+     Si misura dove inizia la lista voci (rispetto a .inner: barra e
+     pannello condividono lo stesso wrap, quindi la distanza vale uguale
+     per tutti i pannelli) e la si passa al CSS come --nav-links-x.
+     ResizeObserver su barra e lista: regge al resize e al cambio di
+     larghezza dei label (font vero che arriva, cambio lingua). */
+  const innerRef = useRef<HTMLDivElement>(null);
+  const linksRef = useRef<HTMLElement>(null);
+  useEffect(() => {
+    const inner = innerRef.current;
+    const links = linksRef.current;
+    if (!inner || !links) return;
+    const measure = () => {
+      /* su mobile la lista è display:none e il mega-menu non esiste:
+         si lascia il fallback del CSS */
+      if (links.offsetParent === null) {
+        inner.style.removeProperty('--nav-links-x');
+        return;
+      }
+      const x =
+        links.getBoundingClientRect().left -
+        inner.getBoundingClientRect().left;
+      inner.style.setProperty('--nav-links-x', `${x}px`);
+    };
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(inner);
+    ro.observe(links);
+    return () => ro.disconnect();
+  }, []);
+
   const close = useCallback(() => {
     setOpen(false);
     closePanelNow();
@@ -308,12 +341,12 @@ export function Nav({
           </button>
         </div>
       )}
-      <div className={styles.inner}>
+      <div className={styles.inner} ref={innerRef}>
         <Link href={homeHref} onClick={close} className={styles.brand}>
           <Wordmark />
         </Link>
 
-        <nav className={styles.links}>
+        <nav className={styles.links} ref={linksRef}>
           {items.map((item, idx) => (
             <div
               key={item.href}
