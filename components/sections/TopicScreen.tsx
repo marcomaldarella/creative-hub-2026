@@ -863,10 +863,34 @@ export async function TopicScreen({
           )
         })}
 
-        {/* ————— coda delle pagine ad apertura secca: prima la banda
-            video, poi i punti come card numerate ————— */}
+        {/* ————— coda delle pagine ad apertura secca: PRIMA la tabella
+            dei punti, poi la banda video (ordine invertito su richiesta
+            cliente, ott 2026) ————— */}
         {pointsTail && (
           <>
+            {copy.points.length > 0 && (
+              <section className={`wrap ${styles.points}`}>
+                <RevealGroup className={styles.pointCards}>
+                  {copy.points.map((p, i) => {
+                    /* le card reggono entrambe le forme del dizionario:
+                       stringa secca o titolo + corpo esteso */
+                    const title = typeof p === 'string' ? p : p.title
+                    const text = typeof p === 'string' ? undefined : p.text
+                    return (
+                      <div key={title} className={`rv ${styles.pointCard}`}>
+                        <span className={`mono ${styles.pointCardNum}`}>
+                          {String(i + 1).padStart(2, '0')}
+                        </span>
+                        <p className={styles.pointCardText}>{title}</p>
+                        {text && (
+                          <p className={styles.pointCardBody}>{text}</p>
+                        )}
+                      </div>
+                    )
+                  })}
+                </RevealGroup>
+              </section>
+            )}
             <Reveal className={`${styles.heroMedia} ${styles.heroMediaTight}`}>
               <BgVideo
                 src={media.src}
@@ -875,22 +899,6 @@ export async function TopicScreen({
                 className={styles.heroVideo}
               />
             </Reveal>
-            {/* la coda vuole punti semplici: i topic a punti ricchi
-                (accordion) non usano questo ordine */}
-            {copy.points.length > 0 && !richPoints && (
-              <section className={`wrap ${styles.points}`}>
-                <RevealGroup className={styles.pointCards}>
-                  {(copy.points as string[]).map((p, i) => (
-                    <div key={p} className={`rv ${styles.pointCard}`}>
-                      <span className={`mono ${styles.pointCardNum}`}>
-                        {String(i + 1).padStart(2, '0')}
-                      </span>
-                      <p className={styles.pointCardText}>{p}</p>
-                    </div>
-                  ))}
-                </RevealGroup>
-              </section>
-            )}
           </>
         )}
 

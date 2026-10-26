@@ -1252,10 +1252,22 @@
         "href": "/academy/corsi"
       },
       "points": [
-        "Una lezione individuale a settimana, anche di sera",
-        "Pacchetti da 4, 20 o 40 lezioni",
-        "Sale e strumentazione incluse",
-        "Prova gratuita, in sede o online"
+        {
+          "title": "Una lezione a settimana, anche di sera",
+          "text": "Lezioni individuali, una volta a settimana, in un orario che concordi con il tuo insegnante. Puoi venire anche di sera, dopo il lavoro o l'università: il percorso si adatta alla tua settimana, non il contrario. E ogni lezione è costruita su di te, sul tuo livello e su quello che vuoi ottenere."
+        },
+        {
+          "title": "Pacchetti da 4, 20 o 40 lezioni",
+          "text": "Scegli quanto impegnarti. Con 4 lezioni provi il percorso o lavori su un obiettivo preciso; con 20 costruisci basi solide; con 40 segui un anno intero di crescita continua. I pacchetti si attivano in qualsiasi momento dell'anno, senza aspettare l'inizio di un semestre."
+        },
+        {
+          "title": "Sale e strumentazione incluse",
+          "text": "Suoni in sale attrezzate e trattate acusticamente, con strumenti, amplificazione e software già pronti. Non devi portare nulla, se non vuoi: puoi iniziare anche se a casa non hai ancora uno strumento. Ti concentri sulla musica, al resto pensiamo noi."
+        },
+        {
+          "title": "La prima lezione è gratis, in sede o online",
+          "text": "Prima di scegliere un pacchetto, fai una lezione di prova gratuita con il tuo insegnante. Serve a capire da dove parti, cosa vuoi raggiungere e se il metodo fa per te. Puoi farla in sede a Bologna oppure online, da dove preferisci."
+        }
       ],
       "eyebrow": "corsi custom"
     },

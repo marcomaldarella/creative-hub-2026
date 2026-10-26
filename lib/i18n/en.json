@@ -1252,10 +1252,22 @@
         "href": "/academy/corsi"
       },
       "points": [
-        "One one-to-one lesson a week, evenings included",
-        "Packages of 4, 20 or 40 lessons",
-        "Rooms and gear included",
-        "Free trial, on site or online"
+        {
+          "title": "One lesson a week, evenings included",
+          "text": "One-to-one lessons, once a week, at a time you agree with your teacher. You can come in the evening too, after work or university: the path adapts to your week, not the other way round. And every lesson is built around you, your level and what you want to achieve."
+        },
+        {
+          "title": "Packages of 4, 20 or 40 lessons",
+          "text": "Choose how much to commit. With 4 lessons you try the path out or work on one specific goal; with 20 you build solid foundations; with 40 you follow a whole year of steady growth. Packages start at any time of the year, no need to wait for a semester."
+        },
+        {
+          "title": "Rooms and gear included",
+          "text": "You play in acoustically treated rooms, with instruments, amps and software ready to go. Bring nothing, if you prefer: you can start even if you don't own an instrument yet. You focus on the music, we take care of the rest."
+        },
+        {
+          "title": "The first lesson is free, on site or online",
+          "text": "Before choosing a package, take a free trial lesson with your teacher. It helps understand where you start from, what you want to reach and whether the method works for you. On site in Bologna or online, from wherever you prefer."
+        }
       ],
       "eyebrow": "custom courses"
     },

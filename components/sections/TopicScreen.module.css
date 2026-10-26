@@ -850,3 +850,19 @@
 .tailOpen .head {
   padding-bottom: clamp(32px, 4.5vw, 64px);
 }
+
+/* corpo esteso sotto il titolo della card: tono secondario, misura
+   da lettura */
+.pointCardBody {
+  margin-top: 12px;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--fg-2);
+  max-width: 52ch;
+}
+
+/* con la tabella PRIMA del video, la banda non è più a filo di una
+   fascia nera: le serve il suo stacco */
+.tailOpen .heroMediaTight {
+  margin-top: clamp(28px, 3.5vw, 52px);
+}
