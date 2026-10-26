@@ -18,13 +18,6 @@
   max-width: none;
 }
 
-/* ————— fascia avviso: testo a sinistra, tasto a destra ————— */
-
-.bandRow {
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-}
-
 /* ————— "Gratuiti, ma non per tutti.": quattro colonne hairline ————— */
 
 .how {
@@ -236,4 +229,20 @@ a.card:hover {
 .darkBand .uniPh {
   background: var(--surface);
   border: 1px solid color-mix(in srgb, var(--fg) 26%, transparent);
+}
+
+/* ————— avviso accorpato alla testata: tasto e hint sulla stessa riga,
+   l'hint compare solo a elenco Sanity vuoto ————— */
+.heroCtaRow {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px 22px;
+}
+
+.heroHint {
+  font-size: 14.5px;
+  line-height: 1.45;
+  color: var(--fg-2);
+  max-width: 48ch;
 }

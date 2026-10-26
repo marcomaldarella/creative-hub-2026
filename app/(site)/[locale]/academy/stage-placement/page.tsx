@@ -312,15 +312,21 @@ export default async function StagePlacementPage({
             {d.lede}
           </Reveal>
           <Reveal className={tp.sezCta} delay={220}>
+            {/* due bottoni affiancati: le storie in pastiglia nera,
+                l'open day come ghost accanto */}
             {d.heroCtas.map((c, i) =>
               i === 0 ? (
                 <Button key={c.href} href={hrefOf(locale, c.href)}>
                   {c.label}
                 </Button>
               ) : (
-                <ArrowLink key={c.href} href={hrefOf(locale, c.href)} dir="e">
+                <Button
+                  key={c.href}
+                  variant="ghost"
+                  href={hrefOf(locale, c.href)}
+                >
                   {c.label}
-                </ArrowLink>
+                </Button>
               )
             )}
           </Reveal>
@@ -643,7 +649,8 @@ export default async function StagePlacementPage({
               <Reveal as="h2" className={`display-thin ${det.h2}`}>
                 {titleOf('domande')}
               </Reveal>
-              <PointsAccordion items={faq} plain />
+              {/* una sola domanda in chiusura (richiesta cliente) */}
+              <PointsAccordion items={faq.slice(0, 1)} plain />
             </section>
           </>
         )}

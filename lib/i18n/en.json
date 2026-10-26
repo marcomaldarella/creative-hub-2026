@@ -1191,7 +1191,7 @@
       "eyebrow": "funded training"
     },
     "stagePlacement": {
-      "title": "Internships and work in music.\nDuring the course, not after.",
+      "title": "Internships and work in music.\nBoth during and after the course.",
       "lede": "Internships in studios, clubs and productions. An in-house label distributed by Orchard Italia. Auditions with management agencies. From year one.",
       "points": [
         "83% of students work in the industry. Data certified by the Emilia-Romagna Region",
@@ -1203,12 +1203,12 @@
       "metaDesc": "Internships in studios, clubs and productions, the in-house Label Lab with Orchard Italia, auditions with management agencies. From year one.",
       "heroCtas": [
         {
-          "label": "Book the open day",
-          "href": "/academy/open-day"
-        },
-        {
           "label": "Read the stories",
           "href": "#storie"
+        },
+        {
+          "label": "Book the open day",
+          "href": "/academy/open-day"
         }
       ],
       "subnav": {

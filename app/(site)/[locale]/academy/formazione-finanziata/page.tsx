@@ -109,8 +109,14 @@ export default async function FormazioneFinanziataPage({
                   </div>
                 ))}
               </Reveal>
-              <Reveal delay={300}>
+              <Reveal delay={300} className={styles.heroCtaRow}>
                 <Button href="#avvisami">{d.heroCta}</Button>
+                {/* l'avviso vive QUI, accanto al testo della testata —
+                    e solo quando da Sanity non arriva nessun corso
+                    finanziato (a corsi caricati sparisce da solo) */}
+                {corsi.length === 0 && (
+                  <p className={styles.heroHint}>{d.band.text}</p>
+                )}
               </Reveal>
             </div>
             {/* la foto della testata: è la stessa che apre la card
@@ -134,19 +140,6 @@ export default async function FormazioneFinanziataPage({
             academy): i token invertiti portano da soli testi e fili a
             chiaro, gli aggiusti puntuali stanno nel modulo locale */}
         <div className={`scheme-dark ${styles.darkBand}`}>
-        {/* ————— avviso: oggi non ci sono iscrizioni aperte ————— */}
-        <section className={styles.bandRow}>
-          <div className={`wrap ${det.status}`}>
-            <Reveal as="p" className={det.statusText}>
-              {d.band.text}
-            </Reveal>
-            <Reveal delay={60}>
-              <Button href="#avvisami" variant="ghost">
-                {d.band.cta}
-              </Button>
-            </Reveal>
-          </div>
-        </section>
 
         {/* ————— come funzionano: le quattro colonne del mockup ————— */}
         <Rule left="01" right={d.howTitle.toLowerCase().replace(/\.$/, '')} />

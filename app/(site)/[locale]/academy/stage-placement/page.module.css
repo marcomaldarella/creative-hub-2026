@@ -59,8 +59,9 @@
   margin-top: clamp(28px, 3.4vw, 40px);
   padding-top: clamp(16px, 2vw, 22px);
   /* il respiro in fondo all'hero: senza, la fonte del dato finiva a
-     filo della barra nera dell'indice sticky */
-  padding-bottom: clamp(40px, 5vw, 72px);
+     filo della barra nera dell'indice sticky (allargato di un passo,
+     ott 2026) */
+  padding-bottom: clamp(56px, 6.5vw, 96px);
   border-top: var(--rule) solid var(--fg);
 }
 
@@ -127,18 +128,16 @@
 }
 
 /* la pastiglia del momento: «dal primo anno», «durante il corso» */
+/* da pastiglia a TITOLETTO (richiesta ott 2026): il momento del
+   percorso apre la carta come un titolo, non come un tag */
 .when {
-  /* inline-block e non inline-flex: dentro un flex container la regola
-     ::first-letter qui sotto non si applica */
-  display: inline-block;
-  margin-bottom: 16px;
-  padding: 5px 12px;
-  border-radius: var(--radius-pill);
-  background: var(--petrolio);
+  display: block;
+  margin-bottom: 14px;
+  font-size: clamp(19px, 1.7vw, 24px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
   color: var(--osso);
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: -0.01em;
 }
 
 .stageList {
@@ -487,7 +486,6 @@
 
 /* le pastiglie petrolio/osso si fonderebbero col nero: si invertono —
    pastiglia chiara con inchiostro scuro, come il tasto osso */
-.darkBand .when,
 .darkBand .now {
   background: var(--osso);
   color: #0a0a0a;

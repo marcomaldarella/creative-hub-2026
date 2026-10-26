@@ -63,9 +63,25 @@ export default async function CorsiPage({
     }
   }
 
+  /* ordine mescolato ma DETERMINISTICO (niente random: è un server
+     component): round-robin fra le categorie, così i corsi della stessa
+     categoria — che da Sanity arrivano vicini e in ordine alfabetico —
+     non si affiancano mai in griglia */
+  const byCat = new Map<string, typeof courses>()
+  for (const c of courses) {
+    const k = c.category?.slug?.current ?? '~'
+    if (!byCat.has(k)) byCat.set(k, [])
+    byCat.get(k)!.push(c)
+  }
+  const pools = [...byCat.values()]
+  const mixed: typeof courses = []
+  for (let i = 0; mixed.length < courses.length; i++) {
+    for (const pool of pools) if (pool[i]) mixed.push(pool[i])
+  }
+
   const byCategory = active
-    ? courses.filter((c) => c.category?.slug?.current === active)
-    : courses
+    ? mixed.filter((c) => c.category?.slug?.current === active)
+    : mixed
   const byType = activeType
     ? byCategory.filter((c) => c.types?.includes(activeType))
     : byCategory

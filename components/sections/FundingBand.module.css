@@ -15,14 +15,12 @@
   margin-bottom: 14px;
 }
 
-/* targa del lockup: bianco LETTERALE, non var(--bg) — i loghi
-   istituzionali vanno su fondo chiaro anche quando la pagina è scura */
+/* lockup in versione monocromatica BIANCA (richiesta cliente): via la
+   targa, i loghi passano per soglia + pass bianco via filter — la
+   versione mono è prevista dai manuali d'uso istituzionali */
 .plate {
   display: inline-flex;
   align-items: center;
-  background: #ffffff;
-  border: 1px solid var(--line);
-  padding: 12px 16px;
   max-width: 100%;
 }
 
@@ -31,6 +29,8 @@
   width: 520px;
   max-width: 100%;
   height: auto;
+  /* soglia a nero pieno, poi inversione: silhouette bianca uniforme */
+  filter: brightness(0) invert(1);
 }
 
 /* pill testuale: fallback quando una voce non è un path immagine */

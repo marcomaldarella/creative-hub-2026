@@ -1191,7 +1191,7 @@
       "eyebrow": "formazione finanziata"
     },
     "stagePlacement": {
-      "title": "Stage e lavoro nella musica.\nDurante il corso, non dopo.",
+      "title": "Stage e lavoro nella musica.\nSia durante che dopo il corso.",
       "lede": "Stage in studi, club e produzioni. Un'etichetta interna distribuita da Orchard Italia. Audizioni con agenzie di management. Dal primo anno.",
       "points": [
         "83% degli studenti lavora nel settore. Dato certificato dalla Regione Emilia-Romagna",
@@ -1203,12 +1203,12 @@
       "metaDesc": "Stage in studi, club e produzioni, l'etichetta Label Lab con Orchard Italia, audizioni con agenzie di management. Dal primo anno.",
       "heroCtas": [
         {
-          "label": "Prenota l'open day",
-          "href": "/academy/open-day"
-        },
-        {
           "label": "Leggi le storie",
           "href": "#storie"
+        },
+        {
+          "label": "Prenota l'open day",
+          "href": "/academy/open-day"
         }
       ],
       "subnav": {
