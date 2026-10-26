@@ -14,10 +14,12 @@
 
 /* ————— barra dei passi ————— */
 
+/* la barra è larga quanto il titolo del passo: con un max-width suo
+   restava un trattino corto sotto una domanda lunga e sembrava un
+   elemento di un'altra misura */
 .stepsBar {
   display: flex;
   gap: 6px;
-  max-width: 420px;
 }
 
 .seg {
@@ -298,7 +300,7 @@
   color: var(--fg);
   background: color-mix(in srgb, var(--fg) 5%, transparent);
   border: 1px solid color-mix(in srgb, var(--fg) 40%, transparent);
-  border-radius: 10px;
+  border-radius: 0;
   padding: 11px 12px;
   min-height: 46px;
   width: 100%;
@@ -530,4 +532,36 @@
   color: var(--fg-2);
   max-width: 52ch;
   margin-top: 10px;
+}
+
+/* ————— trattamento vercel (ott 2026): superfici del wizard con filo
+   sottile e angoli 8px — vale anche per l'EventBuilder delle sale
+   eventi, che riusa queste classi ————— */
+/* le card foto: filo da 1px, non il 2px pieno — la selezione resta
+   leggibile dal colore del bordo (i round del primo pass vercel sono
+   stati tolti: campi e card a spigolo vivo, tondo resta solo il
+   riepilogo) */
+.cat {
+  border-width: 1px;
+}
+
+/* il riepilogo come card scura incastonata: superficie appena più
+   chiara del nero, filo sottile, ombra morbida — stessa ricetta del
+   riquadro prenota del coworking */
+.summary {
+  background: #0f0f0f;
+  border-color: #2a2a2a;
+  border-radius: 8px;
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+/* a campi completi il form è :valid e il tasto d'invio si accende:
+   bianco pieno, testo nero — vale anche per l'EventBuilder, che riusa
+   la classe .flow sul suo form */
+.flow:valid button[type='submit'] {
+  background: #ffffff;
+  border-color: #ffffff;
+  color: #0a0a0a;
 }

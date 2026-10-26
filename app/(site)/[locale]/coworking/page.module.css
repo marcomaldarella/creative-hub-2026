@@ -473,23 +473,6 @@
   margin-top: clamp(14px, 1.8vw, 20px);
 }
 
-/* ————— la banano room: occhiello nero, iniziale maiuscola —————
-   PhotoDuo tinge il suo kicker in --azzurro-ink (Photo.module.css): su
-   questa pagina, che è a colore PIENO, l'azzurro è fuori posto — qui
-   l'occhiello torna all'inchiostro (--fg, che il flood di SiteChrome
-   porta a nero) e prende l'iniziale maiuscola via ::first-letter.
-   ⚠️ MAI `text-transform: uppercase` sull'intera stringa: è sentence
-   case, come già fa .galleryCta qui sopra.
-   Il kicker è l'unico `span.mono` dentro PhotoDuo: `:global(.mono)`
-   perché la classe arriva da globals.css, non da questo modulo. */
-.banano span:global(.mono) {
-  color: var(--fg);
-}
-
-.banano span:global(.mono)::first-letter {
-  text-transform: uppercase;
-}
-
 /* ————— riquadro prenota: fisso accanto al contenuto ————— */
 
 /* riquadro prenota: NERO (richiesta cliente), coi token scuri così
@@ -594,28 +577,11 @@
 }
 
 
-/* ————— tabelle su schermo piccolo: testo compatto per non mandare
-   le righe a capo (richiesta cliente) ————— */
-@media (max-width: 760px) {
-  .cmp {
-    font-size: 12.5px;
-  }
-
-  .cmp thead th {
-    font-size: 11px;
-    padding-right: 8px;
-  }
-
-  .cmp tbody th,
-  .cmp tbody td {
-    padding-right: 8px;
-    white-space: nowrap;
-  }
-
-  .cmp tbody th {
-    white-space: normal;
-  }
-}
+/* sul telefono la tabella non si comprime più: diventa l'elenco
+   etichetta/valore di .listino (globals.css). Comprimere il corpo e
+   bloccare il nowrap serviva a far stare quattro colonne in 390px, ma
+   il prezzo era uno scorrimento laterale con le parole tagliate sul
+   bordo. */
 
 
 /* testata del riquadro: prezzo a sinistra, "scegli la formula" allineata
@@ -633,17 +599,6 @@
   margin-bottom: 0;
 }
 
-/* tabella delle formule su mobile: scorre invece di accavallarsi, e
-   ogni cella sta sulla sua riga senza spezzarsi */
-@media (max-width: 760px) {
-  .cmp {
-    min-width: 560px;
-  }
-
-  .cmp tbody th {
-    white-space: nowrap;
-  }
-}
 
 
 /* occhielli delle fasce fotografiche sempre in nero sul colore di
@@ -656,4 +611,23 @@
 .corridoiKicker::first-letter,
 .photoKicker::first-letter {
   text-transform: uppercase;
+}
+
+/* ————— colata nera del prodotto: dal blocco a due colonne alla banano
+   room, la pagina è scura (scheme-dark porta i token); la fascia day
+   pass sotto resta azzurra ————— */
+.darkBand {
+  background: #000;
+}
+
+/* il riquadro prenota incastonato nel nero, alla Vercel: superficie
+   appena più chiara del fondo, filo sottile, angoli 8px e un'ombra
+   morbida che lo stacca dal piano — niente bordo nero su nero */
+.darkBand .book {
+  background: #0f0f0f;
+  border: 1px solid #2a2a2a;
+  border-radius: 8px;
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }

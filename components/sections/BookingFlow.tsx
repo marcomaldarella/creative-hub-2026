@@ -324,6 +324,7 @@ export function BookingFlow({
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   aria-invalid={errName}
+                  required
                 />
               </label>
               <label className={styles.field}>
@@ -340,6 +341,7 @@ export function BookingFlow({
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                   aria-invalid={errPhone}
+                  required
                 />
               </label>
               <label className={`${styles.field} ${styles.full}`}>

@@ -224,6 +224,9 @@
   /* margine, non padding: la classe globale wrap dichiara padding con
      la scorciatoia e azzererebbe il lato alto */
   margin-top: clamp(16px, 2vw, 28px);
+  /* e respiro anche SOTTO le foto: la testata partiva a filo del
+     mosaico */
+  margin-bottom: clamp(28px, 3.5vw, 52px);
   height: clamp(320px, 48vh, 520px);
 }
 
@@ -307,4 +310,57 @@
 a.room {
   text-decoration: none;
   color: inherit;
+}
+
+/* ————— già successo qui: prima foto 4:3, seconda quadrata, stessa
+   altezza — le colonne pesano 4:3 così i due tagli chiudono a filo ————— */
+.pastGrid {
+  grid-template-columns: 4fr 3fr;
+}
+
+.pastGrid > :first-child {
+  aspect-ratio: 4 / 3;
+}
+
+.pastGrid > :last-child {
+  aspect-ratio: 1 / 1;
+}
+
+@media (max-width: 700px) {
+  .pastGrid > :first-child,
+  .pastGrid > :last-child {
+    aspect-ratio: 4 / 3;
+  }
+}
+
+/* ————— dove siamo in bianco: fascia chiara coi token reimpostati ————— */
+.whiteBand {
+  background: #ffffff;
+  color: #0a0a0a;
+  --bg: #ffffff;
+  --surface: #f2f2f2;
+  --fg: #0a0a0a;
+  --fg-2: #4a4a4a;
+  --line: rgba(0, 0, 0, 0.16);
+}
+
+/* l'indirizzo è il protagonista: grande, tracking stretto, niente
+   righe-tabella in mezzo */
+.whereAddress {
+  font-size: clamp(26px, 2.6vw, 40px);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+  max-width: 20ch;
+}
+
+.whereNotes {
+  margin-top: 14px;
+}
+
+.whereNotes p {
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--fg-2);
+  max-width: 56ch;
 }

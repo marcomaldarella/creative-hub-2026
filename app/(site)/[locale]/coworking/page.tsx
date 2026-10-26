@@ -162,6 +162,9 @@ export default async function CoworkingPage({
           </RevealGroup>
         </header>
 
+        {/* ————— colata nera: dal prodotto alla banano room, tutto scuro
+            fino alla fascia azzurra del day pass ————— */}
+        <div className={`scheme-dark ${styles.darkBand}`}>
         {/* ————— due colonne: contenuto + riquadro prenota fisso ————— */}
         <div className={`wrap ${styles.lay}`}>
           <div className={styles.colL}>
@@ -189,7 +192,7 @@ export default async function CoworkingPage({
             <section className={styles.block}>
               <h2 className={styles.h2}>{t.coworking.spacesTitle}</h2>
               <div className="scroller">
-                <table className={styles.cmp}>
+                <table className={`listino ${styles.cmp}`}>
                   <thead>
                     <tr>
                       {t.coworking.tableHead.map((h) => (
@@ -203,14 +206,20 @@ export default async function CoworkingPage({
                     {t.coworking.tableRows.map((row, i) => (
                       <tr key={row[0]}>
                         <th scope="row">{row[0]}</th>
-                        <td className={styles.price}>
+                        {/* data-label: sul telefono la tabella diventa un
+                            elenco e ogni valore si porta dietro il nome
+                            della sua colonna */}
+                        <td
+                          className={styles.price}
+                          data-label={t.coworking.tableHead[1]}
+                        >
                           {row[1]}
                           {tableWas[i] && (
                             <s className={styles.was}>{tableWas[i]}</s>
                           )}
                         </td>
-                        <td>{row[2]}</td>
-                        <td>{row[3]}</td>
+                        <td data-label={t.coworking.tableHead[2]}>{row[2]}</td>
+                        <td data-label={t.coworking.tableHead[3]}>{row[3]}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -294,11 +303,10 @@ export default async function CoworkingPage({
           />
         </section>
 
-        {/* ————— la banano room ————— */}
+        {/* ————— la banano room (senza occhiello: il titolo basta) ————— */}
         <section className={`${styles.sez} ${styles.banano}`}>
           <div className="wrap">
             <PhotoDuo
-              kicker={t.coworking.bananoKicker}
               title={t.coworking.bananoTitle}
               text={t.coworking.bananoText}
               photos={[
@@ -314,6 +322,7 @@ export default async function CoworkingPage({
             />
           </div>
         </section>
+        </div>
 
         {/* ————— cta day pass (azzurro) ————— */}
         <section className={`${styles.sez} ${styles.cta}`} id="prenota">

@@ -201,6 +201,9 @@ export default async function SaleEventiPage({
           </RevealGroup>
         </header>
 
+        {/* ————— colata scura: da "scegli una sala" fino in fondo, il
+            giallo resta solo all'hero ————— */}
+        <div className={`scheme-dark ${styles.dark}`}>
         {/* ————— le sale: card con foto ————— */}
         <Rule left="01" right={t.saleEventiPage.roomsKicker} />
         <section className={`wrap ${styles.sez}`}>
@@ -314,25 +317,29 @@ export default async function SaleEventiPage({
               <Reveal as="h2" className={`display-thin ${styles.h2}`}>
                 {t.saleEventiPage.faqTitle}
               </Reveal>
-              <PointsAccordion items={faq} />
+              {/* plain: risposte secche, niente foto/placeholder */}
+              <PointsAccordion items={faq} plain />
             </section>
           </>
         )}
 
-        {/* ————— chiusura: dove siamo, come nel mockup — la richiesta
-            passa dal configuratore qui sopra, non da un'altra CTA ————— */}
-        <div className={`scheme-dark ${styles.dark}`}>
+        </div>
+
+        {/* ————— chiusura: dove siamo, in BIANCO — indirizzo grande
+            protagonista, note senza fili in mezzo ————— */}
+        <div className={styles.whiteBand}>
           <section className={`wrap ${styles.sez} ${styles.duo}`}>
             <Reveal as="h2" className={`display-thin ${styles.h2}`}>
               {t.coworking.whereTitle}
             </Reveal>
             <div>
               <Reveal>
-                <ul className={styles.whereList}>
-                  {t.coworking.where.map((w) => (
-                    <li key={w}>{w}</li>
+                <p className={styles.whereAddress}>{t.coworking.where[0]}</p>
+                <div className={styles.whereNotes}>
+                  {t.coworking.where.slice(1).map((w) => (
+                    <p key={w}>{w}</p>
                   ))}
-                </ul>
+                </div>
               </Reveal>
               {/* recapiti, non una seconda CTA: la richiesta la fa il
                   configuratore qui sopra */}

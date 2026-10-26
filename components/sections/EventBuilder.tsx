@@ -253,6 +253,7 @@ export function EventBuilder({
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 aria-invalid={errName}
+                required
               />
             </label>
             <label className={flow.field}>
@@ -266,6 +267,7 @@ export function EventBuilder({
                 value={contact}
                 onChange={(e) => setContact(e.target.value)}
                 aria-invalid={errContact}
+                required
               />
             </label>
             <Button type="submit" disabled={sending}>
