@@ -5,7 +5,11 @@ import Link from 'next/link'
 import { RevealGroup } from '@/components/ui'
 import { Thumb } from './Thumb'
 import type { SanityImage } from '@/lib/sanity/types'
+import { matchesQuery } from '@/lib/search'
 import styles from './UniScreen.module.css'
+/* stessa pill-campo della ricerca di sezione: qui il filtro è locale
+   (useState), non serve scrivere ?q= nell'URL */
+import search from '@/components/ui/SearchBox.module.css'
 
 export type UniCourseCard = {
   slug: string
@@ -33,6 +37,7 @@ export type UniCoursesLabels = {
   countMany: string
   cycles: Record<'primo' | 'master', string>
   goLabel: string
+  search: string
 }
 
 /* freccia della card: SVG, mai unicode */
@@ -67,10 +72,12 @@ export function UniCourses({
 }) {
   const [ciclo, setCiclo] = useState<'tutti' | 'primo' | 'master'>('tutti')
   const [area, setArea] = useState<string>('tutte')
+  const [q, setQ] = useState('')
 
   const visible = (c: UniCourseCard) =>
     (ciclo === 'tutti' || c.ciclo === ciclo) &&
-    (area === 'tutte' || c.area === area)
+    (area === 'tutte' || c.area === area) &&
+    matchesQuery(q, c.title, c.desc, c.areaLabel, c.tag, ...(c.instruments ?? []))
 
   const n = cards.filter(visible).length
 
@@ -85,7 +92,7 @@ export function UniCourses({
         </figure>
         <div className={styles.cardTop}>
           <span className={styles.area}>{c.areaLabel}</span>
-          <span>{c.tag}</span>
+          {c.tag && <span className={styles.tag}>{c.tag}</span>}
         </div>
         <h3 className={styles.cardTitle}>{c.title}</h3>
         <p className={styles.cardDesc}>{c.desc}</p>
@@ -165,6 +172,30 @@ export function UniCourses({
             {label}
           </button>
         ))}
+        {/* il cerca chiude la riga dei filtri, prima del conteggio */}
+        <span className={search.box}>
+          <svg
+            viewBox="0 0 16 16"
+            width="14"
+            height="14"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            aria-hidden="true"
+          >
+            <circle cx="7" cy="7" r="4.6" />
+            <path d="M10.4 10.4 14 14" />
+          </svg>
+          <input
+            type="search"
+            value={q}
+            placeholder={labels.search}
+            aria-label={labels.search}
+            className={search.input}
+            onChange={(e) => setQ(e.target.value)}
+          />
+        </span>
         <span className={`mono ${styles.count}`}>
           {n} {n === 1 ? labels.countOne : labels.countMany}
         </span>

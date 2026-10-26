@@ -31,7 +31,7 @@
 
 .main {
   /* raggio delle carte bianche, dal mockup (.stage e .abroad: 16px) */
-  --card-r: 16px;
+  --card-r: 0;
   /* regola strutturale: nel mockup i blocchi si aprono con 2px pieni */
   --rule: 2px;
   padding-top: var(--nav-h);
@@ -58,6 +58,9 @@
   gap: clamp(26px, 3vw, 40px) clamp(20px, 2.4vw, 40px);
   margin-top: clamp(28px, 3.4vw, 40px);
   padding-top: clamp(16px, 2vw, 22px);
+  /* il respiro in fondo all'hero: senza, la fonte del dato finiva a
+     filo della barra nera dell'indice sticky */
+  padding-bottom: clamp(40px, 5vw, 72px);
   border-top: var(--rule) solid var(--fg);
 }
 
@@ -65,13 +68,18 @@
   min-width: 0;
   /* nel mockup ogni cella respira a destra (padding 22px 24px 0 0) */
   padding-right: clamp(0px, 1.6vw, 24px);
+  /* il ritardo a scaletta dentro RevealGroup passa da --rvd inline:
+     la .rv globale non lo legge, va ridichiarato qui */
+  transition:
+    opacity var(--dur-slow) ease var(--rvd, 0s),
+    transform var(--dur-slow) var(--ease-out) var(--rvd, 0s);
 }
 
 /* la cifra è il PRIMO figlio della radice di Counter (num, poi il
    meter, poi la riga): <Counter> la tiene a clamp(44px,5.5vw,72px),
    nel mockup è clamp(48px,7vw,96px) — il numero più grande della pagina */
 .counter > div:first-child {
-  font-size: clamp(50px, 7vw, 104px);
+  font-size: clamp(46px, 6.4vw, 94px);
   letter-spacing: -0.05em;
   line-height: 0.95;
 }
@@ -109,7 +117,7 @@
 
 .stage {
   background: var(--bianco);
-  border-radius: var(--card-r);
+  border-radius: 0;
   padding: clamp(20px, 2.2vw, 26px) clamp(18px, 2vw, 24px);
   /* il ritardo a scaletta dentro RevealGroup passa da --rvd inline:
      la .rv globale non lo legge, va ridichiarato qui */
@@ -120,8 +128,9 @@
 
 /* la pastiglia del momento: «dal primo anno», «durante il corso» */
 .when {
-  display: inline-flex;
-  align-items: center;
+  /* inline-block e non inline-flex: dentro un flex container la regola
+     ::first-letter qui sotto non si applica */
+  display: inline-block;
   margin-bottom: 16px;
   padding: 5px 12px;
   border-radius: var(--radius-pill);
@@ -205,8 +214,9 @@
 
 /* dove sono adesso: la pastiglia del mockup */
 .now {
-  display: inline-flex;
-  align-items: center;
+  /* inline-block e non inline-flex: dentro un flex container la regola
+     ::first-letter qui sotto non si applica */
+  display: inline-block;
   margin-bottom: 12px;
   padding: 4px 11px;
   border-radius: var(--radius-pill);
@@ -344,7 +354,7 @@
   margin-top: clamp(24px, 3vw, 30px);
   padding: clamp(20px, 2.3vw, 24px) clamp(20px, 2.4vw, 26px);
   background: var(--bianco);
-  border-radius: var(--card-r);
+  border-radius: 0;
 }
 
 .abroadText {
@@ -407,7 +417,7 @@
     padding-right: 0;
   }
   .counter > div:first-child {
-    font-size: clamp(52px, 16vw, 80px);
+    font-size: clamp(48px, 14.5vw, 74px);
   }
   .counter > div:last-child,
   .source {
@@ -419,5 +429,96 @@
   }
   .abroad {
     align-items: flex-start;
+  }
+}
+
+
+/* le pastiglie di questa pagina arrivano da Sanity, dove il testo è
+   scritto in minuscolo: l'iniziale maiuscola la mette lo stile, come
+   su tutte le altre pill del sito. */
+.when::first-letter,
+.now::first-letter {
+  text-transform: uppercase;
+}
+
+/* ————— fascia nera post-hero (ott 2026) —————
+   Dall'indice sticky in giù la pagina vive su nero: scheme-dark sul
+   wrapper inverte i token, qui il fondo pieno e i ritocchi dove
+   l'inversione non arriva — le superfici bianche del mockup e gli
+   inchiostri petrolio, invisibili sul nero. Override in fondo al
+   modulo, come da regola. */
+
+.darkBand {
+  background: #000;
+}
+
+/* le carte del percorso e la carta Erasmus+ erano bianche
+   sull'azzurro: sul nero diventano carte scure col filo chiaro — il
+   linguaggio delle fasce scure già usato nel resto del sito */
+.darkBand .stage,
+.darkBand .abroad {
+  /* ricetta vercel delle fasce scure: superficie appena più chiara
+     del fondo, filo sottile, angoli 8px, ombra morbida */
+  background: #0f0f0f;
+  border: 1px solid #2a2a2a;
+  border-radius: 8px;
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+/* dentro la carta scura la riga resta hairline, ma chiara: la --linea
+   fissa era pensata per la carta bianca */
+.darkBand .stageRow {
+  border-top-color: color-mix(in srgb, var(--fg) 22%, transparent);
+}
+
+/* gli inchiostri della carta bianca non reggono il nero: il petrolio
+   dei titoli torna osso, il grigio-blu del testo passa al secondario
+   di fascia (che scheme-dark ha già schiarito) */
+.darkBand .stageLabel,
+.darkBand .abroadText {
+  color: var(--osso);
+}
+
+.darkBand .stageText {
+  color: var(--fg-2);
+}
+
+/* le pastiglie petrolio/osso si fonderebbero col nero: si invertono —
+   pastiglia chiara con inchiostro scuro, come il tasto osso */
+.darkBand .when,
+.darkBand .now {
+  background: var(--osso);
+  color: #0a0a0a;
+}
+
+/* ————— chiusura open day: videino a sinistra, testo a destra ————— */
+.endGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+  gap: clamp(24px, 3.5vw, 64px);
+  align-items: center;
+}
+
+.endMedia {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #0f0f0f;
+}
+
+.endVideo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 860px) {
+  .endGrid {
+    grid-template-columns: 1fr;
+    gap: 20px;
   }
 }

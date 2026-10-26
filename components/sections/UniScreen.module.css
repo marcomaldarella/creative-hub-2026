@@ -35,12 +35,6 @@
   border-color: var(--fg);
 }
 
-/* dentro la card azzurra "tasso zero" l'inchiostro torna nero anche
-   nella colata scura */
-.dark .pcardInvert {
-  --ink: #0a0a0a;
-}
-
 /* ————— testata ————— */
 
 .head {
@@ -409,11 +403,15 @@
   );
 }
 
+/* i due tag stanno insieme a sinistra: con lo space-between il secondo
+   finiva all'angolo opposto della card e i due si leggevano come due
+   informazioni scollegate invece che come una coppia */
 .cardTop {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
-  gap: 12px;
+  flex-wrap: wrap;
+  gap: 7px;
   font-size: 12px;
   color: rgba(255, 255, 255, 0.75);
 }
@@ -431,8 +429,21 @@
   font-weight: 500;
 }
 
+/* il secondo tag (bachelor, master, custom…): stessa pastiglia della
+   categoria ma solo di contorno, così la coppia si legge in gerarchia
+   invece di gridare due volte */
+.tag {
+  display: inline-block;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  color: #ffffff;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  font-weight: 500;
+}
+
 /* maiuscola d'attacco su categorie, filtri e tasto (stessa regola dei
    tag del carosello: mai caps, solo la prima lettera) */
+.tag::first-letter,
 .area::first-letter,
 .pill::first-letter,
 .goLabel::first-letter,
@@ -764,8 +775,8 @@
   margin-top: 10px;
 }
 
-/* schede prezzo: la lingua delle card del PDF — corpo nero, testi nel
-   colore di sezione */
+/* schede prezzo: tutte nella stessa lingua — fondo nero, filo bianco,
+   testi bianchi (niente coppia bianco+azzurro) */
 .price {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -774,8 +785,9 @@
 }
 
 .pcard {
-  background: var(--ink);
-  color: var(--accent, var(--osso));
+  background: #0a0a0a;
+  color: #fafafa;
+  border: 1px solid #ffffff;
   padding: 24px;
   display: flex;
   flex-direction: column;
@@ -793,37 +805,15 @@
 .pcardText {
   font-size: 14px;
   margin-top: 10px;
-  color: color-mix(in srgb, var(--accent, var(--osso)) 72%, #fafafa);
+  color: rgba(255, 255, 255, 0.78);
 }
 
-/* l'etichetta mono sul nero: il grigio di --fg-2 spariva, va in azzurro
-   pieno come il resto della card */
 .pcard :global(.mono) {
-  color: var(--azzurro);
-}
-
-.pcardInvert :global(.mono) {
-  color: color-mix(in srgb, var(--ink) 62%, transparent);
+  color: #fafafa;
 }
 
 .pcardLink {
   margin-top: 14px;
-}
-
-/* la card "tasso zero" è invertita: quadrato azzurro su azzurro, tenuto
-   insieme dall'outline nero, testi neri */
-.pcardInvert {
-  background: var(--azzurro);
-  color: var(--ink);
-  border: 1px solid var(--ink);
-}
-
-.pcardInvert .pcardText {
-  color: color-mix(in srgb, var(--ink) 78%, transparent);
-}
-
-.pcardInvert :global(.mono) {
-  color: color-mix(in srgb, var(--ink) 62%, transparent);
 }
 
 .admCta {

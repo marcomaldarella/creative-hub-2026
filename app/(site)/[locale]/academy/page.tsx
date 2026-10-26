@@ -421,14 +421,23 @@ export default async function AcademyPage({
                 </Reveal>
               ))}
             </div>
+            {/* toggle senza JS (come ThemeToggle): la checkbox davanti
+                alla griglia pilota via CSS le celle extra e il testo
+                della label dopo la griglia */}
+            <input
+              type="checkbox"
+              id="tutti-docenti"
+              className={styles.teachersAllToggle}
+            />
             <ul className={styles.teacherGrid}>
-              {teachers.map((teacher) => (
-                <li key={teacher._id} className={styles.teacherCell}>
-                  <div className={styles.teacherPh}>
-                    {teacher.photo && (
-                      /* eslint-disable-next-line @next/next/no-img-element */
+              {teachers
+                .filter((teacher) => teacher.photo)
+                .map((teacher) => (
+                  <li key={teacher._id} className={styles.teacherCell}>
+                    <div className={styles.teacherPh}>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
-                        src={urlFor(teacher.photo)
+                        src={urlFor(teacher.photo!)
                           .width(400)
                           .height(500)
                           .fit('crop')
@@ -437,11 +446,26 @@ export default async function AcademyPage({
                         alt={teacher.name ?? ''}
                         loading="lazy"
                       />
-                    )}
-                  </div>
-                  <span className={styles.teacherName}>{teacher.name}</span>
-                </li>
-              ))}
+                    </div>
+                    <span className={styles.teacherName}>{teacher.name}</span>
+                  </li>
+                ))}
+              {/* i docenti senza ritratto: nascosti finché il toggle non
+                  li chiama, resi con la UI della cella join us — box 4:5
+                  col ruolo dentro, nome sotto */}
+              {teachers
+                .filter((teacher) => !teacher.photo)
+                .map((teacher) => (
+                  <li
+                    key={teacher._id}
+                    className={`${styles.teacherCell} ${styles.teacherExtra}`}
+                  >
+                    <span className={styles.joinBox}>
+                      <span>{l(teacher.role, locale)}</span>
+                    </span>
+                    <span className={styles.teacherName}>{teacher.name}</span>
+                  </li>
+                ))}
               {/* join us come un docente: box 4:5 col solo invito al
                   cv (in hover spunta il +), "join us" sotto come
                   fosse il nome; il clic porta ai contatti */}
@@ -465,6 +489,17 @@ export default async function AcademyPage({
                 <p className={styles.inMemoriaText}>{t.academy.inMemoriaText}</p>
               </li>
             </ul>
+            <label
+              htmlFor="tutti-docenti"
+              className={styles.teachersToggleLab}
+            >
+              <span className={styles.teachersMore}>
+                {t.academy.teachersAll} ({teachers.length})
+              </span>
+              <span className={styles.teachersLess}>
+                {t.academy.teachersLess}
+              </span>
+            </label>
           </section>
         </div>
 
@@ -517,7 +552,8 @@ export default async function AcademyPage({
           >
             {t.academy.faqTitle}
           </Reveal>
-          <PointsAccordion items={t.academy.faq} />
+          {/* plain: risposte brevi, niente foto/placeholder nel pannello */}
+          <PointsAccordion items={t.academy.faq} plain />
         </section>
 
       </main>

@@ -25,15 +25,35 @@
 
 /* ————— filtri pill ————— */
 
+/* una riga sola: la corsia delle pill a sinistra, il campo di ricerca
+   in fondo a destra, sempre affiancati */
 .filters {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 
+/* la corsia: prende lo spazio che avanza e scorre se i filtri sono
+   più larghi di quello spazio */
+.filterTrack {
+  display: flex;
+  flex: 1 1 auto;
+  min-width: 0;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 2px;
+}
+
+/* le pill non si restringono dentro la corsia: scorrono intere */
+.filterTrack > * {
+  flex: none;
+}
+
+/* il campo chiude la riga: fuori dalla corsia che scorre, così resta
+   sempre visibile e sempre alla stessa altezza delle pill */
 .search {
-  margin-left: auto;
+  flex: none;
 }
 
 /* divisore tra filtri categoria e filtri tipologia */
@@ -59,8 +79,8 @@
   display: inline-block;
   border: 1px solid var(--line);
   border-radius: var(--radius-pill);
-  padding: 7px 18px;
-  font-size: var(--fs-small);
+  padding: var(--pill-pad);
+  font-size: var(--pill-fs);
   color: var(--fg-2);
   transition: color 0.2s, border-color 0.2s, background 0.2s;
 }
@@ -106,5 +126,26 @@
 @media (max-width: 560px) {
   .grid {
     grid-template-columns: 1fr;
+  }
+}
+
+/* sotto i 640px il campo scende sotto la corsia, a tutta larghezza:
+   in riga si mangiava metà schermo e lasciava visibili due filtri su
+   dodici. I filtri restano una riga sola che scorre. */
+@media (max-width: 640px) {
+  .filters {
+    flex-wrap: wrap;
+  }
+
+  .filterTrack {
+    flex: 1 0 100%;
+  }
+
+  .search {
+    flex: 1 0 100%;
+  }
+
+  .search :global(input) {
+    width: 100%;
   }
 }

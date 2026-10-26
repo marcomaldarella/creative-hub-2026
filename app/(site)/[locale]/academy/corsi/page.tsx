@@ -56,7 +56,10 @@ export default async function CorsiPage({
     const slug = course.category?.slug?.current
     const label = l(course.category?.title, locale)
     if (slug && label && !categories.some((c) => c.slug === slug)) {
-      categories.push({ slug, label: label.toLowerCase() })
+      /* l'etichetta resta com'è scritta in Sanity (iniziale maiuscola):
+         schiacciata in minuscolo stonava accanto alle pill delle altre
+         sezioni, che la maiuscola ce l'hanno */
+      categories.push({ slug, label })
     }
   }
 
@@ -112,6 +115,10 @@ export default async function CorsiPage({
         {/* ————— fascia filtrabile: nera, le card restano nel colore ————— */}
         <div className={styles.filterBand}>
           <nav className={`wrap ${styles.filters}`} aria-label={t.academy.categoryLabel}>
+            {/* le pill scorrono dentro la loro corsia: dodici filtri più
+                il campo non entrano in una riga, e andando a capo il
+                "cerca" si staccava dal gruppo */}
+            <div className={`scroller scroller-fade-end ${styles.filterTrack}`} tabIndex={0}>
             <Link
               href={filterHref(undefined, activeType)}
               scroll={false}
@@ -148,6 +155,7 @@ export default async function CorsiPage({
                 {t.academy.types[slug]}
               </Link>
             ))}
+            </div>
             <SearchBox placeholder={t.common.search} className={styles.search} />
           </nav>
         </div>
@@ -184,13 +192,19 @@ export default async function CorsiPage({
                           alt={l(course.title, locale) ?? ''}
                         />
                       </figure>
+                      {/* categoria e tipologia sulla stessa riga: ora
+                          che la tipologia ha la maiuscola, schiacciare la
+                          categoria in minuscolo lascerebbe due stili
+                          affiancati */}
                       <div className={uni.cardTop}>
                         {catLabel && (
-                          <span className={uni.area}>
-                            {catLabel.toLowerCase()}
+                          <span className={uni.area}>{catLabel}</span>
+                        )}
+                        {ty && (
+                          <span className={uni.tag}>
+                            {t.academy.types[ty] ?? ty}
                           </span>
                         )}
-                        {ty && <span>{t.academy.types[ty] ?? ty}</span>}
                       </div>
                       <h3 className={uni.cardTitle}>
                         {l(course.title, locale)}

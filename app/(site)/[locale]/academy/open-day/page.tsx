@@ -174,8 +174,13 @@ export default async function OpenDayPage({
           nextLabel={od.subnav.next}
         />
 
-        {/* ————— od.01 · corsi universitari ————— */}
-        <section id="universitari" className={`${styles.blockSez} ${styles.white}`}>
+        {/* ————— od.01 · corsi universitari: fascia NERA (ritmo colori
+            del cliente, ott 2026) — scheme-dark porta i token, .nera i
+            ritocchi locali ————— */}
+        <section
+          id="universitari"
+          className={`scheme-dark ${styles.blockSez} ${styles.nera}`}
+        >
           <div className={`wrap ${det.duo} ${styles.duoWide} ${styles.duoPad}`}>
             <div>
               <Reveal as="span" className={`mono ${det.kicker}`}>
@@ -206,16 +211,23 @@ export default async function OpenDayPage({
               ))}
             </RevealGroup>
           </div>
-          {/* fascia nera compatta di chiusura */}
-          <div className={`scheme-dark ${styles.band}`}>
+          {/* fascia compatta di chiusura: AZZURRA, apre la zona azzurra
+              delle domande dei genitori — i due tasti leggono in nero,
+              pill piena il primario e bordata il secondario */}
+          <div className={`${styles.band} ${styles.bandAzzurra}`}>
             <div className={`wrap ${styles.bandIn}`}>
               <p className={styles.bandText}>{bandRich(od.uni.band.text)}</p>
               <div className={styles.bandRow}>
-                <Button variant="azzurro" href="#prenota-uni">
+                <Button
+                  variant="azzurro"
+                  href="#prenota-uni"
+                  className={styles.pillNera}
+                >
                   {od.uni.band.cta}
                 </Button>
                 <ArrowLink
                   href={localeHref(locale, '/academy/corsi-universitari')}
+                  className={styles.pillBordata}
                 >
                   {od.uni.band.link}
                 </ArrowLink>
@@ -225,8 +237,9 @@ export default async function OpenDayPage({
         </section>
 
         {/* ————— per chi accompagna: le domande dei genitori —————
-            nel mockup è una fascia nera */}
-        <section className={`scheme-dark ${det.sez} ${styles.parentsDark}`}>
+            fascia AZZURRA (ritmo colori ott 2026): nessuno sfondo proprio,
+            lascia vedere il flood di sezione, UI in nero dai token flood */}
+        <section className={det.sez}>
           <div className="wrap">
           <Reveal as="span" className={`mono ${det.kicker}`}>
             {od.parents.kicker}
@@ -249,8 +262,11 @@ export default async function OpenDayPage({
         </div>
         </section>
 
-        {/* ————— od.02 · lezioni su misura ————— */}
-        <section id="lezioni" className={`${styles.blockSez} ${styles.sezLine}`}>
+        {/* ————— od.02 · lezioni su misura: di nuovo fascia NERA ————— */}
+        <section
+          id="lezioni"
+          className={`scheme-dark ${styles.blockSez} ${styles.nera}`}
+        >
           <div className={`wrap ${det.duo} ${styles.duoWide} ${styles.duoPad}`}>
             <div>
               <Reveal as="span" className={`mono ${det.kicker}`}>
@@ -288,14 +304,23 @@ export default async function OpenDayPage({
               ))}
             </RevealGroup>
           </div>
-          <div className={`scheme-dark ${styles.band}`}>
+          {/* fascia "non puoi aspettare": AZZURRA, stessi tasti in nero
+              della fascia gemella di od.01 */}
+          <div className={`${styles.band} ${styles.bandAzzurra}`}>
             <div className={`wrap ${styles.bandIn}`}>
               <p className={styles.bandText}>{bandRich(od.custom.band.text)}</p>
               <div className={styles.bandRow}>
-                <Button variant="azzurro" href="#prenota-lezioni">
+                <Button
+                  variant="azzurro"
+                  href="#prenota-lezioni"
+                  className={styles.pillNera}
+                >
                   {od.custom.band.cta}
                 </Button>
-                <ArrowLink href={localeHref(locale, '/academy/corsi-custom')}>
+                <ArrowLink
+                  href={localeHref(locale, '/academy/corsi-custom')}
+                  className={styles.pillBordata}
+                >
                   {od.custom.band.link}
                 </ArrowLink>
               </div>
@@ -303,8 +328,11 @@ export default async function OpenDayPage({
           </div>
         </section>
 
-        {/* ————— prenota ————— */}
-        <section id="prenota" className={`wrap ${det.sez} ${styles.white}`}>
+        {/* ————— prenota: tutto NERO ————— */}
+        <section
+          id="prenota"
+          className={`wrap scheme-dark ${det.sez} ${styles.nera}`}
+        >
           {/* ancore extra per le CTA con preselezione: il browser scrolla
               solo su id esistenti, l'hash lo legge poi il form */}
           <span id="prenota-uni" className={styles.anchor} aria-hidden="true" />
@@ -342,8 +370,9 @@ export default async function OpenDayPage({
           </div>
         </section>
 
-        {/* ————— non puoi venire? ————— */}
-        <section className={`wrap ${det.sez} ${styles.sezLine}`}>
+        {/* ————— non puoi venire? resta sul NERO, filo hairline a
+            separarla dalla prenotazione ————— */}
+        <section className={`wrap scheme-dark ${det.sez} ${styles.sezLine} ${styles.nera}`}>
           <Reveal as="span" className={`mono ${det.kicker}`}>
             {od.alt.kicker}
           </Reveal>
@@ -358,7 +387,11 @@ export default async function OpenDayPage({
                 <p className={styles.cellText}>{od.alt.live.text}</p>
               </div>
               <div className={styles.altAction}>
-                <Button href="#prenota">{od.alt.live.cta}</Button>
+                {/* sul nero il tasto pieno è bianco (regola di
+                    scheme-dark sulla variante azzurro) */}
+                <Button variant="azzurro" href="#prenota">
+                  {od.alt.live.cta}
+                </Button>
               </div>
             </div>
             <div className={`rv ${styles.altRow}`}>
@@ -376,10 +409,10 @@ export default async function OpenDayPage({
           </RevealGroup>
         </section>
 
-        {/* ————— come arrivare: solo l'indirizzo ————— */}
+        {/* ————— come arrivare: chiusura in BIANCO, testi neri ————— */}
         <section
           id="come-arrivare"
-          className={`wrap ${det.sez} ${styles.sezLine}`}
+          className={`wrap ${det.sez} ${styles.white}`}
         >
           <Reveal as="span" className={`mono ${det.kicker}`}>
             {od.reach.kicker}
@@ -388,12 +421,15 @@ export default async function OpenDayPage({
             {od.reach.title}
           </Reveal>
           <div className={styles.reachGrid}>
+            {/* colonna piena: etichetta piccola, indirizzo GRANDE come
+                protagonista, link alle mappe ancorato in basso — la
+                riga-tabella leggeva vuota accanto alla mappa */}
             <Reveal className={styles.reachBox} delay={120}>
-              <div className={tp.defs}>
-                <div className={tp.def}>
-                  <span className={tp.defLabel}>{od.reach.addressLabel}</span>
-                  <span className={tp.defText}>{od.reach.address}</span>
-                </div>
+              <div>
+                <span className={`mono ${styles.reachLabel}`}>
+                  {od.reach.addressLabel}
+                </span>
+                <p className={styles.reachAddress}>{od.reach.address}</p>
               </div>
               <ArrowLink href={MAPS_URL} external>
                 {od.reach.maps}

@@ -1,11 +1,13 @@
-/* pill coerente coi filtri categoria */
+/* il campo sta nella riga dei filtri: stessa forma, stessa misura e
+   stessa altezza delle pill che affianca — è l'unico elemento non-pill
+   del sito che tiene gli angoli tondi, perché fa parte di quella riga */
 .box {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   border: 1px solid var(--line);
-  border-radius: 0;
-  padding: 7px 16px;
+  border-radius: var(--radius-pill);
+  padding: var(--pill-pad);
   color: var(--fg-2);
   transition: border-color var(--dur), color var(--dur);
 }
@@ -20,7 +22,7 @@
   background: none;
   outline: none;
   font: inherit;
-  font-size: var(--fs-small);
+  font-size: var(--pill-fs);
   color: var(--fg);
   width: clamp(140px, 22vw, 240px);
 }

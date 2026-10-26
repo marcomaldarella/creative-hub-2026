@@ -139,6 +139,9 @@
 .duoWide.duoWide {
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   align-items: stretch;
+  /* stesso passo orizzontale della griglia celle sotto (.cells2): così
+     la scheda info apre in colonna esattamente sopra "02/04" */
+  column-gap: clamp(20px, 2.5vw, 36px);
 }
 
 .duoWide .infoCard {
@@ -157,7 +160,7 @@
 /* scheda info: card bordata con le righe hairline di tp.defs */
 .infoCard {
   border: 1px solid var(--line);
-  border-radius: 14px;
+  border-radius: 0;
   padding: 6px 20px;
 }
 
@@ -403,7 +406,7 @@
 
 .mapBox {
   border: 1px solid var(--line);
-  border-radius: 14px;
+  border-radius: 0;
   overflow: hidden;
   background: var(--surface);
 }
@@ -425,10 +428,11 @@
 }
 
 
-/* ————— ritmo dei colori del mockup: la pagina non è tutta azzurra ————
-   01 corsi universitari su BIANCO, la prenotazione su NERO, il resto
-   nel colore di sezione. I token si riscrivono sul blocco, così card,
-   righe e testi secondari si adattano da soli. */
+/* ————— ritmo dei colori del cliente (ott 2026): la pagina alterna ————
+   hero AZZURRO → od.01 NERO → domande dei genitori AZZURRE → od.02
+   NERO → fascia "non puoi aspettare" AZZURRA → prenota e "non puoi
+   venire" NERI → come arrivare BIANCO. Le fasce nere portano i token
+   con scheme-dark; .nera aggiunge solo i ritocchi locali. */
 
 .white {
   background: #ffffff;
@@ -441,30 +445,94 @@
   --su-inchiostro: #ffffff;
 }
 
-/* la scheda dei dati dentro il blocco bianco: riquadro con angoli come
-   nel mockup (.simple), non più un bordo appena visibile */
-.white .infoCard {
-  background: #ffffff;
-  border-color: #e3e3e3;
-  border-radius: 16px;
+/* la scheda dei dati sulle fasce nere: stesso riquadro 30px del mockup,
+   definito dal solo bordo (hairline chiara dai token scuri) */
+.nera .infoCard {
   padding: 30px;
 }
 
-/* la fascia nera delle domande dei genitori: il wrap sta dentro, così
-   il nero arriva ai due bordi */
-.parentsDark {
-  background: #000000;
+/* il modulo di prenotazione è già una card nera di suo: sul nero di
+   sezione il suo bordo #000 spariva, lo si tiene a filo hairline */
+.nera form {
+  border-color: #2a2a2a;
 }
 
+/* ————— fascia azzurra dentro le sezioni nere ————— */
 
+/* riscrive la fascia (base .band nera) nel blu brand: dentro una
+   sezione scheme-dark i token vanno riportati al nero su azzurro */
+.band.bandAzzurra {
+  background: var(--azzurro);
+  color: #0a0a0a;
+  --fg: #0a0a0a;
+  --fg-2: #141414;
+  --line: rgba(0, 0, 0, 0.28);
+}
 
-.prenotaDark {
-  background: #000000;
+/* i due tasti della fascia azzurra: il primario è una pill piena nera… */
+.band.bandAzzurra .pillNera {
+  background: #0a0a0a;
   color: #fafafa;
-  --bg: #000000;
-  --surface: #111111;
-  --fg: #fafafa;
-  --fg-2: #b3b3b3;
-  --line: #2a2a2a;
-  --su-inchiostro: #000000;
+  border-color: #0a0a0a;
+}
+
+.band.bandAzzurra .pillNera:hover {
+  background: #262626;
+}
+
+/* …il secondario una pill bordata (outline nero), freccia compresa */
+.band.bandAzzurra .pillBordata {
+  padding: 9px 20px;
+  border: 1px solid #0a0a0a;
+  border-radius: var(--radius-pill);
+  font-size: var(--fs-small);
+  color: #0a0a0a;
+  transition: background var(--dur);
+}
+
+.band.bandAzzurra .pillBordata:hover {
+  background: rgba(0, 0, 0, 0.08);
+}
+
+/* ————— stacco in alto ————— */
+
+/* il padding copre l'altezza VERA della barra (nav + topbar): prima
+   "torna a academy" finiva nascosto sotto la barra e il suo spazio si
+   leggeva come un vuoto; il respiro lo si recupera stringendo il
+   margine sotto il back */
+.main {
+  padding-top: var(--header-h);
+}
+
+.main > header > :first-child {
+  margin-bottom: 12px;
+}
+
+/* ————— come arrivare, colonna sinistra ripensata: l'indirizzo è il
+   protagonista (grande, tracking stretto), l'etichetta mono sopra e il
+   link alle mappe ancorato al piede — la colonna riempie l'altezza
+   della mappa invece di lasciare il vuoto ————— */
+.reachBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-self: stretch;
+  gap: 28px;
+  max-width: none;
+  border-top: 1px solid var(--line);
+  padding-top: 18px;
+}
+
+.reachLabel {
+  display: block;
+  color: var(--fg-2);
+  margin-bottom: 12px;
+}
+
+.reachAddress {
+  font-size: clamp(28px, 2.8vw, 44px);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.06;
+  max-width: 16ch;
 }

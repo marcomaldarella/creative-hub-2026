@@ -245,7 +245,9 @@ export function ExploreField({ rows }: { rows: ExploreCard[][] }) {
           {/* velo scuro di lettura al piede, tutto nel CSS */}
           <span className={styles.glass} aria-hidden="true" />
           <span className={`mono ${styles.cardMeta}`}>
-            <span>{card.tag}</span>
+            {/* la categoria (triennio, magistrale, custom…) è una
+                pastiglia come sulle card dei corsi universitari */}
+            {card.tag && <span className={styles.cardTag}>{card.tag}</span>}
             {card.meta && <span>{card.meta}</span>}
           </span>
           <span className={styles.cardBody}>

@@ -294,7 +294,7 @@ export async function TopicScreen({
     lede: string
     points: (string | PointsAccordionItem)[]
     /* obbligo normativo FSE+ (formazione finanziata): loghi + dicitura */
-    funding?: { logos: string[]; text: string }
+    funding?: { logos: string[]; logosAlt?: string; text: string }
     /* seconda voce dell'occhiello: "academy · servizi studenti" */
     eyebrow?: string
     /* azioni in testata, quando il mockup del topic le prevede */
@@ -364,7 +364,17 @@ export async function TopicScreen({
 
   return (
     <SiteChrome locale={locale} path={topic.base}>
-      <main className={styles.main}>
+      <main
+        className={[
+          styles.main,
+          topic.loudGroupLabels ? styles.loudLabels : '',
+          /* corpo in fascia nera (servizi studenti): la classe scopa
+             gli override in fondo al modulo a QUESTA pagina */
+          topic.darkBody ? styles.darkBody : '',
+        ]
+          .filter(Boolean)
+          .join(' ')}
+      >
         {/* ————— testata compatta ————— */}
         <header className={`wrap ${styles.head}`}>
           <Reveal className={styles.back}>
@@ -492,14 +502,23 @@ export async function TopicScreen({
             (pp?.pairs.every((p) => p.title.trim().endsWith('?')) ?? false)
           const isSteps =
             (pp?.pairs.every((p) => /^\d+[.)]\s/.test(p.title)) ?? false)
-          return (
-            <Fragment key={section._key}>
+          /* corpo in fascia nera (flag `darkBody` in topics.ts): ogni
+             sezione si porta il suo wrapper scuro — scheme-dark per i
+             token, sezBand per lo sfondo — TRANNE l'ultima (il
+             referente), che resta nel colore di pagina */
+          const inBand = topic.darkBody === true && i < sections.length - 1
+          const blocco = (
+            <>
               {/* l'occhiello della sezione sta SOLO sul filetto numerato:
-                  ripeterlo anche in testata lo stampava due volte di fila */}
-              <Rule
-                left={String(i + 1).padStart(2, '0')}
-                right={l(section.kicker, locale)}
-              />
+                  ripeterlo anche in testata lo stampava due volte di fila.
+                  Sul corpo scuro la PRIMA sezione non porta il filetto:
+                  il suo titolo grande apre la fascia da solo */}
+              {!(topic.darkBody && i === 0) && (
+                <Rule
+                  left={String(i + 1).padStart(2, '0')}
+                  right={l(section.kicker, locale)}
+                />
+              )}
               {/* l'ancora della sezione, quando c'è, è il bersaglio
                   delle card della griglia indice */}
               <section className={styles.sez} id={section.anchor || undefined}>
@@ -607,7 +626,12 @@ export async function TopicScreen({
                                 >
                                   {c.label && (
                                     <span className={`mono ${styles.indexNum}`}>
-                                      {c.label}
+                                      {/* in Sanity le label arrivano col
+                                          prefisso di pagina ("ss.01"): sul
+                                          corpo scuro resta solo il numero */}
+                                      {topic.darkBody
+                                        ? c.label.replace(/^ss\.\s*/i, '')
+                                        : c.label}
                                     </span>
                                   )}
                                   <span className={styles.indexTitle}>
@@ -737,6 +761,15 @@ export async function TopicScreen({
                   </div>
                 </div>
               </section>
+            </>
+          )
+          return (
+            <Fragment key={section._key}>
+              {inBand ? (
+                <div className={`scheme-dark ${styles.sezBand}`}>{blocco}</div>
+              ) : (
+                blocco
+              )}
             </Fragment>
           )
         })}
@@ -774,7 +807,11 @@ export async function TopicScreen({
 
         {/* ————— fascia FSE+ (obbligo normativo), se il topic la porta ————— */}
         {copy.funding && (
-          <FundingBand logos={copy.funding.logos} text={copy.funding.text} />
+          <FundingBand
+            logos={copy.funding.logos}
+            logosAlt={copy.funding.logosAlt}
+            text={copy.funding.text}
+          />
         )}
 
         {/* ————— chiusura: sui corsi finanziati il form "Avvisami" (le

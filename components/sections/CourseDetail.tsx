@@ -235,13 +235,11 @@ export async function CourseDetail({
       })),
     funding: finanziato
       ? {
-          logos: DICITURE[slug]
-            ? [
-                'Unione Europea',
-                'Repubblica Italiana',
-                'Regione Emilia-Romagna',
-              ]
-            : (fundingTopic?.logos ?? []),
+          /* lockup ufficiale a 4 loghi (kit immagine coordinata 21-27):
+             vale sia con la dicitura specifica del corso sia con quella
+             generica del programma */
+          logos: fundingTopic?.logos ?? [],
+          logosAlt: fundingTopic?.logosAlt,
           text: DICITURE[slug] ?? fundingTopic?.text ?? '',
         }
       : undefined,

@@ -156,6 +156,7 @@ export async function UniScreen({ locale }: { locale: Locale }) {
               ...u.filters,
               cycles: u.cycles,
               goLabel: u.goCta,
+              search: t.common.search,
             }}
           />
           {/* ponte alla griglia completa con i filtri */}
@@ -230,11 +231,7 @@ export async function UniScreen({ locale }: { locale: Locale }) {
             {u.admissions.prices.map((p, i) => (
               <Reveal
                 key={p.k}
-                className={
-                  'linkLabel' in p
-                    ? `${styles.pcard} ${styles.pcardInvert}`
-                    : styles.pcard
-                }
+                className={styles.pcard}
                 delay={i * 60}
               >
                 <span className="mono">{p.k}</span>

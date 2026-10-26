@@ -44,6 +44,22 @@ export type Topic = {
    * solo testo, come nel mockup (servizi studenti).
    */
   heroMedia?: boolean
+  /**
+   * Etichette di gruppo in evidenza: le righe che aprono un blocco
+   * ("Borse di studio di merito", "Come si assegnano") diventano
+   * maiuscole e più grandi, perché qui separano gruppi lunghi e da
+   * occhiello piccolo si perdevano nell'elenco.
+   */
+  loudGroupLabels?: boolean
+  /**
+   * Corpo lungo in fascia nera (mockup servizi studenti): ogni sezione
+   * Sanity — filetto numerato compreso — va su fondo nero con i testi
+   * chiari, TRANNE l'ultima (il referente), che resta nel colore di
+   * pagina. La testata non si tocca. Gli override stanno in fondo a
+   * TopicScreen.module.css, scopati a .darkBody/.sezBand: le altre
+   * pagine non cambiano.
+   */
+  darkBody?: boolean
 }
 
 export const TOPICS: Topic[] = [
@@ -74,6 +90,8 @@ export const TOPICS: Topic[] = [
     base: '/academy',
     key: 'serviziStudenti',
     heroMedia: false,
+    loudGroupLabels: true,
+    darkBody: true,
   },
 
   /* ————— studio ————— */

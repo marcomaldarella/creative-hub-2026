@@ -102,7 +102,7 @@
   flex-direction: column;
   padding: clamp(18px, 2vw, 26px);
   border: 1px solid color-mix(in srgb, var(--fg) 26%, transparent);
-  border-radius: 14px;
+  border-radius: 0;
   background: color-mix(in srgb, #ffffff 16%, transparent);
 }
 
@@ -192,7 +192,7 @@ a.card:hover {
   position: relative;
   overflow: hidden;
   background: #000;
-  border-radius: 14px;
+  border-radius: 0;
   aspect-ratio: 4 / 3;
 }
 
@@ -211,4 +211,29 @@ a.card:hover {
 .avvisami {
   background: #000;
   padding: clamp(44px, 6vw, 84px) 0;
+}
+
+/* ————— fascia nera post-hero (ott 2026) —————
+   Dall'avviso in giù la pagina vive su nero: scheme-dark sul wrapper
+   inverte i token (testi e fili chiari da soli), qui solo il fondo
+   pieno — doppiato come nella darkBand dell'indice academy — e i
+   ritocchi dove l'inversione non arriva. Override in fondo al modulo,
+   come da regola. */
+
+.darkBand {
+  background: #000;
+}
+
+/* la card in evidenza era nera sull'azzurro: sul nero si fonderebbe
+   col fondo — resta nera ma si stacca col filo chiaro, lo stesso
+   linguaggio delle card scure del sito */
+.darkBand .cardHot {
+  border-color: color-mix(in srgb, var(--fg) 55%, transparent);
+}
+
+/* il placeholder foto dei corsi universitari era nero pieno: sul nero
+   sparirebbe — superficie quasi nera col filo chiaro, come le card */
+.darkBand .uniPh {
+  background: var(--surface);
+  border: 1px solid color-mix(in srgb, var(--fg) 26%, transparent);
 }

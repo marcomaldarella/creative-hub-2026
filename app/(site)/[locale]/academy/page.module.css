@@ -984,3 +984,54 @@ h3.orientOptTitle {
   max-width: 26ch;
   margin-bottom: clamp(24px, 3vw, 40px);
 }
+
+/* ————— toggle "tutti i docenti": niente JS, come ThemeToggle — la
+   checkbox (nascosta) davanti alla griglia mostra le celle dei docenti
+   senza ritratto (UI della cella join us) e scambia il testo della
+   label dopo la griglia ————— */
+.teachersAllToggle {
+  display: none;
+}
+
+.teacherExtra {
+  display: none;
+}
+
+.teachersAllToggle:checked ~ .teacherGrid .teacherExtra {
+  display: block;
+}
+
+.teachersToggleLab {
+  display: inline-block;
+  margin-top: clamp(20px, 2.4vw, 32px);
+  /* sul nero della fascia il filo --line spariva: il bordo si vede,
+     e il tasto si legge come un'azione */
+  border: 1px solid color-mix(in srgb, var(--fg) 45%, transparent);
+  border-radius: var(--radius-pill);
+  padding: 10px 22px;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  transition:
+    border-color var(--dur) ease,
+    background var(--dur) ease,
+    color var(--dur) ease;
+}
+
+.teachersToggleLab:hover {
+  border-color: var(--fg);
+  background: color-mix(in srgb, var(--fg) 8%, transparent);
+}
+
+.teachersLess {
+  display: none;
+}
+
+.teachersAllToggle:checked ~ .teachersToggleLab .teachersMore {
+  display: none;
+}
+
+.teachersAllToggle:checked ~ .teachersToggleLab .teachersLess {
+  display: inline;
+}

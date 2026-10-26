@@ -128,6 +128,12 @@ export default async function FormazioneFinanziataPage({
           </div>
         </header>
 
+        {/* ————— fascia nera: da qui in giù la pagina vive su nero —————
+            l'hero resta nell'azzurro del flood; tutto il resto sta nella
+            stessa fascia scheme-dark (come la darkBand dell'indice
+            academy): i token invertiti portano da soli testi e fili a
+            chiaro, gli aggiusti puntuali stanno nel modulo locale */}
+        <div className={`scheme-dark ${styles.darkBand}`}>
         {/* ————— avviso: oggi non ci sono iscrizioni aperte ————— */}
         <section className={styles.bandRow}>
           <div className={`wrap ${det.status}`}>
@@ -275,7 +281,12 @@ export default async function FormazioneFinanziataPage({
                 {d.uniLede}
               </Reveal>
               <Reveal delay={120}>
-                <Button href={localeHref(locale, '/academy/corsi-universitari')}>
+                {/* sul nero il tasto pieno è bianco, non petrolio (che
+                    sparirebbe): è l'override scheme-dark del variant */}
+                <Button
+                  variant="azzurro"
+                  href={localeHref(locale, '/academy/corsi-universitari')}
+                >
                   {d.uniCta}
                 </Button>
               </Reveal>
@@ -309,6 +320,7 @@ export default async function FormazioneFinanziataPage({
             />
           </div>
         </section>
+        </div>
       </main>
     </SiteChrome>
   )

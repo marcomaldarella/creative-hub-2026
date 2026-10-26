@@ -11,6 +11,7 @@ import {
   Rule,
   SectionHeader,
 } from '@/components/ui'
+import { BgVideo } from '@/components/sections/BgVideo'
 import { PointsAccordion } from '@/components/sections/PointsAccordion'
 import { SiteChrome } from '@/components/sections/SiteChrome'
 import { UniSubnav } from '@/components/sections/UniSubnav'
@@ -34,22 +35,24 @@ export const dynamic = 'force-dynamic'
    topic). Ricostruita sulla struttura del mockup v2 del cliente
    (Downloads/pagine-html/academy/stage-placement.html).
 
-   IL RESPIRO DELLA PAGINA — nel mockup il fondo è azzurro ma la pagina
-   ALTERNA, e l'alternanza è il suo ritmo:
+   IL RESPIRO DELLA PAGINA — rivisto a ott 2026: l'alternanza del
+   mockup non c'è più. Resta azzurra SOLO la testata (coi numeri);
+   dall'indice sticky in giù tutto vive su un'unica fascia nera:
 
-     testata          azzurro   (.st-hero)
-     01 il percorso   azzurro   con le carte bianche (.stage)
-     02 le storie     azzurro   a tutta larghezza (.tight)
+     testata          azzurro   (.st-hero, colata di SiteChrome)
+     01 il percorso   NERO      con le carte scure a filo chiaro
+     02 le storie     NERO      a tutta larghezza
      03 label lab     NERO      (.band)
-     04 la rete       azzurro   con la carta bianca Erasmus+ (.abroad)
-     05 domande       azzurro   (.tight)
+     04 la rete       NERO      con la carta scura Erasmus+ (.abroad)
+     05 domande       NERO
      open day         NERO      (.prenota) — l'unica azione in fondo
 
-   L'azzurro di fondo arriva da SiteChrome (colata di sezione su
-   /academy/*): non si dipinge qui. Le due fasce nere sono
-   `.scheme-dark` del sito, col nero del sito — NON il #0A0E14 del
-   mockup. Il giallo #FFE24A del mockup resta fuori: è il colore dei
-   promemoria redazionali.
+   L'azzurro della testata arriva da SiteChrome (colata di sezione su
+   /academy/*): non si dipinge qui. La fascia nera è `.scheme-dark`
+   del sito, col nero del sito — NON il #0A0E14 del mockup; i ritocchi
+   dove i token invertiti non bastano stanno nel modulo locale
+   (darkBand). Il giallo #FFE24A del mockup resta fuori: è il colore
+   dei promemoria redazionali.
 
    I contenuti NON sono scritti qui: arrivano dal documento Sanity
    `page` con pageId `stage-placement`, già allineato al mockup e già
@@ -257,7 +260,7 @@ export default async function StagePlacementPage({
   const sezione = t.nav.academy
 
   /* l'anno accademico per la coda dell'indice: dalla striscia in cima
-     al sito, senza una stringa nuova («iscrizioni aperte · a.a. 2026/27») */
+     al sito, senza una stringa nuova («iscrizioni aperte · A.A. 2026/27») */
   const year = t.nav.topbar.middle.split('·').pop()?.trim() ?? ''
 
   /* le voci dell'indice: solo quelle che hanno davvero una sezione */
@@ -325,25 +328,41 @@ export default async function StagePlacementPage({
           {/* ————— i numeri: 83% / 20 / 27 come contatori, cifra in
               grande, sotto la riga di testo e — per l'83% — la fonte.
               Il promemoria giallo del mockup «verificare base del dato»
-              è una nota interna: non si pubblica. ————— */}
-          <CounterRow className={styles.stats}>
-            {d.stats.map((s) => (
-              <div key={s.label} className={styles.stat}>
-                <Counter
-                  value={s.value}
-                  suffix={s.suffix}
-                  label={s.label}
-                  formatLocale={locale === 'en' ? 'en-GB' : 'it-IT'}
-                  className={styles.counter}
-                />
-                {s.source && (
-                  <span className={styles.source}>{s.source}</span>
-                )}
-              </div>
-            ))}
-          </CounterRow>
+              è una nota interna: non si pubblica.
+              Entrano in coda alla scaletta della testata (back 0 →
+              kicker 60 → titolo 120 → lede 180 → cta 220): ogni cella
+              porta la sua `rv` e il gruppo le rivela, col ritardo a
+              scaletta via --rvd come nelle sezioni qui sotto. ————— */}
+          <RevealGroup>
+            <CounterRow className={styles.stats}>
+              {d.stats.map((s, i) => (
+                <div
+                  key={s.label}
+                  className={`rv ${styles.stat}`}
+                  style={rvd(280 + i * 80)}
+                >
+                  <Counter
+                    value={s.value}
+                    suffix={s.suffix}
+                    label={s.label}
+                    formatLocale={locale === 'en' ? 'en-GB' : 'it-IT'}
+                    className={styles.counter}
+                  />
+                  {s.source && (
+                    <span className={styles.source}>{s.source}</span>
+                  )}
+                </div>
+              ))}
+            </CounterRow>
+          </RevealGroup>
         </header>
 
+        {/* ————— fascia nera: da qui in giù la pagina vive su nero —————
+            l'hero coi numeri resta nell'azzurro del flood; il resto sta
+            in un'unica fascia scheme-dark (stessa tecnica della darkBand
+            dell'indice academy): i token invertiti portano testi e fili
+            a chiaro, gli aggiusti stanno nel modulo locale */}
+        <div className={`scheme-dark ${styles.darkBand}`}>
         {/* ————— indice sticky: la pagina è lunga e va letta per prove ————— */}
         {indexItems.length > 1 && (
           <UniSubnav
@@ -360,7 +379,8 @@ export default async function StagePlacementPage({
             tre carte bianche anno per anno ———————————————— */}
         {percorso.length > 0 && (
           <>
-            <Rule left="01" right={kickerOf('percorso')} />
+            {/* niente filetto "01 — il percorso": la voce sta già nello
+                scroller sticky qui sopra */}
             <section className={`wrap ${det.sez}`} id="percorso">
               <SectionHeader
                 title={titleOf('percorso')}
@@ -545,7 +565,12 @@ export default async function StagePlacementPage({
                     ))}
                   </div>
                   {reteCtas.length > 0 && (
-                    <Button href={hrefOf(locale, reteCtas[0].href)}>
+                    /* sul nero il tasto pieno è bianco, non petrolio
+                       (che sparirebbe): override scheme-dark del variant */
+                    <Button
+                      variant="azzurro"
+                      href={hrefOf(locale, reteCtas[0].href)}
+                    >
                       {reteCtas[0].label}
                     </Button>
                   )}
@@ -555,7 +580,60 @@ export default async function StagePlacementPage({
           </>
         )}
 
-        {/* ———————————————— 05 domande · azzurro
+        {/* ———————————————— open day · PRIMA delle domande (ordine
+            voluto dal cliente): videino a sinistra, testo a destra ———————— */}
+        {sez('open-day') && (
+          <div className={`scheme-dark ${det.dark}`} id="open-day">
+            <section className={`wrap ${det.sez} ${styles.endGrid}`}>
+              <Reveal className={styles.endMedia}>
+                <BgVideo
+                  src="/video/stage-open-day.mp4"
+                  className={styles.endVideo}
+                />
+              </Reveal>
+              <div>
+                <Reveal as="span" className={`mono ${styles.endKicker}`}>
+                  {kickerOf('open-day')}
+                </Reveal>
+                <Reveal
+                  as="h2"
+                  className={`display-thin ${det.ctaTitle}`}
+                  delay={60}
+                >
+                  {titleOf('open-day')}
+                </Reveal>
+                {leadOf(openDay).map((p) => (
+                  <Reveal key={p} as="p" className={det.ctaText} delay={120}>
+                    {p}
+                  </Reveal>
+                ))}
+                <Reveal className={det.ctaRow} delay={180}>
+                  {openDayCtas.map((c, i) =>
+                    i === 0 ? (
+                      <Button
+                        key={c.href}
+                        variant="azzurro"
+                        href={hrefOf(locale, c.href)}
+                      >
+                        {c.label}
+                      </Button>
+                    ) : (
+                      <ArrowLink
+                        key={c.href}
+                        href={hrefOf(locale, c.href)}
+                        dir="e"
+                      >
+                        {c.label}
+                      </ArrowLink>
+                    )
+                  )}
+                </Reveal>
+              </div>
+            </section>
+          </div>
+        )}
+
+        {/* ———————————————— 05 domande · in chiusura
             solo quelle con una risposta vera: le due «da confermare
             con il Career Service» del mockup non si pubblicano ———————— */}
         {faq.length > 0 && (
@@ -569,51 +647,7 @@ export default async function StagePlacementPage({
             </section>
           </>
         )}
-
-        {/* ———————————————— chiusura · FASCIA NERA
-            UNA sola azione, l'open day (nota dello sviluppatore) ———————— */}
-        {sez('open-day') && (
-          <div className={`scheme-dark ${det.dark}`} id="open-day">
-            <section className={`wrap ${det.sez}`}>
-              <Reveal as="span" className={`mono ${styles.endKicker}`}>
-                {kickerOf('open-day')}
-              </Reveal>
-              <Reveal
-                as="h2"
-                className={`display-thin ${det.ctaTitle}`}
-                delay={60}
-              >
-                {titleOf('open-day')}
-              </Reveal>
-              {leadOf(openDay).map((p) => (
-                <Reveal key={p} as="p" className={det.ctaText} delay={120}>
-                  {p}
-                </Reveal>
-              ))}
-              <Reveal className={det.ctaRow} delay={180}>
-                {openDayCtas.map((c, i) =>
-                  i === 0 ? (
-                    <Button
-                      key={c.href}
-                      variant="azzurro"
-                      href={hrefOf(locale, c.href)}
-                    >
-                      {c.label}
-                    </Button>
-                  ) : (
-                    <ArrowLink
-                      key={c.href}
-                      href={hrefOf(locale, c.href)}
-                      dir="e"
-                    >
-                      {c.label}
-                    </ArrowLink>
-                  )
-                )}
-              </Reveal>
-            </section>
-          </div>
-        )}
+        </div>
       </main>
     </SiteChrome>
   )
