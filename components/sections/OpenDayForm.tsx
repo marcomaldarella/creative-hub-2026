@@ -119,6 +119,7 @@ export function OpenDayForm({
         checked={checked}
         onChange={onPick}
         className={styles.srIn}
+        required
       />
       <span className={styles.dot} aria-hidden="true" />
       <span>{label}</span>
@@ -160,6 +161,7 @@ export function OpenDayForm({
             value={name}
             onChange={(e) => setName(e.target.value)}
             autoComplete="name"
+            required
             className={errName ? styles.errIn : undefined}
           />
         </label>
@@ -170,6 +172,7 @@ export function OpenDayForm({
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
             autoComplete="tel"
+            required
             className={errPhone ? styles.errIn : undefined}
           />
         </label>

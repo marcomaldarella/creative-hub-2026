@@ -355,3 +355,10 @@
   clip-path: inset(50%);
   white-space: nowrap;
 }
+
+/* a campi completi il tasto si accende: bianco, testo nero */
+.card:valid .go {
+  background: #ffffff;
+  border-color: #ffffff;
+  color: #0a0a0a;
+}

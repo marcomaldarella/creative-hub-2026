@@ -41,7 +41,7 @@
   color: var(--fg);
   background: color-mix(in srgb, var(--fg) 5%, transparent);
   border: 1px solid var(--line);
-  border-radius: 10px;
+  border-radius: 0;
   padding: 10px 12px;
   width: 100%;
   transition: border-color 0.15s ease;
@@ -144,4 +144,11 @@
 /* campo che occupa l'intera riga della griglia a due colonne */
 .full {
   grid-column: 1 / -1;
+}
+
+/* a campi completi il tasto si accende: bianco, testo nero */
+.form:valid .send {
+  background: #ffffff;
+  border-color: #ffffff;
+  color: #0a0a0a;
 }

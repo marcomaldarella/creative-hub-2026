@@ -8,7 +8,7 @@
    si invertono da soli */
 .card {
   border: 1px solid #000000;
-  border-radius: 16px;
+  border-radius: 0;
   padding: clamp(20px, 2.6vw, 32px);
   background: #000000;
   color: #fafafa;
@@ -59,7 +59,7 @@
   gap: 12px;
   padding: 13px 16px;
   border: 1px solid var(--line);
-  border-radius: 10px;
+  border-radius: 0;
   font-size: 15px;
   letter-spacing: -0.01em;
   cursor: pointer;
@@ -153,7 +153,7 @@
   width: 100%;
   padding: 12px 14px;
   border: 1px solid var(--line);
-  border-radius: 10px;
+  border-radius: 0;
   background: transparent;
   color: inherit;
   font: inherit;
@@ -191,7 +191,7 @@
   width: 100%;
   padding: 15px 18px;
   border: 1px solid #0a0a0a;
-  border-radius: 10px;
+  border-radius: 0;
   background: #0a0a0a;
   color: #fff;
   font: inherit;
@@ -239,7 +239,7 @@
   margin-top: 14px;
   padding: 12px 14px;
   border: 1px solid var(--line);
-  border-radius: 10px;
+  border-radius: 0;
   font-size: 14px;
 }
 
@@ -248,4 +248,12 @@
   .row2 {
     grid-template-columns: 1fr;
   }
+}
+
+/* a campi completi (radio scelte, nome e telefono) il tasto si
+   accende: bianco, testo nero */
+.card:valid .submit {
+  background: #ffffff;
+  border-color: #ffffff;
+  color: #0a0a0a;
 }
