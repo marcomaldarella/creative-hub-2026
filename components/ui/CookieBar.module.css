@@ -1,0 +1,85 @@
+/* barra cookie alla vercel: full width, incollata in fondo al viewport,
+   sempre scura (non segue il tema: è un avviso, non una sezione) */
+.bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 180; /* sotto il velo della transizione (200), sopra il resto */
+  background: #0f0f0f;
+  color: #fafafa;
+  border-top: 1px solid #2a2a2a;
+  box-shadow: 0 -16px 40px rgba(0, 0, 0, 0.35);
+  animation: cookieIn 0.3s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+@keyframes cookieIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bar {
+    animation: none;
+  }
+}
+
+.in {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 14px var(--pad);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.text {
+  font-size: 13.5px;
+  line-height: 1.45;
+  letter-spacing: -0.01em;
+  color: #b3b3b3;
+  max-width: 92ch;
+}
+
+.link {
+  color: #fafafa;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.15s ease;
+}
+
+.link:hover {
+  color: var(--azzurro);
+}
+
+/* l'ok è la pill bianca delle fasce scure */
+.ok {
+  flex-shrink: 0;
+  padding: 8px 22px;
+  border-radius: var(--radius-pill);
+  background: #ffffff;
+  color: #0a0a0a;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  transition: background 0.15s ease;
+}
+
+.ok:hover {
+  background: #e6e6e6;
+}
+
+@media (max-width: 640px) {
+  .in {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}

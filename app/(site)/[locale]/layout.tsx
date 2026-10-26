@@ -2,8 +2,10 @@ import type { Metadata, Viewport } from 'next'
 import { notFound } from 'next/navigation'
 import { Archivo, Geist } from 'next/font/google'
 import localFont from 'next/font/local'
-import { locales, isLocale } from '@/lib/i18n/config'
+import { locales, isLocale, localeHref } from '@/lib/i18n/config'
+import { getDictionary } from '@/lib/i18n/dictionaries'
 import { PageTransition } from '@/components/sections/PageTransition'
+import { CookieBar } from '@/components/ui/CookieBar'
 import '@/app/globals.css'
 
 const display = Archivo({
@@ -109,6 +111,7 @@ export default async function SiteLayout({
 }) {
   const { locale } = await params
   if (!isLocale(locale)) notFound()
+  const t = getDictionary(locale)
 
   return (
     <html lang={locale}>
@@ -125,6 +128,13 @@ export default async function SiteLayout({
         {/* transizione di pagina: tendine dei tre colori brand + nera
             col logotipo (vedi PageTransition) */}
         <PageTransition>{children}</PageTransition>
+        {/* barra cookie alla vercel: compare finché manca l'ok in
+            localStorage, poi si smonta (regola iOS sui fixed) */}
+        <CookieBar
+          labels={t.cookieBar}
+          privacyHref={localeHref(locale, '/privacy')}
+          cookieHref={localeHref(locale, '/cookie')}
+        />
       </body>
     </html>
   )

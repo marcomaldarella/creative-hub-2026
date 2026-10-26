@@ -1,4 +1,10 @@
 {
+  "cookieBar": {
+    "text": "This site only uses technical cookies: no profiling, no third-party tracking.",
+    "privacy": "Privacy policy",
+    "cookie": "Cookie policy",
+    "ok": "Ok"
+  },
   "nav": {
     "academy": "Academy",
     "studio": "Studio",
