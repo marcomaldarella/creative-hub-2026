@@ -22,10 +22,10 @@
         "desc": "Corsi di laurea, master e alta formazione in musica, sound, multimedia e visual. E corsi custom — per strumento, per codice, per skill — su tempi tuoi.",
         "items": [
           "Corsi universitari",
-          "Formazione finanziata",
-          "Stage & placement",
           "Corsi custom",
+          "Formazione finanziata",
           "Open day",
+          "Stage & placement",
           "Servizi studenti"
         ]
       },
@@ -80,7 +80,7 @@
     },
     "topbar": {
       "left": "est.1999 · bologna",
-      "middle": "iscrizioni aperte · A.A. 2026/27",
+      "middle": "iscrizioni aperte · A.A. 27/28",
       "cta": "Prenota l'open day"
     },
     "home": "Home"
@@ -312,12 +312,12 @@
     }
   },
   "academy": {
-    "kicker": "Academy · Iscrizioni aperte · A.A. 2026/27",
+    "kicker": "Academy · Iscrizioni aperte · A.A. 27/28",
     "titleLines": [
       "Accademia di musica, produzione",
       "e tecnico del suono a Bologna."
     ],
-    "lede": "Corsi universitari — Bachelor of Arts, Bachelor of Science e Master of Music — in musica, produzione cinematografica e videomaking. Sei corsi di primo ciclo, tre Master, venti posti per corso.",
+    "lede": "Corsi universitari — Bachelor of Arts, Bachelor of Science e Master of Music — in musica, produzione cinematografica e videomaking. Sei corsi triennali, tre Master, venti posti per corso.",
     "categoryLabel": "filtra per categoria",
     "empty": "nessun corso in questa categoria.",
     "teachersKicker": "i docenti",
@@ -464,7 +464,7 @@
       "percorso."
     ],
     "aroundTitle": "Quello che c'è\noltre l'aula.",
-    "exploreCardMeta": "A.A. 2026/27",
+    "exploreCardMeta": "A.A. 27/28",
     "exploreFundedSubs": [
       "Composizione e produzione digitale per musica, media e live.",
       "Scrittura, interpretazione e identità vocale, dal provino al palco.",
@@ -1167,7 +1167,7 @@
     "inBrief": "in breve",
     "corsiUniversitari": {
       "title": "Bachelor of Arts. Bachelor of Science. In musica, sound e visual.",
-      "lede": "Titoli universitari internazionali di primo ciclo e Master of Music. Venti posti per corso, un'ora di lezione individuale a settimana.",
+      "lede": "Titoli universitari internazionali triennali e Master of Music. Venti posti per corso, un'ora di lezione individuale a settimana.",
       "points": [
         "Performance & songwriting · urban music production · music technology",
         "Film production · music business · creative musicianship",
@@ -1600,7 +1600,7 @@
     }
   },
   "uni": {
-    "kicker": "Academy · corsi universitari · A.A. 2026/27",
+    "kicker": "Academy · corsi universitari · A.A. 27/28",
     "title": "Corsi universitari di musica, produzione e tecnico del suono a Bologna.",
     "lede": "Bachelor of Arts, Bachelor of Science, Master of Music. Titoli riconosciuti a livello internazionale. Sei corsi, tre Master, venti posti all'anno.",
     "ctaOpenDay": "Prenota l'open day",
@@ -1620,7 +1620,7 @@
       "areaLabel": "area",
       "all": "Tutti",
       "allAreas": "Tutte",
-      "primo": "Primo ciclo",
+      "primo": "Triennale",
       "master": "Master",
       "areas": {
         "musica": "Musica",
@@ -1632,8 +1632,8 @@
       "countMany": "corsi"
     },
     "cycles": {
-      "primo": "primo ciclo · bachelor · tre anni",
-      "master": "secondo ciclo · master of music · due anni"
+      "primo": "triennale · bachelor · tre anni",
+      "master": "biennale · master of music · due anni"
     },
     "cards": {
       "urban-music-production": {
@@ -1700,7 +1700,7 @@
       "film-production": {
         "ciclo": "primo",
         "area": "visual",
-        "areaLabel": "cinema",
+        "areaLabel": "cine audiovisivo",
         "tag": "bachelor",
         "desc": "Corso universitario di produzione cinematografica e videomaking. Regia, ripresa, montaggio e post-produzione.",
         "meta": [
@@ -1781,17 +1781,17 @@
     "degree": {
       "n": "03 / il titolo",
       "title": "Un titolo universitario internazionale.\nNon un attestato.",
-      "lead": "I Bachelor e i Master sono conferiti in partnership con Coventry University. Studi a Bologna, ottieni un titolo britannico di primo o secondo ciclo.",
+      "lead": "I Bachelor e i Master sono conferiti in partnership con Coventry University. Studi a Bologna, ottieni un titolo britannico triennale o biennale.",
       "cols": [
         {
-          "k": "primo ciclo",
+          "k": "triennale",
           "title": "Bachelor of Arts\nBachelor of Science",
           "text": "Tre anni, 180 crediti. È il primo livello universitario del sistema europeo: dà accesso al lavoro e ai Master."
         },
         {
-          "k": "secondo ciclo",
+          "k": "biennale",
           "title": "Master of Music",
-          "text": "Per chi ha già un titolo di primo ciclo o un'esperienza professionale equivalente. Specializzazione su produzione, composizione o direzione."
+          "text": "Per chi ha già un titolo triennale o un'esperienza professionale equivalente. Specializzazione su produzione, composizione o direzione."
         },
         {
           "k": "in italia e all'estero",
@@ -1867,7 +1867,7 @@
       "items": [
         {
           "q": "Che differenza c'è tra un Bachelor e una laurea italiana?",
-          "a": "Il Bachelor of Arts o Bachelor of Science è un titolo accademico estero di primo ciclo, livello EQF 6. Fuori dall'Italia è immediatamente spendibile. Per l'Italia ti affianchiamo nell'ottenimento della Dichiarazione di Valore."
+          "a": "Il Bachelor of Arts o Bachelor of Science è un titolo accademico estero triennale, livello EQF 6. Fuori dall'Italia è immediatamente spendibile. Per l'Italia ti affianchiamo nell'ottenimento della Dichiarazione di Valore."
         },
         {
           "q": "Come funziona l'ammissione?",

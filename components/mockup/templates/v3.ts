@@ -966,15 +966,15 @@ export const html = `
 <a class="marquee-wrap" data-contact data-origine="marquee" data-intento="candidatura" href="#" aria-label="Candidati ora">
   <div class="marquee-track">
     <div class="marquee-group">
-      <div class="mq-unit"><span>Candidature aperte per l'A.A. 2026/27</span><span class="pill">Candidati ora</span></div>
+      <div class="mq-unit"><span>Candidature aperte per l'A.A. 27/28</span><span class="pill">Candidati ora</span></div>
       <div class="mq-unit"><span>Venti posti all'anno</span><span class="pill">Candidati ora</span></div>
-      <div class="mq-unit"><span>Candidature aperte per l'A.A. 2026/27</span><span class="pill">Candidati ora</span></div>
+      <div class="mq-unit"><span>Candidature aperte per l'A.A. 27/28</span><span class="pill">Candidati ora</span></div>
       <div class="mq-unit"><span>Venti posti all'anno</span><span class="pill">Candidati ora</span></div>
     </div>
     <div class="marquee-group" aria-hidden="true">
-      <div class="mq-unit"><span>Candidature aperte per l'A.A. 2026/27</span><span class="pill">Candidati ora</span></div>
+      <div class="mq-unit"><span>Candidature aperte per l'A.A. 27/28</span><span class="pill">Candidati ora</span></div>
       <div class="mq-unit"><span>Venti posti all'anno</span><span class="pill">Candidati ora</span></div>
-      <div class="mq-unit"><span>Candidature aperte per l'A.A. 2026/27</span><span class="pill">Candidati ora</span></div>
+      <div class="mq-unit"><span>Candidature aperte per l'A.A. 27/28</span><span class="pill">Candidati ora</span></div>
       <div class="mq-unit"><span>Venti posti all'anno</span><span class="pill">Candidati ora</span></div>
     </div>
   </div>

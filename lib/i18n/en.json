@@ -80,7 +80,7 @@
     },
     "topbar": {
       "left": "est.1999 · bologna",
-      "middle": "enrolment open · A.Y. 2026/27",
+      "middle": "enrolment open · A.Y. 27/28",
       "cta": "Book the open day"
     },
     "home": "Home"
@@ -312,7 +312,7 @@
     }
   },
   "academy": {
-    "kicker": "Academy · Enrolment open · A.Y. 2026/27",
+    "kicker": "Academy · Enrolment open · A.Y. 27/28",
     "titleLines": [
       "Academy of music, production",
       "and sound engineering in Bologna."
@@ -464,7 +464,7 @@
       "path."
     ],
     "aroundTitle": "What's there\nbeyond the classroom.",
-    "exploreCardMeta": "A.Y. 2026/27",
+    "exploreCardMeta": "A.Y. 27/28",
     "exploreFundedSubs": [
       "Digital composition and production for music, media and live.",
       "Writing, performance and vocal identity, from demo to stage.",
@@ -1600,7 +1600,7 @@
     }
   },
   "uni": {
-    "kicker": "Academy · university programmes · A.Y. 2026/27",
+    "kicker": "Academy · university programmes · A.Y. 27/28",
     "title": "University programmes in music, production and sound engineering in Bologna.",
     "lede": "Bachelor of Arts, Bachelor of Science, Master of Music. Internationally recognised degrees. Six programmes, three Masters, twenty places a year.",
     "ctaOpenDay": "Book the open day",
@@ -1620,7 +1620,7 @@
       "areaLabel": "area",
       "all": "All",
       "allAreas": "All",
-      "primo": "First cycle",
+      "primo": "Three-year",
       "master": "Masters",
       "areas": {
         "musica": "Music",
@@ -1632,8 +1632,8 @@
       "countMany": "courses"
     },
     "cycles": {
-      "primo": "first cycle · bachelor · three years",
-      "master": "second cycle · master of music · two years"
+      "primo": "three-year · bachelor · three years",
+      "master": "two-year · master of music · two years"
     },
     "cards": {
       "urban-music-production": {
@@ -1700,7 +1700,7 @@
       "film-production": {
         "ciclo": "primo",
         "area": "visual",
-        "areaLabel": "film",
+        "areaLabel": "film & audiovisual",
         "tag": "bachelor",
         "desc": "University programme in film production and videomaking. Directing, shooting, editing and post-production.",
         "meta": [
@@ -1781,17 +1781,17 @@
     "degree": {
       "n": "03 / the degree",
       "title": "An international university degree.\nNot a certificate.",
-      "lead": "Bachelors and Masters are awarded in partnership with Coventry University. You study in Bologna and earn a British first- or second-cycle degree.",
+      "lead": "Bachelors and Masters are awarded in partnership with Coventry University. You study in Bologna and earn a British three-year or two-year degree.",
       "cols": [
         {
-          "k": "first cycle",
+          "k": "three-year",
           "title": "Bachelor of Arts\nBachelor of Science",
           "text": "Three years, 180 credits. It is the first university level of the European system: it opens the door to work and to Masters."
         },
         {
-          "k": "second cycle",
+          "k": "two-year",
           "title": "Master of Music",
-          "text": "For those who already hold a first-cycle degree or equivalent professional experience. Specialise in production, composition or direction."
+          "text": "For those who already hold a three-year degree or equivalent professional experience. Specialise in production, composition or direction."
         },
         {
           "k": "in italy and abroad",
@@ -1867,7 +1867,7 @@
       "items": [
         {
           "q": "What's the difference between a Bachelor and an Italian degree?",
-          "a": "The Bachelor of Arts or Bachelor of Science is a foreign first-cycle academic degree, EQF level 6. Outside Italy it is immediately spendable. For Italy, we support you in obtaining the Dichiarazione di Valore."
+          "a": "The Bachelor of Arts or Bachelor of Science is a foreign three-year academic degree, EQF level 6. Outside Italy it is immediately spendable. For Italy, we support you in obtaining the Dichiarazione di Valore."
         },
         {
           "q": "How does admission work?",
