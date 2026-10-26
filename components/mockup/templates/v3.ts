@@ -842,6 +842,11 @@ export const css = `
      pill dei loghi tratteggiate in attesa degli SVG ufficiali, stessa
      grammatica dei finLogos di innovazione ————— */
   .fund-logos{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px;}
+  /* targa del lockup ufficiale: bianco letterale su template dark — i
+     loghi istituzionali restano a colori originali su fondo chiaro */
+  .fund-plate{display:inline-flex;align-items:center;background:#fff;
+    padding:12px 16px;max-width:100%;}
+  .fund-lockup{display:block;width:520px;max-width:100%;height:auto;}
   .fund-logo{font-size:12px;font-weight:600;letter-spacing:-.01em;padding:8px 14px;
     border:1px dashed color-mix(in srgb,var(--white) 28%,transparent);
     border-radius:8px;color:var(--txt-2);}
@@ -961,15 +966,15 @@ export const html = `
 <a class="marquee-wrap" data-contact data-origine="marquee" data-intento="candidatura" href="#" aria-label="Candidati ora">
   <div class="marquee-track">
     <div class="marquee-group">
-      <div class="mq-unit"><span>Candidature aperte per l'a.a. 2026/27</span><span class="pill">Candidati ora</span></div>
+      <div class="mq-unit"><span>Candidature aperte per l'A.A. 2026/27</span><span class="pill">Candidati ora</span></div>
       <div class="mq-unit"><span>Venti posti all'anno</span><span class="pill">Candidati ora</span></div>
-      <div class="mq-unit"><span>Candidature aperte per l'a.a. 2026/27</span><span class="pill">Candidati ora</span></div>
+      <div class="mq-unit"><span>Candidature aperte per l'A.A. 2026/27</span><span class="pill">Candidati ora</span></div>
       <div class="mq-unit"><span>Venti posti all'anno</span><span class="pill">Candidati ora</span></div>
     </div>
     <div class="marquee-group" aria-hidden="true">
-      <div class="mq-unit"><span>Candidature aperte per l'a.a. 2026/27</span><span class="pill">Candidati ora</span></div>
+      <div class="mq-unit"><span>Candidature aperte per l'A.A. 2026/27</span><span class="pill">Candidati ora</span></div>
       <div class="mq-unit"><span>Venti posti all'anno</span><span class="pill">Candidati ora</span></div>
-      <div class="mq-unit"><span>Candidature aperte per l'a.a. 2026/27</span><span class="pill">Candidati ora</span></div>
+      <div class="mq-unit"><span>Candidature aperte per l'A.A. 2026/27</span><span class="pill">Candidati ora</span></div>
       <div class="mq-unit"><span>Venti posti all'anno</span><span class="pill">Candidati ora</span></div>
     </div>
   </div>
@@ -1472,8 +1477,9 @@ export type CourseHtmlData = {
   network?: CourseEntryData[];
   faq?: CourseEntryData[];
   /* fascia del cofinanziamento FSE+ (obbligo normativo sui corsi
-     finanziati): pill dei loghi + dicitura per esteso */
-  funding?: { logos: string[]; text: string };
+     finanziati): lockup ufficiale dei loghi (path che iniziano per "/",
+     su targa chiara) o pill testuali di fallback + dicitura per esteso */
+  funding?: { logos: string[]; logosAlt?: string; text: string };
   /* corsi finanziati: il template nasce dalla scheda Urban (triennio a
      pagamento). Con questo flag le sezioni che valgono solo per quel
      corso — studio di registrazione, vita in Academy, manifesto, rette,
@@ -1850,8 +1856,13 @@ ${accordionHtml(d.enrollment.items)}
   }
 
   if (d.funding) {
+    const alt = e(d.funding.logosAlt ?? '');
     const pills = d.funding.logos
-      .map((l) => `<span class="fund-logo">${e(l)}</span>`)
+      .map((l) =>
+        l.startsWith('/')
+          ? `<span class="fund-plate"><img class="fund-lockup" src="${e(l)}" alt="${alt}" loading="lazy" decoding="async"></span>`
+          : `<span class="fund-logo">${e(l)}</span>`,
+      )
       .join('');
     coda.push(`<div class="sezRule"><span></span><i></i></div>
 

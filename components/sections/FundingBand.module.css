@@ -1,5 +1,6 @@
-/* fascia FSE+: filo sopra, pill dei loghi (tratteggiate in attesa degli
-   SVG ufficiali, come i finLogos di cte-cobo) e dicitura compatta */
+/* fascia FSE+: filo sopra, lockup ufficiale dei quattro loghi su targa
+   chiara dedicata (colori originali, mai ricolorati: la targa bianca
+   letterale li tiene leggibili anche in tema dark) e dicitura compatta */
 
 .band {
   padding-block: clamp(28px, 3.5vw, 44px);
@@ -14,13 +15,32 @@
   margin-bottom: 14px;
 }
 
+/* targa del lockup: bianco LETTERALE, non var(--bg) — i loghi
+   istituzionali vanno su fondo chiaro anche quando la pagina è scura */
+.plate {
+  display: inline-flex;
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid var(--line);
+  padding: 12px 16px;
+  max-width: 100%;
+}
+
+.lockup {
+  display: block;
+  width: 520px;
+  max-width: 100%;
+  height: auto;
+}
+
+/* pill testuale: fallback quando una voce non è un path immagine */
 .logo {
   font-size: 12px;
   font-weight: 600;
   letter-spacing: -0.01em;
   padding: 8px 14px;
   border: 1px dashed var(--line);
-  border-radius: 8px;
+  border-radius: 0;
   color: var(--fg-2);
 }
 

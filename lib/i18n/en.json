@@ -3,7 +3,7 @@
     "academy": "Academy",
     "studio": "Studio",
     "coworking": "Coworking",
-    "innovation": "Innovation",
+    "innovation": "Companies & startups",
     "magazine": "Editorial",
     "about": "About",
     "book": "Book",
@@ -38,7 +38,6 @@
         "desc": "Coworking · rooms · events in the heart of Bologna.",
         "items": [
           "Coworking",
-          "Recording studio",
           "Book a space",
           "Rooms & events",
           "Metaverse"
@@ -75,8 +74,8 @@
     },
     "topbar": {
       "left": "est.1999 · bologna",
-      "middle": "enrolment open · a.y. 2026/27",
-      "cta": "book the open day"
+      "middle": "enrolment open · A.Y. 2026/27",
+      "cta": "Book the open day"
     },
     "home": "Home"
   },
@@ -85,16 +84,16 @@
     "coords": "Est. 1999\nBologna 44.4929°n, 11.3429°e",
     "lede": "Sound, image, code. All in one building.",
     "tagline": "inspire, innovate, excel.",
-    "discover": "discover the hub",
+    "discover": "Discover the hub",
     "caption": "A music and creative arts academy, a recording studio and co-working spaces.",
     "captionSub": "Bologna, since 1999."
   },
   "common": {
     "readMore": "read",
     "viewAll": "view all",
-    "all": "all",
+    "all": "All",
     "bookOn": "book on the shop",
-    "backTo": "back to",
+    "backTo": "Back to",
     "teachers": "teachers",
     "courses": "courses",
     "articles": "articles",
@@ -171,7 +170,7 @@
     "magazineAll": "all articles",
     "opendayTitleLine1": "An afternoon",
     "opendayTitleLine2": "inside the hub.",
-    "opendayCta": "book your spot",
+    "opendayCta": "Book your spot",
     "methodKicker": "02 — method",
     "methodEyebrow": "method",
     "methodTitle": "You learn inside the industry.\nNot next to it.",
@@ -307,7 +306,7 @@
     }
   },
   "academy": {
-    "kicker": "Academy · Enrolment open · A.y. 2026/27",
+    "kicker": "Academy · Enrolment open · A.Y. 2026/27",
     "titleLines": [
       "Academy of music, production",
       "and sound engineering in Bologna."
@@ -327,11 +326,11 @@
     "courseInfo": "course details",
     "typeLabel": "filter by type",
     "types": {
-      "magistrale": "master's",
-      "triennio": "bachelor's",
-      "finanziato": "funded",
-      "gratuito": "free",
-      "custom": "custom"
+      "magistrale": "Master's",
+      "triennio": "Bachelor's",
+      "finanziato": "Funded",
+      "gratuito": "Free",
+      "custom": "Custom"
     },
     "courseGallery": "gallery",
     "joinUs": "join us",
@@ -407,10 +406,12 @@
       "Angela Madonia",
       "Stefania Martin"
     ],
+    "teachersAll": "all teachers",
+    "teachersLess": "show fewer",
     "inMemoriaTitle": "In memoriam",
     "inMemoriaText": "Bologna also counted Celso Valli among its teachers, the arranger and producer behind the sound of Vasco Rossi, Laura Pausini, Mina and Eros Ramazzotti. He passed away in 2025. What he taught here still shapes the way the Academy works today.",
-    "heroCtaPrimary": "book the open day",
-    "heroCtaSecondary": "ask for information",
+    "heroCtaPrimary": "Book the open day",
+    "heroCtaSecondary": "Ask for information",
     "exploreKicker": "the full offer",
     "exploreTitle": "Everything you can learn here.",
     "exploreLead": "University, tailor-made and funded courses across music, sound, film and business. Open a title to see the course.",
@@ -438,12 +439,12 @@
       {
         "title": "Open day",
         "text": "An afternoon inside the hub, parents welcome too.",
-        "cta": "book your place"
+        "cta": "Book your place"
       },
       {
         "title": "Guidance interview",
         "text": "Half an hour with a tutor, on site or online, to find the right path for you.",
-        "cta": "book an interview"
+        "cta": "Book an interview"
       },
       {
         "title": "Call us",
@@ -457,7 +458,7 @@
       "path."
     ],
     "aroundTitle": "What's there\nbeyond the classroom.",
-    "exploreCardMeta": "a.y. 2026/27",
+    "exploreCardMeta": "A.Y. 2026/27",
     "exploreFundedSubs": [
       "Digital composition and production for music, media and live.",
       "Writing, performance and vocal identity, from demo to stage.",
@@ -489,7 +490,7 @@
     "cardCta": "discover the course"
   },
   "studios": {
-    "kicker": "studio · roveri district, bologna",
+    "kicker": "Studio · roveri district, bologna",
     "title": "Recording studio in Bologna.\nSSL control room, Dolby Atmos, a 60 m² live room.",
     "lede": "Creative Hub SSL Recording Studio: 120 m² of tracking and control rooms, for artists, bands, productions and companies. From the idea to the master.",
     "spacesKicker": "the spaces",
@@ -666,7 +667,7 @@
     "heroCta": "Tell us about your project"
   },
   "coworking": {
-    "kicker": "coworking · roveri district, bologna",
+    "kicker": "Coworking · roveri district, bologna",
     "title": "Coworking in Bologna.\nA space that matches your work.",
     "lede": "A bright open space inside a 2,000 m² hub for the creative industries. At the next desk there may be a designer, a startup or an agency: at break time you all meet in the banano room.",
     "spacesKicker": "the plans",
@@ -674,7 +675,7 @@
     "ctaKicker": "book",
     "ctaTitle": "Pick your plan.",
     "ctaText": "From €9.50 a day. We confirm within one working day.",
-    "ctaDayPass": "book a day pass",
+    "ctaDayPass": "Book a day pass",
     "bananoKicker": "banano room",
     "bananoTitle": "The banano room.",
     "bananoText": "The shared heart of the coworking space: communal tables, sofas and warm light for breaks, informal meetings and small events.",
@@ -720,7 +721,7 @@
       "15 minutes from Bologna Centrale, TPER Bologna–Portomaggiore line",
       "051 631 3706, ext. 1 — Mon–Fri 11–13 and 14–18"
     ],
-    "galleryCta": "see all photos",
+    "galleryCta": "See all photos",
     "facts": [
       "Roveri district, Bologna",
       "FTTH fibre",
@@ -844,11 +845,11 @@
     ]
   },
   "prenota": {
-    "kicker": "book your space",
+    "kicker": "Book your space",
     "title": "Book your space at Creative Hub.",
     "lede": "Choose what you need to do, the right space with its price, and leave us your contacts: we take it from there.",
     "metaDesc": "Day passes, desks, offices, meeting rooms and event spaces, with prices. Book in three steps at Creative Hub, Roveri district, Bologna.",
-    "back": "back to coworking",
+    "back": "Back to coworking",
     "facts": [
       "clear prices",
       "confirmation within one working day",
@@ -987,7 +988,7 @@
   "innovation": {
     "metaTitle": "Incubator and accelerator for creative startups in Bologna | Creative Hub",
     "metaDesc": "Free incubation, acceleration and business services for music, audiovisual, immersive tech and AI. CreaTech Venture Club, open calls and CTE COBO.",
-    "kicker": "innovation · creative hub bologna",
+    "kicker": "Innovation · creative hub bologna",
     "title": "Creative businesses are born here.",
     "lede": "Incubation, acceleration and business services for music, audiovisual, immersive technologies and artificial intelligence. Inside a hub that already has studios, classrooms and talent.",
     "heroCta": "Find your path",
@@ -1000,7 +1001,7 @@
         "tag": "you have an idea or a startup",
         "title": "Incubation & acceleration",
         "text": "CreaTech Venture Club: a free nine-month programme for startups and professionals in the cultural and creative industries. Mentoring, coworking, training and a Pitch Day in front of investors.",
-        "badge": "applications open",
+        "badge": "Applications open",
         "cta": "discover the programme",
         "href": "/innovazione/incubazione-accelerazione"
       },
@@ -1139,7 +1140,7 @@
     "colSocial": "social"
   },
   "magazine": {
-    "kicker": "editorial",
+    "kicker": "Editorial",
     "title": "The trade, told by those who do it.",
     "lede": "Four strands. One industry.",
     "metaTitle": "editorial",
@@ -1148,13 +1149,13 @@
     "latestLabel": "all articles",
     "categoriesLabel": "categories",
     "categoryKicker": "category",
-    "backToMagazine": "back to editorial",
+    "backToMagazine": "Back to editorial",
     "relatedTitle": "more articles",
     "empty": "no articles yet.",
     "by": "by"
   },
   "topics": {
-    "backTo": "back to",
+    "backTo": "Back to",
     "related": "in this section",
     "empty": "content coming soon.",
     "inBrief": "in brief",
@@ -1177,12 +1178,8 @@
         "Small classes: limited places, with selection"
       ],
       "funding": {
-        "logos": [
-          "Unione Europea",
-          "Repubblica Italiana",
-          "Regione Emilia-Romagna",
-          "PR FSE+ 2021-2027"
-        ],
+        "logos": ["/img/funding/loghi-fse-plus-en.svg"],
+        "logosAlt": "Cohesion Italy 21-27 Emilia-Romagna · Co-funded by the European Union · Italian Republic · Emilia-Romagna Region",
         "text": "Courses co-financed by the European Social Fund Plus (ESF+) under the ESF+ 2021-2027 Regional Programme of the Emilia-Romagna Region. Implementing body: MPDA Aps, via del Tappezziere 4, Bologna."
       },
       "eyebrow": "funded training"
@@ -1347,7 +1344,7 @@
       "title": "Open day in Bologna | Creative Hub Academy",
       "description": "Open day for Creative Hub Academy's university courses and tailor-made lessons: studios, teachers, workshops and live sessions. On site in Bologna or online. Free."
     },
-    "kicker": "open day · via del tappezziere 4, bologna",
+    "kicker": "Open day · via del tappezziere 4, bologna",
     "title": "Open day in Bologna.\nCome and see, bring your family too.",
     "lede": "Two open days, for two different paths: the university courses, for those who want to turn music into a job, and the tailor-made lessons, for those who want to play or sing for passion. Free, on site or live online.",
     "cards": {
@@ -1559,7 +1556,7 @@
       }
     },
     "alt": {
-      "kicker": "can't make it?",
+      "kicker": "Can't make it?",
       "title": "There are other ways.",
       "live": {
         "title": "Follow the live stream",
@@ -1572,7 +1569,7 @@
       }
     },
     "reach": {
-      "kicker": "how to get here",
+      "kicker": "How to get here",
       "title": "The Roveri district, ten minutes from the centre.",
       "addressLabel": "Address",
       "address": "Via del Tappezziere 4, 40138 Bologna",
@@ -1580,11 +1577,11 @@
     }
   },
   "uni": {
-    "kicker": "academy · university programmes · a.y. 2026/27",
+    "kicker": "Academy · university programmes · A.Y. 2026/27",
     "title": "University programmes in music, production and sound engineering in Bologna.",
     "lede": "Bachelor of Arts, Bachelor of Science, Master of Music. Internationally recognised degrees. Six programmes, three Masters, twenty places a year.",
-    "ctaOpenDay": "book the open day",
-    "ctaInfo": "ask for information",
+    "ctaOpenDay": "Book the open day",
+    "ctaInfo": "Ask for information",
     "subnav": {
       "corsi": "the courses",
       "numeri": "in numbers",
@@ -1598,15 +1595,15 @@
     "filters": {
       "pathLabel": "path",
       "areaLabel": "area",
-      "all": "all",
-      "allAreas": "all",
-      "primo": "first cycle",
-      "master": "masters",
+      "all": "All",
+      "allAreas": "All",
+      "primo": "First cycle",
+      "master": "Masters",
       "areas": {
-        "musica": "music",
-        "suono": "sound",
-        "visual": "visual",
-        "business": "business"
+        "musica": "Music",
+        "suono": "Sound",
+        "visual": "Visual",
+        "business": "Business"
       },
       "countOne": "course",
       "countMany": "courses"
@@ -1875,17 +1872,17 @@
         {
           "title": "Open day",
           "text": "An afternoon inside the hub, parents welcome too.",
-          "cta": "book your place"
+          "cta": "Book your place"
         },
         {
           "title": "Guidance interview",
           "text": "Half an hour with a tutor, on site or online, to find the right course for you.",
-          "cta": "book an interview"
+          "cta": "Book an interview"
         },
         {
           "title": "Message us on WhatsApp",
           "text": "For a quick question, a member of the team replies.",
-          "cta": "open the chat"
+          "cta": "Open the chat"
         }
       ]
     },
@@ -1900,12 +1897,12 @@
     }
   },
   "lesson": {
-    "kicker": "academy · custom lessons",
+    "kicker": "Academy · custom lessons",
     "titlePrefix": "Lessons:",
     "titleSuffix": "in Bologna.",
-    "back": "back to academy",
+    "back": "Back to academy",
     "ctaBook": "book your free first lesson",
-    "ctaInfo": "ask us anything",
+    "ctaInfo": "Ask us anything",
     "metodoKicker": "the method",
     "metodoTitle": "How you learn here.",
     "teachersKicker": "the teachers",
@@ -2408,7 +2405,7 @@
     }
   },
   "saleEventiPage": {
-    "kicker": "coworking · rooms & events",
+    "kicker": "Coworking · rooms & events",
     "facts": [
       "From 10 people to the main hall",
       "Live streaming from the main hall",
@@ -2424,7 +2421,7 @@
     "ctaTitle": "Build your event.",
     "ctaText": "Tell us what kind of event it is, for how many people and what you need: we send you a proposal with room, services and quote within one working day.",
     "ctaBook": "request a proposal",
-    "back": "back to coworking",
+    "back": "Back to coworking",
     "roomMeta": [
       {
         "n": "ev.01",
@@ -2433,6 +2430,7 @@
       },
       {
         "n": "ev.02",
+        "cap": "30 people",
         "price": "€159.50"
       },
       {
@@ -2528,7 +2526,7 @@
     }
   },
   "innovationSub": {
-    "back": "back to innovation",
+    "back": "Back to innovation",
     "createch": {
       "metaTitle": "Free incubator for creative startups in Bologna | CreaTech Venture Club",
       "metaDesc": "Nine months of incubation and acceleration for startups and professionals in the cultural and creative industries. Funded by Regione Emilia-Romagna.",
@@ -2749,7 +2747,7 @@
     "bandi": {
       "metaTitle": "Calls for creative startups and companies in Bologna | Creative Hub",
       "metaDesc": "Incubation and acceleration calls, regional and European programmes for the cultural and creative industries.",
-      "kicker": "innovation · calls & opportunities",
+      "kicker": "Innovation · calls & opportunities",
       "title": "Calls and opportunities for creative startups and companies.",
       "lede": "Incubation calls, acceleration programmes, regional and European projects. Open ones on top.",
       "listTitle": "All the opportunities.",
@@ -2943,7 +2941,7 @@
     }
   },
   "studioSub": {
-    "back": "back to studio",
+    "back": "Back to studio",
     "email": "recordingstudio@bologna-creativehub.it",
     "registrazione": {
       "metaTitle": "Audio recording in Bologna, live tracking and remote recording | Creative Hub Studio",
@@ -3076,7 +3074,7 @@
       "facts": [
         {
           "t": "SSL XL-Desk",
-          "s": "32-channel analogue console"
+          "s": "XL-Desk, 32-channel analogue console"
         },
         {
           "t": "Stereo and Dolby Atmos",
@@ -3626,7 +3624,7 @@
     }
   },
   "avvisami": {
-    "kicker": "keep me posted",
+    "kicker": "Keep me posted",
     "title": "Tell me when the next course opens.",
     "titleCourse": "Tell me about the next edition.",
     "lede": "Enrolment for funded courses stays open for just a few weeks. Leave a contact: we will write to you as soon as the call opens, before the deadline.",

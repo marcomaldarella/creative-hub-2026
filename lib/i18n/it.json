@@ -3,7 +3,7 @@
     "academy": "Academy",
     "studio": "Studio",
     "coworking": "Coworking",
-    "innovation": "Innovazione",
+    "innovation": "Aziende & startup",
     "magazine": "Editorial",
     "about": "Chi siamo",
     "book": "Prenota",
@@ -38,7 +38,6 @@
         "desc": "Coworking · sale · eventi nel cuore di Bologna.",
         "items": [
           "Coworking",
-          "Studio di registrazione",
           "Prenota uno spazio",
           "Sale & eventi",
           "Metaverso"
@@ -75,8 +74,8 @@
     },
     "topbar": {
       "left": "est.1999 · bologna",
-      "middle": "iscrizioni aperte · a.a. 2026/27",
-      "cta": "prenota l'open day"
+      "middle": "iscrizioni aperte · A.A. 2026/27",
+      "cta": "Prenota l'open day"
     },
     "home": "Home"
   },
@@ -85,16 +84,16 @@
     "coords": "Est. 1999\nBologna 44.4929°n, 11.3429°e",
     "lede": "Suono, immagine, codice. Tutto in un edificio.",
     "tagline": "inspire, innovate, excel.",
-    "discover": "scopri l'hub",
+    "discover": "Scopri l'hub",
     "caption": "Accademia di musica e arti creative, studio di registrazione e spazi co-working.",
     "captionSub": "Bologna dal 1999."
   },
   "common": {
     "readMore": "leggi",
     "viewAll": "vedi tutti",
-    "all": "tutti",
+    "all": "Tutti",
     "bookOn": "prenota sullo shop",
-    "backTo": "torna a",
+    "backTo": "Torna a",
     "teachers": "docenti",
     "courses": "corsi",
     "articles": "articoli",
@@ -171,7 +170,7 @@
     "magazineAll": "tutti gli articoli",
     "opendayTitleLine1": "Un pomeriggio",
     "opendayTitleLine2": "dentro l'hub.",
-    "opendayCta": "prenota il tuo posto",
+    "opendayCta": "Prenota il tuo posto",
     "methodKicker": "02 — metodo",
     "methodEyebrow": "metodo",
     "methodTitle": "Si impara dentro l'industria.\nNon accanto.",
@@ -307,7 +306,7 @@
     }
   },
   "academy": {
-    "kicker": "Academy · Iscrizioni aperte · A.a. 2026/27",
+    "kicker": "Academy · Iscrizioni aperte · A.A. 2026/27",
     "titleLines": [
       "Accademia di musica, produzione",
       "e tecnico del suono a Bologna."
@@ -327,11 +326,11 @@
     "courseInfo": "scheda del corso",
     "typeLabel": "filtra per tipologia",
     "types": {
-      "magistrale": "magistrale",
-      "triennio": "triennio",
-      "finanziato": "finanziati",
-      "gratuito": "gratuito",
-      "custom": "custom"
+      "magistrale": "Magistrale",
+      "triennio": "Triennio",
+      "finanziato": "Finanziati",
+      "gratuito": "Gratuito",
+      "custom": "Custom"
     },
     "courseGallery": "galleria",
     "joinUs": "join us",
@@ -407,10 +406,12 @@
       "Angela Madonia",
       "Stefania Martin"
     ],
+    "teachersAll": "tutti i docenti",
+    "teachersLess": "mostra meno",
     "inMemoriaTitle": "In memoria",
     "inMemoriaText": "Bologna ha avuto tra i suoi maestri anche Celso Valli, arrangiatore e produttore che ha firmato il suono di Vasco Rossi, Laura Pausini, Mina, Eros Ramazzotti. Ci ha lasciati nel 2025. Quello che ha insegnato qui resta nel modo in cui l'Academy lavora ancora oggi.",
-    "heroCtaPrimary": "prenota l'open day",
-    "heroCtaSecondary": "chiedi informazioni",
+    "heroCtaPrimary": "Prenota l'open day",
+    "heroCtaSecondary": "Chiedi informazioni",
     "exploreKicker": "tutta l'offerta",
     "exploreTitle": "Tutto quello che si impara qui.",
     "exploreLead": "Corsi universitari, su misura e finanziati tra musica, suono, cinema e business. Apri un titolo per vedere il corso.",
@@ -438,12 +439,12 @@
       {
         "title": "Open day",
         "text": "Un pomeriggio dentro l'hub, anche con i tuoi genitori.",
-        "cta": "prenota il tuo posto"
+        "cta": "Prenota il tuo posto"
       },
       {
         "title": "Colloquio orientativo",
         "text": "Mezz'ora con un tutor, in sede o online, per capire quale percorso fa per te.",
-        "cta": "fissa un colloquio"
+        "cta": "Fissa un colloquio"
       },
       {
         "title": "Chiamaci",
@@ -457,7 +458,7 @@
       "percorso."
     ],
     "aroundTitle": "Quello che c'è\noltre l'aula.",
-    "exploreCardMeta": "a.a. 2026/27",
+    "exploreCardMeta": "A.A. 2026/27",
     "exploreFundedSubs": [
       "Composizione e produzione digitale per musica, media e live.",
       "Scrittura, interpretazione e identità vocale, dal provino al palco.",
@@ -489,7 +490,7 @@
     "cardCta": "scopri il corso"
   },
   "studios": {
-    "kicker": "studio · zona roveri, bologna",
+    "kicker": "Studio · zona roveri, bologna",
     "title": "Studio di registrazione a Bologna.\nRegia SSL, Dolby Atmos, una sala da 60 m².",
     "lede": "Creative Hub SSL Recording Studio: 120 m² tra sala di ripresa e regia, per artisti, band, produzioni e aziende. Dall'idea al master.",
     "spacesKicker": "gli spazi",
@@ -666,7 +667,7 @@
     "heroCta": "Parlaci del tuo progetto"
   },
   "coworking": {
-    "kicker": "coworking · zona roveri, bologna",
+    "kicker": "Coworking · zona roveri, bologna",
     "title": "Coworking a Bologna.\nUno spazio all'altezza del tuo lavoro.",
     "lede": "Un open space luminoso dentro un hub di 2.000 m² dedicato alle industrie creative. Alla scrivania accanto può esserci un grafico, una startup o un'agenzia: in pausa vi trovate tutti nella banano room.",
     "spacesKicker": "le formule",
@@ -674,7 +675,7 @@
     "ctaKicker": "prenota",
     "ctaTitle": "Scegli la formula.",
     "ctaText": "Da 9,50€ al giorno. Ti confermiamo entro un giorno lavorativo.",
-    "ctaDayPass": "prenota un day pass",
+    "ctaDayPass": "Prenota un day pass",
     "bananoKicker": "banano room",
     "bananoTitle": "La banano room.",
     "bananoText": "Lo spazio comune del coworking: tavoli condivisi, divani e luce calda per le pause, gli incontri informali e gli eventi piccoli.",
@@ -720,7 +721,7 @@
       "15 minuti dalla stazione Centrale, linea TPER Bologna–Portomaggiore",
       "051 631 3706, interno 1 — lun–ven 11–13 e 14–18"
     ],
-    "galleryCta": "vedi tutte le foto",
+    "galleryCta": "Vedi tutte le foto",
     "facts": [
       "Zona Roveri, Bologna",
       "Fibra FTTH",
@@ -844,11 +845,11 @@
     ]
   },
   "prenota": {
-    "kicker": "prenota il tuo spazio",
+    "kicker": "Prenota il tuo spazio",
     "title": "Prenota il tuo spazio al Creative Hub.",
     "lede": "Scegli cosa devi fare, lo spazio giusto con il prezzo, e lasciaci i contatti: ci pensiamo noi.",
     "metaDesc": "Day pass, postazioni, uffici, sale riunioni e spazi per eventi, con i prezzi. Prenota in tre passaggi al Creative Hub, zona Roveri, Bologna.",
-    "back": "torna a coworking",
+    "back": "Torna a coworking",
     "facts": [
       "prezzi chiari",
       "conferma entro un giorno lavorativo",
@@ -987,7 +988,7 @@
   "innovation": {
     "metaTitle": "Incubatore e acceleratore per startup creative a Bologna | Creative Hub",
     "metaDesc": "Incubazione gratuita, accelerazione e servizi alle imprese per musica, audiovisivo, tecnologie immersive e AI. CreaTech Venture Club, bandi e CTE COBO.",
-    "kicker": "innovazione · creative hub bologna",
+    "kicker": "Innovazione · creative hub bologna",
     "title": "Le imprese creative nascono qui.",
     "lede": "Incubazione, accelerazione e servizi alle imprese per musica, audiovisivo, tecnologie immersive e intelligenza artificiale. Dentro un hub dove ci sono già studi, aule e talenti.",
     "heroCta": "Trova il percorso giusto",
@@ -1000,7 +1001,7 @@
         "tag": "hai un'idea o una startup",
         "title": "Incubazione e accelerazione",
         "text": "CreaTech Venture Club: un programma gratuito di nove mesi per startup e professionisti delle industrie culturali e creative. Mentoring, coworking, formazione e un Pitch Day davanti agli investitori.",
-        "badge": "candidature aperte",
+        "badge": "Candidature aperte",
         "cta": "scopri il programma",
         "href": "/innovazione/incubazione-accelerazione"
       },
@@ -1139,7 +1140,7 @@
     "colSocial": "social"
   },
   "magazine": {
-    "kicker": "editorial",
+    "kicker": "Editorial",
     "title": "Il mestiere, raccontato da chi lo fa.",
     "lede": "Quattro linee. Un solo settore.",
     "metaTitle": "editorial",
@@ -1148,13 +1149,13 @@
     "latestLabel": "tutti gli articoli",
     "categoriesLabel": "categorie",
     "categoryKicker": "categoria",
-    "backToMagazine": "torna all'editorial",
+    "backToMagazine": "Torna all'editorial",
     "relatedTitle": "altri articoli",
     "empty": "nessun articolo, per ora.",
     "by": "di"
   },
   "topics": {
-    "backTo": "torna a",
+    "backTo": "Torna a",
     "related": "in questa sezione",
     "empty": "contenuti in arrivo.",
     "inBrief": "in breve",
@@ -1177,12 +1178,8 @@
         "Classi piccole: posti limitati, con selezione"
       ],
       "funding": {
-        "logos": [
-          "Unione Europea",
-          "Repubblica Italiana",
-          "Regione Emilia-Romagna",
-          "PR FSE+ 2021-2027"
-        ],
+        "logos": ["/img/funding/loghi-fse-plus.svg"],
+        "logosAlt": "Coesione Italia 21-27 Emilia-Romagna · Cofinanziato dall'Unione europea · Repubblica Italiana · Regione Emilia-Romagna",
         "text": "Corsi cofinanziati dal Fondo sociale europeo Plus (FSE+) nell'ambito del Programma Regionale FSE+ 2021-2027 della Regione Emilia-Romagna. Ente attuatore: MPDA Aps, via del Tappezziere 4, Bologna."
       },
       "eyebrow": "formazione finanziata"
@@ -1347,7 +1344,7 @@
       "title": "Open day a Bologna | Creative Hub Academy",
       "description": "Open day dei corsi universitari e delle lezioni su misura di Creative Hub Academy: studi, docenti, workshop e live. In sede a Bologna o online. Gratuito."
     },
-    "kicker": "open day · via del tappezziere 4, bologna",
+    "kicker": "Open day · via del tappezziere 4, bologna",
     "title": "Open day a Bologna.\nVieni a vedere, anche con i tuoi.",
     "lede": "Due open day, per due strade diverse: i corsi universitari, per chi vuole fare della musica un lavoro, e le lezioni su misura, per chi vuole suonare o cantare per passione. Gratuiti, in sede o in diretta online.",
     "cards": {
@@ -1559,7 +1556,7 @@
       }
     },
     "alt": {
-      "kicker": "non puoi venire?",
+      "kicker": "Non puoi venire?",
       "title": "Ci sono altri modi.",
       "live": {
         "title": "Segui in diretta",
@@ -1572,7 +1569,7 @@
       }
     },
     "reach": {
-      "kicker": "come arrivare",
+      "kicker": "Come arrivare",
       "title": "Zona Roveri, dieci minuti dal centro.",
       "addressLabel": "Indirizzo",
       "address": "Via del Tappezziere 4, 40138 Bologna",
@@ -1580,11 +1577,11 @@
     }
   },
   "uni": {
-    "kicker": "academy · corsi universitari · a.a. 2026/27",
+    "kicker": "Academy · corsi universitari · A.A. 2026/27",
     "title": "Corsi universitari di musica, produzione e tecnico del suono a Bologna.",
     "lede": "Bachelor of Arts, Bachelor of Science, Master of Music. Titoli riconosciuti a livello internazionale. Sei corsi, tre Master, venti posti all'anno.",
-    "ctaOpenDay": "prenota l'open day",
-    "ctaInfo": "chiedi informazioni",
+    "ctaOpenDay": "Prenota l'open day",
+    "ctaInfo": "Chiedi informazioni",
     "subnav": {
       "corsi": "i corsi",
       "numeri": "in numeri",
@@ -1598,15 +1595,15 @@
     "filters": {
       "pathLabel": "percorso",
       "areaLabel": "area",
-      "all": "tutti",
-      "allAreas": "tutte",
-      "primo": "primo ciclo",
-      "master": "master",
+      "all": "Tutti",
+      "allAreas": "Tutte",
+      "primo": "Primo ciclo",
+      "master": "Master",
       "areas": {
-        "musica": "musica",
-        "suono": "suono",
-        "visual": "visual",
-        "business": "business"
+        "musica": "Musica",
+        "suono": "Suono",
+        "visual": "Visual",
+        "business": "Business"
       },
       "countOne": "corso",
       "countMany": "corsi"
@@ -1875,17 +1872,17 @@
         {
           "title": "Open day",
           "text": "Un pomeriggio dentro l'hub, anche con i tuoi genitori.",
-          "cta": "prenota il tuo posto"
+          "cta": "Prenota il tuo posto"
         },
         {
           "title": "Colloquio orientativo",
           "text": "Mezz'ora con un tutor, in sede o online, per capire quale corso fa per te.",
-          "cta": "fissa un colloquio"
+          "cta": "Fissa un colloquio"
         },
         {
           "title": "Scrivici su WhatsApp",
           "text": "Per una domanda veloce, risponde una persona del team.",
-          "cta": "apri la chat"
+          "cta": "Apri la chat"
         }
       ]
     },
@@ -1900,12 +1897,12 @@
     }
   },
   "lesson": {
-    "kicker": "academy · lezioni su misura",
+    "kicker": "Academy · lezioni su misura",
     "titlePrefix": "Lezioni di",
     "titleSuffix": "a Bologna.",
-    "back": "torna a academy",
+    "back": "Torna a academy",
     "ctaBook": "prenota la prima lezione gratuita",
-    "ctaInfo": "chiedi informazioni",
+    "ctaInfo": "Chiedi informazioni",
     "metodoKicker": "il metodo",
     "metodoTitle": "Come si impara qui.",
     "teachersKicker": "gli insegnanti",
@@ -2408,7 +2405,7 @@
     }
   },
   "saleEventiPage": {
-    "kicker": "coworking · sale & eventi",
+    "kicker": "Coworking · sale & eventi",
     "facts": [
       "Da 10 persone all'aula magna",
       "Dirette streaming dall'aula magna",
@@ -2424,7 +2421,7 @@
     "ctaTitle": "Componi il tuo evento.",
     "ctaText": "Raccontaci che evento è, per quante persone e cosa ti serve: ti mandiamo una proposta con sala, servizi e preventivo entro un giorno lavorativo.",
     "ctaBook": "chiedi una proposta",
-    "back": "torna a coworking",
+    "back": "Torna a coworking",
     "roomMeta": [
       {
         "n": "ev.01",
@@ -2433,6 +2430,7 @@
       },
       {
         "n": "ev.02",
+        "cap": "30 persone",
         "price": "159,50€"
       },
       {
@@ -2528,7 +2526,7 @@
     }
   },
   "innovationSub": {
-    "back": "torna a innovazione",
+    "back": "Torna a innovazione",
     "createch": {
       "metaTitle": "Incubatore per startup creative a Bologna, gratuito | CreaTech Venture Club",
       "metaDesc": "Nove mesi di incubazione e accelerazione per startup e professionisti delle industrie culturali e creative. Finanziato da Regione Emilia-Romagna.",
@@ -2749,7 +2747,7 @@
     "bandi": {
       "metaTitle": "Bandi per startup e imprese creative a Bologna | Creative Hub",
       "metaDesc": "Call di incubazione e accelerazione, programmi regionali ed europei per le industrie culturali e creative.",
-      "kicker": "innovazione · bandi & opportunità",
+      "kicker": "Innovazione · bandi & opportunità",
       "title": "Bandi e opportunità per startup e imprese creative.",
       "lede": "Call di incubazione, programmi di accelerazione, progetti regionali ed europei. Quelli aperti in cima.",
       "listTitle": "Tutte le opportunità.",
@@ -2943,7 +2941,7 @@
     }
   },
   "studioSub": {
-    "back": "torna a studio",
+    "back": "Torna a studio",
     "email": "recordingstudio@bologna-creativehub.it",
     "registrazione": {
       "metaTitle": "Registrazione audio a Bologna, presa diretta e remote recording | Creative Hub Studio",
@@ -3076,7 +3074,7 @@
       "facts": [
         {
           "t": "SSL XL-Desk",
-          "s": "console analogica a 32 canali"
+          "s": "XL-Desk, console analogica a 32 canali"
         },
         {
           "t": "Stereo e Dolby Atmos",
@@ -3626,7 +3624,7 @@
     }
   },
   "avvisami": {
-    "kicker": "avvisami",
+    "kicker": "Avvisami",
     "title": "Avvisami quando apre il prossimo corso.",
     "titleCourse": "Avvisami alla prossima edizione.",
     "lede": "Le iscrizioni ai corsi finanziati restano aperte poche settimane. Lasciaci un contatto: ti scriviamo appena esce il bando, prima della scadenza.",

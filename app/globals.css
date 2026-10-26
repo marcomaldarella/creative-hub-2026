@@ -159,6 +159,12 @@
   --topbar-h: 28px;
   --header-h: calc(var(--nav-h) + var(--topbar-h));
   --radius: 0; /* angoli netti ovunque — taglio svizzero */
+  /* misura unica delle pill filtro e del campo di ricerca che le
+     affianca: senza questi token ogni pagina aveva la sua (13px su
+     bandi e corsi finanziati, 14.5px sui corsi) e la riga dei filtri
+     cambiava altezza da una sezione all'altra */
+  --pill-fs: 14px;
+  --pill-pad: 7px 16px;
   --radius-pill: 999px; /* i tasti sono pillole ovunque (set 2026) */
 
   /* sezioni */
@@ -497,4 +503,78 @@ img { max-width: 100%; height: auto; display: block; }
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
+}
+
+/* ————— listini sul telefono: etichetta e valore, non una griglia —————
+   Le tabelle tariffe hanno quattro colonne: su 390px ogni colonna resta
+   larga un paio di parole, quindi il testo si sbriciola su più righe e,
+   dentro uno .scroller, le parole restano tagliate a metà sul bordo.
+   Sotto i 700px la tabella diventa un elenco di voci: il nome della
+   formula fa da titolo, ogni dato prende la sua etichetta a sinistra e
+   il valore a destra. Nessuno scorrimento laterale, nessuna parola
+   spezzata. Le etichette arrivano da data-label sulle celle. */
+@media (max-width: 700px) {
+  .listino.listino,
+  .listino.listino tbody,
+  .listino.listino tr,
+  .listino.listino th,
+  .listino.listino td {
+    display: block;
+    width: auto;
+  }
+
+  /* l'intestazione non serve più: ogni cella si porta la sua etichetta */
+  .listino.listino thead {
+    display: none;
+  }
+
+  .listino.listino tr {
+    border-bottom: 1px solid var(--line);
+    padding: 16px 0;
+  }
+
+  .listino.listino tr:first-child {
+    border-top: 1px solid var(--fg);
+  }
+
+  /* il nome della formula: titolo della voce */
+  .listino.listino tbody th {
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    padding: 0 0 8px;
+    border: 0;
+    color: var(--fg);
+  }
+
+  .listino.listino td {
+    display: flex;
+    align-items: baseline;
+    /* i valori restano raggruppati a destra: in una cella con due pezzi
+       (prezzo scontato + prezzo pieno barrato) lo space-between li
+       spingeva ai due estremi della riga */
+    justify-content: flex-end;
+    gap: 8px;
+    padding: 3px 0;
+    border: 0;
+    font-size: 14px;
+    line-height: 1.35;
+    text-align: right;
+  }
+
+  .listino.listino td::before {
+    content: attr(data-label);
+    flex: none;
+    /* l'etichetta sta a sinistra, tutto il resto va a destra */
+    margin-right: auto;
+    text-align: left;
+    color: var(--fg-2);
+    font-size: 13px;
+  }
+
+  /* celle senza etichetta (o vuote) non lasciano una riga fantasma */
+  .listino.listino td:empty {
+    display: none;
+  }
 }
