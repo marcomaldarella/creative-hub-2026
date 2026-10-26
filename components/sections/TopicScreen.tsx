@@ -11,9 +11,13 @@ import { AvvisamiForm } from '@/components/sections/AvvisamiForm'
 import { FundingBand } from '@/components/sections/FundingBand'
 import { PortableBlocks } from '@/components/sections/PortableBlocks'
 import { PointsAccordion, type PointsAccordionItem } from '@/components/sections/PointsAccordion'
+import Link from 'next/link'
 import { BgVideo } from '@/components/sections/BgVideo'
-import { CourseCard } from '@/components/sections/CourseCard'
+import { Thumb } from '@/components/sections/Thumb'
 import { SiteChrome, shopHref } from '@/components/sections/SiteChrome'
+/* stesse card a foto piena della landing universitari: il modulo si
+   condivide, la UI resta UNA */
+import uni from '@/components/sections/UniScreen.module.css'
 import { localeHref, type Locale } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
 import { getAllCourses, getPageById, getSiteSettings } from '@/lib/sanity/queries'
@@ -462,24 +466,81 @@ export async function TopicScreen({
               {elenco.length === 0 ? (
                 <p className={`mono ${styles.empty}`}>{t.academy.empty}</p>
               ) : (
-                <RevealGroup className={styles.grid}>
-                  {elenco.map((course, i) => (
-                    <CourseCard
-                      key={course._id}
-                      course={course}
-                      locale={locale}
-                      index={i}
-                      /* cover orizzontale come nelle altre pagine
-                         academy, non il ritratto 3:4 */
-                      ratio="4 / 3"
-                      href={localeHref(
-                        locale,
-                        `/academy/${course.slug?.current ?? ''}`
-                      )}
-                      className="rv"
-                      style={{ '--rvd': `${(i % 4) * 60}ms` } as CSSProperties}
-                    />
-                  ))}
+                /* stesse card a foto piena della landing universitari
+                   (layout B): modulo condiviso, stessa UI e stesso hover
+                   — foto che scala, pill categoria+tipologia, "entra nel
+                   corso" con la freccia */
+                <RevealGroup className={uni.grid}>
+                  {elenco.map((course, i) => {
+                    const ty = course.types?.[0] as
+                      | keyof typeof t.academy.types
+                      | undefined
+                    const catLabel = l(course.category?.title, locale)
+                    const meta = [
+                      l(course.duration, locale),
+                      l(course.mode, locale),
+                    ].filter(Boolean) as string[]
+                    return (
+                      <Link
+                        key={course._id}
+                        href={localeHref(
+                          locale,
+                          `/academy/${course.slug?.current ?? ''}`
+                        )}
+                        className={`${uni.card} rv`}
+                        style={{ '--rvd': `${(i % 3) * 60}ms` } as CSSProperties}
+                      >
+                        <figure className={uni.ph}>
+                          <Thumb
+                            image={course.coverImage}
+                            index={i}
+                            fill
+                            alt={l(course.title, locale) ?? ''}
+                          />
+                        </figure>
+                        <div className={uni.cardTop}>
+                          {catLabel && (
+                            <span className={uni.area}>{catLabel}</span>
+                          )}
+                          {ty && (
+                            <span className={uni.tag}>
+                              {t.academy.types[ty] ?? ty}
+                            </span>
+                          )}
+                        </div>
+                        <h3 className={uni.cardTitle}>
+                          {l(course.title, locale)}
+                        </h3>
+                        {l(course.summary, locale) && (
+                          <p className={uni.cardDesc}>
+                            {l(course.summary, locale)}
+                          </p>
+                        )}
+                        {meta.length > 0 && (
+                          <div className={uni.cardMeta}>
+                            {meta.map((m, k) =>
+                              k === 0 ? <b key={m}>{m}</b> : <span key={m}>{m}</span>
+                            )}
+                          </div>
+                        )}
+                        {/* freccia della card: SVG, mai unicode */}
+                        <span className={uni.go}>
+                          <span className={uni.goLabel}>{t.uni.goCta}</span>
+                          <svg
+                            viewBox="0 0 24 24"
+                            width="15"
+                            height="15"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="1.8"
+                            aria-hidden="true"
+                          >
+                            <path d="M7 17 17 7M9 7h8v8" />
+                          </svg>
+                        </span>
+                      </Link>
+                    )
+                  })}
                 </RevealGroup>
               )}
             </div>
