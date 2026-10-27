@@ -174,4 +174,10 @@
   .back + .kicker + * {
     margin-top: 14px;
   }
+
+  /* stessa dimensione del breadcrumb accanto (richiesta 27/10) */
+  .back a {
+    font-size: 13px;
+    font-weight: 600;
+  }
 }

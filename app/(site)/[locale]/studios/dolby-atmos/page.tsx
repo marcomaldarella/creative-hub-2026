@@ -290,9 +290,13 @@ export default async function DolbyAtmosPage({
               {labText}
             </Reveal>
             <Reveal delay={80}>
-              <ArrowLink href={localeHref(locale, '/innovazione')} dir="e">
+              <Button
+                variant="ghost"
+                className={det.btnPill}
+                href={localeHref(locale, '/innovazione')}
+              >
                 {d.labCta}
-              </ArrowLink>
+              </Button>
             </Reveal>
           </div>
         </section>
