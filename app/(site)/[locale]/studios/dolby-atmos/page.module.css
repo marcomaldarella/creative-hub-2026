@@ -27,35 +27,41 @@
 
 /* ————— la regia atmos: quattro voci grandi in fascia nera ————— */
 
+/* tabella QUADRATA alla Vercel (27/10), come i loghi di /studios:
+   celle su superficie quasi-nera divise da un filo, valore centrato e
+   didascalia appoggiata in basso alla stessa quota per tutte */
 .specs {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: clamp(20px, 2.5vw, 36px);
-  align-items: end;
+  gap: 1px;
+  background: #2a2a2a;
+  border: 1px solid #2a2a2a;
 }
 
-/* ogni cella: valore (testo o logo) appoggiato su una BASE comune e
-   didascalia sotto, tutte alla stessa quota (27/10) */
 .specs > :global(.rv) {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  min-height: clamp(96px, 9vw, 130px);
+  align-items: center;
+  background: #0f0f0f;
+  aspect-ratio: 1;
+  padding: clamp(16px, 2vw, 28px);
 }
 
+/* il valore (numero o logo) si centra nello spazio che avanza */
 .specT {
   display: block;
+  margin: auto;
   font-size: clamp(30px, 3.6vw, 56px);
   letter-spacing: -0.04em;
   line-height: 0.9;
 }
 
 /* didascalie come i titoletti: semibold, inchiostro pieno, iniziale
-   maiuscola, tutte alla stessa altezza */
+   maiuscola, in basso alla stessa quota */
 .specS {
   composes: titoletto from global;
   display: block;
-  margin-top: 14px;
+  text-align: center;
 }
 
 @media (max-width: 860px) {
@@ -103,12 +109,13 @@ div.appCard {
    sinistra come il numero 7.1.4 accanto */
 .specLogo {
   display: block;
-  width: clamp(120px, 13vw, 170px);
+  margin: auto;
+  width: clamp(110px, 11vw, 150px);
   background: currentColor;
   mask-repeat: no-repeat;
-  mask-position: left bottom;
+  mask-position: center;
   mask-size: contain;
   -webkit-mask-repeat: no-repeat;
-  -webkit-mask-position: left bottom;
+  -webkit-mask-position: center;
   -webkit-mask-size: contain;
 }
