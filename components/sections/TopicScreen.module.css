@@ -869,17 +869,9 @@
   margin-top: clamp(28px, 3.5vw, 52px);
 }
 
-/* titoletti di sezione (richiesta ott 2026): più presenti del mono di
-   servizio — un punto in più, semibold, inchiostro pieno, iniziale
-   maiuscola. Tracking mai positivo (regola di progetto). */
+/* titoletto: stile unico dalla classe globale (27/10) */
 .kicker {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--fg);
-}
-
-.kicker::first-letter {
-  text-transform: uppercase;
+  composes: titoletto from global;
 }
 
 

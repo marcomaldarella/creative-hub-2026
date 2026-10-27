@@ -311,6 +311,22 @@ img { max-width: 100%; height: auto; display: block; }
   color: var(--fg-2);
 }
 
+/* titoletti di sezione (27/10): UNA classe per tutte le etichette
+   piccole del sito — eyebrow, breadcrumb, etichette delle Rule.
+   Un punto in più del mono, semibold, inchiostro pieno, iniziale
+   maiuscola. I moduli la richiamano con `composes: titoletto from
+   global` invece di duplicare le regole. */
+.titoletto {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--fg);
+}
+
+.titoletto::first-letter {
+  text-transform: uppercase;
+}
+
 /* ————— SCROLLER: una sola grammatica per tutto ciò che scorre in
    orizzontale (nastri di card, file di voci nelle barre sticky, marquee
    infiniti, tabelle larghe). Utility globali come .wrap/.mono: si
