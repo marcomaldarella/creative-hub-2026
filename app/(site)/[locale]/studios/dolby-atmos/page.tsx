@@ -257,7 +257,7 @@ export default async function DolbyAtmosPage({
         </section>
 
         {/* ————— promo remix: fascia nera ————— */}
-        <div className={det.promoAccent}>
+        <div className={`scheme-dark ${det.promo}`}>
           <section className={`wrap ${det.sez}`}>
             <Reveal as="span" className={`mono ${styles.bandKicker}`}>
               {d.remixKicker}
@@ -269,7 +269,7 @@ export default async function DolbyAtmosPage({
               {d.remixText}
             </Reveal>
             <Reveal delay={180}>
-              <Button variant="ghost" className={det.btnInk} href={mailRemix} external>
+              <Button variant="azzurro" href={mailRemix} external>
                 {d.remixCta}
               </Button>
             </Reveal>

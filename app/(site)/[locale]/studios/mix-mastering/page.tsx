@@ -173,7 +173,7 @@ export default async function MixMasteringPage({
         </section>
 
         {/* ————— promo Dolby Atmos: fascia nera, rimando interno ————— */}
-        <div className={det.promoAccent}>
+        <div className={`scheme-dark ${det.promo}`}>
           <section className={`wrap ${det.sez}`}>
             <Reveal as="h2" className={`display-thin ${det.promoTitle}`}>
               {d.atmosTitle}
@@ -183,8 +183,7 @@ export default async function MixMasteringPage({
             </Reveal>
             <Reveal delay={160}>
               <Button
-                variant="ghost"
-                className={det.btnInk}
+                variant="azzurro"
                 href={localeHref(locale, '/studios/dolby-atmos')}
               >
                 {d.atmosCta}

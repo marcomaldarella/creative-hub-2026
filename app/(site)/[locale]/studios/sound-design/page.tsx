@@ -246,7 +246,7 @@ export default async function SoundDesignPage({
         </section>
 
         {/* ————— promo colonne sonore: fascia nera, rimando interno ————— */}
-        <div className={det.promoAccent}>
+        <div className={`scheme-dark ${det.promo}`}>
           <section className={`wrap ${det.sez}`}>
             <Reveal as="span" className={`mono ${styles.bandKicker}`}>
               {d.scoreKicker}
@@ -259,8 +259,7 @@ export default async function SoundDesignPage({
             </Reveal>
             <Reveal delay={180}>
               <Button
-                variant="ghost"
-                className={det.btnInk}
+                variant="azzurro"
                 href={localeHref(locale, '/studios/registrazione')}
               >
                 {d.scoreCta}

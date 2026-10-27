@@ -66,17 +66,11 @@ const FLOOD_SECTIONS: Record<string, string> = {
   '/coworking': 'var(--giallo-fluo)',
 }
 
-/* revisione 27/10: la sezione studio è APPIATTITA (UI alla Vercel, arancio
-   solo su specchietti e FAQ) — il colore pieno le resta solo nel pannello
-   del mega-menu (FLOOD_SECTIONS sopra), la pagina torna neutra */
-const FLOOD_OFF = new Set(['/studios'])
-
 function floodOf(path: string): string | undefined {
   const base = Object.keys(FLOOD_SECTIONS).find(
     (b) => path === b || path.startsWith(`${b}/`)
   )
-  if (!base || FLOOD_OFF.has(base)) return undefined
-  return FLOOD_SECTIONS[base]
+  return base ? FLOOD_SECTIONS[base] : undefined
 }
 
 /**

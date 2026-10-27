@@ -332,11 +332,14 @@
   color: var(--fg-2);
 }
 
+/* titoletti accanto ai numeri: MAIUSCOLO e bold, più presenti
+   (richiesta esplicita 27/10 — deroga alla regola no-uppercase) */
 .stepTitle {
-  font-size: clamp(17px, 1.6vw, 21px);
-  font-weight: 600;
-  letter-spacing: -0.02em;
+  font-size: clamp(18px, 1.7vw, 23px);
+  font-weight: 700;
+  letter-spacing: -0.01em;
   line-height: 1.15;
+  text-transform: uppercase;
 }
 
 .stepText {

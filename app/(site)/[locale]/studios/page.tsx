@@ -102,17 +102,9 @@ export default async function StudiosPage({
     <SiteChrome locale={locale} path="/studios">
       <main className={styles.main}>
         {/* ————— hero ————— */}
+        {/* revisione 27/10: testi a sinistra, foto a DESTRA a tutta
+            altezza e a filo del bordo (come le pagine di dettaglio) */}
         <header className={styles.head}>
-          <Reveal className={styles.headMedia}>
-            <Image
-              src="/img/sections/studio-regia.jpg"
-              alt="La regia principale dello studio: console, monitoring e synth"
-              width={1800}
-              height={1350}
-              priority
-              className={styles.headImg}
-            />
-          </Reveal>
           <div className={styles.headText}>
             <Reveal as="span" className={`mono ${styles.kicker}`}>
               {t.studios.kicker}
@@ -130,6 +122,16 @@ export default async function StudiosPage({
               </Button>
             </Reveal>
           </div>
+          <Reveal className={styles.headMedia}>
+            <Image
+              src="/img/sections/studio-regia.jpg"
+              alt="La regia principale dello studio: console, monitoring e synth"
+              width={1800}
+              height={1350}
+              priority
+              className={styles.headImg}
+            />
+          </Reveal>
         </header>
 
         {/* ————— barra delle pagine di sezione (mockup) ————— */}
