@@ -117,7 +117,7 @@ export default async function StudiosPage({
             </Reveal>
             {/* la CTA dell'hero del mockup: porta al form in fondo */}
             <Reveal className={styles.headCta} delay={220}>
-              <Button variant="azzurro" href="#contatti">
+              <Button variant="ghost" className={det.btnInk} href="#contatti">
                 {t.studios.heroCta}
               </Button>
             </Reveal>
@@ -137,11 +137,12 @@ export default async function StudiosPage({
         {/* ————— barra delle pagine di sezione (mockup) ————— */}
         <SectionPagesNav locale={locale} base="/studios" current="/studios" />
 
-        <Rule left={t.studios.kicker} right={t.studios.servicesKicker} />
+        {/* ————— corpo NERO dal primo servizio in giù (revisione 27/10):
+            servizi, spazi, in regia e partner vivono tutti sulla stessa
+            fascia scura; l'arancio resta a hero e FAQ ————— */}
+        <div className="scheme-dark">
 
-        {/* ————— i sei servizi, subito dopo l'hero: fascia nera (il
-            "ritmo scuro" chiesto in revisione) con card alla Vercel ————— */}
-        <section className={`scheme-dark ${styles.sez}`} id="mix-mastering">
+        <section className={styles.sez} id="mix-mastering">
           <div className="wrap">
             <SectionHeader
               kicker={t.studios.servicesKicker}
@@ -395,6 +396,7 @@ export default async function StudiosPage({
           </section>
         )}
 
+        </div>
       </main>
     </SiteChrome>
   )

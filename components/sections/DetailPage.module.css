@@ -78,7 +78,10 @@
 }
 
 .fact {
-  /* le voci respirano: prima stavano appiccicate una sull'altra */
+  /* riga di tabella vera: sulle pagine studio il markup è uno span e
+     senza display block perdeva fili e padding (le pagine academy
+     usano div — così leggono uguali) */
+  display: block;
   padding: 14px 0 16px;
   border-bottom: 1px solid var(--line);
 }

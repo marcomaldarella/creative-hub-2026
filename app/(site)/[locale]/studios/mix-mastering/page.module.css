@@ -85,34 +85,13 @@ h3.svcTitle {
   border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
-/* il lockup Dolby in maschera bianca (lo stesso svg dei partner) */
+/* il lockup verticale ufficiale, bianco su trasparente */
 .atmosLogo {
   position: relative;
   z-index: 1;
   display: block;
-  width: min(64%, 330px);
-  aspect-ratio: 560 / 300;
-  background: #ffffff;
-  mask-repeat: no-repeat;
-  mask-position: center;
-  mask-size: contain;
-  -webkit-mask-repeat: no-repeat;
-  -webkit-mask-position: center;
-  -webkit-mask-size: contain;
-}
-
-/* riga ATMOS del lockup: riproduzione del marchio, caps spaziati —
-   il margine negativo a destra ricentra l'ultima spaziatura */
-.atmosWord {
-  position: relative;
-  z-index: 1;
-  margin-top: -2px;
-  font-weight: 700;
-  font-size: clamp(20px, 2vw, 30px);
-  line-height: 1;
-  letter-spacing: 0.32em;
-  margin-right: -0.32em;
-  color: #ffffff;
+  width: min(58%, 330px);
+  height: auto;
 }
 
 @media (max-width: 860px) {

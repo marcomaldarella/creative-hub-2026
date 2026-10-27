@@ -166,7 +166,7 @@ export default async function SoundDesignPage({
                 ))}
               </RevealGroup>
               <Reveal className={det.heroRow} delay={120}>
-                <Button variant="azzurro" href={mailBook} external>
+                <Button variant="ghost" className={det.btnInk} href={mailBook} external>
                   {d.book}
                 </Button>
               </Reveal>

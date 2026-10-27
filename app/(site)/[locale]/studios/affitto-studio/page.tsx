@@ -122,7 +122,7 @@ export default async function AffittoStudioPage({
               </RevealGroup>
               <Reveal className={det.heroRow} delay={120}>
                 {/* la CTA apre il flusso di prenotazione in fondo */}
-                <Button variant="azzurro" href="#prenota">
+                <Button variant="ghost" className={det.btnInk} href="#prenota">
                   {d.book}
                 </Button>
               </Reveal>

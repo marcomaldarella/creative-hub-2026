@@ -18,6 +18,9 @@ import { getDictionary } from '@/lib/i18n/dictionaries'
 import { pageAlternates } from '@/lib/seo'
 import { getSiteSettings } from '@/lib/sanity/queries'
 import liveBandImg from '@/public/img/foto/live-band.jpg'
+import regLiveRoomImg from '@/public/img/foto/reg-live-room.jpg'
+import regVocalBoothImg from '@/public/img/foto/reg-vocal-booth.jpg'
+import regControlRoomImg from '@/public/img/foto/reg-control-room.jpg'
 import { ContactForm } from '@/components/sections/ContactForm'
 import det from '@/components/sections/DetailPage.module.css'
 import { StudioContacts } from '@/components/sections/StudioContacts'
@@ -29,6 +32,17 @@ export const dynamic = 'force-dynamic'
 /* etichetta della Rule dal titolo di sezione: via il punto, tutto minuscolo
    (così resta giusta anche in inglese, senza chiavi dedicate) */
 const kickerOf = (s: string) => s.replace(/\.+$/, '').toLowerCase()
+
+/* le foto dei tre ambienti (27/10), nell'ordine di d.where:
+   live room, vocal booth, control room */
+const WHERE_PHOTOS = [
+  { src: regLiveRoomImg, alt: 'La live room: batteria e backline pronti' },
+  {
+    src: regVocalBoothImg,
+    alt: 'La cabina vocale: microfono a condensatore e pop filter',
+  },
+  { src: regControlRoomImg, alt: 'La regia dietro il vetro, verso la sala' },
+]
 
 export async function generateMetadata({
   params,
@@ -93,7 +107,7 @@ export default async function RegistrazionePage({
                 ))}
               </RevealGroup>
               <Reveal className={det.heroRow} delay={120}>
-                <Button variant="azzurro" href={mailBook} external>
+                <Button variant="ghost" className={det.btnInk} href={mailBook} external>
                   {d.book}
                 </Button>
               </Reveal>
@@ -169,7 +183,11 @@ export default async function RegistrazionePage({
           <Reveal as="h2" className={`display-thin ${det.h2}`}>
             {d.whatTitle}
           </Reveal>
-          <Reveal as="ul" className={det.check} delay={80}>
+          <Reveal
+            as="ul"
+            className={`${det.check} ${styles.checkSteps}`}
+            delay={80}
+          >
             {d.what.map((w) => (
               <li key={w}>{w}</li>
             ))}
@@ -238,14 +256,23 @@ export default async function RegistrazionePage({
           </Reveal>
           <RevealGroup className={det.grid3}>
             {d.where.map((w, i) => (
-              <Card
-                key={w.title}
-                className={`rv ${styles.cardDark}`}
-                kicker={String(i + 1).padStart(2, '0')}
-                title={w.title}
-              >
-                {w.text}
-              </Card>
+              <div key={w.title} className={`rv ${styles.whereCard}`}>
+                <figure className={styles.wherePh}>
+                  <Image
+                    src={WHERE_PHOTOS[i % WHERE_PHOTOS.length].src}
+                    alt={WHERE_PHOTOS[i % WHERE_PHOTOS.length].alt}
+                    fill
+                    sizes="(max-width: 860px) 100vw, 33vw"
+                  />
+                </figure>
+                <div className={styles.whereBody}>
+                  <span className={`mono ${styles.whereNum}`}>
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <h3 className={styles.whereTitle}>{w.title}</h3>
+                  <p className={styles.whereText}>{w.text}</p>
+                </div>
+              </div>
             ))}
           </RevealGroup>
         </section>
