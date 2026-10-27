@@ -631,3 +631,16 @@
     0 24px 60px rgba(0, 0, 0, 0.55),
     inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
+
+/* titoletti di sezione (richiesta ott 2026): più presenti del mono di
+   servizio — un punto in più, semibold, inchiostro pieno, iniziale
+   maiuscola. Tracking mai positivo (regola di progetto). */
+.kicker {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--fg);
+}
+
+.kicker::first-letter {
+  text-transform: uppercase;
+}

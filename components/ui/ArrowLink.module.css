@@ -8,6 +8,10 @@
 
 .reverse {
   flex-direction: row-reverse;
+  /* richiesta ott 2026: i breadcrumb "torna a…" (freccia davanti) più
+     grandi e in grassetto, ovunque nel sito */
+  font-size: 17px;
+  font-weight: 700;
 }
 
 .arrow {

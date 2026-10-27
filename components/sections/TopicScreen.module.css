@@ -18,13 +18,6 @@
   display: block;
   margin-bottom: clamp(20px, 2.5vw, 32px);
 }
-
-/* index custom (richiesta ott 2026): breadcrumb un filo più grande e bold */
-.tailOpen .back a {
-  font-size: 17px;
-  font-weight: 700;
-}
-
 .kicker {
   display: block;
   margin-bottom: 16px;
@@ -871,4 +864,17 @@
    fascia nera: le serve il suo stacco */
 .tailOpen .heroMediaTight {
   margin-top: clamp(28px, 3.5vw, 52px);
+}
+
+/* titoletti di sezione (richiesta ott 2026): più presenti del mono di
+   servizio — un punto in più, semibold, inchiostro pieno, iniziale
+   maiuscola. Tracking mai positivo (regola di progetto). */
+.kicker {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--fg);
+}
+
+.kicker::first-letter {
+  text-transform: uppercase;
 }

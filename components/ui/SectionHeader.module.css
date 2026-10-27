@@ -29,3 +29,16 @@
 .dark .lede {
   color: color-mix(in srgb, var(--osso) 75%, transparent);
 }
+
+/* titoletti di sezione (richiesta ott 2026): più presenti del mono di
+   servizio — un punto in più, semibold, inchiostro pieno, iniziale
+   maiuscola. Tracking mai positivo (regola di progetto). */
+.kicker {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--fg);
+}
+
+.kicker::first-letter {
+  text-transform: uppercase;
+}
