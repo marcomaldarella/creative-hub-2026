@@ -12,7 +12,6 @@ import {
   SectionHeader,
 } from '@/components/ui'
 import { SiteChrome } from '@/components/sections/SiteChrome'
-import { SectionPagesNav } from '@/components/sections/SectionPagesNav'
 import { BrandRow } from '@/components/sections/BrandMark'
 import { PointsAccordion } from '@/components/sections/PointsAccordion'
 import { StudioBookingFlow } from '@/components/sections/StudioBookingFlow'
@@ -140,8 +139,8 @@ export default async function AffittoStudioPage({
           </div>
         </header>
 
-        {/* ————— barra delle pagine di sezione (mockup) ————— */}
-        <SectionPagesNav locale={locale} base="/studios" current="/studios/affitto-studio" />
+        {/* revisione 27/10: via lo scroller delle pagine di sezione da
+            questa pagina (SectionPagesNav resta sulle sorelle) */}
 
         {/* ————— le tre formule: ogni card apre il flusso con la
             formula già scelta (?formula=…#prenota) ————— */}
@@ -250,12 +249,14 @@ export default async function AffittoStudioPage({
 
         {/* ————— domande frequenti ————— */}
         <Rule left="05" right={d.faqKicker} />
-        <section className={`wrap ${det.sez} ${det.duo}`}>
-          <Reveal as="h2" className={`display-thin ${det.h2}`}>
-            {d.faqTitle}
-          </Reveal>
-          <PointsAccordion items={d.faq} plain />
-        </section>
+        <div className={det.faqBand}>
+          <section className={`wrap ${det.sez} ${det.duo}`}>
+            <Reveal as="h2" className={`display-thin ${det.h2}`}>
+              {d.faqTitle}
+            </Reveal>
+            <PointsAccordion items={d.faq} plain />
+          </section>
+        </div>
 
         {/* ————— chiusura: la prenotazione guidata (3 passi) al posto
             del form generico — ancora #prenota per le CTA ————— */}

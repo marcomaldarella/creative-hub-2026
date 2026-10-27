@@ -7,25 +7,6 @@
   margin-bottom: 16px;
 }
 
-/* ————— fascia marquee sotto l'hero (mockup) ————— */
-
-.mq {
-  background: #000;
-  padding: 14px 0;
-}
-
-.mqText {
-  font-size: clamp(20px, 2vw, 28px);
-  font-weight: 600;
-  letter-spacing: -0.03em;
-  white-space: nowrap;
-}
-
-/* il bottone dentro il marquee resta compatto */
-.mqBtn {
-  font-size: 13px;
-}
-
 /* ————— manifesto bicolore (mockup): frase piena + coda attenuata ————— */
 
 .manifesto {

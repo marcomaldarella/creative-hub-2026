@@ -9,23 +9,8 @@
   overflow: hidden;
 }
 
-/* texture liquida di fondo, come la sezione studio del reference */
-.main::before {
-  content: '';
-  position: absolute;
-  inset: -10%;
-  background:
-    radial-gradient(50% 60% at 20% 10%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 60%),
-    radial-gradient(60% 70% at 85% 55%, color-mix(in srgb, var(--accent) 8%, transparent), transparent 65%),
-    radial-gradient(40% 50% at 55% 90%, color-mix(in srgb, var(--fg-2) 5%, transparent), transparent 60%);
-  animation: drift 30s ease-in-out infinite alternate;
-  pointer-events: none;
-}
-
-@keyframes drift {
-  from { transform: translate(0, 0) rotate(0deg); }
-  to { transform: translate(3%, 4%) rotate(2deg); }
-}
+/* revisione 27/10: via la texture liquida — la pagina è piatta, alla
+   Vercel, e il ritmo lo fanno le fasce scure */
 
 .main > * {
   position: relative;
@@ -109,17 +94,27 @@
   gap: 16px;
 }
 
-/* le sei card servizio: nere con testo bianco, così si staccano dal
-   colore pieno della pagina.
-   Colori ESPLICITI, non token: dentro una pagina a colore pieno
-   var(--bg) vale il colore della pagina, e il testo sparirebbe sul nero.
-   Classe raddoppiata per vincere sugli stili base di Card. */
+/* le card servizio/spazio: "card Vercel" — superficie quasi-nera, filo
+   scuro, radius 8 e ombra morbida. Colori ESPLICITI, non token: la
+   stessa card vive sia sulla fascia nera (servizi) sia sul fondo chiaro
+   (spazi). Classe raddoppiata per vincere sugli stili base di Card. */
 .spaceCard.spaceCard {
   height: 100%;
-  background: var(--petrolio);
-  border-color: var(--petrolio);
+  background: #0f0f0f;
+  border: 1px solid #2a2a2a;
+  border-radius: 8px;
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
   color: var(--osso);
   transition: transform var(--dur) var(--ease-out), background var(--dur);
+}
+
+/* titoli card più grandi e bold (revisione 27/10) */
+.spaceCard.spaceCard h3 {
+  font-size: clamp(20px, 1.9vw, 26px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
 }
 
 /* kicker, righe-specifica e sommario: osso smorzato, come il testo
@@ -146,7 +141,7 @@
 /* il puntatore schiarisce appena la card: sul nero un bordo che cambia
    non si leggerebbe */
 .spaceCard.spaceCard:hover {
-  background: var(--petrolio-hover);
+  background: #161616;
 }
 
 .spaceSummary {
@@ -161,9 +156,10 @@
   color: var(--fg-2);
 }
 
+/* i trattini delle dotazioni: arancio pieno (revisione 27/10) */
 .features li::before {
   content: '— ';
-  color: var(--accent-ink);
+  color: var(--arancio);
 }
 
 /* ————— servizi ————— */
@@ -315,6 +311,17 @@
   .number:nth-child(2n) {
     border-right: 0;
   }
+
+  /* 2×2: la prima colonna resta a filo del margine su ENTRAMBE le
+     righe (prima solo la prima cella: la riga sotto rientrava) e un
+     filo orizzontale separa le due righe */
+  .number:nth-child(odd) {
+    padding-left: 0;
+  }
+
+  .number:nth-child(-n + 2) {
+    border-bottom: 1px solid var(--line);
+  }
 }
 
 /* ————— in regia ————— */
@@ -381,32 +388,22 @@
   transform: translateX(3px);
 }
 
-/* ————— tecnologia e partner: nomi in griglia hairline ————— */
-
+/* ————— tecnologia e partner: tabella di celle alla Vercel —————
+   celle su superficie quasi-nera divise da un filo (gap 1px su fondo
+   --line), altezza UGUALE per tutte: il ritmo lo fanno le superfici
+   scure, non le altezze dei loghi (su mobile la vecchia colonna unica
+   faceva righe altissime e vuote) */
 .tech {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 0 clamp(20px, 2.5vw, 36px);
-  border-top: 1px solid var(--line);
-}
-
-.techName {
-  padding: 14px 0;
-  border-bottom: 1px solid var(--line);
-  font-size: 15px;
-  font-weight: 600;
-  letter-spacing: -0.01em;
+  gap: 1px;
+  background: #2a2a2a;
+  border: 1px solid #2a2a2a;
 }
 
 @media (max-width: 1000px) {
   .tech {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (max-width: 560px) {
-  .tech {
-    grid-template-columns: 1fr;
   }
 }
 
@@ -435,21 +432,22 @@
 .techItem {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  padding: clamp(18px, 2.2vw, 28px) 0;
-  border-bottom: 1px solid var(--line);
+  justify-content: center;
+  background: #0f0f0f;
+  min-height: clamp(96px, 11vw, 140px);
+  padding: 18px clamp(14px, 2vw, 24px);
 }
 
 .techLogo {
   display: block;
-  width: clamp(130px, 14vw, 180px);
+  width: min(100%, clamp(120px, 13vw, 170px));
   /* l'altezza arriva dal singolo logo (vedi TECH_LOGHI) */
   background: currentColor;
   mask-repeat: no-repeat;
-  mask-position: left center;
+  mask-position: center;
   mask-size: contain;
   -webkit-mask-repeat: no-repeat;
-  -webkit-mask-position: left center;
+  -webkit-mask-position: center;
   -webkit-mask-size: contain;
   opacity: 0.85;
   transition: opacity 0.2s var(--ease-out);

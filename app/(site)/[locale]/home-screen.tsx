@@ -5,7 +5,6 @@ import {
   Button,
   Counter,
   CounterRow,
-  Marquee,
   PartnerMark,
   Reveal,
   RevealGroup,
@@ -316,7 +315,8 @@ export async function HomeScreen({ locale }: { locale: Locale }) {
                 </Link>
               </Reveal>
             </div>
-            <Marquee items={partnerMarks} />
+            {/* revisione 27/10: via il marquee — loghi fermi, a capo */}
+            <div className={`wrap ${styles.partnerRow}`}>{partnerMarks}</div>
             <div className={`wrap ${styles.networkFoot}`}>
               <span className="mono">{t.home.networkRight}</span>
               <span className="mono">{partnerMarks.length}</span>

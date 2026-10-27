@@ -5,7 +5,6 @@ import {
   ArrowLink,
   Button,
   Card,
-  Marquee,
   Reveal,
   RevealGroup,
   Rule,
@@ -63,7 +62,9 @@ export default async function RegistrazionePage({
 
   return (
     <SiteChrome locale={locale} path="/studios/registrazione">
-      <main className={det.main}>
+      {/* revisione 27/10: TUTTA la pagina è nera, tranne FAQ e lo
+          specchietto arrangiamento (arancio) */}
+      <main className={`scheme-dark ${det.main}`}>
         {/* ————— testata: testo a sinistra, live room a destra ————— */}
         <header className={`wrap ${det.head}`}>
           <div className={det.headGrid}>
@@ -108,28 +109,6 @@ export default async function RegistrazionePage({
           </div>
         </header>
 
-        {/* ————— fascia marquee: la frase del mockup, nel nostro stile ————— */}
-        <div className={`scheme-dark ${styles.mq}`}>
-          <Marquee
-            dark
-            speed={30}
-            items={[
-              <span key="t" className={styles.mqText}>
-                {d.marquee}
-              </span>,
-              <Button
-                key="b"
-                variant="azzurro"
-                className={styles.mqBtn}
-                href={mailBook}
-                external
-              >
-                {d.book}
-              </Button>,
-            ]}
-          />
-        </div>
-
         {/* ————— barra delle pagine di sezione (mockup) ————— */}
         <SectionPagesNav locale={locale} base="/studios" current="/studios/registrazione" />
 
@@ -143,7 +122,12 @@ export default async function RegistrazionePage({
           />
           <RevealGroup className={det.grid3}>
             {d.modes.map((m) => (
-              <Card key={m.title} className="rv" kicker={m.kicker} title={m.title}>
+              <Card
+                key={m.title}
+                className={`rv ${styles.modeCard} ${styles.cardDark}`}
+                kicker={m.kicker}
+                title={m.title}
+              >
                 {m.text}
               </Card>
             ))}
@@ -210,10 +194,11 @@ export default async function RegistrazionePage({
           </RevealGroup>
         </section>
 
-        {/* ————— promo arrangiamento: fascia nera ————— */}
-        <div className={`scheme-dark ${det.promo}`}>
+        {/* ————— specchietto arrangiamento: fascia ARANCIO (una delle due
+            sole pause di colore sulla pagina nera, revisione 27/10) ————— */}
+        <div className={det.promoAccent}>
           <section className={`wrap ${det.sez}`}>
-            <Reveal as="span" className={`mono ${styles.bandKicker}`}>
+            <Reveal as="span" className={`mono ${det.kicker}`}>
               {d.arrKicker}
             </Reveal>
             <Reveal as="h2" className={`display-thin ${det.promoTitle}`} delay={60}>
@@ -223,7 +208,12 @@ export default async function RegistrazionePage({
               {d.arrText}
             </Reveal>
             <Reveal delay={180}>
-              <Button variant="azzurro" href={mailArr} external>
+              <Button
+                variant="ghost"
+                className={det.btnInk}
+                href={mailArr}
+                external
+              >
                 {d.arrCta}
               </Button>
             </Reveal>
@@ -249,7 +239,7 @@ export default async function RegistrazionePage({
             {d.where.map((w, i) => (
               <Card
                 key={w.title}
-                className="rv"
+                className={`rv ${styles.cardDark}`}
                 kicker={String(i + 1).padStart(2, '0')}
                 title={w.title}
               >
@@ -259,14 +249,16 @@ export default async function RegistrazionePage({
           </RevealGroup>
         </section>
 
-        {/* ————— prima di prenotare: le domande dei mockup ————— */}
-        <Rule left="05" right={kickerOf(d.faqTitle)} />
-        <section className={`wrap ${det.sez} ${det.duo}`}>
-          <Reveal as="h2" className={`display-thin ${det.h2}`}>
-            {d.faqTitle}
-          </Reveal>
-          <PointsAccordion items={d.faq} plain />
-        </section>
+        {/* ————— prima di prenotare: FAQ in fascia arancio ————— */}
+        <div className={det.faqBand}>
+          <Rule left="05" right={kickerOf(d.faqTitle)} />
+          <section className={`wrap ${det.sez} ${det.duo}`}>
+            <Reveal as="h2" className={`display-thin ${det.h2}`}>
+              {d.faqTitle}
+            </Reveal>
+            <PointsAccordion items={d.faq} plain />
+          </section>
+        </div>
 
         {/* ————— chiusura: raccontaci il progetto ————— */}
         <div className={`scheme-dark ${det.dark}`}>

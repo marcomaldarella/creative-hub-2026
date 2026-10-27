@@ -218,12 +218,14 @@ export default async function PodcastPage({
         {faq.length > 0 && (
           <>
             <Rule left="04" right={kickerOf(d.faqTitle)} />
-            <section className={`wrap ${det.sez} ${det.duo}`}>
-              <Reveal as="h2" className={`display-thin ${det.h2}`}>
-                {d.faqTitle}
-              </Reveal>
-              <PointsAccordion items={faq} plain />
-            </section>
+            <div className={det.faqBand}>
+              <section className={`wrap ${det.sez} ${det.duo}`}>
+                <Reveal as="h2" className={`display-thin ${det.h2}`}>
+                  {d.faqTitle}
+                </Reveal>
+                <PointsAccordion items={faq} plain />
+              </section>
+            </div>
           </>
         )}
 

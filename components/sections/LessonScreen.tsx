@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import {
   ArrowLink,
-  Marquee,
   Reveal,
   RevealGroup,
   Rule,
@@ -352,14 +351,14 @@ export function LessonScreen({
             <span className={`mono ${styles.creditsLabel}`}>
               {creditsLabel}
             </span>
-            <Marquee
-              speed={34}
-              items={credits.map((c) => (
+            {/* revisione 27/10: via il marquee — i nomi stanno fermi */}
+            <div className={styles.creditRow}>
+              {credits.map((c) => (
                 <span key={c} className={styles.credit}>
                   {c}
                 </span>
               ))}
-            />
+            </div>
           </div>
         )}
 

@@ -137,9 +137,9 @@ export default async function StudiosPage({
 
         <Rule left={t.studios.kicker} right={t.studios.servicesKicker} />
 
-        {/* ————— i servizi st.01–06: nel mockup vengono subito dopo
-            l'hero, prima del manifesto e della galleria degli spazi ————— */}
-        <section className={styles.sez} id="mix-mastering">
+        {/* ————— i sei servizi, subito dopo l'hero: fascia nera (il
+            "ritmo scuro" chiesto in revisione) con card alla Vercel ————— */}
+        <section className={`scheme-dark ${styles.sez}`} id="mix-mastering">
           <div className="wrap">
             <SectionHeader
               kicker={t.studios.servicesKicker}
@@ -150,7 +150,7 @@ export default async function StudiosPage({
               {services.map((service, i) => (
                 <Reveal key={service.n} delay={i * 60}>
                   <Card
-                    kicker={service.n}
+                    kicker={service.n.replace(/^st\./, '')}
                     title={service.title}
                     href={localeHref(locale, service.href)}
                     className={styles.spaceCard}
@@ -226,7 +226,7 @@ export default async function StudiosPage({
               {spaces.map((space, i) => (
                 <Reveal key={space._id} delay={(i % 3) * 60}>
                   <Card
-                    kicker={`s.0${i + 1}`}
+                    kicker={`0${i + 1}`}
                     title={l(space.title, locale)}
                     className={styles.spaceCard}
                   >
@@ -242,26 +242,6 @@ export default async function StudiosPage({
                         ))}
                       </ul>
                     )}
-                  </Card>
-                </Reveal>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ————— perché registrare qui ————— */}
-        <section className={styles.sez}>
-          <div className="wrap">
-            <SectionHeader kicker={t.studios.whyKicker} title={t.studios.whyTitle} />
-            <div className={styles.services}>
-              {t.studios.why.map((item, i) => (
-                <Reveal key={item.n} delay={i * 60}>
-                  <Card
-                    kicker={`${item.n} ${item.kicker}`}
-                    title={item.title}
-                    className={styles.spaceCard}
-                  >
-                    {item.text}
                   </Card>
                 </Reveal>
               ))}
@@ -378,8 +358,9 @@ export default async function StudiosPage({
           </section>
         </div>
 
-        {/* ————— faq ————— */}
-        <section className={styles.sez}>
+        {/* ————— faq: una delle due sole fasce arancio rimaste (revisione
+            27/10: arancio solo su specchietti e faq) ————— */}
+        <section className={`${styles.sez} ${det.faqBand}`}>
           <div className="wrap">
             <SectionHeader kicker={t.studios.faqKicker} title={t.studios.faqTitle} />
             <PointsAccordion items={t.studios.faq} plain />

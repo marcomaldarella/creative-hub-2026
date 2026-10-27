@@ -299,34 +299,18 @@ export function Nav({
       {topbar && topOpen && (
         <div className={styles.topbar}>
           <span className={styles.topLeft}>{topbar.left}</span>
-          {/* marquee infinito al centro: due gruppi identici, loop -50% */}
-          <span
-            className={`scroller-fade ${styles.topMid}`}
-            aria-label={topbar.middle}
-          >
-            <span className={styles.topTrack}>
-              {[0, 1].map((copy) => (
-                <span
-                  key={copy}
-                  className={styles.topGroup}
-                  aria-hidden={copy === 1 ? 'true' : undefined}
-                >
-                  {[0, 1, 2].map((i) => (
-                    <span key={i} className={styles.topPair}>
-                      {topbar.middle}
-                      <a
-                        href={topbar.ctaHref}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={styles.topCta}
-                        tabIndex={copy === 1 || i > 0 ? -1 : undefined}
-                      >
-                        {topbar.cta} <Arrow size={12} />
-                      </a>
-                    </span>
-                  ))}
-                </span>
-              ))}
+          {/* revisione 27/10: via il marquee — una sola copia, ferma */}
+          <span className={styles.topMid}>
+            <span className={styles.topPair}>
+              {topbar.middle}
+              <a
+                href={topbar.ctaHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.topCta}
+              >
+                {topbar.cta} <Arrow size={12} />
+              </a>
             </span>
           </span>
           <span className={styles.topRight}>

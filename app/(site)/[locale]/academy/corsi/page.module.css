@@ -162,3 +162,24 @@
 .kicker::first-letter {
   text-transform: uppercase;
 }
+
+
+/* ————— mobile (27/10): breadcrumb e "torna a" sulla STESSA riga ————— */
+@media (max-width: 860px) {
+  .back {
+    display: inline-flex;
+    vertical-align: middle;
+    margin-bottom: 0;
+    margin-right: 16px;
+  }
+
+  .back + .kicker {
+    display: inline-flex;
+    vertical-align: middle;
+    margin-bottom: 0;
+  }
+
+  .back + .kicker + * {
+    margin-top: 14px;
+  }
+}

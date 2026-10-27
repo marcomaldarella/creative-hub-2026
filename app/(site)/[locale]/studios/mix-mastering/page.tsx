@@ -173,7 +173,7 @@ export default async function MixMasteringPage({
         </section>
 
         {/* ————— promo Dolby Atmos: fascia nera, rimando interno ————— */}
-        <div className={`scheme-dark ${det.promo}`}>
+        <div className={det.promoAccent}>
           <section className={`wrap ${det.sez}`}>
             <Reveal as="h2" className={`display-thin ${det.promoTitle}`}>
               {d.atmosTitle}
@@ -183,7 +183,8 @@ export default async function MixMasteringPage({
             </Reveal>
             <Reveal delay={160}>
               <Button
-                variant="azzurro"
+                variant="ghost"
+                className={det.btnInk}
                 href={localeHref(locale, '/studios/dolby-atmos')}
               >
                 {d.atmosCta}
@@ -194,12 +195,14 @@ export default async function MixMasteringPage({
 
         {/* ————— domande frequenti: le voci dei mockup ————— */}
         <Rule left="04" right={kickerOf(d.faqTitle)} />
-        <section className={`wrap ${det.sez} ${det.duo}`}>
-          <Reveal as="h2" className={`display-thin ${det.h2}`}>
-            {d.faqTitle}
-          </Reveal>
-          <PointsAccordion items={d.faq} plain />
-        </section>
+        <div className={det.faqBand}>
+          <section className={`wrap ${det.sez} ${det.duo}`}>
+            <Reveal as="h2" className={`display-thin ${det.h2}`}>
+              {d.faqTitle}
+            </Reveal>
+            <PointsAccordion items={d.faq} plain />
+          </section>
+        </div>
 
         {/* ————— chiusura: mandaci il brano ————— */}
         <div className={`scheme-dark ${det.dark}`}>

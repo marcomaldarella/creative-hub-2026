@@ -571,3 +571,59 @@
 .kicker::first-letter {
   text-transform: uppercase;
 }
+
+/* ————— revisione 27/10: l'arancio vive SOLO qui —————
+   fascia FAQ e specchietti in colore pieno, inchiostro nero. I token
+   vanno ridefiniti espliciti: la fascia deve leggersi uguale dentro una
+   pagina nera (scheme-dark) e su fondo chiaro. */
+.faqBand {
+  background: var(--arancio);
+  --fg: #0a0a0a;
+  --fg-2: color-mix(in srgb, #0a0a0a 64%, transparent);
+  --line: color-mix(in srgb, #0a0a0a 30%, transparent);
+  --accent-ink: #0a0a0a;
+  color: var(--fg);
+}
+
+/* specchietto arancio (es. promo arrangiamento): stessa palette della
+   fascia FAQ */
+.promoAccent {
+  background: var(--arancio);
+  --fg: #0a0a0a;
+  --fg-2: color-mix(in srgb, #0a0a0a 64%, transparent);
+  --line: color-mix(in srgb, #0a0a0a 30%, transparent);
+  --accent-ink: #0a0a0a;
+  color: var(--fg);
+}
+
+/* CTA sugli specchietti arancio: pastiglia d'inchiostro pieno (nessuna
+   variante Button è neutra: ghost + classe doppiata) */
+.btnInk.btnInk {
+  background: var(--fg);
+  border-color: var(--fg);
+  color: #ffffff;
+}
+
+.btnInk.btnInk:hover {
+  background: color-mix(in srgb, var(--fg) 84%, var(--arancio));
+}
+
+/* ————— mobile: breadcrumb e "torna a" sulla STESSA riga ————— */
+@media (max-width: 860px) {
+  .back {
+    display: inline-flex;
+    vertical-align: middle;
+    margin-bottom: 0;
+    margin-right: 16px;
+  }
+
+  .back + .kicker {
+    display: inline-flex;
+    vertical-align: middle;
+    margin-bottom: 0;
+  }
+
+  .back + .kicker + * {
+    margin-top: 14px;
+  }
+}

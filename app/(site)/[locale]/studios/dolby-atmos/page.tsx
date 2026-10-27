@@ -4,7 +4,6 @@ import { notFound } from 'next/navigation'
 import {
   ArrowLink,
   Button,
-  Marquee,
   Reveal,
   RevealGroup,
   Rule,
@@ -184,28 +183,6 @@ export default async function DolbyAtmosPage({
           </div>
         </header>
 
-        {/* ————— fascia marquee: la frase del mockup, nel nostro stile ————— */}
-        <div className={`scheme-dark ${styles.mq}`}>
-          <Marquee
-            dark
-            speed={30}
-            items={[
-              <span key="t" className={styles.mqText}>
-                {d.marquee}
-              </span>,
-              <Button
-                key="b"
-                variant="azzurro"
-                className={styles.mqBtn}
-                href={mailBook}
-                external
-              >
-                {d.talk}
-              </Button>,
-            ]}
-          />
-        </div>
-
         {/* ————— barra delle pagine di sezione (mockup) ————— */}
         <SectionPagesNav locale={locale} base="/studios" current="/studios/dolby-atmos" />
 
@@ -280,7 +257,7 @@ export default async function DolbyAtmosPage({
         </section>
 
         {/* ————— promo remix: fascia nera ————— */}
-        <div className={`scheme-dark ${det.promo}`}>
+        <div className={det.promoAccent}>
           <section className={`wrap ${det.sez}`}>
             <Reveal as="span" className={`mono ${styles.bandKicker}`}>
               {d.remixKicker}
@@ -292,7 +269,7 @@ export default async function DolbyAtmosPage({
               {d.remixText}
             </Reveal>
             <Reveal delay={180}>
-              <Button variant="azzurro" href={mailRemix} external>
+              <Button variant="ghost" className={det.btnInk} href={mailRemix} external>
                 {d.remixCta}
               </Button>
             </Reveal>
@@ -321,12 +298,14 @@ export default async function DolbyAtmosPage({
         {faq.length > 0 && (
           <>
             <Rule left="04" right={kickerOf(d.faqTitle)} />
-            <section className={`wrap ${det.sez} ${det.duo}`}>
-              <Reveal as="h2" className={`display-thin ${det.h2}`}>
-                {d.faqTitle}
-              </Reveal>
-              <PointsAccordion items={faq} plain />
-            </section>
+            <div className={det.faqBand}>
+              <section className={`wrap ${det.sez} ${det.duo}`}>
+                <Reveal as="h2" className={`display-thin ${det.h2}`}>
+                  {d.faqTitle}
+                </Reveal>
+                <PointsAccordion items={faq} plain />
+              </section>
+            </div>
           </>
         )}
 
