@@ -569,6 +569,9 @@
    vanno ridefiniti espliciti: la fascia deve leggersi uguale dentro una
    pagina nera (scheme-dark) e su fondo chiaro. */
 .faqBand {
+  /* i margini dei figli (Rule) non devono collassare FUORI dalla
+     fascia: senza flow-root restava un filo bianco sopra il colore */
+  display: flow-root;
   background: var(--arancio);
   --fg: #0a0a0a;
   --fg-2: color-mix(in srgb, #0a0a0a 64%, transparent);
@@ -596,6 +599,9 @@
    pagine studio resta nel colore di sezione anche quando il resto della
    pagina è nero */
 .headAccent {
+  /* i margini dei figli (Rule) non devono collassare FUORI dalla
+     fascia: senza flow-root restava un filo bianco sopra il colore */
+  display: flow-root;
   background: var(--arancio);
   --fg: #0a0a0a;
   --fg-2: color-mix(in srgb, #0a0a0a 64%, transparent);
@@ -607,6 +613,9 @@
 /* specchietto arancio (es. promo arrangiamento): stessa palette della
    fascia FAQ */
 .promoAccent {
+  /* i margini dei figli (Rule) non devono collassare FUORI dalla
+     fascia: senza flow-root restava un filo bianco sopra il colore */
+  display: flow-root;
   background: var(--arancio);
   --fg: #0a0a0a;
   --fg-2: color-mix(in srgb, #0a0a0a 64%, transparent);

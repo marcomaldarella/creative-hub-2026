@@ -172,22 +172,43 @@ export default async function MixMasteringPage({
           </Reveal>
         </section>
 
-        {/* ————— promo Dolby Atmos: fascia nera, rimando interno ————— */}
+        {/* ————— promo Dolby Atmos: fascia nera a due colonne — testi a
+            sinistra, lockup Dolby Atmos in bianco a destra su un palco
+            con profondità alla Vercel (richiesta 27/10) ————— */}
         <div className={`scheme-dark ${det.promo}`}>
-          <section className={`wrap ${det.sez}`}>
-            <Reveal as="h2" className={`display-thin ${det.promoTitle}`}>
-              {d.atmosTitle}
-            </Reveal>
-            <Reveal as="p" className={det.promoText} delay={80}>
-              {d.atmosText}
-            </Reveal>
-            <Reveal delay={160}>
-              <Button
-                variant="azzurro"
-                href={localeHref(locale, '/studios/dolby-atmos')}
-              >
-                {d.atmosCta}
-              </Button>
+          <section className={`wrap ${det.sez} ${styles.atmosDuo}`}>
+            <div>
+              <Reveal as="h2" className={`display-thin ${det.promoTitle}`}>
+                {d.atmosTitle}
+              </Reveal>
+              <Reveal as="p" className={det.promoText} delay={80}>
+                {d.atmosText}
+              </Reveal>
+              <Reveal delay={160}>
+                <Button
+                  variant="azzurro"
+                  href={localeHref(locale, '/studios/dolby-atmos')}
+                >
+                  {d.atmosCta}
+                </Button>
+              </Reveal>
+            </div>
+            <Reveal className={styles.atmosStage} delay={120}>
+              <span
+                className={styles.atmosLogo}
+                role="img"
+                aria-label="Dolby Atmos"
+                style={{
+                  maskImage: 'url(/img/partners-studio/dolby-bianco.svg)',
+                  WebkitMaskImage:
+                    'url(/img/partners-studio/dolby-bianco.svg)',
+                }}
+              />
+              {/* la riga ATMOS del lockup ufficiale: caps spaziati — è la
+                  riproduzione del logo, non testo UI (deroga al tracking) */}
+              <span className={styles.atmosWord} aria-hidden="true">
+                ATMOS
+              </span>
             </Reveal>
           </section>
         </div>

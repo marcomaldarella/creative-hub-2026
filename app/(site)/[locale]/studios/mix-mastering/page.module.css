@@ -29,3 +29,99 @@ h3.svcTitle {
 .factLogo {
   margin: 3px 0 5px;
 }
+
+/* ————— promo atmos a due colonne: palco del logo a destra ————— */
+
+.atmosDuo {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: clamp(24px, 4vw, 72px);
+  align-items: center;
+}
+
+/* il palco: superficie quasi-nera alla Vercel, spotlight radiale e due
+   anelli hairline a dare profondità dietro al lockup */
+.atmosStage {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      62% 56% at 50% 44%,
+      rgba(255, 255, 255, 0.1),
+      transparent 72%
+    ),
+    #0f0f0f;
+  border: 1px solid #2a2a2a;
+  border-radius: 8px;
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.atmosStage::before,
+.atmosStage::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -52%);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.atmosStage::before {
+  width: 82%;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.atmosStage::after {
+  width: 54%;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+/* il lockup Dolby in maschera bianca (lo stesso svg dei partner) */
+.atmosLogo {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: min(64%, 330px);
+  aspect-ratio: 560 / 300;
+  background: #ffffff;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  -webkit-mask-size: contain;
+}
+
+/* riga ATMOS del lockup: riproduzione del marchio, caps spaziati —
+   il margine negativo a destra ricentra l'ultima spaziatura */
+.atmosWord {
+  position: relative;
+  z-index: 1;
+  margin-top: -2px;
+  font-weight: 700;
+  font-size: clamp(20px, 2vw, 30px);
+  line-height: 1;
+  letter-spacing: 0.32em;
+  margin-right: -0.32em;
+  color: #ffffff;
+}
+
+@media (max-width: 860px) {
+  .atmosDuo {
+    grid-template-columns: 1fr;
+  }
+
+  .atmosStage {
+    margin-top: 8px;
+    aspect-ratio: 16 / 10;
+  }
+}
