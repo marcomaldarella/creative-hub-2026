@@ -289,8 +289,8 @@
 }
 
 .numbersKicker {
+  composes: titoletto from global;
   display: block;
-  color: var(--fg-2);
   margin-bottom: 18px;
 }
 

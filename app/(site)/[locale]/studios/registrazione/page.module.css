@@ -3,6 +3,7 @@
 
 /* etichetta mono sopra i titoli delle fasce nere */
 .bandKicker {
+  composes: titoletto from global;
   display: block;
   margin-bottom: 16px;
 }

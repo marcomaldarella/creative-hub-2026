@@ -598,6 +598,25 @@
   color: var(--fg);
 }
 
+/* testate studio: altezza UNIFORME su tutte le pagine (27/10) — il
+   primo schermo pieno (viewport meno header e barra di sezione),
+   qualunque sia la quantità di testo; la foto si stira a riempire */
+@media (min-width: 861px) {
+  /* il max() col pavimento fisso copre la pagina più piena
+     (registrazione): così le sei testate sono IDENTICHE anche quando il
+     primo schermo è più basso del contenuto più lungo */
+  .headAccent .headGrid {
+    min-height: max(calc(100svh - var(--header-h) - 58px), 980px);
+  }
+
+  /* i testi si centrano sull'altezza piena, come sulla landing */
+  .headAccent .headGrid > :first-child {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
 /* testata ARANCIO su pagina nera (registrazione, 27/10): la hero delle
    pagine studio resta nel colore di sezione anche quando il resto della
    pagina è nero */

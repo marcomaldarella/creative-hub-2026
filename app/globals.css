@@ -205,6 +205,10 @@
 .scheme-dark {
   background: var(--bg);
   color: var(--fg);
+  /* i margini dei figli (Rule, titoli) NON devono collassare fuori dalla
+     fascia: senza flow-root restava un filo chiaro tra due blocchi neri
+     adiacenti (giunzioni sporche segnalate dal cliente, 27/10) */
+  display: flow-root;
   --bg: #000000;
   --surface: #111111;   /* grigio quasi nero, zero tinta: superficie card */
   --fg: #FAFAFA;

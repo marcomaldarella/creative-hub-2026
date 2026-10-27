@@ -3,6 +3,7 @@
 
 /* etichetta mono sopra i titoli delle fasce nere */
 .bandKicker {
+  composes: titoletto from global;
   display: block;
   margin-bottom: 16px;
 }
@@ -30,20 +31,31 @@
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: clamp(20px, 2.5vw, 36px);
+  align-items: end;
+}
+
+/* ogni cella: valore (testo o logo) appoggiato su una BASE comune e
+   didascalia sotto, tutte alla stessa quota (27/10) */
+.specs > :global(.rv) {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: clamp(96px, 9vw, 130px);
 }
 
 .specT {
   display: block;
   font-size: clamp(30px, 3.6vw, 56px);
   letter-spacing: -0.04em;
-  line-height: 1;
+  line-height: 0.9;
 }
 
+/* didascalie come i titoletti: semibold, inchiostro pieno, iniziale
+   maiuscola, tutte alla stessa altezza */
 .specS {
+  composes: titoletto from global;
   display: block;
-  font-size: 13px;
-  color: var(--fg-2);
-  margin-top: 8px;
+  margin-top: 14px;
 }
 
 @media (max-width: 860px) {
@@ -94,10 +106,9 @@ div.appCard {
   width: clamp(120px, 13vw, 170px);
   background: currentColor;
   mask-repeat: no-repeat;
-  mask-position: left center;
+  mask-position: left bottom;
   mask-size: contain;
   -webkit-mask-repeat: no-repeat;
-  -webkit-mask-position: left center;
+  -webkit-mask-position: left bottom;
   -webkit-mask-size: contain;
-  margin-bottom: 10px;
 }
