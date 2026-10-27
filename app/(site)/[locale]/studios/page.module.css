@@ -23,12 +23,14 @@
 /* ————— hero ————— */
 
 /* hero a due colonne (revisione 27/10): testi a sinistra, foto a DESTRA
-   a tutta altezza della testata e a filo del bordo pagina */
+   a filo del bordo pagina. L'hero riempie il PRIMO SCHERMO: la foto
+   scende fino al taglio con la barra di sezione, non si ferma a metà */
 .head {
   display: grid;
   grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
   gap: clamp(24px, 4vw, 64px);
   align-items: stretch;
+  min-height: calc(100svh - var(--header-h));
 }
 
 .headMedia {
@@ -53,12 +55,19 @@
   padding-left: var(--pad);
   padding-top: clamp(32px, 4.5vw, 56px);
   padding-bottom: clamp(32px, 4.5vw, 56px);
+  /* testi centrati sull'altezza piena del primo schermo */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 @media (max-width: 860px) {
   .head {
     grid-template-columns: 1fr;
     align-items: start;
+    /* in colonna l'altezza la fanno i contenuti: il min-height da primo
+       schermo vale solo sul layout a due colonne */
+    min-height: 0;
   }
 
   /* su mobile la foto resta SOPRA i testi, a tutta larghezza */

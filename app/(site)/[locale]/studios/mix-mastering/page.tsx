@@ -60,9 +60,9 @@ export default async function MixMasteringPage({
 
   return (
     <SiteChrome locale={locale} path="/studios/mix-mastering">
-      <main className={det.main}>
+      <main className={`${det.main} ${det.mainNeutral}`}>
         {/* ————— testata: testo a sinistra, console a destra ————— */}
-        <header className={`wrap ${det.head}`}>
+        <header className={`wrap ${det.head} ${det.headAccent}`}>
           <div className={det.headGrid}>
             <div>
               <Reveal className={det.back}>
@@ -193,8 +193,8 @@ export default async function MixMasteringPage({
         </div>
 
         {/* ————— domande frequenti: le voci dei mockup ————— */}
-        <Rule left="04" right={kickerOf(d.faqTitle)} />
         <div className={det.faqBand}>
+          <Rule left="04" right={kickerOf(d.faqTitle)} />
           <section className={`wrap ${det.sez} ${det.duo}`}>
             <Reveal as="h2" className={`display-thin ${det.h2}`}>
               {d.faqTitle}

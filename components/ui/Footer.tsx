@@ -110,10 +110,18 @@ export function Footer({
         </div>
       </div>
 
-      {/* type gigante croppato al bordo, come le cover del manuale —
-          FERMO (revisione 27/10: via tutti i marquee) */}
+      {/* type gigante croppato al bordo, come le cover del manuale:
+          marquee infinito (due metà identiche, loop -50%; due copie per
+          metà così il gruppo supera sempre il viewport, niente buchi) */}
       <div className={`display-black ${styles.giant}`} aria-hidden="true">
-        <span className={styles.giantWord}><b>creative</b>hub</span>
+        <div className={styles.giantTrack}>
+          {[0, 1].map((half) => (
+            <span key={half} className={styles.giantGroup}>
+              <span className={styles.giantWord}><b>creative</b>hub</span>
+              <span className={styles.giantWord}><b>creative</b>hub</span>
+            </span>
+          ))}
+        </div>
       </div>
     </footer>
   );

@@ -34,8 +34,18 @@
   display: flex;
   align-items: stretch;
   gap: clamp(14px, 1.8vw, 26px);
-  /* niente padding di coda qui: la sfumatura si accende solo quando la
-     fila sborda (ScrollerRow) e si porta dietro il proprio spazio */
+  /* snap sulle voci (richiesta 27/10): la fila si aggancia alla pillola,
+     niente fermate a metà */
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: 2px;
+  /* spazio di coda: a fine corsa l'ultima pillola non resta a filo del
+     taglio (il padding vero lo porta il wrap, questo è il respiro
+     DENTRO la fila che scorre) */
+  padding-right: 10px;
+}
+
+.row a {
+  scroll-snap-align: start;
 }
 
 /* le voci sono PILLOLE nel colore di sezione (richiesta cliente):

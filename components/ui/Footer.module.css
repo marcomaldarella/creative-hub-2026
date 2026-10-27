@@ -100,8 +100,8 @@
 }
 
 
-/* il wordmark gigante esce dal bordo inferiore (crop da manuale) —
-   fermo dal 27/10 (via tutti i marquee) */
+/* il wordmark gigante esce dal bordo inferiore (crop da manuale)
+   e scorre in marquee infinito */
 .giant {
   white-space: nowrap;
   overflow: hidden;
@@ -116,10 +116,32 @@
   pointer-events: none;
 }
 
+.giantTrack {
+  display: flex;
+  width: max-content;
+  animation: giantScroll 60s linear infinite;
+  backface-visibility: hidden;
+}
+
+/* padding-right = gap: il loop -50% resta seamless */
+.giantGroup {
+  display: flex;
+}
+
 .giantWord {
+  padding-right: 0.45em;
   font-weight: 400;
 }
 
 .giantWord b {
   font-weight: 700;
+}
+
+@keyframes giantScroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
 }

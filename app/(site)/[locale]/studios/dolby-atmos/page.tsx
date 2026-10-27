@@ -138,9 +138,9 @@ export default async function DolbyAtmosPage({
 
   return (
     <SiteChrome locale={locale} path="/studios/dolby-atmos">
-      <main className={det.main}>
+      <main className={`${det.main} ${det.mainNeutral}`}>
         {/* ————— testata: testo a sinistra, regia a destra ————— */}
-        <header className={`wrap ${det.head}`}>
+        <header className={`wrap ${det.head} ${det.headAccent}`}>
           <div className={det.headGrid}>
             <div>
               <Reveal className={det.back}>
@@ -229,7 +229,9 @@ export default async function DolbyAtmosPage({
           </div>
         </div>
 
-        {/* ————— per cosa si usa: quattro card a foto piena ————— */}
+        {/* ————— per cosa si usa: card a foto piena, a COPPIE su fascia
+            nera (richiesta 27/10) ————— */}
+        <div className="scheme-dark">
         <Rule left="02" right={kickerOf(d.usesTitle)} />
         <section className={`wrap ${det.sez}`}>
           <SectionHeader title={d.usesTitle} lede={usesLede} />
@@ -255,6 +257,7 @@ export default async function DolbyAtmosPage({
             ))}
           </RevealGroup>
         </section>
+        </div>
 
         {/* ————— promo remix: fascia nera ————— */}
         <div className={`scheme-dark ${det.promo}`}>
@@ -297,8 +300,8 @@ export default async function DolbyAtmosPage({
         {/* ————— domande sull'Atmos: solo le coppie con risposta in Sanity ————— */}
         {faq.length > 0 && (
           <>
-            <Rule left="04" right={kickerOf(d.faqTitle)} />
             <div className={det.faqBand}>
+              <Rule left="04" right={kickerOf(d.faqTitle)} />
               <section className={`wrap ${det.sez} ${det.duo}`}>
                 <Reveal as="h2" className={`display-thin ${det.h2}`}>
                   {d.faqTitle}

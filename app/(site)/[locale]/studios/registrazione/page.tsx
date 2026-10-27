@@ -65,8 +65,9 @@ export default async function RegistrazionePage({
       {/* revisione 27/10: TUTTA la pagina è nera, tranne FAQ e lo
           specchietto arrangiamento (arancio) */}
       <main className={`scheme-dark ${det.main}`}>
-        {/* ————— testata: testo a sinistra, live room a destra ————— */}
-        <header className={`wrap ${det.head}`}>
+        {/* ————— testata: testo a sinistra, live room a destra — ARANCIO
+            come le sorelle, anche se il resto della pagina è nero ————— */}
+        <header className={`wrap ${det.head} ${det.headAccent}`}>
           <div className={det.headGrid}>
             <div>
               <Reveal className={det.back}>

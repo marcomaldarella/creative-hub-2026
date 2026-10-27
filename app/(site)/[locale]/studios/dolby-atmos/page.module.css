@@ -19,6 +19,9 @@
 
 .manifestoDim {
   color: var(--fg-2);
+  /* "Chi ascolta non sente un brano: ci sta dentro." va A CAPO
+     (richiesta 27/10) */
+  display: block;
 }
 
 /* ————— la regia atmos: quattro voci grandi in fascia nera ————— */
@@ -51,16 +54,11 @@
 
 /* ————— per cosa si usa: card a foto piena (modulo uni) ————— */
 
+/* a COPPIE di due (richiesta 27/10): due card per riga, grandi */
 .apps {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
-}
-
-@media (max-width: 1100px) {
-  .apps {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
 }
 
 @media (max-width: 560px) {

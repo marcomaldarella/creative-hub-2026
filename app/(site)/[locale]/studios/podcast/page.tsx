@@ -108,9 +108,9 @@ export default async function PodcastPage({
 
   return (
     <SiteChrome locale={locale} path="/studios/podcast">
-      <main className={det.main}>
+      <main className={`${det.main} ${det.mainNeutral}`}>
         {/* ————— testata: testo a sinistra, regia a destra ————— */}
-        <header className={`wrap ${det.head}`}>
+        <header className={`wrap ${det.head} ${det.headAccent}`}>
           <div className={det.headGrid}>
             <div>
               <Reveal className={det.back}>
@@ -217,8 +217,8 @@ export default async function PodcastPage({
         {/* ————— domande frequenti: solo le coppie con risposta in Sanity ————— */}
         {faq.length > 0 && (
           <>
-            <Rule left="04" right={kickerOf(d.faqTitle)} />
             <div className={det.faqBand}>
+              <Rule left="04" right={kickerOf(d.faqTitle)} />
               <section className={`wrap ${det.sez} ${det.duo}`}>
                 <Reveal as="h2" className={`display-thin ${det.h2}`}>
                   {d.faqTitle}

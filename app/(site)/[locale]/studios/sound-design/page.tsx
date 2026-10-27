@@ -133,9 +133,9 @@ export default async function SoundDesignPage({
 
   return (
     <SiteChrome locale={locale} path="/studios/sound-design">
-      <main className={det.main}>
+      <main className={`scheme-dark ${det.main}`}>
         {/* ————— testata: testo a sinistra, regia a destra ————— */}
-        <header className={`wrap ${det.head}`}>
+        <header className={`wrap ${det.head} ${det.headAccent}`}>
           <div className={det.headGrid}>
             <div>
               <Reveal className={det.back}>
@@ -271,8 +271,8 @@ export default async function SoundDesignPage({
         {/* ————— domande frequenti: solo le coppie con risposta in Sanity ————— */}
         {faq.length > 0 && (
           <>
-            <Rule left="04" right={kickerOf(d.faqTitle)} />
             <div className={det.faqBand}>
+              <Rule left="04" right={kickerOf(d.faqTitle)} />
               <section className={`wrap ${det.sez} ${det.duo}`}>
                 <Reveal as="h2" className={`display-thin ${det.h2}`}>
                   {d.faqTitle}
@@ -294,9 +294,15 @@ export default async function SoundDesignPage({
               {masterText}
             </Reveal>
             <Reveal delay={80}>
-              <ArrowLink href={localeHref(locale, '/academy/corsi')} dir="e">
+              <Button
+                variant="azzurro"
+                href={localeHref(
+                  locale,
+                  '/academy/professional-production-sound-design'
+                )}
+              >
                 {d.masterCta}
-              </ArrowLink>
+              </Button>
             </Reveal>
           </div>
         </section>
