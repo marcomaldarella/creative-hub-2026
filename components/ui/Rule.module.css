@@ -10,10 +10,19 @@
   padding: 0 var(--pad);
 }
 
-/* le etichette non devono alzare la riga: altezza fissa e allineata */
-.label {
+/* le etichette non devono alzare la riga: altezza fissa e allineata.
+   Stile allineato ai titoletti di sezione (27/10): un punto in più,
+   semibold, inchiostro pieno, iniziale maiuscola */
+.rule .label {
   line-height: 1;
   white-space: nowrap;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--fg);
+}
+
+.rule .label::first-letter {
+  text-transform: uppercase;
 }
 
 .line {
