@@ -144,7 +144,6 @@ export function LessonScreen({
     (t.lesson.creditsLabelBySlug as Record<string, string>)[slugNow] ??
     t.lesson.creditsLabel
 
-  const academyPath = localeHref(locale, '/academy')
   /* il tasto indietro riporta all'indice delle lezioni su misura, non
      all'academy intera (richiesta cliente) */
   const indicePath = localeHref(locale, '/academy/corsi-custom')

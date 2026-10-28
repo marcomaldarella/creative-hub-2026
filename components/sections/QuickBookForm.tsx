@@ -25,14 +25,12 @@ export function QuickBookForm({
   labels,
   subject,
   moreHref,
-  privacyHref,
   options,
   optionsLabel,
 }: {
   labels: QuickBookLabels
   subject: string
   moreHref: string
-  privacyHref?: string
   /** formule scegliibili: nome, riga piccola e prezzo. Con `href` la
       riga è un link che apre direttamente la scheda prodotto WordPress
       (stessa scheda); senza, resta la scelta per la richiesta rapida */
@@ -187,7 +185,6 @@ export function QuickBookForm({
         <Link className={styles.more} href={moreHref}>
           {labels.more}
         </Link>
-        {privacyHref ? '' : ''}
       </p>
     </form>
   )

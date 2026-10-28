@@ -107,11 +107,6 @@ export const COWORKING_ROW_SLUGS: string[] = [
   'area-culture',
 ]
 
-/** listino di categoria sullo shop (per le voci senza prodotto) */
-export function shopCategoryUrl(category: WcCategory): string {
-  return `${SHOP_BASE}/categoria-prodotto/${category}/`
-}
-
 /** prezzo in centesimi → "9,50 €" / "9.50 €" (vuoto se su richiesta) */
 export function formatPrice(cents: number, locale: 'it' | 'en'): string {
   if (!cents) return ''

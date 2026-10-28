@@ -50,7 +50,6 @@ export default async function IncubazioneAccelerazionePage({
   const c = t.innovationSub.createch
   const settings = await getSiteSettings()
 
-  const ctaMailto = `mailto:info@createch.it?subject=${encodeURIComponent(c.ctaTitle)}`
 
   return (
     <SiteChrome locale={locale} path="/innovazione/incubazione-accelerazione">

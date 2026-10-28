@@ -82,7 +82,6 @@ export default async function BandiPage({
   /* etichetta della Rule: il titolo d'elenco, minuscolo e senza punto */
   const listKicker = d.listTitle.toLowerCase().replace(/\.$/, '')
 
-  const mailto = `mailto:hello@bologna-creativehub.it?subject=${encodeURIComponent(d.ctaTitle)}`
 
   return (
     <SiteChrome locale={locale} path="/innovazione/bandi">
