@@ -498,7 +498,7 @@
     "cardCta": "discover the course"
   },
   "studios": {
-    "kicker": "Studio · roveri district, bologna",
+    "kicker": "Studio · Roveri district, bologna",
     "title": "Recording studio in Bologna.\nSSL control room, Dolby Atmos, a 60 m² live room.",
     "lede": "Creative Hub SSL Recording Studio: 120 m² of tracking and control rooms, for artists, bands, productions and companies. From the idea to the master.",
     "spacesKicker": "the spaces",
@@ -675,7 +675,7 @@
     "heroCta": "Tell us about your project"
   },
   "coworking": {
-    "kicker": "Coworking · roveri district, bologna",
+    "kicker": "Coworking · Roveri district, bologna",
     "title": "Coworking in Bologna.\nA space that matches your work.",
     "lede": "A bright open space inside a 2,000 m² hub for the creative industries. At the next desk there may be a designer, a startup or an agency: at break time you all meet in the banano room.",
     "spacesKicker": "the plans",
@@ -996,7 +996,7 @@
   "innovation": {
     "metaTitle": "Incubator and accelerator for creative startups in Bologna | Creative Hub",
     "metaDesc": "Free incubation, acceleration and business services for music, audiovisual, immersive tech and AI. CreaTech Venture Club, open calls and CTE COBO.",
-    "kicker": "Innovation · creative hub bologna",
+    "kicker": "Innovation · Creative hub bologna",
     "title": "Creative businesses are born here.",
     "lede": "Incubation, acceleration and business services for music, audiovisual, immersive technologies and artificial intelligence. Inside a hub that already has studios, classrooms and talent.",
     "heroCta": "Find your path",
@@ -1381,7 +1381,7 @@
       "title": "Open day in Bologna | Creative Hub Academy",
       "description": "Open day for Creative Hub Academy's university courses and tailor-made lessons: studios, teachers, workshops and live sessions. On site in Bologna or online. Free."
     },
-    "kicker": "Open day · via del tappezziere 4, bologna",
+    "kicker": "Open day · Via del tappezziere 4, bologna",
     "title": "Open day in Bologna.\nCome and see, bring your family too.",
     "lede": "Two open days, for two different paths: the university courses, for those who want to turn music into a job, and the tailor-made lessons, for those who want to play or sing for passion. Free, on site or live online.",
     "cards": {
@@ -1409,7 +1409,7 @@
       "next": "next section"
     },
     "uni": {
-      "kicker": "Open Day 01 · university courses",
+      "kicker": "Open Day 01 · University courses",
       "title": "The university courses open day.",
       "lede": "Three hours inside Creative Hub Academy, to find out whether a university course in music, sound or visual is the right path.",
       "text": "It is designed for students finishing high school, for those who want to change direction and for families who want to understand before choosing. You meet the teachers, who work in the industry, and the students taking the courses. You visit the spaces where classes are held. You leave with answers on admission, costs, scholarships and internships.",
@@ -1497,7 +1497,7 @@
       ]
     },
     "custom": {
-      "kicker": "Open Day 02 · tailor-made lessons",
+      "kicker": "Open Day 02 · Tailor-made lessons",
       "title": "The tailor-made lessons open day.",
       "lede": "An afternoon to meet the teachers, try playing together and understand how the lessons work.",
       "text": "It is for anyone who wants to learn an instrument, singing or production for passion, at any age: adults, teenagers and children from age 6, with their parents. You don't need to know how to play. The atmosphere is relaxed: you can make mistakes without pressure.",
@@ -1614,7 +1614,7 @@
     }
   },
   "uni": {
-    "kicker": "Academy · university programmes · A.Y. 27/28",
+    "kicker": "Academy · University programmes · A.Y. 27/28",
     "title": "University programmes in music, production and sound engineering in Bologna.",
     "lede": "Bachelor of Arts, Bachelor of Science, Master of Music. Internationally recognised degrees. Six programmes, three Masters, twenty places a year.",
     "ctaOpenDay": "Book the open day",
@@ -1934,7 +1934,7 @@
     }
   },
   "lesson": {
-    "kicker": "Academy · custom lessons",
+    "kicker": "Academy · Custom lessons",
     "titlePrefix": "Lessons:",
     "titleSuffix": "in Bologna.",
     "back": "Back to academy",
@@ -2442,7 +2442,7 @@
     }
   },
   "saleEventiPage": {
-    "kicker": "Coworking · rooms & events",
+    "kicker": "Coworking · Rooms & events",
     "facts": [
       "From 10 people to the main hall",
       "Live streaming from the main hall",
@@ -2785,7 +2785,7 @@
     "bandi": {
       "metaTitle": "Calls for creative startups and companies in Bologna | Creative Hub",
       "metaDesc": "Incubation and acceleration calls, regional and European programmes for the cultural and creative industries.",
-      "kicker": "Innovation · calls & opportunities",
+      "kicker": "Innovation · Calls & opportunities",
       "title": "Calls and opportunities for creative startups and companies.",
       "lede": "Incubation calls, acceleration programmes, regional and European projects. Open ones on top.",
       "listTitle": "All the opportunities.",

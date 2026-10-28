@@ -498,7 +498,7 @@
     "cardCta": "scopri il corso"
   },
   "studios": {
-    "kicker": "Studio · zona roveri, bologna",
+    "kicker": "Studio · Zona roveri, bologna",
     "title": "Studio di registrazione a Bologna.\nRegia SSL, Dolby Atmos, una sala da 60 m².",
     "lede": "Creative Hub SSL Recording Studio: 120 m² tra sala di ripresa e regia, per artisti, band, produzioni e aziende. Dall'idea al master.",
     "spacesKicker": "gli spazi",
@@ -675,7 +675,7 @@
     "heroCta": "Parlaci del tuo progetto"
   },
   "coworking": {
-    "kicker": "Coworking · zona roveri, bologna",
+    "kicker": "Coworking · Zona roveri, bologna",
     "title": "Coworking a Bologna.\nUno spazio all'altezza del tuo lavoro.",
     "lede": "Un open space luminoso dentro un hub di 2.000 m² dedicato alle industrie creative. Alla scrivania accanto può esserci un grafico, una startup o un'agenzia: in pausa vi trovate tutti nella banano room.",
     "spacesKicker": "le formule",
@@ -996,7 +996,7 @@
   "innovation": {
     "metaTitle": "Incubatore e acceleratore per startup creative a Bologna | Creative Hub",
     "metaDesc": "Incubazione gratuita, accelerazione e servizi alle imprese per musica, audiovisivo, tecnologie immersive e AI. CreaTech Venture Club, bandi e CTE COBO.",
-    "kicker": "Innovazione · creative hub bologna",
+    "kicker": "Innovazione · Creative hub bologna",
     "title": "Le imprese creative nascono qui.",
     "lede": "Incubazione, accelerazione e servizi alle imprese per musica, audiovisivo, tecnologie immersive e intelligenza artificiale. Dentro un hub dove ci sono già studi, aule e talenti.",
     "heroCta": "Trova il percorso giusto",
@@ -1381,7 +1381,7 @@
       "title": "Open day a Bologna | Creative Hub Academy",
       "description": "Open day dei corsi universitari e delle lezioni su misura di Creative Hub Academy: studi, docenti, workshop e live. In sede a Bologna o online. Gratuito."
     },
-    "kicker": "Open day · via del tappezziere 4, bologna",
+    "kicker": "Open day · Via del tappezziere 4, bologna",
     "title": "Open day a Bologna.\nVieni a vedere, anche con i tuoi.",
     "lede": "Due open day, per due strade diverse: i corsi universitari, per chi vuole fare della musica un lavoro, e le lezioni su misura, per chi vuole suonare o cantare per passione. Gratuiti, in sede o in diretta online.",
     "cards": {
@@ -1409,7 +1409,7 @@
       "next": "sezione successiva"
     },
     "uni": {
-      "kicker": "Open Day 01 · corsi universitari",
+      "kicker": "Open Day 01 · Corsi universitari",
       "title": "Open day dei corsi universitari.",
       "lede": "Tre ore dentro Creative Hub Academy, per capire se un corso universitario in musica, sound o visual è la strada giusta.",
       "text": "È pensato per chi sta finendo la scuola superiore, per chi vuole cambiare strada e per le famiglie che vogliono capire prima di scegliere. Conosci i docenti, che lavorano nel settore, e gli studenti che stanno facendo il corso. Visiti gli spazi in cui si fa lezione. Esci con le risposte su ammissione, costi, borse di studio e stage.",
@@ -1497,7 +1497,7 @@
       ]
     },
     "custom": {
-      "kicker": "Open Day 02 · lezioni su misura",
+      "kicker": "Open Day 02 · Lezioni su misura",
       "title": "Open day delle lezioni su misura.",
       "lede": "Un pomeriggio per conoscere gli insegnanti, provare a suonare insieme e capire come funzionano le lezioni.",
       "text": "È per chi vuole imparare uno strumento, il canto o la produzione per passione, a qualsiasi età: adulti, ragazzi e bambini dai 6 anni, con i genitori. Non serve saper suonare. L'ambiente è rilassato: si può sbagliare senza ansia.",
@@ -1614,7 +1614,7 @@
     }
   },
   "uni": {
-    "kicker": "Academy · corsi universitari · A.A. 27/28",
+    "kicker": "Academy · Corsi universitari · A.A. 27/28",
     "title": "Corsi universitari di musica, produzione e tecnico del suono a Bologna.",
     "lede": "Bachelor of Arts, Bachelor of Science, Master of Music. Titoli riconosciuti a livello internazionale. Sei corsi, tre Master, venti posti all'anno.",
     "ctaOpenDay": "Prenota l'open day",
@@ -1934,7 +1934,7 @@
     }
   },
   "lesson": {
-    "kicker": "Academy · lezioni su misura",
+    "kicker": "Academy · Lezioni su misura",
     "titlePrefix": "Lezioni di",
     "titleSuffix": "a Bologna.",
     "back": "Torna a academy",
@@ -2442,7 +2442,7 @@
     }
   },
   "saleEventiPage": {
-    "kicker": "Coworking · sale & eventi",
+    "kicker": "Coworking · Sale & eventi",
     "facts": [
       "Da 10 persone all'aula magna",
       "Dirette streaming dall'aula magna",
@@ -2785,7 +2785,7 @@
     "bandi": {
       "metaTitle": "Bandi per startup e imprese creative a Bologna | Creative Hub",
       "metaDesc": "Call di incubazione e accelerazione, programmi regionali ed europei per le industrie culturali e creative.",
-      "kicker": "Innovazione · bandi & opportunità",
+      "kicker": "Innovazione · Bandi & opportunità",
       "title": "Bandi e opportunità per startup e imprese creative.",
       "lede": "Call di incubazione, programmi di accelerazione, progetti regionali ed europei. Quelli aperti in cima.",
       "listTitle": "Tutte le opportunità.",

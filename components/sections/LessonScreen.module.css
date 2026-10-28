@@ -103,6 +103,11 @@
   display: block;
 }
 
+/* trattino davanti al breadcrumb di testata (richiesta 28/10) */
+.kicker::before {
+  content: '- ';
+}
+
 /* revisione 27/10: anche su mobile ritorno e breadcrumb restano
    AFFIANCATI sulla stessa riga (prima andavano in colonna) */
 
@@ -835,9 +840,12 @@ a.defText {
     display: inline-flex;
     vertical-align: middle;
     margin-bottom: 0;
+    /* breadcrumb a filo col bordo destro del contenitore (28/10) */
+    float: right;
   }
 
   .back + .kicker + * {
+    clear: both;
     margin-top: 14px;
   }
 

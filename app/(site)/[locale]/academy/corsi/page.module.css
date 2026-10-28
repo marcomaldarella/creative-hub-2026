@@ -185,9 +185,12 @@
     display: inline-flex;
     vertical-align: middle;
     margin-bottom: 0;
+    /* breadcrumb a filo col bordo destro del contenitore (28/10) */
+    float: right;
   }
 
   .back + .kicker + * {
+    clear: both;
     margin-top: 14px;
   }
 

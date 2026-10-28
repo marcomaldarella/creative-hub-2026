@@ -30,6 +30,11 @@
   text-transform: uppercase;
 }
 
+/* trattino davanti al breadcrumb di testata (richiesta 28/10) */
+.head .kicker::before {
+  content: '- ';
+}
+
 .title {
   font-size: var(--fs-h2);
   margin-bottom: 16px;
@@ -912,9 +917,12 @@
     display: inline-flex;
     vertical-align: middle;
     margin-bottom: 0;
+    /* breadcrumb a filo col bordo destro del contenitore (28/10) */
+    float: right;
   }
 
   .back + .kicker + * {
+    clear: both;
     margin-top: 14px;
   }
 

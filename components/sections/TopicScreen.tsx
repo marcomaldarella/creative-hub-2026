@@ -394,7 +394,12 @@ export async function TopicScreen({
             </ArrowLink>
           </Reveal>
           <Reveal as="span" className={`mono ${styles.kicker}`} delay={60}>
-            {[sezione.toLowerCase(), copy.eyebrow].filter(Boolean).join(' · ')}
+            {/* ogni segmento con l'iniziale maiuscola (28/10):
+                "Academy · Servizi studenti" */}
+            {[sezione, copy.eyebrow]
+              .filter((s): s is string => Boolean(s))
+              .map((s) => s.charAt(0).toUpperCase() + s.slice(1))
+              .join(' · ')}
           </Reveal>
           <Reveal as="h1" className={`display-thin ${styles.title}`} delay={120}>
             {/* un \n nel dizionario spezza il titolo su più righe */}
