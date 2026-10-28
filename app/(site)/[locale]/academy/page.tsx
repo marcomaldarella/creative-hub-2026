@@ -26,6 +26,7 @@ import { l } from '@/lib/sanity/l'
 import { urlFor } from '@/lib/sanity/image'
 import type { Course } from '@/lib/sanity/types'
 import { getAllCourses, getAllTeachers, getSiteSettings } from '@/lib/sanity/queries'
+import { courseHref } from '@/lib/courses'
 import styles from './page.module.css'
 
 export const dynamic = 'force-dynamic'
@@ -152,14 +153,20 @@ export default async function AcademyPage({
       .filter((c) => c.types?.some((ty) => ty === 'triennio' || ty === 'magistrale'))
       .map(toCard),
     courses.filter((c) => c.types?.includes('custom')).map(toCard),
-    t.academy.exploreFunded.map((label, i) => ({
-      label,
-      tag: t.academy.exploreFundedTag,
-      meta: t.academy.exploreCardMeta,
-      sub: t.academy.exploreFundedSubs[i],
-      href: localeHref(locale, '/academy/formazione-finanziata'),
-      img: EXPLORE_FUNDED_PICS[i] ?? EXPLORE_FALLBACK,
-    })),
+    /* i finanziati ora sono corsi veri in Sanity (28/10): cover e
+       scheda arrivano da lì; chi non ha ancora la foto pesca dal
+       vecchio giro di foto della sede */
+    courses
+      .filter((c) => c.types?.includes('finanziato'))
+      .map((c, i) => ({
+        ...toCard(c),
+        tag: t.academy.exploreFundedTag,
+        href: courseHref(c, locale),
+        img:
+          (c.coverImage &&
+            urlFor(c.coverImage).width(680).height(480).fit('crop').auto('format').url()) ||
+          EXPLORE_FUNDED_PICS[i % EXPLORE_FUNDED_PICS.length],
+      })),
   ]
   const cards: ExploreCard[] = []
   const maxLen = Math.max(...pools.map((p) => p.length))
