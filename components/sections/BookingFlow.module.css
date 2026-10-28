@@ -112,7 +112,9 @@
    qualunque sia lo schema della sezione */
 .catShade {
   position: absolute;
-  inset: 0;
+  /* 1px oltre i bordi: alle posizioni subpixel il velo lasciava
+     una lamella di foto scoperta (fix 28/10, come ExploreField) */
+  inset: -1px;
   background: linear-gradient(180deg, transparent 38%, rgba(0, 0, 0, 0.76));
   pointer-events: none;
 }
