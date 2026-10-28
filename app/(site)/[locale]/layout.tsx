@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import { notFound } from 'next/navigation'
-import { Archivo, Geist, Zalando_Sans } from 'next/font/google'
+import { Archivo, Zalando_Sans } from 'next/font/google'
 import localFont from 'next/font/local'
 import { locales, isLocale, localeHref } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
@@ -16,7 +16,9 @@ const display = Archivo({
   display: 'swap',
 })
 
-const body = Geist({
+/* Zalando Sans è IL font del sito (28/10): corpo, nav e display-thin
+   passano tutti da --font-body — via Geist, via Helvetica */
+const body = Zalando_Sans({
   subsets: ['latin'],
   weight: 'variable',
   variable: '--font-body',
