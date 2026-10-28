@@ -58,11 +58,10 @@
      marquee attacca sotto "Academy" e resta largo fino ai contatti.
      La fascia resta full-bleed: cambia solo dove vive il nastro. */
   display: grid;
-  /* il nastro prende più riga (28/10): la colonna di sinistra si tiene
-     metà dello spazio fino alle voci, il marquee parte prima */
-  grid-template-columns:
-    calc((var(--nav-links-x, 440px) - var(--pad)) / 2)
-    minmax(0, 1fr) auto auto;
+  /* sinistra · spazio · contatti · chiudi — il marquee NON vive più in
+     una colonna: sta centrato sulla barra in assoluto (28/10) */
+  grid-template-columns: auto minmax(0, 1fr) auto auto;
+  position: relative;
   align-items: center;
   column-gap: 24px;
   height: var(--topbar-h);
@@ -85,9 +84,19 @@
 /* centro: marquee infinito con la sfumatura condivisa ai due tagli
    (.scroller-fade, var(--scroller-fade)) — area stretta, non tutta
    la barra */
+/* il nastro sta al CENTRO vero della barra, largo quanto può senza
+   toccare sinistra e contatti; sfumature più lunghe ai due tagli */
 .topMid {
-  width: 100%;
+  position: absolute;
+  left: 50%;
+  top: 0;
+  height: 100%;
+  transform: translateX(-50%);
+  width: min(820px, calc(100% - 840px));
+  display: flex;
+  align-items: center;
   overflow: hidden;
+  --scroller-fade: 64px;
 }
 
 .topTrack {

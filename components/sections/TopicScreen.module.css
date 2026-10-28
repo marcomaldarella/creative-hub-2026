@@ -772,6 +772,19 @@
   background: #0a0a0a;
 }
 
+/* da 02 in poi le sezioni stanno su banda BIANCA (28/10): testi in
+   nero dai token chiari; gli "in breve" qui sotto restano card scure
+   perché i loro colori sono fissi, non tokenizzati */
+.darkBody .sezWhite {
+  display: flow-root;
+  background: #ffffff;
+  --bg: #ffffff;
+  --surface: #f5f5f5;
+  --fg: #0a0a0a;
+  --fg-2: #5a5a5a;
+  --line: #e3e3e3;
+}
+
 /* numero di sezione sul filetto: più grande e in grassetto (vale anche
    per l'ultima sezione, quella che resta nel colore di pagina) */
 .darkBody [role='separator'] > :global(.mono):first-child {

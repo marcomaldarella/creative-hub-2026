@@ -591,11 +591,12 @@ export async function TopicScreen({
             (pp?.pairs.every((p) => p.title.trim().endsWith('?')) ?? false)
           const isSteps =
             (pp?.pairs.every((p) => /^\d+[.)]\s/.test(p.title)) ?? false)
-          /* corpo in fascia nera (flag `darkBody` in topics.ts): ogni
-             sezione si porta il suo wrapper scuro — scheme-dark per i
-             token, sezBand per lo sfondo — TRANNE l'ultima (il
-             referente), che resta nel colore di pagina */
-          const inBand = topic.darkBody === true && i < sections.length - 1
+          /* corpo a fasce (flag `darkBody` in topics.ts): la PRIMA
+             sezione resta la fascia scura, da 02 in poi tutto passa su
+             banda BIANCA (richiesta 28/10) — gli "in breve" restano le
+             card scure (colori fissi, non tokenizzati) */
+          const inBand = topic.darkBody === true && i === 0
+          const inWhite = topic.darkBody === true && i > 0
           const blocco = (
             <>
               {/* l'occhiello della sezione sta SOLO sul filetto numerato:
@@ -856,6 +857,8 @@ export async function TopicScreen({
             <Fragment key={section._key}>
               {inBand ? (
                 <div className={`scheme-dark ${styles.sezBand}`}>{blocco}</div>
+              ) : inWhite ? (
+                <div className={styles.sezWhite}>{blocco}</div>
               ) : (
                 blocco
               )}
