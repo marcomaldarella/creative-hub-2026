@@ -14,7 +14,6 @@ import { getPageById, getSiteSettings } from '@/lib/sanity/queries'
 import {
   COWORKING_ROW_SLUGS,
   getBookableProducts,
-  shopCategoryUrl,
 } from '@/lib/woocommerce'
 import { QuickBookForm } from '@/components/sections/QuickBookForm'
 /* la card prenota è la stessa del coworking: stesso modulo CSS */
@@ -291,7 +290,10 @@ export default async function SaleEventiPage({
                   name: row[0],
                   hint: t.coworking.bookHints[i],
                   price: row[1],
-                  href: slug ? bySlug.get(slug) : shopCategoryUrl('coworking'),
+                  /* senza permalink (ufficio) si apre la scheda interna */
+                  href:
+                    bySlug.get(slug) ||
+                    localeHref(locale, `/prenota/${slug}`),
                 }
               })}
             />

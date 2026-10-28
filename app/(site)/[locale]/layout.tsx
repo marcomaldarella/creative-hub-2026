@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import { notFound } from 'next/navigation'
-import { Archivo, Geist } from 'next/font/google'
+import { Archivo, Geist, Zalando_Sans } from 'next/font/google'
 import localFont from 'next/font/local'
 import { locales, isLocale, localeHref } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
@@ -30,14 +30,11 @@ const fat = localFont({
   display: 'swap',
 })
 
-// Helvetica Neue (estratta dal .ttc dell'utente) — display svizzero.
-// NB: per il go-live su dominio pubblico serve la licenza web Monotype
-const swiss = localFont({
-  src: [
-    { path: '../../fonts/HelveticaNeue-Regular.woff2', weight: '400' },
-    { path: '../../fonts/HelveticaNeue-Medium.woff2', weight: '500' },
-    { path: '../../fonts/HelveticaNeue-Bold.woff2', weight: '700' },
-  ],
+// Zalando Sans (Google Fonts, 28/10) — display svizzero al posto di
+// Helvetica Neue: licenza libera, niente più nodo Monotype al go-live
+const swiss = Zalando_Sans({
+  subsets: ['latin'],
+  weight: 'variable',
   variable: '--font-swiss',
   display: 'swap',
 })

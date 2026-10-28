@@ -17,7 +17,6 @@ import { getSiteSettings } from '@/lib/sanity/queries'
 import {
   COWORKING_ROW_SLUGS,
   getBookableProducts,
-  shopCategoryUrl,
 } from '@/lib/woocommerce'
 import corridoio1Img from '@/public/img/foto/corridoio-1.jpg'
 import corridoio2Img from '@/public/img/foto/corridoio-2.jpg'
@@ -93,9 +92,9 @@ export default async function CoworkingPage({
     getBookableProducts(),
   ])
   /* ogni formula del riquadro apre direttamente la sua scheda prodotto
-     WordPress (richiesta 28/10), nella stessa scheda: otto su otto.
-     L'ufficio non ha un prodotto a catalogo (è su richiesta) e porta
-     al listino coworking */
+     (richiesta 28/10), nella stessa scheda: otto su otto. Sette stanno
+     sullo shop WordPress; l'ufficio è il prodotto locale non
+     acquistabile e apre la scheda interna /prenota/ufficio */
   const bySlug = new Map(products.map((p) => [p.slug, p.permalink]))
   const prenota = localeHref(locale, '/coworking/prenota')
   const sale = localeHref(locale, '/coworking/sale-eventi')
@@ -292,7 +291,10 @@ export default async function CoworkingPage({
                   name: row[0],
                   hint: t.coworking.bookHints[i],
                   price: row[1],
-                  href: slug ? bySlug.get(slug) : shopCategoryUrl('coworking'),
+                  /* senza permalink (ufficio) si apre la scheda interna */
+                  href:
+                    bySlug.get(slug) ||
+                    localeHref(locale, `/prenota/${slug}`),
                 }
               })}
             />

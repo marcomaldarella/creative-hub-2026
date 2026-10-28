@@ -104,9 +104,13 @@ export default async function ProdottoPage({
               </Reveal>
             )}
             <Reveal className={styles.ctas} delay={260}>
-              <Button href={product.permalink} external variant="azzurro">
-                {t.prenota.book}
-              </Button>
+              {/* senza permalink il prodotto non si compra (ufficio, su
+                  misura): resta solo il contatto */}
+              {product.permalink && (
+                <Button href={product.permalink} external variant="azzurro">
+                  {t.prenota.book}
+                </Button>
+              )}
               <Button href={localeHref(locale, '/chi-siamo#contatti')}>
                 {t.prenota.contact}
               </Button>

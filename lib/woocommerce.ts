@@ -94,15 +94,15 @@ function normalize(raw: RawProduct): WcProduct {
 }
 
 /** le otto formule del riquadro coworking, nell'ordine di
-    t.coworking.tableRows → slug del prodotto sullo shop (null = senza
-    prodotto: la voce porta al listino di categoria) */
-export const COWORKING_ROW_SLUGS: (string | null)[] = [
+    t.coworking.tableRows → slug del prodotto (l'ufficio è il prodotto
+    locale non acquistabile: scheda interna su /prenota/ufficio) */
+export const COWORKING_ROW_SLUGS: string[] = [
   'day-pass',
   'day-pass-pacchetto-10-ingressi',
   'quick-desk',
   'full-desk',
   'vip-quick-pass-annuale',
-  null,
+  'ufficio',
   'sala-didattica',
   'area-culture',
 ]
@@ -121,6 +121,33 @@ export function formatPrice(cents: number, locale: 'it' | 'en'): string {
   }).format(cents / 100)
 }
 
+/* L'ufficio non è mai stato un prodotto WooCommerce (nemmeno sul sito
+   vecchio: "ala coworking con uffici per startup ed enti", si tratta su
+   misura). Entra nel catalogo dal locale con la sua scheda su
+   /prenota/ufficio e NESSUN link di acquisto (permalink vuoto: la
+   pagina prodotto nasconde il tasto "prenota" e resta il contatto).
+   Se un giorno lo creano sullo shop, il prodotto vero vince. */
+const UFFICIO: WcProduct = {
+  id: -1,
+  name: 'Ufficio',
+  slug: 'ufficio',
+  permalink: '',
+  price: 0,
+  regularPrice: 0,
+  onSale: false,
+  category: 'coworking',
+  image: {
+    src: '/img/sections/coworking-lounge.jpg',
+    alt: 'La lounge del coworking: sedute e grafiche geometriche alle pareti',
+  },
+  descriptionHtml:
+    "<p>L'ala coworking del Creative Hub ospita uffici privati per startup, enti e team che vogliono una base stabile dentro un hub di 2.000 mq dedicato alle industrie creative, in zona Roveri.</p>" +
+    "<p>L'ufficio si definisce su misura: numero di postazioni, durata e servizi si concordano con la struttura. Si lavora con wifi in fibra FTTH, sale riunioni e cabine call, stampante e scanner, email @creativehub e posta in reception, caffè e cucina, giardino e aree relax, reception per i tuoi clienti.</p>" +
+    '<p>Il prezzo è su richiesta: raccontaci di che spazio hai bisogno e ti prepariamo una proposta.</p>',
+  shortDescriptionHtml:
+    "<p>Un ufficio privato nell'ala coworking dell'hub, su misura per startup, enti e team: postazioni dedicate, accesso alla struttura e ai servizi comuni.</p>",
+}
+
 export async function getBookableProducts(): Promise<WcProduct[]> {
   let raw = fallbackRaw as RawProduct[]
   try {
@@ -137,9 +164,11 @@ export async function getBookableProducts(): Promise<WcProduct[]> {
   }
   /* l'API ordina per data di pubblicazione: per il listino ha più senso
      il prezzo crescente, con i "su richiesta" (prezzo 0) in fondo */
-  return raw
+  const list = raw
     .map(normalize)
     .sort((a, b) => (a.price || Infinity) - (b.price || Infinity))
+  if (!list.some((p) => p.slug === UFFICIO.slug)) list.push(UFFICIO)
+  return list
 }
 
 export async function getBookableProduct(
