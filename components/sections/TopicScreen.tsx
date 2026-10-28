@@ -891,6 +891,24 @@ export async function TopicScreen({
                 </RevealGroup>
               </section>
             )}
+            {/* la CTA di coda sta PRIMA del video, su fascia nera
+                (richiesta 28/10) */}
+            {!ownClosing && (
+              <section className={`scheme-dark ${styles.ctaBand}`}>
+                <div className={`wrap ${styles.cta}`}>
+                  <Reveal>
+                    <Button href={shopHref(settings)} external variant="azzurro">
+                      {t.nav.book}
+                    </Button>
+                  </Reveal>
+                  <Reveal delay={80}>
+                    <ArrowLink href={localeHref(locale, topic.base)} dir="e">
+                      {t.nav.explore}
+                    </ArrowLink>
+                  </Reveal>
+                </div>
+              </section>
+            )}
             <Reveal className={`${styles.heroMedia} ${styles.heroMediaTight}`}>
               <BgVideo
                 src={media.src}
@@ -922,7 +940,7 @@ export async function TopicScreen({
               />
             </div>
           </section>
-        ) : ownClosing ? null : (
+        ) : ownClosing || pointsTail ? null : (
           <section className={`wrap ${styles.cta}`}>
             <Reveal>
               <Button href={shopHref(settings)} external variant="azzurro">

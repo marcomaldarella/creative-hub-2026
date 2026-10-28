@@ -264,6 +264,17 @@
 
 /* ————— cta ————— */
 
+/* la CTA di coda su fascia nera, prima del video (corsi custom, 28/10):
+   scheme-dark porta i token, qui solo il fondo */
+.ctaBand {
+  background: #000000;
+}
+
+.ctaBand .cta {
+  padding-top: clamp(40px, 5vw, 64px);
+  padding-bottom: clamp(40px, 5vw, 64px);
+}
+
 .cta {
   display: flex;
   flex-wrap: wrap;
