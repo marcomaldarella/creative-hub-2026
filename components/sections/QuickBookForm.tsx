@@ -33,11 +33,15 @@ export function QuickBookForm({
   subject: string
   moreHref: string
   privacyHref?: string
-  /** formule scegliibili: nome, riga piccola e prezzo */
-  options?: { name: string; hint?: string; price: string }[]
+  /** formule scegliibili: nome, riga piccola e prezzo. Con `href` la
+      riga è un link che apre direttamente la scheda prodotto WordPress
+      (stessa scheda); senza, resta la scelta per la richiesta rapida */
+  options?: { name: string; hint?: string; price: string; href?: string }[]
   optionsLabel?: string
 }) {
-  const [formula, setFormula] = useState(options?.[0]?.name ?? '')
+  const [formula, setFormula] = useState(
+    options?.find((o) => !o.href)?.name ?? ''
+  )
   const [status, setStatus] = useState<'idle' | 'pending' | 'sent' | 'error'>(
     'idle',
   )
@@ -96,27 +100,39 @@ export function QuickBookForm({
             <legend className={styles.legend}>{optionsLabel}</legend>
           )}
           <div className={styles.opts}>
-            {options.map((o) => (
-              <label
-                key={o.name}
-                className={`${styles.opt} ${
-                  formula === o.name ? styles.optOn : ''
-                }`}
-              >
-                <input
-                  type="radio"
-                  name="formula"
-                  className={styles.sr}
-                  checked={formula === o.name}
-                  onChange={() => setFormula(o.name)}
-                />
-                <span className={styles.optName}>
-                  {o.name}
-                  {o.hint && <em className={styles.optHint}>{o.hint}</em>}
-                </span>
-                <span className={`mono ${styles.optPrice}`}>{o.price}</span>
-              </label>
-            ))}
+            {options.map((o) =>
+              o.href ? (
+                /* la formula a catalogo: si prosegue direttamente sulla
+                   scheda prodotto WordPress, stessa scheda */
+                <a key={o.name} className={styles.opt} href={o.href}>
+                  <span className={styles.optName}>
+                    {o.name}
+                    {o.hint && <em className={styles.optHint}>{o.hint}</em>}
+                  </span>
+                  <span className={`mono ${styles.optPrice}`}>{o.price}</span>
+                </a>
+              ) : (
+                <label
+                  key={o.name}
+                  className={`${styles.opt} ${
+                    formula === o.name ? styles.optOn : ''
+                  }`}
+                >
+                  <input
+                    type="radio"
+                    name="formula"
+                    className={styles.sr}
+                    checked={formula === o.name}
+                    onChange={() => setFormula(o.name)}
+                  />
+                  <span className={styles.optName}>
+                    {o.name}
+                    {o.hint && <em className={styles.optHint}>{o.hint}</em>}
+                  </span>
+                  <span className={`mono ${styles.optPrice}`}>{o.price}</span>
+                </label>
+              )
+            )}
           </div>
         </fieldset>
       )}

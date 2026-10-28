@@ -220,12 +220,8 @@ export function EventBuilder({
           <dd>
             {room}
             {roomUrl && (
-              <a
-                className={styles.roomLink}
-                href={roomUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              /* stessa scheda: si prosegue direttamente sul prodotto */
+              <a className={styles.roomLink} href={roomUrl}>
                 {labels.roomCta}
                 <Arrow dir="ne" size={12} />
               </a>

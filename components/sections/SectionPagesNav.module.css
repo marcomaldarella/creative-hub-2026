@@ -31,6 +31,8 @@
    sfumatura al taglio destro arrivano dalla grammatica condivisa
    (.scroller .scroller-fade-end in app/globals.css) */
 .row {
+  flex: 1;
+  min-width: 0;
   display: flex;
   align-items: stretch;
   gap: clamp(14px, 1.8vw, 26px);
@@ -80,10 +82,27 @@
   color: #000000;
 }
 
+/* le frecce della fila (ScrollerRow con `arrows`): qui prendono il
+   colore di sezione sul fondo nero della barra */
+.rowNav.rowNav {
+  color: var(--pn-accent, #ffffff);
+  border-color: color-mix(in srgb, var(--pn-accent, #ffffff) 55%, transparent);
+}
+
+.rowNav.rowNav:hover:not(:disabled) {
+  border-color: var(--pn-accent, #ffffff);
+}
+
 @media (max-width: 760px) {
   /* su mobile l'etichetta lascia tutta la riga alle voci */
   .label {
     display: none;
+  }
+
+  /* la pagina corrente apre la fila: pillola piena in testa, le altre
+     seguono in overscroll */
+  .row a.on {
+    order: -1;
   }
 }
 

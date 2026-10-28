@@ -13,6 +13,7 @@ import {
   type LessonVariant,
 } from '@/components/sections/LessonForm'
 import { PointsAccordion } from '@/components/sections/PointsAccordion'
+import { courseHref } from '@/lib/courses'
 import {
   LessonTeachers,
   type LessonTeacher,
@@ -708,7 +709,7 @@ export function LessonScreen({
                 {siblings.map((c) => (
                   <Link
                     key={c._id}
-                    href={`${academyPath}/${c.slug?.current ?? ''}`}
+                    href={courseHref(c, locale)}
                     className={`rv ${styles.other}`}
                   >
                     {l(c.title, locale)}

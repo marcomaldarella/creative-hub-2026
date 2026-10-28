@@ -325,6 +325,9 @@
   grid-template-columns: minmax(0, 1.55fr) minmax(280px, 1fr);
   gap: clamp(28px, 4vw, 72px);
   align-items: start;
+  /* respiro sopra "Com'è lavorare qui": il blocco partiva a filo
+     dell'hero (padding errato, 28/10) */
+  padding-top: clamp(40px, 5vw, 80px);
   /* l'aria sotto la colonna di prodotto era 84px contro i 140 di ogni
      sezione a filo: il salto fra "dove siamo" e "il palazzo" leggeva
      più stretto di tutti gli altri. Stesso passo delle sezioni */
@@ -481,9 +484,13 @@
 .book {
   position: sticky;
   top: calc(var(--header-h, 64px) + 58px + 16px);
-  border: 1px solid #000000;
+  /* card nera sul fondo chiaro della pagina (28/10): stessa pelle che
+     aveva dentro la colata nera, con l'ombra tarata sul bianco */
+  border: 1px solid #2a2a2a;
+  border-radius: 8px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.18);
   padding: clamp(18px, 2.2vw, 26px);
-  background: #000000;
+  background: #0f0f0f;
   color: #fafafa;
   --bg: #000000;
   --surface: #111111;
@@ -613,26 +620,19 @@
   text-transform: uppercase;
 }
 
-/* ————— colata nera del prodotto: dal blocco a due colonne alla banano
-   room, la pagina è scura (scheme-dark porta i token); la fascia day
+/* ————— fascia nera della banano room (scheme-dark porta i token):
+   dal 28/10 il resto del prodotto sta su fondo chiaro, la fascia day
    pass sotto resta azzurra ————— */
 .darkBand {
   background: #000;
 }
 
-/* il riquadro prenota incastonato nel nero, alla Vercel: superficie
-   appena più chiara del fondo, filo sottile, angoli 8px e un'ombra
-   morbida che lo stacca dal piano — niente bordo nero su nero */
-.darkBand .book {
-  background: #0f0f0f;
-  border: 1px solid #2a2a2a;
-  border-radius: 8px;
-  box-shadow:
-    0 24px 60px rgba(0, 0, 0, 0.55),
-    inset 0 1px 0 rgba(255, 255, 255, 0.04);
-}
-
 /* titoletto: stile unico dalla classe globale (27/10) */
 .kicker {
   composes: titoletto from global;
+}
+
+/* trattino davanti al breadcrumb di testata (richiesta 28/10) */
+.head .kicker::before {
+  content: "- ";
 }

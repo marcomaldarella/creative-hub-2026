@@ -77,6 +77,8 @@ export default async function MagazinePage({
               locale={locale}
               allLabel={t.common.all}
               ariaLabel={t.magazine.categoriesLabel}
+              prevLabel={t.nav.pagesPrev}
+              nextLabel={t.nav.pagesNext}
               className={styles.categories}
             />
             <SearchBox placeholder={t.common.search} className={styles.search} />

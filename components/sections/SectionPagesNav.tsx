@@ -86,8 +86,14 @@ export function SectionPagesNav({
         <span className={styles.label}>{label}</span>
         {/* fila di voci: stessa grammatica dello subnav delle schede
             corso — scorre senza barra di sistema e sfuma al taglio di
-            destra (solo quando sborda davvero) */}
-        <ScrollerRow className={styles.row} aria-label={label}>
+            destra (solo quando sborda davvero); quando sborda, a destra
+            restano fisse le due frecce nei cerchi */}
+        <ScrollerRow
+          className={styles.row}
+          aria-label={label}
+          arrows={{ prev: t.nav.pagesPrev, next: t.nav.pagesNext }}
+          arrowsClassName={styles.rowNav}
+        >
           {items.map((it) => (
             <Link
               key={it.path}

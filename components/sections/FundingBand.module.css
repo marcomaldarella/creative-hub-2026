@@ -15,13 +15,17 @@
   margin-bottom: 14px;
 }
 
-/* lockup in versione monocromatica BIANCA (richiesta cliente): via la
-   targa, i loghi passano per soglia + pass bianco via filter — la
-   versione mono è prevista dai manuali d'uso istituzionali */
+/* lockup su targa bianca, colori originali (28/10): il pass bianco via
+   filter appiattiva i loghi a riempimento pieno (bandiera UE e Regione
+   diventavano rettangoli) — i loghi istituzionali non si ricolorano,
+   la targa chiara li tiene leggibili anche sulle fasce nere */
 .plate {
   display: inline-flex;
   align-items: center;
   max-width: 100%;
+  background: #ffffff;
+  padding: 14px 18px;
+  border-radius: 4px;
 }
 
 .lockup {
@@ -29,8 +33,6 @@
   width: 520px;
   max-width: 100%;
   height: auto;
-  /* soglia a nero pieno, poi inversione: silhouette bianca uniforme */
-  filter: brightness(0) invert(1);
 }
 
 /* pill testuale: fallback quando una voce non è un path immagine */

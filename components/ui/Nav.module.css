@@ -58,8 +58,10 @@
      marquee attacca sotto "Academy" e resta largo fino ai contatti.
      La fascia resta full-bleed: cambia solo dove vive il nastro. */
   display: grid;
+  /* il nastro prende più riga (28/10): la colonna di sinistra si tiene
+     metà dello spazio fino alle voci, il marquee parte prima */
   grid-template-columns:
-    calc(var(--nav-links-x, 440px) - var(--pad) - 24px)
+    calc((var(--nav-links-x, 440px) - var(--pad)) / 2)
     minmax(0, 1fr) auto auto;
   align-items: center;
   column-gap: 24px;
@@ -136,6 +138,14 @@
      l'azzurro sul colore pieno di sezione non leggeva */
   color: var(--topbar-cta, var(--azzurro-ink));
   transition: color 0.2s;
+  /* freccia a misura del type e centrata sulla riga (28/10) */
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.topCta svg {
+  display: block;
 }
 
 .topCta:hover {
@@ -360,13 +370,28 @@
   white-space: nowrap;
 }
 
+/* "esplora la sezione" a PILLOLA (richiesta 28/10): profilo nel colore
+   di sezione, pieno al passaggio */
 .panelExplore {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  align-self: flex-start;
   color: var(--accent-ink);
-  font-size: 15px;
+  font-size: 14px;
+  padding: 7px 16px;
+  border: 1px solid color-mix(in srgb, var(--accent-ink, currentColor) 55%, transparent);
+  border-radius: var(--radius-pill, 999px);
+  transition:
+    background 0.15s var(--ease-out),
+    border-color 0.15s var(--ease-out),
+    color 0.15s var(--ease-out);
 }
 
 .panelExplore:hover {
-  color: var(--fg);
+  background: var(--accent-ink);
+  border-color: var(--accent-ink);
+  color: var(--accent-on, #000000);
 }
 
 .lang {
@@ -819,7 +844,9 @@
 }
 
 .dark .panelExplore:hover {
-  color: var(--osso);
+  background: var(--accent-ink);
+  border-color: var(--accent-ink);
+  color: var(--accent-on, #000000);
 }
 
 .dark .lang {

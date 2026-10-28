@@ -14,6 +14,9 @@ export type ThumbProps = {
   /** riempie l'altezza del genitore invece di fissare l'aspect-ratio
    *  (es. dentro un pannello accordion con altezza propria) */
   fill?: boolean
+  /** foto locale quando manca la cover Sanity (al posto del gradient):
+      es. le foto della sede usate dalla landing academy */
+  fallbackSrc?: string
   width?: number
   className?: string
 }
@@ -32,6 +35,7 @@ export function Thumb({
   ratio = '3 / 2',
   round = false,
   fill = false,
+  fallbackSrc,
   width = 1200,
   className,
 }: ThumbProps) {
@@ -40,7 +44,7 @@ export function Thumb({
     styles.thumb,
     round ? styles.round : '',
     fill ? styles.fill : '',
-    hasAsset ? '' : gradients[Math.abs(index) % gradients.length],
+    hasAsset || fallbackSrc ? '' : gradients[Math.abs(index) % gradients.length],
     className,
   ]
     .filter(Boolean)
@@ -51,7 +55,7 @@ export function Thumb({
       className={cls}
       style={fill ? undefined : { aspectRatio: round ? '1 / 1' : ratio }}
     >
-      {hasAsset && (
+      {hasAsset ? (
         /* eslint-disable-next-line @next/next/no-img-element */
         <img
           /* auto('format'): la CDN di Sanity serve webp/avif dove supportati */
@@ -59,7 +63,10 @@ export function Thumb({
           alt={image?.alt ?? alt}
           loading="lazy"
         />
-      )}
+      ) : fallbackSrc ? (
+        /* eslint-disable-next-line @next/next/no-img-element */
+        <img src={fallbackSrc} alt={alt} loading="lazy" />
+      ) : null}
     </div>
   )
 }

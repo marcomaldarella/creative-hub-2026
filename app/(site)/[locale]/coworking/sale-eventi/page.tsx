@@ -11,7 +11,14 @@ import { isLocale, localeHref } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
 import { pageAlternates } from '@/lib/seo'
 import { getPageById, getSiteSettings } from '@/lib/sanity/queries'
-import { getBookableProducts } from '@/lib/woocommerce'
+import {
+  COWORKING_ROW_SLUGS,
+  getBookableProducts,
+  shopCategoryUrl,
+} from '@/lib/woocommerce'
+import { QuickBookForm } from '@/components/sections/QuickBookForm'
+/* la card prenota è la stessa del coworking: stesso modulo CSS */
+import cw from '../page.module.css'
 import { l } from '@/lib/sanity/l'
 import banano1Img from '@/public/img/foto/banano-1.jpg'
 import banano2Img from '@/public/img/foto/banano-2.jpg'
@@ -218,9 +225,9 @@ export default async function SaleEventiPage({
               <Card
                 key={room.title}
                 className={`rv ${styles.room}`}
-                {...(shop
-                  ? { href: shop, target: '_blank', rel: 'noopener noreferrer' }
-                  : {})}
+                /* stessa scheda (richiesta 28/10): la prenotazione
+                   prosegue direttamente sul prodotto WordPress */
+                {...(shop ? { href: shop } : {})}
               >
                 <div className={styles.roomPh}>
                   {ROOM_PHOTOS[i] && (
@@ -250,10 +257,11 @@ export default async function SaleEventiPage({
                     {t.saleEventiPage.roomMeta[i].price}
                   </p>
                 )}
-                {/* la sala che si può prenotare lo dice */}
+                {/* la sala che si può prenotare lo dice: il rimando è
+                    alla scheda prodotto WordPress, non alla proposta */}
                 {shop && (
                   <span className={styles.roomGo}>
-                    {t.saleEventiPage.ctaBook}
+                    {t.saleEventiPage.roomBook}
                     <Arrow dir="ne" size={13} />
                   </span>
                 )}
@@ -261,6 +269,33 @@ export default async function SaleEventiPage({
               )
             })}
           </RevealGroup>
+
+          {/* anche se qui sono solo sale, le formule sono le stesse del
+              riquadro prenota del coworking (richiesta 28/10): otto
+              voci, ognuna apre la sua scheda prodotto WordPress */}
+          <Reveal className={`${cw.book} ${styles.bookCard}`} delay={120}>
+            <div className={cw.bookHead}>
+              <div className={cw.bookFrom}>
+                {t.coworking.bookFrom} <b>{t.coworking.bookPrice}</b>{' '}
+                {t.coworking.bookUnit}
+              </div>
+              <span className={cw.bookChoose}>{t.coworking.bookChoose}</span>
+            </div>
+            <QuickBookForm
+              labels={t.coworking.quickBook}
+              subject={t.coworking.bookCta}
+              moreHref={localeHref(locale, '/coworking/prenota')}
+              options={t.coworking.tableRows.map((row, i) => {
+                const slug = COWORKING_ROW_SLUGS[i]
+                return {
+                  name: row[0],
+                  hint: t.coworking.bookHints[i],
+                  price: row[1],
+                  href: slug ? bySlug.get(slug) : shopCategoryUrl('coworking'),
+                }
+              })}
+            />
+          </Reveal>
         </section>
 
         {/* ————— componi il tuo evento: quattro domande e il riepilogo

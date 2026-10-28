@@ -228,9 +228,14 @@ export async function SiteChrome({
                altrimenti resta l'ancora, che punta a una sezione vera
                della pagina indice */
             href: localeHref(locale, hrefSub(s.base, anchor)),
-            /* Academy: l'offerta formativa (le prime 3) pesa di più,
-               nel pannello e nell'overlay mobile */
-            strong: s.key === 'academy' && i < 3 ? true : undefined,
+            /* Academy, Studio e Coworking: la prima colonna del pannello
+               (metà voci, flow column) pesa di più, anche nell'overlay
+               mobile — come l'offerta formativa di Academy */
+            strong:
+              ['academy', 'studio', 'coworking'].includes(s.key) &&
+              i < Math.ceil(sub.items.length / 2)
+                ? true
+                : undefined,
             cross: crossKey
               ? {
                   label: `/${labelOf[crossKey]}`,

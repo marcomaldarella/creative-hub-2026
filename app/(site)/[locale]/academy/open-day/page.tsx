@@ -150,7 +150,7 @@ export default async function OpenDayPage({
                     sizes="(max-width: 860px) 100vw, 50vw"
                   />
                 </figure>
-                <span className={`mono ${styles.cardNum}`}>{card.num}</span>
+                {/* niente numerino sulle card (richiesta 28/10) */}
                 <span className={styles.cardTitle}>{card.title}</span>
                 <span className={styles.cardSub}>{card.sub}</span>
                 <span className={styles.cardGo}>
@@ -237,9 +237,9 @@ export default async function OpenDayPage({
         </section>
 
         {/* ————— per chi accompagna: le domande dei genitori —————
-            fascia AZZURRA (ritmo colori ott 2026): nessuno sfondo proprio,
-            lascia vedere il flood di sezione, UI in nero dai token flood */}
-        <section className={det.sez}>
+            fascia BIANCA (richiesta 28/10): parte a bianco sul flood
+            azzurro, token chiari dalla classe .white */}
+        <section className={`${styles.white} ${det.sez}`}>
           <div className="wrap">
           <Reveal as="span" className={`mono ${det.kicker}`}>
             {od.parents.kicker}
@@ -328,10 +328,11 @@ export default async function OpenDayPage({
           </div>
         </section>
 
-        {/* ————— prenota: tutto NERO ————— */}
+        {/* ————— prenota: fascia BIANCA (richiesta 28/10), il form
+            resta la card nera che è già di suo ————— */}
         <section
           id="prenota"
-          className={`wrap scheme-dark ${det.sez} ${styles.nera}`}
+          className={`wrap ${styles.white} ${det.sez}`}
         >
           {/* ancore extra per le CTA con preselezione: il browser scrolla
               solo su id esistenti, l'hash lo legge poi il form */}

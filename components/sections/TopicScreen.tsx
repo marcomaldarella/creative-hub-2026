@@ -8,6 +8,7 @@ import {
   SectionHeader,
 } from '@/components/ui'
 import { AvvisamiForm } from '@/components/sections/AvvisamiForm'
+import { courseHref } from '@/lib/courses'
 import { FundingBand } from '@/components/sections/FundingBand'
 import { PortableBlocks } from '@/components/sections/PortableBlocks'
 import { PointsAccordion, type PointsAccordionItem } from '@/components/sections/PointsAccordion'
@@ -486,10 +487,9 @@ export async function TopicScreen({
                     return (
                       <Link
                         key={course._id}
-                        href={localeHref(
-                          locale,
-                          `/academy/${course.slug?.current ?? ''}`
-                        )}
+                        /* i finanziati senza scheda vanno alla pagina di
+                           categoria, mai su un 404 (lib/courses) */
+                        href={courseHref(course, locale)}
                         className={`${uni.card} rv`}
                         style={{ '--rvd': `${(i % 3) * 60}ms` } as CSSProperties}
                       >

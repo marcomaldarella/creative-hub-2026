@@ -172,27 +172,82 @@ export function useScrollerOverflow<T extends HTMLElement>() {
 }
 
 /**
- * Fila di voci che scorre (le barre sticky: pagine di sezione, indice
- * delle schede corso): barra di sistema nascosta, nessun chaining sulla
- * pagina e la sfumatura al taglio destro solo quando sborda davvero.
+ * Fila di voci che scorre (le barre sticky: pagine di sezione, filtri,
+ * categorie): barra di sistema nascosta, nessun chaining sulla pagina e
+ * la sfumatura al taglio destro solo quando sborda davvero.
+ *
+ * Con `arrows` (richiesta 28/10) la fila porta anche i suoi controlli:
+ * su mobile, quando sborda, a destra restano fisse le due frecce nei
+ * cerchi che spostano il nastro di quasi una schermata. Su desktop le
+ * frecce non compaiono: resta la sola sfumatura.
  */
 export function ScrollerRow({
   className,
   children,
+  as = 'nav',
+  arrows,
+  arrowsClassName,
+  wrapClassName,
   ...rest
-}: React.ComponentPropsWithoutRef<'nav'>) {
+}: React.ComponentPropsWithoutRef<'nav'> & {
+  /** 'div' quando la fila vive già dentro un <nav> (filtri corsi) */
+  as?: 'nav' | 'div'
+  /** aria-label delle due frecce: con queste la fila ha i controlli */
+  arrows?: { prev: string; next: string }
+  arrowsClassName?: string
+  wrapClassName?: string
+}) {
   const { attach, overflow } = useScrollerOverflow<HTMLElement>()
+  /* un passo di freccia = quasi tutta la finestra visibile del nastro */
+  const rail = useScrollRail<HTMLElement>((el) =>
+    Math.round(el.clientWidth * 0.8)
+  )
+  const Tag = as
 
-  return (
-    <nav
-      ref={attach}
+  const row = (
+    <Tag
+      ref={(el: HTMLElement | null) => {
+        attach(el)
+        if (arrows) rail.attach(el)
+      }}
+      onScroll={arrows ? rail.measure : undefined}
       className={['scroller', overflow ? 'scroller-fade-end' : '', className]
         .filter(Boolean)
         .join(' ')}
       {...rest}
     >
       {children}
-    </nav>
+    </Tag>
+  )
+
+  if (!arrows) return row
+
+  return (
+    <div className={[styles.rowWrap, wrapClassName].filter(Boolean).join(' ')}>
+      {row}
+      {overflow && (
+        <div className={styles.rowArrows}>
+          <ScrollerNav
+            dir="w"
+            label={arrows.prev}
+            disabled={rail.atStart}
+            onClick={() => rail.nudge(-1)}
+            className={[styles.navSm, arrowsClassName]
+              .filter(Boolean)
+              .join(' ')}
+          />
+          <ScrollerNav
+            dir="e"
+            label={arrows.next}
+            disabled={rail.atEnd}
+            onClick={() => rail.nudge(1)}
+            className={[styles.navSm, arrowsClassName]
+              .filter(Boolean)
+              .join(' ')}
+          />
+        </div>
+      )}
+    </div>
   )
 }
 

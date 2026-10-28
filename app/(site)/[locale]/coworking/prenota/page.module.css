@@ -71,3 +71,8 @@
 .kicker {
   composes: titoletto from global;
 }
+
+/* trattino davanti al breadcrumb di testata (richiesta 28/10) */
+.head .kicker::before {
+  content: "- ";
+}

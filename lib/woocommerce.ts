@@ -93,6 +93,25 @@ function normalize(raw: RawProduct): WcProduct {
   }
 }
 
+/** le otto formule del riquadro coworking, nell'ordine di
+    t.coworking.tableRows → slug del prodotto sullo shop (null = senza
+    prodotto: la voce porta al listino di categoria) */
+export const COWORKING_ROW_SLUGS: (string | null)[] = [
+  'day-pass',
+  'day-pass-pacchetto-10-ingressi',
+  'quick-desk',
+  'full-desk',
+  'vip-quick-pass-annuale',
+  null,
+  'sala-didattica',
+  'area-culture',
+]
+
+/** listino di categoria sullo shop (per le voci senza prodotto) */
+export function shopCategoryUrl(category: WcCategory): string {
+  return `${SHOP_BASE}/categoria-prodotto/${category}/`
+}
+
 /** prezzo in centesimi → "9,50 €" / "9.50 €" (vuoto se su richiesta) */
 export function formatPrice(cents: number, locale: 'it' | 'en'): string {
   if (!cents) return ''

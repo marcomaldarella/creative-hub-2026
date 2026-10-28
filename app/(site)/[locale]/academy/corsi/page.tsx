@@ -2,7 +2,13 @@ import type { Metadata } from 'next'
 import type { CSSProperties } from 'react'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { ArrowLink, Reveal, RevealGroup, SearchBox } from '@/components/ui'
+import {
+  ArrowLink,
+  Reveal,
+  RevealGroup,
+  ScrollerRow,
+  SearchBox,
+} from '@/components/ui'
 import { SiteChrome } from '@/components/sections/SiteChrome'
 import { Thumb } from '@/components/sections/Thumb'
 /* stesse card a foto piena della landing universitari (layout B):
@@ -14,7 +20,19 @@ import { pageAlternates } from '@/lib/seo'
 import { getAllCourses } from '@/lib/sanity/queries'
 import { l } from '@/lib/sanity/l'
 import { matchesQuery } from '@/lib/search'
+import { courseHref } from '@/lib/courses'
 import styles from './page.module.css'
+
+/* cover di riserva per i corsi senza foto in Sanity: le stesse della
+   landing academy, a giro */
+const FALLBACK_PHOTOS = [
+  '/img/foto/studio-ssl.jpg',
+  '/img/foto/live-band.jpg',
+  '/img/sections/node-innovazione.jpg',
+  '/img/sections/studio-regia-b.jpg',
+  '/img/sections/studio-regia.jpg',
+  '/img/foto/sede.jpg',
+] as const
 
 export const dynamic = 'force-dynamic'
 
@@ -134,7 +152,13 @@ export default async function CorsiPage({
             {/* le pill scorrono dentro la loro corsia: dodici filtri più
                 il campo non entrano in una riga, e andando a capo il
                 "cerca" si staccava dal gruppo */}
-            <div className={`scroller scroller-fade-end ${styles.filterTrack}`} tabIndex={0}>
+            <ScrollerRow
+              as="div"
+              tabIndex={0}
+              className={styles.filterTrack}
+              wrapClassName={styles.filterWrap}
+              arrows={{ prev: t.nav.pagesPrev, next: t.nav.pagesNext }}
+            >
             <Link
               href={filterHref(undefined, activeType)}
               scroll={false}
@@ -171,7 +195,7 @@ export default async function CorsiPage({
                 {t.academy.types[slug]}
               </Link>
             ))}
-            </div>
+            </ScrollerRow>
             <SearchBox placeholder={t.common.search} className={styles.search} />
           </nav>
         </div>
@@ -196,7 +220,9 @@ export default async function CorsiPage({
                   return (
                     <Link
                       key={course._id}
-                      href={`${academyPath}/${course.slug?.current ?? ''}`}
+                      /* i finanziati senza scheda atterrano sulla pagina
+                         di categoria, mai su un 404 (lib/courses) */
+                      href={courseHref(course, locale)}
                       className={`${uni.card} rv`}
                       style={{ '--rvd': `${(i % 3) * 60}ms` } as CSSProperties}
                     >
@@ -205,6 +231,9 @@ export default async function CorsiPage({
                           image={course.coverImage}
                           index={i}
                           fill
+                          /* senza cover Sanity si pesca dalle foto della
+                             landing academy, a giro (28/10) */
+                          fallbackSrc={FALLBACK_PHOTOS[i % FALLBACK_PHOTOS.length]}
                           alt={l(course.title, locale) ?? ''}
                         />
                       </figure>

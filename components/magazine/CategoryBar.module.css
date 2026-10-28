@@ -42,3 +42,11 @@
   color: var(--osso);
   border-color: var(--petrolio);
 }
+
+@media (max-width: 760px) {
+  /* stessa logica della barra pagine di sezione (28/10): la pill
+     attiva apre la fila, le altre seguono in overscroll */
+  .active {
+    order: -1;
+  }
+}

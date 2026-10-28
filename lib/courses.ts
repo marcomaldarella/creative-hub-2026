@@ -1,4 +1,4 @@
-import type { Locale } from '@/lib/i18n/config'
+import { localeHref, type Locale } from '@/lib/i18n/config'
 import { l } from '@/lib/sanity/l'
 import type { Course } from '@/lib/sanity/types'
 
@@ -15,4 +15,17 @@ import type { Course } from '@/lib/sanity/types'
 export function hasScheda(course: Course, locale: Locale): boolean {
   const body = l(course.body, locale)
   return Array.isArray(body) && body.length > 0
+}
+
+/**
+ * Dove porta la card di un corso: la sua scheda, oppure — per i corsi
+ * finanziati senza scheda scritta (la route risponde 404 apposta) — la
+ * pagina della formazione finanziata, dove il corso è in griglia con
+ * l'avvisami. Mai un link che atterra su un 404 (28/10).
+ */
+export function courseHref(course: Course, locale: Locale): string {
+  if (course.types?.includes('finanziato') && !hasScheda(course, locale)) {
+    return localeHref(locale, '/academy/formazione-finanziata')
+  }
+  return localeHref(locale, `/academy/${course.slug?.current ?? ''}`)
 }

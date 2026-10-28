@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { localeHref, type Locale } from '@/lib/i18n/config'
 import { l } from '@/lib/sanity/l'
 import type { Category } from '@/lib/sanity/types'
+import { ScrollerRow } from '@/components/ui'
 import { categoryHref } from './helpers'
 import styles from './CategoryBar.module.css'
 
@@ -14,6 +15,9 @@ export type CategoryBarProps = {
   allLabel: string
   /** aria-label della barra (da dizionario) */
   ariaLabel: string
+  /** aria-label delle due frecce mobile (da dizionario) */
+  prevLabel: string
+  nextLabel: string
   className?: string
 }
 
@@ -24,17 +28,18 @@ export function CategoryBar({
   activeSlug,
   allLabel,
   ariaLabel,
+  prevLabel,
+  nextLabel,
   className,
 }: CategoryBarProps) {
   if (categories.length === 0) return null
 
   return (
-    <nav
+    <ScrollerRow
       aria-label={ariaLabel}
       tabIndex={0}
-      className={['scroller', 'scroller-fade-end', styles.bar, className]
-        .filter(Boolean)
-        .join(' ')}
+      className={[styles.bar, className].filter(Boolean).join(' ')}
+      arrows={{ prev: prevLabel, next: nextLabel }}
     >
       <Link
         href={localeHref(locale, '/magazine')}
@@ -61,6 +66,6 @@ export function CategoryBar({
           </Link>
         )
       })}
-    </nav>
+    </ScrollerRow>
   )
 }

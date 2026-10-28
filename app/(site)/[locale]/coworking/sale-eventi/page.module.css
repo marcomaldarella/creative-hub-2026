@@ -365,7 +365,21 @@ a.room {
   max-width: 56ch;
 }
 
+/* la card formule sotto le sale (28/10): stessa pelle del riquadro
+   coworking, ma in flusso e a misura di colonna */
+.bookCard.bookCard {
+  position: static;
+  display: block;
+  max-width: 560px;
+  margin-top: clamp(28px, 4vw, 48px);
+}
+
 /* titoletto: stile unico dalla classe globale (27/10) */
 .kicker {
   composes: titoletto from global;
+}
+
+/* trattino davanti al breadcrumb di testata (richiesta 28/10) */
+.head .kicker::before {
+  content: "- ";
 }

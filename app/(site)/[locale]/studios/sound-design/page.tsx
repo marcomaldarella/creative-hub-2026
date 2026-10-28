@@ -50,7 +50,7 @@ const CLIENT_PHOTOS = [
   },
   {
     src: sdPubblicitaImg,
-    alt: 'Timeline di montaggio video su monitor, con la forma d’onda dell’audio in alto',
+    alt: 'Timeline di montaggio video su monitor, con le tracce audio e le forme d’onda',
   },
   {
     src: sdVideogiochiImg,

@@ -14,6 +14,11 @@ import { isLocale, localeHref } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
 import { pageAlternates } from '@/lib/seo'
 import { getSiteSettings } from '@/lib/sanity/queries'
+import {
+  COWORKING_ROW_SLUGS,
+  getBookableProducts,
+  shopCategoryUrl,
+} from '@/lib/woocommerce'
 import corridoio1Img from '@/public/img/foto/corridoio-1.jpg'
 import corridoio2Img from '@/public/img/foto/corridoio-2.jpg'
 import corridoio3Img from '@/public/img/foto/corridoio-3.jpg'
@@ -83,7 +88,15 @@ export default async function CoworkingPage({
   const { locale } = await params
   if (!isLocale(locale)) notFound()
   const t = getDictionary(locale)
-  const settings = await getSiteSettings()
+  const [settings, products] = await Promise.all([
+    getSiteSettings(),
+    getBookableProducts(),
+  ])
+  /* ogni formula del riquadro apre direttamente la sua scheda prodotto
+     WordPress (richiesta 28/10), nella stessa scheda: otto su otto.
+     L'ufficio non ha un prodotto a catalogo (è su richiesta) e porta
+     al listino coworking */
+  const bySlug = new Map(products.map((p) => [p.slug, p.permalink]))
   const prenota = localeHref(locale, '/coworking/prenota')
   const sale = localeHref(locale, '/coworking/sale-eventi')
   /* prezzi pieni barrati, allineati alle righe della tabella: nel
@@ -162,10 +175,10 @@ export default async function CoworkingPage({
           </RevealGroup>
         </header>
 
-        {/* ————— colata nera: dal prodotto alla banano room, tutto scuro
-            fino alla fascia azzurra del day pass ————— */}
-        <div className={`scheme-dark ${styles.darkBand}`}>
-        {/* ————— due colonne: contenuto + riquadro prenota fisso ————— */}
+        {/* ————— due colonne: contenuto + riquadro prenota fisso —————
+            da "Com'è lavorare qui" fino ai corridoi il fondo è chiaro
+            (richiesta 28/10); il nero resta sulla card prenota e
+            riparte dai corridoi in poi */}
         <div className={`wrap ${styles.lay}`}>
           <div className={styles.colL}>
             {/* com'è lavorare qui */}
@@ -273,11 +286,15 @@ export default async function CoworkingPage({
               labels={t.coworking.quickBook}
               subject={t.coworking.bookCta}
               moreHref={prenota}
-              options={t.coworking.tableRows.map((row, i) => ({
-                name: row[0],
-                hint: t.coworking.bookHints[i],
-                price: row[1],
-              }))}
+              options={t.coworking.tableRows.map((row, i) => {
+                const slug = COWORKING_ROW_SLUGS[i]
+                return {
+                  name: row[0],
+                  hint: t.coworking.bookHints[i],
+                  price: row[1],
+                  href: slug ? bySlug.get(slug) : shopCategoryUrl('coworking'),
+                }
+              })}
             />
             {settings?.phone && (
               <ArrowLink href={`tel:${settings.phone.replace(/\s/g, '')}`} external>
@@ -287,6 +304,9 @@ export default async function CoworkingPage({
           </aside>
         </div>
 
+        {/* ————— dai corridoi in poi la pagina torna nera, fino alla
+            fascia azzurra del day pass ————— */}
+        <div className={`scheme-dark ${styles.darkBand}`}>
         {/* ————— il palazzo, per immagini ————— */}
         <section className={styles.sez} id="palazzo">
           <PhotoStrip

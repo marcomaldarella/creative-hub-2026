@@ -17,6 +17,8 @@
     "menu": "menu",
     "lang": "language",
     "explore": "explore the section",
+    "pagesPrev": "previous pages",
+    "pagesNext": "next pages",
     "sub": {
       "academy": {
         "desc": "Degree courses, masters and higher education in music, sound, multimedia and visual. Plus custom courses — by instrument, by code, by skill — on your own schedule.",
@@ -322,7 +324,7 @@
     "empty": "no courses in this category.",
     "teachersKicker": "the teachers",
     "teachersTitle": "Those who teach, work.",
-    "backToCourses": "all courses",
+    "backToCourses": "All courses",
     "highlightKicker": "featured",
     "highlightCta": "view all courses",
     "sliderPrev": "previous courses",
@@ -1385,13 +1387,13 @@
     "cards": {
       "cta": "go to the open day",
       "uni": {
-        "num": "od.01",
+        "num": "Open Day 01",
         "title": "University courses",
         "sub": "Bachelor's and Master's in music, sound and visual",
         "alt": "Singing session in class during a university course"
       },
       "custom": {
-        "num": "od.02",
+        "num": "Open Day 02",
         "title": "Tailor-made lessons",
         "sub": "Voice, instrument and production, from age 6",
         "alt": "Hands on the pads during a production lesson"
@@ -1407,7 +1409,7 @@
       "next": "next section"
     },
     "uni": {
-      "kicker": "od.01 · university courses",
+      "kicker": "Open Day 01 · university courses",
       "title": "The university courses open day.",
       "lede": "Three hours inside Creative Hub Academy, to find out whether a university course in music, sound or visual is the right path.",
       "text": "It is designed for students finishing high school, for those who want to change direction and for families who want to understand before choosing. You meet the teachers, who work in the industry, and the students taking the courses. You visit the spaces where classes are held. You leave with answers on admission, costs, scholarships and internships.",
@@ -1495,7 +1497,7 @@
       ]
     },
     "custom": {
-      "kicker": "od.02 · tailor-made lessons",
+      "kicker": "Open Day 02 · tailor-made lessons",
       "title": "The tailor-made lessons open day.",
       "lede": "An afternoon to meet the teachers, try playing together and understand how the lessons work.",
       "text": "It is for anyone who wants to learn an instrument, singing or production for passion, at any age: adults, teenagers and children from age 6, with their parents. You don't need to know how to play. The atmosphere is relaxed: you can make mistakes without pressure.",
@@ -2456,6 +2458,7 @@
     "ctaTitle": "Build your event.",
     "ctaText": "Tell us what kind of event it is, for how many people and what you need: we send you a proposal with room, services and quote within one working day.",
     "ctaBook": "request a proposal",
+    "roomBook": "book the room",
     "back": "Back to coworking",
     "roomMeta": [
       {

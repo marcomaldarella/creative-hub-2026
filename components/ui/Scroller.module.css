@@ -66,6 +66,42 @@
   cursor: default;
 }
 
+/* fila + controlli (ScrollerRow con `arrows`): il nastro scorre, le
+   frecce restano fisse a filo del taglio destro — solo su mobile, su
+   desktop resta la sola sfumatura */
+.rowWrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.rowArrows {
+  display: flex;
+  gap: 8px;
+  flex: none;
+}
+
+/* dentro una barra compatta i 38px non ci stanno: stessa forma, 30px */
+.navSm.navSm {
+  width: 30px;
+  height: 30px;
+}
+
+@media (min-width: 761px) {
+  .rowArrows {
+    display: none;
+  }
+}
+
+@media (max-width: 760px) {
+  /* la fila prende tutta la riga, così le frecce finiscono a filo del
+     bordo destro del contenitore */
+  .rowWrap {
+    width: 100%;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .thumb,
   .nav {

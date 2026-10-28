@@ -17,6 +17,8 @@
     "menu": "menu",
     "lang": "lingua",
     "explore": "esplora la sezione",
+    "pagesPrev": "pagine precedenti",
+    "pagesNext": "pagine successive",
     "sub": {
       "academy": {
         "desc": "Corsi di laurea, master e alta formazione in musica, sound, multimedia e visual. E corsi custom — per strumento, per codice, per skill — su tempi tuoi.",
@@ -322,7 +324,7 @@
     "empty": "nessun corso in questa categoria.",
     "teachersKicker": "i docenti",
     "teachersTitle": "Chi insegna, lavora.",
-    "backToCourses": "tutti i corsi",
+    "backToCourses": "Tutti i corsi",
     "highlightKicker": "in evidenza",
     "highlightCta": "visualizza tutti i corsi",
     "sliderPrev": "corsi precedenti",
@@ -1385,13 +1387,13 @@
     "cards": {
       "cta": "vai all'open day",
       "uni": {
-        "num": "od.01",
+        "num": "Open Day 01",
         "title": "Corsi universitari",
         "sub": "Bachelor e Master in musica, sound e visual",
         "alt": "Sessione di canto in aula durante un corso universitario"
       },
       "custom": {
-        "num": "od.02",
+        "num": "Open Day 02",
         "title": "Lezioni su misura",
         "sub": "Canto, strumento e produzione, dai 6 anni",
         "alt": "Mani sui pad durante una lezione di produzione"
@@ -1407,7 +1409,7 @@
       "next": "sezione successiva"
     },
     "uni": {
-      "kicker": "od.01 · corsi universitari",
+      "kicker": "Open Day 01 · corsi universitari",
       "title": "Open day dei corsi universitari.",
       "lede": "Tre ore dentro Creative Hub Academy, per capire se un corso universitario in musica, sound o visual è la strada giusta.",
       "text": "È pensato per chi sta finendo la scuola superiore, per chi vuole cambiare strada e per le famiglie che vogliono capire prima di scegliere. Conosci i docenti, che lavorano nel settore, e gli studenti che stanno facendo il corso. Visiti gli spazi in cui si fa lezione. Esci con le risposte su ammissione, costi, borse di studio e stage.",
@@ -1495,7 +1497,7 @@
       ]
     },
     "custom": {
-      "kicker": "od.02 · lezioni su misura",
+      "kicker": "Open Day 02 · lezioni su misura",
       "title": "Open day delle lezioni su misura.",
       "lede": "Un pomeriggio per conoscere gli insegnanti, provare a suonare insieme e capire come funzionano le lezioni.",
       "text": "È per chi vuole imparare uno strumento, il canto o la produzione per passione, a qualsiasi età: adulti, ragazzi e bambini dai 6 anni, con i genitori. Non serve saper suonare. L'ambiente è rilassato: si può sbagliare senza ansia.",
@@ -2456,6 +2458,7 @@
     "ctaTitle": "Componi il tuo evento.",
     "ctaText": "Raccontaci che evento è, per quante persone e cosa ti serve: ti mandiamo una proposta con sala, servizi e preventivo entro un giorno lavorativo.",
     "ctaBook": "chiedi una proposta",
+    "roomBook": "prenota la sala",
     "back": "Torna a coworking",
     "roomMeta": [
       {

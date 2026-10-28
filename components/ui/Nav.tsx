@@ -321,7 +321,7 @@ export function Nav({
                         className={styles.topCta}
                         tabIndex={copy === 1 || i > 0 ? -1 : undefined}
                       >
-                        {topbar.cta} <Arrow size={12} />
+                        {topbar.cta} <Arrow size={10} />
                       </a>
                     </span>
                   ))}
