@@ -11,13 +11,13 @@ import {
   SectionHeader,
 } from '@/components/ui'
 import { SiteChrome } from '@/components/sections/SiteChrome'
+import { BgVideo } from '@/components/sections/BgVideo'
 import { SectionPagesNav } from '@/components/sections/SectionPagesNav'
 import { PointsAccordion } from '@/components/sections/PointsAccordion'
 import { isLocale, localeHref } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
 import { pageAlternates } from '@/lib/seo'
 import { getSiteSettings } from '@/lib/sanity/queries'
-import liveBandImg from '@/public/img/foto/live-band.jpg'
 import regLiveRoomImg from '@/public/img/foto/reg-live-room.jpg'
 import regVocalBoothImg from '@/public/img/foto/reg-vocal-booth.jpg'
 import regControlRoomImg from '@/public/img/foto/reg-control-room.jpg'
@@ -113,12 +113,12 @@ export default async function RegistrazionePage({
               </Reveal>
             </div>
             <Reveal className={det.headPh} delay={120}>
-              <Image
-                src={liveBandImg}
-                alt="Band in presa diretta nella live room"
-                className={det.headImg}
-                sizes="(max-width: 860px) 100vw, 50vw"
-                priority
+              {/* la regia SSL in movimento (clip 28/10): loop ping-pong
+                  muto al posto della foto statica */}
+              <BgVideo
+                src="/video/regia-ssl-8s-1920x1080.mp4"
+                poster="/img/sections/regia-ssl-poster.jpg"
+                className={det.headVideo}
               />
             </Reveal>
           </div>

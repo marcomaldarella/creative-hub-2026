@@ -703,3 +703,12 @@
 .head .kicker::before {
   content: "- ";
 }
+
+/* video di testata (28/10): riempie il riquadro come la foto */
+.headVideo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
