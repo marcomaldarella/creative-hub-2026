@@ -98,7 +98,10 @@ a.card {
    testo regge anche su foto chiare, la parte alta resta pulita */
 .glass {
   position: absolute;
-  inset: 0;
+  /* 1px oltre i bordi: durante lo scorrimento (posizioni subpixel) il
+     velo restava un pixel corto e il bordo della foto affiorava — lo
+     sbordo lo clippa l'overflow della card */
+  inset: -1px;
   z-index: 2;
   pointer-events: none;
   background:
