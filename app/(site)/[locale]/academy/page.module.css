@@ -986,19 +986,45 @@ h3.orientOptTitle {
 }
 
 /* ————— toggle "tutti i docenti": niente JS, come ThemeToggle — la
-   checkbox (nascosta) davanti alla griglia mostra le celle dei docenti
-   senza ritratto (UI della cella join us) e scambia il testo della
-   label dopo la griglia ————— */
+   checkbox (nascosta) davanti alla griglia apre il BLOCCO col resto
+   dei docenti (28/10): espansione 0fr→1fr + dissolvenza del contenuto,
+   e scambia il testo della label dopo la griglia ————— */
 .teachersAllToggle {
   display: none;
 }
 
-.teacherExtra {
-  display: none;
+.teachersRest {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 250ms var(--ease-out, ease-out);
 }
 
-.teachersAllToggle:checked ~ .teacherGrid .teacherExtra {
-  display: block;
+.teachersRestClip {
+  overflow: hidden;
+  min-height: 0;
+}
+
+.teacherGridRest {
+  /* lo stacco tra le due metà è lo stesso gap della griglia */
+  margin-top: clamp(24px, 2.6vw, 40px);
+  opacity: 0;
+  transition: opacity 180ms ease-out;
+}
+
+.teachersAllToggle:checked ~ .teachersRest {
+  grid-template-rows: 1fr;
+}
+
+.teachersAllToggle:checked ~ .teachersRest .teacherGridRest {
+  opacity: 1;
+  transition: opacity 220ms ease-out 60ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .teachersRest,
+  .teacherGridRest {
+    transition: none;
+  }
 }
 
 .teachersToggleLab {

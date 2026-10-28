@@ -422,8 +422,9 @@ export default async function AcademyPage({
               ))}
             </div>
             {/* toggle senza JS (come ThemeToggle): la checkbox davanti
-                alla griglia pilota via CSS le celle extra e il testo
-                della label dopo la griglia */}
+                alla griglia pilota via CSS il blocco espandibile e il
+                testo della label dopo la griglia. "Vedi tutti" apre il
+                resto della griglia con l'espansione 0fr→1fr (28/10) */}
             <input
               type="checkbox"
               id="tutti-docenti"
@@ -432,6 +433,7 @@ export default async function AcademyPage({
             <ul className={styles.teacherGrid}>
               {teachers
                 .filter((teacher) => teacher.photo)
+                .slice(0, 12)
                 .map((teacher) => (
                   <li key={teacher._id} className={styles.teacherCell}>
                     <div className={styles.teacherPh}>
@@ -450,45 +452,78 @@ export default async function AcademyPage({
                     <span className={styles.teacherName}>{teacher.name}</span>
                   </li>
                 ))}
-              {/* i docenti senza ritratto: nascosti finché il toggle non
-                  li chiama, resi con la UI della cella join us — box 4:5
-                  col ruolo dentro, nome sotto */}
-              {teachers
-                .filter((teacher) => !teacher.photo)
-                .map((teacher) => (
-                  <li
-                    key={teacher._id}
-                    className={`${styles.teacherCell} ${styles.teacherExtra}`}
-                  >
-                    <span className={styles.joinBox}>
-                      <span>{l(teacher.role, locale)}</span>
-                    </span>
-                    <span className={styles.teacherName}>{teacher.name}</span>
-                  </li>
-                ))}
-              {/* join us come un docente: box 4:5 col solo invito al
-                  cv (in hover spunta il +), "join us" sotto come
-                  fosse il nome; il clic porta ai contatti */}
-              <li className={styles.teacherCell}>
-                <Link
-                  className={styles.joinCell}
-                  href={`${localeHref(locale, '/chi-siamo')}#contatti`}
-                >
-                  <span className={styles.joinBox}>
-                    <span>{t.academy.joinUsRole}</span>
-                  </span>
-                  <span className={styles.teacherName}>{t.academy.joinUs}</span>
-                </Link>
-              </li>
-              {/* in memoria riempie lo spazio avanzato dell'ultima
-                  riga: blocco testuale a destra, ancorato in basso */}
-              <li className={styles.memoriaCell}>
-                <h3 className={styles.inMemoriaTitle}>
-                  {t.academy.inMemoriaTitle}
-                </h3>
-                <p className={styles.inMemoriaText}>{t.academy.inMemoriaText}</p>
-              </li>
             </ul>
+            {/* il resto dei docenti vive in un blocco che si apre
+                (grid-template-rows 0fr→1fr + dissolvenza) */}
+            <div className={styles.teachersRest}>
+              <div className={styles.teachersRestClip}>
+                <ul className={`${styles.teacherGrid} ${styles.teacherGridRest}`}>
+                  {teachers
+                    .filter((teacher) => teacher.photo)
+                    .slice(12)
+                    .map((teacher) => (
+                      <li key={teacher._id} className={styles.teacherCell}>
+                        <div className={styles.teacherPh}>
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img
+                            src={urlFor(teacher.photo!)
+                              .width(400)
+                              .height(500)
+                              .fit('crop')
+                              .auto('format')
+                              .url()}
+                            alt={teacher.name ?? ''}
+                            loading="lazy"
+                          />
+                        </div>
+                        <span className={styles.teacherName}>
+                          {teacher.name}
+                        </span>
+                      </li>
+                    ))}
+                  {/* i docenti senza ritratto, con la UI della cella
+                      join us — box 4:5 col ruolo dentro, nome sotto */}
+                  {teachers
+                    .filter((teacher) => !teacher.photo)
+                    .map((teacher) => (
+                      <li key={teacher._id} className={styles.teacherCell}>
+                        <span className={styles.joinBox}>
+                          <span>{l(teacher.role, locale)}</span>
+                        </span>
+                        <span className={styles.teacherName}>
+                          {teacher.name}
+                        </span>
+                      </li>
+                    ))}
+                  {/* join us come un docente: box 4:5 col solo invito al
+                      cv (in hover spunta il +), "join us" sotto come
+                      fosse il nome; il clic porta ai contatti */}
+                  <li className={styles.teacherCell}>
+                    <Link
+                      className={styles.joinCell}
+                      href={`${localeHref(locale, '/chi-siamo')}#contatti`}
+                    >
+                      <span className={styles.joinBox}>
+                        <span>{t.academy.joinUsRole}</span>
+                      </span>
+                      <span className={styles.teacherName}>
+                        {t.academy.joinUs}
+                      </span>
+                    </Link>
+                  </li>
+                  {/* in memoria riempie lo spazio avanzato dell'ultima
+                      riga: blocco testuale a destra, ancorato in basso */}
+                  <li className={styles.memoriaCell}>
+                    <h3 className={styles.inMemoriaTitle}>
+                      {t.academy.inMemoriaTitle}
+                    </h3>
+                    <p className={styles.inMemoriaText}>
+                      {t.academy.inMemoriaText}
+                    </p>
+                  </li>
+                </ul>
+              </div>
+            </div>
             <label
               htmlFor="tutti-docenti"
               className={styles.teachersToggleLab}
