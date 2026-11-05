@@ -3,7 +3,7 @@ import { Footer, Nav } from '@/components/ui'
 import { getDictionary } from '@/lib/i18n/dictionaries'
 import { localeHref, type Locale } from '@/lib/i18n/config'
 import { getSiteSettings } from '@/lib/sanity/queries'
-import { findTopic, type TopicBase } from '@/lib/topics'
+import { findTopic, topicNascosto, type TopicBase } from '@/lib/topics'
 import { EDITORIAL_ATTIVO } from '@/lib/flags'
 import type { SiteSettings } from '@/lib/sanity/types'
 
@@ -175,6 +175,26 @@ export async function SiteChrome({
     },
   ]
 
+  /**
+   * Le voci di un pannello: le etichette stanno nei dizionari e le
+   * ancore qui, appaiate per indice. Una voce spenta da flag
+   * (lib/topics) va tolta DALLA COPPIA: filtrare solo le ancore
+   * farebbe slittare le etichette su quelle sbagliate.
+   */
+  const voci = (s: Section) => {
+    const cross: Partial<Record<number, SectionKey>> = s.cross ?? {}
+    return t.nav.sub[s.key].items
+      .map((label, i) => ({ label, anchor: s.anchors[i], crossKey: cross[i] }))
+      .filter(
+        ({ anchor }) =>
+          !(
+            anchor &&
+            !anchor.startsWith('/') &&
+            topicNascosto(s.base as TopicBase, anchor)
+          )
+      )
+  }
+
   /* editorial spento: sparisce da menu e footer, e dal cross-link delle
      altre voci che ci puntavano */
   const sezioniVisibili = EDITORIAL_ATTIVO
@@ -189,7 +209,6 @@ export async function SiteChrome({
 
   const items = sezioniVisibili.map((s) => {
     const sub = t.nav.sub[s.key]
-    const cross: Partial<Record<number, SectionKey>> = s.cross ?? {}
     /* da una pagina a colore pieno, solo il pannello della SEZIONE
        CORRENTE resta nel colore; gli altri vanno in fascia scura
        (nero, testi chiari) via darkPanel. L'inline style di NavItem è
@@ -219,9 +238,7 @@ export async function SiteChrome({
         eyebrow: `/${s.label.toLowerCase()}`,
         desc: sub.desc,
         explore: t.nav.explore,
-        entries: sub.items.map((label, i) => {
-          const anchor = s.anchors[i]
-          const crossKey = cross[i]
+        entries: voci(s).map(({ label, anchor, crossKey }, i, tutte) => {
           return {
             label,
             /* se la voce ha una pagina propria (lib/topics) si va lì;
@@ -233,7 +250,7 @@ export async function SiteChrome({
                mobile — come l'offerta formativa di Academy */
             strong:
               ['academy', 'studio', 'coworking'].includes(s.key) &&
-              i < Math.ceil(sub.items.length / 2)
+              i < Math.ceil(tutte.length / 2)
                 ? true
                 : undefined,
             cross: crossKey

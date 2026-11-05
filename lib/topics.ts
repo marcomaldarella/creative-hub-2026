@@ -16,6 +16,8 @@
  * (documento `page` con pageId uguale allo slug).
  */
 
+import { METAVERSO_ATTIVO } from './flags'
+
 export type TopicBase =
   | '/academy'
   | '/studios'
@@ -127,6 +129,19 @@ export const TOPICS: Topic[] = [
   { slug: 'governance', base: '/chi-siamo', key: 'governance' },
 ]
 
+/**
+ * Voci spente da un flag: la pagina resta in piedi (chi ha il link la
+ * apre) ma esce dal mega-menu e dalla sitemap, e dice ai motori di non
+ * indicizzarla. Stessa regola dell'editorial, vedi lib/flags.
+ */
+export const TOPIC_PATHS_NASCOSTI: string[] = METAVERSO_ATTIVO
+  ? []
+  : ['/coworking/metaverso']
+
+export function topicNascosto(base: TopicBase, slug: string): boolean {
+  return TOPIC_PATHS_NASCOSTI.includes(`${base}/${slug}`)
+}
+
 /** gli slug di una sezione: serve alle route [slug] per riconoscerli */
 export function topicsOf(base: TopicBase): Topic[] {
   return TOPICS.filter((t) => t.base === base)
@@ -136,5 +151,7 @@ export function findTopic(base: TopicBase, slug: string): Topic | undefined {
   return TOPICS.find((t) => t.base === base && t.slug === slug)
 }
 
-/** tutti i percorsi (senza locale), per la sitemap */
-export const TOPIC_PATHS = TOPICS.map((t) => `${t.base}/${t.slug}`)
+/** tutti i percorsi (senza locale), per la sitemap — meno quelli spenti */
+export const TOPIC_PATHS = TOPICS.map((t) => `${t.base}/${t.slug}`).filter(
+  (p) => !TOPIC_PATHS_NASCOSTI.includes(p)
+)

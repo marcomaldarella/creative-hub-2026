@@ -9,3 +9,6 @@
 
 /** Editorial/magazine: nascosto su richiesta del cliente (ott 2026) */
 export const EDITORIAL_ATTIVO = false
+
+/** Metaverso: fuori dalle sezioni su richiesta del cliente (ott 2026) */
+export const METAVERSO_ATTIVO = false

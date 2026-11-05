@@ -4,7 +4,7 @@ import { TopicScreen } from '@/components/sections/TopicScreen'
 import { isLocale } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
 import { pageAlternates } from '@/lib/seo'
-import { findTopic, topicsOf } from '@/lib/topics'
+import { findTopic, topicNascosto, topicsOf } from '@/lib/topics'
 
 export const dynamic = 'force-dynamic'
 
@@ -32,6 +32,9 @@ export async function generateMetadata({
     title: copy.title,
     description: copy.lede,
     alternates: pageAlternates(locale, `/coworking/${slug}`),
+    /* voce spenta da flag: la pagina resta raggiungibile per chi ha il
+       link, ma fuori dalla sitemap e fuori dall'indice (lib/flags) */
+    ...(topicNascosto(BASE, slug) ? { robots: { index: false, follow: false } } : {}),
   }
 }
 
