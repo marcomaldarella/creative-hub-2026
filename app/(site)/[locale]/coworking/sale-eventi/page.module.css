@@ -60,7 +60,9 @@
 
 @media (max-width: 860px) {
   .duo {
-    grid-template-columns: 1fr;
+    /* minmax(0,…) e non 1fr: altrimenti la colonna si allarga sul
+       min-content di quello che contiene e la pagina scorre di lato */
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
@@ -179,6 +181,9 @@
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
+  /* mai stretch: con l'aspect-ratio sulle card un riquadro stirato in
+     altezza si ricalcola la LARGHEZZA e sfonda la colonna */
+  align-items: start;
 }
 
 @media (max-width: 700px) {
@@ -314,22 +319,44 @@ a.room {
 
 /* ————— già successo qui: prima foto 4:3, seconda quadrata, stessa
    altezza — le colonne pesano 4:3 così i due tagli chiudono a filo ————— */
-.pastGrid {
-  grid-template-columns: 4fr 3fr;
+/* le due colonne solo da tablet in su: sotto i 700px resta la colonna
+   singola del blocco base (se la regola stesse fuori dalla media query
+   vincerebbe per ordine e il mobile tornerebbe a due colonne) */
+@media (min-width: 701px) {
+  .pastGrid {
+    grid-template-columns: 4fr 3fr;
+  }
+
+  /* width: 100% + min-height azzerata: con un aspect-ratio addosso il
+     grid item non si stira da solo e si misurava sulla min-height
+     della card (480 → 640px), sfondando la colonna anche da desktop.
+     Qui comanda la larghezza della colonna e la proporzione decide
+     l'altezza, che è il modo in cui 4:3 e 1:1 chiudono a filo. */
+  .pastGrid > :first-child,
+  .pastGrid > :last-child {
+    width: 100%;
+    min-height: 0;
+  }
+
+  .pastGrid > :first-child {
+    aspect-ratio: 4 / 3;
+  }
+
+  .pastGrid > :last-child {
+    aspect-ratio: 1 / 1;
+  }
 }
 
-.pastGrid > :first-child {
-  aspect-ratio: 4 / 3;
-}
-
-.pastGrid > :last-child {
-  aspect-ratio: 1 / 1;
-}
-
+/* in colonna singola l'aspect-ratio va tolto: su un grid item con
+   proporzione fissa lo stretch non si applica, così la card si
+   ricavava la larghezza dalla min-height (400 → 533px) e sfondava la
+   pagina di lato. Senza proporzione resta la min-height delle altre
+   card a foto piena, che è la forma giusta. */
 @media (max-width: 700px) {
   .pastGrid > :first-child,
   .pastGrid > :last-child {
-    aspect-ratio: 4 / 3;
+    aspect-ratio: auto;
+    width: 100%;
   }
 }
 
