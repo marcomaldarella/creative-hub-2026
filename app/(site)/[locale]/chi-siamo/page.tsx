@@ -5,13 +5,11 @@ import { Button, Reveal, Rule, SectionHeader } from '@/components/ui'
 import { PartnerGrid } from '@/components/sections/PartnerGrid'
 import { PortableBlocks } from '@/components/sections/PortableBlocks'
 import { SiteChrome, shopHref } from '@/components/sections/SiteChrome'
-import { TeacherGrid } from '@/components/sections/TeacherGrid'
 import { isLocale } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
 import { pageAlternates } from '@/lib/seo'
 import {
   getAllPartners,
-  getAllTeachers,
   getPageById,
   getSiteSettings,
 } from '@/lib/sanity/queries'
@@ -44,9 +42,8 @@ export default async function ChiSiamoPage({
   if (!isLocale(locale)) notFound()
   const t = getDictionary(locale)
 
-  const [page, teachers, partners, settings] = await Promise.all([
+  const [page, partners, settings] = await Promise.all([
     getPageById('chi-siamo'),
-    getAllTeachers(),
     getAllPartners(),
     getSiteSettings(),
   ])
@@ -100,13 +97,17 @@ export default async function ChiSiamoPage({
           </Fragment>
         ))}
 
-        <Rule left={t.about.teamKicker} right={t.common.teachers} />
+        <Rule left={t.about.teamKicker} />
 
-        {/* ————— team completo ————— */}
+        {/* ————— le persone —————
+            L'elenco nominale dei docenti è sospeso su richiesta del cliente
+            (nov 2026): molti nominativi non sono più attivi. I documenti
+            teacher restano intatti in Sanity; per ripristinare la griglia
+            basta reimportare TeacherGrid + getAllTeachers e rimettere
+            <TeacherGrid teachers={teachers} locale={locale} /> qui sotto. */}
         <section className={styles.sez} id="team">
           <div className="wrap">
             <SectionHeader kicker={t.about.teamKicker} title={t.about.teamTitle} />
-            <TeacherGrid teachers={teachers} locale={locale} />
           </div>
         </section>
 

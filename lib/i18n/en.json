@@ -699,7 +699,6 @@
     "amenities": [
       "FTTH fibre wifi",
       "Monitor and ergonomic chair",
-      "Call booths and phone booths",
       "Printer and scanner",
       "Lockable drawer unit (full desk)",
       "@creativehub email and mail at reception",
@@ -707,8 +706,27 @@
       "Coffee and kitchen",
       "Air conditioning",
       "Garden and break areas",
-      "Library and bookshop",
       "Reception for your clients"
+    ],
+    "coplayingTitle": "Not just desks: co-playing.",
+    "coplayingText": "Coworking for creatives here also comes as co-playing: in the same hub you can book the podcasting box, the production boxes, the drum boxes and the stage for talks and showcases.",
+    "coplayingLinks": [
+      {
+        "label": "Podcasting and production boxes",
+        "href": "/prenota/production-boxes"
+      },
+      {
+        "label": "Drum box",
+        "href": "/prenota/double-drum-box-hp101"
+      },
+      {
+        "label": "Stage for talks and showcases",
+        "href": "/prenota/main-stage-con-divanetto-hp100"
+      },
+      {
+        "label": "All bookable spaces",
+        "href": "/prenota"
+      }
     ],
     "faqKicker": "before you book",
     "faqTitle": "Before you book.",
@@ -839,7 +857,6 @@
       "The \"small steps big change\" stairs",
       "The classroom corridors",
       "The entrance to the CW300 area",
-      "The library",
       "The front office",
       "The corridor to the offices"
     ],
@@ -3426,7 +3443,7 @@
         {
           "_key": "findExtra-1",
           "title": "Software and instruments",
-          "text": "Pro Tools, Ableton, Universal Audio."
+          "text": "Pro Tools, Ableton."
         }
       ]
     },

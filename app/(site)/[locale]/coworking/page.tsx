@@ -22,7 +22,6 @@ import corridoio1Img from '@/public/img/foto/corridoio-1.jpg'
 import corridoio2Img from '@/public/img/foto/corridoio-2.jpg'
 import corridoio3Img from '@/public/img/foto/corridoio-3.jpg'
 import corridoio4Img from '@/public/img/foto/corridoio-4.jpg'
-import corridoio5Img from '@/public/img/foto/corridoio-5.jpg'
 import corridoio6Img from '@/public/img/foto/corridoio-6.jpg'
 import corridoio7Img from '@/public/img/foto/corridoio-7.jpg'
 import banano1Img from '@/public/img/foto/banano-1.jpg'
@@ -97,7 +96,6 @@ export default async function CoworkingPage({
      acquistabile e apre la scheda interna /prenota/ufficio */
   const bySlug = new Map(products.map((p) => [p.slug, p.permalink]))
   const prenota = localeHref(locale, '/coworking/prenota')
-  const sale = localeHref(locale, '/coworking/sale-eventi')
   /* prezzi pieni barrati, allineati alle righe della tabella: nel
      mockup solo il carnet da dieci ingressi ne ha uno */
   const tableWas = t.coworking.tableWas
@@ -106,15 +104,17 @@ export default async function CoworkingPage({
      mockup, "Vedi tutte le foto (10)"): il numero si legge dall'elenco
      vero, non si scrive a mano.
      ⚠️ i testi alternativi erano assegnati ai file sbagliati: qui sono
-     rimessi sulla foto giusta, didascalie comprese */
+     rimessi sulla foto giusta, didascalie comprese.
+     ⚠️ la foto della library è fuori dal giro (revisione 11/2026: la
+     library non c'è ancora): restano i corridoi delle aule e degli
+     uffici */
   const corridoi = [
     { src: corridoio1Img, alt: 'Murale "future together" lungo il corridoio, con una pianta in primo piano', caption: t.coworking.corridoiCaptions[0] },
     { src: corridoio2Img, alt: 'Scala interna con il murale "small steps big change" su parete arancio', caption: t.coworking.corridoiCaptions[1] },
     { src: corridoio6Img, alt: 'Corridoio delle aule CW301 con segnaletica gialla a pavimento e pareti', caption: t.coworking.corridoiCaptions[2] },
     { src: corridoio7Img, alt: "Ingresso dell'area CW300: pareti bianche, segnaletica gialla e parquet", caption: t.coworking.corridoiCaptions[3] },
-    { src: corridoio5Img, alt: 'Corridoio della library, con la scritta arancio sulla parete scura', caption: t.coworking.corridoiCaptions[4] },
-    { src: corridoio3Img, alt: "Porta dell'ufficio segreteria vista dal corridoio", caption: t.coworking.corridoiCaptions[5] },
-    { src: corridoio4Img, alt: 'Corridoio lungo verso gli uffici, con la targa della segreteria', caption: t.coworking.corridoiCaptions[6] },
+    { src: corridoio3Img, alt: "Porta dell'ufficio segreteria vista dal corridoio", caption: t.coworking.corridoiCaptions[4] },
+    { src: corridoio4Img, alt: 'Corridoio lungo verso gli uffici, con la targa della segreteria', caption: t.coworking.corridoiCaptions[5] },
   ]
 
   return (
@@ -134,18 +134,18 @@ export default async function CoworkingPage({
             />
           </Reveal>
           <Reveal className={styles.mosaicSide} delay={80}>
-            <Image src={banano1Img} alt="La banano room: tavolo rotondo, sedute in velluto e luci calde" className={styles.mosaicImg} />
+            <Image src={banano1Img} alt="Gli spazi comuni: tavolo rotondo, sedute in velluto e luci calde" className={styles.mosaicImg} />
           </Reveal>
           <Reveal className={styles.mosaicSide} delay={140}>
             <Image src={corridoio2Img} alt='Scala interna con il murale "small steps big change"' className={styles.mosaicImg} />
           </Reveal>
           {/* le altre due del mosaico del mockup: il corridoio "future
-              together" e la banano room d'insieme */}
+              together" e gli spazi comuni d'insieme */}
           <Reveal className={styles.mosaicSide} delay={200}>
             <Image src={futureImg} alt='Il corridoio con il murale "future together" e le sedute blu' className={styles.mosaicImg} />
           </Reveal>
           <Reveal className={styles.mosaicSide} delay={260}>
-            <Image src={banano2Img} alt="La banano room: soffitto industriale e il grande banano al centro" className={styles.mosaicImg} />
+            <Image src={banano2Img} alt="Gli spazi comuni: soffitto industriale e una grande pianta al centro" className={styles.mosaicImg} />
           </Reveal>
           <a href="#palazzo" className={`mono ${styles.galleryCta}`}>
             {t.coworking.galleryCta} ({corridoi.length})
@@ -237,11 +237,32 @@ export default async function CoworkingPage({
                   </tbody>
                 </table>
               </div>
+              {/* il cliente non capiva dove portasse la freccia (revisione
+                  11/2026): ora apre dritta la scheda della sala riunioni
+                  su /prenota, con prezzo e tasto di prenotazione */}
               <div className={styles.salaCta}>
-                <ArrowLink href={sale} dir="e">
+                <ArrowLink href={localeHref(locale, '/prenota/sala-riunioni')} dir="e">
                   {t.coworking.salaCta}
                 </ArrowLink>
               </div>
+            </section>
+
+            {/* co-playing: gli spazi prenotabili oltre le scrivanie
+                (revisione 11/2026 — il coworking per creativi si declina
+                anche in co-playing), ogni voce apre la sua scheda interna
+                su /prenota come le formule */}
+            <section className={styles.block}>
+              <h2 className={styles.h2}>{t.coworking.coplayingTitle}</h2>
+              <p className={styles.p}>{t.coworking.coplayingText}</p>
+              <ul className={styles.whereList}>
+                {t.coworking.coplayingLinks.map((l) => (
+                  <li key={l.href}>
+                    <ArrowLink href={localeHref(locale, l.href)} dir="e">
+                      {l.label}
+                    </ArrowLink>
+                  </li>
+                ))}
+              </ul>
             </section>
 
             {/* prima di prenotare */}
@@ -325,7 +346,9 @@ export default async function CoworkingPage({
           />
         </section>
 
-        {/* ————— la banano room (senza occhiello: il titolo basta) ————— */}
+        {/* ————— gli spazi comuni (senza occhiello: il titolo basta).
+            La banano room non c'è più (revisione 11/2026): stessa
+            struttura, si punta sugli spazi condivisi veri ————— */}
         <section className={`${styles.sez} ${styles.banano}`}>
           <div className="wrap">
             <PhotoDuo
@@ -334,11 +357,11 @@ export default async function CoworkingPage({
               photos={[
                 {
                   src: banano1Img,
-                  alt: 'La banano room del coworking: tavolo rotondo, sedute in velluto e luci calde',
+                  alt: 'Gli spazi comuni del coworking: tavolo rotondo, sedute in velluto e luci calde',
                 },
                 {
                   src: banano2Img,
-                  alt: "La banano room vista d'insieme: soffitto industriale, grande banano al centro e divani",
+                  alt: "Gli spazi comuni visti d'insieme: soffitto industriale, una grande pianta al centro e divani",
                 },
               ]}
             />

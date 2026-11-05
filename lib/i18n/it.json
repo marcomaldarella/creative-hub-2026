@@ -32,7 +32,7 @@
         ]
       },
       "studio": {
-        "desc": "Regia SSL XL Desk da 55 m², sala live, ISO box e tre cabine B-Ear.",
+        "desc": "Regia SSL XL Desk da 55 m², sala live, ISO box e quattro cabine B-Ear.",
         "items": [
           "Registrazione",
           "Mix & mastering",
@@ -677,19 +677,19 @@
   "coworking": {
     "kicker": "Coworking · Zona roveri, bologna",
     "title": "Coworking a Bologna.\nUno spazio all'altezza del tuo lavoro.",
-    "lede": "Un open space luminoso dentro un hub di 2.000 m² dedicato alle industrie creative. Alla scrivania accanto può esserci un grafico, una startup o un'agenzia: in pausa vi trovate tutti nella banano room.",
+    "lede": "Un open space luminoso dentro un hub di 2.500 m² dedicato alle industrie creative. Alla scrivania accanto può esserci un grafico, una startup o un'agenzia: in pausa vi trovate tutti negli spazi comuni.",
     "spacesKicker": "le formule",
     "spacesTitle": "Le formule a confronto.",
     "ctaKicker": "prenota",
     "ctaTitle": "Scegli la formula.",
     "ctaText": "Da 9,50€ al giorno. Ti confermiamo entro un giorno lavorativo.",
     "ctaDayPass": "Prenota un day pass",
-    "bananoKicker": "banano room",
-    "bananoTitle": "La banano room.",
-    "bananoText": "Lo spazio comune del coworking: tavoli condivisi, divani e luce calda per le pause, gli incontri informali e gli eventi piccoli.",
+    "bananoKicker": "spazi comuni",
+    "bananoTitle": "Gli spazi comuni.",
+    "bananoText": "Gli spazi condivisi del coworking: tavoli comuni, divani e luce calda per le pause, gli incontri informali e gli eventi piccoli.",
     "corridoiKicker": "i corridoi",
     "corridoiTitle": "Il palazzo, dentro.",
-    "corridoiText": "Aule, uffici, sale prova, library: i corridoi tengono insieme tutto quello che succede in hub — e ti dicono sempre dove sei.",
+    "corridoiText": "Aule, uffici, sale prova, sala riunioni: i corridoi tengono insieme tutto quello che succede in hub — e ti dicono sempre dove sei.",
     "corridoiPrev": "foto precedenti",
     "corridoiNext": "altre foto",
     "corridoiHint": "scorri per vedere tutte le foto",
@@ -699,16 +699,35 @@
     "amenities": [
       "Wifi in fibra FTTH",
       "Monitor e seduta ergonomica",
-      "Cabine call e phone booth",
       "Stampante e scanner",
       "Cassettiera con chiave (full desk)",
       "Email @creativehub e posta in reception",
       "Google Workspace e cloud illimitato",
-      "Caffè e cucina",
+      "Cucina per eventi, 2 aree vending machines con caffetteria, bevande, snack e pasti artigianali a km0",
       "Aria condizionata",
       "Giardino e aree relax",
-      "Library e bookshop",
-      "Reception per i tuoi clienti"
+      "Reception per i tuoi clienti",
+      "Possibilità di ospitare la sede legale o operativa"
+    ],
+    "coplayingTitle": "Non solo scrivanie: il co-playing.",
+    "coplayingText": "Il coworking per creativi qui si declina anche in co-playing: nello stesso hub prenoti il box podcasting, i production box, i drum box e il palco per talk e showcase.",
+    "coplayingLinks": [
+      {
+        "label": "Box podcasting e production box",
+        "href": "/prenota/production-boxes"
+      },
+      {
+        "label": "Drum box",
+        "href": "/prenota/double-drum-box-hp101"
+      },
+      {
+        "label": "Palco per talk e showcase",
+        "href": "/prenota/main-stage-con-divanetto-hp100"
+      },
+      {
+        "label": "Tutti gli spazi prenotabili",
+        "href": "/prenota"
+      }
     ],
     "faqKicker": "prima di prenotare",
     "faqTitle": "Prima di prenotare.",
@@ -738,7 +757,7 @@
     "hereKicker": "com'è lavorare qui",
     "hereTitle": "Com'è lavorare qui.",
     "hereText": [
-      "Un open space luminoso dentro un hub di 2.000 m² dedicato alle industrie creative. Alla scrivania accanto può esserci un grafico, una startup o un'agenzia: in pausa vi trovate tutti nella banano room.",
+      "Un open space luminoso dentro un hub di 2.500 m² dedicato alle industrie creative. Alla scrivania accanto può esserci un grafico, una startup o un'agenzia: in pausa vi trovate tutti negli spazi comuni.",
       "Vieni un giorno con il day pass, prendi una postazione per il mese o un ufficio per il tuo team."
     ],
     "tableHead": [
@@ -797,7 +816,7 @@
         "eventi e incontri"
       ]
     ],
-    "salaCta": "Ti serve una sala riunioni? Da 90€",
+    "salaCta": "Ti serve una sala riunioni? Prenotala da 90€",
     "bookFrom": "da",
     "bookPrice": "9,50€",
     "bookUnit": "al giorno",
@@ -821,7 +840,7 @@
       "submit": "Prenota",
       "sending": "Invio…",
       "note": "Ti confermiamo entro un giorno lavorativo.",
-      "done": "Richiesta inviata. Ti confermiamo disponibilità e accesso dal lunedì al venerdì.",
+      "done": "Ti contatteremo a breve per confermare lo spazio.",
       "missing": "Compila nome e cellulare.",
       "error": "Non siamo riusciti a inviare la richiesta: riprova, o scrivici.",
       "more": "scegli la formula con calma",
@@ -839,7 +858,6 @@
       "La scala \"small steps big change\"",
       "I corridoi delle aule",
       "L'ingresso dell'area CW300",
-      "La library",
       "La segreteria",
       "Il corridoio degli uffici"
     ],
@@ -3426,7 +3444,32 @@
         {
           "_key": "findExtra-1",
           "title": "Software e strumenti",
-          "text": "Pro Tools, Ableton, Universal Audio."
+          "text": "Pro Tools, Ableton."
+        },
+        {
+          "_key": "findExtra-2",
+          "title": "Amplificatori chitarra elettrica",
+          "text": "Fender, Brunetti."
+        },
+        {
+          "_key": "findExtra-3",
+          "title": "Amplificatori basso",
+          "text": "Ampeg."
+        },
+        {
+          "_key": "findExtra-4",
+          "title": "Bassi e chitarre",
+          "text": "Acustiche ed elettriche: Fender, Yamaha, Eko."
+        },
+        {
+          "_key": "findExtra-5",
+          "title": "Batterie",
+          "text": "Hollywood, Pearl, Mapex, Ludwig."
+        },
+        {
+          "_key": "findExtra-6",
+          "title": "Tastiere",
+          "text": "Moog SubSequent 37, master keyboard di regia Arturia KeyLab 88."
         }
       ]
     },

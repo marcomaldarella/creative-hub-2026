@@ -185,7 +185,7 @@ export default async function AffittoStudioPage({
                 {/* i marchi citati nella dotazione del mockup: console,
                     monitor, interfacce e software */}
                 <BrandRow
-                  brands={['ssl', 'genelec', 'dolby', 'avid', 'universalAudio', 'ableton']}
+                  brands={['ssl', 'genelec', 'dolby', 'avid', 'ableton']}
                 />
               </div>
             </section>
