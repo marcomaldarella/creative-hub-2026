@@ -46,6 +46,7 @@
         "desc": "Coworking · sale · eventi nel cuore di Bologna.",
         "items": [
           "Coworking",
+          "Co-playing",
           "Prenota uno spazio",
           "Sale & eventi",
           "Metaverso"
@@ -1509,7 +1510,7 @@
         },
         {
           "q": "Com'è la sede?",
-          "a": "Duemila metri quadri in zona Roveri, a dieci minuti dal centro: aule, studi di registrazione, sale prova. Venire a vederla è il modo migliore per capirlo.",
+          "a": "Duemilacinquecento metri quadri in zona Roveri, a dieci minuti dal centro: aule, studi di registrazione, sale prova. Venire a vederla è il modo migliore per capirlo.",
           "link": "Come arrivare"
         }
       ]
@@ -2536,7 +2537,7 @@
         {
           "id": "networking",
           "label": "Networking o aperitivo",
-          "room": "Banano room"
+          "room": "Area Culture"
         },
         {
           "id": "mostra",

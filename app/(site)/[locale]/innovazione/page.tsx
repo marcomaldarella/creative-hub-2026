@@ -75,7 +75,7 @@ export default async function InnovazionePage({
             <Reveal className={det.headPh} delay={120}>
               <Image
                 src={banano1Img}
-                alt="La banano room: tavolo rotondo e sedute attorno al grande banano"
+                alt="Lo spazio comune dell'hub: tavolo rotondo e sedute attorno alla grande pianta"
                 priority
                 sizes="(max-width: 860px) 100vw, 50vw"
                 className={det.headImg}

@@ -190,6 +190,25 @@ export default async function CoworkingPage({
               ))}
             </section>
 
+            {/* co-playing: gli spazi prenotabili oltre le scrivanie
+                (revisione 11/2026 — il coworking per creativi si declina
+                anche in co-playing), ogni voce apre la sua scheda interna
+                su /prenota come le formule. Sta ALTO di proposito: il
+                cliente non trovava dove si prenota un box (feedback 8/11) */}
+            <section className={styles.block} id="co-playing">
+              <h2 className={styles.h2}>{t.coworking.coplayingTitle}</h2>
+              <p className={styles.p}>{t.coworking.coplayingText}</p>
+              <ul className={styles.whereList}>
+                {t.coworking.coplayingLinks.map((l) => (
+                  <li key={l.href}>
+                    <ArrowLink href={localeHref(locale, l.href)} dir="e">
+                      {l.label}
+                    </ArrowLink>
+                  </li>
+                ))}
+              </ul>
+            </section>
+
             {/* cosa trovi */}
             <section className={styles.block}>
               <h2 className={styles.h2}>{t.coworking.amenitiesTitle}</h2>
@@ -245,24 +264,6 @@ export default async function CoworkingPage({
                   {t.coworking.salaCta}
                 </ArrowLink>
               </div>
-            </section>
-
-            {/* co-playing: gli spazi prenotabili oltre le scrivanie
-                (revisione 11/2026 — il coworking per creativi si declina
-                anche in co-playing), ogni voce apre la sua scheda interna
-                su /prenota come le formule */}
-            <section className={styles.block}>
-              <h2 className={styles.h2}>{t.coworking.coplayingTitle}</h2>
-              <p className={styles.p}>{t.coworking.coplayingText}</p>
-              <ul className={styles.whereList}>
-                {t.coworking.coplayingLinks.map((l) => (
-                  <li key={l.href}>
-                    <ArrowLink href={localeHref(locale, l.href)} dir="e">
-                      {l.label}
-                    </ArrowLink>
-                  </li>
-                ))}
-              </ul>
             </section>
 
             {/* prima di prenotare */}

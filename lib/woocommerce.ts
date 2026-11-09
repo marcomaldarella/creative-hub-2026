@@ -136,7 +136,7 @@ const UFFICIO: WcProduct = {
     alt: 'La lounge del coworking: sedute e grafiche geometriche alle pareti',
   },
   descriptionHtml:
-    "<p>L'ala coworking del Creative Hub ospita uffici privati per startup, enti e team che vogliono una base stabile dentro un hub di 2.000 mq dedicato alle industrie creative, in zona Roveri.</p>" +
+    "<p>L'ala coworking del Creative Hub ospita uffici privati per startup, enti e team che vogliono una base stabile dentro un hub di 2.500 mq dedicato alle industrie creative, in zona Roveri.</p>" +
     "<p>L'ufficio si definisce su misura: numero di postazioni, durata e servizi si concordano con la struttura. Si lavora con wifi in fibra FTTH, sale riunioni, stampante e scanner, email @creativehub e posta in reception, caffè e cucina, giardino e aree relax, reception per i tuoi clienti.</p>" +
     '<p>Il prezzo è su richiesta: raccontaci di che spazio hai bisogno e ti prepariamo una proposta.</p>',
   shortDescriptionHtml:

@@ -84,7 +84,7 @@ export default async function AziendePage({
             <Reveal className={det.headPh} delay={100}>
               <Image
                 src={banano1Img}
-                alt="La banano room: tavolo rotondo e sedute in velluto"
+                alt="Lo spazio comune dell'hub: tavolo rotondo e sedute in velluto"
                 className={det.headImg}
               />
             </Reveal>

@@ -46,6 +46,7 @@
         "desc": "Coworking · rooms · events in the heart of Bologna.",
         "items": [
           "Coworking",
+          "Co-playing",
           "Book a space",
           "Rooms & events",
           "Metaverse"
@@ -677,16 +678,16 @@
   "coworking": {
     "kicker": "Coworking · Roveri district, bologna",
     "title": "Coworking in Bologna.\nA space that matches your work.",
-    "lede": "A bright open space inside a 2,000 m² hub for the creative industries. At the next desk there may be a designer, a startup or an agency: at break time you all meet in the banano room.",
+    "lede": "A bright open space inside a 2,500 m² hub for the creative industries. At the next desk there may be a designer, a startup or an agency: at break time you all meet in the common areas.",
     "spacesKicker": "the plans",
     "spacesTitle": "The plans, compared.",
     "ctaKicker": "book",
     "ctaTitle": "Pick your plan.",
     "ctaText": "From €9.50 a day. We confirm within one working day.",
     "ctaDayPass": "Book a day pass",
-    "bananoKicker": "banano room",
-    "bananoTitle": "The banano room.",
-    "bananoText": "The shared heart of the coworking space: communal tables, sofas and warm light for breaks, informal meetings and small events.",
+    "bananoKicker": "common areas",
+    "bananoTitle": "The common areas.",
+    "bananoText": "The shared areas of the coworking space: communal tables, sofas and warm light for breaks, informal meetings and small events.",
     "corridoiKicker": "the corridors",
     "corridoiTitle": "Inside the building.",
     "corridoiText": "Classrooms, offices, rehearsal rooms, the library: the corridors hold together everything that happens in the hub — and always tell you where you are.",
@@ -756,7 +757,7 @@
     "hereKicker": "what it's like",
     "hereTitle": "What it's like to work here.",
     "hereText": [
-      "A bright open space inside a 2,000 m² hub for the creative industries. At the next desk there may be a designer, a startup or an agency: at break time you all meet in the banano room.",
+      "A bright open space inside a 2,500 m² hub for the creative industries. At the next desk there may be a designer, a startup or an agency: at break time you all meet in the common areas.",
       "Come for a day with a day pass, take a desk for the month or an office for your team."
     ],
     "tableHead": [
@@ -1508,7 +1509,7 @@
         },
         {
           "q": "What is the campus like?",
-          "a": "Two thousand square metres in the Roveri district, ten minutes from the centre: classrooms, recording studios, rehearsal rooms. Coming to see it is the best way to find out.",
+          "a": "Two thousand five hundred square metres in the Roveri district, ten minutes from the centre: classrooms, recording studios, rehearsal rooms. Coming to see it is the best way to find out.",
           "link": "How to get here"
         }
       ]
@@ -2535,7 +2536,7 @@
         {
           "id": "networking",
           "label": "Networking or drinks",
-          "room": "Banano room"
+          "room": "Area Culture"
         },
         {
           "id": "mostra",

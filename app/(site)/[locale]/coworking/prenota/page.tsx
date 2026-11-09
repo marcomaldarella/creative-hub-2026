@@ -136,7 +136,7 @@ export default async function PrenotaPage({
                 },
                 sale: {
                   src: banano2Img,
-                  alt: 'La banano room: soffitto industriale e grande banano al centro',
+                  alt: 'Gli spazi comuni: soffitto industriale e grande pianta al centro',
                 },
               }}
               shopLinks={shopLinks}

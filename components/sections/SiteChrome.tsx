@@ -146,7 +146,16 @@ export async function SiteChrome({
       /* la voce "Studio di registrazione" è uscita dal pannello: lo
          studio ha la sua macrovoce, qui era un rimando che riportava
          alla stessa pagina */
-      anchors: ['coworking', '/coworking/prenota', 'sale-eventi', 'metaverso'],
+      /* "Co-playing" porta alla sezione degli spazi prenotabili oltre le
+         scrivanie (box podcasting/production/drum, palco): il cliente non
+         trovava da dove si prenota un box (feedback 8/11) */
+      anchors: [
+        'coworking',
+        'co-playing',
+        '/coworking/prenota',
+        'sale-eventi',
+        'metaverso',
+      ],
     },
     {
       key: 'innovation',
