@@ -19,6 +19,8 @@ import { article } from './documents/article'
 import { partner } from './documents/partner'
 import { space } from './documents/space'
 import { page } from './documents/page'
+import { sectionMedia } from './documents/sectionMedia'
+import { mediaKit } from './documents/mediaKit'
 
 export const schemaTypes = [
   // oggetti
@@ -44,4 +46,6 @@ export const schemaTypes = [
   partner,
   space,
   page,
+  sectionMedia,
+  mediaKit,
 ]

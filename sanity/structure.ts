@@ -96,6 +96,33 @@ export const structure: StructureResolver = (S) =>
               S.documentTypeListItem('space').title('Tutti gli spazi'),
             ])
         ),
+      S.listItem()
+        .title('Media del sito')
+        .id('media-sito')
+        .child(
+          S.list()
+            .title('Media del sito')
+            .items([
+              S.listItem()
+                .title('Pagina Studio — foto')
+                .id('media-studios')
+                .child(
+                  S.document()
+                    .schemaType('sectionMedia')
+                    .documentId('media-studios')
+                    .title('Pagina Studio — foto')
+                ),
+              S.listItem()
+                .title('Archivio media (download)')
+                .id('mediaKit-sito')
+                .child(
+                  S.document()
+                    .schemaType('mediaKit')
+                    .documentId('mediaKit-sito')
+                    .title('Archivio media (download)')
+                ),
+            ])
+        ),
       S.documentTypeListItem('partner').title('Partner'),
       S.documentTypeListItem('page').title('Pagine (hero & corpi)'),
     ])

@@ -24,10 +24,12 @@ import { pageAlternates } from '@/lib/seo'
 import {
   getAllArticles,
   getArticlesByCategory,
+  getSectionImages,
   getSiteSettings,
   getSpacesByKind,
 } from '@/lib/sanity/queries'
 import { l } from '@/lib/sanity/l'
+import { urlFor } from '@/lib/sanity/image'
 import studioRegiaBImg from '@/public/img/sections/studio-regia-b.jpg'
 import styles from './page.module.css'
 
@@ -72,12 +74,20 @@ export default async function StudiosPage({
   if (!isLocale(locale)) notFound()
   const t = getDictionary(locale)
 
-  const [spaces, settings, studioArticles, allArticles] = await Promise.all([
-    getSpacesByKind('studio'),
-    getSiteSettings(),
-    getArticlesByCategory('produzione-musicale'),
-    getAllArticles(),
-  ])
+  const [spaces, settings, studioArticles, allArticles, media] =
+    await Promise.all([
+      getSpacesByKind('studio'),
+      getSiteSettings(),
+      getArticlesByCategory('produzione-musicale'),
+      getAllArticles(),
+      getSectionImages('studios'),
+    ])
+  /* foto sostituibili dal CMS (Media del sito → Pagina Studio);
+     senza slot compilato resta la foto di repo */
+  const foto = (slot: string, fallback: string, w: number, h: number) =>
+    media[slot]
+      ? urlFor(media[slot]).width(w).height(h).fit('crop').auto('format').url()
+      : fallback
   /* due articoli a tema studio: prima la linea produzione musicale,
      poi si completa con gli ultimi del magazine se non bastano */
   const editorial = [
@@ -124,7 +134,7 @@ export default async function StudiosPage({
           </div>
           <Reveal className={styles.headMedia}>
             <Image
-              src="/img/sections/studio-regia.jpg"
+              src={foto('hero', '/img/sections/studio-regia.jpg', 1800, 1350)}
               alt="La regia principale dello studio: console, monitoring e synth"
               width={1800}
               height={1350}
@@ -202,14 +212,14 @@ export default async function StudiosPage({
         {/* ————— le regie, dal vivo: banda fotografica a due colonne ————— */}
         <section className={styles.photoDuo} aria-label="Le regie dello studio">
           <Image
-            src="/img/sections/studio-desk.jpg"
+            src={foto('duo-sinistra', '/img/sections/studio-desk.jpg', 1800, 1800)}
             alt="La regia vista dal centro della sala: console, rack e tastiere"
             width={1800}
             height={1800}
             className={styles.duoImg}
           />
           <Image
-            src="/img/sections/studio-regia-b.jpg"
+            src={foto('duo-destra', '/img/sections/studio-regia-b.jpg', 1200, 1600)}
             alt="La postazione di lavoro con console SSL e modulari"
             width={1200}
             height={1600}

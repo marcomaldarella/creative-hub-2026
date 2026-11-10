@@ -9,6 +9,10 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: path.resolve(process.cwd()),
   },
+  // le foto di sezione sostituibili dal CMS arrivano dalla CDN Sanity
+  images: {
+    remotePatterns: [{ protocol: "https", hostname: "cdn.sanity.io" }],
+  },
   async redirects() {
     // incubazione e accelerazione sono la stessa pagina (CreaTech):
     // i vecchi slug — e le loro versioni /en — vanno in 301

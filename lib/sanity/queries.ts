@@ -8,6 +8,7 @@ import type {
   Page,
   PageId,
   Partner,
+  SanityImage,
   SiteSettings,
   Space,
   SpaceKind,
@@ -145,4 +146,25 @@ export const homeDataQuery = groq`{
 
 export function getHomeData(): Promise<HomeData> {
   return client.fetch(homeDataQuery)
+}
+
+/* ---------- media di sezione (foto delle pagine, sostituibili dal CMS) ---------- */
+
+export const sectionMediaQuery = groq`
+  *[_type == "sectionMedia" && pageId == $pageId][0].slots[] { slot, image }
+`
+
+/** Mappa slot → immagine per una pagina: lo slot senza immagine (o il
+ *  documento assente) non compare, e la pagina resta sulla foto di repo */
+export async function getSectionImages(
+  pageId: string
+): Promise<Record<string, SanityImage>> {
+  const slots = await client.fetch<
+    { slot: string; image?: SanityImage }[] | null
+  >(sectionMediaQuery, { pageId })
+  const map: Record<string, SanityImage> = {}
+  for (const s of slots ?? []) {
+    if (s?.slot && s.image?.asset) map[s.slot] = s.image
+  }
+  return map
 }
