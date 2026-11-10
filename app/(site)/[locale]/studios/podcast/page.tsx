@@ -14,10 +14,13 @@ import { PointsAccordion } from '@/components/sections/PointsAccordion'
 import { isLocale, localeHref } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
 import { pageAlternates } from '@/lib/seo'
-import { getPageById, getSiteSettings } from '@/lib/sanity/queries'
+import {
+  getPageById,
+  getSectionImages,
+  getSiteSettings,
+} from '@/lib/sanity/queries'
 import { l } from '@/lib/sanity/l'
-import podcastImg from '@/public/img/foto/podcast-cabina.avif'
-import studioSslImg from '@/public/img/foto/studio-ssl.jpg'
+import { urlFor } from '@/lib/sanity/image'
 import { ContactForm } from '@/components/sections/ContactForm'
 import det from '@/components/sections/DetailPage.module.css'
 import { StudioContacts } from '@/components/sections/StudioContacts'
@@ -77,10 +80,17 @@ export default async function PodcastPage({
   if (!isLocale(locale)) notFound()
   const t = getDictionary(locale)
   const d = t.studioSub.podcast
-  const [page, settings] = await Promise.all([
+  const [page, settings, media] = await Promise.all([
     getPageById('podcast'),
     getSiteSettings(),
+    getSectionImages('studios/podcast'),
   ])
+  /* foto sostituibili dal CMS (Media del sito → Pagina Podcast);
+     senza slot compilato resta la foto di repo */
+  const foto = (slot: string, fallback: string, w: number, h: number) =>
+    media[slot]
+      ? urlFor(media[slot]).width(w).height(h).fit('crop').auto('format').url()
+      : fallback
 
   /* dal documento Sanity (v2): le tre schede, la cabina, la checklist,
      le domande frequenti — restano editabili dallo Studio, il dizionario
@@ -142,8 +152,10 @@ export default async function PodcastPage({
             </div>
             <Reveal className={det.headPh} delay={120}>
               <Image
-                src={podcastImg}
+                src={foto('podcast-cabina', '/img/foto/podcast-cabina.avif', 5568, 3712)}
                 alt="Microfono da studio con filtro anti-pop davanti alla cuffia, pronto per la registrazione di una voce"
+                width={5568}
+                height={3712}
                 className={det.headImg}
                 sizes="(max-width: 860px) 100vw, 50vw"
                 priority
@@ -179,8 +191,10 @@ export default async function PodcastPage({
         <section className={`wrap ${det.sez} ${det.duo}`}>
           <Reveal className={styles.boothPh}>
             <Image
-              src={studioSslImg}
+              src={foto('studio-ssl', '/img/foto/studio-ssl.jpg', 1920, 1440)}
               alt="Mani sulla console SSL in regia"
+              width={1920}
+              height={1440}
               className={styles.boothImg}
               sizes="(max-width: 860px) 100vw, 40vw"
             />

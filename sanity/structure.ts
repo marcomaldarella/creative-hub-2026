@@ -103,15 +103,9 @@ export const structure: StructureResolver = (S) =>
           S.list()
             .title('Media del sito')
             .items([
-              S.listItem()
-                .title('Pagina Studio — foto')
-                .id('media-studios')
-                .child(
-                  S.document()
-                    .schemaType('sectionMedia')
-                    .documentId('media-studios')
-                    .title('Pagina Studio — foto')
-                ),
+              S.documentTypeListItem('sectionMedia')
+                .title('Foto delle pagine')
+                .id('foto-pagine'),
               S.listItem()
                 .title('Archivio media (download)')
                 .id('mediaKit-sito')

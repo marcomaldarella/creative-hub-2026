@@ -15,8 +15,8 @@ import { ContactForm } from '@/components/sections/ContactForm'
 import { isLocale, localeHref } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
 import { pageAlternates } from '@/lib/seo'
-import { getSiteSettings } from '@/lib/sanity/queries'
-import banano1Img from '@/public/img/foto/banano-1.jpg'
+import { getSectionImages, getSiteSettings } from '@/lib/sanity/queries'
+import { urlFor } from '@/lib/sanity/image'
 /* grammatica condivisa delle pagine di dettaglio (mockup ott 2026):
    qui lavora in bianco/nero puro, nessun accento */
 import det from '@/components/sections/DetailPage.module.css'
@@ -47,8 +47,16 @@ export default async function InnovazionePage({
   const { locale } = await params
   if (!isLocale(locale)) notFound()
   const t = getDictionary(locale)
-  const settings = await getSiteSettings()
-
+  const [settings, media] = await Promise.all([
+    getSiteSettings(),
+    getSectionImages('innovazione'),
+  ])
+  /* foto sostituibili dal CMS (Media del sito → Pagina Innovazione);
+     senza slot compilato resta la foto di repo */
+  const foto = (slot: string, fallback: string, w: number, h: number) =>
+    media[slot]
+      ? urlFor(media[slot]).width(w).height(h).fit('crop').auto('format').url()
+      : fallback
 
   return (
     <SiteChrome locale={locale} path="/innovazione">
@@ -74,7 +82,9 @@ export default async function InnovazionePage({
             </div>
             <Reveal className={det.headPh} delay={120}>
               <Image
-                src={banano1Img}
+                src={foto('banano-1', '/img/foto/banano-1.jpg', 1440, 1440)}
+                width={1440}
+                height={1440}
                 alt="Lo spazio comune dell'hub: tavolo rotondo e sedute attorno alla grande pianta"
                 priority
                 sizes="(max-width: 860px) 100vw, 50vw"

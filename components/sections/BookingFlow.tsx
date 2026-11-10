@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState, type FormEvent } from 'react'
-import Image, { type StaticImageData } from 'next/image'
+import Image from 'next/image'
 import { useSearchParams } from 'next/navigation'
 import { Arrow, Button } from '@/components/ui'
 import type { Locale } from '@/lib/i18n/config'
@@ -31,7 +31,9 @@ export function BookingFlow({
   labels: Labels
   privacyHref: string
   /** foto delle due card del passo 1, per id categoria */
-  catImages: Record<CatId, { src: StaticImageData; alt: string }>
+  /* src stringa (foto di repo o URL Sanity) + dimensioni intrinseche:
+     la card ritaglia via CSS */
+  catImages: Record<CatId, { src: string; alt: string; width: number; height: number }>
   /** uscita secondaria: pagina prodotto WooCommerce per voce scelta */
   shopLinks?: Partial<Record<string, string>>
 }) {
@@ -181,6 +183,8 @@ export function BookingFlow({
                   <Image
                     src={catImages[c.id as CatId].src}
                     alt={catImages[c.id as CatId].alt}
+                    width={catImages[c.id as CatId].width}
+                    height={catImages[c.id as CatId].height}
                     className={styles.catImg}
                     sizes="(max-width: 900px) 100vw, 40vw"
                   />

@@ -2,6 +2,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { BgVideo } from './BgVideo'
 import { Arrow, RevealGroup } from '@/components/ui'
+import { getSectionImages } from '@/lib/sanity/queries'
+import { urlFor } from '@/lib/sanity/image'
 import academyImg from '@/public/img/sections/node-academy.jpg'
 import studioImg from '@/public/img/sections/node-studio.jpg'
 import spaziImg from '@/public/img/sections/node-spazi.jpg'
@@ -21,7 +23,8 @@ export type EcosystemBentoProps = {
   hrefs: [string, string, string]
 }
 
-const IMAGES = [academyImg, studioImg, spaziImg]
+/* le foto di repo dei tre nodi: fallback quando il CMS non le sostituisce */
+const FALLBACK = [academyImg, studioImg, spaziImg]
 
 /* labeling di sezione: ogni nodo porta il colore della sua area */
 const SECTIONS = [
@@ -47,7 +50,20 @@ const SECTIONS = [
  * media pieno e testo in basso, due card orizzontali impilate a destra
  * con testo a sinistra e media a filo sul lato destro.
  */
-export function EcosystemBento({ items, hrefs }: EcosystemBentoProps) {
+export async function EcosystemBento({ items, hrefs }: EcosystemBentoProps) {
+  /* foto sostituibili dal CMS (Media del sito → doc "comuni"): gli slot
+     node-* sono condivisi da bento, carosello e pagine di sezione;
+     senza slot compilato resta la foto di repo (1200×1500) */
+  const media = await getSectionImages('comuni')
+  const foto = (slot: string, i: number) =>
+    media[slot]
+      ? urlFor(media[slot]).width(1200).height(1500).fit('crop').auto('format').url()
+      : FALLBACK[i].src
+  const IMAGES = [
+    foto('node-academy', 0),
+    foto('node-studio', 1),
+    foto('node-spazi', 2),
+  ]
   const [big, ...side] = items
   return (
     <RevealGroup className={styles.bento}>
@@ -65,7 +81,7 @@ export function EcosystemBento({ items, hrefs }: EcosystemBentoProps) {
           {SECTIONS[0].video ? (
             <BgVideo
               src={SECTIONS[0].video}
-              poster={IMAGES[0].src}
+              poster={IMAGES[0]}
               className={styles.img}
             />
           ) : (
@@ -75,7 +91,6 @@ export function EcosystemBento({ items, hrefs }: EcosystemBentoProps) {
               fill
               sizes="(max-width: 900px) 100vw, 50vw"
               className={styles.img}
-              placeholder="blur"
             />
           )}
         </div>
@@ -124,7 +139,7 @@ export function EcosystemBento({ items, hrefs }: EcosystemBentoProps) {
             {SECTIONS[i + 1].video ? (
               <BgVideo
                 src={SECTIONS[i + 1].video as string}
-                poster={IMAGES[i + 1].src}
+                poster={IMAGES[i + 1]}
                 className={styles.img}
               />
             ) : (
@@ -134,7 +149,6 @@ export function EcosystemBento({ items, hrefs }: EcosystemBentoProps) {
                 fill
                 sizes="(max-width: 900px) 100vw, 25vw"
                 className={styles.img}
-                placeholder="blur"
               />
             )}
           </div>

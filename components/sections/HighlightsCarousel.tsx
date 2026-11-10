@@ -1,7 +1,7 @@
 'use client'
 
 import { useCallback, useRef, useState } from 'react'
-import Image from 'next/image'
+import Image, { type StaticImageData } from 'next/image'
 import Link from 'next/link'
 import { Arrow, ScrollerNav } from '@/components/ui'
 import academyImg from '@/public/img/sections/node-academy.jpg'
@@ -23,27 +23,22 @@ export type HighlightsCarouselProps = {
   slides: HighlightSlide[]
   /** [studio, coworking, corsi custom] */
   hrefs: string[]
+  /** foto dal CMS (slot node-* del doc "comuni"): il componente è client
+      e non può fetchare, gli URL glieli passa la pagina; una voce assente
+      lascia la foto di repo */
+  images?: { academy?: string; studio?: string; spazi?: string }
 }
 
-/* media e accento di sezione per i tre hi-lights. `video` e' opzionale:
+/* accento e clip di sezione per i tre hi-lights. `video` e' opzionale:
    quando c'e', la clip muta in loop prende il posto della foto, che resta
-   come poster */
+   come poster (la foto la decide `pics` nel componente) */
 const LOOK: {
-  img: typeof studioImg
   accent: string
   video?: string
 }[] = [
-  { img: studioImg, accent: 'var(--arancio)', video: '/video/hi-studio.mp4' },
-  {
-    img: spaziImg,
-    accent: 'var(--giallo-fluo)',
-    video: '/video/node-coworking.mp4',
-  },
-  {
-    img: academyImg,
-    accent: 'var(--azzurro-ink)',
-    video: '/video/hi-corsi.mp4',
-  },
+  { accent: 'var(--arancio)', video: '/video/hi-studio.mp4' },
+  { accent: 'var(--giallo-fluo)', video: '/video/node-coworking.mp4' },
+  { accent: 'var(--azzurro-ink)', video: '/video/hi-corsi.mp4' },
 ]
 
 const AUTOPLAY_MS = 6500
@@ -61,7 +56,14 @@ export function HighlightsCarousel({
   eyebrow,
   slides,
   hrefs,
+  images,
 }: HighlightsCarouselProps) {
+  /* foto effettive nell'ordine di LOOK: CMS se passata, repo altrimenti */
+  const pics: (StaticImageData | string)[] = [
+    images?.studio ?? studioImg,
+    images?.spazi ?? spaziImg,
+    images?.academy ?? academyImg,
+  ]
   const n = slides.length
   // extended: [ultima, ...slides, prima] — pos parte da 1
   const ext = [slides[n - 1], ...slides, slides[0]]
@@ -239,7 +241,8 @@ export function HighlightsCarousel({
         >
           {ext.map((slide, i) => {
             const logical = ((i - 1) % n + n) % n
-            const { img, accent, video } = LOOK[logical]
+            const { accent, video } = LOOK[logical]
+            const img = pics[logical]
             const active = i === pos
             const clone = i === 0 || i === n + 1
             return (
@@ -266,7 +269,7 @@ export function HighlightsCarousel({
                 {video ? (
                   <BgVideo
                     src={video}
-                    poster={img.src}
+                    poster={typeof img === 'string' ? img : img.src}
                     className={styles.img}
                   />
                 ) : (
@@ -276,7 +279,8 @@ export function HighlightsCarousel({
                     fill
                     sizes="(max-width: 860px) 88vw, 64vw"
                     className={styles.img}
-                    placeholder="blur"
+                    /* il blur esiste solo per gli import statici */
+                    placeholder={typeof img === 'string' ? 'empty' : 'blur'}
                     draggable={false}
                   />
                 )}

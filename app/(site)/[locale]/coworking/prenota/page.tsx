@@ -8,9 +8,9 @@ import { SectionPagesNav } from '@/components/sections/SectionPagesNav'
 import { isLocale, localeHref } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
 import { pageAlternates } from '@/lib/seo'
+import { getSectionImages } from '@/lib/sanity/queries'
+import { urlFor } from '@/lib/sanity/image'
 import { getBookableProducts } from '@/lib/woocommerce'
-import loungeImg from '@/public/img/sections/coworking-lounge.jpg'
-import banano2Img from '@/public/img/foto/banano-2.jpg'
 import styles from './page.module.css'
 
 export const dynamic = 'force-dynamic'
@@ -55,7 +55,16 @@ export default async function PrenotaPage({
 
   /* catalogo WooCommerce (con fallback locale): serve solo a risolvere i
      permalink reali delle voci che hanno un prodotto sullo shop */
-  const products = await getBookableProducts()
+  const [products, media] = await Promise.all([
+    getBookableProducts(),
+    getSectionImages('coworking/prenota'),
+  ])
+  /* foto sostituibili dal CMS (Media del sito → Prenota);
+     senza slot compilato resta la foto di repo */
+  const foto = (slot: string, fallback: string, w: number, h: number) =>
+    media[slot]
+      ? urlFor(media[slot]).width(w).height(h).fit('crop').auto('format').url()
+      : fallback
   const bySlug = new Map(products.map((p) => [p.slug, p.permalink]))
   const shopLinks = Object.fromEntries(
     Object.entries(SHOP_SLUGS).flatMap(([id, slug]) => {
@@ -131,11 +140,15 @@ export default async function PrenotaPage({
               privacyHref={localeHref(locale, '/privacy')}
               catImages={{
                 lavoro: {
-                  src: loungeImg,
+                  src: foto('coworking-lounge', '/img/sections/coworking-lounge.jpg', 1800, 1350),
+                  width: 1800,
+                  height: 1350,
                   alt: 'La lounge del coworking: sedute e grafiche geometriche alle pareti',
                 },
                 sale: {
-                  src: banano2Img,
+                  src: foto('banano-2', '/img/foto/banano-2.jpg', 1440, 1440),
+                  width: 1440,
+                  height: 1440,
                   alt: 'Gli spazi comuni: soffitto industriale e grande pianta al centro',
                 },
               }}

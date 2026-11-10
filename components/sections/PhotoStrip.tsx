@@ -1,6 +1,6 @@
 'use client'
 
-import Image, { type StaticImageData } from 'next/image'
+import Image from 'next/image'
 import { useCallback } from 'react'
 import {
   ScrollerControls,
@@ -10,8 +10,10 @@ import {
 import styles from './PhotoStrip.module.css'
 
 export type PhotoStripProps = {
-  /** caption: il nome dello spazio sotto la foto, se c'è */
-  photos: { src: StaticImageData; alt: string; caption?: string }[]
+  /** caption: il nome dello spazio sotto la foto, se c'è.
+      src è una stringa (foto di repo o URL Sanity): le dimensioni
+      intrinseche viaggiano accanto, il taglio lo decide il CSS */
+  photos: { src: string; alt: string; width: number; height: number; caption?: string }[]
   kicker?: string
   title?: string
   text?: string
@@ -65,9 +67,10 @@ export function PhotoStrip({
             <Image
               src={photo.src}
               alt={photo.alt}
+              width={photo.width}
+              height={photo.height}
               sizes="(max-width: 760px) 78vw, 34vw"
               className={styles.img}
-              placeholder="blur"
             />
             {photo.caption && (
               <span className={styles.caption}>{photo.caption}</span>

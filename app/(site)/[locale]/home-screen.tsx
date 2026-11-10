@@ -21,8 +21,10 @@ import { ArticleCard } from '@/components/magazine/ArticleCard'
 import { EDITORIAL_ATTIVO } from '@/lib/flags'
 import { localeHref, type Locale } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
-import { getHomeData } from '@/lib/sanity/queries'
+import { getHomeData, getSectionImages } from '@/lib/sanity/queries'
 import { l } from '@/lib/sanity/l'
+import { urlFor } from '@/lib/sanity/image'
+import type { StaticImageData } from 'next/image'
 import studioSslImg from '@/public/img/foto/studio-ssl.jpg'
 import liveBandImg from '@/public/img/foto/live-band.jpg'
 import sedeImg from '@/public/img/foto/sede.jpg'
@@ -56,8 +58,38 @@ function openDayLabel(date: string | undefined, locale: Locale): string | null {
 export async function HomeScreen({ locale }: { locale: Locale }) {
   const t = getDictionary(locale)
 
-  const home = await getHomeData()
+  const [home, media, comuni] = await Promise.all([
+    getHomeData(),
+    getSectionImages('home'),
+    getSectionImages('comuni'),
+  ])
   const { settings, latestArticles, partners } = home
+
+  /* foto sostituibili dal CMS (Media del sito → Home); senza slot
+     compilato resta la foto di repo, col suo blur da import statico */
+  const foto = (slot: string, fallback: StaticImageData, w: number, h: number) =>
+    media[slot]
+      ? urlFor(media[slot]).width(w).height(h).fit('crop').auto('format').url()
+      : fallback
+  /* una foto, un posto solo: le stesse tre servono anche da fallback
+     alle card del magazine, lì serve il path stringa */
+  const fotoSsl = foto('studio-ssl', studioSslImg, 1920, 1440)
+  const fotoLive = foto('live-band', liveBandImg, 1440, 1920)
+  const fotoSede = foto('sede', sedeImg, 1920, 1200)
+  const src = (f: StaticImageData | string) =>
+    typeof f === 'string' ? f : f.src
+
+  /* slot condivisi (doc "comuni"): il carosello è client e non può
+     fetchare, gli URL CMS glieli passa la pagina */
+  const comune = (slot: string) =>
+    comuni[slot]
+      ? urlFor(comuni[slot])
+          .width(1200)
+          .height(1500)
+          .fit('crop')
+          .auto('format')
+          .url()
+      : undefined
 
   const stats = [
     t.home.stats.students,
@@ -204,7 +236,7 @@ export async function HomeScreen({ locale }: { locale: Locale }) {
 
         {/* ————— foto: la regia SSL, a tutta pagina ————— */}
         <PhotoFull
-          src={studioSslImg}
+          src={fotoSsl}
           alt="La regia dello studio di registrazione del Creative Hub, con console SSL, monitor da studio e sintetizzatori"
           kicker={t.home.photoStudio.kicker}
           caption={t.home.photoStudio.caption}
@@ -229,7 +261,9 @@ export async function HomeScreen({ locale }: { locale: Locale }) {
         {/* ————— foto verticale: la live room in funzione ————— */}
         <section className={styles.sez}>
           <PhotoSplit
-            src={liveBandImg}
+            src={fotoLive}
+            width={1440}
+            height={1920}
             alt="Studenti del Creative Hub che suonano dal vivo nella live room: voce, chitarre, batteria e tastiere"
             kicker={t.home.photoLive.kicker}
             title={t.home.photoLive.title}
@@ -246,6 +280,11 @@ export async function HomeScreen({ locale }: { locale: Locale }) {
             localeHref(locale, '/coworking'),
             `${localeHref(locale, '/academy')}?tipo=custom`,
           ]}
+          images={{
+            academy: comune('node-academy'),
+            studio: comune('node-studio'),
+            spazi: comune('node-spazi'),
+          }}
         />
 
         {/* ————— counters: titolo a sinistra (~25%), numeri inline nel resto ————— */}
@@ -343,11 +382,8 @@ export async function HomeScreen({ locale }: { locale: Locale }) {
                      dei gradient placeholder */
                   flat
                   fallbackSrc={
-                    [
-                      '/img/foto/studio-ssl.jpg',
-                      '/img/foto/live-band.jpg',
-                      '/img/foto/sede.jpg',
-                    ][i % 3]
+                    /* stesse foto (e stessi slot CMS) delle fasce sopra */
+                    [src(fotoSsl), src(fotoLive), src(fotoSede)][i % 3]
                   }
                 />
               ))}
@@ -388,7 +424,7 @@ export async function HomeScreen({ locale }: { locale: Locale }) {
 
         {/* ————— l'ingresso della sede: ultima immagine prima del footer ————— */}
         <PhotoFull
-          src={sedeImg}
+          src={fotoSede}
           alt="L'ingresso della sede del Creative Hub Bologna in via del Tappezziere 4"
           kicker={t.home.photoSede.kicker}
           caption={t.home.photoSede.caption}

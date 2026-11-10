@@ -9,8 +9,8 @@ import { OpenDayForm } from '@/components/sections/OpenDayForm'
 import { isLocale, localeHref } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
 import { pageAlternates } from '@/lib/seo'
-import uniImg from '@/public/img/sections/academy-universitari.jpg'
-import customImg from '@/public/img/sections/academy-custom.jpg'
+import { getSectionImages } from '@/lib/sanity/queries'
+import { urlFor } from '@/lib/sanity/image'
 /* grammatiche condivise: det per testata/sezioni/griglie, tp per le
    righe etichetta—testo delle schede info */
 import det from '@/components/sections/DetailPage.module.css'
@@ -68,17 +68,30 @@ export default async function OpenDayPage({
 
   const telHref = `tel:${od.book.phone.replace(/\s/g, '')}`
 
+  const media = await getSectionImages('academy/open-day')
+  /* foto sostituibili dal CMS (Media del sito → Pagina Open day);
+     senza slot compilato resta la foto di repo */
+  const foto = (slot: string, fallback: string, w: number, h: number) =>
+    media[slot]
+      ? urlFor(media[slot]).width(w).height(h).fit('crop').auto('format').url()
+      : fallback
+
   /* le due card-ancora con foto: stessa foto dei percorsi della landing
      academy (canto = universitari, pad = custom) */
   const anchorCards = [
     {
       id: 'universitari',
-      img: uniImg,
+      img: foto(
+        'academy-universitari',
+        '/img/sections/academy-universitari.jpg',
+        1800,
+        1349
+      ),
       card: od.cards.uni,
     },
     {
       id: 'lezioni',
-      img: customImg,
+      img: foto('academy-custom', '/img/sections/academy-custom.jpg', 1800, 1800),
       card: od.cards.custom,
     },
   ]

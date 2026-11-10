@@ -7,7 +7,7 @@ import {
   type CSSProperties,
   type FormEvent,
 } from 'react'
-import Image, { type StaticImageData } from 'next/image'
+import Image from 'next/image'
 import { useSearchParams } from 'next/navigation'
 import { Arrow, Button } from '@/components/ui'
 import type { Locale } from '@/lib/i18n/config'
@@ -43,8 +43,11 @@ export function StudioBookingFlow({
   privacyHref: string
   /** recapito email mostrato nel riepilogo */
   email: string
-  /** foto delle card formula, per id; senza foto la card resta scura */
-  catImages?: Partial<Record<string, { src: StaticImageData; alt: string }>>
+  /** foto delle card formula, per id (url + misure intrinseche, così la
+      pagina può passare lo slot CMS); senza foto la card resta scura */
+  catImages?: Partial<
+    Record<string, { src: string; alt: string; width: number; height: number }>
+  >
   /** pagina prodotto WooCommerce per formula: dove si prenota davvero.
       Le formule senza prodotto a catalogo restano sulla richiesta. */
   shopLinks?: Partial<Record<string, string>>
@@ -219,6 +222,8 @@ export function StudioBookingFlow({
                       <Image
                         src={img.src}
                         alt={img.alt}
+                        width={img.width}
+                        height={img.height}
                         className={styles.catImg}
                         sizes="(max-width: 900px) 100vw, 26vw"
                       />

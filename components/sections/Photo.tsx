@@ -4,7 +4,8 @@ import { BgVideo } from './BgVideo'
 import styles from './Photo.module.css'
 
 export type PhotoFullProps = {
-  src: StaticImageData
+  /* import statico di repo oppure URL dal CMS (media di sezione) */
+  src: StaticImageData | string
   alt: string
   /** etichetta mono in alto a sinistra */
   kicker?: string
@@ -42,7 +43,7 @@ export function PhotoFull({
         <BgVideo
           src={video.src}
           portrait={video.portrait}
-          poster={src.src}
+          poster={typeof src === 'string' ? src : src.src}
           className={styles.img}
         />
       ) : (
@@ -52,7 +53,8 @@ export function PhotoFull({
           fill
           sizes="100vw"
           className={styles.img}
-          placeholder="blur"
+          /* il blur esiste solo per gli import statici */
+          placeholder={typeof src === 'string' ? 'empty' : 'blur'}
           priority={priority}
         />
       )}
@@ -67,7 +69,11 @@ export function PhotoFull({
 }
 
 export type PhotoSplitProps = {
-  src: StaticImageData
+  /* import statico di repo oppure URL dal CMS: con la stringa Next non
+     conosce le misure, vanno dichiarate qui accanto */
+  src: StaticImageData | string
+  width?: number
+  height?: number
   alt: string
   kicker?: string
   title: string
@@ -82,6 +88,8 @@ export type PhotoSplitProps = {
  */
 export function PhotoSplit({
   src,
+  width,
+  height,
   alt,
   kicker,
   title,
@@ -94,9 +102,11 @@ export function PhotoSplit({
         <Image
           src={src}
           alt={alt}
+          /* con l'import statico le misure le porta il file */
+          {...(typeof src === 'string' ? { width, height } : null)}
           sizes="(max-width: 900px) 100vw, 42vw"
           className={styles.splitImg}
-          placeholder="blur"
+          placeholder={typeof src === 'string' ? 'empty' : 'blur'}
         />
       </Reveal>
       <Reveal className={styles.splitBody} delay={80}>
@@ -108,8 +118,12 @@ export function PhotoSplit({
   )
 }
 
+/* src stringa (foto di repo o URL Sanity) con le dimensioni intrinseche
+   accanto: il quadrato lo impone il CSS */
+type DuoPhoto = { src: string; alt: string; width: number; height: number }
+
 export type PhotoDuoProps = {
-  photos: [{ src: StaticImageData; alt: string }, { src: StaticImageData; alt: string }]
+  photos: [DuoPhoto, DuoPhoto]
   kicker?: string
   title?: string
   text?: string
@@ -132,9 +146,10 @@ export function PhotoDuo({ photos, kicker, title, text }: PhotoDuoProps) {
             <Image
               src={photo.src}
               alt={photo.alt}
+              width={photo.width}
+              height={photo.height}
               sizes="(max-width: 760px) 100vw, 46vw"
               className={styles.duoImg}
-              placeholder="blur"
             />
           </Reveal>
         ))}

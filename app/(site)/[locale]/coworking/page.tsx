@@ -13,21 +13,12 @@ import { MobileBookBar } from '@/components/sections/MobileBookBar'
 import { isLocale, localeHref } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
 import { pageAlternates } from '@/lib/seo'
-import { getSiteSettings } from '@/lib/sanity/queries'
+import { getSectionImages, getSiteSettings } from '@/lib/sanity/queries'
 import {
   COWORKING_ROW_SLUGS,
   getBookableProducts,
 } from '@/lib/woocommerce'
-import corridoio1Img from '@/public/img/foto/corridoio-1.jpg'
-import corridoio2Img from '@/public/img/foto/corridoio-2.jpg'
-import corridoio3Img from '@/public/img/foto/corridoio-3.jpg'
-import corridoio4Img from '@/public/img/foto/corridoio-4.jpg'
-import corridoio6Img from '@/public/img/foto/corridoio-6.jpg'
-import corridoio7Img from '@/public/img/foto/corridoio-7.jpg'
-import banano1Img from '@/public/img/foto/banano-1.jpg'
-import banano2Img from '@/public/img/foto/banano-2.jpg'
-import futureImg from '@/public/img/sections/future-together.jpg'
-import sedeImg from '@/public/img/foto/sede.jpg'
+import { urlFor } from '@/lib/sanity/image'
 import styles from './page.module.css'
 
 export const dynamic = 'force-dynamic'
@@ -86,10 +77,17 @@ export default async function CoworkingPage({
   const { locale } = await params
   if (!isLocale(locale)) notFound()
   const t = getDictionary(locale)
-  const [settings, products] = await Promise.all([
+  const [settings, products, media] = await Promise.all([
     getSiteSettings(),
     getBookableProducts(),
+    getSectionImages('coworking'),
   ])
+  /* foto sostituibili dal CMS (Media del sito → Pagina Coworking);
+     senza slot compilato resta la foto di repo */
+  const foto = (slot: string, fallback: string, w: number, h: number) =>
+    media[slot]
+      ? urlFor(media[slot]).width(w).height(h).fit('crop').auto('format').url()
+      : fallback
   /* ogni formula del riquadro apre direttamente la sua scheda prodotto
      (richiesta 28/10), nella stessa scheda: otto su otto. Sette stanno
      sullo shop WordPress; l'ufficio è il prodotto locale non
@@ -109,12 +107,12 @@ export default async function CoworkingPage({
      library non c'è ancora): restano i corridoi delle aule e degli
      uffici */
   const corridoi = [
-    { src: corridoio1Img, alt: 'Murale "future together" lungo il corridoio, con una pianta in primo piano', caption: t.coworking.corridoiCaptions[0] },
-    { src: corridoio2Img, alt: 'Scala interna con il murale "small steps big change" su parete arancio', caption: t.coworking.corridoiCaptions[1] },
-    { src: corridoio6Img, alt: 'Corridoio delle aule CW301 con segnaletica gialla a pavimento e pareti', caption: t.coworking.corridoiCaptions[2] },
-    { src: corridoio7Img, alt: "Ingresso dell'area CW300: pareti bianche, segnaletica gialla e parquet", caption: t.coworking.corridoiCaptions[3] },
-    { src: corridoio3Img, alt: "Porta dell'ufficio segreteria vista dal corridoio", caption: t.coworking.corridoiCaptions[4] },
-    { src: corridoio4Img, alt: 'Corridoio lungo verso gli uffici, con la targa della segreteria', caption: t.coworking.corridoiCaptions[5] },
+    { src: foto('corridoio-1', '/img/foto/corridoio-1.jpg', 1600, 1000), width: 1600, height: 1000, alt: 'Murale "future together" lungo il corridoio, con una pianta in primo piano', caption: t.coworking.corridoiCaptions[0] },
+    { src: foto('corridoio-2', '/img/foto/corridoio-2.jpg', 1600, 1000), width: 1600, height: 1000, alt: 'Scala interna con il murale "small steps big change" su parete arancio', caption: t.coworking.corridoiCaptions[1] },
+    { src: foto('corridoio-6', '/img/foto/corridoio-6.jpg', 1600, 1200), width: 1600, height: 1200, alt: 'Corridoio delle aule CW301 con segnaletica gialla a pavimento e pareti', caption: t.coworking.corridoiCaptions[2] },
+    { src: foto('corridoio-7', '/img/foto/corridoio-7.jpg', 1600, 1200), width: 1600, height: 1200, alt: "Ingresso dell'area CW300: pareti bianche, segnaletica gialla e parquet", caption: t.coworking.corridoiCaptions[3] },
+    { src: foto('corridoio-3', '/img/foto/corridoio-3.jpg', 1600, 1000), width: 1600, height: 1000, alt: "Porta dell'ufficio segreteria vista dal corridoio", caption: t.coworking.corridoiCaptions[4] },
+    { src: foto('corridoio-4', '/img/foto/corridoio-4.jpg', 1600, 1000), width: 1600, height: 1000, alt: 'Corridoio lungo verso gli uffici, con la targa della segreteria', caption: t.coworking.corridoiCaptions[5] },
   ]
 
   return (
@@ -134,18 +132,18 @@ export default async function CoworkingPage({
             />
           </Reveal>
           <Reveal className={styles.mosaicSide} delay={80}>
-            <Image src={banano1Img} alt="Gli spazi comuni: tavolo rotondo, sedute in velluto e luci calde" className={styles.mosaicImg} />
+            <Image src={foto('banano-1', '/img/foto/banano-1.jpg', 1440, 1440)} width={1440} height={1440} alt="Gli spazi comuni: tavolo rotondo, sedute in velluto e luci calde" className={styles.mosaicImg} />
           </Reveal>
           <Reveal className={styles.mosaicSide} delay={140}>
-            <Image src={corridoio2Img} alt='Scala interna con il murale "small steps big change"' className={styles.mosaicImg} />
+            <Image src={foto('corridoio-2', '/img/foto/corridoio-2.jpg', 1600, 1000)} width={1600} height={1000} alt='Scala interna con il murale "small steps big change"' className={styles.mosaicImg} />
           </Reveal>
           {/* le altre due del mosaico del mockup: il corridoio "future
               together" e gli spazi comuni d'insieme */}
           <Reveal className={styles.mosaicSide} delay={200}>
-            <Image src={futureImg} alt='Il corridoio con il murale "future together" e le sedute blu' className={styles.mosaicImg} />
+            <Image src={foto('future-together', '/img/sections/future-together.jpg', 1800, 1350)} width={1800} height={1350} alt='Il corridoio con il murale "future together" e le sedute blu' className={styles.mosaicImg} />
           </Reveal>
           <Reveal className={styles.mosaicSide} delay={260}>
-            <Image src={banano2Img} alt="Gli spazi comuni: soffitto industriale e una grande pianta al centro" className={styles.mosaicImg} />
+            <Image src={foto('banano-2', '/img/foto/banano-2.jpg', 1440, 1440)} width={1440} height={1440} alt="Gli spazi comuni: soffitto industriale e una grande pianta al centro" className={styles.mosaicImg} />
           </Reveal>
           <a href="#palazzo" className={`mono ${styles.galleryCta}`}>
             {t.coworking.galleryCta} ({corridoi.length})
@@ -281,7 +279,9 @@ export default async function CoworkingPage({
                 ))}
               </ul>
               <Image
-                src={sedeImg}
+                src={foto('sede', '/img/foto/sede.jpg', 1920, 1200)}
+                width={1920}
+                height={1200}
                 alt="La sede di via del Tappezziere 4, Bologna"
                 className={styles.whereImg}
               />
@@ -357,11 +357,15 @@ export default async function CoworkingPage({
               text={t.coworking.bananoText}
               photos={[
                 {
-                  src: banano1Img,
+                  src: foto('banano-1', '/img/foto/banano-1.jpg', 1440, 1440),
+                  width: 1440,
+                  height: 1440,
                   alt: 'Gli spazi comuni del coworking: tavolo rotondo, sedute in velluto e luci calde',
                 },
                 {
-                  src: banano2Img,
+                  src: foto('banano-2', '/img/foto/banano-2.jpg', 1440, 1440),
+                  width: 1440,
+                  height: 1440,
                   alt: "Gli spazi comuni visti d'insieme: soffitto industriale, una grande pianta al centro e divani",
                 },
               ]}

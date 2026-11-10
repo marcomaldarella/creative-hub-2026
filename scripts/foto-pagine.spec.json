@@ -1,0 +1,194 @@
+[
+  {
+    "pageId": "home",
+    "title": "Home (/)",
+    "slots": [
+      { "slot": "studio-ssl", "file": "img/foto/studio-ssl.jpg", "label": "Foto grande della regia SSL — home, anche riserva delle card magazine" },
+      { "slot": "live-band", "file": "img/foto/live-band.jpg", "label": "Foto verticale della live room — home, anche riserva delle card magazine" },
+      { "slot": "sede", "file": "img/foto/sede.jpg", "label": "Foto finale dell'ingresso della sede — home, anche riserva delle card magazine" }
+    ]
+  },
+  {
+    "pageId": "comuni",
+    "title": "Foto comuni (card delle tre aree)",
+    "slots": [
+      { "slot": "node-academy", "file": "img/sections/node-academy.jpg", "label": "Card Academy — ecosistema home, carosello in evidenza, pagine di sezione" },
+      { "slot": "node-studio", "file": "img/sections/node-studio.jpg", "label": "Card Studio — ecosistema home, carosello in evidenza, pagine di sezione" },
+      { "slot": "node-spazi", "file": "img/sections/node-spazi.jpg", "label": "Card Coworking — ecosistema home, carosello in evidenza, pagine di sezione" },
+      { "slot": "aula-corsi", "file": "img/sections/aula-corsi.jpg", "label": "Foto finale a tutto schermo — landing corsi universitari" }
+    ]
+  },
+  {
+    "pageId": "studios",
+    "title": "Studio (/studios)",
+    "slots": [
+      { "slot": "hero", "file": "img/sections/studio-regia.jpg", "label": "Hero — foto grande a destra (regia principale)" },
+      { "slot": "duo-sinistra", "file": "img/sections/studio-desk.jpg", "label": "Banda a due foto — sinistra, quadrata (regia dal centro)" },
+      { "slot": "duo-destra", "file": "img/sections/studio-regia-b.jpg", "label": "Banda a due foto — destra, verticale (postazione SSL)" }
+    ]
+  },
+  {
+    "pageId": "studios/registrazione",
+    "title": "Studio — registrazione",
+    "slots": [
+      { "slot": "reg-live-room", "file": "img/foto/reg-live-room.jpg", "label": "Card dove registri — live room" },
+      { "slot": "reg-vocal-booth", "file": "img/foto/reg-vocal-booth.jpg", "label": "Card dove registri — cabina vocale" },
+      { "slot": "reg-control-room", "file": "img/foto/reg-control-room.jpg", "label": "Card dove registri — control room" }
+    ]
+  },
+  {
+    "pageId": "studios/dolby-atmos",
+    "title": "Studio — Dolby Atmos",
+    "slots": [
+      { "slot": "studio-regia", "file": "img/sections/studio-regia.jpg", "label": "Testata — la regia dello studio" },
+      { "slot": "studio-ssl", "file": "img/foto/studio-ssl.jpg", "label": "Card per cosa si usa — musica, la console SSL" },
+      { "slot": "sd-cinema", "file": "img/foto/sd-cinema.jpg", "label": "Card per cosa si usa — cinema e serie" },
+      { "slot": "sd-installazioni", "file": "img/foto/sd-installazioni.jpg", "label": "Card per cosa si usa — media e installazioni" },
+      { "slot": "sd-videogiochi", "file": "img/foto/sd-videogiochi.jpg", "label": "Card per cosa si usa — gaming" },
+      { "slot": "sd-pubblicita", "file": "img/foto/sd-pubblicita.jpg", "label": "Card per cosa si usa — didattica, timeline di montaggio" }
+    ]
+  },
+  {
+    "pageId": "studios/sound-design",
+    "title": "Studio — sound design",
+    "slots": [
+      { "slot": "studio-desk", "file": "img/sections/studio-desk.jpg", "label": "Testata — la postazione di lavoro in regia" },
+      { "slot": "sd-cinema", "file": "img/foto/sd-cinema.jpg", "label": "Card per chi lavoriamo — cinema e serie" },
+      { "slot": "sd-pubblicita", "file": "img/foto/sd-pubblicita.jpg", "label": "Card per chi lavoriamo — pubblicità e video" },
+      { "slot": "sd-videogiochi", "file": "img/foto/sd-videogiochi.jpg", "label": "Card per chi lavoriamo — videogiochi" },
+      { "slot": "sd-installazioni", "file": "img/foto/sd-installazioni.jpg", "label": "Card per chi lavoriamo — installazioni" }
+    ]
+  },
+  {
+    "pageId": "studios/mix-mastering",
+    "title": "Studio — mix e mastering",
+    "slots": [
+      { "slot": "studio-ssl", "file": "img/foto/studio-ssl.jpg", "label": "Testata — mani sulla console SSL" }
+    ]
+  },
+  {
+    "pageId": "studios/podcast",
+    "title": "Studio — podcast",
+    "slots": [
+      { "slot": "podcast-cabina", "file": "img/foto/podcast-cabina.avif", "label": "Testata — microfono con filtro anti-pop" },
+      { "slot": "studio-ssl", "file": "img/foto/studio-ssl.jpg", "label": "Sezione la cabina — foto accanto ai due paragrafi" }
+    ]
+  },
+  {
+    "pageId": "studios/affitto-studio",
+    "title": "Studio — affitto studio",
+    "slots": [
+      { "slot": "studio-desk", "file": "img/sections/studio-desk.jpg", "label": "Testata — la regia vista dal centro della sala" },
+      { "slot": "studio-ssl", "file": "img/foto/studio-ssl.jpg", "label": "Prenotazione guidata — card formula produzione" },
+      { "slot": "live-band", "file": "img/foto/live-band.jpg", "label": "Prenotazione guidata — card formula prove" },
+      { "slot": "studio-regia-b", "file": "img/sections/studio-regia-b.jpg", "label": "Prenotazione guidata — card formula allestimento tour" }
+    ]
+  },
+  {
+    "pageId": "academy",
+    "title": "Academy (/academy)",
+    "slots": [
+      { "slot": "academy-universitari", "file": "img/sections/academy-universitari.jpg", "label": "Scegli il percorso — card corsi universitari (fermo-immagine della clip)" },
+      { "slot": "academy-custom", "file": "img/sections/academy-custom.jpg", "label": "Scegli il percorso — card corsi custom (fermo-immagine della clip)" },
+      { "slot": "academy-finanziata", "file": "img/sections/academy-finanziata.jpg", "label": "Scegli il percorso — card formazione finanziata (fermo-immagine della clip)" },
+      { "slot": "studio-ssl", "file": "img/foto/studio-ssl.jpg", "label": "Campo esplora — card del corso Digital Composer and Producer" },
+      { "slot": "live-band", "file": "img/foto/live-band.jpg", "label": "Campo esplora — card del corso Songwriter & Vocal Artist" },
+      { "slot": "node-innovazione", "file": "img/sections/node-innovazione.jpg", "label": "Campo esplora — card del corso Tecnico modellatore 3D" },
+      { "slot": "studio-regia-b", "file": "img/sections/studio-regia-b.jpg", "label": "Campo esplora — card del corso Multimedia Sound Designer" },
+      { "slot": "studio-regia", "file": "img/sections/studio-regia.jpg", "label": "Campo esplora — card del corso Sound design immersivo" },
+      { "slot": "sede", "file": "img/foto/sede.jpg", "label": "Campo esplora — foto di riserva per i corsi senza cover" }
+    ]
+  },
+  {
+    "pageId": "academy/corsi",
+    "title": "Academy — tutti i corsi",
+    "slots": [
+      { "slot": "studio-ssl", "file": "img/foto/studio-ssl.jpg", "label": "Griglia corsi — cover di riserva 1 di 6, a giro sui corsi senza foto" },
+      { "slot": "live-band", "file": "img/foto/live-band.jpg", "label": "Griglia corsi — cover di riserva 2 di 6, a giro sui corsi senza foto" },
+      { "slot": "node-innovazione", "file": "img/sections/node-innovazione.jpg", "label": "Griglia corsi — cover di riserva 3 di 6, a giro sui corsi senza foto" },
+      { "slot": "studio-regia-b", "file": "img/sections/studio-regia-b.jpg", "label": "Griglia corsi — cover di riserva 4 di 6, a giro sui corsi senza foto" },
+      { "slot": "studio-regia", "file": "img/sections/studio-regia.jpg", "label": "Griglia corsi — cover di riserva 5 di 6, a giro sui corsi senza foto" },
+      { "slot": "sede", "file": "img/foto/sede.jpg", "label": "Griglia corsi — cover di riserva 6 di 6, a giro sui corsi senza foto" }
+    ]
+  },
+  {
+    "pageId": "academy/open-day",
+    "title": "Academy — open day",
+    "slots": [
+      { "slot": "academy-universitari", "file": "img/sections/academy-universitari.jpg", "label": "Card-ancora in testata — corsi universitari" },
+      { "slot": "academy-custom", "file": "img/sections/academy-custom.jpg", "label": "Card-ancora in testata — lezioni su misura" }
+    ]
+  },
+  {
+    "pageId": "academy/formazione-finanziata",
+    "title": "Academy — formazione finanziata",
+    "slots": [
+      { "slot": "academy-finanziata", "file": "img/sections/academy-finanziata.jpg", "label": "Foto della testata, a filo a destra del titolo" }
+    ]
+  },
+  {
+    "pageId": "coworking",
+    "title": "Coworking (/coworking)",
+    "slots": [
+      { "slot": "banano-1", "file": "img/foto/banano-1.jpg", "label": "Mosaico hero — foto 1, e spazi comuni — foto 1" },
+      { "slot": "corridoio-2", "file": "img/foto/corridoio-2.jpg", "label": "Mosaico hero — foto 2, e strip corridoi — foto 2" },
+      { "slot": "future-together", "file": "img/sections/future-together.jpg", "label": "Mosaico hero — foto 3" },
+      { "slot": "banano-2", "file": "img/foto/banano-2.jpg", "label": "Mosaico hero — foto 4, e spazi comuni — foto 2" },
+      { "slot": "sede", "file": "img/foto/sede.jpg", "label": "Dove siamo — foto della sede" },
+      { "slot": "corridoio-1", "file": "img/foto/corridoio-1.jpg", "label": "Strip corridoi — foto 1" },
+      { "slot": "corridoio-6", "file": "img/foto/corridoio-6.jpg", "label": "Strip corridoi — foto 3" },
+      { "slot": "corridoio-7", "file": "img/foto/corridoio-7.jpg", "label": "Strip corridoi — foto 4" },
+      { "slot": "corridoio-3", "file": "img/foto/corridoio-3.jpg", "label": "Strip corridoi — foto 5" },
+      { "slot": "corridoio-4", "file": "img/foto/corridoio-4.jpg", "label": "Strip corridoi — foto 6" }
+    ]
+  },
+  {
+    "pageId": "coworking/sale-eventi",
+    "title": "Coworking — sale eventi",
+    "slots": [
+      { "slot": "banano-2", "file": "img/foto/banano-2.jpg", "label": "Apertura — foto grande a sinistra, e già successo qui — foto 1" },
+      { "slot": "banano-1", "file": "img/foto/banano-1.jpg", "label": "Apertura — foto impilata in alto, e card sala 6 (banano)" },
+      { "slot": "coworking-lounge", "file": "img/sections/coworking-lounge.jpg", "label": "Apertura — foto impilata in basso, card sala 3 (area culture) e già successo qui — foto 2" },
+      { "slot": "corridoio-2", "file": "img/foto/corridoio-2.jpg", "label": "Card sala 1 (sala riunioni)" },
+      { "slot": "corridoio-1", "file": "img/foto/corridoio-1.jpg", "label": "Card sala 2 (sala didattica)" },
+      { "slot": "sede", "file": "img/foto/sede.jpg", "label": "Card sala 4 (aula magna) e dove siamo in fondo" },
+      { "slot": "designing-the", "file": "img/sections/designing-the.jpg", "label": "Card sala 5 (showroom)" }
+    ]
+  },
+  {
+    "pageId": "coworking/prenota",
+    "title": "Coworking — prenota",
+    "slots": [
+      { "slot": "coworking-lounge", "file": "img/sections/coworking-lounge.jpg", "label": "Flusso di prenotazione — card categoria lavorare" },
+      { "slot": "banano-2", "file": "img/foto/banano-2.jpg", "label": "Flusso di prenotazione — card categoria sale" }
+    ]
+  },
+  {
+    "pageId": "innovazione",
+    "title": "Innovazione (/innovazione)",
+    "slots": [
+      { "slot": "banano-1", "file": "img/foto/banano-1.jpg", "label": "Testata — foto a destra del titolo" }
+    ]
+  },
+  {
+    "pageId": "innovazione/aziende",
+    "title": "Innovazione — aziende",
+    "slots": [
+      { "slot": "banano-1", "file": "img/foto/banano-1.jpg", "label": "Testata — foto a destra del titolo" }
+    ]
+  },
+  {
+    "pageId": "innovazione/cte-cobo",
+    "title": "Innovazione — CTE COBO",
+    "slots": [
+      { "slot": "sede", "file": "img/foto/sede.jpg", "label": "Testata — foto della sede a destra del titolo" }
+    ]
+  },
+  {
+    "pageId": "innovazione/incubazione-accelerazione",
+    "title": "Innovazione — incubazione e accelerazione",
+    "slots": [
+      { "slot": "corridoio-1", "file": "img/foto/corridoio-1.jpg", "label": "Testata — foto del corridoio a destra del titolo" }
+    ]
+  }
+]

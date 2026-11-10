@@ -7,8 +7,8 @@ import { SectionPagesNav } from '@/components/sections/SectionPagesNav'
 import { isLocale, localeHref } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
 import { pageAlternates } from '@/lib/seo'
-import { getSiteSettings } from '@/lib/sanity/queries'
-import sedeImg from '@/public/img/foto/sede.jpg'
+import { getSectionImages, getSiteSettings } from '@/lib/sanity/queries'
+import { urlFor } from '@/lib/sanity/image'
 import { ContactForm } from '@/components/sections/ContactForm'
 import det from '@/components/sections/DetailPage.module.css'
 import tp from '@/components/sections/TopicScreen.module.css'
@@ -44,7 +44,16 @@ export default async function CteCoboPage({
   if (!isLocale(locale)) notFound()
   const t = getDictionary(locale)
   const c = t.innovationSub.cte
-  const settings = await getSiteSettings()
+  const [settings, media] = await Promise.all([
+    getSiteSettings(),
+    getSectionImages('innovazione/cte-cobo'),
+  ])
+  /* foto sostituibili dal CMS (Media del sito → CTE COBO);
+     senza slot compilato resta la foto di repo */
+  const foto = (slot: string, fallback: string, w: number, h: number) =>
+    media[slot]
+      ? urlFor(media[slot]).width(w).height(h).fit('crop').auto('format').url()
+      : fallback
 
   const ctaMailto = `mailto:hello@bologna-creativehub.it?subject=${encodeURIComponent(c.ctaTitle)}`
 
@@ -93,7 +102,9 @@ export default async function CteCoboPage({
             </div>
             <Reveal className={det.headPh} delay={100}>
               <Image
-                src={sedeImg}
+                src={foto('sede', '/img/foto/sede.jpg', 1920, 1200)}
+                width={1920}
+                height={1200}
                 alt="La sede di via del Tappezziere 4"
                 className={det.headImg}
                 priority

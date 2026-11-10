@@ -3,7 +3,6 @@ import type { CSSProperties } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import finanziataImg from '@/public/img/sections/academy-finanziata.jpg'
 import { Arrow, ArrowLink, Button, Reveal, RevealGroup, Rule } from '@/components/ui'
 import { AvvisamiForm } from '@/components/sections/AvvisamiForm'
 import { FundingBand } from '@/components/sections/FundingBand'
@@ -14,7 +13,8 @@ import { isLocale, localeHref } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
 import { pageAlternates } from '@/lib/seo'
 import { l } from '@/lib/sanity/l'
-import { getAllCourses } from '@/lib/sanity/queries'
+import { getAllCourses, getSectionImages } from '@/lib/sanity/queries'
+import { urlFor } from '@/lib/sanity/image'
 /* grammatica condivisa delle pagine di dettaglio: testata, fatti,
    fascia di stato, pillole filtro, chiusura scura */
 import det from '@/components/sections/DetailPage.module.css'
@@ -59,7 +59,16 @@ export default async function FormazioneFinanziataPage({
   /* categoria sconosciuta in query = come 'tutti' */
   const active = cat && d.filters.some((f) => f.key === cat) ? cat : 'tutti'
 
-  const all = await getAllCourses()
+  const [all, media] = await Promise.all([
+    getAllCourses(),
+    getSectionImages('academy/formazione-finanziata'),
+  ])
+  /* foto sostituibili dal CMS (Media del sito → Pagina Formazione
+     finanziata); senza slot compilato resta la foto di repo */
+  const foto = (slot: string, fallback: string, w: number, h: number) =>
+    media[slot]
+      ? urlFor(media[slot]).width(w).height(h).fit('crop').auto('format').url()
+      : fallback
   const corsi = all
     .filter((c) => c.types?.includes('finanziato'))
     .sort((a, b) => (a.order ?? 999) - (b.order ?? 999))
@@ -124,8 +133,15 @@ export default async function FormazioneFinanziataPage({
                 c'era solo il placeholder nero, cioè un buco in pagina */}
             <Reveal className={det.headPh} delay={120}>
               <Image
-                src={finanziataImg}
+                src={foto(
+                  'academy-finanziata',
+                  '/img/sections/academy-finanziata.jpg',
+                  1800,
+                  1417
+                )}
                 alt="Uno studente al banco di regia, davanti allo schermo touch della DAW e al rack di effetti"
+                width={1800}
+                height={1417}
                 priority
                 sizes="(max-width: 860px) 100vw, 50vw"
                 className={det.headImg}

@@ -18,13 +18,10 @@ import { StudioBookingFlow } from '@/components/sections/StudioBookingFlow'
 import { isLocale, localeHref } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
 import { pageAlternates } from '@/lib/seo'
-import { getSpacesByKind } from '@/lib/sanity/queries'
+import { getSectionImages, getSpacesByKind } from '@/lib/sanity/queries'
 import { getBookableProducts } from '@/lib/woocommerce'
 import { l } from '@/lib/sanity/l'
-import studioDeskImg from '@/public/img/sections/studio-desk.jpg'
-import studioSslImg from '@/public/img/foto/studio-ssl.jpg'
-import liveBandImg from '@/public/img/foto/live-band.jpg'
-import studioRegiaBImg from '@/public/img/sections/studio-regia-b.jpg'
+import { urlFor } from '@/lib/sanity/image'
 import det from '@/components/sections/DetailPage.module.css'
 import styles from './page.module.css'
 
@@ -62,7 +59,16 @@ export default async function AffittoStudioPage({
   if (!isLocale(locale)) notFound()
   const t = getDictionary(locale)
   const d = t.studioSub.affitto
-  const spaces = await getSpacesByKind('studio')
+  const [spaces, media] = await Promise.all([
+    getSpacesByKind('studio'),
+    getSectionImages('studios/affitto-studio'),
+  ])
+  /* foto sostituibili dal CMS (Media del sito → Pagina Affitto studio);
+     senza slot compilato resta la foto di repo */
+  const foto = (slot: string, fallback: string, w: number, h: number) =>
+    media[slot]
+      ? urlFor(media[slot]).width(w).height(h).fit('crop').auto('format').url()
+      : fallback
 
   const email = t.studioSub.email
   const base = localeHref(locale, '/studios/affitto-studio')
@@ -129,8 +135,10 @@ export default async function AffittoStudioPage({
             </div>
             <Reveal className={det.headPh} delay={120}>
               <Image
-                src={studioDeskImg}
+                src={foto('studio-desk', '/img/sections/studio-desk.jpg', 1800, 1800)}
                 alt="La regia vista dal centro della sala"
+                width={1800}
+                height={1800}
                 className={det.headImg}
                 sizes="(max-width: 860px) 100vw, 50vw"
                 priority
@@ -289,15 +297,21 @@ export default async function AffittoStudioPage({
                 email={email}
                 catImages={{
                   produzione: {
-                    src: studioSslImg,
+                    src: foto('studio-ssl', '/img/foto/studio-ssl.jpg', 1920, 1440),
+                    width: 1920,
+                    height: 1440,
                     alt: 'La console SSL della regia, vista di lato',
                   },
                   prove: {
-                    src: liveBandImg,
+                    src: foto('live-band', '/img/foto/live-band.jpg', 1440, 1920),
+                    width: 1440,
+                    height: 1920,
                     alt: 'Una band al lavoro nella live room',
                   },
                   tour: {
-                    src: studioRegiaBImg,
+                    src: foto('studio-regia-b', '/img/sections/studio-regia-b.jpg', 1200, 1600),
+                    width: 1200,
+                    height: 1600,
                     alt: 'La regia dello studio con outboard e monitor',
                   },
                 }}

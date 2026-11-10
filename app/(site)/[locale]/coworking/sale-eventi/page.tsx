@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import Image, { type StaticImageData } from 'next/image'
+import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { Arrow, ArrowLink, Reveal, RevealGroup, Rule } from '@/components/ui'
 import { SiteChrome } from '@/components/sections/SiteChrome'
@@ -10,7 +10,11 @@ import { EventBuilder } from '@/components/sections/EventBuilder'
 import { isLocale, localeHref } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
 import { pageAlternates } from '@/lib/seo'
-import { getPageById, getSiteSettings } from '@/lib/sanity/queries'
+import {
+  getPageById,
+  getSectionImages,
+  getSiteSettings,
+} from '@/lib/sanity/queries'
 import {
   COWORKING_ROW_SLUGS,
   getBookableProducts,
@@ -19,22 +23,10 @@ import { QuickBookForm } from '@/components/sections/QuickBookForm'
 /* la card prenota è la stessa del coworking: stesso modulo CSS */
 import cw from '../page.module.css'
 import { l } from '@/lib/sanity/l'
-import banano1Img from '@/public/img/foto/banano-1.jpg'
-import banano2Img from '@/public/img/foto/banano-2.jpg'
-import corridoio1Img from '@/public/img/foto/corridoio-1.jpg'
-import corridoio2Img from '@/public/img/foto/corridoio-2.jpg'
-import sedeImg from '@/public/img/foto/sede.jpg'
-import loungeImg from '@/public/img/sections/coworking-lounge.jpg'
-import designingImg from '@/public/img/sections/designing-the.jpg'
+import { urlFor } from '@/lib/sanity/image'
 /* le card a foto piena dei corsi (layout B): modulo condiviso */
 import uni from '@/components/sections/UniScreen.module.css'
 import styles from './page.module.css'
-
-/* foto degli eventi passati, nell'ordine del documento Sanity */
-const PAST_PHOTOS = [
-  { src: banano2Img, alt: 'Networking nella banano room: grande banano al centro e divani' },
-  { src: loungeImg, alt: 'La lounge del coworking durante un talk' },
-]
 
 export const dynamic = 'force-dynamic'
 
@@ -52,18 +44,6 @@ const ROOM_PRODUCT: Record<string, string> = {
   'sala didattica': 'sala-didattica',
   'area culture': 'area-culture',
 }
-
-/* foto di sede abbinate alle sale, nell'ordine del documento Sanity:
-   riunioni, didattica, area culture, aula magna, showroom, banano */
-const ROOM_PHOTOS: { src: StaticImageData; alt: string }[] = [
-  /* i testi alternativi seguono la foto vera, non il nome del file */
-  { src: corridoio2Img, alt: 'Scala interna con il murale "small steps big change"' },
-  { src: corridoio1Img, alt: 'Murale "future together" lungo il corridoio' },
-  { src: loungeImg, alt: 'La lounge: sedute e grafiche geometriche alle pareti' },
-  { src: sedeImg, alt: 'La sede di via del Tappezziere 4' },
-  { src: designingImg, alt: 'La parete gialla "designing the future" lungo il corridoio' },
-  { src: banano1Img, alt: 'La banano room: tavolo rotondo, sedute in velluto e luci calde' },
-]
 
 type Block = {
   style?: string
@@ -97,10 +77,35 @@ export default async function SaleEventiPage({
   const { locale } = await params
   if (!isLocale(locale)) notFound()
   const t = getDictionary(locale)
-  const [page, settings] = await Promise.all([
+  const [page, settings, media] = await Promise.all([
     getPageById('sale-eventi'),
     getSiteSettings(),
+    getSectionImages('coworking/sale-eventi'),
   ])
+  /* foto sostituibili dal CMS (Media del sito → Sale eventi);
+     senza slot compilato resta la foto di repo */
+  const foto = (slot: string, fallback: string, w: number, h: number) =>
+    media[slot]
+      ? urlFor(media[slot]).width(w).height(h).fit('crop').auto('format').url()
+      : fallback
+
+  /* foto degli eventi passati, nell'ordine del documento Sanity */
+  const PAST_PHOTOS = [
+    { src: foto('banano-2', '/img/foto/banano-2.jpg', 1440, 1440), alt: 'Networking nella banano room: grande banano al centro e divani' },
+    { src: foto('coworking-lounge', '/img/sections/coworking-lounge.jpg', 1800, 1350), alt: 'La lounge del coworking durante un talk' },
+  ]
+
+  /* foto di sede abbinate alle sale, nell'ordine del documento Sanity:
+     riunioni, didattica, area culture, aula magna, showroom, banano */
+  const ROOM_PHOTOS = [
+    /* i testi alternativi seguono la foto vera, non il nome del file */
+    { src: foto('corridoio-2', '/img/foto/corridoio-2.jpg', 1600, 1000), width: 1600, height: 1000, alt: 'Scala interna con il murale "small steps big change"' },
+    { src: foto('corridoio-1', '/img/foto/corridoio-1.jpg', 1600, 1000), width: 1600, height: 1000, alt: 'Murale "future together" lungo il corridoio' },
+    { src: foto('coworking-lounge', '/img/sections/coworking-lounge.jpg', 1800, 1350), width: 1800, height: 1350, alt: 'La lounge: sedute e grafiche geometriche alle pareti' },
+    { src: foto('sede', '/img/foto/sede.jpg', 1920, 1200), width: 1920, height: 1200, alt: 'La sede di via del Tappezziere 4' },
+    { src: foto('designing-the', '/img/sections/designing-the.jpg', 1800, 1350), width: 1800, height: 1350, alt: 'La parete gialla "designing the future" lungo il corridoio' },
+    { src: foto('banano-1', '/img/foto/banano-1.jpg', 1440, 1440), width: 1440, height: 1440, alt: 'La banano room: tavolo rotondo, sedute in velluto e luci calde' },
+  ]
 
   /* tipo di evento → scheda prodotto della sala sullo shop: la
      prenotazione si chiude lì, il configuratore resta per la richiesta
@@ -167,18 +172,24 @@ export default async function SaleEventiPage({
             comuni dove gli eventi si fanno davvero) ————— */}
         <Reveal className={`wrap ${styles.venue}`}>
           <Image
-            src={banano2Img}
+            src={foto('banano-2', '/img/foto/banano-2.jpg', 1440, 1440)}
+            width={1440}
+            height={1440}
             alt="La banano room: soffitto industriale e grande banano al centro"
             className={styles.venueImg}
           />
           <div className={styles.venueStack}>
             <Image
-              src={banano1Img}
+              src={foto('banano-1', '/img/foto/banano-1.jpg', 1440, 1440)}
+              width={1440}
+              height={1440}
               alt="La banano room: tavolo rotondo, sedute in velluto e luci calde"
               className={styles.venueImg}
             />
             <Image
-              src={loungeImg}
+              src={foto('coworking-lounge', '/img/sections/coworking-lounge.jpg', 1800, 1350)}
+              width={1800}
+              height={1350}
               alt="La lounge del coworking: sedute e grafiche geometriche alle pareti"
               className={styles.venueImg}
             />
@@ -233,6 +244,8 @@ export default async function SaleEventiPage({
                     <Image
                       src={ROOM_PHOTOS[i].src}
                       alt={ROOM_PHOTOS[i].alt}
+                      width={ROOM_PHOTOS[i].width}
+                      height={ROOM_PHOTOS[i].height}
                       className={styles.roomImg}
                     />
                   )}
@@ -395,7 +408,9 @@ export default async function SaleEventiPage({
               </Reveal>
               <Reveal delay={140}>
                 <Image
-                  src={sedeImg}
+                  src={foto('sede', '/img/foto/sede.jpg', 1920, 1200)}
+                  width={1920}
+                  height={1200}
                   alt="La sede di via del Tappezziere 4, Bologna"
                   className={styles.whereImg}
                 />

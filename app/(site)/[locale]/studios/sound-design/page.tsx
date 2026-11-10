@@ -15,13 +15,13 @@ import { PointsAccordion } from '@/components/sections/PointsAccordion'
 import { isLocale, localeHref } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
 import { pageAlternates } from '@/lib/seo'
-import { getPageById, getSiteSettings } from '@/lib/sanity/queries'
+import {
+  getPageById,
+  getSectionImages,
+  getSiteSettings,
+} from '@/lib/sanity/queries'
 import { l } from '@/lib/sanity/l'
-import studioDeskImg from '@/public/img/sections/studio-desk.jpg'
-import sdCinemaImg from '@/public/img/foto/sd-cinema.jpg'
-import sdPubblicitaImg from '@/public/img/foto/sd-pubblicita.jpg'
-import sdVideogiochiImg from '@/public/img/foto/sd-videogiochi.jpg'
-import sdInstallazioniImg from '@/public/img/foto/sd-installazioni.jpg'
+import { urlFor } from '@/lib/sanity/image'
 /* le card a foto piena dei corsi (layout B): modulo condiviso */
 import uni from '@/components/sections/UniScreen.module.css'
 import { ContactForm } from '@/components/sections/ContactForm'
@@ -39,22 +39,35 @@ const kickerOf = (s: string) => s.replace(/\.+$/, '').toLowerCase()
 /* foto dei quattro committenti, nell'ordine del dizionario:
    cinema e serie, pubblicità e video, videogiochi, installazioni */
 /* una foto per ogni mondo a cui lavoriamo, nell'ordine delle voci:
-   cinema e serie, pubblicità e video, videogiochi, installazioni */
+   cinema e serie, pubblicità e video, videogiochi, installazioni —
+   slot CMS + foto di repo */
 const CLIENT_PHOTOS = [
   {
-    src: sdCinemaImg,
+    slot: 'sd-cinema',
+    fallback: '/img/foto/sd-cinema.jpg',
+    w: 7255,
+    h: 4842,
     alt: 'Troupe sul set: operatore alla macchina e microfonista con l’asta durante una ripresa in esterni',
   },
   {
-    src: sdPubblicitaImg,
+    slot: 'sd-pubblicita',
+    fallback: '/img/foto/sd-pubblicita.jpg',
+    w: 2400,
+    h: 1392,
     alt: 'Timeline di montaggio video su monitor, con le tracce audio e le forme d’onda',
   },
   {
-    src: sdVideogiochiImg,
+    slot: 'sd-videogiochi',
+    fallback: '/img/foto/sd-videogiochi.jpg',
+    w: 2048,
+    h: 3072,
     alt: 'Parete di televisori a tubo catodico con videogiochi accesi e un’insegna al neon',
   },
   {
-    src: sdInstallazioniImg,
+    slot: 'sd-installazioni',
+    fallback: '/img/foto/sd-installazioni.jpg',
+    w: 4800,
+    h: 3200,
     alt: 'Parete di diffusori acustici di epoche diverse in uno spazio espositivo',
   },
 ]
@@ -107,10 +120,17 @@ export default async function SoundDesignPage({
   if (!isLocale(locale)) notFound()
   const t = getDictionary(locale)
   const d = t.studioSub.soundDesign
-  const [page, settings] = await Promise.all([
+  const [page, settings, media] = await Promise.all([
     getPageById('sound-design'),
     getSiteSettings(),
+    getSectionImages('studios/sound-design'),
   ])
+  /* foto sostituibili dal CMS (Media del sito → Pagina Sound design);
+     senza slot compilato resta la foto di repo */
+  const foto = (slot: string, fallback: string, w: number, h: number) =>
+    media[slot]
+      ? urlFor(media[slot]).width(w).height(h).fit('crop').auto('format').url()
+      : fallback
 
   /* dal documento Sanity (v2): per chi lavoriamo (lede), cosa facciamo,
      i cinque passi, le domande frequenti, il rimando al Master — restano
@@ -170,8 +190,10 @@ export default async function SoundDesignPage({
             </div>
             <Reveal className={det.headPh} delay={120}>
               <Image
-                src={studioDeskImg}
+                src={foto('studio-desk', '/img/sections/studio-desk.jpg', 1800, 1800)}
                 alt="La postazione di lavoro in regia"
+                width={1800}
+                height={1800}
                 className={det.headImg}
                 sizes="(max-width: 860px) 100vw, 50vw"
                 priority
@@ -188,12 +210,14 @@ export default async function SoundDesignPage({
         <section className={`wrap ${det.sez}`}>
           <SectionHeader title={d.forTitle} lede={forLede} />
           <RevealGroup className={styles.apps}>
-            {d.clients.map((c, i) => (
+            {d.clients.map((c, i) => {
+              const ph = CLIENT_PHOTOS[i % CLIENT_PHOTOS.length]
+              return (
               <div key={c.title} className={`rv ${uni.card} ${styles.appCard}`}>
                 <figure className={uni.ph}>
                   <Image
-                    src={CLIENT_PHOTOS[i % CLIENT_PHOTOS.length].src}
-                    alt={CLIENT_PHOTOS[i % CLIENT_PHOTOS.length].alt}
+                    src={foto(ph.slot, ph.fallback, ph.w, ph.h)}
+                    alt={ph.alt}
                     fill
                     sizes="(max-width: 560px) 100vw, (max-width: 1100px) 50vw, 25vw"
                   />
@@ -206,7 +230,8 @@ export default async function SoundDesignPage({
                   </ArrowLink>
                 </div>
               </div>
-            ))}
+              )
+            })}
           </RevealGroup>
         </section>
 

@@ -15,8 +15,8 @@ import { PointsAccordion } from '@/components/sections/PointsAccordion'
 import { isLocale, localeHref } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
 import { pageAlternates } from '@/lib/seo'
-import { getSiteSettings } from '@/lib/sanity/queries'
-import studioSslImg from '@/public/img/foto/studio-ssl.jpg'
+import { getSectionImages, getSiteSettings } from '@/lib/sanity/queries'
+import { urlFor } from '@/lib/sanity/image'
 import { ContactForm } from '@/components/sections/ContactForm'
 import det from '@/components/sections/DetailPage.module.css'
 import { StudioContacts } from '@/components/sections/StudioContacts'
@@ -53,7 +53,16 @@ export default async function MixMasteringPage({
   if (!isLocale(locale)) notFound()
   const t = getDictionary(locale)
   const d = t.studioSub.mix
-  const settings = await getSiteSettings()
+  const [settings, media] = await Promise.all([
+    getSiteSettings(),
+    getSectionImages('studios/mix-mastering'),
+  ])
+  /* foto sostituibili dal CMS (Media del sito → Pagina Mix e mastering);
+     senza slot compilato resta la foto di repo */
+  const foto = (slot: string, fallback: string, w: number, h: number) =>
+    media[slot]
+      ? urlFor(media[slot]).width(w).height(h).fit('crop').auto('format').url()
+      : fallback
 
   const email = t.studioSub.email
   const mailBook = `mailto:${email}?subject=${encodeURIComponent(d.book)}`
@@ -100,8 +109,10 @@ export default async function MixMasteringPage({
             </div>
             <Reveal className={det.headPh} delay={120}>
               <Image
-                src={studioSslImg}
+                src={foto('studio-ssl', '/img/foto/studio-ssl.jpg', 1920, 1440)}
                 alt="Mani sulla console SSL"
+                width={1920}
+                height={1440}
                 className={det.headImg}
                 sizes="(max-width: 860px) 100vw, 50vw"
                 priority

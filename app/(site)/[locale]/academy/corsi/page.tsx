@@ -17,21 +17,22 @@ import uni from '@/components/sections/UniScreen.module.css'
 import { isLocale, localeHref } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
 import { pageAlternates } from '@/lib/seo'
-import { getAllCourses } from '@/lib/sanity/queries'
+import { getAllCourses, getSectionImages } from '@/lib/sanity/queries'
 import { l } from '@/lib/sanity/l'
+import { urlFor } from '@/lib/sanity/image'
 import { matchesQuery } from '@/lib/search'
 import { courseHref } from '@/lib/courses'
 import styles from './page.module.css'
 
 /* cover di riserva per i corsi senza foto in Sanity: le stesse della
-   landing academy, a giro */
+   landing academy, a giro — slot CMS + misura intrinseca per urlFor */
 const FALLBACK_PHOTOS = [
-  '/img/foto/studio-ssl.jpg',
-  '/img/foto/live-band.jpg',
-  '/img/sections/node-innovazione.jpg',
-  '/img/sections/studio-regia-b.jpg',
-  '/img/sections/studio-regia.jpg',
-  '/img/foto/sede.jpg',
+  { slot: 'studio-ssl', src: '/img/foto/studio-ssl.jpg', w: 1920, h: 1440 },
+  { slot: 'live-band', src: '/img/foto/live-band.jpg', w: 1440, h: 1920 },
+  { slot: 'node-innovazione', src: '/img/sections/node-innovazione.jpg', w: 1200, h: 1500 },
+  { slot: 'studio-regia-b', src: '/img/sections/studio-regia-b.jpg', w: 1200, h: 1600 },
+  { slot: 'studio-regia', src: '/img/sections/studio-regia.jpg', w: 1800, h: 1350 },
+  { slot: 'sede', src: '/img/foto/sede.jpg', w: 1920, h: 1200 },
 ] as const
 
 export const dynamic = 'force-dynamic'
@@ -66,7 +67,16 @@ export default async function CorsiPage({
   const activeType = typeof tipo === 'string' ? tipo : undefined
   const query = typeof q === 'string' ? q : undefined
 
-  const courses = await getAllCourses()
+  const [courses, media] = await Promise.all([
+    getAllCourses(),
+    getSectionImages('academy/corsi'),
+  ])
+  /* foto sostituibili dal CMS (Media del sito → Pagina Corsi);
+     senza slot compilato resta la foto di repo */
+  const foto = (slot: string, fallback: string, w: number, h: number) =>
+    media[slot]
+      ? urlFor(media[slot]).width(w).height(h).fit('crop').auto('format').url()
+      : fallback
 
   // categorie derivate dai corsi (uniche, in ordine di apparizione)
   const categories: { slug: string; label: string }[] = []
@@ -217,6 +227,7 @@ export default async function CorsiPage({
                     l(course.duration, locale),
                     l(course.mode, locale),
                   ].filter(Boolean) as string[]
+                  const fb = FALLBACK_PHOTOS[i % FALLBACK_PHOTOS.length]
                   return (
                     <Link
                       key={course._id}
@@ -233,7 +244,7 @@ export default async function CorsiPage({
                           fill
                           /* senza cover Sanity si pesca dalle foto della
                              landing academy, a giro (28/10) */
-                          fallbackSrc={FALLBACK_PHOTOS[i % FALLBACK_PHOTOS.length]}
+                          fallbackSrc={foto(fb.slot, fb.src, fb.w, fb.h)}
                           alt={l(course.title, locale) ?? ''}
                         />
                       </figure>

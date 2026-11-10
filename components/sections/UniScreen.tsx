@@ -16,8 +16,13 @@ import { UniSubnav } from '@/components/sections/UniSubnav'
 import { UniCourses, type UniCourseCard } from '@/components/sections/UniCourses'
 import { localeHref, type Locale } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
-import { getAllCourses, getAllTeachers } from '@/lib/sanity/queries'
+import {
+  getAllCourses,
+  getAllTeachers,
+  getSectionImages,
+} from '@/lib/sanity/queries'
 import { l } from '@/lib/sanity/l'
+import { urlFor } from '@/lib/sanity/image'
 import styles from './UniScreen.module.css'
 
 /* i dieci nomi scelti nel layout del cliente, nell'ordine del mock;
@@ -51,10 +56,21 @@ export async function UniScreen({ locale }: { locale: Locale }) {
   const t = getDictionary(locale)
   const u = t.uni
 
-  const [courses, teachers] = await Promise.all([
+  const [courses, teachers, comuni] = await Promise.all([
     getAllCourses(),
     getAllTeachers(),
+    getSectionImages('comuni'),
   ])
+  /* foto finale sostituibile dal CMS (doc "comuni", slot condiviso);
+     senza slot compilato resta la foto di repo (2048×1536) */
+  const fotoFinale = comuni['aula-corsi']
+    ? urlFor(comuni['aula-corsi'])
+        .width(2048)
+        .height(1536)
+        .fit('crop')
+        .auto('format')
+        .url()
+    : finalImg
 
   /* le card nell'ordine del dizionario; foto e link dal corso Sanity
      con lo stesso slug — un corso senza scheda nel dizionario resta
@@ -374,7 +390,7 @@ export async function UniScreen({ locale }: { locale: Locale }) {
 
         {/* ————— foto finale a tutto schermo ————— */}
         <div className={styles.finalPhoto}>
-          <PhotoFull src={finalImg} alt={u.final.alt} caption={u.final.caption} />
+          <PhotoFull src={fotoFinale} alt={u.final.alt} caption={u.final.caption} />
         </div>
         <ParallaxMedia />
       </main>

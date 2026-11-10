@@ -21,8 +21,14 @@ import { SiteChrome, shopHref } from '@/components/sections/SiteChrome'
 import uni from '@/components/sections/UniScreen.module.css'
 import { localeHref, type Locale } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
-import { getAllCourses, getPageById, getSiteSettings } from '@/lib/sanity/queries'
+import {
+  getAllCourses,
+  getPageById,
+  getSectionImages,
+  getSiteSettings,
+} from '@/lib/sanity/queries'
 import { l } from '@/lib/sanity/l'
+import { urlFor } from '@/lib/sanity/image'
 import type { Topic, TopicBase } from '@/lib/topics'
 import type { PageId } from '@/lib/sanity/types'
 import academyImg from '@/public/img/sections/node-academy.jpg'
@@ -46,11 +52,25 @@ const SECTION_KEY = {
    che ha anche il taglio verticale per il mobile. */
 const SECTION_MEDIA: Record<
   TopicBase,
-  { src: string; portrait?: string; poster?: string }
+  { src: string; portrait?: string; poster?: string; slot?: string }
 > = {
-  '/academy': { src: '/video/hi-corsi.mp4', poster: academyImg.src },
-  '/studios': { src: '/video/hi-studio.mp4', poster: studioImg.src },
-  '/coworking': { src: '/video/node-coworking.mp4', poster: spaziImg.src },
+  /* `slot` = foto sostituibile dal CMS (doc "comuni"), condivisa con
+     bento e carosello della home; la foto di repo resta il fallback */
+  '/academy': {
+    src: '/video/hi-corsi.mp4',
+    poster: academyImg.src,
+    slot: 'node-academy',
+  },
+  '/studios': {
+    src: '/video/hi-studio.mp4',
+    poster: studioImg.src,
+    slot: 'node-studio',
+  },
+  '/coworking': {
+    src: '/video/node-coworking.mp4',
+    poster: spaziImg.src,
+    slot: 'node-spazi',
+  },
   '/innovazione': {
     src: '/video/creative-hub-8s-1920x1080.mp4',
     portrait: '/video/creative-hub-8s-1080x1920.mp4',
@@ -315,10 +335,11 @@ export async function TopicScreen({
       ? (copy.points as PointsAccordionItem[])
       : null
 
-  const [courses, page, settings] = await Promise.all([
+  const [courses, page, settings, comuni] = await Promise.all([
     topic.courseTypes ? getAllCourses() : Promise.resolve([]),
     getPageById(topic.slug as PageId),
     getSiteSettings(),
+    getSectionImages('comuni'),
   ])
 
   const elenco = topic.courseTypes
@@ -327,7 +348,21 @@ export async function TopicScreen({
 
   const sezione = t.nav[SECTION_KEY[topic.base]]
   const sections = page?.sections ?? []
-  const media = SECTION_MEDIA[topic.base]
+  /* poster della banda video: se il CMS ha compilato lo slot comune
+     prende quello, altrimenti la foto di repo (1200×1500) */
+  const base = SECTION_MEDIA[topic.base]
+  const media = {
+    ...base,
+    poster:
+      base.slot && comuni[base.slot]
+        ? urlFor(comuni[base.slot])
+            .width(1200)
+            .height(1500)
+            .fit('crop')
+            .auto('format')
+            .url()
+        : base.poster,
+  }
 
   /* token della fascia nera: sulle pagine flood l'accento resta il colore
      pieno di sezione (e fa anche da inchiostro sul nero); sulle sezioni

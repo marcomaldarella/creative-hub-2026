@@ -25,7 +25,12 @@ import { pageAlternates } from '@/lib/seo'
 import { l } from '@/lib/sanity/l'
 import { urlFor } from '@/lib/sanity/image'
 import type { Course } from '@/lib/sanity/types'
-import { getAllCourses, getAllTeachers, getSiteSettings } from '@/lib/sanity/queries'
+import {
+  getAllCourses,
+  getAllTeachers,
+  getSectionImages,
+  getSiteSettings,
+} from '@/lib/sanity/queries'
 import { courseHref } from '@/lib/courses'
 import styles from './page.module.css'
 
@@ -37,11 +42,15 @@ export const dynamic = 'force-dynamic'
    loop (BgVideo, lazy): la foto di prima resta come poster, quindi il
    primo paint è identico e il video arriva solo quando la card entra
    in viewport. Clip già in uso altrove nel sito (home/bento). */
+/* photo: slot CMS + misura intrinseca del file, per urlFor */
 const PATHS = [
   {
     slug: 'corsi-universitari',
     types: ['triennio', 'magistrale'],
     photo: '/img/sections/academy-universitari.jpg',
+    slot: 'academy-universitari',
+    w: 1800,
+    h: 1349,
     /* due CUT DIVERSI della stessa clip (ffmpeg): sessione di canto
        qui, mani sui pad sulla card custom — mai la stessa scena */
     video: '/video/percorso-uni.mp4',
@@ -50,12 +59,18 @@ const PATHS = [
     slug: 'corsi-custom',
     types: ['custom'],
     photo: '/img/sections/academy-custom.jpg',
+    slot: 'academy-custom',
+    w: 1800,
+    h: 1800,
     video: '/video/percorso-custom.mp4',
   },
   {
     slug: 'formazione-finanziata',
     types: ['finanziato', 'gratuito'],
     photo: '/img/sections/academy-finanziata.jpg',
+    slot: 'academy-finanziata',
+    w: 1800,
+    h: 1417,
     video: '/video/node-studio.mp4',
   },
 ] as const
@@ -114,11 +129,22 @@ export default async function AcademyPage({
   if (!isLocale(locale)) notFound()
   const t = getDictionary(locale)
 
-  const [courses, teachers, settings] = await Promise.all([
+  const [courses, teachers, settings, media] = await Promise.all([
     getAllCourses(),
     getAllTeachers(),
     getSiteSettings(),
+    getSectionImages('academy'),
   ])
+  /* foto sostituibili dal CMS (Media del sito → Pagina Academy);
+     senza slot compilato resta la foto di repo */
+  const foto = (slot: string, fallback: string, w: number, h: number) =>
+    media[slot]
+      ? urlFor(media[slot]).width(w).height(h).fit('crop').auto('format').url()
+      : fallback
+  /* le foto del campo esplora passano tutte di qui: slot = nome file
+     senza estensione, misura identica alle cover Sanity */
+  const fotoEsplora = (p: string) =>
+    foto(p.split('/').pop()!.replace(/\.\w+$/, ''), p, 680, 480)
 
   const basePath = localeHref(locale, '/academy')
   const corsiPath = localeHref(locale, '/academy/corsi')
@@ -165,7 +191,7 @@ export default async function AcademyPage({
         img:
           (c.coverImage &&
             urlFor(c.coverImage).width(680).height(480).fit('crop').auto('format').url()) ||
-          EXPLORE_FUNDED_PICS[i % EXPLORE_FUNDED_PICS.length],
+          fotoEsplora(EXPLORE_FUNDED_PICS[i % EXPLORE_FUNDED_PICS.length]),
       })),
   ]
   const cards: ExploreCard[] = []
@@ -178,7 +204,7 @@ export default async function AcademyPage({
   const exploreRows: ExploreCard[][] = [[], [], []]
   cards.forEach((c, i) => {
     exploreRows[i % exploreRows.length].push(
-      c.img ? c : { ...c, img: EXPLORE_FALLBACK }
+      c.img ? c : { ...c, img: fotoEsplora(EXPLORE_FALLBACK) }
     )
   })
 
@@ -256,7 +282,7 @@ export default async function AcademyPage({
                         poster, lo scale in hover vale anche sul video */}
                     <BgVideo
                       src={path.video}
-                      poster={path.photo}
+                      poster={foto(path.slot, path.photo, path.w, path.h)}
                       className={styles.pathPhoto}
                     />
                     {/* tutto DENTRO la card: titolo sempre visibile al

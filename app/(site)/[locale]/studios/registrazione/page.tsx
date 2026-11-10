@@ -17,10 +17,8 @@ import { PointsAccordion } from '@/components/sections/PointsAccordion'
 import { isLocale, localeHref } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
 import { pageAlternates } from '@/lib/seo'
-import { getSiteSettings } from '@/lib/sanity/queries'
-import regLiveRoomImg from '@/public/img/foto/reg-live-room.jpg'
-import regVocalBoothImg from '@/public/img/foto/reg-vocal-booth.jpg'
-import regControlRoomImg from '@/public/img/foto/reg-control-room.jpg'
+import { getSectionImages, getSiteSettings } from '@/lib/sanity/queries'
+import { urlFor } from '@/lib/sanity/image'
 import { ContactForm } from '@/components/sections/ContactForm'
 import det from '@/components/sections/DetailPage.module.css'
 import { StudioContacts } from '@/components/sections/StudioContacts'
@@ -34,14 +32,29 @@ export const dynamic = 'force-dynamic'
 const kickerOf = (s: string) => s.replace(/\.+$/, '').toLowerCase()
 
 /* le foto dei tre ambienti (27/10), nell'ordine di d.where:
-   live room, vocal booth, control room */
+   live room, vocal booth, control room — slot CMS + foto di repo */
 const WHERE_PHOTOS = [
-  { src: regLiveRoomImg, alt: 'La live room: batteria e backline pronti' },
   {
-    src: regVocalBoothImg,
+    slot: 'reg-live-room',
+    fallback: '/img/foto/reg-live-room.jpg',
+    w: 1800,
+    h: 1350,
+    alt: 'La live room: batteria e backline pronti',
+  },
+  {
+    slot: 'reg-vocal-booth',
+    fallback: '/img/foto/reg-vocal-booth.jpg',
+    w: 1800,
+    h: 1200,
     alt: 'La cabina vocale: microfono a condensatore e pop filter',
   },
-  { src: regControlRoomImg, alt: 'La regia dietro il vetro, verso la sala' },
+  {
+    slot: 'reg-control-room',
+    fallback: '/img/foto/reg-control-room.jpg',
+    w: 1800,
+    h: 1512,
+    alt: 'La regia dietro il vetro, verso la sala',
+  },
 ]
 
 export async function generateMetadata({
@@ -68,7 +81,16 @@ export default async function RegistrazionePage({
   if (!isLocale(locale)) notFound()
   const t = getDictionary(locale)
   const d = t.studioSub.registrazione
-  const settings = await getSiteSettings()
+  const [settings, media] = await Promise.all([
+    getSiteSettings(),
+    getSectionImages('studios/registrazione'),
+  ])
+  /* foto sostituibili dal CMS (Media del sito → Pagina Registrazione);
+     senza slot compilato resta la foto di repo */
+  const foto = (slot: string, fallback: string, w: number, h: number) =>
+    media[slot]
+      ? urlFor(media[slot]).width(w).height(h).fit('crop').auto('format').url()
+      : fallback
 
   const email = t.studioSub.email
   const mailBook = `mailto:${email}?subject=${encodeURIComponent(d.book)}`
@@ -259,12 +281,14 @@ export default async function RegistrazionePage({
             </Button>
           </Reveal>
           <RevealGroup className={det.grid3}>
-            {d.where.map((w, i) => (
+            {d.where.map((w, i) => {
+              const ph = WHERE_PHOTOS[i % WHERE_PHOTOS.length]
+              return (
               <div key={w.title} className={`rv ${styles.whereCard}`}>
                 <figure className={styles.wherePh}>
                   <Image
-                    src={WHERE_PHOTOS[i % WHERE_PHOTOS.length].src}
-                    alt={WHERE_PHOTOS[i % WHERE_PHOTOS.length].alt}
+                    src={foto(ph.slot, ph.fallback, ph.w, ph.h)}
+                    alt={ph.alt}
                     fill
                     sizes="(max-width: 860px) 100vw, 33vw"
                   />
@@ -277,7 +301,8 @@ export default async function RegistrazionePage({
                   <p className={styles.whereText}>{w.text}</p>
                 </div>
               </div>
-            ))}
+              )
+            })}
           </RevealGroup>
         </section>
 

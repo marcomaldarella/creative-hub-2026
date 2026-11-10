@@ -7,8 +7,8 @@ import { SectionPagesNav } from '@/components/sections/SectionPagesNav'
 import { isLocale, localeHref } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
 import { pageAlternates } from '@/lib/seo'
-import { getSiteSettings } from '@/lib/sanity/queries'
-import banano1Img from '@/public/img/foto/banano-1.jpg'
+import { getSectionImages, getSiteSettings } from '@/lib/sanity/queries'
+import { urlFor } from '@/lib/sanity/image'
 /* grammatica condivisa delle pagine di dettaglio (testata con fatti,
    griglie hairline, chiusura nera) + celle/passi delle pagine topic */
 import { ContactForm } from '@/components/sections/ContactForm'
@@ -42,7 +42,16 @@ export default async function AziendePage({
   if (!isLocale(locale)) notFound()
   const t = getDictionary(locale)
   const d = t.innovationSub.aziende
-  const settings = await getSiteSettings()
+  const [settings, media] = await Promise.all([
+    getSiteSettings(),
+    getSectionImages('innovazione/aziende'),
+  ])
+  /* foto sostituibili dal CMS (Media del sito → Startup e aziende);
+     senza slot compilato resta la foto di repo */
+  const foto = (slot: string, fallback: string, w: number, h: number) =>
+    media[slot]
+      ? urlFor(media[slot]).width(w).height(h).fit('crop').auto('format').url()
+      : fallback
 
   const mailto = `mailto:hello@bologna-creativehub.it?subject=${encodeURIComponent(d.ctaTitle)}`
 
@@ -83,7 +92,9 @@ export default async function AziendePage({
             </div>
             <Reveal className={det.headPh} delay={100}>
               <Image
-                src={banano1Img}
+                src={foto('banano-1', '/img/foto/banano-1.jpg', 1440, 1440)}
+                width={1440}
+                height={1440}
                 alt="Lo spazio comune dell'hub: tavolo rotondo e sedute in velluto"
                 className={det.headImg}
               />

@@ -15,14 +15,13 @@ import { PointsAccordion } from '@/components/sections/PointsAccordion'
 import { isLocale, localeHref } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
 import { pageAlternates } from '@/lib/seo'
-import { getPageById, getSiteSettings } from '@/lib/sanity/queries'
+import {
+  getPageById,
+  getSectionImages,
+  getSiteSettings,
+} from '@/lib/sanity/queries'
 import { l } from '@/lib/sanity/l'
-import studioRegiaImg from '@/public/img/sections/studio-regia.jpg'
-import studioSslImg from '@/public/img/foto/studio-ssl.jpg'
-import sdCinemaImg from '@/public/img/foto/sd-cinema.jpg'
-import sdPubblicitaImg from '@/public/img/foto/sd-pubblicita.jpg'
-import sdVideogiochiImg from '@/public/img/foto/sd-videogiochi.jpg'
-import sdInstallazioniImg from '@/public/img/foto/sd-installazioni.jpg'
+import { urlFor } from '@/lib/sanity/image'
 /* le card a foto piena dei corsi (layout B): modulo condiviso */
 import uni from '@/components/sections/UniScreen.module.css'
 import { ContactForm } from '@/components/sections/ContactForm'
@@ -49,23 +48,41 @@ const kickerOf = (s: string) => s.replace(/\.+$/, '').toLowerCase()
 /* foto delle quattro applicazioni, nell'ordine del dizionario:
    musica, cinema e serie, media e installazioni, gaming */
 /* una foto per ogni uso: musica in regia, cinema sul set, media e
-   installazioni, gaming, didattica */
+   installazioni, gaming, didattica — slot CMS + foto di repo */
 const USE_PHOTOS = [
-  { src: studioSslImg, alt: 'La console SSL durante una sessione di mix' },
   {
-    src: sdCinemaImg,
+    slot: 'studio-ssl',
+    fallback: '/img/foto/studio-ssl.jpg',
+    w: 1920,
+    h: 1440,
+    alt: 'La console SSL durante una sessione di mix',
+  },
+  {
+    slot: 'sd-cinema',
+    fallback: '/img/foto/sd-cinema.jpg',
+    w: 7255,
+    h: 4842,
     alt: 'Troupe sul set: operatore e microfonista durante una ripresa',
   },
   {
-    src: sdInstallazioniImg,
+    slot: 'sd-installazioni',
+    fallback: '/img/foto/sd-installazioni.jpg',
+    w: 4800,
+    h: 3200,
     alt: 'Parete di diffusori acustici in uno spazio espositivo',
   },
   {
-    src: sdVideogiochiImg,
+    slot: 'sd-videogiochi',
+    fallback: '/img/foto/sd-videogiochi.jpg',
+    w: 2048,
+    h: 3072,
     alt: 'Televisori a tubo catodico con videogiochi accesi',
   },
   {
-    src: sdPubblicitaImg,
+    slot: 'sd-pubblicita',
+    fallback: '/img/foto/sd-pubblicita.jpg',
+    w: 2400,
+    h: 1392,
     alt: 'Timeline di montaggio con la forma d’onda dell’audio',
   },
 ]
@@ -117,10 +134,17 @@ export default async function DolbyAtmosPage({
   if (!isLocale(locale)) notFound()
   const t = getDictionary(locale)
   const d = t.studioSub.atmos
-  const [page, settings] = await Promise.all([
+  const [page, settings, media] = await Promise.all([
     getPageById('dolby-atmos'),
     getSiteSettings(),
+    getSectionImages('studios/dolby-atmos'),
   ])
+  /* foto sostituibili dal CMS (Media del sito → Pagina Dolby Atmos);
+     senza slot compilato resta la foto di repo */
+  const foto = (slot: string, fallback: string, w: number, h: number) =>
+    media[slot]
+      ? urlFor(media[slot]).width(w).height(h).fit('crop').auto('format').url()
+      : fallback
 
   /* dal documento Sanity (v2): per cosa si usa (lede), laboratorio,
      domande sull'Atmos — restano editabili dallo Studio */
@@ -171,8 +195,10 @@ export default async function DolbyAtmosPage({
             </div>
             <Reveal className={det.headPh} delay={120}>
               <Image
-                src={studioRegiaImg}
+                src={foto('studio-regia', '/img/sections/studio-regia.jpg', 1800, 1350)}
                 alt="La regia dello studio"
+                width={1800}
+                height={1350}
                 className={det.headImg}
                 sizes="(max-width: 860px) 100vw, 50vw"
                 priority
@@ -234,12 +260,14 @@ export default async function DolbyAtmosPage({
         <section className={`wrap ${det.sez}`}>
           <SectionHeader title={d.usesTitle} lede={usesLede} />
           <RevealGroup className={styles.apps}>
-            {d.uses.map((u, i) => (
+            {d.uses.map((u, i) => {
+              const ph = USE_PHOTOS[i % USE_PHOTOS.length]
+              return (
               <div key={u.title} className={`rv ${uni.card} ${styles.appCard}`}>
                 <figure className={uni.ph}>
                   <Image
-                    src={USE_PHOTOS[i % USE_PHOTOS.length].src}
-                    alt={USE_PHOTOS[i % USE_PHOTOS.length].alt}
+                    src={foto(ph.slot, ph.fallback, ph.w, ph.h)}
+                    alt={ph.alt}
                     fill
                     sizes="(max-width: 560px) 100vw, (max-width: 1100px) 50vw, 25vw"
                   />
@@ -252,7 +280,8 @@ export default async function DolbyAtmosPage({
                   </ArrowLink>
                 </div>
               </div>
-            ))}
+              )
+            })}
           </RevealGroup>
         </section>
         </div>

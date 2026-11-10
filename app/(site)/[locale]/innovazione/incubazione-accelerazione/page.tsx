@@ -7,8 +7,8 @@ import { SectionPagesNav } from '@/components/sections/SectionPagesNav'
 import { isLocale, localeHref } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
 import { pageAlternates } from '@/lib/seo'
-import { getSiteSettings } from '@/lib/sanity/queries'
-import corridoio1Img from '@/public/img/foto/corridoio-1.jpg'
+import { getSectionImages, getSiteSettings } from '@/lib/sanity/queries'
+import { urlFor } from '@/lib/sanity/image'
 import { ContactForm } from '@/components/sections/ContactForm'
 import det from '@/components/sections/DetailPage.module.css'
 import tp from '@/components/sections/TopicScreen.module.css'
@@ -48,8 +48,16 @@ export default async function IncubazioneAccelerazionePage({
   if (!isLocale(locale)) notFound()
   const t = getDictionary(locale)
   const c = t.innovationSub.createch
-  const settings = await getSiteSettings()
-
+  const [settings, media] = await Promise.all([
+    getSiteSettings(),
+    getSectionImages('innovazione/incubazione-accelerazione'),
+  ])
+  /* foto sostituibili dal CMS (Media del sito → Incubazione);
+     senza slot compilato resta la foto di repo */
+  const foto = (slot: string, fallback: string, w: number, h: number) =>
+    media[slot]
+      ? urlFor(media[slot]).width(w).height(h).fit('crop').auto('format').url()
+      : fallback
 
   return (
     <SiteChrome locale={locale} path="/innovazione/incubazione-accelerazione">
@@ -93,7 +101,9 @@ export default async function IncubazioneAccelerazionePage({
             </div>
             <Reveal className={det.headPh} delay={100}>
               <Image
-                src={corridoio1Img}
+                src={foto('corridoio-1', '/img/foto/corridoio-1.jpg', 1600, 1000)}
+                width={1600}
+                height={1000}
                 alt="Corridoio delle aule con segnaletica gialla"
                 className={det.headImg}
                 priority
