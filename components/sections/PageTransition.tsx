@@ -61,12 +61,14 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
         stripes: [] as HTMLElement[],
         logo: null as HTMLElement | null,
         glifi: [] as SVGPathElement[],
+        riga: null as SVGPathElement | null,
       }
     const q = (sel: string) => Array.from(veil.querySelectorAll<HTMLElement>(sel))
     return {
       stripes: q('[data-stripe]'),
       logo: veil.querySelector<HTMLElement>('[data-logo]'),
       glifi: Array.from(veil.querySelectorAll<SVGPathElement>('[data-logo-path]')),
+      riga: veil.querySelector<SVGPathElement>('[data-logo-line]'),
     }
   }
 
@@ -94,7 +96,7 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
           return () => tl.kill()
         }
         setActive(true)
-        const { stripes, logo, glifi } = parts()
+        const { stripes, logo, glifi, riga } = parts()
         const tl = gsap.timeline({ onComplete: next })
         /* y: 0 obbligatorio — il translateY(100%) del CSS arriva a GSAP
            già risolto in pixel (900px) e verrebbe tenuto come offset fisso
@@ -120,6 +122,16 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
             { y: 0, duration: 0.34, ease: 'power3.out', stagger: 0.024 },
             '<'
           )
+          if (riga) {
+            /* la sottolineatura cresce verso sinistra: scaleX ancorata
+               al bordo destro del proprio bbox */
+            tl.fromTo(
+              riga,
+              { scaleX: 0, transformOrigin: '100% 50%' },
+              { scaleX: 1, duration: 0.45, ease: 'power3.inOut' },
+              '-=0.25'
+            )
+          }
         }
         return () => tl.kill()
       }}
