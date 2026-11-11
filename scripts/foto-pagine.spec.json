@@ -24,7 +24,8 @@
     "slots": [
       { "slot": "hero", "file": "img/sections/studio-regia.jpg", "label": "Hero — foto grande a destra (regia principale)" },
       { "slot": "duo-sinistra", "file": "img/sections/studio-desk.jpg", "label": "Banda a due foto — sinistra, quadrata (regia dal centro)" },
-      { "slot": "duo-destra", "file": "img/sections/studio-regia-b.jpg", "label": "Banda a due foto — destra, verticale (postazione SSL)" }
+      { "slot": "duo-destra", "file": "img/sections/studio-regia-b.jpg", "label": "Banda a due foto — destra, verticale (postazione SSL)" },
+      { "slot": "cosentino", "file": "img/foto/cosentino.jpg", "label": "Sezione in regia — ritratto di Alessandro Cosentino" }
     ]
   },
   {

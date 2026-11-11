@@ -30,7 +30,6 @@ import {
 } from '@/lib/sanity/queries'
 import { l } from '@/lib/sanity/l'
 import { urlFor } from '@/lib/sanity/image'
-import studioRegiaBImg from '@/public/img/sections/studio-regia-b.jpg'
 import styles from './page.module.css'
 
 export const dynamic = 'force-dynamic'
@@ -289,12 +288,13 @@ export default async function StudiosPage({
                 ))}
               </Reveal>
             </div>
-              {/* la regia accanto al racconto: finché non arriva un
-                  ritratto del fonico, la stanza in cui lavora */}
+              {/* il ritratto del fonico in regia */}
               <Reveal className={styles.engineerPh} delay={120}>
                 <Image
-                  src={studioRegiaBImg}
-                  alt="La regia dello studio: console, outboard e monitor"
+                  src={foto('cosentino', '/img/foto/cosentino.jpg', 1600, 1200)}
+                  alt="Alessandro Cosentino in regia"
+                  width={1600}
+                  height={1200}
                   className={styles.engineerImg}
                   sizes="(max-width: 860px) 100vw, 42vw"
                 />
