@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { Fragment } from 'react';
-import { Wordmark } from './Wordmark';
+import { FooterLogo } from './FooterLogo';
 import styles from './Footer.module.css';
 
 export type FooterLink = {
@@ -57,7 +57,7 @@ export function Footer({
           <div>
             <div className={styles.brandRow}>
               <Link href={homeHref} className={styles.brand}>
-                <Wordmark />
+                <FooterLogo />
               </Link>
             </div>
             {contactLines && contactLines.length > 0 && (

@@ -1,0 +1,16 @@
+.logo {
+  display: block;
+  height: 40px;
+  width: auto;
+}
+
+/* la targa nel colore di sezione: --giant arriva dal wrapper del footer
+   sulle pagine flood, altrove si torna all'azzurro brand */
+.plate {
+  fill: var(--giant, var(--azzurro));
+}
+
+/* lettere nel colore del fondo: su footer nero leggono come intaglio */
+.glyph {
+  fill: var(--bg);
+}
