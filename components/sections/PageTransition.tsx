@@ -3,6 +3,7 @@
 import { useRef, useState } from 'react'
 import { TransitionRouter } from 'next-transition-router'
 import gsap from 'gsap'
+import { TransitionLogo } from './TransitionLogo'
 import styles from './PageTransition.module.css'
 
 /**
@@ -14,21 +15,9 @@ import styles from './PageTransition.module.css'
  * Regola iOS: il velo fixed è display:none quando inattivo (un overlay
  * fixed lasciato nel layer tree ammazza lo scroll in Safari mobile).
  */
-/* parola spezzata in lettere, ognuna dentro la sua maschera overflow:hidden
-   così può salire dal basso senza sbordare */
-function Word({ text }: { text: string }) {
-  return (
-    <span className={styles.word} data-word={text}>
-      {[...text].map((c, i) => (
-        <span className={styles.mask} key={i}>
-          <span className={styles.letter} data-letter>
-            {c}
-          </span>
-        </span>
-      ))}
-    </span>
-  )
-}
+/* il logotipo nuovo è un SVG inline con un path per glifo: i path
+   salgono dal basso e il viewBox dell'svg fa da maschera (quello che
+   sta sotto il bordo inferiore è clippato di suo) */
 
 const reduced = () => {
   try {
@@ -71,15 +60,13 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
       return {
         stripes: [] as HTMLElement[],
         logo: null as HTMLElement | null,
-        creative: [] as HTMLElement[],
-        hub: [] as HTMLElement[],
+        glifi: [] as SVGPathElement[],
       }
     const q = (sel: string) => Array.from(veil.querySelectorAll<HTMLElement>(sel))
     return {
       stripes: q('[data-stripe]'),
       logo: veil.querySelector<HTMLElement>('[data-logo]'),
-      creative: q('[data-word="creative"] [data-letter]'),
-      hub: q('[data-word="hub"] [data-letter]'),
+      glifi: Array.from(veil.querySelectorAll<SVGPathElement>('[data-logo-path]')),
     }
   }
 
@@ -107,7 +94,7 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
           return () => tl.kill()
         }
         setActive(true)
-        const { stripes, logo, creative, hub } = parts()
+        const { stripes, logo, glifi } = parts()
         const tl = gsap.timeline({ onComplete: next })
         /* y: 0 obbligatorio — il translateY(100%) del CSS arriva a GSAP
            già risolto in pixel (900px) e verrebbe tenuto come offset fisso
@@ -123,21 +110,15 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
           }
         )
         if (logo) {
-          /* logotipo composto: "creative" sale lettera per lettera dentro
-             le maschere, "hub" segue in stagger. Il contenitore appare
-             secco (set, niente fade) */
+          /* i glifi del logotipo salgono in stagger da sotto il viewBox
+             (y in unità svg: 440 > altezza 430.477 = fuori quadro, il
+             viewBox clippa). Il contenitore appare secco (set, no fade) */
           tl.set(logo, { autoAlpha: 1 }, '-=0.15')
           tl.fromTo(
-            creative,
-            { yPercent: 110 },
-            { yPercent: 0, duration: 0.32, ease: 'power3.out', stagger: 0.022 },
+            glifi,
+            { y: 440 },
+            { y: 0, duration: 0.34, ease: 'power3.out', stagger: 0.024 },
             '<'
-          )
-          tl.fromTo(
-            hub,
-            { yPercent: 110 },
-            { yPercent: 0, duration: 0.32, ease: 'power3.out', stagger: 0.038 },
-            '-=0.2'
           )
         }
         return () => tl.kill()
@@ -199,8 +180,7 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
         <div className={`${styles.stripe} ${styles.giallo}`} data-stripe />
         <div className={`${styles.stripe} ${styles.nero}`} data-stripe>
           <span className={styles.logo} data-logo>
-            <Word text="creative" />
-            <Word text="hub" />
+            <TransitionLogo className={styles.logoSvg} />
           </span>
         </div>
       </div>

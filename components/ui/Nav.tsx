@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useCallback, useRef, useEffect, useId, useState } from 'react';
 import { Arrow } from './Arrow';
-import { Wordmark } from './Wordmark';
+import { LogoMark } from './LogoMark';
 import styles from './Nav.module.css';
 
 export type NavSubEntry = {
@@ -348,7 +348,7 @@ export function Nav({
       )}
       <div className={styles.inner} ref={innerRef}>
         <Link href={homeHref} onClick={close} className={styles.brand}>
-          <Wordmark />
+          <LogoMark />
         </Link>
 
         <nav className={styles.links} ref={linksRef}>

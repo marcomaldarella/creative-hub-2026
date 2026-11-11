@@ -1,0 +1,15 @@
+.logo {
+  display: block;
+  height: 19px;
+  aspect-ratio: 1757.193 / 430.477;
+  background: currentColor;
+  -webkit-mask: url('/img/logo-new.svg') center / contain no-repeat;
+  mask: url('/img/logo-new.svg') center / contain no-repeat;
+}
+
+/* barra mobile più leggera, come il vecchio wordmark */
+@media (max-width: 760px) {
+  .logo {
+    height: 17px;
+  }
+}

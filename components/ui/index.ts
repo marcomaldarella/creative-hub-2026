@@ -6,6 +6,8 @@ export type { NavProps, NavItem } from './Nav';
 
 export { Wordmark } from './Wordmark';
 export type { WordmarkProps } from './Wordmark';
+export { LogoMark } from './LogoMark';
+export type { LogoMarkProps } from './LogoMark';
 
 export { Footer } from './Footer';
 export type { FooterProps, FooterGroup, FooterLink } from './Footer';
