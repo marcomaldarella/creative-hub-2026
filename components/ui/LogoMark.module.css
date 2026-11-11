@@ -1,15 +1,17 @@
 .logo {
   display: block;
-  height: 19px;
-  aspect-ratio: 1757.193 / 430.477;
+  /* solo il lettering "Creativehub" (niente Bologna/riga): l'altezza
+     insegue l'ascendente del testo 15px delle voci menu a destra */
+  height: 11.5px;
+  aspect-ratio: 1684.556 / 239.181;
   background: currentColor;
-  -webkit-mask: url('/img/logo-new.svg') center / contain no-repeat;
-  mask: url('/img/logo-new.svg') center / contain no-repeat;
+  -webkit-mask: url('/img/logo-wordmark.svg') center / contain no-repeat;
+  mask: url('/img/logo-wordmark.svg') center / contain no-repeat;
 }
 
 /* barra mobile più leggera, come il vecchio wordmark */
 @media (max-width: 760px) {
   .logo {
-    height: 17px;
+    height: 10.5px;
   }
 }
