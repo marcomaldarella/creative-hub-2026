@@ -26,19 +26,20 @@
   place-items: center;
 }
 
-/* logotipo come in nav: "creativehub" una parola, due pesi.
-   Kerning più stretto del menu: alla misura grande il -0.01em
-   leggeva largo */
 .logo {
   color: #fafafa;
-  display: inline-flex;
-  align-items: center;
+  display: block;
+  width: 100%;
+  padding-inline: var(--pad);
   opacity: 0;
   visibility: hidden;
 }
 
+/* full-bleed: il wordmark riempie la viewport meno i gutter del sito;
+   il tetto in svh tiene dentro anche gli schermi bassi/landscape */
 .logoSvg {
   display: block;
-  width: clamp(200px, 24vw, 340px);
+  width: 100%;
   height: auto;
+  max-height: 60svh;
 }

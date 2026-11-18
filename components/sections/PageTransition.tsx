@@ -113,8 +113,9 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
         )
         if (logo) {
           /* i glifi del logotipo salgono in stagger da sotto il viewBox
-             (y in unità svg: 440 > altezza 430.477 = fuori quadro, il
-             viewBox clippa). Il contenitore appare secco (set, no fade) */
+             (y in unità svg: +440 porta ogni glifo oltre il bordo
+             inferiore 392.187 = fuori quadro, il viewBox clippa). Il
+             contenitore appare secco (set, no fade) */
           tl.set(logo, { autoAlpha: 1 }, '-=0.15')
           tl.fromTo(
             glifi,
