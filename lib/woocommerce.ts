@@ -76,13 +76,19 @@ function categoryOf(raw: RawProduct): WcCategory {
     : 'coplaying'
 }
 
+/** Migrazione sale → ScuolaSemplice (24/11): quando la env è settata,
+    TUTTI i bottoni "prenota" portano al pannello pubblico di vendita del
+    gestionale invece che alla scheda prodotto WooCommerce. Le tabelle
+    prezzi del sito restano nei dizionari e non cambiano. */
+const SS_BOOKING_URL = process.env.NEXT_PUBLIC_SS_BOOKING_URL
+
 function normalize(raw: RawProduct): WcProduct {
   const first = raw.images[0]
   return {
     id: raw.id,
     name: sentenceCase(raw.name),
     slug: raw.slug,
-    permalink: `${SHOP_BASE}/prodotto/${raw.slug}/`,
+    permalink: SS_BOOKING_URL ?? `${SHOP_BASE}/prodotto/${raw.slug}/`,
     price: Number(raw.prices.price) || 0,
     regularPrice: Number(raw.prices.regular_price) || 0,
     onSale: Boolean(raw.on_sale),
