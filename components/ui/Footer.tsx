@@ -14,6 +14,13 @@ export type FooterGroup = {
   links: FooterLink[];
 };
 
+export type FooterLogoItem = {
+  src: string;
+  alt: string;
+  /** altezza in px, calibrata perché i marchi pesino uguale */
+  h: number;
+};
+
 export type FooterProps = {
   /** intestazione della colonna social */
   socialTitle?: string;
@@ -26,6 +33,10 @@ export type FooterProps = {
   /** riga bottom */
   copyright: string;
   legal?: FooterLink[];
+  /** marchi istituzionali a colori (fascia bianca sopra il bottom) */
+  institutional?: FooterLogoItem[];
+  /** dati societari (riga mono sotto il copyright) */
+  corporate?: string;
   /** href del wordmark (default '/') */
   homeHref?: string;
 };
@@ -48,6 +59,8 @@ export function Footer({
   socialTitle,
   copyright,
   legal,
+  institutional,
+  corporate,
   homeHref = '/',
 }: FooterProps) {
   return (
@@ -95,6 +108,23 @@ export function Footer({
           )}
         </div>
 
+        {/* marchi istituzionali (must cliente 23/11): a colori per
+            regolamento d'uso, quindi su pastiglia bianca anche in dark */}
+        {institutional && institutional.length > 0 && (
+          <div className={styles.inst}>
+            {institutional.map((logo) => (
+              /* eslint-disable-next-line @next/next/no-img-element */
+              <img
+                key={logo.src}
+                src={logo.src}
+                alt={logo.alt}
+                style={{ height: `${logo.h}px` }}
+                loading="lazy"
+              />
+            ))}
+          </div>
+        )}
+
         <div className={styles.bottom}>
           <span className="mono">{copyright}</span>
           {legal && legal.length > 0 && (
@@ -108,6 +138,7 @@ export function Footer({
             </span>
           )}
         </div>
+        {corporate && <p className={`mono ${styles.corporate}`}>{corporate}</p>}
       </div>
 
       {/* type gigante croppato al bordo, come le cover del manuale:
