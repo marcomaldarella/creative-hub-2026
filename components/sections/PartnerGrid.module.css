@@ -29,6 +29,13 @@
   color: var(--fg);
 }
 
+/* su cella stretta (mobile a 2-3 colonne) un marchio largo sbordava:
+   il box della mask si limita alla cella e il logo, in contain, scala
+   dentro — le altezze del map restano la misura del peso ottico */
+.cell > span[role='img'] {
+  max-width: 78%;
+}
+
 @media (max-width: 900px) {
   .grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));

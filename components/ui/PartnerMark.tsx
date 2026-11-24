@@ -25,9 +25,28 @@ const LOGOS: Record<string, { file: string; ratio: number; h: number }> = {
   'erasmus+': { file: 'erasmus-plus', ratio: 3.49, h: 40 },
   'confindustria emilia': { file: 'confindustria', ratio: 1.93, h: 48 },
   'università di bologna': { file: 'unibo', ratio: 1, h: 54 },
-  'cnr tecnopolo bologna': { file: 'cnr', ratio: 8.57, h: 34 },
-  'regione emilia-romagna': { file: 'regione-emilia-romagna', ratio: 1, h: 48 },
-  'comune di bologna': { file: 'comune-bologna', ratio: 0.66, h: 54 },
+  /* loghi ufficiali dal pacchetto cliente 23/11: Tecnopolo al posto del
+     marchio CNR, Regione con l'identità 2025, Comune solo stemma (il
+     vecchio file diventava un blocco pieno nella mask) */
+  'cnr tecnopolo bologna': { file: 'tecnopolo-cnr.png', ratio: 4.09, h: 40 },
+  'regione emilia-romagna': {
+    file: 'regione-emilia-romagna',
+    ratio: 6.89,
+    h: 30,
+  },
+  'comune di bologna': { file: 'comune-bologna', ratio: 0.656, h: 54 },
+  'art-er': { file: 'art-er', ratio: 2.48, h: 44 },
+  'its academy adriano olivetti': { file: 'its-olivetti', ratio: 1.7, h: 54 },
+  'emilia-romagna startup': { file: 'emiliaromagna-startup', ratio: 4.81, h: 36 },
+  'artes 4.0': { file: 'artes.png', ratio: 2.83, h: 44 },
+  'clust-er create': { file: 'clust-er-create.png', ratio: 1.31, h: 52 },
+  'incredibol!': { file: 'incredibol.png', ratio: 3.36, h: 40 },
+  'erasmus for young entrepreneurs': {
+    file: 'erasmus-young.png',
+    ratio: 2.67,
+    h: 44,
+  },
+  'hub cultura e creatività': { file: 'hub-cultura.png', ratio: 0.8, h: 54 },
 };
 
 export type PartnerMarkProps = {
@@ -43,8 +62,11 @@ export function PartnerMark({ name }: PartnerMarkProps) {
   const logo = LOGOS[name.trim().toLowerCase()];
   if (!logo) return <>{name}</>;
 
+  /* senza estensione nel map il file è un SVG; i marchi disponibili solo
+     in raster (vedi pacchetto cliente) portano la propria ".png" */
+  const file = logo.file.includes('.') ? logo.file : `${logo.file}.svg`;
   const style = {
-    '--logo': `url(/img/partners/${logo.file}.svg)`,
+    '--logo': `url(/img/partners/${file})`,
     height: `${logo.h}px`,
     aspectRatio: logo.ratio,
   } as CSSProperties;
