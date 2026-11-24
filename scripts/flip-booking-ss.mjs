@@ -12,7 +12,7 @@ import { homedir } from 'node:os'
 import { join } from 'node:path'
 import { createClient } from '@sanity/client'
 
-const SS_URL = 'https://creativehub.scuolasemplice.it/register/public/dNCiPvhyh9'
+const SS_URL = 'https://creativehub.scuolasemplice.it/selling/public/dNCiPvhyh9'
 const WOO_URL = 'https://bologna-creativehub.it/negozio/'
 const revert = process.argv.includes('--revert')
 
