@@ -36,7 +36,9 @@ const LOGOS: Record<string, { file: string; ratio: number; h: number }> = {
     ratio: 0.9,
     h: 54,
   },
-  'comune di bologna': { file: 'comune-bologna', ratio: 0.656, h: 54 },
+  /* stemma via pipeline luminanza→alpha: in mask pura era una silhouette
+     senza i contorni interni */
+  'comune di bologna': { file: 'comune-bologna-mono.png', ratio: 0.656, h: 54 },
   'art-er': { file: 'art-er', ratio: 2.48, h: 44 },
   'its academy adriano olivetti': { file: 'its-olivetti', ratio: 1.7, h: 54 },
   'emilia-romagna startup': { file: 'emiliaromagna-startup', ratio: 4.81, h: 36 },
