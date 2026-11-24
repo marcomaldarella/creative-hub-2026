@@ -8,9 +8,16 @@ export const runtime = 'nodejs'
  * Contratto: POST JSON { form: string, subject?: string, fields: Record<string,string> }
  * Risposta:  { ok: boolean, error?: string, test?: boolean } — mai 500 non gestiti.
  *
+ * Transport SS — SS_API_HOST/USER/PASS settati: lead nel gestionale
+ *   ScuolaSemplice via POST {host}/api/createlead (Basic auth, body JSON
+ *   [{type:'standard'|'custom', name|id, value}] — stesso contratto del
+ *   plugin ufficiale scuolasemplice-contacts). Il gestionale fa upsert
+ *   sull'email: stesso indirizzo → stesso lead aggiornato, mai duplicati.
+ *   I multiselect vogliono la stringa dell'id opzione (l'array dà 500).
  * Transport A — WP_FORMS_ENDPOINT settato: inoltro all'endpoint REST di
  *   Contact Form 7 (…/wp-json/contact-form-7/v1/contact-forms/{id}/feedback)
  *   come multipart/form-data, mappando i campi standard your-*.
+ *   Usato come fallback se ScuolaSemplice fallisce o non è configurato.
  * Transport B — senza env: log su console con prefisso [contact] e
  *   { ok: true, test: true } — ambiente di test, nessun invio reale.
  */
@@ -45,6 +52,108 @@ function composeBody(
     `data: ${when}`,
   ].filter(Boolean)
   return [...rows, '', ...meta].join('\n')
+}
+
+/* ————— ScuolaSemplice: mappatura form → lead ————— */
+
+type SSField =
+  | { type: 'standard'; name: string; value: string }
+  | { type: 'custom'; id: string; value: string }
+
+/* id dei campi custom del gestionale (da /api/fetchcustomfields/students) */
+const SS = {
+  LEADTYPE: '9997', // 'lead' | 'student'
+  CANALE: '524', // select — 159245 = "Sito/form"
+  FONTE: '525', // testo libero
+  INTERESSE: '420', // multiselect "Che cosa ti interessa?"
+  OPENDAY: '380', // select — 159052 = "Iscritto"
+} as const
+
+const SS_CANALE_SITO = '159245'
+const SS_INTERESSE = {
+  uni: '159093', // Corsi Universitari
+  hobby: '159092', // Corsi hobbistici
+  rer: '159094', // Corsi RER (finanziati)
+} as const
+const SS_OPENDAY_ISCRITTO = '159052'
+
+/* "Mario Rossi Verdi" → name/surname (surname è obbligatorio lato API) */
+function splitName(full: string): { name: string; surname: string } {
+  const parts = full.trim().split(/\s+/)
+  if (parts.length < 2) return { name: full.trim() || '-', surname: '-' }
+  return { name: parts[0], surname: parts.slice(1).join(' ') }
+}
+
+function buildLead(
+  form: string,
+  fields: Record<string, string>,
+  email: string,
+  body: string
+): SSField[] {
+  const { name, surname } = splitName(fields.nome ?? fields.name ?? '')
+  const phone = (fields.cellulare ?? fields.telefono ?? '').trim()
+  /* EventBuilder ha un campo "contatto" libero: email o telefono */
+  const contatto = (fields.contatto ?? '').trim()
+  const leadEmail = email || (EMAIL_RE.test(contatto) ? contatto : '')
+  const leadPhone = phone || (EMAIL_RE.test(contatto) ? '' : contatto)
+
+  const lead: SSField[] = [
+    { type: 'standard', name: 'name', value: name },
+    { type: 'standard', name: 'surname', value: surname },
+    { type: 'standard', name: 'notes', value: body },
+    { type: 'custom', id: SS.LEADTYPE, value: 'lead' },
+    { type: 'custom', id: SS.CANALE, value: SS_CANALE_SITO },
+    { type: 'custom', id: SS.FONTE, value: `sito — ${form}` },
+  ]
+  if (leadEmail) lead.push({ type: 'standard', name: 'email', value: leadEmail })
+  if (leadPhone) lead.push({ type: 'standard', name: 'mobile', value: leadPhone })
+
+  /* interesse/stato per i form che lo implicano */
+  if (form === 'avvisami') {
+    lead.push({ type: 'custom', id: SS.INTERESSE, value: SS_INTERESSE.rer })
+  } else if (form === 'lezione') {
+    lead.push({ type: 'custom', id: SS.INTERESSE, value: SS_INTERESSE.hobby })
+  } else if (form === 'openday') {
+    lead.push({ type: 'custom', id: SS.OPENDAY, value: SS_OPENDAY_ISCRITTO })
+    const uni = /universitar/i.test(fields['open day'] ?? '')
+    lead.push({
+      type: 'custom',
+      id: SS.INTERESSE,
+      value: uni ? SS_INTERESSE.uni : SS_INTERESSE.hobby,
+    })
+  }
+  return lead
+}
+
+async function sendToScuolaSemplice(lead: SSField[]): Promise<boolean> {
+  const host = process.env.SS_API_HOST
+  const user = process.env.SS_API_USER
+  const pass = process.env.SS_API_PASS
+  if (!host || !user || !pass) return false
+  try {
+    const res = await fetch(`${host.replace(/\/$/, '')}/api/createlead`, {
+      method: 'POST',
+      headers: {
+        /* la password può contenere non-ASCII (es. £): btoa non basta */
+        authorization:
+          'Basic ' + Buffer.from(`${user}:${pass}`, 'utf8').toString('base64'),
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(lead),
+      signal: AbortSignal.timeout(10_000),
+    })
+    if (!res.ok) {
+      console.error('[contact] ScuolaSemplice HTTP', res.status)
+      return false
+    }
+    const data = (await res.json()) as { success?: number; id?: number; error?: string }
+    if (data.success === 1) return true
+    console.error('[contact] ScuolaSemplice ha rifiutato il lead:', data.error)
+    return false
+  } catch (err) {
+    console.error('[contact] invio ScuolaSemplice fallito:', err)
+    return false
+  }
 }
 
 export async function POST(req: Request) {
@@ -103,6 +212,19 @@ export async function POST(req: Request) {
 
     const body = composeBody(form, subject, fields)
     const endpoint = process.env.WP_FORMS_ENDPOINT
+
+    /* ————— Transport SS: lead nel gestionale ScuolaSemplice ————— */
+    if (process.env.SS_API_HOST) {
+      const sent = await sendToScuolaSemplice(buildLead(form, fields, email, body))
+      if (sent) return NextResponse.json({ ok: true })
+      /* fallisce → si tenta CF7 se configurato, altrimenti errore onesto */
+      if (!endpoint) {
+        return NextResponse.json(
+          { ok: false, error: 'Invio non riuscito. Riprova tra poco.' },
+          { status: 502 }
+        )
+      }
+    }
 
     /* ————— Transport B: nessun endpoint → log di test ————— */
     if (!endpoint) {
