@@ -71,22 +71,25 @@
   margin-bottom: 10px;
 }
 
-/* marchi istituzionali: i loghi UE/Repubblica vanno a colori, quindi la
-   fascia resta bianca anche quando il footer è scuro */
+/* marchi istituzionali piallati mono (rev 24/11): mask in currentColor
+   sul fondo del footer, nessuna pastiglia — si invertono col tema */
 .inst {
   margin-top: 56px;
-  padding: 22px clamp(18px, 3vw, 36px);
-  background: #fff;
+  padding-top: 26px;
+  border-top: 1px solid var(--line);
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   gap: 18px clamp(22px, 3vw, 44px);
+  color: var(--fg-2);
 }
 
-.inst img {
-  display: block;
-  width: auto;
+.instMark {
+  display: inline-block;
   max-width: 100%;
+  background: currentColor;
+  -webkit-mask: var(--logo) no-repeat center / contain;
+  mask: var(--logo) no-repeat center / contain;
 }
 
 .bottom {

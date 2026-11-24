@@ -49,6 +49,16 @@ const LOGOS: Record<string, { file: string; ratio: number; h: number }> = {
     h: 44,
   },
   'hub cultura e creatività': { file: 'hub-cultura.png', ratio: 0.8, h: 54 },
+  /* loghi recuperati dai siti ufficiali indicati nel docx (24/11) */
+  boxy: { file: 'boxy.png', ratio: 1.95, h: 44 },
+  'b-ear': { file: 'b-ear.png', ratio: 2.18, h: 44 },
+  midiware: { file: 'midiware.png', ratio: 5.32, h: 36 },
+  genelec: { file: 'genelec', ratio: 5.76, h: 30 },
+  ludwig: { file: 'ludwig', ratio: 3.09, h: 44 },
+  fimi: { file: 'fimi.png', ratio: 3.34, h: 40 },
+  scf: { file: 'scf', ratio: 1.62, h: 52 },
+  esibirsi: { file: 'esibirsi.png', ratio: 2.92, h: 44 },
+  'ths foundation': { file: 'ths', ratio: 3.69, h: 36 },
 };
 
 export type PartnerMarkProps = {

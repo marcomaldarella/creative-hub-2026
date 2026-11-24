@@ -345,17 +345,30 @@ export async function SiteChrome({
          partner accademici e certificazione */
       institutional={[
         {
-          src: `/img/funding/loghi-fse-plus${locale === 'en' ? '-en' : ''}.svg`,
+          /* versione "piallata" del lockup (luminanza→alpha): le bandiere
+             restano leggibili in mono, cosa che l'svg originale non fa */
+          src: `/img/funding/fse-mono${locale === 'en' ? '-en' : ''}.png`,
           alt:
             locale === 'en'
               ? 'Cohesion Italy 21-27 — co-funded by the European Union, Italian Republic, Emilia-Romagna Region'
               : 'Coesione Italia 21-27 — cofinanziato dall’Unione europea, Repubblica Italiana, Regione Emilia-Romagna',
-          h: 44,
+          h: 48,
+          ratio: 5,
         },
-        { src: '/img/partners/pearson.svg', alt: 'Pearson', h: 26 },
-        { src: '/img/partners/coventry.svg', alt: 'Coventry University', h: 34 },
-        { src: '/img/funding/iso-9001.png', alt: 'Certified ISO 9001:2015 company', h: 44 },
-        { src: '/img/funding/erasmus-plus-color.svg', alt: 'Erasmus+', h: 30 },
+        { src: '/img/partners/pearson.svg', alt: 'Pearson', h: 26, ratio: 4.99 },
+        {
+          src: '/img/partners/coventry.svg',
+          alt: 'Coventry University',
+          h: 34,
+          ratio: 3.57,
+        },
+        {
+          src: '/img/funding/iso-9001.png',
+          alt: 'Certified ISO 9001:2015 company',
+          h: 44,
+          ratio: 1,
+        },
+        { src: '/img/funding/erasmus-mono.png', alt: 'Erasmus+', h: 34, ratio: 3.43 },
       ]}
       corporate="© 2026 MPDA Aps · C.F. 91333740370 · P. IVA 03154561207 · mpda@pec.it"
       homeHref={localeHref(locale, '/')}

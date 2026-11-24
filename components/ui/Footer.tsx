@@ -19,6 +19,9 @@ export type FooterLogoItem = {
   alt: string;
   /** altezza in px, calibrata perché i marchi pesino uguale */
   h: number;
+  /** larghezza/altezza del file: serve alla mask (lo span non ha misura
+      intrinseca) */
+  ratio: number;
 };
 
 export type FooterProps = {
@@ -108,18 +111,23 @@ export function Footer({
           )}
         </div>
 
-        {/* marchi istituzionali (must cliente 23/11): a colori per
-            regolamento d'uso, quindi su pastiglia bianca anche in dark */}
+        {/* marchi istituzionali (must cliente 23/11, rev 24/11): piallati
+            mono — mask riempita di currentColor, niente pastiglia bianca */}
         {institutional && institutional.length > 0 && (
           <div className={styles.inst}>
             {institutional.map((logo) => (
-              /* eslint-disable-next-line @next/next/no-img-element */
-              <img
+              <span
                 key={logo.src}
-                src={logo.src}
-                alt={logo.alt}
-                style={{ height: `${logo.h}px` }}
-                loading="lazy"
+                role="img"
+                aria-label={logo.alt}
+                className={styles.instMark}
+                style={
+                  {
+                    '--logo': `url(${logo.src})`,
+                    height: `${logo.h}px`,
+                    aspectRatio: logo.ratio,
+                  } as React.CSSProperties
+                }
               />
             ))}
           </div>
