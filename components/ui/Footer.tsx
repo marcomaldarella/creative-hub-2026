@@ -111,42 +111,44 @@ export function Footer({
           )}
         </div>
 
-        {/* marchi istituzionali (must cliente 23/11, rev 24/11): piallati
-            mono — mask riempita di currentColor, niente pastiglia bianca */}
-        {institutional && institutional.length > 0 && (
-          <div className={styles.inst}>
-            {institutional.map((logo) => (
-              <span
-                key={logo.src}
-                role="img"
-                aria-label={logo.alt}
-                className={styles.instMark}
-                style={
-                  {
-                    '--logo': `url(${logo.src})`,
-                    height: `${logo.h}px`,
-                    aspectRatio: logo.ratio,
-                  } as React.CSSProperties
-                }
-              />
-            ))}
-          </div>
-        )}
-
+        {/* chiusura (rev 24/11 sera): testi a sinistra su tre righe della
+            stessa misura, marchi istituzionali mono a destra */}
         <div className={styles.bottom}>
-          <span className="mono">{copyright}</span>
-          {legal && legal.length > 0 && (
-            <span className={styles.legal}>
-              {legal.map((link, i) => (
-                <Fragment key={`${link.href}-${link.label}`}>
-                  {i > 0 && <span aria-hidden="true"> · </span>}
-                  <FootLink link={link} />
-                </Fragment>
+          <div className={styles.bottomText}>
+            <span className="mono">{copyright}</span>
+            {legal && legal.length > 0 && (
+              <span className={styles.legal}>
+                {legal.map((link, i) => (
+                  <Fragment key={`${link.href}-${link.label}`}>
+                    {i > 0 && <span aria-hidden="true"> · </span>}
+                    <FootLink link={link} />
+                  </Fragment>
+                ))}
+              </span>
+            )}
+            {corporate && <span className="mono">{corporate}</span>}
+          </div>
+
+          {institutional && institutional.length > 0 && (
+            <div className={styles.inst}>
+              {institutional.map((logo) => (
+                <span
+                  key={logo.src}
+                  role="img"
+                  aria-label={logo.alt}
+                  className={styles.instMark}
+                  style={
+                    {
+                      '--logo': `url(${logo.src})`,
+                      height: `${logo.h}px`,
+                      aspectRatio: logo.ratio,
+                    } as React.CSSProperties
+                  }
+                />
               ))}
-            </span>
+            </div>
           )}
         </div>
-        {corporate && <p className={`mono ${styles.corporate}`}>{corporate}</p>}
       </div>
 
       {/* type gigante croppato al bordo, come le cover del manuale:

@@ -245,12 +245,9 @@ export default async function CoworkingPage({
               </div>
             </section>
 
-            {/* co-playing: gli spazi prenotabili oltre le scrivanie
-                (revisione 11/2026 — il coworking per creativi si declina
-                anche in co-playing), ogni voce apre la sua scheda interna
-                su /prenota come le formule. Spostato qui, subito prima
-                delle faq, su richiesta del 23/11 (prima stava in alto
-                dopo "com'è lavorare qui") */}
+            {/* co-playing: gli spazi prenotabili oltre le scrivanie —
+                subito prima delle faq (richiesta 23/11); il box prenota
+                resta a destra coi suoi colori (ripristino 24/11) */}
             <section className={styles.block} id="co-playing">
               <h2 className={styles.h2}>{t.coworking.coplayingTitle}</h2>
               <p className={styles.p}>{t.coworking.coplayingText}</p>
@@ -288,28 +285,15 @@ export default async function CoworkingPage({
               />
             </section>
           </div>
-        </div>
 
-        {/* ————— riquadro prenota: fascia a sé stante (23/11) —————
-            fuori dalla gabbia a due colonne: box nero a tutta larghezza
-            con l'accento che qui passa all'ARANCIO (il resto del
-            coworking è giallo). La testata sta a sinistra, il form a
-            destra; sotto i 900px tornano in colonna */}
-        <div className="wrap">
+          {/* riquadro prenota: fisso accanto al contenuto */}
           <aside className={styles.book} aria-label={t.coworking.bookCta}>
-            <div className={styles.bookIntro}>
-              <div className={styles.bookHead}>
-                <div className={styles.bookFrom}>
-                  {t.coworking.bookFrom}{' '}
-                  <b>{t.coworking.bookPrice}</b> {t.coworking.bookUnit}
-                </div>
-                <span className={styles.bookChoose}>{t.coworking.bookChoose}</span>
+            <div className={styles.bookHead}>
+              <div className={styles.bookFrom}>
+                {t.coworking.bookFrom}{' '}
+                <b>{t.coworking.bookPrice}</b> {t.coworking.bookUnit}
               </div>
-              {settings?.phone && (
-                <ArrowLink href={`tel:${settings.phone.replace(/\s/g, '')}`} external>
-                  {settings.phone}
-                </ArrowLink>
-              )}
+              <span className={styles.bookChoose}>{t.coworking.bookChoose}</span>
             </div>
             {/* legenda e sottodidascalie del mockup: ogni formula dice
                 in una riga a cosa serve. ⚠️ l'unità di tempo di quick e
@@ -334,6 +318,11 @@ export default async function CoworkingPage({
                 }
               })}
             />
+            {settings?.phone && (
+              <ArrowLink href={`tel:${settings.phone.replace(/\s/g, '')}`} external>
+                {settings.phone}
+              </ArrowLink>
+            )}
           </aside>
         </div>
 
