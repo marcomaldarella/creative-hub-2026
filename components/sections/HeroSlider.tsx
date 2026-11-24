@@ -386,10 +386,20 @@ export function HeroSlider({
         color={ACCENT_RGB[slides[active]?.accent] ?? [1, 1, 1]}
       />
 
-      {annot && (
+      {/* annotazioni: le voci vuote non si rendono — in home la riga di
+          sinistra (il claim "international college") è stata tolta su
+          richiesta del cliente, resta solo la coordinata a destra */}
+      {annot && annot.some(Boolean) && (
         <div className={styles.annot}>
-          <span className="mono">{annot[0]}</span>
-          <span className="mono">{annot[1]}</span>
+          {annot.map((a, i) =>
+            a ? (
+              <span key={i} className="mono">
+                {a}
+              </span>
+            ) : (
+              <span key={i} aria-hidden="true" />
+            )
+          )}
         </div>
       )}
 

@@ -479,17 +479,26 @@
 /* ————— riquadro prenota: fisso accanto al contenuto ————— */
 
 /* riquadro prenota: NERO (richiesta cliente), coi token scuri così
-   righe, campi e testi secondari si invertono da soli. Si ferma sotto
-   la barra delle pagine di sezione, non attaccato ad essa */
+   righe, campi e testi secondari si invertono da soli.
+   23/11: NON è più la colonna sticky dentro la gabbia a due colonne —
+   è una fascia a sé stante a tutta larghezza, con la testata a
+   sinistra e il form a destra. L'accento qui passa all'ARANCIO
+   (--su-inchiostro è il fondo del tasto d'invio di QuickBookForm:
+   ridichiararlo tinge il bottone senza toccare il componente) */
 .book {
-  position: sticky;
-  top: calc(var(--header-h, 64px) + 58px + 16px);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 1fr);
+  gap: clamp(22px, 3.4vw, 64px);
+  align-items: start;
   /* card nera sul fondo chiaro della pagina (28/10): stessa pelle che
      aveva dentro la colata nera, con l'ombra tarata sul bianco */
   border: 1px solid #2a2a2a;
+  /* il filo d'accento in testa: dice "qui si prenota" senza colorare
+     tutta la superficie */
+  border-top: 2px solid var(--arancio);
   border-radius: 8px;
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.18);
-  padding: clamp(18px, 2.2vw, 26px);
+  padding: clamp(22px, 2.8vw, 40px);
   background: #0f0f0f;
   color: #fafafa;
   --bg: #000000;
@@ -497,6 +506,29 @@
   --fg: #fafafa;
   --fg-2: #b3b3b3;
   --line: #2a2a2a;
+  --su-inchiostro: var(--arancio);
+  --accent: var(--arancio);
+  --accent-ink: var(--arancio);
+  --accent-on: #0a0a0a;
+}
+
+/* colonna di sinistra della fascia: prezzo, "scegli la formula" e
+   telefono restano insieme */
+.bookIntro {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* il prezzo prende l'accento della fascia */
+.book .bookFrom b {
+  color: var(--arancio);
+}
+
+@media (max-width: 900px) {
+  .book {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 
 .bookFrom {
@@ -575,11 +607,6 @@
 @media (max-width: 900px) {
   .lay {
     grid-template-columns: 1fr;
-  }
-
-  .book {
-    position: static;
-    order: -1;
   }
 }
 

@@ -119,3 +119,23 @@
     padding-right: 8px;
   }
 }
+
+/* ————— co-playing (23/11): i quattro spazi in due colonne larghe,
+   sotto ai paragrafi, e la pillola verso la pagina categoria ————— */
+.coplayList {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px clamp(18px, 3vw, 48px);
+  margin: clamp(18px, 2.4vw, 30px) 0 clamp(20px, 2.6vw, 34px);
+}
+
+@media (max-width: 760px) {
+  .coplayList {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* il tasto sotto la tabella delle tariffe */
+.ratesCta {
+  margin-top: clamp(18px, 2.4vw, 30px);
+}

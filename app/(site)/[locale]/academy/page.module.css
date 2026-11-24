@@ -1071,3 +1071,14 @@ h3.orientOptTitle {
 .head .kicker::before {
   content: "- ";
 }
+
+/* il claim "international college of music, sound, multimedia & visual"
+   tolto dalla home il 23/11: qui sta sotto l'occhiello, in secondo
+   piano rispetto al titolo ma leggibile */
+.college {
+  composes: titoletto from global;
+  display: block;
+  margin-top: -8px;
+  margin-bottom: 16px;
+  color: var(--fg-2);
+}

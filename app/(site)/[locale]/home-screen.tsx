@@ -127,7 +127,10 @@ export async function HomeScreen({ locale }: { locale: Locale }) {
             nascosto ma letto da crawler e screen reader */}
         <h1 className="sr-only">{t.home.seoH1}</h1>
         <HeroSlider
-            annot={[t.hero.since, t.hero.coords]}
+            /* il claim "international college" è stato tolto dalla home
+               (23/11: in home dava l'idea che l'hub fosse solo
+               un'accademia) — vive ora nella testata di /academy */
+            annot={['', t.hero.coords]}
             caption={{
               tagline: t.hero.tagline,
               text: t.hero.caption,

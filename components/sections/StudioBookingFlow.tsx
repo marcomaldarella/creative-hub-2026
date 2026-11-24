@@ -18,6 +18,9 @@ type Affitto = Dictionary['studioSub']['affitto']
 type Labels = Affitto['flow']
 type Formula = Affitto['formule'][number]
 
+/** id della quarta scelta del passo 1 (non è una formula di listino) */
+const COPLAY_ID = 'co-playing'
+
 /**
  * Prenotazione guidata dell'affitto studio (mockup "affitto-studio"):
  * stessa grammatica del flusso coworking, con le regole sue —
@@ -35,6 +38,7 @@ export function StudioBookingFlow({
   email: contactEmail,
   catImages,
   shopLinks,
+  coplaySpaces,
 }: {
   locale: Locale
   labels: Labels
@@ -51,6 +55,16 @@ export function StudioBookingFlow({
   /** pagina prodotto WooCommerce per formula: dove si prenota davvero.
       Le formule senza prodotto a catalogo restano sulla richiesta. */
   shopLinks?: Partial<Record<string, string>>
+  /** gli spazi del co-playing (sale prove, drum box, production box,
+      palco): con questi il passo 1 mostra la quarta scelta "co-playing"
+      e il passo 2 diventa la griglia degli spazi invece delle durate */
+  coplaySpaces?: {
+    id: string
+    label: string
+    price: string
+    shop?: string
+    img?: { src: string; alt: string }
+  }[]
 }) {
   const [step, setStep] = useState(1)
   const [cat, setCat] = useState<string | null>(null)
@@ -91,6 +105,9 @@ export function StudioBookingFlow({
 
   const pickCat = (id: string, scroll = true) => {
     setCat(id)
+    /* cambiando formula la scelta del passo 2 riparte da zero: durate e
+       spazi del co-playing sono due elenchi diversi */
+    setItemId(null)
     /* l'allestimento tour è per definizione su più giorni */
     if (id === 'tour') pickItem('piu-giorni')
     go(2, scroll)
@@ -103,15 +120,41 @@ export function StudioBookingFlow({
   useEffect(() => {
     const q = search.get('formula')
     // eslint-disable-next-line react-hooks/set-state-in-effect
-    if (q && formule.some((f) => f.id === q)) pickCat(q, false)
+    if (q && (formule.some((f) => f.id === q) || q === COPLAY_ID))
+      pickCat(q, false)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search])
 
-  const selCat = formule.find((f) => f.id === cat)
-  const selItem = labels.items.find((i) => i.id === itemId)
+  /* co-playing: quarta scelta del passo 1, costruita qui e non nel
+     dizionario delle formule — quelle restano le tre card della
+     sezione "le formule" della pagina (richiesta 23/11) */
+  const coplay =
+    coplaySpaces && coplaySpaces.length > 0
+      ? {
+          id: COPLAY_ID,
+          n: labels.coplayN,
+          title: labels.coplayTitle,
+          text: labels.coplayText,
+        }
+      : null
+  const isCoplay = cat === COPLAY_ID
+  const selSpace = coplaySpaces?.find((s) => s.id === itemId)
+
+  const selCat = isCoplay
+    ? coplay && { id: COPLAY_ID, title: coplay.title }
+    : formule.find((f) => f.id === cat)
+  /* nel co-playing la "durata" del riepilogo è lo spazio scelto, col
+     suo prezzo di listino (o "su richiesta" quando è a preventivo) */
+  const selItem = isCoplay
+    ? selSpace && {
+        id: selSpace.id,
+        label: selSpace.label,
+        price: selSpace.price || labels.coplayPriceNote,
+      }
+    : labels.items.find((i) => i.id === itemId)
   /* la prenotazione vera si chiude sulla scheda prodotto dello shop:
      se la formula scelta ne ha una, il passo finale ci porta lì */
-  const shopUrl = cat ? shopLinks?.[cat] : undefined
+  const shopUrl = isCoplay ? selSpace?.shop : cat ? shopLinks?.[cat] : undefined
 
   const dash = '—'
   const daysLabel = `${days} ${
@@ -173,7 +216,10 @@ export function StudioBookingFlow({
   return (
     <form
       className={styles.flow}
-      style={{ '--cats-cols': 3, '--cat-ratio': '4 / 5' } as CSSProperties}
+      style={
+        /* con il co-playing le scelte del passo 1 sono quattro */
+        { '--cats-cols': coplay ? 4 : 3, '--cat-ratio': '4 / 5' } as CSSProperties
+      }
       ref={rootRef}
       onSubmit={onSubmit}
       noValidate
@@ -237,13 +283,87 @@ export function StudioBookingFlow({
                   </label>
                 )
               })}
+              {/* quarta scelta: il co-playing. Porta al passo 2 con la
+                  griglia degli spazi invece delle durate dello studio */}
+              {coplay && (
+                <label
+                  className={
+                    cat === coplay.id
+                      ? `${styles.cat} ${styles.catOn}`
+                      : styles.cat
+                  }
+                >
+                  <input
+                    className="sr-only"
+                    type="radio"
+                    name="formula"
+                    value={coplay.id}
+                    checked={cat === coplay.id}
+                    onChange={() => pickCat(coplay.id)}
+                  />
+                  {catImages?.[coplay.id] && (
+                    <Image
+                      src={catImages[coplay.id]!.src}
+                      alt={catImages[coplay.id]!.alt}
+                      width={catImages[coplay.id]!.width}
+                      height={catImages[coplay.id]!.height}
+                      className={styles.catImg}
+                      sizes="(max-width: 900px) 100vw, 26vw"
+                    />
+                  )}
+                  <span className={styles.catShade} aria-hidden="true" />
+                  <span className={styles.catText}>
+                    <span className={`mono ${styles.catCode}`}>{coplay.n}</span>
+                    <span className={styles.catTitle}>{coplay.title}</span>
+                    <span className={styles.catSub}>{coplay.text}</span>
+                  </span>
+                </label>
+              )}
             </div>
           </div>
         )}
 
         {step === 2 && (
           <div className={styles.panel}>
-            <h3 className={styles.q}>{labels.step2Title}</h3>
+            <h3 className={styles.q}>
+              {isCoplay ? labels.coplayStepTitle : labels.step2Title}
+            </h3>
+            {/* co-playing: la griglia degli spazi disponibili, ognuno
+                col suo prezzo — si sceglie il box direttamente qui */}
+            {isCoplay && coplaySpaces && (
+              <div className={styles.spaces} role="radiogroup">
+                {coplaySpaces.map((s) => (
+                  <label
+                    key={s.id}
+                    className={
+                      itemId === s.id
+                        ? `${styles.space} ${styles.spaceOn}`
+                        : styles.space
+                    }
+                  >
+                    <input
+                      className="sr-only"
+                      type="radio"
+                      name="spazio"
+                      value={s.id}
+                      checked={itemId === s.id}
+                      onChange={() => setItemId(s.id)}
+                    />
+                    <span className={styles.spaceMedia} aria-hidden="true">
+                      {s.img && (
+                        /* eslint-disable-next-line @next/next/no-img-element */
+                        <img src={s.img.src} alt="" loading="lazy" />
+                      )}
+                    </span>
+                    <span className={styles.spaceName}>{s.label}</span>
+                    <span className={`mono ${styles.spacePrice}`}>
+                      {s.price || labels.coplayPriceNote}
+                    </span>
+                  </label>
+                ))}
+              </div>
+            )}
+            {!isCoplay && (
             <div className={styles.items}>
               {labels.items.map((i) => (
                 <label
@@ -270,6 +390,10 @@ export function StudioBookingFlow({
                 </label>
               ))}
             </div>
+            )}
+            {/* il fonico dello studio è una cosa della regia: negli
+                spazi del co-playing non si propone */}
+            {!isCoplay && (
             <label
               className={
                 engineer ? `${styles.xtra} ${styles.xtraOn}` : styles.xtra
@@ -290,6 +414,7 @@ export function StudioBookingFlow({
                 <span className={styles.xtraNote}>· {labels.engineerNote}</span>
               </span>
             </label>
+            )}
             <div className={styles.navrow}>
               <Button variant="ghost" type="button" onClick={() => go(1)}>
                 <span className={styles.btnIn}>
@@ -471,10 +596,14 @@ export function StudioBookingFlow({
         <dl className={styles.summaryList}>
           <dt>{labels.summaryFormula}</dt>
           <dd>{selCat?.title ?? dash}</dd>
-          <dt>{labels.summaryDuration}</dt>
+          <dt>{isCoplay ? labels.coplayTitle : labels.summaryDuration}</dt>
           <dd>{selItem?.label ?? dash}</dd>
-          <dt>{labels.summaryEngineer}</dt>
-          <dd>{engineer ? labels.engineerOurs : labels.engineerYours}</dd>
+          {!isCoplay && (
+            <>
+              <dt>{labels.summaryEngineer}</dt>
+              <dd>{engineer ? labels.engineerOurs : labels.engineerYours}</dd>
+            </>
+          )}
           <dt>{labels.summaryPrice}</dt>
           <dd>{selItem?.price ?? dash}</dd>
           <dt>{labels.summaryWhen}</dt>

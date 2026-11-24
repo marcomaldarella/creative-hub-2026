@@ -188,25 +188,6 @@ export default async function CoworkingPage({
               ))}
             </section>
 
-            {/* co-playing: gli spazi prenotabili oltre le scrivanie
-                (revisione 11/2026 — il coworking per creativi si declina
-                anche in co-playing), ogni voce apre la sua scheda interna
-                su /prenota come le formule. Sta ALTO di proposito: il
-                cliente non trovava dove si prenota un box (feedback 8/11) */}
-            <section className={styles.block} id="co-playing">
-              <h2 className={styles.h2}>{t.coworking.coplayingTitle}</h2>
-              <p className={styles.p}>{t.coworking.coplayingText}</p>
-              <ul className={styles.whereList}>
-                {t.coworking.coplayingLinks.map((l) => (
-                  <li key={l.href}>
-                    <ArrowLink href={localeHref(locale, l.href)} dir="e">
-                      {l.label}
-                    </ArrowLink>
-                  </li>
-                ))}
-              </ul>
-            </section>
-
             {/* cosa trovi */}
             <section className={styles.block}>
               <h2 className={styles.h2}>{t.coworking.amenitiesTitle}</h2>
@@ -264,6 +245,26 @@ export default async function CoworkingPage({
               </div>
             </section>
 
+            {/* co-playing: gli spazi prenotabili oltre le scrivanie
+                (revisione 11/2026 — il coworking per creativi si declina
+                anche in co-playing), ogni voce apre la sua scheda interna
+                su /prenota come le formule. Spostato qui, subito prima
+                delle faq, su richiesta del 23/11 (prima stava in alto
+                dopo "com'è lavorare qui") */}
+            <section className={styles.block} id="co-playing">
+              <h2 className={styles.h2}>{t.coworking.coplayingTitle}</h2>
+              <p className={styles.p}>{t.coworking.coplayingText}</p>
+              <ul className={styles.whereList}>
+                {t.coworking.coplayingLinks.map((l) => (
+                  <li key={l.href}>
+                    <ArrowLink href={localeHref(locale, l.href)} dir="e">
+                      {l.label}
+                    </ArrowLink>
+                  </li>
+                ))}
+              </ul>
+            </section>
+
             {/* prima di prenotare */}
             <section className={styles.block}>
               <h2 className={styles.h2}>{t.coworking.faqTitle}</h2>
@@ -287,15 +288,28 @@ export default async function CoworkingPage({
               />
             </section>
           </div>
+        </div>
 
-          {/* riquadro prenota: fisso accanto al contenuto */}
+        {/* ————— riquadro prenota: fascia a sé stante (23/11) —————
+            fuori dalla gabbia a due colonne: box nero a tutta larghezza
+            con l'accento che qui passa all'ARANCIO (il resto del
+            coworking è giallo). La testata sta a sinistra, il form a
+            destra; sotto i 900px tornano in colonna */}
+        <div className="wrap">
           <aside className={styles.book} aria-label={t.coworking.bookCta}>
-            <div className={styles.bookHead}>
-              <div className={styles.bookFrom}>
-                {t.coworking.bookFrom}{' '}
-                <b>{t.coworking.bookPrice}</b> {t.coworking.bookUnit}
+            <div className={styles.bookIntro}>
+              <div className={styles.bookHead}>
+                <div className={styles.bookFrom}>
+                  {t.coworking.bookFrom}{' '}
+                  <b>{t.coworking.bookPrice}</b> {t.coworking.bookUnit}
+                </div>
+                <span className={styles.bookChoose}>{t.coworking.bookChoose}</span>
               </div>
-              <span className={styles.bookChoose}>{t.coworking.bookChoose}</span>
+              {settings?.phone && (
+                <ArrowLink href={`tel:${settings.phone.replace(/\s/g, '')}`} external>
+                  {settings.phone}
+                </ArrowLink>
+              )}
             </div>
             {/* legenda e sottodidascalie del mockup: ogni formula dice
                 in una riga a cosa serve. ⚠️ l'unità di tempo di quick e
@@ -320,11 +334,6 @@ export default async function CoworkingPage({
                 }
               })}
             />
-            {settings?.phone && (
-              <ArrowLink href={`tel:${settings.phone.replace(/\s/g, '')}`} external>
-                {settings.phone}
-              </ArrowLink>
-            )}
           </aside>
         </div>
 

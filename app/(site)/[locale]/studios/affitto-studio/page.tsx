@@ -19,7 +19,7 @@ import { isLocale, localeHref } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
 import { pageAlternates } from '@/lib/seo'
 import { getSectionImages, getSpacesByKind } from '@/lib/sanity/queries'
-import { getBookableProducts } from '@/lib/woocommerce'
+import { formatPrice, getBookableProducts } from '@/lib/woocommerce'
 import { l } from '@/lib/sanity/l'
 import { urlFor } from '@/lib/sanity/image'
 import det from '@/components/sections/DetailPage.module.css'
@@ -85,6 +85,22 @@ export default async function AffittoStudioPage({
       return url ? [[id, url] as const] : []
     })
   )
+
+  /* gli spazi del co-playing per la quarta scelta del flusso (23/11):
+     sale prove, drum box, production box e palco, presi dalla stessa
+     famiglia del catalogo che alimenta /coworking/co-playing. Fuori i
+     due "spazi" che sono già formule dello studio (sala live e studio
+     di registrazione), altrimenti il passo 1 si ripeterebbe */
+  const FUORI_COPLAY = ['sala-live', 'studio-di-registrazione']
+  const coplaySpaces = products
+    .filter((p) => p.category === 'coplaying' && !FUORI_COPLAY.includes(p.slug))
+    .map((p) => ({
+      id: p.slug,
+      label: p.name,
+      price: formatPrice(p.price, locale),
+      shop: p.permalink,
+      img: p.image ? { src: p.image.src, alt: p.image.alt || p.name } : undefined,
+    }))
 
   /* la dotazione: gli spazi studio veri da Sanity, più le voci che non
      sono stanze (software e strumenti del mockup, dal dizionario) —
@@ -180,10 +196,48 @@ export default async function AffittoStudioPage({
           </RevealGroup>
         </section>
 
+        {/* ————— il co-playing, per esteso (richiesta 23/11): questa
+            pagina non è solo l'affitto della regia, è "affitto studio &
+            co-playing" — sale prove, drum box, production box e main
+            stage. Sezione a sé stante, PRIMA di "cosa trovi in studio",
+            e si chiude sulla pagina categoria del co-playing ————— */}
+        <Rule left="02" right={d.coplayingKicker} />
+        <section className={`wrap ${det.sez}`} id="co-playing">
+          <Reveal as="h2" className={`display-thin ${det.h2}`}>
+            {d.coplayingTitle}
+          </Reveal>
+          {d.coplayingText.map((p, i) => (
+            <Reveal as="p" key={p} className={det.sezLede} delay={80 + i * 60}>
+              {p}
+            </Reveal>
+          ))}
+          <RevealGroup className={styles.coplayList}>
+            {d.coplayingLinks.map((l) => (
+              <ArrowLink
+                key={l.href}
+                href={localeHref(locale, l.href)}
+                dir="e"
+                className="rv"
+              >
+                {l.label}
+              </ArrowLink>
+            ))}
+          </RevealGroup>
+          <Reveal delay={200}>
+            <Button
+              variant="ghost"
+              className={det.btnPill}
+              href={localeHref(locale, '/coworking/co-playing')}
+            >
+              {d.coplayingAll}
+            </Button>
+          </Reveal>
+        </section>
+
         {/* ————— la dotazione: gli spazi da Sanity, in accordion ————— */}
         {dotazione.length > 0 && (
           <>
-            <Rule left="02" right={d.findKicker} />
+            <Rule left="03" right={d.findKicker} />
             <section className={`wrap ${det.sez} ${det.duo}`}>
               <Reveal as="h2" className={`display-thin ${det.h2}`}>
                 {d.findTitle}
@@ -202,7 +256,7 @@ export default async function AffittoStudioPage({
 
         {/* ————— tariffe: formule e durate; i prezzi del mockup sono
             tutti da confermare → "su preventivo" ————— */}
-        <Rule left="03" right={d.ratesKicker} />
+        <Rule left="04" right={d.ratesKicker} />
         <section className={`wrap ${det.sez}`}>
           <Reveal as="h2" className={`display-thin ${det.h2}`}>
             {d.ratesTitle}
@@ -240,10 +294,18 @@ export default async function AffittoStudioPage({
               </tbody>
             </table>
           </Reveal>
+          {/* più recall sulla prenotazione (richiesta 23/11): chi legge
+              le tariffe deve poter prenotare da qui, non risalire alla
+              testata — pillola d'inchiostro, apre il flusso in fondo */}
+          <Reveal className={styles.ratesCta} delay={200}>
+            <Button variant="ghost" className={det.btnPill} href="#prenota">
+              {d.ratesBook}
+            </Button>
+          </Reveal>
         </section>
 
         {/* ————— come si prenota ————— */}
-        <Rule left="04" right={d.howKicker} />
+        <Rule left="05" right={d.howKicker} />
         <section className={`wrap ${det.sez}`}>
           <SectionHeader kicker={d.howKicker} title={d.howTitle} />
           <RevealGroup className={det.grid3}>
@@ -254,17 +316,6 @@ export default async function AffittoStudioPage({
             ))}
           </RevealGroup>
         </section>
-
-        {/* ————— domande frequenti ————— */}
-        <div className={det.faqBand}>
-          <Rule left="05" right={d.faqKicker} />
-          <section className={`wrap ${det.sez} ${det.duo}`}>
-            <Reveal as="h2" className={`display-thin ${det.h2}`}>
-              {d.faqTitle}
-            </Reveal>
-            <PointsAccordion items={d.faq} plain />
-          </section>
-        </div>
 
         {/* ————— chiusura: la prenotazione guidata (3 passi) al posto
             del form generico — ancora #prenota per le CTA ————— */}
@@ -314,10 +365,30 @@ export default async function AffittoStudioPage({
                     height: 1600,
                     alt: 'La regia dello studio con outboard e monitor',
                   },
+                  /* la quarta card: il co-playing, con la sala prove */
+                  'co-playing': {
+                    src: foto('live-band', '/img/foto/live-band.jpg', 1440, 1920),
+                    width: 1440,
+                    height: 1920,
+                    alt: 'Una band in sala prove',
+                  },
                 }}
                 shopLinks={shopLinks}
+                coplaySpaces={coplaySpaces}
               />
             </Suspense>
+          </section>
+        </div>
+
+        {/* ————— domande frequenti: ULTIMA sezione della pagina
+            (richiesta 23/11) — chiudono dopo la prenotazione guidata ————— */}
+        <div className={det.faqBand}>
+          <Rule left="06" right={d.faqKicker} />
+          <section className={`wrap ${det.sez} ${det.duo}`}>
+            <Reveal as="h2" className={`display-thin ${det.h2}`}>
+              {d.faqTitle}
+            </Reveal>
+            <PointsAccordion items={d.faq} plain />
           </section>
         </div>
       </main>

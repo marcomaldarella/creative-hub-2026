@@ -4,13 +4,15 @@
   width: auto;
 }
 
-/* la targa nel colore di sezione: --giant arriva dal wrapper del footer
-   sulle pagine flood, altrove si torna all'azzurro brand */
+/* 23/11: niente più targa piena. Il logo del footer non è un riquadro
+   di colore con le lettere a intaglio: la targa sparisce e sono le
+   LETTERE a prendere il colore di sezione, direttamente sul nero. */
 .plate {
-  fill: var(--giant, var(--azzurro));
+  fill: none;
 }
 
-/* lettere nel colore del fondo: su footer nero leggono come intaglio */
+/* lettere nel colore di sezione (--giant dal wrapper del footer sulle
+   pagine flood, altrove l'azzurro brand) */
 .glyph {
-  fill: var(--bg);
+  fill: var(--giant, var(--azzurro));
 }

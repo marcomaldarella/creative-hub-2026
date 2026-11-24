@@ -31,7 +31,12 @@ const PATHS: Record<Base, string[]> = {
   ],
   /* coworking: le tre pagine dei mockup, la indice compresa — il menu
      di sezione del sito nuovo non elenca più studio e metaverso */
-  '/coworking': ['/coworking', '/coworking/sale-eventi', '/coworking/prenota'],
+  '/coworking': [
+    '/coworking',
+    '/coworking/co-playing',
+    '/coworking/sale-eventi',
+    '/coworking/prenota',
+  ],
 }
 
 export function SectionPagesNav({

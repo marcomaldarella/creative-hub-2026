@@ -1,0 +1,94 @@
+/* ————— pagina categoria co-playing —————
+   la griglia degli spazi ripete la grammatica delle card "altri spazi"
+   della scheda prodotto: foto 16:9, nome, prezzo, e la riga mono che
+   dice dove si va. Card senza bordi (regola del sito): è il contrasto
+   di superficie a staccarle dal fondo, e l'hover le schiarisce. */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(14px, 1.6vw, 22px);
+  margin-top: clamp(20px, 2.6vw, 34px);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border-radius: 8px;
+  overflow: hidden;
+  color: inherit;
+  text-decoration: none;
+  transition: background 0.2s var(--ease-out);
+}
+
+.card:hover {
+  background: color-mix(in srgb, var(--surface) 86%, var(--fg));
+}
+
+/* la foto: rapporto fisso, così le righe restano allineate anche
+   quando il catalogo non ha l'immagine (lo slot resta pieno di
+   superficie, non un buco bianco) */
+.media {
+  display: block;
+  aspect-ratio: 16 / 9;
+  background: color-mix(in srgb, var(--surface) 80%, var(--fg));
+}
+
+.media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: clamp(14px, 1.6vw, 20px);
+}
+
+.name {
+  font-size: clamp(16px, 1.3vw, 19px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.price {
+  font-size: 12px;
+  color: var(--fg-2);
+  font-variant-numeric: tabular-nums;
+}
+
+.cta {
+  font-size: 11px;
+  color: var(--fg-2);
+  margin-top: 6px;
+}
+
+.card:hover .cta {
+  color: var(--fg);
+}
+
+/* chiusura: pillola e rimando allo studio sulla stessa riga */
+.allRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: clamp(16px, 2.4vw, 32px);
+  margin-top: clamp(18px, 2.4vw, 30px);
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

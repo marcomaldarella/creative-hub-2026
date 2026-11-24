@@ -10,7 +10,7 @@
     "studio": "Studio",
     "coworking": "Coworking",
     "innovation": "Companies & startups",
-    "magazine": "Editorial",
+    "magazine": "News & events",
     "about": "About",
     "book": "Book",
     "contact": "Contact us",
@@ -39,7 +39,7 @@
           "Dolby Atmos",
           "Sound design",
           "Podcast & voice over",
-          "Studio rental"
+          "Studio rental & co-playing"
         ]
       },
       "coworking": {
@@ -62,7 +62,7 @@
         ]
       },
       "magazine": {
-        "desc": "Editorial engine · SEO · stories from the creative industry.",
+        "desc": "News, events and editorials from the Centro Studi Celso Valli.",
         "items": [
           "Music production",
           "Creative industries",
@@ -142,8 +142,8 @@
         "text": "Creative startups and services for companies."
       },
       "magazine": {
-        "title": "Editorial",
-        "text": "Voices and stories from the creative industry."
+        "title": "News & events",
+        "text": "News, events and editorials from the Centro Studi Celso Valli."
       },
       "about": {
         "title": "Team and governance",
@@ -154,12 +154,12 @@
     "resultsRuleRight": "2026",
     "stats": {
       "students": {
-        "value": 8400,
+        "value": 9500,
         "suffix": "+",
         "label": "students trained"
       },
       "partners": {
-        "value": 300,
+        "value": 200,
         "suffix": "+",
         "label": "partner companies"
       },
@@ -174,7 +174,7 @@
         "label": "startups incubated per year"
       }
     },
-    "magazineKicker": "06 — editorial",
+    "magazineKicker": "06 — news & events",
     "magazineTitle": "Stories from the trade.",
     "magazineAll": "all articles",
     "opendayTitleLine1": "An afternoon",
@@ -187,7 +187,7 @@
       {
         "n": "01",
         "title": "Recognised qualifications",
-        "text": "University degrees, masters and recognised custom paths."
+        "text": "Three-year and master's university degrees, IFTS and ITS courses recognised within the European system. Plus custom paths for every need."
       },
       {
         "n": "02",
@@ -244,9 +244,9 @@
       },
       {
         "n": "05",
-        "tags": "editorial · seo",
-        "title": "Editorial",
-        "text": "Stories, research and SEO on the creative industry: the editorial engine that feeds the whole hub.",
+        "tags": "news · events",
+        "title": "News & events",
+        "text": "News, events and editorials from the Centro Studi Celso Valli, born inside the hub to connect the creative industry with young talent.",
         "cta": "Enter the node"
       },
       {
@@ -298,7 +298,7 @@
         }
       ]
     },
-    "networkText": "Universities, companies and institutions shape the paths: they bring real briefs and productions, host internships and hire from the network. The same network that runs through courses, studios and coworking.",
+    "networkText": "Universities, technopoles, companies and institutions shape the paths: they bring real briefs and productions, host internships and hire from the network. The same network that runs through courses, studios and coworking.",
     "networkCta": "Partners",
     "photoStudio": {
       "kicker": "ssl studio",
@@ -320,7 +320,7 @@
       "Academy of music, production",
       "and sound engineering in Bologna."
     ],
-    "lede": "University programmes — Bachelor of Arts, Bachelor of Science and Master of Music — in music, film production and videomaking. Six undergraduate programmes, three Masters, twenty places per course.",
+    "lede": "University programmes — Bachelor of Arts, Bachelor of Science and Master Degree — in music, film production and videomaking. Six undergraduate programmes, three Masters, twenty places per course.",
     "categoryLabel": "filter by category",
     "empty": "no courses in this category.",
     "teachersKicker": "the teachers",
@@ -356,7 +356,7 @@
         "text": "International university degrees. Three years, twenty places per course."
       },
       {
-        "title": "Tailor-made courses",
+        "title": "Tailor-made courses by instrument or specialisation",
         "text": "Your instrument, your schedule. Packages of 4, 20 or 40 lessons. First lesson free."
       },
       {
@@ -409,11 +409,13 @@
     ],
     "teachersIntro": [
       "Creative Hub Academy's teachers are working professionals in the music industry, not teachers describing a job they no longer do. What you bring into the classroom, they're doing right now, outside these walls: on tour, in the studio, on stage.",
-      "Among them Angela Madonia, a vocal coach familiar to Amici audiences, and Stefania Martin, who has worked alongside Renato Zero and Mina."
+      "Among them Dhany (Daniela Galli), the voice of Benny Benassi's hits, Fosco17 (Luca Jacoboni), songwriter and producer who went through Sanremo Giovani, Michele Suzzi, producer with tracks in the millions of streams, and Gaia Banfi, songwriter and producer between songwriting and electronics."
     ],
     "teachersNames": [
-      "Angela Madonia",
-      "Stefania Martin"
+      "Dhany",
+      "Fosco17",
+      "Michele Suzzi",
+      "Gaia Banfi"
     ],
     "teachersAll": "all teachers",
     "teachersLess": "show fewer",
@@ -480,11 +482,11 @@
     "faq": [
       {
         "title": "What's the difference between university programmes and custom lessons?",
-        "text": "University programmes last three years (two for Masters) and award an international academic degree — Bachelor of Arts, Bachelor of Science or Master of Music. Custom lessons are flexible packages with no exams or final degree: for those who want to learn an instrument without committing to a multi-year programme."
+        "text": "University programmes last three years (two for Masters) and award an international academic degree — Bachelor of Arts, Bachelor of Science or Master Degree. Custom lessons are flexible packages with no exams or final degree: for those who want to learn an instrument without committing to a multi-year programme."
       },
       {
         "title": "How does Region-funded training work?",
-        "text": "These are free courses funded by the European Social Fund Plus and the Emilia-Romagna Region, lasting a few months, with an internship included and a specialisation certificate recognised at regional level. They are not equivalent to a university degree."
+        "text": "These are free courses funded by the European Social Fund Plus and the Emilia-Romagna Region, lasting a few months. With a specialisation certificate recognised at regional level and a possible training internship."
       },
       {
         "title": "Can I visit an open day before choosing a course?",
@@ -559,7 +561,7 @@
       },
       "rental": {
         "n": "st.06",
-        "title": "Studio rental",
+        "title": "Studio rental & co-playing",
         "text": "The full studio for productions with your own engineer, live rehearsals and tour prep.",
         "rows": [
           "the full studio",
@@ -725,8 +727,8 @@
         "href": "/prenota/main-stage-con-divanetto-hp100"
       },
       {
-        "label": "All bookable spaces",
-        "href": "/prenota"
+        "label": "All co-playing spaces",
+        "href": "/coworking/co-playing"
       }
     ],
     "faqKicker": "before you book",
@@ -849,6 +851,7 @@
     "subnavLabel": "Coworking · Roveri district",
     "subnavPages": [
       "Coworking",
+      "Co-playing",
       "Rooms & events",
       "Book your space"
     ],
@@ -869,6 +872,29 @@
       "",
       ""
     ]
+  },
+  "coplaying": {
+    "metaTitle": "Co-playing in Bologna: rehearsal rooms, drum boxes, production boxes and stage | Creative Hub",
+    "metaDesc": "All the co-playing spaces at Creative Hub: rehearsal rooms with drum kit, soundproofed drum boxes, production boxes for podcasting and the main stage for talks and showcases. Booked by the hour.",
+    "kicker": "Coworking · co-playing",
+    "title": "Co-playing.",
+    "lede": "The spaces where you play, rehearse and take the stage: by the hour, in the same hub as the studio and the desks.",
+    "back": "Back to coworking",
+    "introKicker": "what it is",
+    "introTitle": "Not a rehearsal room: a whole floor.",
+    "introText": [
+      "Co-playing is the part of the hub built for people who play. Rehearsal rooms with the drum kit already set up, soundproofed drum boxes to practise without disturbing anyone, production boxes for podcast and voice, and the main stage for talks and showcases in front of an audience.",
+      "They are booked by the hour, like the studio: you walk in, the gear is in place and you play. Whoever rents the recording studio for a production or for tour prep usually keeps the two together — rehearsals in the room, takes in the control room."
+    ],
+    "spacesKicker": "the spaces",
+    "spacesTitle": "All the co-playing spaces.",
+    "cardCta": "See and book",
+    "allKicker": "and then",
+    "allTitle": "Explore all the spaces.",
+    "allText": "Beyond co-playing the hub has desks, offices, meeting rooms and the recording studio: they are all booked from the same flow.",
+    "allCta": "Explore all bookable spaces",
+    "studioCta": "Studio rental & co-playing",
+    "empty": "The space catalogue is not responding right now: write to us and we'll reply with availability and prices."
   },
   "prenota": {
     "kicker": "Book your space",
@@ -1166,7 +1192,7 @@
     "colSocial": "social"
   },
   "magazine": {
-    "kicker": "Editorial",
+    "kicker": "News & events",
     "title": "The trade, told by those who do it.",
     "lede": "Four strands. One industry.",
     "metaTitle": "editorial",
@@ -1175,7 +1201,7 @@
     "latestLabel": "all articles",
     "categoriesLabel": "categories",
     "categoryKicker": "category",
-    "backToMagazine": "Back to editorial",
+    "backToMagazine": "Back to news & events",
     "relatedTitle": "more articles",
     "empty": "no articles yet.",
     "by": "by"
@@ -1187,11 +1213,11 @@
     "inBrief": "in brief",
     "corsiUniversitari": {
       "title": "Bachelor of Arts. Bachelor of Science. In music, sound and visual.",
-      "lede": "International undergraduate degrees and Master of Music. Twenty places per course, one hour of one-to-one tuition a week.",
+      "lede": "International undergraduate degrees and Master Degree. Twenty places per course, weekly one-to-one lessons.",
       "points": [
         "Performance & songwriting · urban music production · music technology",
         "Film production · music business · creative musicianship",
-        "Twenty places per course, one hour of one-to-one tuition a week"
+        "Twenty places per course, weekly one-to-one lessons"
       ],
       "eyebrow": "university courses"
     },
@@ -1634,7 +1660,7 @@
   "uni": {
     "kicker": "Academy · University programmes · A.Y. 27/28",
     "title": "University programmes in music, production and sound engineering in Bologna.",
-    "lede": "Bachelor of Arts, Bachelor of Science, Master of Music. Internationally recognised degrees. Six programmes, three Masters, twenty places a year.",
+    "lede": "Bachelor of Arts, Bachelor of Science, Master Degree. Internationally recognised degrees. Six programmes, three Masters, twenty places a year.",
     "ctaOpenDay": "Book the open day",
     "ctaInfo": "Ask for information",
     "subnav": {
@@ -1665,7 +1691,7 @@
     },
     "cycles": {
       "primo": "three-year · bachelor · three years",
-      "master": "two-year · master of music · two years"
+      "master": "two-year · master degree · two years"
     },
     "cards": {
       "urban-music-production": {
@@ -1759,7 +1785,7 @@
         "ciclo": "master",
         "area": "suono",
         "areaLabel": "production",
-        "tag": "master of music",
+        "tag": "master degree",
         "desc": "Advanced production and sound design: from the artistic project to the master, with the studio's equipment.",
         "meta": [
           "2 years",
@@ -1771,7 +1797,7 @@
         "ciclo": "master",
         "area": "musica",
         "areaLabel": "composition",
-        "tag": "master of music",
+        "tag": "master degree",
         "desc": "Arrangement and composition at a professional level, for records, stage and screen.",
         "meta": [
           "2 years",
@@ -1783,7 +1809,7 @@
         "ciclo": "master",
         "area": "musica",
         "areaLabel": "direction",
-        "tag": "master of music",
+        "tag": "master degree",
         "desc": "From performer to director: leading an ensemble, planning a production, running a team.",
         "meta": [
           "2 years",
@@ -1822,7 +1848,7 @@
         },
         {
           "k": "two-year",
-          "title": "Master of Music",
+          "title": "Master Degree",
           "text": "For those who already hold a three-year degree or equivalent professional experience. Specialise in production, composition or direction."
         },
         {
@@ -1943,7 +1969,7 @@
     },
     "seo": {
       "title": "University programmes in Bologna: music, sound, film and music business",
-      "description": "Bachelor of Arts, Bachelor of Science and Master of Music in music production, sound engineering, voice and instrument, film, music business. Bologna, since 1999. Twenty places per course."
+      "description": "Bachelor of Arts, Bachelor of Science and Master Degree in music production, sound engineering, voice and instrument, film, music business. Bologna, since 1999. Twenty places per course."
     },
     "goCta": "enter the course",
     "final": {
@@ -3227,7 +3253,7 @@
     "affitto": {
       "metaTitle": "Recording studio and rehearsal room rental in Bologna | Creative Hub Studio",
       "metaDesc": "Full studio with SSL control room and 60 m² live room, for productions with your engineer, live rehearsals and tour pre-production.",
-      "kicker": "Studio · Studio rental",
+      "kicker": "Studio · Studio rental & co-playing",
       "title": "Recording studio rental in Bologna.",
       "lede": "The full studio for your production: SSL control room, 60 m² live room, booth, Dolby Atmos. With your engineer, for live rehearsals or tour pre-production.",
       "facts": [
@@ -3283,6 +3309,31 @@
         }
       ],
       "formCta": "book this formula",
+      "coplayingKicker": "co-playing",
+      "coplayingTitle": "Co-playing: rehearse, play, take the stage.",
+      "coplayingText": [
+        "The studio is not only recording: in the same building there are rehearsal rooms with the drum kit already set up, soundproofed drum boxes, production boxes and the main stage for talks and showcases. That's co-playing — the spaces are booked by the hour, like the studio, with the same key.",
+        "It works for rehearsing before you step into the control room, for letting the band play without hauling the backline, for recording a podcast or for a live show in front of fifty people. Whoever rents the studio for tour prep usually keeps the two together: rehearsals in the room, takes in the control room."
+      ],
+      "coplayingLinks": [
+        {
+          "label": "Rehearsal rooms with drum kit",
+          "href": "/prenota/sala-prove-con-batteria"
+        },
+        {
+          "label": "Soundproofed drum boxes",
+          "href": "/prenota/double-drum-box-hp101"
+        },
+        {
+          "label": "Production boxes and podcast",
+          "href": "/prenota/production-boxes"
+        },
+        {
+          "label": "Main stage for talks and showcases",
+          "href": "/prenota/main-stage-hp100"
+        }
+      ],
+      "coplayingAll": "Explore all co-playing spaces",
       "findKicker": "the gear",
       "findTitle": "What you find in the studio.",
       "howKicker": "how to book",
@@ -3315,6 +3366,7 @@
       "ratesKicker": "the rates",
       "ratesTitle": "Rates.",
       "ratesLede": "Clear prices before you book: send us the dates and we reply with a quote.",
+      "ratesBook": "Book now",
       "ratesHead": [
         "formula",
         "duration",
@@ -3372,6 +3424,11 @@
         "stepOf": "step {n} of 3",
         "stepDone": "done",
         "step1Title": "What do you need to do in the studio?",
+        "coplayN": "af.04",
+        "coplayTitle": "Co-playing",
+        "coplayText": "Rehearsal rooms, drum boxes, production boxes and stage: pick the space from the grid.",
+        "coplayStepTitle": "Which co-playing space?",
+        "coplayPriceNote": "on request",
         "step2Title": "For how long?",
         "items": [
           {

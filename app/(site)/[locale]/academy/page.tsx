@@ -216,6 +216,11 @@ export default async function AcademyPage({
           <Reveal as="span" className={`mono ${styles.kicker}`}>
             {t.academy.kicker}
           </Reveal>
+          {/* il claim tolto dalla home (23/11) vive qui, dove dire
+              "international college" è vero e non riduce tutto l'hub */}
+          <Reveal as="span" className={`mono ${styles.college}`} delay={40}>
+            {t.hero.since.replace('\n', ' ')}
+          </Reveal>
           <Reveal as="h1" className={`display-thin ${styles.title}`} delay={80}>
             {t.academy.titleLines[0]}{' '}
             <br className={styles.titleBreak} />

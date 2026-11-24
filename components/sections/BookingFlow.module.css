@@ -567,3 +567,76 @@
   border-color: #ffffff;
   color: #0a0a0a;
 }
+
+/* ————— griglia degli spazi del co-playing (23/11) —————
+   quarta scelta del passo 1 dell'affitto studio: qui si sceglie il box
+   vero (sala prove, drum box, production box, palco). Stessa grammatica
+   delle righe durata — bordo sottile, selezione a inchiostro pieno — ma
+   impaginate a griglia, con la miniatura del catalogo in testa. */
+.spaces {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.space {
+  position: relative;
+  display: grid;
+  grid-template-rows: auto auto auto;
+  gap: 6px;
+  padding: 10px 12px 12px;
+  border: 1px solid color-mix(in srgb, var(--fg) 45%, transparent);
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease,
+    color 0.15s ease;
+}
+
+.space:hover {
+  border-color: var(--fg);
+}
+
+.spaceOn {
+  background: var(--fg);
+  border-color: var(--fg);
+  color: var(--su-inchiostro);
+}
+
+.space:has(input:focus-visible) {
+  outline: 2px solid var(--fg);
+  outline-offset: 3px;
+}
+
+/* la miniatura: rapporto fisso così le card restano allineate anche
+   quando un prodotto non ha foto a catalogo */
+.spaceMedia {
+  display: block;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--fg) 12%, transparent);
+}
+
+.spaceMedia img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.spaceName {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.spacePrice {
+  font-size: 11px;
+  opacity: 0.75;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 900px) {
+  .spaces {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

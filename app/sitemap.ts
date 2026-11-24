@@ -13,6 +13,9 @@ const SECTIONS = [
   '/coworking',
   '/innovazione',
   '/coworking/prenota',
+  /* pagina categoria del co-playing (23/11): route statica, non un
+     topic di Sanity, quindi va elencata qui a mano */
+  '/coworking/co-playing',
   '/chi-siamo',
   '/privacy',
   '/cookie',

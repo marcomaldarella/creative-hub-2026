@@ -10,7 +10,7 @@
     "studio": "Studio",
     "coworking": "Coworking",
     "innovation": "Aziende & startup",
-    "magazine": "Editorial",
+    "magazine": "News & eventi",
     "about": "Chi siamo",
     "book": "Prenota",
     "contact": "Contattaci",
@@ -39,7 +39,7 @@
           "Dolby Atmos",
           "Sound design",
           "Podcast & voice over",
-          "Affitto studio"
+          "Affitto studio & co-playing"
         ]
       },
       "coworking": {
@@ -62,7 +62,7 @@
         ]
       },
       "magazine": {
-        "desc": "Motore editoriale · SEO · storie dell'industria creativa.",
+        "desc": "News, eventi ed editoriali del Centro Studi Celso Valli.",
         "items": [
           "Produzione musicale",
           "Industrie creative",
@@ -142,8 +142,8 @@
         "text": "Startup creative e servizi per le imprese."
       },
       "magazine": {
-        "title": "Editoriale",
-        "text": "Voci e storie dall'industria creativa."
+        "title": "News & eventi",
+        "text": "News, eventi ed editoriali del Centro Studi Celso Valli."
       },
       "about": {
         "title": "Team e governance",
@@ -154,12 +154,12 @@
     "resultsRuleRight": "2026",
     "stats": {
       "students": {
-        "value": 8400,
+        "value": 9500,
         "suffix": "+",
         "label": "studenti formati"
       },
       "partners": {
-        "value": 300,
+        "value": 200,
         "suffix": "+",
         "label": "aziende partner"
       },
@@ -174,7 +174,7 @@
         "label": "startup incubate all'anno"
       }
     },
-    "magazineKicker": "06 — editorial",
+    "magazineKicker": "06 — news & eventi",
     "magazineTitle": "Storie di mestiere.",
     "magazineAll": "tutti gli articoli",
     "opendayTitleLine1": "Un pomeriggio",
@@ -187,7 +187,7 @@
       {
         "n": "01",
         "title": "Titoli riconosciuti",
-        "text": "Università, master e percorsi custom riconosciuti."
+        "text": "Corsi triennali e magistrali universitari, IFTS, ITS riconosciuti nel sistema europeo. Inoltre percorsi custom per tutte le esigenze."
       },
       {
         "n": "02",
@@ -244,9 +244,9 @@
       },
       {
         "n": "05",
-        "tags": "editoriale · seo",
-        "title": "Editorial",
-        "text": "Storie, ricerca e SEO sull'industria creativa: motore editoriale che alimenta l'intero hub.",
+        "tags": "news · eventi",
+        "title": "News & eventi",
+        "text": "News, eventi ed editoriali del Centro Studi Celso Valli, nato nell'hub per connettere l'industria creativa ai giovani talenti.",
         "cta": "Entra nel nodo"
       },
       {
@@ -298,7 +298,7 @@
         }
       ]
     },
-    "networkText": "Università, aziende e istituzioni collaborano ai percorsi: portano brief e produzioni reali, ospitano stage e assumono dal network. È la stessa rete che attraversa corsi, studi e coworking.",
+    "networkText": "Università, tecnopoli, aziende e istituzioni collaborano ai percorsi: portano brief e produzioni reali, ospitano stage e assumono dal network. È la stessa rete che attraversa corsi, studi e coworking.",
     "networkCta": "Partner",
     "photoStudio": {
       "kicker": "studio ssl",
@@ -320,7 +320,7 @@
       "Accademia di musica, produzione",
       "e tecnico del suono a Bologna."
     ],
-    "lede": "Corsi universitari — Bachelor of Arts, Bachelor of Science e Master of Music — in musica, produzione cinematografica e videomaking. Sei corsi triennali, tre Master, venti posti per corso.",
+    "lede": "Corsi universitari — Bachelor of Arts, Bachelor of Science e Master Degree — in musica, produzione cinematografica e videomaking. Sei corsi triennali, tre Master, venti posti per corso.",
     "categoryLabel": "filtra per categoria",
     "empty": "nessun corso in questa categoria.",
     "teachersKicker": "i docenti",
@@ -356,7 +356,7 @@
         "text": "Titoli universitari internazionali. Tre anni, venti posti per corso."
       },
       {
-        "title": "Corsi su misura",
+        "title": "Corsi su misura per strumento o specializzazione",
         "text": "Il tuo strumento, i tuoi orari. Pacchetti da 4, 20 o 40 lezioni. Prima lezione gratis."
       },
       {
@@ -409,11 +409,13 @@
     ],
     "teachersIntro": [
       "I docenti di Creative Hub Academy sono professionisti attivi nell'industria musicale, non insegnanti che raccontano un mestiere che non fanno più. Quello che porti in aula lo stanno facendo anche fuori da qui: in tour, in studio, sul palco.",
-      "Tra loro Angela Madonia, vocal coach nota al pubblico di Amici, e Stefania Martin, che ha lavorato al fianco di Renato Zero e Mina."
+      "Tra loro Dhany (Daniela Galli), voce delle hit di Benny Benassi, Fosco17 (Luca Jacoboni), cantautore e producer passato per Sanremo Giovani, Michele Suzzi, producer con brani da milioni di stream, e Gaia Banfi, cantautrice e produttrice tra canzone d'autore ed elettronica."
     ],
     "teachersNames": [
-      "Angela Madonia",
-      "Stefania Martin"
+      "Dhany",
+      "Fosco17",
+      "Michele Suzzi",
+      "Gaia Banfi"
     ],
     "teachersAll": "tutti i docenti",
     "teachersLess": "mostra meno",
@@ -480,11 +482,11 @@
     "faq": [
       {
         "title": "Che differenza c'è tra corsi universitari e corsi su misura?",
-        "text": "I corsi universitari durano tre anni (o due per i Master) e rilasciano un titolo accademico internazionale — Bachelor of Arts, Bachelor of Science o Master of Music. I corsi su misura sono pacchetti flessibili di lezioni, senza esami né titolo finale: pensati per chi vuole imparare uno strumento senza impegnarsi in un percorso pluriennale."
+        "text": "I corsi universitari durano tre anni (o due per i Master) e rilasciano un titolo accademico internazionale — Bachelor of Arts, Bachelor of Science o Master Degree. I corsi su misura sono pacchetti flessibili di lezioni, senza esami né titolo finale: pensati per chi vuole imparare uno strumento senza impegnarsi in un percorso pluriennale."
       },
       {
         "title": "Come funziona la formazione finanziata dalla Regione?",
-        "text": "Sono corsi gratuiti finanziati dal Fondo Sociale Europeo Plus e dalla Regione Emilia-Romagna, della durata di alcuni mesi, con stage incluso e attestato di specializzazione riconosciuto a livello regionale. Non sono equivalenti a un titolo universitario."
+        "text": "Sono corsi gratuiti finanziati dal Fondo Sociale Europeo Plus e dalla Regione Emilia-Romagna, della durata di alcuni mesi. Con attestato di specializzazione a livello regionale e possibile stage formativo."
       },
       {
         "title": "Si può venire all'open day prima di scegliere il corso?",
@@ -559,7 +561,7 @@
       },
       "rental": {
         "n": "st.06",
-        "title": "Affitto studio",
+        "title": "Affitto studio & co-playing",
         "text": "Lo studio completo per produzioni con il tuo fonico, prove per live e allestimento tour.",
         "rows": [
           "studio completo",
@@ -726,8 +728,8 @@
         "href": "/prenota/main-stage-con-divanetto-hp100"
       },
       {
-        "label": "Tutti gli spazi prenotabili",
-        "href": "/prenota"
+        "label": "Tutti gli spazi del co-playing",
+        "href": "/coworking/co-playing"
       }
     ],
     "faqKicker": "prima di prenotare",
@@ -850,6 +852,7 @@
     "subnavLabel": "Coworking · zona Roveri",
     "subnavPages": [
       "Coworking",
+      "Co-playing",
       "Sale & eventi",
       "Prenota il tuo spazio"
     ],
@@ -870,6 +873,29 @@
       "",
       ""
     ]
+  },
+  "coplaying": {
+    "metaTitle": "Co-playing a Bologna: sale prove, drum box, production box e palco | Creative Hub",
+    "metaDesc": "Tutti gli spazi del co-playing al Creative Hub: sale prove con batteria, drum box insonorizzati, production box per podcast e main stage per talk e showcase. Prenotabili a ore.",
+    "kicker": "Coworking · co-playing",
+    "title": "Co-playing.",
+    "lede": "Gli spazi dove si suona, si prova e si sta sul palco: a ore, nello stesso hub dello studio e delle scrivanie.",
+    "back": "Torna a coworking",
+    "introKicker": "cos'è",
+    "introTitle": "Non una sala prove: un piano intero.",
+    "introText": [
+      "Il co-playing è la parte dell'hub dedicata a chi suona. Sale prove con la batteria già montata, drum box insonorizzati per studiare senza disturbare, production box per podcast e voce, e il main stage per talk e showcase davanti a un pubblico.",
+      "Si prenotano a ore come lo studio: entri, trovi l'attrezzatura al suo posto e suoni. Chi affitta lo studio di registrazione per una produzione o per un tour di solito tiene insieme le due cose — prove in sala e riprese in regia."
+    ],
+    "spacesKicker": "gli spazi",
+    "spacesTitle": "Tutti gli spazi del co-playing.",
+    "cardCta": "Vedi e prenota",
+    "allKicker": "e poi",
+    "allTitle": "Esplora tutti gli spazi.",
+    "allText": "Oltre al co-playing nell'hub ci sono scrivanie, uffici, sale riunioni e lo studio di registrazione: si prenotano dallo stesso percorso.",
+    "allCta": "Esplora tutti gli spazi prenotabili",
+    "studioCta": "Affitto studio & co-playing",
+    "empty": "Il catalogo degli spazi non risponde in questo momento: scrivici e ti rispondiamo con disponibilità e prezzi."
   },
   "prenota": {
     "kicker": "Prenota il tuo spazio",
@@ -1167,7 +1193,7 @@
     "colSocial": "social"
   },
   "magazine": {
-    "kicker": "Editorial",
+    "kicker": "News & eventi",
     "title": "Il mestiere, raccontato da chi lo fa.",
     "lede": "Quattro linee. Un solo settore.",
     "metaTitle": "editorial",
@@ -1176,7 +1202,7 @@
     "latestLabel": "tutti gli articoli",
     "categoriesLabel": "categorie",
     "categoryKicker": "categoria",
-    "backToMagazine": "Torna all'editorial",
+    "backToMagazine": "Torna a news & eventi",
     "relatedTitle": "altri articoli",
     "empty": "nessun articolo, per ora.",
     "by": "di"
@@ -1188,11 +1214,11 @@
     "inBrief": "in breve",
     "corsiUniversitari": {
       "title": "Bachelor of Arts. Bachelor of Science. In musica, sound e visual.",
-      "lede": "Titoli universitari internazionali triennali e Master of Music. Venti posti per corso, un'ora di lezione individuale a settimana.",
+      "lede": "Titoli universitari internazionali triennali e Master Degree. Venti posti per corso, lezioni individuali settimanali.",
       "points": [
         "Performance & songwriting · urban music production · music technology",
         "Film production · music business · creative musicianship",
-        "Venti posti per corso, un'ora di lezione individuale a settimana"
+        "Venti posti per corso, lezioni individuali settimanali"
       ],
       "eyebrow": "corsi universitari"
     },
@@ -1635,7 +1661,7 @@
   "uni": {
     "kicker": "Academy · Corsi universitari · A.A. 27/28",
     "title": "Corsi universitari di musica, produzione e tecnico del suono a Bologna.",
-    "lede": "Bachelor of Arts, Bachelor of Science, Master of Music. Titoli riconosciuti a livello internazionale. Sei corsi, tre Master, venti posti all'anno.",
+    "lede": "Bachelor of Arts, Bachelor of Science, Master Degree. Titoli riconosciuti a livello internazionale. Sei corsi, tre Master, venti posti all'anno.",
     "ctaOpenDay": "Prenota l'open day",
     "ctaInfo": "Chiedi informazioni",
     "subnav": {
@@ -1666,7 +1692,7 @@
     },
     "cycles": {
       "primo": "triennale · bachelor · tre anni",
-      "master": "biennale · master of music · due anni"
+      "master": "biennale · master degree · due anni"
     },
     "cards": {
       "urban-music-production": {
@@ -1713,7 +1739,7 @@
         "area": "musica",
         "areaLabel": "canto e strumento",
         "tag": "bachelor",
-        "desc": "Corso universitario di canto e strumento, con un'ora di lezione individuale a settimana e musica d'insieme. Scegli da dove partire:",
+        "desc": "Corso universitario di canto e strumento, con lezioni individuali settimanali e musica d'insieme. Scegli da dove partire:",
         "instruments": [
           "canto",
           "chitarra",
@@ -1760,7 +1786,7 @@
         "ciclo": "master",
         "area": "suono",
         "areaLabel": "produzione",
-        "tag": "master of music",
+        "tag": "master degree",
         "desc": "Produzione e sound design avanzati: dal progetto artistico al master, con la strumentazione dello studio.",
         "meta": [
           "2 anni",
@@ -1772,7 +1798,7 @@
         "ciclo": "master",
         "area": "musica",
         "areaLabel": "composizione",
-        "tag": "master of music",
+        "tag": "master degree",
         "desc": "Arrangiamento e composizione a livello professionale, per disco, scena e immagine.",
         "meta": [
           "2 anni",
@@ -1784,7 +1810,7 @@
         "ciclo": "master",
         "area": "musica",
         "areaLabel": "direzione",
-        "tag": "master of music",
+        "tag": "master degree",
         "desc": "Da esecutore a direzione: guidare una formazione, progettare una produzione, condurre un team.",
         "meta": [
           "2 anni",
@@ -1823,7 +1849,7 @@
         },
         {
           "k": "biennale",
-          "title": "Master of Music",
+          "title": "Master Degree",
           "text": "Per chi ha già un titolo triennale o un'esperienza professionale equivalente. Specializzazione su produzione, composizione o direzione."
         },
         {
@@ -1944,7 +1970,7 @@
     },
     "seo": {
       "title": "Corsi universitari a Bologna: musica, suono, cinema e music business",
-      "description": "Bachelor of Arts, Bachelor of Science e Master of Music in produzione musicale, tecnico del suono, canto e strumento, cinema, music business. Bologna, dal 1999. Venti posti per corso."
+      "description": "Bachelor of Arts, Bachelor of Science e Master Degree in produzione musicale, tecnico del suono, canto e strumento, cinema, music business. Bologna, dal 1999. Venti posti per corso."
     },
     "goCta": "entra nel corso",
     "final": {
@@ -3228,7 +3254,7 @@
     "affitto": {
       "metaTitle": "Affitto studio di registrazione e sala prove a Bologna | Creative Hub Studio",
       "metaDesc": "Studio completo con regia SSL e live room da 60 m², per produzioni con il tuo fonico, prove per live e allestimento tour.",
-      "kicker": "Studio · Affitto studio",
+      "kicker": "Studio · Affitto studio & co-playing",
       "title": "Affitto studio di registrazione a Bologna.",
       "lede": "Lo studio completo per la tua produzione: regia SSL, live room da 60 m², cabina, Dolby Atmos. Con il tuo fonico, per le prove di un live o per allestire un tour.",
       "facts": [
@@ -3284,6 +3310,31 @@
         }
       ],
       "formCta": "prenota questa formula",
+      "coplayingKicker": "il co-playing",
+      "coplayingTitle": "Il co-playing: provare, suonare, stare sul palco.",
+      "coplayingText": [
+        "Lo studio non è solo registrazione: nello stesso edificio ci sono le sale prove con la batteria montata, i drum box insonorizzati, i production box e il main stage per talk e showcase. È il co-playing — gli spazi si prenotano a ore, come lo studio, e con la stessa chiave si entra.",
+        "Serve per provare prima di entrare in regia, per far suonare la band senza portarsi l'attrezzatura, per registrare un podcast o per un live davanti a cinquanta persone. Chi affitta lo studio per un tour di solito tiene insieme le due cose: prove in sala, riprese in regia."
+      ],
+      "coplayingLinks": [
+        {
+          "label": "Sale prove con batteria",
+          "href": "/prenota/sala-prove-con-batteria"
+        },
+        {
+          "label": "Drum box insonorizzati",
+          "href": "/prenota/double-drum-box-hp101"
+        },
+        {
+          "label": "Production box e podcast",
+          "href": "/prenota/production-boxes"
+        },
+        {
+          "label": "Main stage per talk e showcase",
+          "href": "/prenota/main-stage-hp100"
+        }
+      ],
+      "coplayingAll": "Esplora tutti gli spazi del co-playing",
       "findKicker": "la dotazione",
       "findTitle": "Cosa trovi in studio.",
       "howKicker": "come si prenota",
@@ -3316,6 +3367,7 @@
       "ratesKicker": "le tariffe",
       "ratesTitle": "Tariffe.",
       "ratesLede": "Prezzi chiari prima di prenotare: scrivici le date e ti mandiamo il preventivo.",
+      "ratesBook": "Prenota ora",
       "ratesHead": [
         "formula",
         "durata",
@@ -3373,6 +3425,11 @@
         "stepOf": "passo {n} di 3",
         "stepDone": "fatto",
         "step1Title": "Cosa devi fare in studio?",
+        "coplayN": "af.04",
+        "coplayTitle": "Co-playing",
+        "coplayText": "Sale prove, drum box, production box e palco: scegli lo spazio dalla griglia.",
+        "coplayStepTitle": "Quale spazio del co-playing?",
+        "coplayPriceNote": "su richiesta",
         "step2Title": "Per quanto tempo?",
         "items": [
           {
