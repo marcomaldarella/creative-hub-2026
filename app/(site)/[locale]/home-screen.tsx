@@ -359,7 +359,7 @@ export async function HomeScreen({ locale }: { locale: Locale }) {
                 interne (chi-siamo) — i partner senza logo escono come
                 nome in cella, non più concatenati su una riga */}
             <div className={`wrap ${styles.partnerTable}`}>
-              <PartnerGrid names={partnerNames} />
+              <PartnerGrid names={partnerNames} columns={5} />
             </div>
             <div className={`wrap ${styles.networkFoot}`}>
               <span className="mono">{t.home.networkRight}</span>

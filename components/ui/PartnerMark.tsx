@@ -61,6 +61,10 @@ const LOGOS: Record<string, { file: string; ratio: number; h: number }> = {
   scf: { file: 'scf', ratio: 1.62, h: 52 },
   esibirsi: { file: 'esibirsi.png', ratio: 2.92, h: 44 },
   'ths foundation': { file: 'ths', ratio: 3.69, h: 36 },
+  'cte cobo': { file: 'cte-cobo.png', ratio: 2.53, h: 40 },
+  assonanza: { file: 'assonanza.png', ratio: 1, h: 52 },
+  /* CRICC (nessun marchio proprio: è un centro UniBo) e IN-ER (il dominio
+     ridirige su ER Startup) restano al nome testuale */
 };
 
 export type PartnerMarkProps = {

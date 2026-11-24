@@ -36,8 +36,14 @@
   max-width: 78%;
 }
 
+/* variante home: cinque loghi per riga da desktop */
+.grid5 {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
 @media (max-width: 900px) {
-  .grid {
+  .grid,
+  .grid5 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
