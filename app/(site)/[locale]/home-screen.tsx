@@ -4,12 +4,12 @@ import {
   Button,
   Counter,
   CounterRow,
-  PartnerMark,
   Reveal,
   RevealGroup,
   SectionHeader,
 } from '@/components/ui'
 import { SiteChrome } from '@/components/sections/SiteChrome'
+import { PartnerGrid } from '@/components/sections/PartnerGrid'
 import { ParallaxMedia } from '@/components/sections/ParallaxMedia'
 import { HeroSlider } from '@/components/sections/HeroSlider'
 import { HighlightsCarousel } from '@/components/sections/HighlightsCarousel'
@@ -98,10 +98,9 @@ export async function HomeScreen({ locale }: { locale: Locale }) {
     t.home.stats.startups,
   ]
 
-  const partnerMarks = partners
+  const partnerNames = partners
     .map((p) => p.name)
     .filter((name): name is string => Boolean(name))
-    .map((name) => <PartnerMark key={name} name={name} />)
 
   const openDate = openDayLabel(settings?.openDay?.date, locale)
   const openTitle = l(settings?.openDay?.title, locale)
@@ -316,7 +315,7 @@ export async function HomeScreen({ locale }: { locale: Locale }) {
         </section>
 
         {/* ————— network (§ 06): titolo a sinistra, approfondimento + cta partner a destra ————— */}
-        {partnerMarks.length > 0 && (
+        {partnerNames.length > 0 && (
           <section className={styles.sez}>
             <div className={`wrap ${styles.networkHead}`}>
               <div>
@@ -356,11 +355,15 @@ export async function HomeScreen({ locale }: { locale: Locale }) {
                 </Link>
               </Reveal>
             </div>
-            {/* revisione 27/10: via il marquee — loghi fermi, a capo */}
-            <div className={`wrap ${styles.partnerRow}`}>{partnerMarks}</div>
+            {/* revisione 24/11: stessa tabella di quadrati delle griglie
+                interne (chi-siamo) — i partner senza logo escono come
+                nome in cella, non più concatenati su una riga */}
+            <div className={`wrap ${styles.partnerTable}`}>
+              <PartnerGrid names={partnerNames} />
+            </div>
             <div className={`wrap ${styles.networkFoot}`}>
               <span className="mono">{t.home.networkRight}</span>
-              <span className="mono">{partnerMarks.length}</span>
+              <span className="mono">{partnerNames.length}</span>
             </div>
           </section>
         )}

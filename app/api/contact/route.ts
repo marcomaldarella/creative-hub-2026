@@ -125,6 +125,47 @@ function buildLead(
   return lead
 }
 
+/* ————— copia di consultazione in Sanity ("Richieste dai form") ————— */
+
+async function saveToSanity(
+  form: string,
+  fields: Record<string, string>,
+  email: string,
+  body: string,
+  syncedToCrm: boolean
+): Promise<void> {
+  const token = process.env.SANITY_WRITE_TOKEN
+  if (!token) return
+  const doc = {
+    _type: 'formSubmission',
+    form,
+    name: (fields.nome ?? fields.name ?? '').trim(),
+    email: email || (fields.contatto ?? '').trim(),
+    phone: (fields.cellulare ?? fields.telefono ?? '').trim(),
+    body,
+    date: new Date().toISOString(),
+    syncedToCrm,
+  }
+  try {
+    const res = await fetch(
+      'https://if3942oc.api.sanity.io/v2024-01-01/data/mutate/production',
+      {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ mutations: [{ create: doc }] }),
+        signal: AbortSignal.timeout(8_000),
+      }
+    )
+    if (!res.ok) console.error('[contact] archivio Sanity HTTP', res.status)
+  } catch (err) {
+    /* l'archivio è una copia: un suo errore non deve mai bloccare l'invio */
+    console.error('[contact] archivio Sanity fallito:', err)
+  }
+}
+
 async function sendToScuolaSemplice(lead: SSField[]): Promise<boolean> {
   const host = process.env.SS_API_HOST
   const user = process.env.SS_API_USER
@@ -216,6 +257,8 @@ export async function POST(req: Request) {
     /* ————— Transport SS: lead nel gestionale ScuolaSemplice ————— */
     if (process.env.SS_API_HOST) {
       const sent = await sendToScuolaSemplice(buildLead(form, fields, email, body))
+      /* copia di consultazione nel CMS ("Richieste dai form"), sempre */
+      await saveToSanity(form, fields, email, body, sent)
       if (sent) return NextResponse.json({ ok: true })
       /* fallisce → si tenta CF7 se configurato, altrimenti errore onesto */
       if (!endpoint) {

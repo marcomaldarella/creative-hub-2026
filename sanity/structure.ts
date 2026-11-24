@@ -119,4 +119,14 @@ export const structure: StructureResolver = (S) =>
         ),
       S.documentTypeListItem('partner').title('Partner'),
       S.documentTypeListItem('page').title('Pagine (hero & corpi)'),
+      S.divider(),
+      S.listItem()
+        .title('Richieste dai form')
+        .id('richieste-form')
+        .child(
+          S.documentList()
+            .title('Richieste dai form')
+            .filter('_type == "formSubmission"')
+            .defaultOrdering([{ field: 'date', direction: 'desc' }])
+        ),
     ])

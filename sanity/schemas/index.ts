@@ -21,6 +21,7 @@ import { space } from './documents/space'
 import { page } from './documents/page'
 import { sectionMedia } from './documents/sectionMedia'
 import { mediaKit } from './documents/mediaKit'
+import { formSubmission } from './documents/formSubmission'
 
 export const schemaTypes = [
   // oggetti
@@ -48,4 +49,5 @@ export const schemaTypes = [
   page,
   sectionMedia,
   mediaKit,
+  formSubmission,
 ]

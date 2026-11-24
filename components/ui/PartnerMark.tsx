@@ -29,10 +29,12 @@ const LOGOS: Record<string, { file: string; ratio: number; h: number }> = {
      marchio CNR, Regione con l'identità 2025, Comune solo stemma (il
      vecchio file diventava un blocco pieno nella mask) */
   'cnr tecnopolo bologna': { file: 'tecnopolo-cnr.png', ratio: 4.09, h: 40 },
+  /* versione positiva (quadrato + scritta), appiattita per la mask: il
+     lockup orizzontale 2025 era una targa piena → blocco bianco in dark */
   'regione emilia-romagna': {
-    file: 'regione-emilia-romagna',
-    ratio: 6.89,
-    h: 30,
+    file: 'regione-emilia-romagna.png',
+    ratio: 0.9,
+    h: 54,
   },
   'comune di bologna': { file: 'comune-bologna', ratio: 0.656, h: 54 },
   'art-er': { file: 'art-er', ratio: 2.48, h: 44 },

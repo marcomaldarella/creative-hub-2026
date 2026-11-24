@@ -86,21 +86,9 @@ export default async function AffittoStudioPage({
     })
   )
 
-  /* gli spazi del co-playing per la quarta scelta del flusso (23/11):
-     sale prove, drum box, production box e palco, presi dalla stessa
-     famiglia del catalogo che alimenta /coworking/co-playing. Fuori i
-     due "spazi" che sono già formule dello studio (sala live e studio
-     di registrazione), altrimenti il passo 1 si ripeterebbe */
-  const FUORI_COPLAY = ['sala-live', 'studio-di-registrazione']
-  const coplaySpaces = products
-    .filter((p) => p.category === 'coplaying' && !FUORI_COPLAY.includes(p.slug))
-    .map((p) => ({
-      id: p.slug,
-      label: p.name,
-      price: formatPrice(p.price, locale),
-      shop: p.permalink,
-      img: p.image ? { src: p.image.src, alt: p.image.alt || p.name } : undefined,
-    }))
+  /* (24/11) la quarta scelta co-playing del wizard è stata tolta: a 4
+     colonne rompeva la colonna del form. Il co-playing resta in evidenza
+     nella sua sezione estesa (02) e su /coworking/co-playing */
 
   /* la dotazione: gli spazi studio veri da Sanity, più le voci che non
      sono stanze (software e strumenti del mockup, dal dizionario) —
@@ -374,7 +362,9 @@ export default async function AffittoStudioPage({
                   },
                 }}
                 shopLinks={shopLinks}
-                coplaySpaces={coplaySpaces}
+                /* niente quarta scelta co-playing nel wizard (24/11: a 4
+                   colonne rompeva la colonna del form) — il co-playing
+                   resta in evidenza nella sua sezione estesa qui sopra */
               />
             </Suspense>
           </section>
