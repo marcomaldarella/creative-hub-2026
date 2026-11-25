@@ -83,15 +83,13 @@
   gap: 20px clamp(24px, 4vw, 64px);
 }
 
-/* tre righe tutte della stessa misura del copyright */
+/* tre righe tutte della stessa misura del copyright: anche la riga dei
+   link legali è mono piccola (25/11 — prima ereditava il corpo base e
+   spiccava sulle altre due) */
 .bottomText {
   display: grid;
   gap: 8px;
   color: var(--fg-2);
-}
-
-.bottomText .legal {
-  font-size: inherit;
 }
 
 /* marchi istituzionali: mask in currentColor, si invertono col tema */

@@ -5,6 +5,14 @@ import type { Teacher } from '@/lib/sanity/types'
 import { Thumb } from './Thumb'
 import styles from './TeacherGrid.module.css'
 
+/* nome e, a capo, cognome: si spezza al primo spazio (i cognomi
+   composti restano insieme sulla seconda riga) — come in TeacherStrip */
+function nameLines(name?: string | null): [string] | [string, string] {
+  const n = name ?? ''
+  const i = n.indexOf(' ')
+  return i === -1 ? [n] : [n.slice(0, i), n.slice(i + 1)]
+}
+
 export type TeacherGridProps = {
   /* basta la parte anagrafica: così la griglia serve anche lo staff
      (teamMember) di chi-siamo, non solo i docenti */
@@ -14,8 +22,9 @@ export type TeacherGridProps = {
 }
 
 /**
- * Docenti/team in griglia: ritratto tondo (placeholder gradient se la foto
- * manca), nome e ruolo mono. Per la fila scorrevole c'è <TeacherStrip>.
+ * Persone in griglia con la STESSA carta della fila docenti
+ * (TeacherStrip): ritratto 4:5 a tutta colonna, nome su due righe,
+ * ruolo mono. Placeholder gradient se la foto manca.
  */
 export function TeacherGrid({ teachers, locale, className }: TeacherGridProps) {
   if (teachers.length === 0) return null
@@ -34,11 +43,17 @@ export function TeacherGrid({ teachers, locale, className }: TeacherGridProps) {
             image={teacher.photo}
             alt={teacher.name ?? ''}
             index={i}
-            round
-            width={320}
+            ratio="4 / 5"
+            width={480}
             className={styles.photo}
           />
-          <span className={styles.name}>{teacher.name}</span>
+          <span className={styles.name}>
+            {nameLines(teacher.name).map((line, j) => (
+              <span key={j} className={styles.nameLine}>
+                {line}
+              </span>
+            ))}
+          </span>
           {l(teacher.role, locale) && (
             <span className={`mono ${styles.role}`}>
               {l(teacher.role, locale)}

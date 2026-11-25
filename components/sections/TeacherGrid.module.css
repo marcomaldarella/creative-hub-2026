@@ -1,8 +1,10 @@
+/* stessa carta della fila docenti (TeacherStrip), ma incolonnata:
+   ritratti 4:5 larghi quanto la colonna, sei per riga da desktop */
 .grid {
   list-style: none;
   display: grid;
-  gap: clamp(24px, 3vw, 40px);
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: clamp(18px, 2vw, 28px) clamp(14px, 1.8vw, 24px);
 }
 
 .person {
@@ -13,14 +15,20 @@
 }
 
 .photo {
-  width: clamp(88px, 10vw, 120px);
+  width: 100%;
   margin-bottom: 12px;
 }
 
 .name {
   font-weight: 600;
-  font-size: 15px;
+  font-size: clamp(17px, 1.5vw, 21px);
+  line-height: 1.02;
   letter-spacing: -0.01em;
+}
+
+/* nome e, a capo, cognome */
+.nameLine {
+  display: block;
 }
 
 .role {

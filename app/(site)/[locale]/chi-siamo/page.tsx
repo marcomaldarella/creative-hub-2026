@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Fragment } from 'react'
 import { notFound } from 'next/navigation'
-import { Button, Reveal, Rule, SectionHeader } from '@/components/ui'
+import { Reveal, Rule, SectionHeader } from '@/components/ui'
 import { PartnerGrid } from '@/components/sections/PartnerGrid'
 import { PortableBlocks } from '@/components/sections/PortableBlocks'
 import { TeacherGrid } from '@/components/sections/TeacherGrid'
@@ -107,7 +107,7 @@ export default async function ChiSiamoPage({
             bologna-creativehub.it/team), NON i docenti — l'elenco
             nominale dei docenti resta sospeso su richiesta del cliente
             (nov 2026). Si cura da Studio, voce "Team (le persone)" */}
-        <section className={styles.sez} id="team">
+        <section className={`${styles.sez} ${styles.teamSez}`} id="team">
           <div className="wrap">
             <SectionHeader kicker={t.about.teamKicker} title={t.about.teamTitle} />
             <TeacherGrid teachers={team} locale={locale} />
@@ -147,9 +147,31 @@ export default async function ChiSiamoPage({
               </Reveal>
             </div>
             <Reveal delay={220}>
-              <Button href={shopHref(settings)} external>
-                {t.nav.book}
-              </Button>
+              {/* 25/11: stessa pastiglia col pallino-freccia della home
+                  (il bottone pieno qui galleggiava e basta) */}
+              <a
+                href={shopHref(settings)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.bookCta}
+              >
+                <span>{t.nav.book}</span>
+                <span className={styles.bookCtaBall} aria-hidden="true">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M4 12h15" />
+                    <path d="M13 5.5 19.5 12 13 18.5" />
+                  </svg>
+                </span>
+              </a>
             </Reveal>
           </div>
         </section>

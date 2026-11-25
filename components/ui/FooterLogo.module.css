@@ -1,14 +1,10 @@
 .logo {
   display: block;
-  height: 40px;
+  /* 25/11: il viewBox ora è tagliato sulle lettere (prima includeva
+     l'aria della targa): 25.5px rende il lettering alla stessa misura
+     ottica dei vecchi 40px */
+  height: 25.5px;
   width: auto;
-}
-
-/* 23/11: niente più targa piena. Il logo del footer non è un riquadro
-   di colore con le lettere a intaglio: la targa sparisce e sono le
-   LETTERE a prendere il colore di sezione, direttamente sul nero. */
-.plate {
-  fill: none;
 }
 
 /* lettere nel colore di sezione (--giant dal wrapper del footer sulle

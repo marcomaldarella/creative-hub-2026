@@ -117,7 +117,7 @@ export function Footer({
           <div className={styles.bottomText}>
             <span className="mono">{copyright}</span>
             {legal && legal.length > 0 && (
-              <span className={styles.legal}>
+              <span className={`mono ${styles.legal}`}>
                 {legal.map((link, i) => (
                   <Fragment key={`${link.href}-${link.label}`}>
                     {i > 0 && <span aria-hidden="true"> · </span>}
