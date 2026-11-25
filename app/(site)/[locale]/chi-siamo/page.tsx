@@ -132,29 +132,51 @@ export default async function ChiSiamoPage({
           <div className={`wrap ${styles.contacts}`}>
             <div>
               <SectionHeader
-                kicker={t.about.contactsKicker}
+                /* 25/11: freccia accanto al titoletto — glifo → ruotato
+                   a ↘ via CSS (mai frecce unicode) */
+                kicker={
+                  <span className={styles.contactsKicker}>
+                    {t.about.contactsKicker}
+                    <svg
+                      width="11"
+                      height="11"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M4 12h15" />
+                      <path d="M13 5.5 19.5 12 13 18.5" />
+                    </svg>
+                  </span>
+                }
                 title={t.about.contactsTitle}
                 lede={t.about.contactsText}
                 className={styles.contactsHead}
               />
-              <Reveal as="address" className={`mono ${styles.contactLines}`} delay={160}>
-                {contactLines.map((line) => (
-                  <span key={line}>
-                    {line}
-                    <br />
-                  </span>
-                ))}
-              </Reveal>
-            </div>
-            <Reveal delay={220}>
-              {/* 25/11: stessa pastiglia col pallino-freccia della home
-                  (il bottone pieno qui galleggiava e basta) */}
-              <a
-                href={shopHref(settings)}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.bookCta}
-              >
+              {/* 25/11: la cta sta nella STESSA riga degli indirizzi,
+                  non all'altro capo della sezione */}
+              <div className={styles.contactRow}>
+                <Reveal as="address" className={`mono ${styles.contactLines}`} delay={160}>
+                  {contactLines.map((line) => (
+                    <span key={line}>
+                      {line}
+                      <br />
+                    </span>
+                  ))}
+                </Reveal>
+                <Reveal delay={220}>
+                  {/* stessa pastiglia col pallino-freccia della home
+                      (il bottone pieno qui galleggiava e basta) */}
+                  <a
+                    href={shopHref(settings)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.bookCta}
+                  >
                 <span>{t.nav.book}</span>
                 <span className={styles.bookCtaBall} aria-hidden="true">
                   <svg
@@ -172,7 +194,9 @@ export default async function ChiSiamoPage({
                   </svg>
                 </span>
               </a>
-            </Reveal>
+                </Reveal>
+              </div>
+            </div>
           </div>
         </section>
       </main>

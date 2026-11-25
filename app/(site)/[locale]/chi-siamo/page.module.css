@@ -60,8 +60,29 @@
   display: flex;
   flex-wrap: wrap;
   align-items: flex-end;
-  justify-content: space-between;
-  gap: 32px;
+  /* 25/11: la cta sta A FIANCO degli indirizzi, non all'altro capo
+     della riga */
+  justify-content: flex-start;
+  gap: 32px clamp(48px, 6vw, 96px);
+}
+
+/* indirizzi e cta sulla stessa riga, piedi allineati */
+.contactRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 24px clamp(40px, 5vw, 72px);
+}
+
+/* freccia del titoletto contatti: → ruotata a ↘ */
+.contactsKicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.contactsKicker svg {
+  transform: rotate(45deg);
 }
 
 /* 25/11: cta contatti = la pastiglia col pallino-freccia della home
@@ -107,7 +128,10 @@
 
 .contactLines {
   font-style: normal;
-  line-height: 2;
+  /* 25/11: interlinea stretta e nero pieno — gli indirizzi devono
+     leggersi (prima riga doppia nel grigio del mono) */
+  line-height: 1.45;
+  color: var(--fg);
 }
 
 @media (max-width: 860px) {

@@ -3,8 +3,9 @@ import { Reveal } from './Reveal';
 import styles from './SectionHeader.module.css';
 
 export type SectionHeaderProps = {
-  /** etichetta mono sopra il titolo (es. "lo studio") */
-  kicker?: string;
+  /** etichetta mono sopra il titolo (es. "lo studio"); accetta anche un
+      nodo per varianti con glifi (es. freccia dei contatti) */
+  kicker?: ReactNode;
   /** titolo display-thin grande */
   title: ReactNode;
   /** paragrafo introduttivo opzionale */
