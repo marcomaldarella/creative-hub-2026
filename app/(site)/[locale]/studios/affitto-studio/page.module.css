@@ -28,9 +28,13 @@
   color: var(--fg-2);
 }
 
-/* rimando al flusso di prenotazione con la formula già scelta */
+/* rimando al flusso di prenotazione con la formula già scelta: tasto a
+   pastiglia (25/11, il link testuale non leggeva come cliccabile) */
 .formulaGo {
-  margin-top: 14px;
+  margin-top: 18px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   font-size: 14px;
 }
 

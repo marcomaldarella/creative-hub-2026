@@ -28,7 +28,7 @@ import styles from './UniScreen.module.css'
 /* i dieci nomi scelti nel layout del cliente, nell'ordine del mock;
    le foto arrivano dai documenti teacher già in Sanity */
 const TEACHER_IDS = [
-  'teacher-angela-madonia',
+  'teacher-gaia-banfi' /* al posto di Angela Madonia, eliminata 25/11 */,
   'teacher-stefania-martin',
   'teacher-cristiano-santini',
   'teacher-teo-ciavarella',
@@ -42,7 +42,7 @@ const TEACHER_IDS = [
 
 /* ruoli noti dal layout del cliente (in Sanity sono ancora vuoti) */
 const TEACHER_ROLES: Record<string, { it: string; en: string }> = {
-  'teacher-angela-madonia': { it: 'canto', en: 'voice' },
+  'teacher-gaia-banfi': { it: 'canto', en: 'voice' },
   'teacher-stefania-martin': { it: 'canto', en: 'voice' },
 }
 

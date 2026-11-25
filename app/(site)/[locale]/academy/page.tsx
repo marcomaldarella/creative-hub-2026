@@ -94,7 +94,7 @@ const EXPLORE_FUNDED_PICS = [
 /* rete di sicurezza per corsi Sanity senza cover */
 const EXPLORE_FALLBACK = '/img/foto/sede.jpg'
 
-/** avvolge in <strong> i nomi propri dentro un paragrafo (Angela Madonia
+/** avvolge in <strong> i nomi propri dentro un paragrafo (Gaia Banfi
  *  ecc.): evita di portare markup nei dizionari JSON. */
 function withNames(text: string, names: string[]): ReactNode {
   if (names.length === 0) return text

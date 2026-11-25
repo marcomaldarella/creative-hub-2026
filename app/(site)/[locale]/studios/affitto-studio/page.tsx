@@ -3,6 +3,7 @@ import { Suspense } from 'react'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import {
+  Arrow,
   ArrowLink,
   Button,
   Card,
@@ -172,13 +173,16 @@ export default async function AffittoStudioPage({
                     <li key={r}>{r}</li>
                   ))}
                 </ul>
-                <ArrowLink
+                {/* revisione 25/11: da link testuale a tasto vero e
+                    proprio — le formule devono leggersi cliccabili */}
+                <Button
+                  variant="ghost"
                   href={`${base}?formula=${f.id}#prenota`}
-                  dir="e"
-                  className={styles.formulaGo}
+                  className={`${det.btnPill} ${styles.formulaGo}`}
                 >
                   {d.formCta}
-                </ArrowLink>
+                  <Arrow dir="e" size={14} />
+                </Button>
               </div>
             ))}
           </RevealGroup>
