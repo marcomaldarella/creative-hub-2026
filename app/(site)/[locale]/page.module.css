@@ -547,8 +547,18 @@
   display: grid;
   grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
   gap: clamp(28px, 5vw, 90px);
-  align-items: end;
+  /* 25/11: le due colonne hanno la STESSA altezza — il testo attacca in
+     alto col kicker, il tasto chiude in basso col titolo */
+  align-items: stretch;
   margin-bottom: clamp(32px, 4.5vw, 56px);
+}
+
+.networkSide {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
 }
 
 .networkKicker {
@@ -567,7 +577,9 @@
   font-size: clamp(15px, 1.2vw, 18px);
   line-height: 1.5;
   color: color-mix(in srgb, var(--fg) 78%, var(--bg));
-  max-width: 46ch;
+  /* 25/11: la misura la dà la colonna della griglia, il blocco arriva
+     al filo destro del contenitore come il titolo a sinistra */
+  max-width: none;
 }
 
 @media (max-width: 860px) {
