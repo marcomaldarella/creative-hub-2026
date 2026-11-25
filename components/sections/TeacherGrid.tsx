@@ -6,7 +6,9 @@ import { Thumb } from './Thumb'
 import styles from './TeacherGrid.module.css'
 
 export type TeacherGridProps = {
-  teachers: Teacher[]
+  /* basta la parte anagrafica: così la griglia serve anche lo staff
+     (teamMember) di chi-siamo, non solo i docenti */
+  teachers: Array<Pick<Teacher, '_id' | 'name' | 'role' | 'photo'>>
   locale: Locale
   className?: string
 }

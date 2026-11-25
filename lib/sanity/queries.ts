@@ -13,6 +13,7 @@ import type {
   Space,
   SpaceKind,
   Teacher,
+  TeamMember,
 } from './types'
 
 /* ---------- frammenti ---------- */
@@ -67,6 +68,18 @@ export const allTeachersQuery = groq`
 
 export function getAllTeachers(): Promise<Teacher[]> {
   return client.fetch(allTeachersQuery)
+}
+
+/* staff dell'hub per chi-siamo ("Le persone"): ordine manuale dal campo
+   order, i senza numero in coda per nome */
+export const allTeamMembersQuery = groq`
+  *[_type == "teamMember"] | order(order asc, name asc) {
+    _id, _type, name, role, photo, order
+  }
+`
+
+export function getAllTeamMembers(): Promise<TeamMember[]> {
+  return client.fetch(allTeamMembersQuery)
 }
 
 export const allArticlesQuery = groq`

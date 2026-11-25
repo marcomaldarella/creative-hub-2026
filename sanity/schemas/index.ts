@@ -11,6 +11,7 @@ import {
 } from './objects/content'
 import { siteSettings } from './documents/siteSettings'
 import { teacher } from './documents/teacher'
+import { teamMember } from './documents/teamMember'
 import { courseCategory } from './documents/courseCategory'
 import { course } from './documents/course'
 import { author } from './documents/author'
@@ -39,6 +40,7 @@ export const schemaTypes = [
   // documenti
   siteSettings,
   teacher,
+  teamMember,
   courseCategory,
   course,
   author,

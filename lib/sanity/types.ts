@@ -56,6 +56,17 @@ export interface SiteSettings {
   }
 }
 
+/* staff dell'hub (chi-siamo, "Le persone") — anagrafica separata dai
+   docenti, stessa resa in griglia */
+export interface TeamMember {
+  _id: string
+  _type: 'teamMember'
+  name?: string
+  role?: LocaleString
+  photo?: SanityImage
+  order?: number
+}
+
 export interface Teacher {
   _id: string
   _type: 'teacher'

@@ -117,6 +117,7 @@ export const structure: StructureResolver = (S) =>
                 ),
             ])
         ),
+      S.documentTypeListItem('teamMember').title('Team (le persone)'),
       S.documentTypeListItem('partner').title('Partner'),
       S.documentTypeListItem('page').title('Pagine (hero & corpi)'),
       S.divider(),

@@ -11,7 +11,7 @@ import { getDictionary } from '@/lib/i18n/dictionaries'
 import { pageAlternates } from '@/lib/seo'
 import {
   getAllPartners,
-  getAllTeachers,
+  getAllTeamMembers,
   getPageById,
   getSiteSettings,
 } from '@/lib/sanity/queries'
@@ -44,9 +44,9 @@ export default async function ChiSiamoPage({
   if (!isLocale(locale)) notFound()
   const t = getDictionary(locale)
 
-  const [page, teachers, partners, settings] = await Promise.all([
+  const [page, team, partners, settings] = await Promise.all([
     getPageById('chi-siamo'),
-    getAllTeachers(),
+    getAllTeamMembers(),
     getAllPartners(),
     getSiteSettings(),
   ])
@@ -103,13 +103,14 @@ export default async function ChiSiamoPage({
         <Rule left={t.about.teamKicker} />
 
         {/* ————— le persone —————
-            griglia ripristinata il 25/11 su richiesta (era stata sospesa
-            a nov 2026 per nominativi non più attivi: la curatela ora
-            passa da Sanity — chi non deve apparire si toglie da lì) */}
+            25/11: lo STAFF dell'hub (doc teamMember, fonte iniziale
+            bologna-creativehub.it/team), NON i docenti — l'elenco
+            nominale dei docenti resta sospeso su richiesta del cliente
+            (nov 2026). Si cura da Studio, voce "Team (le persone)" */}
         <section className={styles.sez} id="team">
           <div className="wrap">
             <SectionHeader kicker={t.about.teamKicker} title={t.about.teamTitle} />
-            <TeacherGrid teachers={teachers} locale={locale} />
+            <TeacherGrid teachers={team} locale={locale} />
           </div>
         </section>
 
