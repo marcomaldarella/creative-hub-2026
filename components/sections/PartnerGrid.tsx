@@ -10,13 +10,13 @@ export function PartnerGrid({
   columns = 4,
 }: {
   names: string[]
-  /** colonne della tabella da desktop (la home ne vuole 5) */
-  columns?: 4 | 5
+  /** colonne della tabella da desktop (la home ne vuole 6, celle 4:3) */
+  columns?: 4 | 5 | 6
 }) {
+  const variant =
+    columns === 6 ? ` ${styles.grid6}` : columns === 5 ? ` ${styles.grid5}` : ''
   return (
-    <RevealGroup
-      className={columns === 5 ? `${styles.grid} ${styles.grid5}` : styles.grid}
-    >
+    <RevealGroup className={`${styles.grid}${variant}`}>
       {names.map((name, i) => (
         <div
           key={name}

@@ -355,11 +355,12 @@ export async function HomeScreen({ locale }: { locale: Locale }) {
                 </Link>
               </Reveal>
             </div>
-            {/* revisione 24/11: stessa tabella di quadrati delle griglie
-                interne (chi-siamo) — i partner senza logo escono come
-                nome in cella, non più concatenati su una riga */}
+            {/* revisione 24/11: stessa tabella delle griglie interne
+                (chi-siamo) — i partner senza logo escono come nome in
+                cella, non più concatenati su una riga. 25/11: sei per
+                riga e celle 4:3, più marchi a schermo e meno scroll */}
             <div className={`wrap ${styles.partnerTable}`}>
-              <PartnerGrid names={partnerNames} columns={5} />
+              <PartnerGrid names={partnerNames} columns={6} />
             </div>
             <div className={`wrap ${styles.networkFoot}`}>
               <span className="mono">{t.home.networkRight}</span>
